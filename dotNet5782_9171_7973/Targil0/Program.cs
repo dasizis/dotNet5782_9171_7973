@@ -2,7 +2,7 @@
 
 namespace Targil0
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
@@ -16,9 +16,6 @@ namespace Targil0
 
             Console.WriteLine($"{name}, welcome to my first console application");
         }
-        private static void Welcome7973()
-        {
-
-        }
+        static partial void Welcome7973();
     }
 }

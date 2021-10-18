@@ -1,6 +1,5 @@
 ﻿namespace IDAL.DO
 {
-
     public enum WeightCategory
     {
         LOW,

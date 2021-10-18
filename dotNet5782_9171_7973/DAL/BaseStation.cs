@@ -19,10 +19,10 @@ namespace IDAL.DO
         public override string ToString()
         {
             return (
-                $"Base Station number {Id} information: /n" +
-                $"Name: {Name} /n" +
-                $"Location: Longitude: {Longitude} /t " +
-                $"Latitude: {Latitude} /n" +
+                $"Base Station number {Id} information: \n" +
+                $"Name: {Name} \n" +
+                $"Location: Longitude: {Longitude} \t " +
+                $"Latitude: {Latitude} \n" +
                 $"ChargeSlots: {ChargeSlots} slots."
             );
         }

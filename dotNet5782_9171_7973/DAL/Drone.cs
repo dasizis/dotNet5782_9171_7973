@@ -19,10 +19,10 @@ namespace IDAL.DO
         public override string ToString()
         {
             return (
-                $"Drone number {Id} information: /n" +
-                $"Model: {Model} /n" +
-                $"Weight: {MaxWeight} /t " +
-                $"Status: {Status} /n" +
+                $"Drone number {Id} information: \n" +
+                $"Model: {Model} \n" +
+                $"Weight: {MaxWeight} \t " +
+                $"Status: {Status} \n" +
                 $"Battery: {Battery}%"
             );
         }

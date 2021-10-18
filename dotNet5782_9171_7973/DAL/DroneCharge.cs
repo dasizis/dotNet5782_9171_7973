@@ -14,7 +14,7 @@ namespace IDAL.DO
         {
             return (
                 $"Drone charge in station number  {StationId} " +
-                $"charges drone number {DroneId} /n"
+                $"charges drone number {DroneId} \n"
             );
         }
     }

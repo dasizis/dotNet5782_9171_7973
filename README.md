@@ -23,6 +23,7 @@ this is an extra line
  > - command
  > - ##check validation - in all functions- very important (can't be done by delegates since we havn't learnt it yet)
  > - arrange random func od Parcel- few statuses and dates.
+ > - separate dalObject to files. It's too long
  > - go over the code and see if logic is correct
  > - anything More?
 

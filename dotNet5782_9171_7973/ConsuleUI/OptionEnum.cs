@@ -21,7 +21,7 @@ namespace ConsuleUI
         Drone,
     }
 
-    enum UpdataOption
+    enum UpdateOption
     {
         AssignParcelToDrone,
         CollectParcel,
@@ -43,7 +43,8 @@ namespace ConsuleUI
         Customer,
         Parcel,
         Drone,
-        AvaiableBaseStation,
+        NotAssignedToDroneParcel,
+        AvailableBaseStation,
     }
 
 }

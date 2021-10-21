@@ -12,6 +12,7 @@ namespace ConsuleUI
     {
         static void Main(string[] args)
         {
+            DalObject.DataSource.Initialize();
             Console.WriteLine(RandomFullName());
             printTitle("Main Options");
             printEnum(typeof(MainOption));
@@ -25,6 +26,11 @@ namespace ConsuleUI
             Console.WriteLine("=================================");
         }
 
+        private static void printHeader(string header)
+        {
+            Console.WriteLine($"---- {header} ----");
+        }
+
 
         private static void printEnum(Type enumType, int numOfTabs = 0)
         {
@@ -33,5 +39,9 @@ namespace ConsuleUI
                 Console.WriteLine($"{new string('\t', numOfTabs)}{(int)option} - {option}");
             }
         }
+
+        
+
+        
     }
 }

@@ -27,14 +27,18 @@ namespace IDAL.DO
         public DateTime Delivered { get; set; }
 
         public static Parcel Random(int id)
-        {
+        { 
             return new Parcel()
             {
                 Id = id,
-                Model = DAL.RandomManager.RandomName(),
-                Status = (DroneStatus)DAL.RandomManager.RandomEnumOption(typeof(DroneStatus)),
-                MaxWeight = (WeightCategory)DAL.RandomManager.RandomEnumOption(typeof(WeightCategory)),
-                Battery = DAL.RandomManager.Rand.NextDouble() * 100,
+                Requested = DAL.RandomManager.RandomDate(),
+                Weight = (WeightCategory)DAL.RandomManager.RandomEnumOption(typeof(WeightCategory)),
+                Priority = (Priority)DAL.RandomManager.RandomEnumOption(typeof(Priority)),
+                SenderId = DAL.RandomManager.Rand.Next(),
+                TargetId = DAL.RandomManager.Rand.Next(),
+                DroneId = 0,
+
+                //TODO add dates of several positions
             };
         }
 

@@ -29,7 +29,7 @@ namespace DAL
 
         public static string RandomPhone()
         {
-            const int LENGTH = 10;
+            /*const int LENGTH = 10;
 
             string phone = "";
 
@@ -38,14 +38,33 @@ namespace DAL
                 phone += (char)Rand.Next();
             }
 
+            return phone;*/
+
+            string phone ="05";
+
+            phone += Rand.Next(1000000, 10000000 ).ToString();
+
             return phone;
         }
 
+        public static System.DateTime RandomDate()
+        {
+            int year = Rand.Next(1950, 2021);
+            int month = Rand.Next(1, 12);
+            int day = Rand.Next(1, 28);
+            int hour = Rand.Next(23);
+            int minute = Rand.Next(59);
+            int second = Rand.Next(59);
+
+            return new System.DateTime(year, month, day, hour, minute, second);
+        }
+        
         public static int RandomEnumOption(System.Type enumType)
         {
             System.Array enumValues = enumType.GetEnumValues();
             return (int)enumValues.GetValue(Rand.Next(enumValues.Length));
         }
+        
 
     }
 }

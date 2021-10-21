@@ -16,6 +16,11 @@ namespace IDAL.DO
 
         public double Battery { get; set; }
 
+        /// <summary>
+        /// Return a new drone with random values
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Drone Random(int id)
         {
             return new Drone()
@@ -31,12 +36,15 @@ namespace IDAL.DO
         public override string ToString()
         {
             return (
-                $"Drone number {Id} information: \n" +
+                $"************************************\n"+
+                $"Drone #{Id} information: \n" +
                 $"Model  : {Model} \n" +
                 $"Weight : {MaxWeight} \t " +
                 $"Status : {Status} \n" +
-                $"Battery: {Battery}%"
+                $"Battery: {Battery}%\n"+
+                $"************************************\n" 
             );
         }
+        
     }
 }

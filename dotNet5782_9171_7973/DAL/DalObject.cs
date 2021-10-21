@@ -11,7 +11,13 @@ namespace DalObject
     {
 
         //------------Adding functions----------
-
+        /// <summary>
+        /// Add a parcel to Parcels list
+        /// </summary>
+        /// <param name="senderId"></param>
+        /// <param name="targetId"></param>
+        /// <param name="weight"></param>
+        /// <param name="priority"></param>
         public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
         {
             Parcel parcel = new Parcel();
@@ -28,6 +34,13 @@ namespace DalObject
             DataSource.Config.ParcelId++;
         }
 
+        /// <summary>
+        /// Add a base station to base station list
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="longitude"></param>
+        /// <param name="latitude"></param>
+        /// <param name="chargeSlots"></param>
         public void AddBaseStation(string name, double longitude, double latitude, int chargeSlots)
         {
             BaseStation baseStation = new BaseStation();
@@ -43,6 +56,13 @@ namespace DalObject
             DataSource.Config.AvailableStation++;
         }
 
+        /// <summary>
+        /// add a customer to customer list
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="longitude"></param>
+        /// <param name="latitude"></param>
+        /// <param name="phone"></param>
         public void AddCustomer(string name, double longitude, double latitude, string phone)
         {
             Customer customer = new Customer();
@@ -58,6 +78,12 @@ namespace DalObject
             DataSource.Config.AvailableCustomer++;
         }
 
+        /// <summary>
+        /// add a drone to drone list 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="weight"></param>
+        /// <param name="Status"></param>
         public void AddDrone(string model, WeightCategory weight, DroneStatus Status)
         {
             Drone drone = new Drone();
@@ -75,19 +101,12 @@ namespace DalObject
 
 
 
-        //public void Add(object item)
-        //{
-        //    var field = typeof(DataSource).GetField(item.GetType().Name);
-        //    var tempDataSource = new DataSource();
-
-        //    Console.WriteLine(field.GetValue(tempDataSource));
-        //    typeof(DataSource).GetMember("drones");
-        //}
-        //------------------------------------------------
-
-        
-
         //-----------Update functions---------
+        /// <summary>
+        /// Assign parcel to a suitable drone
+        /// Update parcel and drone in their lists
+        /// </summary>
+        /// <param name="parcelId"></param>
         public void AssignParcelToDrone(int parcelId)
         {
             Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
@@ -107,6 +126,10 @@ namespace DalObject
             DataSource.drones.Add(drone);
         }
 
+        /// <summary>
+        /// Update parcel's pick up date
+        /// </summary>
+        /// <param name="parcelId"></param>
         public void CollectParcel(int parcelId)
         {
             Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
@@ -115,6 +138,11 @@ namespace DalObject
             DataSource.parcels.Add(parcel);
         }
 
+        /// <summary>
+        /// Put drone to charge in an available charge slot
+        /// Add a charge slot to charge slot list
+        /// </summary>
+        /// <param name="droneId"></param>
         public void ChargeDroneAtBaseStation(int droneId)
         {
             Drone drone = DataSource.drones.Find(
@@ -137,7 +165,11 @@ namespace DalObject
 
         }
 
-        
+        /// <summary>
+        /// Release drone from charging at charge slot
+        /// Remove charge slot from charge slot list
+        /// </summary>
+        /// <param name="droneId"></param>
         public void FinishCharging(int droneId)
         {
             Drone drone = DataSource.drones.Find(
@@ -154,32 +186,55 @@ namespace DalObject
 
 
         //---------return list functions---------------
-
+        /// <summary>
+        /// return base station list
+        /// </summary>
+        /// <returns></returns>
         public BaseStation[] GetBaseStationList()
         {
             return DataSource.baseStations.ToArray();
         }
 
+        /// <summary>
+        /// return drone list
+        /// </summary>
+        /// <returns></returns>
         public Drone[] GetDroneList()
         {
             return DataSource.drones.ToArray();
         }
 
+        /// <summary>
+        /// return customer list
+        /// </summary>
+        /// <returns></returns>
         public Customer[] GetCustomersList()
         {
             return DataSource.customers.ToArray();
         }
 
+        /// <summary>
+        /// return parcel list
+        /// </summary>
+        /// <returns></returns>
         public Parcel[] GetParcelList()
         {
             return DataSource.parcels.ToArray();
         }
 
+        /// <summary>
+        /// returns all parcel which were not assigned to drones yet
+        /// </summary>
+        /// <returns></returns>
         public Parcel[] GetParcelsNotAssignedToDrone()
         {
              return DataSource.parcels.FindAll(p => p.DroneId == 0).ToArray();
         }
 
+        /// <summary>
+        /// returns all station with empty slots for drones
+        /// </summary>
+        /// <returns></returns>
         public BaseStation[] GetStationsWithEmptySlots()
         {
             //find all base stations where there are available charge slots

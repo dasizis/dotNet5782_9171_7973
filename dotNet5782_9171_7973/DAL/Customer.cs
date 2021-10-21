@@ -16,6 +16,11 @@ namespace IDAL.DO
 
         public double Latitude { get; set; }
 
+        /// <summary>
+        /// Return a new customer with random values
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Customer Random(int id)
         {
             return new Customer()
@@ -28,15 +33,24 @@ namespace IDAL.DO
             };
         }
 
+        /// <summary>
+        /// Print customer data in a nice format
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return (
-                $"Base Station number {Id} information: \n" +
+                $"*********************************************\n" +
+                $"Base Station #{Id} information: \n" +
                 $"Name: {Name} \n" +
                 $"Phone number: {Phone} \n" +
-                $"Location: Longitude: {Longitude} \t " +
-                $"Latitude: {Latitude} \n"
+                $"Location:" +
+                $"-----Longitude: {Longitude} \t " +
+                $"-----Latitude: {Latitude} \n" +
+                $"  * ********************************************"
             );
         }
+
+        
     }
 }

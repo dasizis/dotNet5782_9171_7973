@@ -9,6 +9,12 @@ namespace ConsuleUI
     partial class Program
     {
         public static DalObject.DalObject dalObject = new DalObject.DalObject();
+
+        /// <summary>
+        /// Get input and return it
+        /// </summary>
+        /// <param name="massage"></param>
+        /// <returns></returns>
         private static int getInput(string massage = "")
         {
             Console.Write(massage+ ">");
@@ -17,11 +23,20 @@ namespace ConsuleUI
             return input;
         }
 
+        /// <summary>
+        /// Get item by its type and print it
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
         private static void printItemById(Type type, int id)
         {
             Console.WriteLine($"{DalObject.DataSource.GetById(type, id)}");
         }
 
+        /// <summary>
+        /// Activate main menu 
+        /// Take care of different selection cases
+        /// </summary>
         private static void activateMainMenu()
         {
             int input = getInput();
@@ -55,6 +70,11 @@ namespace ConsuleUI
                 
         }
 
+        /// <summary>
+        /// Activate add menu
+        /// Take care of different selection cases
+        /// Get values to add an entity
+        /// </summary>
         private static void activateAddMenu()
         {
             printTitle("Add Options");
@@ -121,6 +141,11 @@ namespace ConsuleUI
 
         }
 
+        /// <summary>
+        /// Activate display menu
+        /// Take care of different selection cases
+        /// Display a chosen entity type by its ID
+        /// </summary>
         private static void activateDisplayMenu()
         {
             printTitle("Display Options");
@@ -152,6 +177,11 @@ namespace ConsuleUI
             }                
         }
 
+        /// <summary>
+        /// Activate Display Lists menu
+        /// Take care of different selection cases
+        /// Display a list of a chosen entity type
+        /// </summary>
         private static void activateDisplayListMenu()
         {
             printTitle("Display List Options");
@@ -184,6 +214,11 @@ namespace ConsuleUI
             }
         }
 
+        /// <summary>
+        /// Activate updates menu
+        /// Take care of different selection cases
+        /// Several updating actions
+        /// </summary>
         private static void activateUpdateMenu()
         {
            
@@ -243,6 +278,10 @@ namespace ConsuleUI
             }
         }
 
+        /// <summary>
+        /// Display a list
+        /// </summary>
+        /// <param name="list"></param>
         private static void DisplayList(IList list)
         {
             foreach (var item in list)

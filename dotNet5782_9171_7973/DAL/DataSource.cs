@@ -9,6 +9,7 @@ namespace DalObject
 {
     public struct DataSource
     {
+        //number of item for arrays. (not used)
         const int DRONES = 10;
         const int BASE_STATIONS = 5;
         const int CUSTOMERS = 100;
@@ -20,21 +21,14 @@ namespace DalObject
         const int INIT_CUSTOMERS = 10;
         const int INIT_PARCELS = 10;
 
+        //lists of information
         internal static List<Drone> drones = new List<Drone>();
         internal static List<BaseStation> baseStations = new List<BaseStation>();
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> parcels = new List<Parcel>();
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>();
 
-        //internal static Dictionary<string, List> data = new Dictionary<string, List<object>>()
-        //{
-        //    [typeof(Drone).Name]       = new List<Drone>(),
-        //    [typeof(BaseStation).Name] = new List<BaseStation>(),
-        //    [typeof(Customer).Name]    = new List<Customer>(),
-        //    [typeof(Parcel).Name]      = new List<Parcel>(),
-        //};
-
-        internal class Config
+        internal struct Config
         {
             internal static int AvailableDrone = 1;
             internal static int AvailableStation = 0;
@@ -45,6 +39,9 @@ namespace DalObject
         }
 
         //TODO
+        /// <summary>
+        /// Initialize all lists using Random func in each entity
+        /// </summary>
         public static void Initialize()
         {
             for(; Config.AvailableStation < INIT_BASESTATIONS; Config.AvailableStation++)
@@ -61,6 +58,13 @@ namespace DalObject
                 
         }
 
+        /// <summary>
+        /// Return an item of all lists by its ID
+        /// A generic function
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static object GetById(Type type, int id)
         {
             switch (type.Name)
@@ -75,6 +79,12 @@ namespace DalObject
             }
         }
 
+        /// <summary>
+        /// Return number of items there are in a requested list
+        /// A generic function
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static object GetNumberOfItems(Type type)
         {
             switch (type.Name)

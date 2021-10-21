@@ -3,8 +3,13 @@ namespace DAL
 {
     class RandomManager
     {
+        // A static instance used for all random calls needed
         public static System.Random Rand => new System.Random();
 
+        /// <summary>
+        /// Randomize  a name
+        /// </summary>
+        /// <returns></returns>
         public static string RandomName()
         {
             const int MIN_NAME_LENGTH = 4;
@@ -22,24 +27,21 @@ namespace DAL
             return name;
         }
 
+        /// <summary>
+        /// Randomize full name using RandomName
+        /// </summary>
+        /// <returns></returns>
         public static string RandomFullName()
         {
             return $"{RandomName()} {RandomName()}";
         }
 
+        /// <summary>
+        /// Randomize a phone number
+        /// </summary>
+        /// <returns></returns>
         public static string RandomPhone()
         {
-            /*const int LENGTH = 10;
-
-            string phone = "";
-
-            for (int i = 0; i < LENGTH; i++)
-            {
-                phone += (char)Rand.Next();
-            }
-
-            return phone;*/
-
             string phone ="05";
 
             phone += Rand.Next(1000000, 10000000 ).ToString();
@@ -47,6 +49,10 @@ namespace DAL
             return phone;
         }
 
+        /// <summary>
+        /// Randomize a date
+        /// </summary>
+        /// <returns></returns>
         public static System.DateTime RandomDate()
         {
             int year = Rand.Next(1950, 2021);
@@ -59,6 +65,12 @@ namespace DAL
             return new System.DateTime(year, month, day, hour, minute, second);
         }
         
+        /// <summary>
+        /// Randomize an enum option out of one type enum options
+        /// A generic function
+        /// </summary>
+        /// <param name="enumType"></param>
+        /// <returns></returns>
         public static int RandomEnumOption(System.Type enumType)
         {
             System.Array enumValues = enumType.GetEnumValues();

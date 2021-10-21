@@ -10,11 +10,17 @@ namespace IDAL.DO
 
         public int DroneId { get; set; }
 
+        /// <summary>
+        /// Print charge slot information
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return (
-                $"Drone charge in station number  {StationId} " +
-                $"charges drone number {DroneId} \n"
+                $"*****************************************\n"+
+                $"Drone charge in station #{StationId} " +
+                $"charges drone number {DroneId} \n"+
+                $"*****************************************\n"
             );
         }
     }

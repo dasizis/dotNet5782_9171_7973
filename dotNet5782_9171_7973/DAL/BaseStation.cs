@@ -16,6 +16,11 @@ namespace IDAL.DO
 
         public int ChargeSlots { get; set; }
 
+        /// <summary>
+        /// Return a new base station with random values
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static BaseStation Random(int id)
         {
             return new BaseStation()
@@ -28,6 +33,10 @@ namespace IDAL.DO
             };
         }
 
+        /// <summary>
+        /// Print base station in a nice format
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return (

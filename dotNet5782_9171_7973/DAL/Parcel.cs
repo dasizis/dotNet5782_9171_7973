@@ -42,11 +42,15 @@ namespace IDAL.DO
             };
         }
 
-
+        /// <summary>
+        /// Print parcel information
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return (
-                $"Parcel number {Id} information: \n" +
+                $"**********************************\n"+
+                $"Parcel #{Id} information: \n" +
                 $"Sender: {SenderId} \t Target: {TargetId} \n" +
                 $"Whight: {Weight} \t Priority: {Priority} \n " +
                 $"Drone in charge: {DroneId} \n" +
@@ -54,7 +58,8 @@ namespace IDAL.DO
                 $"Requested: {Requested} \n" +
                 $"Scheduled: {Scheduled} \n" +
                 $"Delivered: {Delivered} \n" +
-                $"Picked up: {PickedUp}\n"
+                $"Picked up: {PickedUp}\n"+
+                $"**********************************\n"
             );
         }
     }

@@ -10,6 +10,10 @@ namespace ConsuleUI
 {
     partial class Program
     {
+        /// <summary>
+        /// Activates the program
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             DalObject.DataSource.Initialize();
@@ -19,6 +23,10 @@ namespace ConsuleUI
             activateMainMenu();
         }
 
+        /// <summary>
+        /// Print a title in title format
+        /// </summary>
+        /// <param name="title"></param>
         static private void printTitle(string title)
         {
             Console.WriteLine("=================================");
@@ -26,12 +34,21 @@ namespace ConsuleUI
             Console.WriteLine("=================================");
         }
 
+        /// <summary>
+        /// Print a n header in an header format
+        /// </summary>
+        /// <param name="header"></param>
         private static void printHeader(string header)
         {
             Console.WriteLine($"---- {header} ----");
         }
 
 
+        /// <summary>
+        /// Print enum options for selection
+        /// </summary>
+        /// <param name="enumType"></param>
+        /// <param name="numOfTabs"></param>
         private static void printEnum(Type enumType, int numOfTabs = 0)
         {
             foreach (var option in Enum.GetValues(enumType))

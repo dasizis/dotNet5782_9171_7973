@@ -3,15 +3,7 @@ I'm the first
 
 read [here](https://www.markdownguide.org/basic-syntax/) about markdown format.
 
-hello world
-I'm here to write a peace of code
 
-My name is Yael
-
-hi key
-this is an extra line
-
-## this is the end!
 
 
  > #### to do:

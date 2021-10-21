@@ -251,6 +251,17 @@ namespace ConsuleUI
 
                         break;
                     }
+                case UpdateOption.SupplyParcel:
+                    {
+                        int parcelId = getInput(
+                            $"Number Of Parcel, Please." +
+                            $" (0 - {DalObject.DataSource.GetNumberOfItems(typeof(Parcel))})\n"
+                        );
+
+                        dalObject.SupplyParcel(parcelId);
+
+                        break;
+                    }
                 case UpdateOption.ChargeDroneAtBaseStation:
                     {
                         int droneId = getInput(

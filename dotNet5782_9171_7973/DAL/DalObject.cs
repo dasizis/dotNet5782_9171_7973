@@ -110,18 +110,19 @@ namespace DalObject
         public void AssignParcelToDrone(int parcelId)
         {
             Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
-            DataSource.parcels.Remove(parcel);
             Drone drone =  DataSource.drones.Find(
                drone => (drone.Status == DroneStatus.Free)
                && (parcel.Weight <= drone.MaxWeight)
                );
-
-            if (drone.Id == null) Console.WriteLine("drone not found");
+            DataSource.parcels.Remove(parcel);
             DataSource.drones.Remove(drone);
 
-            drone.Status = DroneStatus.Deliver;
             parcel.DroneId = drone.Id;
+            if (parcel.DroneId == 0) { Console.WriteLine("drone not found"); return; }
+
+            drone.Status = DroneStatus.Deliver;
             parcel.Scheduled = DateTime.Now;
+
             DataSource.parcels.Add(parcel);
             DataSource.drones.Add(drone);
         }
@@ -133,10 +134,42 @@ namespace DalObject
         public void CollectParcel(int parcelId)
         {
             Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
+            if(parcel.DroneId == 0)
+            {
+                Console.WriteLine("Assign Parcel To Drone First");
+                return;
+            }
+
             DataSource.parcels.Remove(parcel);
             parcel.PickedUp = DateTime.Now;
             DataSource.parcels.Add(parcel);
         }
+
+        /// <summary>
+        /// Update parcel's supply date
+        /// Change drone status to FREE
+        /// </summary>
+        /// <param name="parcelId"></param>
+        public void SupplyParcel(int parcelId)
+        {
+            Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
+            if (parcel.DroneId == 0)
+            {
+                Console.WriteLine("Assign Parcel To Drone First, And Collect By Drone.");
+                return;
+            }
+            Drone drone = DataSource.drones.Find(d => d.Id == parcel.DroneId);
+
+            DataSource.drones.Remove(drone);
+            DataSource.parcels.Remove(parcel);
+
+            drone.Status = DroneStatus.Free;
+            parcel.Delivered = DateTime.Now;
+
+            DataSource.parcels.Add(parcel);
+            DataSource.drones.Add(drone);
+        }
+
 
         /// <summary>
         /// Put drone to charge in an available charge slot
@@ -148,16 +181,14 @@ namespace DalObject
             Drone drone = DataSource.drones.Find(
                drone => (drone.Id == droneId)
                );
-
+            //TODO: Is it an heavy action? should it be a copy of the function bellow with "FIND" only?
+            //find a base station where there is an available charge slot
+            BaseStation baseStation = GetStationsWithEmptySlots()[0];
             DataSource.drones.Remove(drone);
 
             drone.Status = DroneStatus.Meintenence;
+
             DroneCharge droneCharge = new DroneCharge();
-
-            //find a base station where there is an available charge slot
-            BaseStation baseStation = GetStationsWithEmptySlots()[0];
-
-            //TODO: Is it an heavy action? should it be a copy of the function bellow with "FIND" only?
             droneCharge.StationId = baseStation.Id;
             droneCharge.DroneId = drone.Id;
 

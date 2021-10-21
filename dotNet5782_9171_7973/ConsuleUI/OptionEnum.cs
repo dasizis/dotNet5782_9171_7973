@@ -25,6 +25,7 @@ namespace ConsuleUI
     {
         AssignParcelToDrone,
         CollectParcel,
+        SupplyParcel,
         ChargeDroneAtBaseStation,
         FinishCharging,
     }

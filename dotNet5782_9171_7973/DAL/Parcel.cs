@@ -6,6 +6,8 @@ namespace IDAL.DO
 {
     public struct Parcel
     {
+        public int DroneId { get; set; }
+
         public int Id { get; set; }
 
         public int SenderId { get; set; }
@@ -18,14 +20,24 @@ namespace IDAL.DO
 
         public DateTime Requested { get; set; }
 
-        public int DroneId { get; set; }
-
         public DateTime Scheduled { get; set; }
 
         public DateTime PickedUp { get; set; }
 
-
         public DateTime Delivered { get; set; }
+
+        public static Parcel Random(int id)
+        {
+            return new Parcel()
+            {
+                Id = id,
+                Model = DAL.RandomManager.RandomName(),
+                Status = (DroneStatus)DAL.RandomManager.RandomEnumOption(typeof(DroneStatus)),
+                MaxWeight = (WeightCategory)DAL.RandomManager.RandomEnumOption(typeof(WeightCategory)),
+                Battery = DAL.RandomManager.Rand.NextDouble() * 100,
+            };
+        }
+
 
         public override string ToString()
         {

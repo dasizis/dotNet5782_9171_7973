@@ -16,14 +16,30 @@ namespace IDAL.DO
 
         public int ChargeSlots { get; set; }
 
+        public static BaseStation Random(int id)
+        {
+            return new BaseStation()
+            {
+                Id          = id,
+                Name        = DAL.RandomManager.RandomName(),
+                Longitude   = DAL.RandomManager.Rand.NextDouble() * 100,
+                Latitude    = DAL.RandomManager.Rand.NextDouble() * 100,
+                ChargeSlots = DAL.RandomManager.Rand.Next(1, 10),
+            };
+        }
+
         public override string ToString()
         {
             return (
-                $"Base Station number {Id} information: \n" +
-                $"Name: {Name} \n" +
-                $"Location: Longitude: {Longitude} \t " +
-                $"Latitude: {Latitude} \n" +
-                $"ChargeSlots: {ChargeSlots} slots."
+                $"*********************************************\n" +
+                $"Base Station #{Id} information\n" +
+                $"---------------------------------------------\n" +
+                $"Name: {Name}\n" +
+                $"Location: \n" +
+                $"-----Longitude: {Longitude}\n" +
+                $"-----Latitude : {Latitude} \n" +
+                $"Charge Slots: {ChargeSlots} slot(s).\n" +
+                $"*********************************************"
             );
         }
     }

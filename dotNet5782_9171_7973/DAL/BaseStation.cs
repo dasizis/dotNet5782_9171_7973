@@ -6,15 +6,53 @@ namespace IDAL.DO
 {
     public struct BaseStation
     {
+        double longitude, latitude;
+        int chargeSlots;
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public double Longitude { get; set; }
+        public double Longitude {
+            get
+            {
+                return longitude;
+            }
+            set
+            {
+                if (value < 0 || value > 180)
+                    throw new ArgumentException("Invalid Longitude values");
+                longitude = value;
+            }
+        }
 
-        public double Latitude { get; set; }
+        public double Latitude
+        {
+            get
+            {
+                return latitude;
+            }
+            set
+            {
+                if (value < 0 || value > 180)
+                    throw new ArgumentException("Invalid Latitude values");
+                latitude = value;
+            }
+        }
 
-        public int ChargeSlots { get; set; }
+        public int ChargeSlots
+        {
+            get
+            {
+                return chargeSlots; 
+            }
+
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("There Owe To be At List One ChargeSlot");
+                chargeSlots = value;
+            }
+        }
 
         /// <summary>
         /// Return a new base station with random values
@@ -27,8 +65,8 @@ namespace IDAL.DO
             {
                 Id          = id,
                 Name        = DAL.RandomManager.RandomName(),
-                Longitude   = DAL.RandomManager.Rand.NextDouble() * 100,
-                Latitude    = DAL.RandomManager.Rand.NextDouble() * 100,
+                Longitude   = DAL.RandomManager.Rand.NextDouble() % 180,
+                Latitude    = DAL.RandomManager.Rand.NextDouble() % 180,
                 ChargeSlots = DAL.RandomManager.Rand.Next(1, 10),
             };
         }

@@ -39,9 +39,11 @@ namespace ConsuleUI
         /// </summary>
         private static void activateMainMenu()
         {
-            int input = getInput();
-            while (true)
+            do
             {
+                printTitle("Main Options");
+                printEnum(typeof(MainOption));
+                int input = getInput();
 
                 switch ((MainOption)input)
                 {
@@ -62,12 +64,8 @@ namespace ConsuleUI
                     default:
                         break;
                 }
-                
-                printTitle("Main Options");
-                printEnum(typeof(MainOption));
-                input = getInput();
             }
-                
+            while (true);
         }
 
         /// <summary>

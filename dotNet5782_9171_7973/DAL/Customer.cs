@@ -6,15 +6,54 @@ namespace IDAL.DO
 {
     public struct Customer
     {
+        double longitude, latitude;
+        string phone;
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string Phone { get; set; }
+        public string Phone {
+            get
+            {
+                return phone;
+            }
 
-        public double Longitude { get; set; }
+            set
+            {
+                if(value.Length != 10)
+                    throw new ArgumentException("Invalid Phone Number");
+                phone = value;
+            }
+        }
 
-        public double Latitude { get; set; }
+        public double Longitude
+        {
+            get
+            {
+                return longitude;
+            }
+            set
+            {
+                if (value < 0 || value > 180)
+                    throw new ArgumentException("Invalid Longitude values");
+                longitude = value;
+            }
+        }
+
+        public double Latitude
+        {
+            get
+            {
+                return latitude;
+            }
+            set
+            {
+                if (value < 0 || value > 180)
+                    throw new ArgumentException("Invalid Latitude values");
+                latitude = value;
+            }
+        }
+
 
         /// <summary>
         /// Return a new customer with random values
@@ -27,8 +66,8 @@ namespace IDAL.DO
             {
                 Id = id,
                 Name = DAL.RandomManager.RandomFullName(),
-                Longitude = DAL.RandomManager.Rand.NextDouble() * 100,
-                Latitude = DAL.RandomManager.Rand.NextDouble() * 100,
+                Longitude = DAL.RandomManager.Rand.NextDouble() % 180,
+                Latitude = DAL.RandomManager.Rand.NextDouble() % 180,
                 Phone = DAL.RandomManager.RandomPhone(),
             };
         }

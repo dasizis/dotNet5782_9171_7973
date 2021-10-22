@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using IDAL.DO;
-
+using System.Linq;
 
 namespace DalObject
 {
@@ -109,17 +109,22 @@ namespace DalObject
         /// <param name="parcelId"></param>
         public void AssignParcelToDrone(int parcelId)
         {
-            Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
-            Drone drone =  DataSource.drones.Find(
+            Parcel parcel = DataSource.parcels.First(item => item.Id == parcelId);
+
+            Drone drone = DataSource.drones.FirstOrDefault(
                drone => (drone.Status == DroneStatus.Free)
                && (parcel.Weight <= drone.MaxWeight)
                );
+            if (drone.Equals(default))
+            {
+                Console.WriteLine("No Suitable Drone Found");
+                return;
+            }
+
             DataSource.parcels.Remove(parcel);
             DataSource.drones.Remove(drone);
 
             parcel.DroneId = drone.Id;
-            if (parcel.DroneId == 0) { Console.WriteLine("drone not found"); return; }
-
             drone.Status = DroneStatus.Deliver;
             parcel.Scheduled = DateTime.Now;
 
@@ -133,12 +138,11 @@ namespace DalObject
         /// <param name="parcelId"></param>
         public void CollectParcel(int parcelId)
         {
-            Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
-            if(parcel.DroneId == 0)
-            {
-                Console.WriteLine("Assign Parcel To Drone First");
-                return;
-            }
+            Parcel parcel = DataSource.parcels.First(item => item.Id == parcelId);
+            if (parcel.DroneId == 0)
+                throw new Exception("Assign Parcel To Drone First");
+
+           
 
             DataSource.parcels.Remove(parcel);
             parcel.PickedUp = DateTime.Now;
@@ -152,12 +156,11 @@ namespace DalObject
         /// <param name="parcelId"></param>
         public void SupplyParcel(int parcelId)
         {
-            Parcel parcel = DataSource.parcels.Find(item => item.Id == parcelId);
-            if (parcel.DroneId == 0)
-            {
-                Console.WriteLine("Assign Parcel To Drone First, And Collect By Drone.");
-                return;
-            }
+            
+            Parcel parcel = DataSource.parcels.First(item => item.Id == parcelId);
+            if (parcel.DroneId == 0 || parcel.PickedUp == new DateTime())
+                throw new Exception("Parcel Is Not In Supplying step.");
+               
             Drone drone = DataSource.drones.Find(d => d.Id == parcel.DroneId);
 
             DataSource.drones.Remove(drone);
@@ -178,17 +181,15 @@ namespace DalObject
         /// <param name="droneId"></param>
         public void ChargeDroneAtBaseStation(int droneId)
         {
-            Drone drone = DataSource.drones.Find(
-               drone => (drone.Id == droneId)
-               );
-            //TODO: Is it an heavy action? should it be a copy of the function bellow with "FIND" only?
+            Drone drone = DataSource.drones.First(drone => (drone.Id == droneId));
             //find a base station where there is an available charge slot
             BaseStation baseStation = GetStationsWithEmptySlots()[0];
+
             DataSource.drones.Remove(drone);
 
-            drone.Status = DroneStatus.Meintenence;
-
             DroneCharge droneCharge = new DroneCharge();
+
+            drone.Status = DroneStatus.Meintenence;
             droneCharge.StationId = baseStation.Id;
             droneCharge.DroneId = drone.Id;
 
@@ -203,7 +204,7 @@ namespace DalObject
         /// <param name="droneId"></param>
         public void FinishCharging(int droneId)
         {
-            Drone drone = DataSource.drones.Find(
+            Drone drone = DataSource.drones.First(
                drone => (drone.Id == droneId)
                );
             DataSource.drones.Remove(drone);
@@ -268,8 +269,6 @@ namespace DalObject
         /// <returns></returns>
         public BaseStation[] GetStationsWithEmptySlots()
         {
-            //find all base stations where there are available charge slots
-
             return DataSource.baseStations.FindAll(b => b.ChargeSlots >
             (DataSource.droneCharges.FindAll(d => d.StationId == b.Id)).Count).ToArray();
         }

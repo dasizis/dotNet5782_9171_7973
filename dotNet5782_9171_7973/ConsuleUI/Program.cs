@@ -18,8 +18,6 @@ namespace ConsuleUI
         {
             DalObject.DataSource.Initialize();
             Console.WriteLine(RandomFullName());
-            printTitle("Main Options");
-            printEnum(typeof(MainOption));
             activateMainMenu();
         }
 

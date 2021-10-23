@@ -77,14 +77,16 @@ namespace IDAL.DO
         /// <returns></returns>
         public override string ToString()
         {
+            
+
             return (
                 $"*********************************************\n" +
                 $"Base Station #{Id} information\n" +
                 $"---------------------------------------------\n" +
                 $"Name: {Name}\n" +
                 $"Location: \n" +
-                $"-----Longitude: {Longitude}\n" +
-                $"-----Latitude : {Latitude} \n" +
+                $"-----Longitude: {DalObject.DalObject.coordinate.CoordinateCast(Longitude)}\n" +
+                $"-----Latitude : {DalObject.DalObject.coordinate.CoordinateCast(Latitude)} \n" +
                 $"Charge Slots: {ChargeSlots} slot(s).\n" +
                 $"*********************************************"
             );

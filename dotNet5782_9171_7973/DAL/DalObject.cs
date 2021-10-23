@@ -9,6 +9,7 @@ namespace DalObject
 {
     public struct DalObject
     {
+        public static DAL.Coordinate coordinate => new DAL.Coordinate();
 
         //------------Adding functions----------
         /// <summary>

@@ -94,7 +94,6 @@ namespace ConsuleUI
                         int chargeSlots = getInput();
 
                         dalObject.AddBaseStation(name, longitude, latitude, chargeSlots);
-                        DisplayList(dalObject.GetBaseStationList());
                         break;
                     }
                 case AddOption.Customer:

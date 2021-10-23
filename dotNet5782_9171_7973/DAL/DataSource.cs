@@ -9,6 +9,7 @@ namespace DalObject
 {
     public struct DataSource
     {
+        
         //number of item for arrays. (not used)
         const int DRONES = 10;
         const int BASE_STATIONS = 5;
@@ -31,11 +32,11 @@ namespace DalObject
         internal struct Config
         {
             internal static int AvailableDrone = 1;
-            internal static int AvailableStation = 0;
-            internal static int AvailableCustomer = 0;
-            //internal static int AvailableParcel = 0;
+            internal static int AvailableStation = 1;
+            internal static int AvailableCustomer = 1;
+            //internal static int AvailableParcel = 1;
 
-            internal static int ParcelId = 0;
+            internal static int ParcelId = 1;
         }
 
         //TODO

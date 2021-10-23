@@ -124,6 +124,7 @@ namespace ConsuleUI
                 case AddOption.Drone:
                     {
                         printHeader("Enter Details, Please.");
+                        Console.WriteLine("-Model, -weight (0-2), status (0-2)");
                         string model = Console.ReadLine();
                         WeightCategory weight = (WeightCategory)getInput();
                         DroneStatus status = (DroneStatus)getInput();

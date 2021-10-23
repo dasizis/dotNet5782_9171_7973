@@ -8,42 +8,37 @@ namespace ConsuleUI
 {
     partial class Program
     {
+        private const string errorAlert = "Invalid Option";
+
         public static DalObject.DalObject dalObject = new DalObject.DalObject();
 
-        /// <summary>
-        /// Get input and return it
-        /// </summary>
-        /// <param name="massage"></param>
-        /// <returns></returns>
         private static int getInput(string massage = "")
         {
-            Console.Write(massage + ">");
+            Console.Write(massage + massage == ""? "": "\n");
+            Console.Write("> ");
             int.TryParse(Console.ReadLine(), out int input);
 
             return input;
         }
 
         /// <summary>
-        /// Get item by its type and print it
+        /// print an item details acording to its type and id
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="id"></param>
+        /// <param name="type">the type of the item</param>
+        /// <param name="id">the item id</param>
         private static void printItemById(Type type, int id)
         {
             Console.WriteLine($"{DalObject.DataSource.GetById(type, id)}");
         }
 
         /// <summary>
-        /// Activate main menu 
-        /// Take care of different selection cases
+        /// activates the main menu
         /// </summary>
         private static void activateMainMenu()
         {
-            do
+            int input = getInput();
+            while (true)
             {
-                printTitle("Main Options");
-                printEnum(typeof(MainOption));
-                int input = getInput();
 
                 switch ((MainOption)input)
                 {
@@ -62,16 +57,19 @@ namespace ConsuleUI
                     case MainOption.Exit:
                         return;
                     default:
+                        Console.WriteLine(errorAlert);
                         break;
                 }
+                
+                printTitle("Main Options");
+                printEnum(typeof(MainOption));
+                input = getInput();
             }
-            while (true);
+                
         }
 
         /// <summary>
-        /// Activate add menu
-        /// Take care of different selection cases
-        /// Get values to add an entity
+        /// activates the main menu
         /// </summary>
         private static void activateAddMenu()
         {
@@ -82,111 +80,64 @@ namespace ConsuleUI
 
             switch ((AddOption)input)
             {
-                case AddOption.BaseStation:
-                    {
-                      
-                        printHeader("Enter Details, Please.");
-                        Console.WriteLine("-name, -longitude, -latitude, -number of charge slots");
-                        string name = Console.ReadLine();
-                        double longitude, latitude;
-                        double.TryParse(Console.ReadLine(), out longitude);
-                        double.TryParse(Console.ReadLine(), out latitude);
-                        int chargeSlots = getInput();
+                case AddOption.BaseStation: AddBaseStation(); break;
 
-                        dalObject.AddBaseStation(name, longitude, latitude, chargeSlots);
-                        break;
-                    }
-                case AddOption.Customer:
-                    {
-                        printHeader("Enter Details, Please.");
-                        Console.WriteLine("-name, -longitude, -latitude, -phone number");
-                        string name = Console.ReadLine();
-                        double longitude, latitude;
-                        double.TryParse(Console.ReadLine(), out longitude);
-                        double.TryParse(Console.ReadLine(), out latitude);
-                        string phone = Console.ReadLine();
+                case AddOption.Customer: AddCustomer(); break;
 
-                        dalObject.AddCustomer(name, longitude, latitude, phone);
-                        break;
-                    }
-                case AddOption.Parcel:
-                    {
-                        printHeader("Enter Details, Please.");
-                        Console.WriteLine("-sender ID, -target ID, -whight (0-2), priority (0-2)");
-                        int senderId = getInput();
-                        int targetId = getInput();
-                        WeightCategory weight = (WeightCategory)getInput();
-                        Priority priority = (Priority)getInput();
+                case AddOption.Parcel: AddParcel(); break;
 
-                        dalObject.AddParcel(senderId, targetId, weight, priority);
-                        break;
-                    }
-                case AddOption.Drone:
-                    {
-                        printHeader("Enter Details, Please.");
-                        string model = Console.ReadLine();
-                        WeightCategory weight = (WeightCategory)getInput();
-                        DroneStatus status = (DroneStatus)getInput();
+                case AddOption.Drone: AddDrone(); break;
 
-                        dalObject.AddDrone(model, weight, status);
-                        break;
-                    }
-                default:
-
-                    break;
+                default: Console.WriteLine(errorAlert); break;
             }
-
         }
 
         /// <summary>
-        /// Activate display menu
-        /// Take care of different selection cases
-        /// Display a chosen entity type by its ID
+        /// activates the display menu
         /// </summary>
         private static void activateDisplayMenu()
         {
             printTitle("Display Options");
             printEnum(typeof(DisplayOption), 1);
 
-            int id = getInput();
-            int index;
+            int option = getInput();
+            int id;
 
-            switch ((DisplayOption)id)
+            switch ((DisplayOption)option)
             {
                 case DisplayOption.BaseStation:
-                    index = getInput("Number Of Station:");
-                    printItemById(typeof(BaseStation), index);
+                    id = getInput("Number Of Station:");
+                    printItemById(typeof(BaseStation), id);
                     break;
                 case DisplayOption.Customer:
-                    index = getInput("Number Of Customer:");
-                    printItemById(typeof(Customer), index);
+                    id = getInput("Number Of Customer:");
+                    printItemById(typeof(Customer), id);
                     break;
                 case DisplayOption.Parcel:
-                    index = getInput("Number Of Parcel:");
-                    printItemById(typeof(Parcel), index);
+                    id = getInput("Number Of Parcel:");
+                    printItemById(typeof(Parcel), id);
                     break;
                 case DisplayOption.Drone:
-                    index = getInput("Number Of Drone:");
-                    printItemById(typeof(Drone), index);
+                    id = getInput("Number Of Drone:");
+                    printItemById(typeof(Drone), id);
                     break;
                 default:
+                    Console.WriteLine(errorAlert);
                     break;
             }                
         }
 
         /// <summary>
-        /// Activate Display Lists menu
-        /// Take care of different selection cases
-        /// Display a list of a chosen entity type
+        /// activates the display list menu
         /// </summary>
         private static void activateDisplayListMenu()
         {
             printTitle("Display List Options");
             printEnum(typeof(DisplayListOption), 1);
 
-            int id = getInput();
+            int option = getInput();
 
-            switch ((DisplayListOption)id)
+            switch ((DisplayListOption)option)
             {
                 case DisplayListOption.BaseStation:
                     DisplayList(dalObject.GetBaseStationList());
@@ -207,89 +158,60 @@ namespace ConsuleUI
                     DisplayList(dalObject.GetStationsWithEmptySlots());
                     break;
                 default:
+                    Console.WriteLine(errorAlert);
                     break;
             }
         }
 
         /// <summary>
-        /// Activate updates menu
-        /// Take care of different selection cases
-        /// Several updating actions
+        /// activates the update menu
         /// </summary>
         private static void activateUpdateMenu()
         {
-           
             printTitle("Update Options");
             printEnum(typeof(UpdateOption), 1);
 
-            int id = getInput();
+            int option = getInput();
 
-            switch ((UpdateOption)id)
+            switch ((UpdateOption)option)
             {
                 case UpdateOption.AssignParcelToDrone:
                     {
-                        int parcelId = getInput(
-                            $"Number Of Parcel, Please." +
-                            $" (0 - {DalObject.DataSource.GetNumberOfItems(typeof(Parcel))})\n"
-                        );
-                       
+                        int parcelId = getInput($"Parcel ID, Please.");
                         dalObject.AssignParcelToDrone(parcelId);
-                        
                         break;
                     }
                 case UpdateOption.CollectParcel:
                     {
-                        int parcelId = getInput(
-                            $"Number Of Parcel, Please." +
-                            $" (0 - {DalObject.DataSource.GetNumberOfItems(typeof(Parcel))})\n"
-                        );
-                       
+                        int parcelId = getInput($"Parcel ID, Please.");
                         dalObject.CollectParcel(parcelId);
-
-                        break;
-                    }
-                case UpdateOption.SupplyParcel:
-                    {
-                        int parcelId = getInput(
-                            $"Number Of Parcel, Please." +
-                            $" (0 - {DalObject.DataSource.GetNumberOfItems(typeof(Parcel))})\n"
-                        );
-
-                        dalObject.SupplyParcel(parcelId);
 
                         break;
                     }
                 case UpdateOption.ChargeDroneAtBaseStation:
                     {
-                        int droneId = getInput(
-                            $"Number Of Drone, Please." +
-                            $" (0 - {DalObject.DataSource.GetNumberOfItems(typeof(Drone))}) \n"
-                            );
-
+                        int droneId = getInput($"Drone ID, Please.");
                         dalObject.ChargeDroneAtBaseStation(droneId);
                         
                         break;
                     }
                 case UpdateOption.FinishCharging:
                     {
-                        int droneId = getInput(
-                            $"Number Of Drone, Please." +
-                            $" (0 - {DalObject.DataSource.GetNumberOfItems(typeof(Drone))}) \n"
-                            );
-
+                        int droneId = getInput($"Drone ID, Please.");
                         dalObject.FinishCharging(droneId);
 
                         break;
                     }
                 default:
+                    Console.WriteLine(errorAlert);
                     break;
             }
         }
 
         /// <summary>
-        /// Display a list
+        /// prints a list of items
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="list">the list to print</param>
         private static void DisplayList(IList list)
         {
             foreach (var item in list)
@@ -297,7 +219,5 @@ namespace ConsuleUI
                 Console.WriteLine(item);
             }
         }
-
     }
 }
-

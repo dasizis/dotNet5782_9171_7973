@@ -3,17 +3,16 @@ namespace DAL
 {
     class RandomManager
     {
-        // A static instance used for all random calls needed
         public static System.Random Rand => new System.Random();
 
         /// <summary>
-        /// Randomize  a name
+        /// creates a ranodm name in a random length (4-7 letters).
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the random name</returns>
         public static string RandomName()
         {
             const int MIN_NAME_LENGTH = 4;
-            const int MAX_NAME_LENGTH = 7;
+            const int MAX_NAME_LENGTH = 8;
 
             int length = Rand.Next(MIN_NAME_LENGTH, MAX_NAME_LENGTH);
 
@@ -28,31 +27,35 @@ namespace DAL
         }
 
         /// <summary>
-        /// Randomize full name using RandomName
+        /// creates a ranodm full name
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the random full name</returns>
         public static string RandomFullName()
         {
             return $"{RandomName()} {RandomName()}";
         }
 
         /// <summary>
-        /// Randomize a phone number
+        /// creates a random phone number
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the random phone number</returns>
         public static string RandomPhone()
         {
             string phone ="05";
+            const int PHONE_LENGTH = 10;
 
-            phone += Rand.Next(10000000, 100000000 ).ToString();
+            phone += Rand.Next(
+                (int)System.Math.Pow(10, PHONE_LENGTH - 3),
+                (int)System.Math.Pow(10, PHONE_LENGTH - 2)
+            ).ToString();
 
             return phone;
         }
 
         /// <summary>
-        /// Randomize a date
+        /// creates a random date
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the random date</returns>
         public static System.DateTime RandomDate()
         {
             int year = Rand.Next(1950, 2021);
@@ -66,17 +69,14 @@ namespace DAL
         }
         
         /// <summary>
-        /// Randomize an enum option out of one type enum options
-        /// A generic function
+        /// choose a random enum value
         /// </summary>
-        /// <param name="enumType"></param>
-        /// <returns></returns>
+        /// <param name="enumType">the enum type</param>
+        /// <returns>the random value (int value)</returns>
         public static int RandomEnumOption(System.Type enumType)
         {
             System.Array enumValues = enumType.GetEnumValues();
-            return (int)enumValues.GetValue(Rand.Next(enumValues.Length));
+            return Rand.Next(enumValues.Length);
         }
-        
-
     }
 }

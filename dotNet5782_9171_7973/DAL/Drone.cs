@@ -6,47 +6,21 @@ namespace IDAL.DO
 {
     public struct Drone
     {
-        WeightCategory maxWeight;
-        DroneStatus status;
         public int Id { get; set; }
 
         public string Model { get; set; }
 
-        public WeightCategory MaxWeight
-        {
-            get
-            {
-                return maxWeight;
-            }
-            set
-            {
-                if ((int)value < 0 || (int)value > 2)
-                    throw new ArgumentException("Invalid MaxWeight Value.");
-                maxWeight = value;
-            }
-        }
+        public WeightCategory MaxWeight { get; set; }
 
-        public DroneStatus Status
-        {
-            get
-            {
-                return status;
-            }
-            set
-            {
-                if ((int)value < 0 || (int)value > 2)
-                    throw new ArgumentException("Invalid Status Value.");
-                status = value;
-            }
-        }
+        public DroneStatus Status { get; set; }
 
         public double Battery { get; set; }
 
         /// <summary>
-        /// Return a new drone with random values
+        /// creates a random Drone instance
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">the instance id</param>
+        /// <returns>the created Drone instance</returns>
         public static Drone Random(int id)
         {
             return new Drone()
@@ -62,15 +36,15 @@ namespace IDAL.DO
         public override string ToString()
         {
             return (
-                $"************************************\n"+
-                $"Drone #{Id} information: \n" +
-                $"Model  : {Model} \n" +
-                $"Weight : {MaxWeight} \t " +
+                $"*********************************************\n" +
+                $"Drone #{Id} information\n" +
+                $"---------------------------------------------\n" +
+                $"Model  : {Model}\n" +
+                $"Weight : {MaxWeight}\n" +
                 $"Status : {Status} \n" +
-                $"Battery: {Battery}%\n"+
-                $"************************************\n" 
+                $"Battery: {Battery}%\n" + 
+                $"*********************************************"
             );
         }
-        
     }
 }

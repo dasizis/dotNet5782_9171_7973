@@ -6,8 +6,6 @@ namespace IDAL.DO
 {
     public struct Parcel
     {
-        WeightCategory weight;
-        Priority priority;
         public int DroneId { get; set; }
 
         public int Id { get; set; }
@@ -16,37 +14,9 @@ namespace IDAL.DO
 
         public int TargetId { get; set; }
 
-        public WeightCategory Weight
-        {
-            get
-            {
-                return weight;
-            }
+        public WeightCategory Weight { get; set; }
 
-            set
-            {
-                if ((int)value < 0 || (int)value > 2)
-                    throw new ArgumentException("Invalid Weight Value.");
-                weight = value;
-
-            }
-        }
-
-        public Priority Priority
-        {
-            get
-            {
-                return priority;
-            }
-
-            set
-            {
-                if ((int)value < 0 || (int)value > 2)
-                    throw new ArgumentException("Invalid Priority Value.");
-                priority = value;
-
-            }
-        }
+        public Priority Priority { get; set; }
 
         public DateTime Requested { get; set; }
 
@@ -56,6 +26,11 @@ namespace IDAL.DO
 
         public DateTime Delivered { get; set; }
 
+        /// <summary>
+        /// creates a random Parcel instance
+        /// </summary>
+        /// <param name="id">the instance id</param>
+        /// <returns>the created Parcel instance</returns>
         public static Parcel Random(int id)
         { 
             return new Parcel()
@@ -72,24 +47,22 @@ namespace IDAL.DO
             };
         }
 
-        /// <summary>
-        /// Print parcel information
-        /// </summary>
-        /// <returns></returns>
+
         public override string ToString()
         {
             return (
-                $"**********************************\n"+
-                $"Parcel #{Id} information: \n" +
+                $"*********************************************\n" +
+                $"Parcel #{Id} information\n" +
+                $"---------------------------------------------\n" +
                 $"Sender: {SenderId} \t Target: {TargetId} \n" +
                 $"Whight: {Weight} \t Priority: {Priority} \n " +
                 $"Drone in charge: {DroneId} \n" +
-                $"====Relevant dates:====\n" +
+                $"- Relevant dates: ---------------------------\n" +
                 $"Requested: {Requested} \n" +
                 $"Scheduled: {Scheduled} \n" +
                 $"Delivered: {Delivered} \n" +
-                $"Picked up: {PickedUp}\n"+
-                $"**********************************\n"
+                $"Picked up: {PickedUp}\n" + 
+                $"*********************************************"
             );
         }
     }

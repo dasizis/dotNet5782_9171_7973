@@ -69,10 +69,10 @@ namespace DalObject
         {
             switch (type.Name)
             {
-                case "Drone"      : return drones.Find(a => a.Id == id);
-                case "BaseStation": return baseStations.Find(a => a.Id == id);
-                case "Customer"   : return customers.Find(a => a.Id == id);
-                case "Parcel"     : return parcels.Find(a => a.Id == id);
+                case "Drone"      : return drones.First(a => a.Id == id);
+                case "BaseStation": return baseStations.First(a => a.Id == id);
+                case "Customer"   : return customers.First(a => a.Id == id);
+                case "Parcel"     : return parcels.First(a => a.Id == id);
 
                 default:
                     throw new Exception("Unknown type");

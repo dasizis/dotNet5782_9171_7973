@@ -44,7 +44,7 @@ namespace DAL
         {
             string phone ="05";
 
-            phone += Rand.Next(1000000, 10000000 ).ToString();
+            phone += Rand.Next(10000000, 100000000 ).ToString();
 
             return phone;
         }

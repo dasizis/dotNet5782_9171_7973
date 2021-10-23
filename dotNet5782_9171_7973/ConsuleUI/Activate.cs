@@ -17,7 +17,7 @@ namespace ConsuleUI
         /// <returns></returns>
         private static int getInput(string massage = "")
         {
-            Console.Write(massage+ ">");
+            Console.Write(massage + ">");
             int.TryParse(Console.ReadLine(), out int input);
 
             return input;

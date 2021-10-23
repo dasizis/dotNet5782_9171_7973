@@ -13,9 +13,28 @@ namespace DAL
         public CoordinatesPosition Position { get; set; }
 
         public Coordinate() { }
-
         
-        public Coordinate CoordinateCast(double value, CoordinatesPosition position = default)
+        public Coordinate(double degrees, double minutes, double seconds, CoordinatesPosition position)
+        {
+            Degrees = degrees;
+            Minutes = minutes;
+            Seconds = seconds;
+            Position = position;
+
+        }
+
+        public Coordinate(double value, CoordinatesPosition position = default)
+        {
+            CastFromDec(value, position);
+        }
+
+        /// <summary>
+        /// convert double value of position to a longitude or latitude format
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
+        /// <returns>this</returns>
+        public Coordinate CastFromDec(double value, CoordinatesPosition position = default)
         {
 
             //sanity
@@ -48,18 +67,21 @@ namespace DAL
 
             return this;
         }
-        public Coordinate(double degrees, double minutes, double seconds, CoordinatesPosition position)
-        {
-            Degrees = degrees;
-            Minutes = minutes;
-            Seconds = seconds;
-            Position = position;
-        }
+
+        /// <summary>
+        /// convert longitude / latitude to double number
+        /// </summary>
+        /// <returns></returns>
         public double ToDouble()
         {
             var result = (Degrees) + (Minutes) / 60 + (Seconds) / 3600;
             return Position == CoordinatesPosition.W || Position == CoordinatesPosition.S ? -result : result;
         }
+
+        /// <summary>
+        /// ToString override function
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Degrees + "º " + Minutes + "' " + Seconds + "'' " + Position;

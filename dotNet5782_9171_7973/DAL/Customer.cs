@@ -84,8 +84,8 @@ namespace IDAL.DO
                 $"Name: {Name} \n" +
                 $"Phone number: {Phone} \n" +
                 $"Location:" +
-                $"-----Longitude: {DalObject.DalObject.coordinate.CoordinateCast(Longitude)} \t " +
-                $"-----Latitude: {DalObject.DalObject.coordinate.CoordinateCast(Latitude)} \n" +
+                $"-----Longitude: {DalObject.DalObject.coordinate.CastFromDec(Longitude)} \t " +
+                $"-----Latitude: {DalObject.DalObject.coordinate.CastFromDec(Latitude)} \n" +
                 $"  * ********************************************"
             );
         }

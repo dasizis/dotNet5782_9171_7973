@@ -18,7 +18,7 @@ read [here](https://www.markdownguide.org/basic-syntax/) about markdown format.
  > - separate dalObject to files. It's too long
  > - go over the code and see if logic is correct. (cant pick up a parcel before assigning to a drone and so on)- DONE
  > - add try and catch in the main program, for all exception thrown.
- > - the bonus if possible
+ > - the bonus if possible- MOSTLY DONE
  > - anything More?
  
 

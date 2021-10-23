@@ -28,19 +28,19 @@ this is an extra line
 
  to do files:
  ### ConsoleUI
- [X] Activate - in my opinion id does not must be in a sequence
- [X] AddMenu
- [X] OptionEnum
- [X] Program
+ - [X] Activate - in my opinion id does not must be in a sequence
+ - [X] AddMenu
+ - [X] OptionEnum
+ - [X] Program
 
  ### DAL
- [X] BaseStation
- [X] Customer
- [ ] DalObject - if not found
- [X] DataSource
- [X] Drone
- [X] DroneCharge
- [X] Enum
- [ ] Parcel - check the date 
- [X] Random
+ - [X] BaseStation
+ - [X] Customer
+ - [ ] DalObject - if not found
+ - [X] DataSource
+ - [X] Drone
+ - [X] DroneCharge
+ - [X] Enum
+ - [ ] Parcel - check the date 
+ - [X] Random
 

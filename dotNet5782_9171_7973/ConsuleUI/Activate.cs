@@ -14,7 +14,7 @@ namespace ConsuleUI
 
         private static int getInput(string massage = "")
         {
-            Console.Write(massage + massage == ""? "": "\n");
+            Console.Write(massage + massage == "" ? "" : "\n");
             Console.Write("> ");
             int.TryParse(Console.ReadLine(), out int input);
 
@@ -60,12 +60,12 @@ namespace ConsuleUI
                         Console.WriteLine(errorAlert);
                         break;
                 }
-                
+
                 printTitle("Main Options");
                 printEnum(typeof(MainOption));
                 input = getInput();
             }
-                
+
         }
 
         /// <summary>
@@ -84,16 +84,7 @@ namespace ConsuleUI
 
                 case AddOption.Customer: AddCustomer(); break;
 
-                        dalObject.AddParcel(senderId, targetId, weight, priority);
-                        break;
-                    }
-                case AddOption.Drone:
-                    {
-                        printHeader("Enter Details, Please.");
-                        Console.WriteLine("-Model, -weight (0-2), status (0-2)");
-                        string model = Console.ReadLine();
-                        WeightCategory weight = (WeightCategory)getInput();
-                        DroneStatus status = (DroneStatus)getInput();
+                case AddOption.Parcel: AddParcel(); break;
 
                 case AddOption.Drone: AddDrone(); break;
 
@@ -133,7 +124,7 @@ namespace ConsuleUI
                 default:
                     Console.WriteLine(errorAlert);
                     break;
-            }                
+            }
         }
 
         /// <summary>
@@ -201,7 +192,7 @@ namespace ConsuleUI
                     {
                         int droneId = getInput($"Drone ID, Please.");
                         dalObject.ChargeDroneAtBaseStation(droneId);
-                        
+
                         break;
                     }
                 case UpdateOption.FinishCharging:

@@ -41,8 +41,8 @@ namespace IDAL.DO
                 $"---------------------------------------------\n" +
                 $"Name: {Name}\n" +
                 $"Location: \n" +
-                $"-----Longitude: {Longitude}\n" +
-                $"-----Latitude : {Latitude} \n" +
+                 $"-----Longitude: {DalObject.DalObject.coordinate.CastFromNum(Longitude)}\n" +
+                $"-----Latitude : {DalObject.DalObject.coordinate.CastFromNum(Latitude)} \n" +
                 $"Charge Slots: {ChargeSlots} slot(s).\n" +
                 $"*********************************************"
             );

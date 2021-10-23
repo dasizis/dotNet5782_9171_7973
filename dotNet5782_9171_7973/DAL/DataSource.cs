@@ -23,10 +23,10 @@ namespace DalObject
 
         internal class Config
         {
-            internal static int NextDroneID = 0;
-            internal static int NextBaseStationID = 0;
-            internal static int NextCustomerID = 0;
-            internal static int NextParcelID = 0;
+            internal static int NextDroneID = 1;
+            internal static int NextBaseStationID = 1;
+            internal static int NextCustomerID = 1;
+            internal static int NextParcelID = 1;
         }
 
         /// <summary>

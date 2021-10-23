@@ -9,7 +9,7 @@ namespace DalObject
 {
     public struct DalObject
     {
-
+        public static DAL.Coordinate coordinate => new DAL.Coordinate();
         //------------Adding functions----------
 
         public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)

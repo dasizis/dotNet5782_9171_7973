@@ -6,6 +6,8 @@ namespace IDAL.DO
 {
     public struct Parcel
     {
+        WeightCategory weight;
+        Priority priority;
         public int DroneId { get; set; }
 
         public int Id { get; set; }
@@ -14,9 +16,37 @@ namespace IDAL.DO
 
         public int TargetId { get; set; }
 
-        public WeightCategory Weight { get; set; }
+        public WeightCategory Weight
+        {
+            get
+            {
+                return weight;
+            }
 
-        public Priority Priority { get; set; }
+            set
+            {
+                if ((int)value < 0 || (int)value > 2)
+                    throw new ArgumentException("Invalid Weight Value.");
+                weight = value;
+
+            }
+        }
+
+        public Priority Priority
+        {
+            get
+            {
+                return priority;
+            }
+
+            set
+            {
+                if ((int)value < 0 || (int)value > 2)
+                    throw new ArgumentException("Invalid Priority Value.");
+                priority = value;
+
+            }
+        }
 
         public DateTime Requested { get; set; }
 

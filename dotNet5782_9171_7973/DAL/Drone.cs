@@ -6,13 +6,39 @@ namespace IDAL.DO
 {
     public struct Drone
     {
+        WeightCategory maxWeight;
+        DroneStatus status;
         public int Id { get; set; }
 
         public string Model { get; set; }
 
-        public WeightCategory MaxWeight { get; set; }
+        public WeightCategory MaxWeight
+        {
+            get
+            {
+                return maxWeight;
+            }
+            set
+            {
+                if ((int)value < 0 || (int)value > 2)
+                    throw new ArgumentException("Invalid MaxWeight Value.");
+                maxWeight = value;
+            }
+        }
 
-        public DroneStatus Status { get; set; }
+        public DroneStatus Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                if ((int)value < 0 || (int)value > 2)
+                    throw new ArgumentException("Invalid Status Value.");
+                status = value;
+            }
+        }
 
         public double Battery { get; set; }
 

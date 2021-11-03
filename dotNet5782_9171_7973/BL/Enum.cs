@@ -19,4 +19,10 @@
         PickedUp, 
         Provided
     }
+    public enum DroneState
+    {
+        FREE,
+        MEINTENENCE,
+        DELIVER,
+    }
 }

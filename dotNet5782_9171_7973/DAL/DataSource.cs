@@ -24,7 +24,7 @@ namespace DalObject
         {
             internal static int NextParcelID = 1;
 
-            static class ElectricityConfumctiol
+            internal static class ElectricityConfumctiol
             {
                 internal static int Free = 1;
                 internal static int Light = 2;

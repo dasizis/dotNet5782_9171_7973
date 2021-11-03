@@ -8,17 +8,17 @@ using System.Linq;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDAL.IDal
     {
         public static DAL.Coordinate coordinate => new DAL.Coordinate();
 
         //------------Adding functions----------
 
-        
 
 
 
-        
+
+
 
         // ----------- Update functions ---------
         /// <summary>
@@ -75,9 +75,9 @@ namespace DalObject
 
         }
 
-        
 
-        
+
+
 
         /// <summary>
         /// releases drone from charging
@@ -95,10 +95,24 @@ namespace DalObject
             DataSource.drones.Add(drone);
         }
 
+        public int[] GetElectricityConfumctiol()
+        {
+
+            return new int[]
+            {
+                DataSource.Config.ElectricityConfumctiol.Free,
+                DataSource.Config.ElectricityConfumctiol.Light,
+                DataSource.Config.ElectricityConfumctiol.Medium,
+                DataSource.Config.ElectricityConfumctiol.Heavy,
+                DataSource.Config.ChargeRate,
+            };
+
+        }
+
 
         //---------return list functions---------------
 
-        
+
 
 
 

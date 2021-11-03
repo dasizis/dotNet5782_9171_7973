@@ -2,18 +2,10 @@
 {
     public enum WeightCategory
     {
-        Low,
+        Light,
         Medium,
         Heavy,
     }
-
-    public enum DroneStatus
-    {
-        Free,
-        Meintenence,
-        Deliver,
-    }
-
     public enum Priority
     {
         Regular,

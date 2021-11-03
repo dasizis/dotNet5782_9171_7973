@@ -9,7 +9,6 @@ namespace DalObject
 {
     public struct DataSource
     {
-        // Minimum number of values to initialize 
         const int INIT_BASESTATIONS = 2;
         const int INIT_DRONES = 5;
         const int INIT_CUSTOMERS = 10;
@@ -23,10 +22,17 @@ namespace DalObject
 
         internal class Config
         {
-            internal static int NextDroneID = 1;
-            internal static int NextBaseStationID = 1;
-            internal static int NextCustomerID = 1;
             internal static int NextParcelID = 1;
+
+            static class ElectricityConfumctiol
+            {
+                internal static int Free = 1;
+                internal static int Light = 2;
+                internal static int Medium = 3;
+                internal static int Heavy = 4;
+            }
+
+            internal static int ChargeRate = 10;
         }
 
         /// <summary>
@@ -34,60 +40,26 @@ namespace DalObject
         /// </summary>
         public static void Initialize()
         {
-            for(; baseStations.Count < INIT_BASESTATIONS; ++Config.NextBaseStationID)
-            {
-                baseStations.Add(BaseStation.Random(Config.NextBaseStationID));
-            }
-           
-            for (; drones.Count < INIT_DRONES; ++Config.NextDroneID)
-            {
-                drones.Add(Drone.Random(Config.NextDroneID));
-            }
+            baseStations.AddRange(
+                Enumerable.Range(0, INIT_BASESTATIONS)
+                          .Select(i => DAL.RandomManager.RandomBaseStation(i))
+            );
 
-            for (; customers.Count < INIT_CUSTOMERS; ++Config.NextCustomerID)
-            {
-                customers.Add(Customer.Random(Config.NextCustomerID));
-            }
+            drones.AddRange(
+                Enumerable.Range(0, INIT_DRONES)
+                          .Select(i => DAL.RandomManager.RandomDrone(i))
+            );
 
-            for (; parcels.Count < INIT_PARCELS; ++Config.NextParcelID)
-            {
-                parcels.Add(Parcel.Random(Config.NextParcelID));
-            }
+            customers.AddRange(
+                Enumerable.Range(0, INIT_CUSTOMERS)
+                          .Select(i => DAL.RandomManager.RandomCustomer(i))
+            );
+
+            parcels.AddRange(
+                Enumerable.Range(0, INIT_PARCELS)
+                          .Select(_ => DAL.RandomManager.RandomParcel(Config.NextParcelID++))
+            );
+
         }
-
-        /// <summary>
-        /// finds the element of a given type with the wanted id otherwise finds the 
-        /// first item from this type (mistake, should throw an exeption)
-        /// </summary>
-        /// <param name="type">the item type</param>
-        /// <param name="id">the item id</param>
-        /// <returns></returns>
-        public static object GetById(Type type, int id)
-        {
-            switch (type.Name)
-            {
-                case "Drone"      : return drones.First(a => a.Id == id);
-                case "BaseStation": return baseStations.First(a => a.Id == id);
-                case "Customer"   : return customers.First(a => a.Id == id);
-                case "Parcel"     : return parcels.First(a => a.Id == id);
-
-                default:
-                    throw new Exception("Unknown type");
-            }
-        }
-
-        //public static object GetNumberOfItems(Type type)
-        //{
-        //    switch (type.Name)
-        //    {
-        //        case "Drone": return drones.Count;
-        //        case "BaseStation": return baseStations.Count;
-        //        case "Customer": return customers.Count;
-        //        case "Parcel": return parcels.Count;
-
-        //        default:
-        //            throw new Exception("Unknown type");
-        //    }
-        //}
     }
 }

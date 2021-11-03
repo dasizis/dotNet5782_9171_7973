@@ -1,4 +1,5 @@
-﻿
+﻿using IDAL.DO;
+
 namespace DAL
 {
     class RandomManager
@@ -77,6 +78,74 @@ namespace DAL
         {
             System.Array enumValues = enumType.GetEnumValues();
             return Rand.Next(enumValues.Length);
+        }
+
+        /// <summary>
+        /// creates a random Parcel instance
+        /// </summary>
+        /// <param name="id">the instance id</param>
+        /// <returns>the created Parcel instance</returns>
+        public static Parcel RandomParcel(int id)
+        {
+            return new Parcel()
+            {
+                Id = id,
+                Requested = RandomDate(),
+                Weight = (WeightCategory)RandomEnumOption(typeof(WeightCategory)),
+                Priority = (Priority)RandomEnumOption(typeof(Priority)),
+                SenderId = Rand.Next(),
+                TargetId = Rand.Next(),
+                DroneId = 0,
+            };
+        }
+
+        /// <summary>
+        /// creates a random Drone instance
+        /// </summary>
+        /// <param name="id">the instance id</param>
+        /// <returns>the created Drone instance</returns>
+        public static Drone RandomDrone(int id)
+        {
+            return new Drone()
+            {
+                Id = id,
+                Model = RandomName(),
+                MaxWeight = (WeightCategory)RandomEnumOption(typeof(WeightCategory)),
+            };
+        }
+
+        /// <summary>
+        /// creates a random Customer instance
+        /// </summary>
+        /// <param name="id">the instance id</param>
+        /// <returns>the created Customer instance</returns>
+        public static Customer RandomCustomer(int id)
+        {
+            return new Customer()
+            {
+                Id = id,
+                Name = RandomFullName(),
+                Longitude = Rand.NextDouble() * 100,
+                Latitude = Rand.NextDouble() * 100,
+                Phone = RandomPhone(),
+            };
+        }
+
+        /// <summary>
+        /// creates a random BaseStation instance
+        /// </summary>
+        /// <param name="id">the instance id</param>
+        /// <returns>the created BaseStation instance</returns>
+        public static BaseStation RandomBaseStation(int id)
+        {
+            return new BaseStation()
+            {
+                Id = id,
+                Name = RandomName(),
+                Longitude = Rand.NextDouble() * 100,
+                Latitude = Rand.NextDouble() * 100,
+                ChargeSlots = Rand.Next(1, 10),
+            };
         }
     }
 }

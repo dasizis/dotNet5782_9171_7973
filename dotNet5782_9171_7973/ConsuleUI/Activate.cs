@@ -12,13 +12,18 @@ namespace ConsuleUI
 
         public static DalObject.DalObject dalObject = new DalObject.DalObject();
 
-        private static int getInput(string massage = "")
+        private static T getInput<T>(Converter<string, T> convert, string prompt = "> ")
         {
-            Console.Write(massage + massage == "" ? "" : "\n");
-            Console.Write("> ");
-            int.TryParse(Console.ReadLine(), out int input);
-
-            return input;
+            Console.Write(prompt);
+            string input = Console.ReadLine();
+            try
+            {
+                return convert(input);
+            }
+            catch
+            {
+                throw new FormatException();
+            }
         }
 
         /// <summary>
@@ -28,7 +33,7 @@ namespace ConsuleUI
         /// <param name="id">the item id</param>
         private static void printItemById(Type type, int id)
         {
-            Console.WriteLine($"{DalObject.DataSource.GetById(type, id)}");
+            Console.WriteLine(Bl.GetById(type, id));
         }
 
         /// <summary>

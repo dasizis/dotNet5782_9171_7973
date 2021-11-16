@@ -14,11 +14,22 @@ namespace DalObject
         const int INIT_CUSTOMERS = 10;
         const int INIT_PARCELS = 10;
 
-        internal static List<Drone> drones = new List<Drone>();
-        internal static List<BaseStation> baseStations = new List<BaseStation>();
-        internal static List<Customer> customers = new List<Customer>();
-        internal static List<Parcel> parcels = new List<Parcel>();
-        internal static List<DroneCharge> droneCharges = new List<DroneCharge>();
+        internal static List<Drone> drones = new();
+        internal static List<BaseStation> baseStations = new();
+        internal static List<Customer> customers = new();
+        internal static List<Parcel> parcels = new();
+        internal static List<DroneCharge> droneCharges = new();
+
+        // Another way to acces the data
+        internal static Dictionary<Type, IList> data = new()
+        {
+            [typeof(Drone)] = drones,
+            [typeof(BaseStation)] = baseStations,
+            [typeof(Customer)] = customers,
+            [typeof(Parcel)] = parcels,
+            [typeof(DroneCharge)] = droneCharges,
+        };
+
 
         internal class Config
         {

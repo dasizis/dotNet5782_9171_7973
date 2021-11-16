@@ -5,116 +5,124 @@ using System.Text;
 using IDAL.DO;
 using System.Linq;
 
+using System.Reflection;
 
 namespace DalObject
 {
     public partial class DalObject : IDAL.IDal
     {
-        public static DAL.Coordinate coordinate => new DAL.Coordinate();
-
-        //------------Adding functions----------
-
-
-
-
-
-
-
-        // ----------- Update functions ---------
         /// <summary>
-        /// assigns parcel to suitable drone
+        /// Add an item to its data list
         /// </summary>
-        /// <param name="parcelId"></param>
-        public void AssignParcelToDrone(int parcelId)
+        /// <param name="item">the item to add</param>.
+        public void Add(IIdentifiable item)
         {
-            Parcel parcel = DataSource.parcels.First(item => item.Id == parcelId);
+            Type type = item.GetType();
 
-            Drone drone = DataSource.drones.FirstOrDefault(
-               drone => (drone.Status == DroneStatus.Free)
-               && (parcel.Weight <= drone.MaxWeight)
-               );
-            if (drone.Equals(default))
+            if (DataSource.data[type].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
             {
-                Console.WriteLine("No Suitable Drone Found");
-                return;
+                throw new IdAlreadyExistsException(type, item.Id);
             }
 
-            DataSource.parcels.Remove(parcel);
-            DataSource.drones.Remove(drone);
-
-            parcel.DroneId = drone.Id;
-            drone.Status = DroneStatus.Deliver;
-            parcel.Scheduled = DateTime.Now;
-
-            DataSource.parcels.Add(parcel);
-            DataSource.drones.Add(drone);
-
+            DataSource.data[type].Add(item);
         }
 
         /// <summary>
-        /// supplys parcel to customer
+        /// returns a filtered list of the given type 
         /// </summary>
-        /// <param name="parcelId"></param>
-        public void SupplyParcel(int parcelId)
-        {
-
-            Parcel parcel = DataSource.parcels.First(item => item.Id == parcelId);
-            if (parcel.DroneId == 0 || parcel.PickedUp == new DateTime())
-                throw new Exception("Parcel Is Not In Supplying step.");
-
-            Drone drone = DataSource.drones.Find(d => d.Id == parcel.DroneId);
-
-            DataSource.drones.Remove(drone);
-            DataSource.parcels.Remove(parcel);
-
-            parcel.Delivered = DateTime.Now;
-            drone.Status = DroneStatus.Free;
-
-            DataSource.parcels.Add(parcel);
-            DataSource.drones.Add(drone);
-
-        }
-
-
-
-
+        /// <param name="type">the wanted list type</param>
+        /// <param name="predicate">a predicate function</param>
+        /// <returns>a filtered list </returns>
+        IEnumerable getFilteredList(Type type, Predicate<IIdentifiable> predicate) =>
+            DataSource.data[type].Cast<IIdentifiable>().Where(item => predicate(item));
 
         /// <summary>
-        /// releases drone from charging
+        /// return a copy of the wanted data list
         /// </summary>
-        /// <param name="droneId"></param>
-        public void FinishCharging(int droneId)
+        /// <param name="type">the list type</param>
+        /// <returns>a copy of the last</returns>
+        public IEnumerable GetList(Type type) => getFilteredList(type, _ => true);
+
+        /// <summary>
+        /// returns an item with the given type and id 
+        /// </summary>
+        /// <param name="type">the item's type</param>
+        /// <param name="id">the item's id</param>
+        /// <returns>the wanted item</returns>
+        public IIdentifiable GetById(Type type, int id)
         {
-            Drone drone = DataSource.drones.First(drone => drone.Id == droneId);
-            DataSource.drones.Remove(drone);
-            drone.Status = DroneStatus.Free;
-            drone.Battery = 100;
-
-            //remove chargeslot which charged the drone
-            DataSource.droneCharges.RemoveAll(d => d.DroneId == drone.Id);
-            DataSource.drones.Add(drone);
-        }
-
-        public int[] GetElectricityConfumctiol()
-        {
-
-            return new int[]
+            try
             {
+                return getFilteredList(type, item => item.Id == id).Cast<IIdentifiable>().First();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new ObjectNotFoundException(type, id);
+            }
+        }
+
+        /// <summary>
+        /// returns tuple of all the electricity confumctiol details
+        /// </summary>
+        /// <returns>tuple of all the electricity confumctiol details</returns>
+        public (int, int, int, int, int) GetElectricityConfumctiol()
+        {
+            return
+            (
                 DataSource.Config.ElectricityConfumctiol.Free,
                 DataSource.Config.ElectricityConfumctiol.Light,
                 DataSource.Config.ElectricityConfumctiol.Medium,
                 DataSource.Config.ElectricityConfumctiol.Heavy,
-                DataSource.Config.ChargeRate,
-            };
+                DataSource.Config.ChargeRate
+            );
 
         }
 
+        public IEnumerable GetNotAssignedToDroneParcels()
+        {
+            return DataSource.parcels.Where(parcel => parcel.DroneId == 0);
+        }
 
-        //---------return list functions---------------
+        public IEnumerable GetAvailableBaseStations()
+        {
+            return DataSource.baseStations.FindAll(
+                            baseStation => baseStation.ChargeSlots > DataSource.droneCharges.FindAll(
+                                droneCharge => droneCharge.StationId == baseStation.Id).Count);
+        }
 
+        public void AssignParcelToDrone(int parcelId, int droneId)
+        {
+            Parcel parcel = (Parcel)GetById(typeof(Parcel), parcelId);
+            DataSource.parcels.Remove(parcel);
 
+            parcel.DroneId = droneId;
+            parcel.Scheduled = DateTime.Now;
+            DataSource.parcels.Add(parcel);
+        }
 
+        public void SupplyParcel(int parcelId)
+        {
+            Parcel parcel = (Parcel)GetById(typeof(Parcel), parcelId);
+            DataSource.parcels.Remove(parcel);
 
+            parcel.PickedUp = DateTime.Now;
+            DataSource.parcels.Add(parcel);
+        }
 
+        public void ChargeDroneAtBaseStation(int droneId, int baseStationId)
+        {
+            DataSource.droneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = baseStationId });
+        }
+
+        public void FinishCharging(int droneId)
+        {
+            var droneCharge = DataSource.droneCharges.First(charge => charge.DroneId == droneId);
+            DataSource.droneCharges.Remove(droneCharge);
+        }
+
+        public void CollectParcel(int parcelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

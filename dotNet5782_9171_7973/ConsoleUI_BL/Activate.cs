@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IDAL.DO
+namespace ConsoleUI_BL
 {
-    public interface IIdentifiable
+    class Activate
     {
-        public int Id { get; }
     }
 }

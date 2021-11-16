@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IDAL.DO
 {
@@ -18,6 +16,5 @@ namespace IDAL.DO
 
             return description;
         }
-
     }
 }

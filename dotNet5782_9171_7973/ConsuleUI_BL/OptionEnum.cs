@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsuleUI
+namespace ConsuleUI_BL
 {
     enum MainOption
     {
@@ -23,6 +23,9 @@ namespace ConsuleUI
 
     enum UpdateOption
     {
+        RenameDrone,
+        UpdateBaseStation,
+        UpdateCustomer,
         AssignParcelToDrone,
         CollectParcel,
         SupplyParcel,
@@ -45,7 +48,7 @@ namespace ConsuleUI
         Parcel,
         Drone,
         NotAssignedToDroneParcels,
-        AvailableBaseStation,
+        AvailableBaseStations,
     }
 
 }

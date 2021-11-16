@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    interface ILocalable
+    public interface ILocalable
     {
         public Location Location { get; set; } 
     }

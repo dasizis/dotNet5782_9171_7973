@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class BL: IBL.IBL
-    {
+     public partial class BL: IBL.IBL
+     {
         public IDAL.IDal Dal { get; set; } = new DalObject.DalObject();
         public int ElectricityConfumctiolFree { get; set; }
         public int ElectricityConfumctiolLight { get; set; }
@@ -17,10 +17,7 @@ namespace BL
         public int ElectricityConfumctiolHeavy { get; set; }
         public int ChargeRate { get; set; }
 
-        public BL()
-        {
-
-        }
+       
 
         public void AddBaseStation(int id, string name, Location location, int chargeSlots)
         {

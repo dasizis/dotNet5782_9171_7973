@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    static class Localable
+    public static class Localable
     {
         const int EARTH_RADIUS_KM = 6371;
         public static double Distance(ILocalable localableA, ILocalable localableB)

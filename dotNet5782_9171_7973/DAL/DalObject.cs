@@ -27,6 +27,19 @@ namespace DalObject
             DataSource.data[type].Add(item);
         }
 
+
+        /// <summary>
+        /// Remove an item from its data list
+        /// </summary>
+        /// <param name="item"></param>
+        public void Remove(IIdentifiable item)
+        {
+            Type type = item.GetType();
+
+            DataSource.data[type].Remove(item);    
+        }
+
+
         /// <summary>
         /// returns a filtered list of the given type 
         /// </summary>
@@ -105,7 +118,7 @@ namespace DalObject
             Parcel parcel = (Parcel)GetById(typeof(Parcel), parcelId);
             DataSource.parcels.Remove(parcel);
 
-            parcel.PickedUp = DateTime.Now;
+            parcel.Delivered = DateTime.Now;
             DataSource.parcels.Add(parcel);
         }
 
@@ -124,5 +137,6 @@ namespace DalObject
         {
             throw new NotImplementedException();
         }
+
     }
 }

@@ -16,6 +16,5 @@ namespace IBL.BO
         public Location Target { get; set; }
         public double DeliveryDistance { get; set; }
        
-
     }
 }

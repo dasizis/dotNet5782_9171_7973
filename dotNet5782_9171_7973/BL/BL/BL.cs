@@ -62,16 +62,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void AssignParcelToDrone(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FinishCharging(int droneId, double timeInCharge)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public IEnumerable<BaseStation> GetAvailableBaseStations()
         {
             throw new NotImplementedException();
@@ -92,34 +83,6 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void PickUpParcel(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RenameDrone(int droneId, string newName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SendDroneToCharge(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SupplyParcel(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateCustomer(int customerId, string name = null, string phone = null)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

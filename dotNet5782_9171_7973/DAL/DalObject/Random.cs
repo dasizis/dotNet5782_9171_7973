@@ -1,8 +1,8 @@
 ﻿using IDAL.DO;
 
-namespace DAL
+namespace DalObject
 {
-    class RandomManager
+    static class RandomManager
     {
         public static System.Random Rand => new System.Random();
 

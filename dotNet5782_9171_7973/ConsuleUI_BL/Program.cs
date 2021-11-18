@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace ConsuleUI_BL
+namespace ConsoleUI_BL
 {
     partial class Program
     {

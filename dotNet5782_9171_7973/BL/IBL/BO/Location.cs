@@ -12,7 +12,7 @@ namespace IBL.BO
 
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        
+
         public static double Distance(Location locationA, Location locationB)
         {
             static double DegreesToRadians(double degrees) => degrees * Math.PI / 180;
@@ -35,6 +35,10 @@ namespace IBL.BO
             return EARTH_RADIUS_KM * c;
         }
 
-        
+        public static T FindClosest<T>(this ILocalable location, IEnumerable<T> localables) where T : ILocalable
+        {
+            return localables.OrderBy(l => Distance(location, l)).First();
+        }
+
     }
 }

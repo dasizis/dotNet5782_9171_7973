@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsuleUI_BL
+namespace ConsoleUI_BL
 {
     enum MainOption
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
 
-namespace ConsuleUI_BL
+namespace ConsoleUI_BL
 {
     partial class Program
     {

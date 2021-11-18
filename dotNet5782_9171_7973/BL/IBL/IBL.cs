@@ -10,7 +10,7 @@ namespace IBL
 {
     public interface IBL:IBLCustomer, IBLBaseStation, IBLDrone, IBLParcel
     {
-        object GetById(Type type, int requestedId);
-        IEnumerable GetList(Type type);  
+        T GetById<T>(int requestedId) where T : IDAL.DO.IIdentifiable;
+        IEnumerable<T> GetList<T>() where T : IDAL.DO.IIdentifiable;  
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class DroneInCharge
+    public class DroneInCharge : IDAL.DO.IIdentifiable
     {
         public int Id { get; set; }
         public double BatteryState { get; set; }

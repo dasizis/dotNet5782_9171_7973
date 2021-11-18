@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class ParcelInDeliver
+    public class ParcelInDeliver : IDAL.DO.IIdentifiable
     {
         public int Id { get; set; }
         public WeightCategory Weight { get; set; }
         public Priority Priority { get; set; }
         public bool Position { get; set; }
-        public Location Collect { get; set; }
+        public Location CollectLocation { get; set; }
         public Location Target { get; set; }
         public double DeliveryDistance { get; set; }
        

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 
-namespace ConsuleUI_BL
+namespace ConsoleUI_BL
 {
     partial class Program
     {

@@ -53,22 +53,22 @@ namespace DalObject
         {
             baseStations.AddRange(
                 Enumerable.Range(0, INIT_BASESTATIONS)
-                          .Select(i => DAL.RandomManager.RandomBaseStation(i))
+                          .Select(i => RandomManager.RandomBaseStation(i))
             );
 
             drones.AddRange(
                 Enumerable.Range(0, INIT_DRONES)
-                          .Select(i => DAL.RandomManager.RandomDrone(i))
+                          .Select(i => RandomManager.RandomDrone(i))
             );
 
             customers.AddRange(
                 Enumerable.Range(0, INIT_CUSTOMERS)
-                          .Select(i => DAL.RandomManager.RandomCustomer(i))
+                          .Select(i => RandomManager.RandomCustomer(i))
             );
 
             parcels.AddRange(
                 Enumerable.Range(0, INIT_PARCELS)
-                          .Select(_ => DAL.RandomManager.RandomParcel(Config.NextParcelID++))
+                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++))
             );
 
         }

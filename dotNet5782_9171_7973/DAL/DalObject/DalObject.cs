@@ -27,34 +27,24 @@ namespace DalObject
             DataSource.data[type].Add(item);
         }
 
-
         /// <summary>
         /// Remove an item from its data list
         /// </summary>
         /// <param name="item"></param>
-        public void Remove(IIdentifiable item)
+        public void Remove<T>(int id) where T : IIdentifiable
         {
-            Type type = item.GetType();
-
-            DataSource.data[type].Remove(item);    
+            DataSource.data[typeof(T)].Cast<T>().ToList().RemoveAll(i => i.Id == id);    
         }
 
-
-        /// <summary>
-        /// returns a filtered list of the given type 
-        /// </summary>
-        /// <param name="type">the wanted list type</param>
-        /// <param name="predicate">a predicate function</param>
-        /// <returns>a filtered list </returns>
-        IEnumerable getFilteredList(Type type, Predicate<IIdentifiable> predicate) =>
-            DataSource.data[type].Cast<IIdentifiable>().Where(item => predicate(item));
+        IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
+            DataSource.data[typeof(T)].Cast<T>().Where(item => predicate(item));
 
         /// <summary>
         /// return a copy of the wanted data list
         /// </summary>
         /// <param name="type">the list type</param>
         /// <returns>a copy of the last</returns>
-        public IEnumerable GetList(Type type) => getFilteredList(type, _ => true);
+        public IEnumerable<T> GetList<T>() where T : IIdentifiable => GetFilteredList<T>(_ => true);
 
         /// <summary>
         /// returns an item with the given type and id 
@@ -62,15 +52,15 @@ namespace DalObject
         /// <param name="type">the item's type</param>
         /// <param name="id">the item's id</param>
         /// <returns>the wanted item</returns>
-        public IIdentifiable GetById(Type type, int id)
+        public T GetById<T>(int id) where T: IIdentifiable
         {
             try
             {
-                return getFilteredList(type, item => item.Id == id).Cast<IIdentifiable>().First();
+                return GetFilteredList<T>(item => item.Id == id).First();
             }
             catch (InvalidOperationException)
             {
-                throw new ObjectNotFoundException(type, id);
+                throw new ObjectNotFoundException(typeof(T), id);
             }
         }
 
@@ -91,12 +81,12 @@ namespace DalObject
 
         }
 
-        public IEnumerable GetNotAssignedToDroneParcels()
+        public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
         {
             return DataSource.parcels.Where(parcel => parcel.DroneId == 0);
         }
 
-        public IEnumerable GetAvailableBaseStations()
+        public IEnumerable<BaseStation> GetAvailableBaseStations()
         {
             return DataSource.baseStations.FindAll(
                             baseStation => baseStation.ChargeSlots > DataSource.droneCharges.FindAll(
@@ -105,7 +95,7 @@ namespace DalObject
 
         public void AssignParcelToDrone(int parcelId, int droneId)
         {
-            Parcel parcel = (Parcel)GetById(typeof(Parcel), parcelId);
+            Parcel parcel = GetById<Parcel>(parcelId);
             DataSource.parcels.Remove(parcel);
 
             parcel.DroneId = droneId;
@@ -115,10 +105,10 @@ namespace DalObject
 
         public void SupplyParcel(int parcelId)
         {
-            Parcel parcel = (Parcel)GetById(typeof(Parcel), parcelId);
+            Parcel parcel = GetById<Parcel>(parcelId);
             DataSource.parcels.Remove(parcel);
 
-            parcel.Delivered = DateTime.Now;
+            parcel.Supplied = DateTime.Now;
             DataSource.parcels.Add(parcel);
         }
 
@@ -138,5 +128,15 @@ namespace DalObject
             throw new NotImplementedException();
         }
 
+        public void Update<T>(IIdentifiable item) where T : IIdentifiable
+        {
+            Remove<T>(item.Id);
+            Add(item);
+        }
+
+        public int GetParcelContNumber()
+        {
+            return DataSource.Config.NextParcelID;
+        }
     }
 }

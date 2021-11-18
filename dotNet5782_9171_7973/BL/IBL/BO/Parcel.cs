@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Parcel
+    public class Parcel : IDAL.DO.IIdentifiable
     {
         public int Id { get; set; }
         public CustomerInDelivery Sender { get; set; }
@@ -14,9 +14,10 @@ namespace IBL.BO
         public WeightCategory Weight { get; set; }
         public Priority Priority { get; set; }
         public Drone Drone { get; set; }
-        public DateTime Create { get; set; }
-        public DateTime Assign { get; set; }
-        public DateTime PickUp { get; set; }
-        public DateTime Supply { get; set; }
+        public DateTime Requested { get; set; }
+        public DateTime Scheduled { get; set; }
+        public DateTime PickedUp { get; set; }
+        public DateTime Supplied { get; set; }
+
     }
 }

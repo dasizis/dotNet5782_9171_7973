@@ -1,10 +1,10 @@
-﻿using IBL.BO;
+﻿using IBL;
+using IBL.BO;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+
 
 namespace BL
 {
@@ -12,14 +12,21 @@ namespace BL
      {
         IDAL.IDal Dal { get; set; } = new DalObject.DalObject();
         const int MAX_CHARGE = 100;
-        public int ElectricityConfumctiolFree { get; set; }
-        public int ElectricityConfumctiolLight { get; set; }
-        public int ElectricityConfumctiolMedium { get; set; }
-        public int ElectricityConfumctiolHeavy { get; set; }
-        public int ChargeRate { get; set; }
 
-       
+        //Electricity confumctiol properties
+        public double ElectricityConfumctiolFree { get; set; }
+        public double ElectricityConfumctiolLight { get; set; }
+        public double ElectricityConfumctiolMedium { get; set; }
+        public double ElectricityConfumctiolHeavy { get; set; }
+        public double ChargeRate { get; set; }
 
+        /// <summary>
+        /// add a base station 
+        /// </summary>
+        /// <param name="id">the base station id</param>
+        /// <param name="name">the base station name</param>
+        /// <param name="location">the base station location</param>
+        /// <param name="chargeSlots">the base station number of charge slots</param>
         public void AddBaseStation(int id, string name, Location location, int chargeSlots)
         {
             var station = new BaseStation()
@@ -42,7 +49,13 @@ namespace BL
                 }
             );
         }
-
+        /// <summary>
+        /// add customer
+        /// </summary>
+        /// <param name="id">the customer id</param>
+        /// <param name="name">the customer name</param>
+        /// <param name="phone">the customer phone number</param>
+        /// <param name="location">the customer location</param>
         public void AddCustomer(int id, string name, string phone, Location location)
         {
             var customer = new Customer()
@@ -66,10 +79,16 @@ namespace BL
                 }
            );
         }
-
+        /// <summary>
+        /// add a drone
+        /// </summary>
+        /// <param name="id">the drone id</param>
+        /// <param name="model">the drone model </param>
+        /// <param name="maxWeight">the drone max weight to carry</param>
+        /// <param name="stationId">first station for drone first charge</param>
         public void AddDrone(int id, string model, WeightCategory maxWeight, int stationId)
         {
-            var station = GetById<BaseStation>(stationId);
+            var station = GetBaseStation(stationId);
 
             var drone = new Drone()
             {
@@ -100,7 +119,6 @@ namespace BL
                 MaxWeight = (IDAL.DO.WeightCategory)drone.MaxWeight,
             });
         }
-
         public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
         {
             var parcel = new Parcel()
@@ -108,8 +126,8 @@ namespace BL
                 Id = Dal.GetParcelContNumber(),
                 Priority = priority,
                 Weight = weight,
-                Sender = GetById<CustomerInDelivery>(senderId),
-                Target = GetById<CustomerInDelivery>(targetId),
+                Sender = GetCustomerInDelivery(senderId),
+                Target = GetCustomerInDelivery(targetId),
                 Requested = DateTime.Now,
             };
 
@@ -123,41 +141,49 @@ namespace BL
                 DroneId = null,
                 Requested = parcel.Requested,
             });
-        }
-
-        
-        public IEnumerable<BaseStation> GetAvailableBaseStations()
+        }    
+        public IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
-            throw new NotImplementedException();
+            return Dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
         }
+        //public T GetById<T>(int id) where T :IDAL.DO.IIdentifiable
+        //{
+        //    Type blType = typeof(BL);
+        //    MethodInfo getMethod = blType.GetMethod(name: $"Get{typeof(T).Name}", types: new Type[] { typeof(int) });
 
-        public T GetById<T>(int id) where T : IDAL.DO.IIdentifiable
+        //    return (T)getMethod.Invoke(this, new object[] { id });
+        //}
+        //public IEnumerable<T> GetList<T>() where T : IDAL.DO.IIdentifiable
+        //{
+        //    Type blType = typeof(BL);
+        //    MethodInfo getMethod = blType.GetMethod(name: $"Get{typeof(T).Name}", types: new Type[] { typeof(int) });
+
+        //    return Dal.GetList<T>().Select(item => (T)getMethod.Invoke(this, new object[] { item.Id } ));
+        //}
+
+        public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
         {
-            return typeof(T) switch
-            {
-                var t when t == typeof(Drone) => GetDrone(id),
-                var t when t == typeof(DroneForList) => GetDrone(id),
-                var t when t == typeof(DroneInCharge) => GetDrone(id),
-                var t when t == typeof(DroneInDeliver) => GetDrone(id),
-                var t when t == typeof() => GetDrone(id),
-                var t when t == typeof(Drone) => GetDrone(id),
-                var t when t == typeof(Drone) => GetDrone(id),
-                var t when t == typeof(Drone) => GetDrone(id),
-                var t when t == typeof(Drone) => GetDrone(id),
-            };
+            return Dal.GetNotAssignedToDroneParcels().Select(parcel => GetParcelForList(parcel.Id));
         }
 
-        public IEnumerable<T> GetList<T>() where T : IDAL.DO.IIdentifiable
+        public IEnumerable<CustomerForList> GetCustomersList()
         {
-            return Dal.GetList<T>().Select(item => GetById<T>(item.Id));
+            return Dal.GetList<IDAL.DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
         }
 
-
-        public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
+        public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
-            throw new NotImplementedException();
+            return Dal.GetList<IDAL.DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
         }
 
-        
+        public IEnumerable<DroneForList> GetDronesList()
+        {
+            return Dal.GetList<IDAL.DO.Drone>().Select(drone => GetDroneForList(drone.Id));
+        }
+
+        public IEnumerable<ParcelForList> GetParcelsList()
+        {
+            return Dal.GetList<IDAL.DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
+        }
     }
 }

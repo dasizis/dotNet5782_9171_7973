@@ -14,5 +14,7 @@ namespace IBL.BO
         public Location Location { get; set; }
         public List<Parcel> Send { get; set; }
         public List<Parcel> Recieve { get; set; }
+        public override string ToString() => this.ToStringProps();
+
     }
 }

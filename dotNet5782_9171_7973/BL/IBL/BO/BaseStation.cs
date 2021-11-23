@@ -13,5 +13,6 @@ namespace IBL.BO
         public Location Location { get; set; }
         public int EmptyChargeSlots { get; set; }
         public List<Drone> DronesInChargeList { get; set; }
+        public override string ToString() => this.ToStringProps(); 
     }
 }

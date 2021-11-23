@@ -15,25 +15,15 @@ namespace DalObject
         /// Add an item to its data list
         /// </summary>
         /// <param name="item">the item to add</param>.
-        public void Add(IIdentifiable item)
-        {
-            Type type = item.GetType();
 
-            if (DataSource.data[type].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
-            {
-                throw new IdAlreadyExistsException(type, item.Id);
-            }
-
-            DataSource.data[type].Add(item);
-        }
 
         /// <summary>
         /// Remove an item from its data list
         /// </summary>
         /// <param name="item"></param>
-        public void Remove<T>(int id) where T : IIdentifiable
+        public void Remove<T>(T item) where T : IIdentifiable
         {
-            DataSource.data[typeof(T)].Cast<T>().ToList().RemoveAll(i => i.Id == id);    
+            DataSource.data[typeof(T)].Remove(item);    
         }
 
         IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
@@ -68,7 +58,7 @@ namespace DalObject
         /// returns tuple of all the electricity confumctiol details
         /// </summary>
         /// <returns>tuple of all the electricity confumctiol details</returns>
-        public (int, int, int, int, int) GetElectricityConfumctiol()
+        public (double, double, double, double, double) GetElectricityConfumctiol()
         {
             return
             (
@@ -130,13 +120,28 @@ namespace DalObject
 
         public void Update<T>(IIdentifiable item) where T : IIdentifiable
         {
-            Remove<T>(item.Id);
+            Remove(item);
             Add(item);
         }
 
         public int GetParcelContNumber()
         {
             return DataSource.Config.NextParcelID;
+        }
+
+        public IEnumerable<DroneCharge> GetDroneCharges()
+        {
+            return DataSource.droneCharges.Where(_ => true);
+        }
+
+        public void Add<T>(T item) where T : IIdentifiable
+        {
+            if (DataSource.data[typeof(T)].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
+            {
+                throw new IdAlreadyExistsException(typeof(T), item.Id);
+            }
+
+            DataSource.data[typeof(T)].Add(item);
         }
     }
 }

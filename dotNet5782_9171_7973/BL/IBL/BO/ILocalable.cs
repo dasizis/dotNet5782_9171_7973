@@ -9,5 +9,6 @@ namespace IBL.BO
     public interface ILocalable
     {
         public Location Location { get; set; } 
+
     }
 }

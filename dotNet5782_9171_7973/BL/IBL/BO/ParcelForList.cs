@@ -9,5 +9,7 @@ namespace IBL.BO
         public string TargetName { get; set; }
         public WeightCategory Weight { get; set; }
         public Priority Priority { get; set; }
+        public override string ToString() => this.ToStringProps();
+
     }
 }

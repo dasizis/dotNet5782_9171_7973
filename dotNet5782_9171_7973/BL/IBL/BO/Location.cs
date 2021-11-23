@@ -34,11 +34,6 @@ namespace IBL.BO
 
             return EARTH_RADIUS_KM * c;
         }
-
-        public static T FindClosest<T>(this ILocalable location, IEnumerable<T> localables) where T : ILocalable
-        {
-            return localables.OrderBy(l => Distance(location, l)).First();
-        }
-
+        public override string ToString() => this.ToStringProps();
     }
 }

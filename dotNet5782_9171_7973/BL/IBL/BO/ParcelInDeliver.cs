@@ -15,6 +15,7 @@ namespace IBL.BO
         public Location CollectLocation { get; set; }
         public Location Target { get; set; }
         public double DeliveryDistance { get; set; }
-       
+        public override string ToString() => this.ToStringProps();
+
     }
 }

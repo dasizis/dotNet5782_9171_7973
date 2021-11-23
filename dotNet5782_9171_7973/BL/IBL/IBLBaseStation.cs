@@ -12,6 +12,8 @@ namespace IBL
     {
         void AddBaseStation(int id, string name, Location location, int chargeSlots);
         void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null);
-        IEnumerable<BaseStation> GetAvailableBaseStations();
+        IEnumerable<BaseStationForList> GetBaseStationsList();
+        IEnumerable<BaseStationForList> GetAvailableBaseStations();
+        BaseStation GetBaseStation(int id);
     }
 }

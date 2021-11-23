@@ -13,114 +13,111 @@ namespace BL
         
         public BL()
         {
+            (
+                ElectricityConfumctiolFree,
+                ElectricityConfumctiolLight,
+                ElectricityConfumctiolMedium,
+                ElectricityConfumctiolHeavy,
+                ChargeRate
+            ) = Dal.GetElectricityConfumctiol();
+
             Random rand = new();
 
-            int id;
-            string model;
-            double battery;
-            int? parcelInDeliver = null;
-            WeightCategory weight;
-            DroneState state;
-            Location location = new();
-            
-
-            var dlDrones = (List<IDAL.DO.Drone>)Dal.GetList(typeof(IDAL.DO.Drone));
-            var parcels = (List<IDAL.DO.Parcel>)Dal.GetList(typeof(IDAL.DO.Parcel));
+            var dlDrones = Dal.GetList<IDAL.DO.Drone>().ToList();
+            var parcels = Dal.GetList<IDAL.DO.Parcel>().ToList();
+            var stationsLocations = Dal.GetList<IDAL.DO.BaseStation>()
+                                       .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
+                                       .ToList();
 
             foreach (var dlDrone in dlDrones)
             {
-                id = dlDrone.Id;
-                model = dlDrone.Model;
 
                 var parcel = parcels.FirstOrDefault(parcel => parcel.DroneId == dlDrone.Id);
+                double battery;
+                int? parcelInDeliverId = null;
+                DroneState state;
+                Location location;
+                Location targetLocation = null;
+                Location senderLocation = null;
 
+                // Set state
                 if (parcel.Equals(default))
                 {
-                    state = (DroneState)rand.Next(0, 1);
-                    weight = (WeightCategory)rand.Next(0, 2);
+                    state = (DroneState)rand.Next(0, 2);
                 }
-
                 else
                 {
                     state = DroneState.DELIVER;
-                    weight = (WeightCategory)parcel.Weight;
-                    parcelInDeliver = parcel.Id;
+                    parcelInDeliverId = parcel.Id;
+
+                    var targetCustomer = Dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+                    targetLocation = new Location() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
+
+                    var senderCustomer = Dal.GetById<IDAL.DO.Customer>(parcel.SenderId);
+                    senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
+                    
                 }
 
-                if(state == DroneState.DELIVER)
-                { 
-                    int electricity = GetElectricity(weight);
-                    bool isPickedUp = true;
-                    Location targetLocation = parcel.TargetId/*converted to customerInDelivery*/.Location;
-                    Location senderLocation = parcel.SenderId /*converted to CustomerInDelivery*/.Location;
-
-                    if (!parcel.Supplied.Equals(DateTime.MinValue)) break;
-                    
-                    if (parcel.PickedUp.Equals(DateTime.MinValue))
-                    { 
-                        location = ClosestStation(senderLocation);
-                        isPickedUp = false;
-                    }   
-
-                    else
-                    {
-                        location = senderLocation;
-                    }
-               
-                    double minCharge = isPickedUp ?
-                        electricity * (Location.Distance(location, targetLocation)
-                        + Location.Distance(targetLocation, ClosestStation(targetLocation))) :
-                        electricity * (Location.Distance(location, senderLocation) + Location.Distance(senderLocation, targetLocation)
-                        + Location.Distance(targetLocation, ClosestStation(targetLocation)));
-
-                    
-                    battery = (rand.NextDouble() * 100 + minCharge) % 100;
-
-                }
-
-                if(state == DroneState.MEINTENENCE)
+                Location RandomSuppliedParcelLocation()
                 {
-                    var stations = (List<IDAL.DO.BaseStation>)Dal.GetList(typeof(IDAL.DO.BaseStation));
-                    int rndStation = rand.Next(stations.Count());
+                    var suppliedParcels = parcels.FindAll(p => p.Supplied != null).ToList();
+                    var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
 
-                    location.Longitude = stations[rndStation].Longitude;
-                    location.Longitude = stations[rndStation].Latitude;
+                    var customer = Dal.GetById<IDAL.DO.Customer>(randomParcel.TargetId);
 
-                    battery = rand.NextDouble()*20;
+                    return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
                 }
 
-               else
-               {
-                    var suppliedParcels = parcels.FindAll(parcel =>
-                                                    !parcel.Supplied.Equals(DateTime.MinValue));
-                    int rndParcel = rand.Next(suppliedParcels.Count);
-                    
-                    Location targetCustomerLocation = suppliedParcels[rndParcel].TargetId/*converted to CustomerInDelivery*/.Location;
-                    location.Longitude = targetCustomerLocation.Longitude;
-                    location.Latitude = targetCustomerLocation.Latitude;
+                // Set location
+                location = state switch
+                {
+                    DroneState.Free => RandomSuppliedParcelLocation(),
+                    DroneState.MEINTENENCE => stationsLocations[rand.Next(stationsLocations.Count)],
+                    DroneState.DELIVER => parcel.Supplied != null
+                                          ? targetLocation.FindClosest(stationsLocations)
+                                          : senderLocation,
+                };
 
-                    double minCharge = Location.Distance(location, closestStation(location)) * ElectricityConfumctiolFree;
-                    battery = (rand.NextDouble() * 100 + minCharge) % 100;
-               }
+                var availableStationsLocations = Dal.GetAvailableBaseStations()
+                                                    .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
+                                                    .ToList();
+
+                // Set battery
+                battery = state switch
+                {
+                    DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree), 100),
+                    DroneState.MEINTENENCE => rand.NextDouble() * 20,
+                    DroneState.DELIVER => rand.Next(Math.Min(
+                                              (int)(
+                                                  Location.Distance(location, senderLocation) * ElectricityConfumctiolFree +
+                                                  Location.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
+                                                  Location.Distance(targetLocation, targetLocation.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree
+                                              ), 80)
+                                             , 100 
+                                          ),
+                };
 
                 drones.Add(
                         new DroneForList()
                         {
-                            Id = id,
-                            Model = model,
-                            MaxWeight = weight,
+                            Id = dlDrone.Id,
+                            Model = dlDrone.Model,
+                            MaxWeight = (WeightCategory)dlDrone.MaxWeight,
                             Battery = battery,
                             State = state,
                             Location = location,
-                            DeliveredParcelId = parcelInDeliver
+                            DeliveredParcelId = parcelInDeliverId
                         }
                     );
             }
         }
-
+        /// <summary>
+        /// find a suitable parcel and assigns it to the drone
+        /// </summary>
+        /// <param name="droneId">drone id to assign a parcel to</param>
         public void AssignParcelToDrone(int droneId)
         {
-            Drone drone = GetById<Drone>(droneId);
+            Drone drone = GetDrone(droneId);
 
             if (drone.State == DroneState.DELIVER)
             {
@@ -129,11 +126,11 @@ namespace BL
 
            var parcels = (Dal.GetNotAssignedToDroneParcels() as List<IDAL.DO.Parcel>)
                          .FindAll(parcel => 
-                            (int)parcel.Weight < (int)drone.MaxWeight && 
-                            IsAbleToPassParcel(drone, GetById<ParcelInDeliver>(parcel.Id)))
+                              (int)parcel.Weight < (int)drone.MaxWeight && 
+                              IsAbleToPassParcel(drone, GetParcelInDeliver(parcel.Id)))
                          .OrderBy(p => p.Priority)
                          .ThenBy(p => p.Weight)
-                         .ThenBy(p => Location.Distance(GetById<Customer>(p.SenderId).Location, drone.Location))
+                         .ThenBy(p => Location.Distance(GetCustomer(p.SenderId).Location, drone.Location))
                          .ToList();
 
             if (parcels.Count == 0)
@@ -145,10 +142,14 @@ namespace BL
 
             drone.State = DroneState.DELIVER;
         }
-
+        /// <summary>
+        /// release drone from charging
+        /// </summary>
+        /// <param name="droneId">drone to release</param>
+        /// <param name="timeInCharge">time drone was in charge</param>
         public void FinishCharging(int droneId, double timeInCharge)
         {
-            DroneForList drone = GetById<DroneForList>(droneId);
+            DroneForList drone = GetDroneForList(droneId);
 
             if (drone.State != DroneState.MEINTENENCE)
             {
@@ -156,14 +157,17 @@ namespace BL
             }
 
             drone.Battery += ChargeRate * timeInCharge;
-            drone.State = DroneState.FREE;
+            drone.State = DroneState.Free;
 
             Dal.FinishCharging(drone.Id);
         }
-
+        /// <summary>
+        /// drone picks up his assigned parcel
+        /// </summary>
+        /// <param name="droneId">drone picks</param>
         public void PickUpParcel(int droneId)
         {
-            DroneForList drone = GetById<DroneForList>(droneId);
+            DroneForList drone = GetDroneForList(droneId);
 
             // Does the drone have a parcel?
             if (!drone.DeliveredParcelId.HasValue)
@@ -174,22 +178,26 @@ namespace BL
             var parcel = Dal.GetById<IDAL.DO.Parcel>(drone.DeliveredParcelId.Value);
 
             // Was the parcel collected?
-            if(parcel.PickedUp != DateTime.MinValue)
+            if(parcel.PickedUp != null)
             {
                 throw new InValidActionException();
             }
 
-            ParcelInDeliver parcelInDeliver = GetById<ParcelInDeliver>(parcel.Id);
+            ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
 
             drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree;
             drone.Location = parcelInDeliver.CollectLocation;
 
             Dal.CollectParcel(parcel.Id);
         }
-
+        /// <summary>
+        /// rename drone
+        /// </summary>
+        /// <param name="droneId">drone to rename</param>
+        /// <param name="model">new name for updating</param>
         public void RenameDrone(int droneId, string model)
         {
-            DroneForList drone = GetById<DroneForList>(droneId);
+            DroneForList drone = GetDroneForList(droneId);
             drone.Model = model;
 
 
@@ -198,125 +206,139 @@ namespace BL
 
             Dal.Update<IDAL.DO.Drone>(dlDrone);
         }
-
-        //void Update<T>(IDAL.DO.IIdentifiable item)
-        //{
-        //    if ()
-        //}
-
+        /// <summary>
+        /// put drone in a charge slot to charge
+        /// </summary>
+        /// <param name="droneId">drone to charge</param>
         public void SendDroneToCharge(int droneId)
         {
-            DroneForList drone = GetById<DroneForList>(droneId);
+            DroneForList drone = GetDroneForList(droneId);
 
-            if (drone.State != DroneState.FREE)
+            if (drone.State != DroneState.Free)
             {
                 throw new InValidActionException();
             }
 
-            var availableBaseStations = Dal.GetAvailableBaseStations().Select(b => GetById<BaseStation>(b.Id));
+            var availableBaseStations = Dal.GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
 
-            BaseStation closest = drone.FindClosest( // new implement?
+            BaseStation closest = drone.FindClosest(availableBaseStations);
 
-            if (!IsEnoughBattery(drone/*converted*/, closest.Location))
+            if (!IsEnoughBattery(drone, closest.Location))
+            {
                 throw new InValidActionException();
+            }
 
             drone.Location = closest.Location;
             drone.State = DroneState.MEINTENENCE;
             drone.Battery -= ElectricityConfumctiolFree * Location.Distance(closest.Location, drone.Location);
 
-            //what for?
+            // What for?
             closest.EmptyChargeSlots -= 1;
 
             Dal.ChargeDroneAtBaseStation(drone.Id, closest.Id);
         }
-
+        /// <summary>
+        /// drone supplies its parcel at target
+        /// </summary>
+        /// <param name="droneId">drone which supplies</param>
         public void SupplyParcel(int droneId)
         {
-            DroneForList drone = drones.FirstOrDefault(d => d.Id == droneId);
+            DroneForList drone = GetDroneForList(droneId);
 
-            if (drone.Equals(default))
-                throw new DalObject.ObjectNotFoundException();
-
-            if (!drone.DeliveredParcelId.HasValue)
+            if (drone.DeliveredParcelId == null)
+            {
                 throw new InValidActionException();
+            }
 
-            var parcel = (IDAL.DO.Parcel)Dal.GetById(typeof(IDAL.DO.Parcel), drone.DeliveredParcelId.Value);
+            var parcel = GetParcel((int)drone.DeliveredParcelId);
 
-            if (parcel.PickedUp == DateTime.MinValue)
+            if (parcel.PickedUp == null)
+            {
                 throw new InValidActionException();
+            }
 
-            ParcelInDeliver parcelInDeliver = parcel/*converted*/;
+            ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
 
-            if(parcelInDeliver.Position == true)
+            if(parcelInDeliver.Position)
+            {
                 throw new InValidActionException();
-            
+            }
+
             drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.Target) * GetElectricity(parcelInDeliver.Weight);
             drone.Location = parcelInDeliver.Target;
-            drone.State = DroneState.FREE;
+            drone.State = DroneState.Free;
 
             Dal.SupplyParcel(parcel.Id);
         }
-
+        /// <summary>
+        /// update base station details
+        /// </summary>
+        /// <param name="baseStationId">base station to update</param>
+        /// <param name="name">new name</param>
+        /// <param name="chargeSlots">new number of charge slots</param>
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
-        {
-
-            //validation
-
-            var station = (IDAL.DO.BaseStation)Dal.GetById(typeof(IDAL.DO.BaseStation), baseStationId);
+        { 
+            var station = Dal.GetById<IDAL.DO.BaseStation>(baseStationId);
             Dal.Remove(station);
 
-            station.Name = name != null ? name : station.Name;
-            station.ChargeSlots = chargeSlots.HasValue ? (int)chargeSlots : station.ChargeSlots;
+            station.Name = name ?? station.Name;
+            station.ChargeSlots = chargeSlots ?? station.ChargeSlots;
 
             Dal.Add(station);
         }
-
+        /// <summary>
+        /// update customer's details
+        /// </summary>
+        /// <param name="customerId">customer to update</param>
+        /// <param name="name">new name</param>
+        /// <param name="phone">new phone</param>
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
-            //validation
-
-            var customer = (IDAL.DO.Customer)Dal.GetById(typeof(IDAL.DO.Customer), customerId);
+            var customer = Dal.GetById<IDAL.DO.Customer>(customerId);
             Dal.Remove(customer);
 
-            customer.Name = name != null ? name : customer.Name;
-            customer.Phone = name != null ? phone : customer.Phone;
+            customer.Name = name ?? customer.Name;
+            customer.Phone = name ?? customer.Phone;
 
             Dal.Add(customer);
         }
-
+        /// <summary>
+        /// check weather a drone can deliver a parcel
+        /// </summary>
+        /// <param name="drone">deliver drone</param>
+        /// <param name="parcel">delivered parcel</param>
+        /// <returns></returns>
         private bool IsAbleToPassParcel(Drone drone, ParcelInDeliver parcel)
         {
-           return drone.Battery >= (Location.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
-                Location.Distance(parcel.CollectLocation, parcel.Target) * GetElectricity(parcel.Weight) +
-                Location.Distance(parcel.Target, drone.closestStation(parcel.Target)) * ElectricityConfumctiolFree);
+            var neededBattery = Location.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
+                               Location.Distance(parcel.CollectLocation, parcel.Target) * GetElectricity(parcel.Weight) +
+                               Location.Distance(parcel.Target, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
+           return drone.Battery >= neededBattery;
         }
-
-        private int GetElectricity(WeightCategory weight)
+        /// <summary>
+        /// returns suitable parameter of electricity 
+        /// </summary>
+        /// <param name="weight">weight category</param>
+        /// <returns></returns>
+        private double GetElectricity(WeightCategory weight)
         {
-            int electricity = 0;
-
-            switch (weight)
+            return weight switch
             {
-                case WeightCategory.Light:
-                    electricity = ElectricityConfumctiolLight;
-                    break;
-                case WeightCategory.Medium:
-                    electricity = ElectricityConfumctiolMedium;
-                    break;
-                case WeightCategory.Heavy:
-                    electricity = ElectricityConfumctiolHeavy;
-                    break;
-                default:
-                    break;
-            }
-
-            return electricity;
+                WeightCategory.Light => ElectricityConfumctiolLight,
+                WeightCategory.Medium => ElectricityConfumctiolMedium,
+                WeightCategory.Heavy => ElectricityConfumctiolHeavy,
+            };
         }
-
-        private bool IsEnoughBattery(Drone drone, Location location)
+        /// <summary>
+        /// check weather a drone has enough battery to get to location
+        /// </summary>
+        /// <param name="drone">drone</param>
+        /// <param name="location">location to get to</param>
+        /// <returns></returns>
+        private bool IsEnoughBattery(DroneForList drone, Location location)
         {
-            //implement
-            return true;
+            var neededBattery = Location.Distance(drone.Location, location) * ElectricityConfumctiolFree;
+            return drone.Battery >= neededBattery;
         }
     }
 }

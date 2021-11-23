@@ -15,6 +15,7 @@ namespace IBL.BO
         public DroneState State { get; set; }
         public ParcelInDeliver ParcelInDeliver { get; set; }
         public Location Location { get; set; }
+        public override string ToString() => this.ToStringProps();
 
 
     }

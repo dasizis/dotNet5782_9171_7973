@@ -7,7 +7,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public struct DataSource
+    public static class DataSource
     {
         const int INIT_BASESTATIONS = 2;
         const int INIT_DRONES = 5;
@@ -30,6 +30,10 @@ namespace DalObject
             [typeof(DroneCharge)] = droneCharges,
         };
 
+        static DataSource()
+        {
+            Initialize();
+        }
 
         internal class Config
         {
@@ -37,13 +41,13 @@ namespace DalObject
 
             internal static class ElectricityConfumctiol
             {
-                internal static int Free = 1;
-                internal static int Light = 2;
-                internal static int Medium = 3;
-                internal static int Heavy = 4;
+                internal static double Free = 0.1;
+                internal static double Light = 0.2;
+                internal static double Medium = 0.3;
+                internal static double Heavy = 0.4;
             }
 
-            internal static int ChargeRate = 10;
+            internal static double ChargeRate = 10;
         }
 
         /// <summary>
@@ -69,7 +73,23 @@ namespace DalObject
             parcels.AddRange(
                 Enumerable.Range(0, INIT_PARCELS)
                           .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++))
-            );
+                          .Select(parcel => RandomManager.Rand.Next(2) == 1
+                                            ? parcel
+                                            : new Parcel()
+                                            {
+                                                Id = parcel.Id,
+                                                Weight = parcel.Weight,
+                                                Priority = parcel.Priority,
+                                                Requested = parcel.Requested,
+                                                DroneId = drones[RandomManager.Rand.Next(drones.Count)].Id,
+                                                Scheduled = parcel.Requested + TimeSpan.FromHours(RandomManager.Rand.NextDouble() * 20),
+                                                SenderId = customers[RandomManager.Rand.Next(customers.Count)].Id,
+                                                TargetId = customers[RandomManager.Rand.Next(customers.Count)].Id,
+                                            }
+
+                          )
+
+            ); ;
 
         }
     }

@@ -15,6 +15,7 @@ namespace IBL.BO
         public int ParcelsSendAndNotSupplied { get; set; }
         public int ParcelsRecieved { get; set; }
         public int ParcelsOnWay { get; set; }
+        public override string ToString() => this.ToStringProps();
 
     }
 }

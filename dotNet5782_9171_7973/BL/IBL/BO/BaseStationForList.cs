@@ -10,8 +10,9 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Phone { get; set; }
         public int EmptyChargeSlots { get; set; }
         public int BusyChargeSlots { get; set; }
+        public override string ToString() => this.ToStringProps();
+
     }
 }

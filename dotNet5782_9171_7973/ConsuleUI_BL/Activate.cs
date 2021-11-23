@@ -10,15 +10,15 @@ namespace ConsoleUI_BL
     {
         const string ERROR_MESSAGE = "Invalid Option";
 
-        /// <summary>
-        /// print an item details acording to its type and id
-        /// </summary>
-        /// <param name="type">the type of the item</param>
-        /// <param name="id">the item id</param>
-        private static void printItemById(Type type, int id)
-        {
-            Console.WriteLine(Bl.GetById(type, id));
-        }
+        ///// <summary>
+        ///// print an item details acording to its type and id
+        ///// </summary>
+        ///// <param name="type">the type of the item</param>
+        ///// <param name="id">the item id</param>
+        //private static void printItemById<T>(int id)
+        //{
+        //    Console.WriteLine(Bl.GetT(id));
+        //}
 
         /// <summary>
         /// activates the main menu
@@ -94,22 +94,22 @@ namespace ConsoleUI_BL
                 case DisplayOption.BaseStation:
                     Console.WriteLine("Number Of Station:");
                     id = GetInput(int.Parse);
-                    printItemById(typeof(BaseStation), id);
+                    Console.WriteLine(Bl.GetBaseStation(id));
                     break;
                 case DisplayOption.Customer:
                     Console.WriteLine("Number Of Customer:");
                     id = GetInput(int.Parse);
-                    printItemById(typeof(Customer), id);
+                    Console.WriteLine(Bl.GetCustomer(id));
                     break;
                 case DisplayOption.Parcel:
                     Console.WriteLine("Number Of Parcel:");
                     id = GetInput(int.Parse);
-                    printItemById(typeof(Parcel), id);
+                    Console.WriteLine(Bl.GetParcel(id));
                     break;
                 case DisplayOption.Drone:
                     Console.WriteLine("Number Of Drone:");
                     id = GetInput(int.Parse);
-                    printItemById(typeof(Drone), id);
+                    Console.WriteLine(Bl.GetDrone(id));
                     break;
                 default:
                     Console.WriteLine(ERROR_MESSAGE);
@@ -130,22 +130,22 @@ namespace ConsoleUI_BL
             switch ((DisplayListOption)option)
             {
                 case DisplayListOption.BaseStation:
-                    DisplayList(Bl.GetList(typeof(BaseStation)));
+                    DisplayList(Bl.GetBaseStationsList());
                     break;
                 case DisplayListOption.Customer:
-                    DisplayList(Bl.GetList(typeof(BaseStation)));
+                    DisplayList(Bl.GetCustomersList());
                     break;
                 case DisplayListOption.Parcel:
-                    DisplayList(Bl.GetList(typeof(BaseStation)));
+                    DisplayList(Bl.GetParcelsList());
                     break;
                 case DisplayListOption.Drone:
-                    DisplayList(Bl.GetList(typeof(BaseStation)));
+                    DisplayList(Bl.GetDronesList());
                     break;
                 case DisplayListOption.NotAssignedToDroneParcels:
-                    DisplayList(Bl.GetList(typeof(BaseStation)));
+                    DisplayList(Bl.GetNotAssignedToDroneParcels());
                     break;
                 case DisplayListOption.AvailableBaseStations:
-                    DisplayList(Bl.GetList(typeof(BaseStation)));
+                    DisplayList(Bl.GetAvailableBaseStations());
                     break;
                 default:
                     Console.WriteLine(ERROR_MESSAGE);

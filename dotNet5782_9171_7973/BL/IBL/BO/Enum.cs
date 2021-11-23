@@ -21,7 +21,7 @@
     }
     public enum DroneState
     {
-        FREE,
+        Free,
         MEINTENENCE,
         DELIVER,
     }

@@ -11,5 +11,7 @@ namespace IBL
     {
         void AddCustomer(int id, string name, string phone, Location location);
         void UpdateCustomer(int customerId, string name = null, string phone = null);
+        IEnumerable<CustomerForList> GetCustomersList();
+        Customer GetCustomer(int id);
     }
 }

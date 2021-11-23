@@ -5,7 +5,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        public static IBL.IBL Bl { get; set; } = new BL.BL();
+        public static IBL.IBL Bl => new BL.BL();
 
         /// <summary>
         /// prints a given enum
@@ -20,7 +20,7 @@ namespace ConsoleUI_BL
 
             foreach (var option in Enum.GetValues(enumType))
             {
-                result.Append($"{new string('\t', numOfTabs)}{(int)option} - {option}");
+                result.Append($"\n{new string('\t', numOfTabs)}{(int)option} - {option}");
             }
 
             return result.ToString();
@@ -53,7 +53,7 @@ namespace ConsoleUI_BL
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            activateMainMenu();
         }
     }
 }

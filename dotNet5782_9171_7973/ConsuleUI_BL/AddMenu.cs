@@ -27,15 +27,7 @@ namespace ConsoleUI_BL
             double latitude = GetInput(double.Parse);
             int chargeSlots = GetInput(int.Parse);
 
-            Bl.AddBaseStation(
-                new BaseStation()
-                {
-                    Id = id,
-                    Name = name,
-                    Location = new Location() { Longitude = longitude, Latitude = latitude },
-                    EmptyChargeSlots = 0,
-                }
-            );
+            Bl.AddBaseStation(id, name, new Location { Latitude = latitude, Longitude = longitude }, chargeSlots);
         }
 
         static void AddCustomer()
@@ -48,15 +40,7 @@ namespace ConsoleUI_BL
             double longitude = GetInput(double.Parse);
             double latitude = GetInput(double.Parse);
 
-            Bl.AddCustomer(
-                new Customer()
-                {
-                    Id = id,
-                    Name = name,
-                    Phone = phone,
-                    Location = new Location() { Longitude = longitude, Latitude = latitude },
-                }
-            );
+            Bl.AddCustomer(id, name, phone, new Location() { Longitude = longitude, Latitude = latitude });
         }
 
         static void AddParcel()
@@ -70,13 +54,7 @@ namespace ConsoleUI_BL
             double longitude = GetInput(double.Parse);
             double latitude = GetInput(double.Parse);
 
-            Bl.AddParcel(
-                new Parcel()
-                {
-                    Sender = senderId,
-                    Target = target
-                }
-            );
+            Bl.AddParcel(senderId, targetId, weight, priority);
         }
 
         static void AddDrone()
@@ -88,14 +66,7 @@ namespace ConsoleUI_BL
             WeightCategory weight = (WeightCategory)GetInput(IsValidEnumOption(3));
             int stationNumber = GetInput(int.Parse);
 
-            Bl.AddDrone(
-                new Drone()
-                {
-                    Id = id,
-                    Model = model,
-                    MaxWeight = weight,
-                }
-            );
+            Bl.AddDrone(id, model, weight, stationNumber);
         }
     }
 }

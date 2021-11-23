@@ -7,10 +7,11 @@ namespace IDAL
 {
     public interface IDal
     {
-        (int, int, int, int, int) GetElectricityConfumctiol();
-        void Add(DO.IIdentifiable item);
-        public void Remove<T>(int id) where T : DO.IIdentifiable;       
+        (double, double, double, double, double) GetElectricityConfumctiol();
+        void Add<T>(T item) where T : DO.IIdentifiable;
+        public void Remove<T>(T item) where T : DO.IIdentifiable;       
         IEnumerable<T> GetList<T>() where T : DO.IIdentifiable;
+        IEnumerable<DO.DroneCharge> GetDroneCharges();
         T GetById<T>(int id) where T : DO.IIdentifiable;
         IEnumerable<DO.Parcel> GetNotAssignedToDroneParcels();
         IEnumerable<DO.BaseStation> GetAvailableBaseStations();

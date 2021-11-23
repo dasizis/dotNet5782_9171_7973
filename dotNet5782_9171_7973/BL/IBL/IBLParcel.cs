@@ -12,7 +12,9 @@ namespace IBL
         void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority);
         void AssignParcelToDrone(int droneId);
         void PickUpParcel(int parcelId);
-        IEnumerable<Parcel> GetNotAssignedToDroneParcels();
+        IEnumerable<ParcelForList> GetNotAssignedToDroneParcels();
         void SupplyParcel(int droneId);
+        IEnumerable<ParcelForList> GetParcelsList();
+        Parcel GetParcel(int id);
     }
 }

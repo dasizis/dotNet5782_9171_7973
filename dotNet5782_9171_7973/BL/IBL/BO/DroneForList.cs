@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class DroneForList : IDAL.DO.IIdentifiable, ILocalable
+    public class DroneForList : IDAL.DO.IIdentifiable, ILocalable
     { 
         public int Id { get; set; }
         public string Model { get; set; }
@@ -15,5 +15,7 @@ namespace IBL.BO
         public DroneState State { get; set; }
         public Location Location { get; set; }
         public int? DeliveredParcelId { get; set; }
+        public override string ToString() => this.ToStringProps();
+
     }
 }

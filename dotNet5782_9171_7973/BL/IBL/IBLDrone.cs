@@ -13,5 +13,7 @@ namespace IBL
         void RenameDrone(int droneId, string newName);
         void SendDroneToCharge(int droneId);
         void FinishCharging(int droneId, double timeInCharge);
+        IEnumerable<DroneForList> GetDronesList();
+        Drone GetDrone(int id);
     }
 }

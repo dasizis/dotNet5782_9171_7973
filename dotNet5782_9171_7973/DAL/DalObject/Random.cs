@@ -93,9 +93,6 @@ namespace DalObject
                 Requested = RandomDate(),
                 Weight = (WeightCategory)RandomEnumOption(typeof(WeightCategory)),
                 Priority = (Priority)RandomEnumOption(typeof(Priority)),
-                SenderId = Rand.Next(),
-                TargetId = Rand.Next(),
-                DroneId = 0,
             };
         }
 

@@ -279,7 +279,7 @@ namespace BL
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
         { 
             var station = Dal.GetById<IDAL.DO.BaseStation>(baseStationId);
-            Dal.Remove(station);
+            Dal.Remove<IDAL.DO.BaseStation>(station.Id);
 
             station.Name = name ?? station.Name;
             station.ChargeSlots = chargeSlots ?? station.ChargeSlots;
@@ -295,7 +295,7 @@ namespace BL
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
             var customer = Dal.GetById<IDAL.DO.Customer>(customerId);
-            Dal.Remove(customer);
+            Dal.Remove<IDAL.DO.Customer>(customer.Id);
 
             customer.Name = name ?? customer.Name;
             customer.Phone = phone ?? customer.Phone;

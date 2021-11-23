@@ -23,7 +23,8 @@ namespace DalObject
         /// <param name="item"></param>
         public void Remove<T>(int id) where T : IIdentifiable
         {
-            
+            int itemIndex = DataSource.data[typeof(T)].Cast<T>().ToList().FindIndex(item => item.Id == id);
+            DataSource.data[typeof(T)].RemoveAt(itemIndex);    
         }
 
         IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
@@ -120,7 +121,7 @@ namespace DalObject
 
         public void Update<T>(T item) where T : IIdentifiable
         {
-            Remove(item.Id);
+            Remove<T>(item.Id);
             Add(item);
         }
 

@@ -204,7 +204,7 @@ namespace BL
             var dlDrone = Dal.GetById<IDAL.DO.Drone>(droneId);
             dlDrone.Model = model;
 
-            Dal.Update<IDAL.DO.Drone>(dlDrone);
+            Dal.Update(dlDrone);
         }
         /// <summary>
         /// put drone in a charge slot to charge
@@ -298,7 +298,7 @@ namespace BL
             Dal.Remove(customer);
 
             customer.Name = name ?? customer.Name;
-            customer.Phone = name ?? customer.Phone;
+            customer.Phone = phone ?? customer.Phone;
 
             Dal.Add(customer);
         }

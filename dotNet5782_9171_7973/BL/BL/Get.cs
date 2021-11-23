@@ -133,7 +133,7 @@ namespace BL
         {
             var drone = drones.FirstOrDefault(d => d.Id == id);
 
-            if (drone.Equals(default))
+            if (drone == default)
             {
                 throw new ObjectNotFoundException(typeof(DroneForList), id);
             }

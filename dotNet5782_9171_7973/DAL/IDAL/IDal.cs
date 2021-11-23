@@ -20,7 +20,7 @@ namespace IDAL
         void SupplyParcel(int parcelId);
         void ChargeDroneAtBaseStation(int droneId, int baseStationId);
         void FinishCharging(int droneId);
-        void Update<T>(DO.IIdentifiable item) where T : DO.IIdentifiable;
+        void Update<T>(T item) where T : DO.IIdentifiable;
         int GetParcelContNumber();
   
     }

@@ -21,9 +21,9 @@ namespace DalObject
         /// Remove an item from its data list
         /// </summary>
         /// <param name="item"></param>
-        public void Remove<T>(T item) where T : IIdentifiable
+        public void Remove<T>(int id) where T : IIdentifiable
         {
-            DataSource.data[typeof(T)].Remove(item);    
+            
         }
 
         IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
@@ -118,9 +118,9 @@ namespace DalObject
             throw new NotImplementedException();
         }
 
-        public void Update<T>(IIdentifiable item) where T : IIdentifiable
+        public void Update<T>(T item) where T : IIdentifiable
         {
-            Remove(item);
+            Remove(item.Id);
             Add(item);
         }
 
@@ -143,5 +143,7 @@ namespace DalObject
 
             DataSource.data[typeof(T)].Add(item);
         }
+
+        
     }
 }

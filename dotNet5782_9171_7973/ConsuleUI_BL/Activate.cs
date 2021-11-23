@@ -239,7 +239,7 @@ namespace ConsoleUI_BL
                         int customerId = GetInput(int.Parse);
                         Console.WriteLine("New Name:");
                         string name = GetInput(s => s);
-                        Console.WriteLine("Charge Slots:");
+                        Console.WriteLine("Phone number:");
                         string phone = GetInput(s => s);
 
                         name = name.Count() == 0 ? null : name;

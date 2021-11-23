@@ -27,7 +27,7 @@ namespace ConsoleUI_BL
             double latitude = GetInput(double.Parse);
             int chargeSlots = GetInput(int.Parse);
 
-            Bl.AddBaseStation(id, name, new Location { Latitude = latitude, Longitude = longitude }, chargeSlots);
+            bl.AddBaseStation(id, name, new Location { Latitude = latitude, Longitude = longitude }, chargeSlots);
         }
 
         static void AddCustomer()
@@ -40,7 +40,7 @@ namespace ConsoleUI_BL
             double longitude = GetInput(double.Parse);
             double latitude = GetInput(double.Parse);
 
-            Bl.AddCustomer(id, name, phone, new Location() { Longitude = longitude, Latitude = latitude });
+            bl.AddCustomer(id, name, phone, new Location() { Longitude = longitude, Latitude = latitude });
         }
 
         static void AddParcel()
@@ -54,7 +54,7 @@ namespace ConsoleUI_BL
             double longitude = GetInput(double.Parse);
             double latitude = GetInput(double.Parse);
 
-            Bl.AddParcel(senderId, targetId, weight, priority);
+            bl.AddParcel(senderId, targetId, weight, priority);
         }
 
         static void AddDrone()
@@ -66,7 +66,7 @@ namespace ConsoleUI_BL
             WeightCategory weight = (WeightCategory)GetInput(IsValidEnumOption(3));
             int stationNumber = GetInput(int.Parse);
 
-            Bl.AddDrone(id, model, weight, stationNumber);
+            bl.AddDrone(id, model, weight, stationNumber);
         }
     }
 }

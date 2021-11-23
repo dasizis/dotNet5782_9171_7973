@@ -94,22 +94,22 @@ namespace ConsoleUI_BL
                 case DisplayOption.BaseStation:
                     Console.WriteLine("Number Of Station:");
                     id = GetInput(int.Parse);
-                    Console.WriteLine(Bl.GetBaseStation(id));
+                    Console.WriteLine(bl.GetBaseStation(id));
                     break;
                 case DisplayOption.Customer:
                     Console.WriteLine("Number Of Customer:");
                     id = GetInput(int.Parse);
-                    Console.WriteLine(Bl.GetCustomer(id));
+                    Console.WriteLine(bl.GetCustomer(id));
                     break;
                 case DisplayOption.Parcel:
                     Console.WriteLine("Number Of Parcel:");
                     id = GetInput(int.Parse);
-                    Console.WriteLine(Bl.GetParcel(id));
+                    Console.WriteLine(bl.GetParcel(id));
                     break;
                 case DisplayOption.Drone:
                     Console.WriteLine("Number Of Drone:");
                     id = GetInput(int.Parse);
-                    Console.WriteLine(Bl.GetDrone(id));
+                    Console.WriteLine(bl.GetDrone(id));
                     break;
                 default:
                     Console.WriteLine(ERROR_MESSAGE);
@@ -130,22 +130,22 @@ namespace ConsoleUI_BL
             switch ((DisplayListOption)option)
             {
                 case DisplayListOption.BaseStation:
-                    DisplayList(Bl.GetBaseStationsList());
+                    DisplayList(bl.GetBaseStationsList());
                     break;
                 case DisplayListOption.Customer:
-                    DisplayList(Bl.GetCustomersList());
+                    DisplayList(bl.GetCustomersList());
                     break;
                 case DisplayListOption.Parcel:
-                    DisplayList(Bl.GetParcelsList());
+                    DisplayList(bl.GetParcelsList());
                     break;
                 case DisplayListOption.Drone:
-                    DisplayList(Bl.GetDronesList());
+                    DisplayList(bl.GetDronesList());
                     break;
                 case DisplayListOption.NotAssignedToDroneParcels:
-                    DisplayList(Bl.GetNotAssignedToDroneParcels());
+                    DisplayList(bl.GetNotAssignedToDroneParcels());
                     break;
                 case DisplayListOption.AvailableBaseStations:
-                    DisplayList(Bl.GetAvailableBaseStations());
+                    DisplayList(bl.GetAvailableBaseStations());
                     break;
                 default:
                     Console.WriteLine(ERROR_MESSAGE);
@@ -169,14 +169,14 @@ namespace ConsoleUI_BL
                     {
                         Console.WriteLine("Parcel ID, Please.");
                         int parcelId = GetInput(int.Parse);
-                        Bl.AssignParcelToDrone(parcelId);
+                        bl.AssignParcelToDrone(parcelId);
                         break;
                     }
                 case UpdateOption.CollectParcel:
                     {
                         Console.WriteLine("Parcel ID, Please.");
                         int parcelId = GetInput(int.Parse);
-                        Bl.PickUpParcel(parcelId);
+                        bl.PickUpParcel(parcelId);
 
                         break;
                     }
@@ -184,7 +184,7 @@ namespace ConsoleUI_BL
                     {
                         Console.WriteLine("Parcel ID, Please.");
                         int parcelId = GetInput(int.Parse);
-                        Bl.SupplyParcel(parcelId);
+                        bl.SupplyParcel(parcelId);
 
                         break;
                     }
@@ -192,7 +192,7 @@ namespace ConsoleUI_BL
                     {
                         Console.WriteLine("Drone ID, Please.");
                         int droneId = GetInput(int.Parse);
-                        Bl.SendDroneToCharge(droneId);
+                        bl.SendDroneToCharge(droneId);
 
                         break;
                     }
@@ -202,7 +202,7 @@ namespace ConsoleUI_BL
                         int droneId = GetInput(int.Parse);
                         Console.WriteLine("Time in Charge:");
                         double timeInCharge = GetInput(double.Parse);
-                        Bl.FinishCharging(droneId, timeInCharge);
+                        bl.FinishCharging(droneId, timeInCharge);
 
                         break;
                     }
@@ -213,7 +213,7 @@ namespace ConsoleUI_BL
                         int droneId = GetInput(int.Parse);
                         Console.WriteLine("New Name:");
                         string name = GetInput(s => s);
-                        Bl.RenameDrone(droneId, name);
+                        bl.RenameDrone(droneId, name);
 
                         break;
                     }
@@ -229,7 +229,7 @@ namespace ConsoleUI_BL
 
                         name = name.Count() == 0 ? null : name;
                         chargeSlots = chargeSlots == 0? null : chargeSlots;
-                        Bl.RenameDrone(droneId, name);
+                        bl.RenameDrone(droneId, name);
 
                         break;
                     }
@@ -244,7 +244,7 @@ namespace ConsoleUI_BL
 
                         name = name.Count() == 0 ? null : name;
                         phone = phone.Count() == 0 ? null : phone;
-                        Bl.UpdateCustomer(customerId, name, phone);
+                        bl.UpdateCustomer(customerId, name, phone);
 
                         break;
                     }

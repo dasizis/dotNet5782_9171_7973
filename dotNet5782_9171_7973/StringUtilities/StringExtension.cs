@@ -27,7 +27,7 @@ namespace StringUtilities
                 }
                 else
                 {
-                    description += prop.GetValue(obj).ToString();
+                    description += prop.GetValue(obj)?.ToString() ?? "null";
                 }
             }
 

@@ -5,7 +5,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        public static IBL.IBL Bl => new BL.BL();
+        private static IBL.IBL bl = new BL.BL();
 
         /// <summary>
         /// prints a given enum

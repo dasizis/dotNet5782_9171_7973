@@ -5,7 +5,7 @@ namespace StringUtilities
 {
     public static class StringUtilitiesExtension
     {
-        public static string ToStringProps<T>(this T obj, bool detailedNested = false, int nestLevel = 0)
+        public static string ToStringProps<T>(this T obj)
         {
             Type type = obj.GetType();
             string description = "=============================" +
@@ -16,17 +16,18 @@ namespace StringUtilities
             {
                 description += $"{Environment.NewLine}{prop.Name} = ";
 
-
-                // Is the prop a list?
-                if (prop.PropertyType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(prop.PropertyType))
+                if (Attribute.IsDefined(prop, typeof(SexadecimalLatitudeAttribute)))
                 {
-                    if (detailedNested)
-                    {
-
-                    }
-                    else description += $"List<{prop.GetType().GetGenericArguments()}>{}"
+                    description += Sexadecimal.Latitude((double)prop.GetValue(obj));
                 }
-                else description += prop.GetValue(obj).ToString();
+                else if (Attribute.IsDefined(prop, typeof(SexadecimalLongitudeAttribute)))
+                {
+                    description += Sexadecimal.Longitde((double)prop.GetValue(obj));
+                }
+                else
+                {
+                    description += prop.GetValue(obj).ToString();
+                }
             }
 
             return description;

@@ -158,14 +158,14 @@ namespace BL
             return Dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
         }
 
-        //public T GetById<T>(int id) where T :IDAL.DO.IIdentifiable
+        //public T GetById<T>(int id) where T :
         //{
         //    Type blType = typeof(BL);
         //    MethodInfo getMethod = blType.GetMethod(name: $"Get{typeof(T).Name}", types: new Type[] { typeof(int) });
 
         //    return (T)getMethod.Invoke(this, new object[] { id });
         //}
-        //public IEnumerable<T> GetList<T>() where T : IDAL.DO.IIdentifiable
+        //public IEnumerable<T> GetList<T>() where T : 
         //{
         //    Type blType = typeof(BL);
         //    MethodInfo getMethod = blType.GetMethod(name: $"Get{typeof(T).Name}", types: new Type[] { typeof(int) });

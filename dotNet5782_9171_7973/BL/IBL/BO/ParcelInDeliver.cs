@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class ParcelInDeliver : IDAL.DO.IIdentifiable
+    public class ParcelInDeliver
     {
         public int Id { get; set; }
         public WeightCategory Weight { get; set; }

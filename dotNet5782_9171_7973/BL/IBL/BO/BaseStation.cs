@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class BaseStation: IDAL.DO.IIdentifiable, ILocalable
+    public class BaseStation: ILocalable
     {
         public int Id { get; set; }
         public string Name { get; set; }

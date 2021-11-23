@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Parcel : IDAL.DO.IIdentifiable
+    public class Parcel 
     {
         public int Id { get; set; }
         public CustomerInDelivery Sender { get; set; }

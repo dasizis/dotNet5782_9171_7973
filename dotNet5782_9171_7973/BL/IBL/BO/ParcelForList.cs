@@ -2,7 +2,7 @@
 
 namespace IBL.BO
 {
-    public class ParcelForList : IDAL.DO.IIdentifiable
+    public class ParcelForList 
     {
         public int Id { get; set; }
         public string SenderName { get; set; }

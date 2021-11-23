@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class CustomerForList : IDAL.DO.IIdentifiable
+    public class CustomerForList 
     {
         public int Id { get; set; }
         public string Name { get; set; }

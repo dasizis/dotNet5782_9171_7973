@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class DroneForList : IDAL.DO.IIdentifiable, ILocalable
+    public class DroneForList : ILocalable
     { 
         public int Id { get; set; }
         public string Model { get; set; }

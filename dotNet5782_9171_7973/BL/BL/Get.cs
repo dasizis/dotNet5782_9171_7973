@@ -80,6 +80,7 @@ namespace BL
                 DronesInChargeList = dronesInChargeList,
             };
         }
+
         /// <summary>
         /// return specific drone
         /// </summary>
@@ -249,19 +250,24 @@ namespace BL
         /// <returns>parcel in delivery</returns>
         public ParcelInDeliver GetParcelInDeliver(int id)
         {
-            var parcel = GetParcel(id);
-            var targetCustomer = GetCustomer(parcel.Target.Id);
-            var senderCustomer = GetCustomer(parcel.Sender.Id);
+            var parcel = Dal.GetById<IDAL.DO.Parcel>(id);
+            var targetCustomer = Dal.GetById<IDAL.DO.Customer>(parcel.SenderId);
+            var senderCustomer = Dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+
+            var targetLocation = new Location() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
+            var senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
 
             return new ParcelInDeliver()
             {
                 Id = id,
-                Weight = parcel.Weight,
-                Priority = parcel.Priority,
-                Target = targetCustomer.Location,
-                CollectLocation = senderCustomer.Location,
+                Weight = (WeightCategory)parcel.Weight,
+                Priority = (Priority)parcel.Priority,
+                TargetLocation = targetLocation,
+                CollectLocation = senderLocation,
                 Position = parcel.Supplied != null,
-                DeliveryDistance = Location.Distance(senderCustomer.Location, targetCustomer.Location),
+                DeliveryDistance = Location.Distance(senderLocation, targetLocation),
+                Sender = GetCustomerInDelivery(senderCustomer.Id),
+                Target = GetCustomerInDelivery(targetCustomer.Id),
             };
         }
     }

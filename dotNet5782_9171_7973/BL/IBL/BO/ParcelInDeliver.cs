@@ -15,8 +15,10 @@ namespace IBL.BO
         public Priority Priority { get; set; }
         public bool Position { get; set; }
         public Location CollectLocation { get; set; }
-        public Location Target { get; set; }
+        public Location TargetLocation { get; set; }
         public double DeliveryDistance { get; set; }
+        public CustomerInDelivery Sender { get; set; }
+        public CustomerInDelivery Target { get; set; }
         public override string ToString() => this.ToStringProps();
 
     }

@@ -8,9 +8,9 @@ namespace StringUtilities
         public static string ToStringProps<T>(this T obj)
         {
             Type type = obj.GetType();
-            string description = "=============================" +
-                                $"{type.Name}" +
-                                 "=============================";
+            string description = "----------------\n" +
+                                $"{type.Name}\n" +
+                                 "----------------";
 
             foreach (var prop in type.GetProperties())
             {
@@ -26,6 +26,11 @@ namespace StringUtilities
                 }
                 else
                 {
+                    if (obj.GetType().GetMethod("ToString").DeclaringType != obj.GetType())
+                    {
+                        description += "\n";
+                    }
+}
                     description += prop.GetValue(obj).ToString();
                 }
             }

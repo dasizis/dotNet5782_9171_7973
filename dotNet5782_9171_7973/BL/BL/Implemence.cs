@@ -264,8 +264,8 @@ namespace BL
                 throw new InValidActionException();
             }
 
-            drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.Target) * GetElectricity(parcelInDeliver.Weight);
-            drone.Location = parcelInDeliver.Target;
+            drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
+            drone.Location = parcelInDeliver.TargetLocation;
             drone.State = DroneState.Free;
 
             Dal.SupplyParcel(parcel.Id);
@@ -311,8 +311,8 @@ namespace BL
         private bool IsAbleToPassParcel(Drone drone, ParcelInDeliver parcel)
         {
             var neededBattery = Location.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
-                               Location.Distance(parcel.CollectLocation, parcel.Target) * GetElectricity(parcel.Weight) +
-                               Location.Distance(parcel.Target, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
+                               Location.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
+                               Location.Distance(parcel.TargetLocation, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
            return drone.Battery >= neededBattery;
         }
         /// <summary>

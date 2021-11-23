@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Reflection;
 
 namespace StringUtilities
 {
@@ -26,11 +27,6 @@ namespace StringUtilities
                 }
                 else
                 {
-                    if (obj.GetType().GetMethod("ToString").DeclaringType != obj.GetType())
-                    {
-                        description += "\n";
-                    }
-}
                     description += prop.GetValue(obj).ToString();
                 }
             }

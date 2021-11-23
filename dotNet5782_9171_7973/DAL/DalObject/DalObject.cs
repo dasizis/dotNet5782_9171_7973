@@ -27,7 +27,7 @@ namespace DalObject
             DataSource.data[typeof(T)].RemoveAt(itemIndex);    
         }
 
-        IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
+        static IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
             DataSource.data[typeof(T)].Cast<T>().Where(item => predicate(item));
 
         /// <summary>

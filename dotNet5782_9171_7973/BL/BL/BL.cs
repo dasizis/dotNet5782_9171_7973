@@ -101,16 +101,18 @@ namespace BL
                 State = DroneState.MEINTENENCE,
             };
 
-            drones.Add(new DroneForList()
-            {
-                Id = drone.Id,
-                Model = drone.Model,
-                MaxWeight = drone.MaxWeight,
-                Battery = drone.Battery,
-                Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
-                DeliveredParcelId = null,
-                State = drone.State,
-            });
+            drones.Add(
+                new DroneForList()
+                {
+                    Id = drone.Id,
+                    Model = drone.Model,
+                    MaxWeight = drone.MaxWeight,
+                    Battery = drone.Battery,
+                    Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
+                    DeliveredParcelId = null,
+                    State = drone.State,
+                }
+            );
 
             Dal.Add(new IDAL.DO.Drone()
             {
@@ -203,7 +205,7 @@ namespace BL
         /// <returns>drone list</returns>
         public IEnumerable<DroneForList> GetDronesList()
         {
-            return Dal.GetList<IDAL.DO.Drone>().Select(drone => GetDroneForList(drone.Id));
+            return drones.Where(_ => true);
         }
         /// <summary>
         /// return parcels list

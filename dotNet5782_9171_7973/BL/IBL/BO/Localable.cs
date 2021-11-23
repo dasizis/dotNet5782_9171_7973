@@ -8,7 +8,6 @@ namespace IBL.BO
 {
     public static class Localable
     {
-        const int EARTH_RADIUS_KM = 6371;
 
 
         //public static double Distance(Locat localableA, T localableB): 

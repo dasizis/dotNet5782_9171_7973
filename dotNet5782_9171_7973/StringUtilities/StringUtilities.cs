@@ -17,7 +17,7 @@ namespace StringUtilities
         /// <param name="numOfTabs">tabs before each enum value</param>
         public static string EnumToString(Type enumType)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new ();
 
             foreach (var option in Enum.GetValues(enumType))
             {

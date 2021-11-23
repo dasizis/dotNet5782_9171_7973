@@ -9,7 +9,7 @@ namespace BL
 {
     partial class BL
     {
-        List<DroneForList> drones = new();
+        readonly List<DroneForList> drones = new();
         
         public BL()
         {

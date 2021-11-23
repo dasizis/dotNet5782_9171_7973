@@ -16,7 +16,7 @@ namespace ConsoleUI_BL
         /// <param name="numOfTabs">tabs before each enum value</param>
         static string EnumToString(Type enumType, int numOfTabs = 0)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new ();
 
             foreach (var option in Enum.GetValues(enumType))
             {

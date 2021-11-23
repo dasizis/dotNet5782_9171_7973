@@ -8,8 +8,8 @@ using System.Reflection;
 
 namespace BL
 {
-     public partial class BL: IBL.IBL
-     {
+    public partial class BL : IBL.IBL
+    {
         IDAL.IDal Dal { get; set; } = new DalObject.DalObject();
         const int MAX_CHARGE = 100;
 
@@ -41,7 +41,7 @@ namespace BL
             Dal.Add(
                 new IDAL.DO.BaseStation()
                 {
-                    Id = station.Id, 
+                    Id = station.Id,
                     Name = station.Name,
                     Latitude = station.Location.Latitude,
                     Longitude = station.Location.Longitude,
@@ -98,7 +98,7 @@ namespace BL
                 Battery = 0,
                 Location = station.Location,
                 ParcelInDeliver = null,
-                State = DroneState.MEINTENENCE,           
+                State = DroneState.MEINTENENCE,
             };
 
             drones.Add(new DroneForList()
@@ -107,7 +107,7 @@ namespace BL
                 Model = drone.Model,
                 MaxWeight = drone.MaxWeight,
                 Battery = drone.Battery,
-                Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude},
+                Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
                 DeliveredParcelId = null,
                 State = drone.State,
             });
@@ -119,6 +119,13 @@ namespace BL
                 MaxWeight = (IDAL.DO.WeightCategory)drone.MaxWeight,
             });
         }
+        /// <summary>
+        /// add a parcel
+        /// </summary>
+        /// <param name="senderId">the parcel sender customer id</param>
+        /// <param name="targetId">the parcel target customer id</param>
+        /// <param name="weight">the parcel weight</param>
+        /// <param name="priority">the parcel priority</param>
         public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
         {
             var parcel = new Parcel()
@@ -131,8 +138,8 @@ namespace BL
                 Requested = DateTime.Now,
             };
 
-            Dal.Add(new IDAL.DO.Parcel() 
-            { 
+            Dal.Add(new IDAL.DO.Parcel()
+            {
                 Id = parcel.Id,
                 SenderId = parcel.Sender.Id,
                 TargetId = parcel.Target.Id,
@@ -141,11 +148,16 @@ namespace BL
                 DroneId = null,
                 Requested = parcel.Requested,
             });
-        }    
+        }
+        /// <summary>
+        /// return list of base stations with empty charge slots
+        /// </summary>
+        /// <returns>list of base stations with empty charge slots</returns>
         public IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
             return Dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
         }
+
         //public T GetById<T>(int id) where T :IDAL.DO.IIdentifiable
         //{
         //    Type blType = typeof(BL);
@@ -161,26 +173,42 @@ namespace BL
         //    return Dal.GetList<T>().Select(item => (T)getMethod.Invoke(this, new object[] { item.Id } ));
         //}
 
+        /// <summary>
+        /// return list of parcels which weren't assigned to drone yet
+        /// </summary>
+        /// <returns>list of parcels which weren't assigned to drone yet</returns>
         public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
         {
             return Dal.GetNotAssignedToDroneParcels().Select(parcel => GetParcelForList(parcel.Id));
         }
-
+        /// <summary>
+        /// return customers list
+        /// </summary>
+        /// <returns>customers list</returns>
         public IEnumerable<CustomerForList> GetCustomersList()
         {
             return Dal.GetList<IDAL.DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
         }
-
+        /// <summary>
+        /// return base stations list
+        /// </summary>
+        /// <returns>base stations list</returns>
         public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
             return Dal.GetList<IDAL.DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
         }
-
+        /// <summary>
+        /// return drone list
+        /// </summary>
+        /// <returns>drone list</returns>
         public IEnumerable<DroneForList> GetDronesList()
         {
             return Dal.GetList<IDAL.DO.Drone>().Select(drone => GetDroneForList(drone.Id));
         }
-
+        /// <summary>
+        /// return parcels list
+        /// </summary>
+        /// <returns>parcels list</returns>
         public IEnumerable<ParcelForList> GetParcelsList()
         {
             return Dal.GetList<IDAL.DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));

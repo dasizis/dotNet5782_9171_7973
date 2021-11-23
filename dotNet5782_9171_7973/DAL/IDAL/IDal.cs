@@ -9,7 +9,7 @@ namespace IDAL
     {
         (double, double, double, double, double) GetElectricityConfumctiol();
         void Add<T>(T item) where T : DO.IIdentifiable;
-        public void Remove<T>(T item) where T : DO.IIdentifiable;       
+        public void Remove<T>(int id) where T : DO.IIdentifiable;       
         IEnumerable<T> GetList<T>() where T : DO.IIdentifiable;
         IEnumerable<DO.DroneCharge> GetDroneCharges();
         T GetById<T>(int id) where T : DO.IIdentifiable;
@@ -20,7 +20,7 @@ namespace IDAL
         void SupplyParcel(int parcelId);
         void ChargeDroneAtBaseStation(int droneId, int baseStationId);
         void FinishCharging(int droneId);
-        void Update<T>(DO.IIdentifiable item) where T : DO.IIdentifiable;
+        void Update<T>(T item) where T : DO.IIdentifiable;
         int GetParcelContNumber();
   
     }

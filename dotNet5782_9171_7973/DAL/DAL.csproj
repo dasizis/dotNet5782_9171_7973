@@ -7,5 +7,9 @@
 	<PropertyGroup>
 		<LangVersion>9.0</LangVersion>
 	</PropertyGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\StringUtilities\StringUtilities.csproj" />
+	</ItemGroup>
 
 </Project>

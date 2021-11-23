@@ -1,4 +1,5 @@
 ﻿using System;
+using StringUtilities;
 
 namespace IBL.BO
 {

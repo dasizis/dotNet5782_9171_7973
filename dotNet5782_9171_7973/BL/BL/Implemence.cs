@@ -67,7 +67,6 @@ namespace BL
                         return stationsLocations[rand.Next(stationsLocations.Count)];
                     }
                     var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
-
                     var customer = Dal.GetById<IDAL.DO.Customer>(randomParcel.TargetId);
 
                     return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };

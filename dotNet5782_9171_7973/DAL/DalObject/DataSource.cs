@@ -56,23 +56,23 @@ namespace DalObject
         public static void Initialize()
         {
             baseStations.AddRange(
-                Enumerable.Range(0, INIT_BASESTATIONS)
+                Enumerable.Range(1, INIT_BASESTATIONS)
                           .Select(i => RandomManager.RandomBaseStation(i))
             );
 
             drones.AddRange(
-                Enumerable.Range(0, INIT_DRONES)
+                Enumerable.Range(1, INIT_DRONES)
                           .Select(i => RandomManager.RandomDrone(i))
             );
 
             customers.AddRange(
-                Enumerable.Range(0, INIT_CUSTOMERS)
+                Enumerable.Range(1, INIT_CUSTOMERS)
                           .Select(i => RandomManager.RandomCustomer(i))
             );
 
             parcels.AddRange(
-                Enumerable.Range(0, INIT_PARCELS)
-                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++))
+                Enumerable.Range(1, INIT_PARCELS)
+                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, customers))    
                           .Select(parcel => RandomManager.Rand.Next(2) == 1
                                             ? parcel
                                             : new Parcel()
@@ -89,8 +89,7 @@ namespace DalObject
 
                           )
 
-            ); ;
-
+            );
         }
     }
 }

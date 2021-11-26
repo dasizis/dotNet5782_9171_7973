@@ -32,7 +32,7 @@ namespace BL
             foreach (var dlDrone in dlDrones)
             {
 
-                var parcel = parcels.FirstOrDefault(parcel => parcel.DroneId == dlDrone.Id);
+                var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
                 double battery;
                 int? parcelInDeliverId = null;
                 DroneState state;
@@ -41,7 +41,7 @@ namespace BL
                 Location senderLocation = null;
 
                 // Set state
-                if (parcel.Equals(default))
+                if (parcel.Equals(default(IDAL.DO.Parcel)))
                 {
                     state = (DroneState)rand.Next(0, 2);
                 }
@@ -60,7 +60,12 @@ namespace BL
 
                 Location RandomSuppliedParcelLocation()
                 {
-                    var suppliedParcels = parcels.FindAll(p => p.Supplied != null).ToList();
+                    var suppliedParcels = parcels.FindAll(p => p.Supplied.HasValue).ToList();
+
+                    if(suppliedParcels.Count == 0)
+                    {
+                        return stationsLocations[rand.Next(stationsLocations.Count)];
+                    }
                     var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
 
                     var customer = Dal.GetById<IDAL.DO.Customer>(randomParcel.TargetId);
@@ -124,16 +129,15 @@ namespace BL
                 throw new InValidActionException();
             }
 
-           var parcels = (Dal.GetNotAssignedToDroneParcels() as List<IDAL.DO.Parcel>)
-                         .FindAll(parcel => 
-                              (int)parcel.Weight < (int)drone.MaxWeight && 
-                              IsAbleToPassParcel(drone, GetParcelInDeliver(parcel.Id)))
-                         .OrderBy(p => p.Priority)
-                         .ThenBy(p => p.Weight)
-                         .ThenBy(p => Location.Distance(GetCustomer(p.SenderId).Location, drone.Location))
-                         .ToList();
+            var parcels = Dal.GetNotAssignedToDroneParcels()
+                          .Where(parcel =>
+                               (int)parcel.Weight < (int)drone.MaxWeight &&
+                               IsAbleToPassParcel(drone, GetParcelInDeliver(parcel.Id)))
+                          .OrderBy(p => p.Priority)
+                          .ThenBy(p => p.Weight)
+                          .ThenBy(p => Location.Distance(GetCustomer(p.SenderId).Location, drone.Location));
 
-            if (parcels.Count == 0)
+            if (!parcels.Any())
             {
                 throw new InValidActionException();
             }

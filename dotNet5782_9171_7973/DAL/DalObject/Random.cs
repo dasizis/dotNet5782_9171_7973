@@ -1,4 +1,5 @@
 ﻿using IDAL.DO;
+using System.Collections.Generic;
 
 namespace DalObject
 {
@@ -42,7 +43,7 @@ namespace DalObject
         /// <returns>the random phone number</returns>
         public static string RandomPhone()
         {
-            string phone ="05";
+            string phone = "05";
             const int PHONE_LENGTH = 10;
 
             phone += Rand.Next(
@@ -68,7 +69,7 @@ namespace DalObject
 
             return new System.DateTime(year, month, day, hour, minute, second);
         }
-        
+
         /// <summary>
         /// choose a random enum value
         /// </summary>
@@ -85,7 +86,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Parcel instance</returns>
-        public static Parcel RandomParcel(int id)
+        public static Parcel RandomParcel(int id, List<Customer> customers)
         {
             return new Parcel()
             {
@@ -93,6 +94,8 @@ namespace DalObject
                 Requested = RandomDate(),
                 Weight = (WeightCategory)RandomEnumOption(typeof(WeightCategory)),
                 Priority = (Priority)RandomEnumOption(typeof(Priority)),
+                SenderId = customers[Rand.Next(customers.Count)].Id,
+                TargetId = customers[Rand.Next(customers.Count)].Id,
             };
         }
 

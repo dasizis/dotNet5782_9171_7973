@@ -45,7 +45,7 @@ namespace ConsoleUI_BL
 
         static void AddParcel()
         {
-            Console.WriteLine("Enter sender Id, target Id, weight (0 - 2), priority (0 - 2)");
+            Console.WriteLine("Enter sender Id, target Id, weight (0 - 2), priority (0 - 2), Location(longitude, latitude)");
 
             int senderId = GetInput(int.Parse);
             int targetId = GetInput(int.Parse);

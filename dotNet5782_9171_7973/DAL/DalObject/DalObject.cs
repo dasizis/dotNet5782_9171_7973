@@ -74,7 +74,7 @@ namespace DalObject
 
         public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
         {
-            return DataSource.parcels.Where(parcel => parcel.DroneId == 0);
+            return DataSource.parcels.Where(parcel => parcel.DroneId == null);
         }
 
         public IEnumerable<BaseStation> GetAvailableBaseStations()
@@ -116,7 +116,11 @@ namespace DalObject
 
         public void CollectParcel(int parcelId)
         {
-            throw new NotImplementedException();
+            Parcel parcel = GetById<Parcel>(parcelId);
+            DataSource.parcels.Remove(parcel);
+
+            parcel.PickedUp = DateTime.Now;
+            DataSource.parcels.Add(parcel);
         }
 
         public void Update<T>(T item) where T : IIdentifiable
@@ -127,7 +131,7 @@ namespace DalObject
 
         public int GetParcelContNumber()
         {
-            return DataSource.Config.NextParcelID;
+            return DataSource.Config.NextParcelID++;
         }
 
         public IEnumerable<DroneCharge> GetDroneCharges()

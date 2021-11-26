@@ -48,7 +48,7 @@ namespace BL
             return new Parcel()
             {
                 Id = parcel.Id,
-                Drone = GetDrone((int)parcel.DroneId),
+                Drone = parcel.DroneId.HasValue? GetDrone(parcel.DroneId.Value) : null,
                 Sender = GetCustomerInDelivery(parcel.SenderId),
                 Target = GetCustomerInDelivery(parcel.TargetId),
                 Weight = (WeightCategory)parcel.Weight,
@@ -119,10 +119,10 @@ namespace BL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
-                ParcelsSendAndSupplied = parcels.Where(parcel => parcel.SenderId == id && parcel.Supplied != null).Count(),
-                ParcelsSendAndNotSupplied = parcels.Where(parcel => parcel.SenderId == id && parcel.Supplied == null).Count(),
-                ParcelsRecieved = parcels.Where(parcel => parcel.TargetId == id && parcel.Supplied != null).Count(),
-                ParcelsOnWay = parcels.Where(parcel => parcel.TargetId == id && parcel.Supplied == null).Count(),
+                ParcelsSendAndSupplied = parcels.Count(parcel => parcel.SenderId == id && parcel.Supplied != null),
+                ParcelsSendAndNotSupplied = parcels.Count(parcel => parcel.SenderId == id && parcel.Supplied == null),
+                ParcelsRecieved = parcels.Count(parcel => parcel.TargetId == id && parcel.Supplied != null),
+                ParcelsOnWay = parcels.Count(parcel => parcel.TargetId == id && parcel.Supplied == null),
             };
         }
         /// <summary>

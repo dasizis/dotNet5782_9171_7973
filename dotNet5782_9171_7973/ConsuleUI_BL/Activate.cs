@@ -220,8 +220,8 @@ namespace ConsoleUI_BL
 
                 case UpdateOption.UpdateBaseStation:
                     {
-                        Console.WriteLine("Drone ID, Please.");
-                        int droneId = GetInput(int.Parse);
+                        Console.WriteLine("Base station ID, Please.");
+                        int baseStationId = GetInput(int.Parse);
                         Console.WriteLine("BaseStation Name:");
                         string name = GetInput(s => s); 
                         Console.WriteLine("Charge Slots:");
@@ -229,7 +229,7 @@ namespace ConsoleUI_BL
 
                         name = name.Count() == 0 ? null : name;
                         chargeSlots = chargeSlots == 0? null : chargeSlots;
-                        bl.RenameDrone(droneId, name);
+                        bl.UpdateBaseStation(baseStationId, name, chargeSlots);
 
                         break;
                     }

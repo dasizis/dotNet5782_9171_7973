@@ -7,16 +7,6 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        static Converter<string, int> IsValidEnumOption(int max)
-        {
-            return str =>
-            {
-                int result = int.Parse(str);
-                if (result < max && result > 0) return result;
-                throw new FormatException();
-            };
-        }
-
         static void AddBaseStation()
         {
             Console.WriteLine("Enter id, name, location (longitude, latitude), number of charge slots");
@@ -49,8 +39,8 @@ namespace ConsoleUI_BL
 
             int senderId = GetInput(int.Parse);
             int targetId = GetInput(int.Parse);
-            WeightCategory weight = (WeightCategory)GetInput(IsValidEnumOption(3));
-            Priority priority = (Priority)GetInput(IsValidEnumOption(3));
+            WeightCategory weight = (WeightCategory)GetInput(int.Parse);
+            Priority priority = (Priority)GetInput(int.Parse);
             double longitude = GetInput(double.Parse);
             double latitude = GetInput(double.Parse);
 
@@ -63,7 +53,7 @@ namespace ConsoleUI_BL
 
             int id = GetInput(int.Parse);
             string model = GetInput(s => s);            
-            WeightCategory weight = (WeightCategory)GetInput(IsValidEnumOption(3));
+            WeightCategory weight = (WeightCategory)GetInput(int.Parse);
             int stationNumber = GetInput(int.Parse);
 
             bl.AddDrone(id, model, weight, stationNumber);

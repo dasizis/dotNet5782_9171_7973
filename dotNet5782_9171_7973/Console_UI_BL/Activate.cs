@@ -220,7 +220,7 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Drone ID, Please.");
                         int droneId = GetInput(int.Parse);
                         Console.WriteLine("Time in Charge:");
-                        double timeInCharge = GetInput(double.Parse);
+                        double timeInCharge = GetInput(double.Parse, input => input > 0);
                         bl.FinishCharging(droneId, timeInCharge);
 
                         break;
@@ -231,7 +231,7 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Drone ID, Please.");
                         int droneId = GetInput(int.Parse);
                         Console.WriteLine("New Name:");
-                        string name = GetInput(s => s);
+                        string name = GetInput(s => s, Validation.IsValidName);
                         bl.RenameDrone(droneId, name);
 
                         break;
@@ -246,8 +246,8 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Charge Slots:");
                         int? chargeSlots = GetInput(int.Parse);
 
-                        name = name.Count() == 0 ? null : name;
-                        chargeSlots = chargeSlots == 0 ? null : chargeSlots;
+                        name = name.Length == 0 ? null : Validation.IsValidName(name)? name: throw new ArgumentException(name);
+                        chargeSlots = chargeSlots == 0 ? null : chargeSlots > 0? chargeSlots: throw new ArgumentException(chargeSlots);
                         bl.UpdateBaseStation(baseStationId, name, chargeSlots);
 
                         break;
@@ -261,8 +261,8 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Phone number:");
                         string phone = GetInput(s => s);
 
-                        name = name.Count() == 0 ? null : name;
-                        phone = phone.Count() == 0 ? null : phone;
+                        name = name.Length == 0 ? null : Validation.IsValidName(name)? name: throw new ArgumentException(name);
+                        phone = phone.Length == 0 ? null : Validation.IsValidPhone(phone)? phone: throw new ArgumentException(phone);
                         bl.UpdateCustomer(customerId, name, phone);
 
                         break;

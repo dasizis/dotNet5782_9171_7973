@@ -63,20 +63,7 @@ namespace IBL.BO
             }
         }
         public ParcelInDeliver ParcelInDeliver { get; set; }
-        private Location location;
-        public Location Location
-        {
-            get => location;
-            set
-            {
-                if (!Validation.IsValidLatitude(value.Latitude)
-                    || !Validation.IsValidLatitude(value.Longitude))
-                {
-                    throw new ArgumentException(value.ToString());
-                }
-                location = value;
-            }
-        }
+        public Location Location { get; set; }
         public override string ToString() => this.ToStringProps();
 
 

@@ -28,8 +28,6 @@ namespace ConsoleUI_BL
         }
         internal static bool IsValidName(string name)
         {
-            if (name.Split(' ').Length != 2) return false;
-
             foreach (char ch in name)
             {
                 if (ch == ' ') continue;

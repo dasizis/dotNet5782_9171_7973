@@ -9,13 +9,12 @@ namespace StringUtilities
         public static string ToStringProps<T>(this T obj)
         {
             Type type = obj.GetType();
-            string description = "----------------\n" +
-                                $"{type.Name}\n" +
-                                 "----------------";
+            string description = $"<{type.Name}> {{";
+                                 
 
             foreach (var prop in type.GetProperties())
             {
-                description += $"{Environment.NewLine}{prop.Name} = ";
+                description += $"{prop.Name} = ";
 
                 if (Attribute.IsDefined(prop, typeof(SexadecimalLatitudeAttribute)))
                 {
@@ -29,9 +28,10 @@ namespace StringUtilities
                 {
                     description += prop.GetValue(obj)?.ToString() ?? "null";
                 }
+                description += ", ";
             }
 
-            return description;
+            return description + '}';
         }
     }
 }

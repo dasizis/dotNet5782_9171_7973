@@ -37,20 +37,7 @@ namespace IBL.BO
                 phone = value;
             }
         }
-        private Location location;
-        public Location Location
-        {
-            get => location;
-            set
-            {
-                if(!Validation.IsValidLatitude(value.Latitude)
-                    || !Validation.IsValidLatitude(value.Longitude))
-                {
-                    throw new ArgumentException(value.ToString());
-                }
-                location = value;
-            }
-        }
+        public Location Location { get; set; }
         public List<Parcel> Send { get; set; }
         public List<Parcel> Recieve { get; set; }
         public override string ToString() => this.ToStringProps();

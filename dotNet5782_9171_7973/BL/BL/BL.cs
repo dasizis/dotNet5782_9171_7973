@@ -20,230 +20,124 @@ namespace BL
         public double ElectricityConfumctiolHeavy { get; set; }
         public double ChargeRate { get; set; }
 
-        /// <summary>
-        /// add a base station 
-        /// </summary>
-        /// <param name="id">the base station id</param>
-        /// <param name="name">the base station name</param>
-        /// <param name="location">the base station location</param>
-        /// <param name="chargeSlots">the base station number of charge slots</param>
-        public void AddBaseStation(int id, string name, Location location, int chargeSlots)
+        public List<DroneForList> drones = new();
+        public BL()
         {
-            var station = new BaseStation()
-            {
-                Id = id,
-                Name = name,
-                Location = location,
-                EmptyChargeSlots = chargeSlots,
-                DronesInChargeList = new(),
-            };
+            (
+                ElectricityConfumctiolFree,
+                ElectricityConfumctiolLight,
+                ElectricityConfumctiolMedium,
+                ElectricityConfumctiolHeavy,
+                ChargeRate
+            ) = dal.GetElectricityConfumctiol();
 
-            try
+            Random rand = new();
+
+            var dlDrones = dal.GetList<IDAL.DO.Drone>().ToList();
+            var parcels = dal.GetList<IDAL.DO.Parcel>().ToList();
+            var stationsLocations = dal.GetList<IDAL.DO.BaseStation>()
+                                       .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
+                                       .ToList();
+
+            foreach (var dlDrone in dlDrones)
             {
 
-                dal.Add(
-                    new IDAL.DO.BaseStation()
-                    {
-                        Id = station.Id,
-                        Name = station.Name,
-                        Latitude = station.Location.Latitude,
-                        Longitude = station.Location.Longitude,
-                        ChargeSlots = station.EmptyChargeSlots + station.DronesInChargeList.Count,
-                    }
-                );
-            }
-            catch
-            {
-                throw new IdAlreadyExistsException(typeof(BaseStation), id);
-            }
-        }
-        /// <summary>
-        /// add customer
-        /// </summary>
-        /// <param name="id">the customer id</param>
-        /// <param name="name">the customer name</param>
-        /// <param name="phone">the customer phone number</param>
-        /// <param name="location">the customer location</param>
-        public void AddCustomer(int id, string name, string phone, Location location)
-        {
-            var customer = new Customer()
-            {
-                Id = id,
-                Name = name,
-                Phone = phone,
-                Location = location,
-                Send = new(),
-                Recieve = new(),
-            };
+                var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
+                double battery;
+                int? parcelInDeliverId = null;
+                DroneState state;
+                Location location;
+                Location targetLocation = null;
+                Location senderLocation = null;
 
-            try
-            {
-                dal.Add(
-                    new IDAL.DO.Customer()
-                    {
-                        Id = customer.Id,
-                        Name = customer.Name,
-                        Phone = customer.Phone,
-                        Longitude = customer.Location.Longitude,
-                        Latitude = customer.Location.Latitude,
-                    }
-               );
-            }
-            catch
-            {
-                throw new IdAlreadyExistsException(typeof(Customer), id);
-            }
-
-        }
-        /// <summary>
-        /// add a drone
-        /// </summary>
-        /// <param name="id">the drone id</param>
-        /// <param name="model">the drone model </param>
-        /// <param name="maxWeight">the drone max weight to carry</param>
-        /// <param name="stationId">first station for drone first charge</param>
-        public void AddDrone(int id, string model, WeightCategory maxWeight, int stationId)
-        {
-            var station = GetBaseStation(stationId);
-
-            var drone = new Drone()
-            {
-                Id = id,
-                Model = model,
-                MaxWeight = maxWeight,
-                Battery = 0,
-                Location = station.Location,
-                ParcelInDeliver = null,
-                State = DroneState.Meintenence,
-            };
-
-            drones.Add(
-                new DroneForList()
+                // Set state
+                if (parcel.Equals(default(IDAL.DO.Parcel)))
                 {
-                    Id = drone.Id,
-                    Model = drone.Model,
-                    MaxWeight = drone.MaxWeight,
-                    Battery = drone.Battery,
-                    Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
-                    DeliveredParcelId = null,
-                    State = drone.State,
+                    state = (DroneState)rand.Next(0, 2);
                 }
-            );
-
-            try
-            {
-                dal.Add(new IDAL.DO.Drone()
+                else
                 {
-                    Id = drone.Id,
-                    Model = drone.Model,
-                    MaxWeight = (IDAL.DO.WeightCategory)drone.MaxWeight,
-                });
-            }
-            catch
-            {
-                throw new IdAlreadyExistsException(typeof(Drone), id);
+                    state = DroneState.Deliver;
+                    parcelInDeliverId = parcel.Id;
+
+                    var targetCustomer = dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+                    targetLocation = new Location() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
+
+                    var senderCustomer = dal.GetById<IDAL.DO.Customer>(parcel.SenderId);
+                    senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
+
+                }
+
+                Location RandomSuppliedParcelLocation()
+                {
+                    var suppliedParcels = parcels.FindAll(p => p.Supplied.HasValue).ToList();
+
+                    if (suppliedParcels.Count == 0)
+                    {
+                        return stationsLocations[rand.Next(stationsLocations.Count)];
+                    }
+                    var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
+                    var customer = dal.GetById<IDAL.DO.Customer>(randomParcel.TargetId);
+
+                    return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
+                }
+
+                // Set location
+                location = state switch
+                {
+                    DroneState.Free => RandomSuppliedParcelLocation(),
+                    DroneState.Meintenence => stationsLocations[rand.Next(stationsLocations.Count)],
+                    DroneState.Deliver => parcel.Supplied != null
+                                          ? targetLocation.FindClosest(stationsLocations)
+                                          : senderLocation,
+                };
+
+                var availableStationsLocations = dal.GetAvailableBaseStations()
+                                                    .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
+                                                    .ToList();
+
+                // Set battery
+                battery = state switch
+                {
+                    DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree), 100),
+                    DroneState.Meintenence => rand.NextDouble() * 20,
+                    DroneState.Deliver => rand.Next(Math.Min(
+                                              (int)(
+                                                  Location.Distance(location, senderLocation) * ElectricityConfumctiolFree +
+                                                  Location.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
+                                                  Location.Distance(targetLocation, targetLocation.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree
+                                              ), 80)
+                                             , 100
+                                          ),
+                };
+
+                drones.Add(
+                        new DroneForList()
+                        {
+                            Id = dlDrone.Id,
+                            Model = dlDrone.Model,
+                            MaxWeight = (WeightCategory)dlDrone.MaxWeight,
+                            Battery = battery,
+                            State = state,
+                            Location = location,
+                            DeliveredParcelId = parcelInDeliverId
+                        }
+                    );
             }
         }
         /// <summary>
-        /// add a parcel
+        /// returns suitable parameter of electricity 
         /// </summary>
-        /// <param name="senderId">the parcel sender customer id</param>
-        /// <param name="targetId">the parcel target customer id</param>
-        /// <param name="weight">the parcel weight</param>
-        /// <param name="priority">the parcel priority</param>
-        public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
+        /// <param name="weight">weight category</param>
+        /// <returns></returns>
+        private double GetElectricity(WeightCategory weight)
         {
-            var parcel = new Parcel()
+            return weight switch
             {
-                Id = dal.GetParcelContNumber(),
-                Priority = priority,
-                Weight = weight,
-                Sender = GetCustomerInDelivery(senderId),
-                Target = GetCustomerInDelivery(targetId),
-                Requested = DateTime.Now,
+                WeightCategory.Light => ElectricityConfumctiolLight,
+                WeightCategory.Medium => ElectricityConfumctiolMedium,
+                WeightCategory.Heavy => ElectricityConfumctiolHeavy,
             };
-
-            try
-            {
-                dal.Add(new IDAL.DO.Parcel()
-                {
-                    Id = parcel.Id,
-                    SenderId = parcel.Sender.Id,
-                    TargetId = parcel.Target.Id,
-                    Priority = (IDAL.DO.Priority)parcel.Priority,
-                    Weight = (IDAL.DO.WeightCategory)parcel.Weight,
-                    DroneId = null,
-                    Requested = parcel.Requested,
-                });
-            }
-            catch
-            {
-                throw new IdAlreadyExistsException(typeof(Parcel), parcel.Id);
-            }
-        }
-        /// <summary>
-        /// return list of base stations with empty charge slots
-        /// </summary>
-        /// <returns>list of base stations with empty charge slots</returns>
-        public IEnumerable<BaseStationForList> GetAvailableBaseStations()
-        {
-            return dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
-        }
-
-        //public T GetById<T>(int id) where T :
-        //{
-        //    Type blType = typeof(BL);
-        //    MethodInfo getMethod = blType.GetMethod(name: $"Get{typeof(T).Name}", types: new Type[] { typeof(int) });
-
-        //    return (T)getMethod.Invoke(this, new object[] { id });
-        //}
-        //public IEnumerable<T> GetList<T>() where T : 
-        //{
-        //    Type blType = typeof(BL);
-        //    MethodInfo getMethod = blType.GetMethod(name: $"Get{typeof(T).Name}", types: new Type[] { typeof(int) });
-
-        //    return Dal.GetList<T>().Select(item => (T)getMethod.Invoke(this, new object[] { item.Id } ));
-        //}
-
-        /// <summary>
-        /// return list of parcels which weren't assigned to drone yet
-        /// </summary>
-        /// <returns>list of parcels which weren't assigned to drone yet</returns>
-        public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
-        {
-            return dal.GetNotAssignedToDroneParcels().Select(parcel => GetParcelForList(parcel.Id));
-        }
-        /// <summary>
-        /// return customers list
-        /// </summary>
-        /// <returns>customers list</returns>
-        public IEnumerable<CustomerForList> GetCustomersList()
-        {
-            return dal.GetList<IDAL.DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
-        }
-        /// <summary>
-        /// return base stations list
-        /// </summary>
-        /// <returns>base stations list</returns>
-        public IEnumerable<BaseStationForList> GetBaseStationsList()
-        {
-            return dal.GetList<IDAL.DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
-        }
-        /// <summary>
-        /// return drone list
-        /// </summary>
-        /// <returns>drone list</returns>
-        public IEnumerable<DroneForList> GetDronesList()
-        {
-            return drones.Where(_ => true);
-        }
-        /// <summary>
-        /// return parcels list
-        /// </summary>
-        /// <returns>parcels list</returns>
-        public IEnumerable<ParcelForList> GetParcelsList()
-        {
-            return dal.GetList<IDAL.DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
         }
     }
 }

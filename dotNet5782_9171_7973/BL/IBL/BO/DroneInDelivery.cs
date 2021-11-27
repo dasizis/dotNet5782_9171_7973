@@ -10,21 +10,20 @@ namespace IBL.BO
     public class DroneInDelivery : ILocalable
     {
         public int Id { get; set; }
-        public double BatteryState { get; set; }
-        private Location location;
-        public Location Location
+        double batteryState;
+        public double BatteryState
         {
-            get => location;
+            get => batteryState;
             set
             {
-                if (!Validation.IsValidLatitude(value.Latitude)
-                    || !Validation.IsValidLatitude(value.Longitude))
+                if (value < 0)
                 {
                     throw new ArgumentException(value.ToString());
                 }
-                location = value;
+                batteryState = value;
             }
         }
+        public Location Location { get; set; }
         public override string ToString() => this.ToStringProps();
     }
 }

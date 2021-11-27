@@ -6,8 +6,32 @@ namespace IBL.BO
     public class ParcelForList 
     {
         public int Id { get; set; }
-        public string SenderName { get; set; }
-        public string TargetName { get; set; }
+        string senderName;
+        public string SenderName
+        {
+            get => senderName;
+            set
+            {
+                if (!Validation.IsValidName(value))
+                {
+                    throw new ArgumentException();
+                }
+                senderName = value;
+            }
+        }
+        string targetName;
+        public string TargetName
+        {
+            get => targetName;
+            set
+            {
+                if (!Validation.IsValidName(value))
+                {
+                    throw new ArgumentException();
+                }
+                targetName = value;
+            }
+        }
         WeightCategory weight;
         public WeightCategory Weight
         {

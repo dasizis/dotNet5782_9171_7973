@@ -20,7 +20,7 @@ namespace IBL.BO
                 {
                     thorw new ArgumentException();
                 }
-                Name = value;
+                name = value;
             }
         }
         public Location Location { get; set; }
@@ -34,7 +34,7 @@ namespace IBL.BO
                 {
                     thorw new ArgumentException();
                 }
-                EmptyChargeSlots = value;
+                emptyChargeSlots = value;
             } 
         }
         public List<Drone> DronesInChargeList { get; set; }

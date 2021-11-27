@@ -18,7 +18,7 @@ namespace IBL.BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException(value);
                 }
                 name = value;
             }
@@ -32,7 +32,7 @@ namespace IBL.BO
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException(value.ToString());
                 }
                 emptyChargeSlots = value;
             } 

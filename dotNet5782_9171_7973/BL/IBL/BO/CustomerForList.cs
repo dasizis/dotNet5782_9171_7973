@@ -18,12 +18,24 @@ namespace IBL.BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    thorw new ArgumentException();
+                    throw new ArgumentException();
                 }
                 name = value;
             }
         }
-        public string Phone { get; set; }
+        string phone;
+        public string Phone
+        {
+            get => phone;
+            set
+            {
+                if (!Validation.IsValidPhone(value))
+                {
+                    throw new ArgumentException(value);
+                }
+                phone = value;
+            }
+        }
         public int ParcelsSendAndSupplied { get; set; }
         public int ParcelsSendAndNotSupplied { get; set; }
         public int ParcelsRecieved { get; set; }

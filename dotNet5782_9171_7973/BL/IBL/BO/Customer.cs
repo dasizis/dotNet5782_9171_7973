@@ -19,25 +19,38 @@ namespace IBL.BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    thorw new ArgumentException();
+                    throw new ArgumentException(value);
                 }
                 name = value;
             }
         }
         string phone;
         public string Phone 
-        { 
-            get => phone
+        {
+            get => phone;
             set
             {
                 if (!Validation.IsValidPhone(value))
                 {
-                    thorw new ArgumentException();
+                    throw new ArgumentException(value);
                 }
                 phone = value;
             }
         }
-        public Location Location { get; set; }
+        private Location location;
+        public Location Location
+        {
+            get => location;
+            set
+            {
+                if(!Validation.IsValidLatitude(value.Latitude)
+                    || !Validation.IsValidLatitude(value.Longitude))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                location = value;
+            }
+        }
         public List<Parcel> Send { get; set; }
         public List<Parcel> Recieve { get; set; }
         public override string ToString() => this.ToStringProps();

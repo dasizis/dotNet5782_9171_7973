@@ -18,11 +18,11 @@ namespace IBL.BO
             }
             return true;
         }
-        internal static bool IsValidLongitude(int longitude)
+        internal static bool IsValidLongitude(double longitude)
         {
             return longitude >= -180 && longitude <= 180;
         }
-        internal static bool IsValidLatitude(int lat)
+        internal static bool IsValidLatitude(double lat)
         {
             return lat >= -90 && lat <= 90;
         }

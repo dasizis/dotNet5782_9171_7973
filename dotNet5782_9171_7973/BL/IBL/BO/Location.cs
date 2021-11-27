@@ -11,11 +11,11 @@ namespace IBL.BO
     {
         const int EARTH_RADIUS_KM = 6371;
         
-        double lognitude;
+        double longitude;
         [SexadecimalLongitude]
         public double Longitude 
         { 
-            get => lognitude;
+            get => longitude;
             set
             {
                 if (!Validation.IsValidLongitude(value))

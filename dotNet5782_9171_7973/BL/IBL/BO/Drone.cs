@@ -10,9 +10,45 @@ namespace IBL.BO
     public class Drone : ILocalable
     {
         public int Id { get; set; }
-        public string Model { get; set; }
-        public WeightCategory MaxWeight { get; set; }
-        public double Battery { get; set; }
+        string model;
+        public string Model
+        {
+            get => model;
+            set
+            {
+                if (!Validation.IsValidName(value))
+                {
+                    throw new ArgumentException(value);
+                }
+                model = value;
+            }
+        }
+        WeightCategory maxWeight;
+        public WeightCategory MaxWeight 
+        {
+            get => maxWeight;
+            set
+            {
+                if(!Validation.IsValidEnumOption<WeightCategory>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                maxWeight = value;
+            }
+        }
+        double battery;
+        public double Battery 
+        {
+            get => battery;
+            set
+            {
+                if(value < 0)
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                battery = value;
+            }
+        }
         public DroneState State { get; set; }
         public ParcelInDeliver ParcelInDeliver { get; set; }
         public Location Location { get; set; }

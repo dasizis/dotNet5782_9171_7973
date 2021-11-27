@@ -40,7 +40,7 @@ namespace StringUtilities
 
             foreach (var letter in letters)
             {
-                result += Char.IsUpper(letter) ? $" {letter.Lower()}" : letter;
+                result += Char.IsUpper(letter) ? $" {Char.ToLower(letter)}" : letter;
             }
 
             return letters[0] + result[2..];

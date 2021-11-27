@@ -18,7 +18,7 @@ namespace IBL.BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    thorw new ArgumentException();
+                    throw new ArgumentException();
                 }
                 name = value;
             }

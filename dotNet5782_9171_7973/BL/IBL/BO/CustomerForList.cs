@@ -36,10 +36,58 @@ namespace IBL.BO
                 phone = value;
             }
         }
-        public int ParcelsSendAndSupplied { get; set; }
-        public int ParcelsSendAndNotSupplied { get; set; }
-        public int ParcelsRecieved { get; set; }
-        public int ParcelsOnWay { get; set; }
+        int parcelsSendAndSupplied;
+        public int ParcelsSendAndSupplied
+        {
+            get => parcelsSendAndSupplied;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                parcelsSendAndSupplied = value;
+            }
+        }
+        int parcelsSendAndNotSupplied;
+        public int ParcelsSendAndNotSupplied
+        {
+            get => parcelsSendAndNotSupplied;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                parcelsSendAndNotSupplied = value;
+            }
+        }
+        int parcelsRecieved;
+        public int ParcelsRecieved
+        {
+            get => parcelsRecieved;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                parcelsRecieved = value;
+            }
+        }
+        int parcelsOnWay;
+        public int ParcelsOnWay
+        {
+            get => parcelsOnWay;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                parcelsOnWay = value;
+            }
+        }
         public override string ToString() => this.ToStringProps();
 
     }

@@ -23,7 +23,7 @@ namespace ConsoleUI_BL
             
             if (isValid != null && !isValid(converted)) 
             {
-                thorw new ArgumentException(converted);
+                throw new ArgumentException(converted.ToString());
             }
             return converted;
         }

@@ -11,7 +11,19 @@ namespace IBL.BO
     public class Customer: ILocalable
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        string name;
+        public string Name 
+        { 
+            get => name;
+            set
+            {
+                if (!Validation.IsValidName(value))
+                {
+                    thorw new ArgumentException();
+                }
+                name = value;
+            }
+        }
         string phone;
         public string Phone 
         { 

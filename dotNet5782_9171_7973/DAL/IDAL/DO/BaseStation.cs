@@ -9,7 +9,9 @@ namespace IDAL.DO
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [SexadecimalLongitude]
         public double Longitude { get; set; }
+        [SexadecimalLatitude]
         public double Latitude { get; set; }
         public int ChargeSlots { get; set; }
 

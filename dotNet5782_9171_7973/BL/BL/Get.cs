@@ -16,13 +16,21 @@ namespace BL
         /// <returns>customer with id</returns>
         public Customer GetCustomer(int id)
         {
-            var customer = Dal.GetById<IDAL.DO.Customer>(id);
+            IDAL.DO.Customer customer;
+            try
+            {
+                customer = dal.GetById<IDAL.DO.Customer>(id);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Customer), id);
+            }
 
-            var sendParcels = from parcel in Dal.GetList<IDAL.DO.Parcel>()
+            var sendParcels = from parcel in dal.GetList<IDAL.DO.Parcel>()
                                        where parcel.SenderId == id
                                        select GetParcel(parcel.Id);
 
-            var targetParcels = from parcel in Dal.GetList<IDAL.DO.Parcel>()
+            var targetParcels = from parcel in dal.GetList<IDAL.DO.Parcel>()
                                          where parcel.TargetId == id
                                          select GetParcel(parcel.Id);
 
@@ -43,7 +51,15 @@ namespace BL
         /// <returns>parcel with id</returns>
         public Parcel GetParcel(int id)
         {
-            var parcel = Dal.GetById<IDAL.DO.Parcel>(id);
+            IDAL.DO.Parcel parcel;
+            try
+            {
+                parcel = dal.GetById<IDAL.DO.Parcel>(id);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Parcel), id);
+            }
 
             return new Parcel()
             {
@@ -66,9 +82,17 @@ namespace BL
         /// <returns>base station with id</returns>
         public BaseStation GetBaseStation(int id)
         {
-            var baseStation = Dal.GetById<IDAL.DO.BaseStation>(id);
+            IDAL.DO.BaseStation baseStation;
+            try
+            {
+                baseStation = dal.GetById<IDAL.DO.BaseStation>(id);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(BaseStation), id);
+            }
 
-            var chargeSlots = Dal.GetDroneCharges().Where(charge => charge.StationId == id).ToList();
+            var chargeSlots = dal.GetDroneCharges().Where(charge => charge.StationId == id).ToList();
             var dronesInChargeList = chargeSlots.Select(charge => GetDrone(charge.DroneId)).ToList();
 
             return new BaseStation()
@@ -88,8 +112,15 @@ namespace BL
         /// <returns>drone with id</returns>
         public Drone GetDrone(int id)
         {
-            DroneForList drone = drones.Find(d => d.Id == id);
-            ParcelInDeliver parcelInDeliver = drone.State == DroneState.DELIVER ?
+            
+            DroneForList drone = drones.FirstOrDefault(d => d.Id == id);
+
+            if(drone.Equals(default(DroneForList)))
+            {
+                throw new ObjectNotFoundException(typeof(Drone), id);
+            }
+
+            ParcelInDeliver parcelInDeliver = drone.State == DroneState.Deliver ?
                                               GetParcelInDeliver((int)drone.DeliveredParcelId) :
                                               null;
             return new Drone()
@@ -111,8 +142,18 @@ namespace BL
         /// <returns>customer with id</returns>
         public CustomerForList GetCustomerForList(int id)
         {
-            var customer = Dal.GetById<IDAL.DO.Customer>(id);
-            var parcels = Dal.GetList<IDAL.DO.Parcel>();
+            IDAL.DO.Customer customer;
+
+            try
+            {
+                customer = dal.GetById<IDAL.DO.Customer>(id);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Customer), id);
+            }
+
+            var parcels = dal.GetList<IDAL.DO.Parcel>();
 
             return new CustomerForList()
             {
@@ -153,8 +194,8 @@ namespace BL
             return new ParcelForList()
             {
                 Id = parcel.Id,
-                Priority = (Priority)parcel.Priority,
-                Weight = (WeightCategory)parcel.Weight,
+                Priority = parcel.Priority,
+                Weight = parcel.Weight,
                 SenderName = parcel.Sender.Name,
                 TargetName = parcel.Target.Name,
             };
@@ -212,7 +253,16 @@ namespace BL
         /// <returns>customer in delivery</returns>
         public CustomerInDelivery GetCustomerInDelivery(int id)
         {
-            var customer = Dal.GetById<IDAL.DO.Customer>(id);
+            IDAL.DO.Customer customer;
+
+            try
+            {
+                customer = dal.GetById<IDAL.DO.Customer>(id);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Customer), id);
+            }
 
             return new CustomerInDelivery()
             {
@@ -250,9 +300,35 @@ namespace BL
         /// <returns>parcel in delivery</returns>
         public ParcelInDeliver GetParcelInDeliver(int id)
         {
-            var parcel = Dal.GetById<IDAL.DO.Parcel>(id);
-            var targetCustomer = Dal.GetById<IDAL.DO.Customer>(parcel.SenderId);
-            var senderCustomer = Dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+            IDAL.DO.Parcel parcel;
+            try
+            {
+                parcel = dal.GetById<IDAL.DO.Parcel>(id);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Parcel), id);
+            }
+
+            IDAL.DO.Customer targetCustomer;
+            try
+            {
+                targetCustomer = dal.GetById<IDAL.DO.Customer>(parcel.SenderId);  
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Customer), parcel.SenderId);
+            }
+
+            IDAL.DO.Customer senderCustomer;
+            try
+            {
+                senderCustomer = dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+            }
+            catch
+            {
+                throw new ObjectNotFoundException(typeof(Customer), parcel.TargetId);
+            }
 
             var targetLocation = new Location() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
             var senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };

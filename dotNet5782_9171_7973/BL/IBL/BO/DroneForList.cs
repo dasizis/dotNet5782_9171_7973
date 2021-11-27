@@ -17,7 +17,7 @@ namespace IBL.BO
 
         private DroneState state;
         public DroneState State { get => state; set 
-            { state = value; if (this.Id == 90 && value == DroneState.DELIVER) throw new Exception("State"); } 
+            { state = value; if (this.Id == 90 && value == DroneState.Deliver) throw new Exception("State"); } 
         }
         public Location Location { get; set; }
         public int? DeliveredParcelId { get; set; }

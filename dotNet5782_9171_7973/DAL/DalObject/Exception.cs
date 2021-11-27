@@ -11,11 +11,11 @@ namespace DalObject
         public IdException(string message) : base(message) { }
         public IdException(string message, Exception inner) : base(message, inner) { }
         protected IdException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        
+
         public Type Type { get; }
         public int Id { get; }
 
-        public IdException(Type type, int id): base()
+        public IdException(Type type, int id) : base()
         {
             Type = type;
             Id = id;
@@ -38,7 +38,7 @@ namespace DalObject
         protected ObjectNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public ObjectNotFoundException(Type type, int id) : base(type, id) { }
-        
+
         protected override string getExceptionMessage()
         {
             return $"item #{Id} of type {Type.Name} not found";

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StringUtilities
 {
-    public class StringUtilities
+    public static class StringUtilities
     {
         /// <summary>
         /// prints a given enum
@@ -33,7 +33,7 @@ namespace StringUtilities
         /// </summary>
         /// <param name="camelCase">the camelCase string</param>
         /// <returns>the readable text</returns>
-        static string CamelCaseToReadable(string camelCase)
+        static string CamelCaseToReadable(this string camelCase)
         {
             char[] letters = camelCase.ToCharArray();
             string result = "";
@@ -51,11 +51,18 @@ namespace StringUtilities
         /// prints a title
         /// </summary>
         /// <param name="title">the title string</param>
-        public static string TitleFormat(string title)
+        public static string ToTitleFormat(this string title)
         {
             return "=================================" +
                    title +
                    "=================================";
+        }
+
+        public static string Indent(this string str, int indentionLevel = 1)
+        {
+            var indention = new string('\t', indentionLevel);
+
+            return indention + str.Replace("\n", '\n' + indention);
         }
     }
 }

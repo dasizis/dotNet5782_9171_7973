@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Text;
+using StringUtilities;
 
 namespace ConsoleUI_BL
 {
@@ -27,31 +28,49 @@ namespace ConsoleUI_BL
         {
             while (true)
             {
-                printTitle("Main Options");
-                Console.WriteLine(EnumToString(typeof(MainOption)));
-                int input = GetInput(int.Parse);
-                switch ((MainOption)input)
+                try
                 {
-                    case MainOption.Add:
-                        activateAddMenu();
-                        break;
-                    case MainOption.Update:
-                        activateUpdateMenu();
-                        break;
-                    case MainOption.Display:
-                        activateDisplayMenu();
-                        break;
-                    case MainOption.DisplayList:
-                        activateDisplayListMenu();
-                        break;
-                    case MainOption.Exit:
-                        return;
-                    default:
-                        Console.WriteLine(ERROR_MESSAGE);
-                        break;
+                    Console.WriteLine("Main Options".ToTitleFormat());
+                    Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(MainOption)));
+                    int input = GetInput(int.Parse);
+                    switch ((MainOption)input)
+                    {
+                        case MainOption.Add:
+                            activateAddMenu();
+                            break;
+                        case MainOption.Update:
+                            activateUpdateMenu();
+                            break;
+                        case MainOption.Display:
+                            activateDisplayMenu();
+                            break;
+                        case MainOption.DisplayList:
+                            activateDisplayListMenu();
+                            break;
+                        case MainOption.Exit:
+                            return;
+                        default:
+                            Console.WriteLine(ERROR_MESSAGE);
+                            break;
+                    }
+                }
+                catch(FormatException exception)
+                {
+                    WriteException($"Wrong format: {exception.Message}");
+                }
+                catch(BL.IdException exception)
+                {
+                    WriteException(exception.ToString());
+                }
+                catch(BL.InValidActionException exception)
+                {
+                    WriteException($"In valid action: {exception.Message}");
+                }
+                catch(ArgumentException exception)
+                {
+                    WriteException($"In valid input: {exception.Message}");
                 }
             }
-
         }
 
         /// <summary>
@@ -59,8 +78,8 @@ namespace ConsoleUI_BL
         /// </summary>
         private static void activateAddMenu()
         {
-            printTitle("Add Options");
-            Console.WriteLine(EnumToString(typeof(AddOption), 1));
+            Console.WriteLine("Add Options".ToTitleFormat());
+            Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(AddOption)).Indent());
 
             int input = GetInput(int.Parse);
 
@@ -83,8 +102,8 @@ namespace ConsoleUI_BL
         /// </summary>
         private static void activateDisplayMenu()
         {
-            printTitle("Display Options");
-            Console.WriteLine(EnumToString(typeof(DisplayOption), 1));
+            Console.WriteLine("Display Options".ToTitleFormat());
+            Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(DisplayOption)).Indent());
 
             int option = GetInput(int.Parse);
             int id;
@@ -122,8 +141,8 @@ namespace ConsoleUI_BL
         /// </summary>
         private static void activateDisplayListMenu()
         {
-            printTitle("Display List Options");
-            Console.WriteLine(EnumToString(typeof(DisplayListOption), 1));
+            Console.WriteLine("Display List Options".ToTitleFormat());
+            Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(DisplayListOption)).Indent());
 
             int option = GetInput(int.Parse);
 
@@ -158,8 +177,8 @@ namespace ConsoleUI_BL
         /// </summary>
         private static void activateUpdateMenu()
         {
-            printTitle("Update Options");
-            Console.WriteLine(EnumToString(typeof(UpdateOption), 1));
+            Console.WriteLine("Update Options".ToTitleFormat());
+            Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(UpdateOption)).Indent());
 
             int option = GetInput(int.Parse);
 
@@ -223,12 +242,12 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Base station ID, Please.");
                         int baseStationId = GetInput(int.Parse);
                         Console.WriteLine("BaseStation Name:");
-                        string name = GetInput(s => s); 
+                        string name = GetInput(s => s);
                         Console.WriteLine("Charge Slots:");
                         int? chargeSlots = GetInput(int.Parse);
 
                         name = name.Count() == 0 ? null : name;
-                        chargeSlots = chargeSlots == 0? null : chargeSlots;
+                        chargeSlots = chargeSlots == 0 ? null : chargeSlots;
                         bl.UpdateBaseStation(baseStationId, name, chargeSlots);
 
                         break;

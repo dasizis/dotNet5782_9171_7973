@@ -10,7 +10,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        IDAL.IDal Dal { get; set; } = new DalObject.DalObject();
+        IDAL.IDal dal { get; set; } = new DalObject.DalObject();
         const int MAX_CHARGE = 100;
 
         //Electricity confumctiol properties
@@ -38,16 +38,24 @@ namespace BL
                 DronesInChargeList = new(),
             };
 
-            Dal.Add(
-                new IDAL.DO.BaseStation()
-                {
-                    Id = station.Id,
-                    Name = station.Name,
-                    Latitude = station.Location.Latitude,
-                    Longitude = station.Location.Longitude,
-                    ChargeSlots = station.EmptyChargeSlots + station.DronesInChargeList.Count,
-                }
-            );
+            try
+            {
+
+                dal.Add(
+                    new IDAL.DO.BaseStation()
+                    {
+                        Id = station.Id,
+                        Name = station.Name,
+                        Latitude = station.Location.Latitude,
+                        Longitude = station.Location.Longitude,
+                        ChargeSlots = station.EmptyChargeSlots + station.DronesInChargeList.Count,
+                    }
+                );
+            }
+            catch
+            {
+                throw new IdAlreadyExistsException(typeof(BaseStation), id);
+            }
         }
         /// <summary>
         /// add customer
@@ -68,16 +76,24 @@ namespace BL
                 Recieve = new(),
             };
 
-            Dal.Add(
-                new IDAL.DO.Customer()
-                {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    Phone = customer.Phone,
-                    Longitude = customer.Location.Longitude,
-                    Latitude = customer.Location.Latitude,
-                }
-           );
+            try
+            {
+                dal.Add(
+                    new IDAL.DO.Customer()
+                    {
+                        Id = customer.Id,
+                        Name = customer.Name,
+                        Phone = customer.Phone,
+                        Longitude = customer.Location.Longitude,
+                        Latitude = customer.Location.Latitude,
+                    }
+               );
+            }
+            catch
+            {
+                throw new IdAlreadyExistsException(typeof(Customer), id);
+            }
+
         }
         /// <summary>
         /// add a drone
@@ -98,7 +114,7 @@ namespace BL
                 Battery = 0,
                 Location = station.Location,
                 ParcelInDeliver = null,
-                State = DroneState.MEINTENENCE,
+                State = DroneState.Meintenence,
             };
 
             drones.Add(
@@ -114,12 +130,19 @@ namespace BL
                 }
             );
 
-            Dal.Add(new IDAL.DO.Drone()
+            try
             {
-                Id = drone.Id,
-                Model = drone.Model,
-                MaxWeight = (IDAL.DO.WeightCategory)drone.MaxWeight,
-            });
+                dal.Add(new IDAL.DO.Drone()
+                {
+                    Id = drone.Id,
+                    Model = drone.Model,
+                    MaxWeight = (IDAL.DO.WeightCategory)drone.MaxWeight,
+                });
+            }
+            catch
+            {
+                throw new IdAlreadyExistsException(typeof(Drone), id);
+            }
         }
         /// <summary>
         /// add a parcel
@@ -132,7 +155,7 @@ namespace BL
         {
             var parcel = new Parcel()
             {
-                Id = Dal.GetParcelContNumber(),
+                Id = dal.GetParcelContNumber(),
                 Priority = priority,
                 Weight = weight,
                 Sender = GetCustomerInDelivery(senderId),
@@ -140,16 +163,23 @@ namespace BL
                 Requested = DateTime.Now,
             };
 
-            Dal.Add(new IDAL.DO.Parcel()
+            try
             {
-                Id = parcel.Id,
-                SenderId = parcel.Sender.Id,
-                TargetId = parcel.Target.Id,
-                Priority = (IDAL.DO.Priority)parcel.Priority,
-                Weight = (IDAL.DO.WeightCategory)parcel.Weight,
-                DroneId = null,
-                Requested = parcel.Requested,
-            });
+                dal.Add(new IDAL.DO.Parcel()
+                {
+                    Id = parcel.Id,
+                    SenderId = parcel.Sender.Id,
+                    TargetId = parcel.Target.Id,
+                    Priority = (IDAL.DO.Priority)parcel.Priority,
+                    Weight = (IDAL.DO.WeightCategory)parcel.Weight,
+                    DroneId = null,
+                    Requested = parcel.Requested,
+                });
+            }
+            catch
+            {
+                throw new IdAlreadyExistsException(typeof(Parcel), parcel.Id);
+            }
         }
         /// <summary>
         /// return list of base stations with empty charge slots
@@ -157,7 +187,7 @@ namespace BL
         /// <returns>list of base stations with empty charge slots</returns>
         public IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
-            return Dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
+            return dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
         }
 
         //public T GetById<T>(int id) where T :
@@ -181,7 +211,7 @@ namespace BL
         /// <returns>list of parcels which weren't assigned to drone yet</returns>
         public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
         {
-            return Dal.GetNotAssignedToDroneParcels().Select(parcel => GetParcelForList(parcel.Id));
+            return dal.GetNotAssignedToDroneParcels().Select(parcel => GetParcelForList(parcel.Id));
         }
         /// <summary>
         /// return customers list
@@ -189,7 +219,7 @@ namespace BL
         /// <returns>customers list</returns>
         public IEnumerable<CustomerForList> GetCustomersList()
         {
-            return Dal.GetList<IDAL.DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
+            return dal.GetList<IDAL.DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
         }
         /// <summary>
         /// return base stations list
@@ -197,7 +227,7 @@ namespace BL
         /// <returns>base stations list</returns>
         public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
-            return Dal.GetList<IDAL.DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
+            return dal.GetList<IDAL.DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
         }
         /// <summary>
         /// return drone list
@@ -213,7 +243,7 @@ namespace BL
         /// <returns>parcels list</returns>
         public IEnumerable<ParcelForList> GetParcelsList()
         {
-            return Dal.GetList<IDAL.DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
+            return dal.GetList<IDAL.DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
         }
     }
 }

@@ -7,36 +7,6 @@ namespace ConsoleUI_BL
     {
         private static IBL.IBL bl = new BL.BL();
 
-        /// <summary>
-        /// prints a given enum
-        /// each value in the following format:
-        /// (numeric-value) - value
-        /// </summary>
-        /// <param name="enumType">the type of the enum</param>
-        /// <param name="numOfTabs">tabs before each enum value</param>
-        static string EnumToString(Type enumType, int numOfTabs = 0)
-        {
-            StringBuilder result = new ();
-
-            foreach (var option in Enum.GetValues(enumType))
-            {
-                result.Append($"\n{new string('\t', numOfTabs)}{(int)option} - {option}");
-            }
-
-            return result.ToString();
-        }
-
-        /// <summary>
-        /// prints a title
-        /// </summary>
-        /// <param name="title">the title string</param>
-        static private void printTitle(string title)
-        {
-            Console.WriteLine("=================================");
-            Console.WriteLine(title);
-            Console.WriteLine("=================================");
-        }
-
         static T GetInput<T>(Converter<string, T> convert = null, string prompt = "> ")
         {
             Console.Write(prompt);
@@ -54,6 +24,16 @@ namespace ConsoleUI_BL
         static void Main(string[] args)
         {
             activateMainMenu();
+        }
+
+        static void WriteException(string str)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(str);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
         }
     }
 }

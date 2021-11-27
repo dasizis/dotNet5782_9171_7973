@@ -37,6 +37,9 @@ namespace ConsoleUI_BL
             }
             return true;
         }
-
+        internal static bool IsValidEnumOption<T>(int option)
+        {
+            return option >= 0 && option < Enum.GetValues(typeof(T)).Length;
+        }
     }
 }

@@ -37,9 +37,9 @@ namespace IBL.BO
             }
             return true;
         }
-        internal static bool IsValidEnumOption(Type enumType, int option)
+        internal static bool IsValidEnumOption<T>(int option)
         {
-            return option >= 0 && option < Enum.GetValues(enumType).Length;
+            return option >= 0 && option < Enum.GetValues(typeof(T)).Length;
         }
     }
 }

@@ -10,7 +10,19 @@ namespace IBL.BO
     public class CustomerForList 
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        string name;
+        public string Name 
+        { 
+            get => name;
+            set
+            {
+                if (!Validation.IsValidName(value))
+                {
+                    thorw new ArgumentException();
+                }
+                name = value;
+            }
+        }
         public string Phone { get; set; }
         public int ParcelsSendAndSupplied { get; set; }
         public int ParcelsSendAndNotSupplied { get; set; }

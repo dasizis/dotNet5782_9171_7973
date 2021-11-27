@@ -13,7 +13,7 @@ namespace IBL.BO
         string name;
         public string Name 
         { 
-            get => name 
+            get => name;
             set
             {
                 if (!Validation.IsValidName(value))

@@ -12,7 +12,19 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Phone { get; set; }
+        string phone;
+        public string Phone 
+        { 
+            get => phone
+            set
+            {
+                if (!Validation.IsValidPhone(value))
+                {
+                    thorw new ArgumentException();
+                }
+                phone = value;
+            }
+        }
         public Location Location { get; set; }
         public List<Parcel> Send { get; set; }
         public List<Parcel> Recieve { get; set; }

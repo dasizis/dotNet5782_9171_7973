@@ -11,8 +11,32 @@ namespace IBL.BO
     public class ParcelInDeliver
     {
         public int Id { get; set; }
-        public WeightCategory Weight { get; set; }
-        public Priority Priority { get; set; }
+        WeightCategory weight;
+        public WeightCategory Weight
+        {
+            get => weight;
+            set
+            {
+                if (!Validation.IsValidEnumOption<WeightCategory>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                weight = value;
+            }
+        }
+        Priority priority;
+        public Priority Priority
+        {
+            get => priority;
+            set
+            {
+                if (!Validation.IsValidEnumOption<Priority>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                priority = value;
+            }
+        }
         public bool Position { get; set; }
         public Location CollectLocation { get; set; }
         public Location TargetLocation { get; set; }

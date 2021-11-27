@@ -12,8 +12,32 @@ namespace IBL.BO
         public int Id { get; set; }
         public CustomerInDelivery Sender { get; set; }
         public CustomerInDelivery Target { get; set; }
-        public WeightCategory Weight { get; set; }
-        public Priority Priority { get; set; }
+        WeightCategory weight;
+        public WeightCategory Weight
+        {
+            get => weight;
+            set
+            {
+                if (!Validation.IsValidEnumOption<WeightCategory>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                weight = value;
+            }
+        }
+        Priority priority;
+        public Priority Priority
+        {
+            get => priority;
+            set
+            {
+                if (!Validation.IsValidEnumOption<Priority>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                priority = value;
+            }
+        }
         public Drone Drone { get; set; }
         public DateTime? Requested { get; set; }
         public DateTime? Scheduled { get; set; }

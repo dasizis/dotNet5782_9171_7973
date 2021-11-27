@@ -8,8 +8,32 @@ namespace IBL.BO
         public int Id { get; set; }
         public string SenderName { get; set; }
         public string TargetName { get; set; }
-        public WeightCategory Weight { get; set; }
-        public Priority Priority { get; set; }
+        WeightCategory weight;
+        public WeightCategory Weight
+        {
+            get => weight;
+            set
+            {
+                if (!Validation.IsValidEnumOption<WeightCategory>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                weight = value;
+            }
+        }
+        Priority priority;
+        public Priority Priority
+        {
+            get => priority;
+            set
+            {
+                if (!Validation.IsValidEnumOption<Priority>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                priority = value;
+            }
+        }
         public override string ToString() => this.ToStringProps();
 
     }

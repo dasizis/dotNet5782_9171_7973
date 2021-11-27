@@ -11,7 +11,20 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public double BatteryState { get; set; }
-        public Location Location { get; set; }
+        private Location location;
+        public Location Location
+        {
+            get => location;
+            set
+            {
+                if (!Validation.IsValidLatitude(value.Latitude)
+                    || !Validation.IsValidLatitude(value.Longitude))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                location = value;
+            }
+        }
         public override string ToString() => this.ToStringProps();
     }
 }

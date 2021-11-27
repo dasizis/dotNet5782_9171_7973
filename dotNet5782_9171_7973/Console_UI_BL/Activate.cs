@@ -247,7 +247,7 @@ namespace ConsoleUI_BL
                         int? chargeSlots = GetInput(int.Parse);
 
                         name = name.Length == 0 ? null : Validation.IsValidName(name)? name: throw new ArgumentException(name);
-                        chargeSlots = chargeSlots == 0 ? null : chargeSlots > 0? chargeSlots: throw new ArgumentException(chargeSlots);
+                        chargeSlots = chargeSlots == 0 ? null : chargeSlots > 0? chargeSlots: throw new ArgumentException(chargeSlots.ToString());
                         bl.UpdateBaseStation(baseStationId, name, chargeSlots);
 
                         break;

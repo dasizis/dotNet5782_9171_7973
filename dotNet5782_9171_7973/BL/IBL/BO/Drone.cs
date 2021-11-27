@@ -49,9 +49,34 @@ namespace IBL.BO
                 battery = value;
             }
         }
-        public DroneState State { get; set; }
+        DroneState state;
+        public DroneState State
+        {
+            get => state;
+            set
+            {
+                if (!Validation.IsValidEnumOption<DroneState>((int)value))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                state = value;
+            }
+        }
         public ParcelInDeliver ParcelInDeliver { get; set; }
-        public Location Location { get; set; }
+        private Location location;
+        public Location Location
+        {
+            get => location;
+            set
+            {
+                if (!Validation.IsValidLatitude(value.Latitude)
+                    || !Validation.IsValidLatitude(value.Longitude))
+                {
+                    throw new ArgumentException(value.ToString());
+                }
+                location = value;
+            }
+        }
         public override string ToString() => this.ToStringProps();
 
 

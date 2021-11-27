@@ -38,10 +38,9 @@ namespace StringUtilities
             char[] letters = camelCase.ToCharArray();
             string result = "";
 
-            foreach (var l in letters)
+            foreach (var letter in letters)
             {
-                string letter = l.ToString();
-                result += letter == letter.ToUpper() ? $" {letter}" : letter;
+                result += Char.IsUpper(letter) ? $" {letter.Lower()}" : letter;
             }
 
             return letters[0] + result[2..];

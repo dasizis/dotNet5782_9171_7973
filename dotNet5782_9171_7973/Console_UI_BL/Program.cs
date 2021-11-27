@@ -7,18 +7,25 @@ namespace ConsoleUI_BL
     {
         private static IBL.IBL bl = new BL.BL();
 
-        static T GetInput<T>(Converter<string, T> convert = null, string prompt = "> ")
+        static T GetInput<T>(Converter<string, T> convert = null, Predicate<T> isValid = null, string prompt = "> ")
         {
             Console.Write(prompt);
             string input = Console.ReadLine();
+            T converted;
             try
             {
-                return convert(input);
+                converted = convert(input);  
             }
             catch
             {
                 throw new FormatException();
             }
+            
+            if (isValid != null && !isValid(converted)) 
+            {
+                thorw new ArgumentException(converted);
+            }
+            return converted;
         }
 
         static void Main(string[] args)

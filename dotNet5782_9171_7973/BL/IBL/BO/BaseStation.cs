@@ -10,9 +10,33 @@ namespace IBL.BO
     public class BaseStation: ILocalable
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        string name;
+        public string Name 
+        { 
+            get => name 
+            set
+            {
+                if (!Validation.IsValidName(value))
+                {
+                    thorw new ArgumentException();
+                }
+                Name = value;
+            }
+        }
         public Location Location { get; set; }
-        public int EmptyChargeSlots { get; set; }
+        int emptyChargeSlots;
+        public int EmptyChargeSlots 
+        { 
+            get => emptyChargeSlots;
+            set
+            {
+                if (value <= 0)
+                {
+                    thorw new ArgumentException();
+                }
+                EmptyChargeSlots = value;
+            } 
+        }
         public List<Drone> DronesInChargeList { get; set; }
         public override string ToString() => this.ToStringProps(); 
     }

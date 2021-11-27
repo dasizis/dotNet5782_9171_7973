@@ -10,9 +10,36 @@ namespace IBL.BO
     public class Location
     {
         const int EARTH_RADIUS_KM = 6371;
-
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        
+        double lognitude;
+        [SexadecimalLongitude]
+        public double Longitude 
+        { 
+            get => lognitude;
+            set
+            {
+                if (!Validation.IsValidLongitude(value))
+                {
+                    throw new ArgumentException();
+                }
+                longitude = value;
+            }
+        }
+        
+        double latitude;
+        [SexadecimalLatitude]
+        public double Latitude
+        { 
+            get => latitude;
+            set
+            {
+                if (!Validation.IsValidLatitude(value))
+                {
+                    throw new ArgumentException();
+                }
+                latitude = value;
+            }
+        }
 
         public static double Distance(Location locationA, Location locationB)
         {

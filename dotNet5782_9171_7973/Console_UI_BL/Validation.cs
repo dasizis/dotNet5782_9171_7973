@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StringUtilities;
 
-namespace IBL.BO
+namespace ConsoleUI_BL
 {
     static class Validation
     {

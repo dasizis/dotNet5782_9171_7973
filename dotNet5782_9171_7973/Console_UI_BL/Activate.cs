@@ -50,7 +50,7 @@ namespace ConsoleUI_BL
                         case MainOption.Exit:
                             return;
                         default:
-                            Console.WriteLine(ERROR_MESSAGE);
+                            WriteException(ERROR_MESSAGE);
                             break;
                     }
                 }
@@ -93,7 +93,7 @@ namespace ConsoleUI_BL
 
                 case AddOption.Drone: AddDrone(); break;
 
-                default: Console.WriteLine(ERROR_MESSAGE); break;
+                default: WriteException(ERROR_MESSAGE); break;
             }
         }
 
@@ -131,7 +131,7 @@ namespace ConsoleUI_BL
                     Console.WriteLine(bl.GetDrone(id));
                     break;
                 default:
-                    Console.WriteLine(ERROR_MESSAGE);
+                    WriteException(ERROR_MESSAGE);
                     break;
             }
         }
@@ -167,7 +167,7 @@ namespace ConsoleUI_BL
                     DisplayList(bl.GetAvailableBaseStations());
                     break;
                 default:
-                    Console.WriteLine(ERROR_MESSAGE);
+                    WriteException(ERROR_MESSAGE);
                     break;
             }
         }
@@ -268,7 +268,7 @@ namespace ConsoleUI_BL
                         break;
                     }
                 default:
-                    Console.WriteLine(ERROR_MESSAGE);
+                    WriteException(ERROR_MESSAGE);
                     break;
             }
         }

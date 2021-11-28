@@ -15,11 +15,9 @@ namespace BL
         public InValidActionException(string message, Exception inner) : base(message, inner) { }
         protected InValidActionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public InValidActionException(Type type, int id) { }
-
         public override string ToString()
         {
-            return $"The Action Couldn't Be performed.";
+            return Message;
         }
     }
 
@@ -40,11 +38,11 @@ namespace BL
             Id = id;
         }
 
-        protected abstract string getExceptionMessage();
+        protected abstract string GetExceptionMessage();
 
         public override string ToString()
         {
-            return $"{GetType().Name}: {getExceptionMessage()}";
+            return $"{GetType().Name}: {GetExceptionMessage()}";
         }
     }
 
@@ -58,7 +56,7 @@ namespace BL
 
         public ObjectNotFoundException(Type type, int id) : base(type, id) { }
 
-        protected override string getExceptionMessage()
+        protected override string GetExceptionMessage()
         {
             return $"item #{Id} of type {Type.Name} not found";
         }
@@ -74,7 +72,7 @@ namespace BL
 
         public IdAlreadyExistsException(Type type, int id) : base(type, id) { }
 
-        protected override string getExceptionMessage()
+        protected override string GetExceptionMessage()
         {
             return $"item by id {Id} of type {Type.Name} already exists";
         }

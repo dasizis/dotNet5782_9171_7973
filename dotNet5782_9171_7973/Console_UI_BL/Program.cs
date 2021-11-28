@@ -30,7 +30,7 @@ namespace ConsoleUI_BL
 
         static void Main(string[] args)
         {
-            activateMainMenu();
+            ActivateMainMenu();
         }
 
         static void WriteException(string str)

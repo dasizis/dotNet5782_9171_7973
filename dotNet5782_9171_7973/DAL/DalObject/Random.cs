@@ -5,7 +5,7 @@ namespace DalObject
 {
     static class RandomManager
     {
-        public static System.Random Rand => new System.Random();
+        public static System.Random Rand => new();
 
         /// <summary>
         /// creates a ranodm name in a random length (4-7 letters).
@@ -126,7 +126,7 @@ namespace DalObject
                 Id = id,
                 Name = RandomFullName(),
                 Longitude = Rand.NextDouble() * 100,
-                Latitude = Rand.NextDouble() * 100,
+                Latitude = Rand.NextDouble() * 90,
                 Phone = RandomPhone(),
             };
         }
@@ -143,7 +143,7 @@ namespace DalObject
                 Id = id,
                 Name = RandomName(),
                 Longitude = Rand.NextDouble() * 100,
-                Latitude = Rand.NextDouble() * 100,
+                Latitude = Rand.NextDouble() * 90,
                 ChargeSlots = Rand.Next(1, 10),
             };
         }

@@ -73,7 +73,7 @@ namespace BL
             // Does the drone have a parcel?
             if (!drone.DeliveredParcelId.HasValue)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("No parcel is assigned to drone.");
             }
 
             IDAL.DO.Parcel parcel;
@@ -89,7 +89,7 @@ namespace BL
             // Was the parcel collected?
             if (parcel.PickedUp != null)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("Parcel assigned to drone was already picked.");
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
@@ -118,21 +118,21 @@ namespace BL
 
             if (drone.DeliveredParcelId == null)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("No parcel is assigned to drone.");
             }
 
             var parcel = GetParcel((int)drone.DeliveredParcelId);
 
             if (parcel.PickedUp == null)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("Parcel assigned to drone was not picked up yet.");
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
 
             if (parcelInDeliver.Position)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("Parcel assigned to drone has already been supplied.");
             }
 
             drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);

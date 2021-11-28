@@ -24,7 +24,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// activates the main menu
         /// </summary>
-        private static void activateMainMenu()
+        private static void ActivateMainMenu()
         {
             while (true)
             {
@@ -36,16 +36,16 @@ namespace ConsoleUI_BL
                     switch ((MainOption)input)
                     {
                         case MainOption.Add:
-                            activateAddMenu();
+                            ActivateAddMenu();
                             break;
                         case MainOption.Update:
-                            activateUpdateMenu();
+                            ActivateUpdateMenu();
                             break;
                         case MainOption.Display:
-                            activateDisplayMenu();
+                            ActivateDisplayMenu();
                             break;
                         case MainOption.DisplayList:
-                            activateDisplayListMenu();
+                            ActivateDisplayListMenu();
                             break;
                         case MainOption.Exit:
                             return;
@@ -66,17 +66,17 @@ namespace ConsoleUI_BL
                 {
                     WriteException($"In valid action: {exception.Message}");
                 }
-                catch(ArgumentException exception)
+                /*catch(ArgumentException exception)
                 {
                     WriteException($"In valid input: {exception.Message}");
-                }
+                }*/
             }
         }
 
         /// <summary>
         /// activates the main menu
         /// </summary>
-        private static void activateAddMenu()
+        private static void ActivateAddMenu()
         {
             Console.WriteLine("Add Options".ToTitleFormat());
             Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(AddOption)).Indent());
@@ -100,7 +100,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// activates the display menu
         /// </summary>
-        private static void activateDisplayMenu()
+        private static void ActivateDisplayMenu()
         {
             Console.WriteLine("Display Options".ToTitleFormat());
             Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(DisplayOption)).Indent());
@@ -139,7 +139,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// activates the display list menu
         /// </summary>
-        private static void activateDisplayListMenu()
+        private static void ActivateDisplayListMenu()
         {
             Console.WriteLine("Display List Options".ToTitleFormat());
             Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(DisplayListOption)).Indent());
@@ -175,7 +175,7 @@ namespace ConsoleUI_BL
         /// <summary>
         /// activates the update menu
         /// </summary>
-        private static void activateUpdateMenu()
+        private static void ActivateUpdateMenu()
         {
             Console.WriteLine("Update Options".ToTitleFormat());
             Console.WriteLine(StringUtilities.StringUtilities.EnumToString(typeof(UpdateOption)).Indent());

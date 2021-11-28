@@ -76,7 +76,7 @@ namespace BL
 
             if (drone.State == DroneState.Deliver)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("Cannot assign parcel to busy drone.");
             }
 
             var parcels = dal.GetNotAssignedToDroneParcels()
@@ -151,7 +151,7 @@ namespace BL
 
             if (drone.State != DroneState.Free)
             {
-                throw new InValidActionException();
+                throw new InValidActionException("Can not send a non-free drone to charge.");
             }
 
             var availableBaseStations = dal.GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
@@ -160,7 +160,7 @@ namespace BL
 
             if (!IsEnoughBattery(drone, closest.Location))
             {
-                throw new InValidActionException();
+                throw new InValidActionException("Drone cannot get to base station for charging.");
             }
 
             drone.Location = closest.Location;

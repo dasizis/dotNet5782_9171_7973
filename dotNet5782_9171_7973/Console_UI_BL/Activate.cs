@@ -64,12 +64,12 @@ namespace ConsoleUI_BL
                 }
                 catch(BL.InValidActionException exception)
                 {
-                    WriteException($"In valid action: {exception.Message}");
+                    WriteException($"Invalid action: {exception.Message}");
                 }
-                /*catch(ArgumentException exception)
+                catch(ArgumentException exception)
                 {
-                    WriteException($"In valid input: {exception.Message}");
-                }*/
+                    WriteException($"Invalid input: {exception.Message}");
+                }
             }
         }
 

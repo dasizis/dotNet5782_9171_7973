@@ -115,7 +115,7 @@ namespace BL
             
             DroneForList drone = drones.FirstOrDefault(d => d.Id == id);
 
-            if(drone.Equals(default(DroneForList)))
+            if(drone == null)
             {
                 throw new ObjectNotFoundException(typeof(Drone), id);
             }

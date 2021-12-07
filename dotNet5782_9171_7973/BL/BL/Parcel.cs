@@ -30,13 +30,13 @@ namespace BL
 
             try
             {
-                dal.Add(new IDAL.DO.Parcel()
+                dal.Add(new DO.Parcel()
                 {
                     Id = parcel.Id,
                     SenderId = parcel.Sender.Id,
                     TargetId = parcel.Target.Id,
-                    Priority = (IDAL.DO.Priority)parcel.Priority,
-                    Weight = (IDAL.DO.WeightCategory)parcel.Weight,
+                    Priority = (DO.Priority)parcel.Priority,
+                    Weight = (DO.WeightCategory)parcel.Weight,
                     DroneId = null,
                     Requested = parcel.Requested,
                 });
@@ -60,7 +60,7 @@ namespace BL
         /// <returns>parcels list</returns>
         public IEnumerable<ParcelForList> GetParcelsList()
         {
-            return dal.GetList<IDAL.DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
+            return dal.GetList<DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
         }
         /// <summary>
         /// drone picks up his assigned parcel
@@ -76,10 +76,10 @@ namespace BL
                 throw new InValidActionException("No parcel is assigned to drone.");
             }
 
-            IDAL.DO.Parcel parcel;
+            DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<IDAL.DO.Parcel>(drone.DeliveredParcelId.Value);
+                parcel = dal.GetById<DO.Parcel>(drone.DeliveredParcelId.Value);
             }
             catch
             {

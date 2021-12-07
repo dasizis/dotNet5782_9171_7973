@@ -1,16 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DlApi\DlApi.csproj" />
     <ProjectReference Include="..\StringUtilities\StringUtilities.csproj" />
   </ItemGroup>
-
-	<PropertyGroup>
-		<LangVersion>9.0</LangVersion>
-	</PropertyGroup>
 
 </Project>

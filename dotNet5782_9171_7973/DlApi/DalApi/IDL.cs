@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DlApi
 {
-    public interface IDal
+    public interface IDL
     {
         (double, double, double, double, double) GetElectricityConfumctiol();
         void Add<T>(T item) where T : DO.IIdentifiable;

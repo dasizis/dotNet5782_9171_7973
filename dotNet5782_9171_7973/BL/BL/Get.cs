@@ -16,21 +16,21 @@ namespace BL
         /// <returns>customer with id</returns>
         public Customer GetCustomer(int id)
         {
-            IDAL.DO.Customer customer;
+            DO.Customer customer;
             try
             {
-                customer = dal.GetById<IDAL.DO.Customer>(id);
+                customer = dal.GetById<DO.Customer>(id);
             }
             catch
             {
                 throw new ObjectNotFoundException(typeof(Customer), id);
             }
 
-            var sendParcels = from parcel in dal.GetList<IDAL.DO.Parcel>()
+            var sendParcels = from parcel in dal.GetList<DO.Parcel>()
                                        where parcel.SenderId == id
                                        select GetParcel(parcel.Id);
 
-            var targetParcels = from parcel in dal.GetList<IDAL.DO.Parcel>()
+            var targetParcels = from parcel in dal.GetList<DO.Parcel>()
                                          where parcel.TargetId == id
                                          select GetParcel(parcel.Id);
 
@@ -51,10 +51,10 @@ namespace BL
         /// <returns>parcel with id</returns>
         public Parcel GetParcel(int id)
         {
-            IDAL.DO.Parcel parcel;
+            DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<IDAL.DO.Parcel>(id);
+                parcel = dal.GetById<DO.Parcel>(id);
             }
             catch
             {
@@ -82,10 +82,10 @@ namespace BL
         /// <returns>base station with id</returns>
         public BaseStation GetBaseStation(int id)
         {
-            IDAL.DO.BaseStation baseStation;
+            DO.BaseStation baseStation;
             try
             {
-                baseStation = dal.GetById<IDAL.DO.BaseStation>(id);
+                baseStation = dal.GetById<DO.BaseStation>(id);
             }
             catch
             {
@@ -142,18 +142,18 @@ namespace BL
         /// <returns>customer with id</returns>
         public CustomerForList GetCustomerForList(int id)
         {
-            IDAL.DO.Customer customer;
+            DO.Customer customer;
 
             try
             {
-                customer = dal.GetById<IDAL.DO.Customer>(id);
+                customer = dal.GetById<DO.Customer>(id);
             }
             catch
             {
                 throw new ObjectNotFoundException(typeof(Customer), id);
             }
 
-            var parcels = dal.GetList<IDAL.DO.Parcel>();
+            var parcels = dal.GetList<DO.Parcel>();
 
             return new CustomerForList()
             {
@@ -253,11 +253,11 @@ namespace BL
         /// <returns>customer in delivery</returns>
         public CustomerInDelivery GetCustomerInDelivery(int id)
         {
-            IDAL.DO.Customer customer;
+            DO.Customer customer;
 
             try
             {
-                customer = dal.GetById<IDAL.DO.Customer>(id);
+                customer = dal.GetById<DO.Customer>(id);
             }
             catch
             {
@@ -300,30 +300,30 @@ namespace BL
         /// <returns>parcel in delivery</returns>
         public ParcelInDeliver GetParcelInDeliver(int id)
         {
-            IDAL.DO.Parcel parcel;
+            DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<IDAL.DO.Parcel>(id);
+                parcel = dal.GetById<DO.Parcel>(id);
             }
             catch
             {
                 throw new ObjectNotFoundException(typeof(Parcel), id);
             }
 
-            IDAL.DO.Customer targetCustomer;
+            DO.Customer targetCustomer;
             try
             {
-                targetCustomer = dal.GetById<IDAL.DO.Customer>(parcel.SenderId);  
+                targetCustomer = dal.GetById<DO.Customer>(parcel.SenderId);  
             }
             catch
             {
                 throw new ObjectNotFoundException(typeof(Customer), parcel.SenderId);
             }
 
-            IDAL.DO.Customer senderCustomer;
+            DO.Customer senderCustomer;
             try
             {
-                senderCustomer = dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+                senderCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
             }
             catch
             {

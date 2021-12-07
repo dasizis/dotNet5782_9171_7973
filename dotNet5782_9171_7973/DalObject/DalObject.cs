@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
-using DlApi.DO;
+using DO;
 using System.Linq;
+using DS;
 
 using System.Reflection;
 
 namespace Dal
 {
-    public partial class DalObject : DlApi.IDal
+    public partial class DalObject : DlApi.IDL
     {
         /// <summary>
         /// Add an item to its data list
@@ -23,21 +24,21 @@ namespace Dal
         /// <param name="item"></param>
         public void Remove<T>(int id) where T : IIdentifiable
         {
-            int itemIndex = DataSource.data[typeof(T)].Cast<T>().ToList().FindIndex(item => item.Id == id);
-            DataSource.data[typeof(T)].RemoveAt(itemIndex);    
+            int itemIndex = DataSource.Data[typeof(T)].Cast<T>().ToList().FindIndex(item => item.Id == id);
+            DataSource.Data[typeof(T)].RemoveAt(itemIndex);    
         }
 
     
         public IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable
         {
-            return from item in DataSource.data[typeof(T)].Cast<T>()
+            return from item in DataSource.Data[typeof(T)].Cast<T>()
                    where predicate(item)
                    select item.Clone();
 
         }
 
         /// <summary>
-        /// return a copy of the wanted data list
+        /// return a copy of the wanted Data list
         /// </summary>
         /// <param name="type">the list type</param>
         /// <returns>a copy of the last</returns>
@@ -80,13 +81,15 @@ namespace Dal
 
         public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
         {
-            return DataSource.parcels.Where(parcel => parcel.DroneId == null);
+            return DataSource.Parcels.Where(parcel => parcel.DroneId == null);
         }
 
         public IEnumerable<BaseStation> GetAvailableBaseStations()
         {
-            return from station in DataSource.baseStations
-                   let dronesCount = (from charge in DataSource.droneCharges where charge.StationId == station.Id select charge).Count()
+            return from station in DataSource.BaseStations
+                   let dronesCount = (from charge in DataSource.DroneCharges 
+                                      where charge.StationId == station.Id 
+                                      select charge).Count()
                    where station.ChargeSlots > dronesCount
                    select station.Clone();
         }
@@ -94,40 +97,40 @@ namespace Dal
         public void AssignParcelToDrone(int parcelId, int droneId)
         {
             Parcel parcel = GetById<Parcel>(parcelId);
-            DataSource.parcels.Remove(parcel);
+            DataSource.Parcels.Remove(parcel);
 
             parcel.DroneId = droneId;
             parcel.Scheduled = DateTime.Now;
-            DataSource.parcels.Add(parcel);
+            DataSource.Parcels.Add(parcel);
         }
 
         public void SupplyParcel(int parcelId)
         {
             Parcel parcel = GetById<Parcel>(parcelId);
-            DataSource.parcels.Remove(parcel);
+            DataSource.Parcels.Remove(parcel);
 
             parcel.Supplied = DateTime.Now;
-            DataSource.parcels.Add(parcel);
+            DataSource.Parcels.Add(parcel);
         }
 
         public void ChargeDroneAtBaseStation(int droneId, int baseStationId)
         {
-            DataSource.droneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = baseStationId });
+            DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = baseStationId });
         }
 
         public void FinishCharging(int droneId)
         {
-            var droneCharge = DataSource.droneCharges.First(charge => charge.DroneId == droneId);
-            DataSource.droneCharges.Remove(droneCharge);
+            var droneCharge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId);
+            DataSource.DroneCharges.Remove(droneCharge);
         }
 
         public void CollectParcel(int parcelId)
         {
             Parcel parcel = GetById<Parcel>(parcelId);
-            DataSource.parcels.Remove(parcel);
+            DataSource.Parcels.Remove(parcel);
 
             parcel.PickedUp = DateTime.Now;
-            DataSource.parcels.Add(parcel);
+            DataSource.Parcels.Add(parcel);
         }
 
         public void Update<T>(T item) where T : IIdentifiable
@@ -143,17 +146,17 @@ namespace Dal
 
         public IEnumerable<DroneCharge> GetDroneCharges()
         {
-            return DataSource.droneCharges.Where(_ => true);
+            return DataSource.DroneCharges.Where(_ => true);
         }
 
         public void Add<T>(T item) where T : IIdentifiable
         {
-            if (DataSource.data[typeof(T)].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
+            if (DataSource.Data[typeof(T)].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
             {
                 throw new IdAlreadyExistsException(typeof(T), item.Id);
             }
 
-            DataSource.data[typeof(T)].Add(item);
+            DataSource.Data[typeof(T)].Add(item);
         }
     }
 }

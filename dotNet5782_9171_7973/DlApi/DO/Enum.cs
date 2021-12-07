@@ -1,4 +1,4 @@
-﻿namespace DlApi.DO
+﻿namespace DO
 {
     public enum WeightCategory
     {

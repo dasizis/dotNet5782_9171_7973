@@ -46,11 +46,11 @@ namespace BL
 
             try
             {
-                dal.Add(new IDAL.DO.Drone()
+                dal.Add(new DO.Drone()
                 {
                     Id = drone.Id,
                     Model = drone.Model,
-                    MaxWeight = (IDAL.DO.WeightCategory)drone.MaxWeight,
+                    MaxWeight = (DO.WeightCategory)drone.MaxWeight,
                 });
             }
             catch
@@ -127,10 +127,10 @@ namespace BL
             DroneForList drone = GetDroneForList(droneId);
             drone.Model = model;
 
-            IDAL.DO.Drone dlDrone;
+            DO.Drone dlDrone;
             try
             {
-                dlDrone = dal.GetById<IDAL.DO.Drone>(droneId);
+                dlDrone = dal.GetById<DO.Drone>(droneId);
             }
             catch
             {

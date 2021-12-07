@@ -31,7 +31,7 @@ namespace BL
             {
 
                 dal.Add(
-                    new IDAL.DO.BaseStation()
+                    new DO.BaseStation()
                     {
                         Id = station.Id,
                         Name = station.Name,
@@ -60,7 +60,7 @@ namespace BL
         /// <returns>base stations list</returns>
         public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
-            return dal.GetList<IDAL.DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
+            return dal.GetList<DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
         }
         /// <summary>
         /// update base station details
@@ -70,18 +70,18 @@ namespace BL
         /// <param name="chargeSlots">new number of charge slots</param>
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
         {
-            IDAL.DO.BaseStation station;
+            DO.BaseStation station;
 
             try
             {
-                station = dal.GetById<IDAL.DO.BaseStation>(baseStationId);
+                station = dal.GetById<DO.BaseStation>(baseStationId);
             }
             catch
             {
                 throw new ObjectNotFoundException(typeof(BaseStation), baseStationId);
             }
 
-            dal.Remove<IDAL.DO.BaseStation>(station.Id);
+            dal.Remove<DO.BaseStation>(station.Id);
 
             station.Name = name ?? station.Name;
             station.ChargeSlots = chargeSlots ?? station.ChargeSlots;

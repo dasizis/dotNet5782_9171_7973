@@ -10,7 +10,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        IDAL.IDal dal { get; set; } = new DalObject.DalObject();
+        DlApi.IDL dal { get; } = new ;
         const int MAX_CHARGE = 100;
 
         //Electricity confumctiol properties
@@ -33,9 +33,9 @@ namespace BL
 
             Random rand = new();
 
-            var dlDrones = dal.GetList<IDAL.DO.Drone>().ToList();
-            var parcels = dal.GetList<IDAL.DO.Parcel>().ToList();
-            var stationsLocations = dal.GetList<IDAL.DO.BaseStation>()
+            var dlDrones = dal.GetList<DO.Drone>().ToList();
+            var parcels = dal.GetList<DO.Parcel>().ToList();
+            var stationsLocations = dal.GetList<DO.BaseStation>()
                                        .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
                                        .ToList();
 
@@ -60,10 +60,10 @@ namespace BL
                     state = DroneState.Deliver;
                     parcelInDeliverId = parcel.Id;
 
-                    var targetCustomer = dal.GetById<IDAL.DO.Customer>(parcel.TargetId);
+                    var targetCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
                     targetLocation = new Location() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
 
-                    var senderCustomer = dal.GetById<IDAL.DO.Customer>(parcel.SenderId);
+                    var senderCustomer = dal.GetById<DO.Customer>(parcel.SenderId);
                     senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
 
                 }
@@ -77,7 +77,7 @@ namespace BL
                         return stationsLocations[rand.Next(stationsLocations.Count)];
                     }
                     var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
-                    var customer = dal.GetById<IDAL.DO.Customer>(randomParcel.TargetId);
+                    var customer = dal.GetById<DO.Customer>(randomParcel.TargetId);
 
                     return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
                 }

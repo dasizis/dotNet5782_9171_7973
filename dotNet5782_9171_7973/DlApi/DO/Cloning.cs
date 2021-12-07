@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DlApi.DO
+namespace DO
 {
-    static class Cloning
+    public static class Cloning
     {
-        internal static T Clone<T>(this T source)
+        public static T Clone<T>(this T source)
         {
             T target = Activator.CreateInstance<T>();
 

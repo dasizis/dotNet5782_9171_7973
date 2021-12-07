@@ -31,7 +31,7 @@ namespace BL
             try
             {
                 dal.Add(
-                    new IDAL.DO.Customer()
+                    new DO.Customer()
                     {
                         Id = customer.Id,
                         Name = customer.Name,
@@ -53,7 +53,7 @@ namespace BL
         /// <returns>customers list</returns>
         public IEnumerable<CustomerForList> GetCustomersList()
         {
-            return dal.GetList<IDAL.DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
+            return dal.GetList<DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
         }
         /// <summary>
         /// update customer's details
@@ -63,18 +63,18 @@ namespace BL
         /// <param name="phone">new phone</param>
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
-            IDAL.DO.Customer customer;
+            DO.Customer customer;
 
             try
             {
-                customer = dal.GetById<IDAL.DO.Customer>(customerId);
+                customer = dal.GetById<DO.Customer>(customerId);
             }
             catch
             {
                 throw new ObjectNotFoundException(typeof(Customer), customerId);
             }
 
-            dal.Remove<IDAL.DO.Customer>(customer.Id);
+            dal.Remove<DO.Customer>(customer.Id);
 
             customer.Name = name ?? customer.Name;
             customer.Phone = phone ?? customer.Phone;

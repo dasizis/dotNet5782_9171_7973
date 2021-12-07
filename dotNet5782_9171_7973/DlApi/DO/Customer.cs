@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using StringUtilities;
 
-namespace DlApi.DO
+namespace DO
 {
     public class Customer : IIdentifiable
     {

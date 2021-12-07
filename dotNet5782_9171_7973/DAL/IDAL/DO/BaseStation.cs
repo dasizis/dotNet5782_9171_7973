@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IDAL.DO
+namespace DlApi.DO
 {
     public class BaseStation : IIdentifiable
     {

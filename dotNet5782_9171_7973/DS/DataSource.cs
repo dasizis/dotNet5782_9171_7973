@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
-using DlApi.DO;
+using DO;
 
-namespace Dal
+namespace DS
 {
     public static class DataSource
     {
@@ -14,20 +14,20 @@ namespace Dal
         const int INIT_CUSTOMERS = 10;
         const int INIT_PARCELS = 10;
 
-        internal static List<Drone> drones = new();
-        internal static List<BaseStation> baseStations = new();
-        internal static List<Customer> customers = new();
-        internal static List<Parcel> parcels = new();
-        internal static List<DroneCharge> droneCharges = new();
+        public static List<Drone> Drones { get; } = new();
+        public static List<BaseStation> BaseStations { get; } = new();
+        public static List<Customer> Customers { get; } = new();
+        public static List<Parcel> Parcels { get; } = new();
+        public static List<DroneCharge> DroneCharges { get; } = new();
 
         // Another way to acces the data
-        internal static Dictionary<Type, IList> data = new()
+        public static Dictionary<Type, IList> Data { get; } = new()
         {
-            [typeof(Drone)] = drones,
-            [typeof(BaseStation)] = baseStations,
-            [typeof(Customer)] = customers,
-            [typeof(Parcel)] = parcels,
-            [typeof(DroneCharge)] = droneCharges,
+            [typeof(Drone)] = Drones,
+            [typeof(BaseStation)] = BaseStations,
+            [typeof(Customer)] = Customers,
+            [typeof(Parcel)] = Parcels,
+            [typeof(DroneCharge)] = DroneCharges,
         };
 
         static DataSource()
@@ -35,19 +35,19 @@ namespace Dal
             Initialize();
         }
 
-        internal class Config
+        public class Config
         {
-            internal static int NextParcelID = 1;
+            public static int NextParcelID = 1;
 
-            internal static class ElectricityConfumctiol
+            public static class ElectricityConfumctiol
             {
-                internal static double Free = 0.1;
-                internal static double Light = 0.2;
-                internal static double Medium = 0.3;
-                internal static double Heavy = 0.4;
+                public static double Free = 0.1;
+                public static double Light = 0.2;
+                public static double Medium = 0.3;
+                public static double Heavy = 0.4;
             }
 
-            internal static double ChargeRate = 10;
+            public static double ChargeRate = 10;
         }
 
         /// <summary>
@@ -55,24 +55,24 @@ namespace Dal
         /// </summary>
         public static void Initialize()
         {
-            baseStations.AddRange(
+            BaseStations.AddRange(
                 Enumerable.Range(1, INIT_BASESTATIONS)
                           .Select(i => RandomManager.RandomBaseStation(i))
             );
 
-            drones.AddRange(
+            Drones.AddRange(
                 Enumerable.Range(1, INIT_DRONES)
                           .Select(i => RandomManager.RandomDrone(i))
             );
 
-            customers.AddRange(
+            Customers.AddRange(
                 Enumerable.Range(1, INIT_CUSTOMERS)
                           .Select(i => RandomManager.RandomCustomer(i))
             );
 
-            parcels.AddRange(
+            Parcels.AddRange(
                 Enumerable.Range(1, INIT_PARCELS)
-                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, customers))    
+                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, Customers))    
                           .Select(parcel => RandomManager.Rand.Next(2) == 1
                                             ? parcel
                                             : new Parcel()
@@ -81,10 +81,10 @@ namespace Dal
                                                 Weight = parcel.Weight,
                                                 Priority = parcel.Priority,
                                                 Requested = parcel.Requested,
-                                                DroneId = drones[RandomManager.Rand.Next(drones.Count)].Id,
+                                                DroneId = Drones[RandomManager.Rand.Next(Drones.Count)].Id,
                                                 Scheduled = parcel.Requested + TimeSpan.FromHours(RandomManager.Rand.NextDouble() * 20),
-                                                SenderId = customers[RandomManager.Rand.Next(customers.Count)].Id,
-                                                TargetId = customers[RandomManager.Rand.Next(customers.Count)].Id,
+                                                SenderId = Customers[RandomManager.Rand.Next(Customers.Count)].Id,
+                                                TargetId = Customers[RandomManager.Rand.Next(Customers.Count)].Id,
                                             }
 
                           )

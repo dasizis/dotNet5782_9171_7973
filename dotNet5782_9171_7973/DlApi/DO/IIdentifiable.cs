@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DlApi.DO
+namespace DO
 {
     public interface IIdentifiable
     {

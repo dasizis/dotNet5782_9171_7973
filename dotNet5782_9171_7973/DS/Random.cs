@@ -1,7 +1,7 @@
-﻿using DlApi.DO;
+﻿using DO;
 using System.Collections.Generic;
 
-namespace Dal
+namespace DS
 {
     static class RandomManager
     {

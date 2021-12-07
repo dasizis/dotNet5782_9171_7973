@@ -15,11 +15,12 @@ namespace DlApi
         {
             try
             {
-                XElement dalConfig = XElement.Load("config.xml");
+                XElement dalConfig = XElement.Load(@"..\..\..\..\config.xml");
                 DalName = dalConfig.Element("dal").Value;
                 DalPackages = (from package in dalConfig.Element("dal-packages").Elements()
                                select package
                               ).ToDictionary(p => $"{p.Name}", p => p.Value);
+                Console.WriteLine("ss");
             }
             catch (Exception e) { Console.WriteLine(e); }
 

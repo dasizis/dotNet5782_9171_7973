@@ -14,13 +14,14 @@ namespace DlApi
         {
             string dalType = DalConfig.DalName;
             string dalPackage = DalConfig.DalPackages[dalType];
+
             if (dalPackage == null) throw new DalConfigException("There is no such package");
 
-            try 
-            { 
-                Assembly.Load(dalPackage); 
+            try
+            {
+                Assembly.Load(dalPackage);
             }
-            catch (System.IO.FileNotFoundException) 
+            catch (System.IO.FileNotFoundException)
             {
                 throw;
             }
@@ -34,14 +35,14 @@ namespace DlApi
             {
                 throw new DalConfigException("Can't find such project");
             }
-            
+
             IDL dal = (IDL)type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static).GetValue(null);
 
             if (dal == null)
             {
                 throw new DalConfigException("Can't Get Dl Instance");
             }
-            
+
             return dal;
         }
     }

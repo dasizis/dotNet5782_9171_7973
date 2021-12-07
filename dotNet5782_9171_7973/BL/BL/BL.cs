@@ -51,7 +51,7 @@ namespace BL
                 Location senderLocation = null;
 
                 // Set state
-                if (parcel.Equals(default(IDAL.DO.Parcel)))
+                if (parcel == null)
                 {
                     state = (DroneState)rand.Next(0, 2);
                 }

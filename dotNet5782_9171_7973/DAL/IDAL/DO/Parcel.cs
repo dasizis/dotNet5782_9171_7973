@@ -5,7 +5,7 @@ using StringUtilities;
 
 namespace IDAL.DO
 {
-    public struct Parcel : IIdentifiable
+    public class Parcel : IIdentifiable
     {
         public int? DroneId { get; set; }
         public int Id { get; set; }

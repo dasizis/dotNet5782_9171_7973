@@ -22,6 +22,6 @@ namespace IDAL
         void FinishCharging(int droneId);
         void Update<T>(T item) where T : DO.IIdentifiable;
         int GetParcelContNumber();
-  
+        IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : DO.IIdentifiable;  
     }
 }

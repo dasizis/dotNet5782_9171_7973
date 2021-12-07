@@ -5,7 +5,7 @@ using StringUtilities;
 
 namespace IDAL.DO
 {
-    public struct Customer : IIdentifiable
+    public class Customer : IIdentifiable
     {
         public int Id { get; set; }
         public string Name { get; set; }

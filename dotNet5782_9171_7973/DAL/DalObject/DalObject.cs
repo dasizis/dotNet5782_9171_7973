@@ -27,8 +27,14 @@ namespace DalObject
             DataSource.data[typeof(T)].RemoveAt(itemIndex);    
         }
 
-        static IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable =>
-            DataSource.data[typeof(T)].Cast<T>().Where(item => predicate(item));
+    
+        public IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable
+        {
+            return from item in DataSource.data[typeof(T)].Cast<T>()
+                   where predicate(item)
+                   select item.Clone();
+
+        }
 
         /// <summary>
         /// return a copy of the wanted data list
@@ -79,9 +85,10 @@ namespace DalObject
 
         public IEnumerable<BaseStation> GetAvailableBaseStations()
         {
-            return DataSource.baseStations.FindAll(
-                            baseStation => baseStation.ChargeSlots > DataSource.droneCharges.FindAll(
-                                droneCharge => droneCharge.StationId == baseStation.Id).Count);
+            return from station in DataSource.baseStations
+                   let dronesCount = (from charge in DataSource.droneCharges where charge.StationId == station.Id select charge).Count()
+                   where station.ChargeSlots > dronesCount
+                   select station.Clone();
         }
 
         public void AssignParcelToDrone(int parcelId, int droneId)
@@ -148,7 +155,5 @@ namespace DalObject
 
             DataSource.data[typeof(T)].Add(item);
         }
-
-        
     }
 }

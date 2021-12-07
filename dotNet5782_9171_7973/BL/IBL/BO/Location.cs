@@ -62,6 +62,6 @@ namespace IBL.BO
 
             return EARTH_RADIUS_KM * c;
         }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
     }
 }

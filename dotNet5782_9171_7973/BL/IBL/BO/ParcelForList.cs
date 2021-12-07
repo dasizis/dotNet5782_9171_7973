@@ -58,7 +58,7 @@ namespace IBL.BO
                 priority = value;
             }
         }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
 
     }
 }

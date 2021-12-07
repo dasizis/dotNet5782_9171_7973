@@ -43,7 +43,7 @@ namespace IBL.BO
         public double DeliveryDistance { get; set; }
         public CustomerInDelivery Sender { get; set; }
         public CustomerInDelivery Target { get; set; }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
 
     }
 }

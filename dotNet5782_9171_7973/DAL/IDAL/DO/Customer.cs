@@ -15,6 +15,6 @@ namespace IDAL.DO
         [SexadecimalLatitude]
         public double Latitude { get; set; }
 
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
     }
 }

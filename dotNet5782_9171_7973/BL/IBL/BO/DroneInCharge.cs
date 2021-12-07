@@ -23,7 +23,7 @@ namespace IBL.BO
                 batteryState = value;
             }
         }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
 
     }
 }

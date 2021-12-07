@@ -38,6 +38,6 @@ namespace IBL.BO
             } 
         }
         public List<Drone> DronesInChargeList { get; set; }
-        public override string ToString() => this.ToStringProps(); 
+        public override string ToString() => this.ToStringProperties(); 
     }
 }

@@ -64,7 +64,7 @@ namespace IBL.BO
         }
         public ParcelInDeliver ParcelInDeliver { get; set; }
         public Location Location { get; set; }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
 
 
     }

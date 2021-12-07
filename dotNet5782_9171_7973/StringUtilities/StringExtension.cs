@@ -1,37 +1,51 @@
 ﻿using System;
 using System.Collections;
 using System.Reflection;
+using System.Text;
 
 namespace StringUtilities
 {
     public static class StringUtilitiesExtension
     {
-        public static string ToStringProps<T>(this T obj)
+        public static string ToStringProperties<T>(this T obj)
         {
             Type type = obj.GetType();
-            string description = $"<{type.Name}> {{";
-                                 
+            StringBuilder description = new($"<{type.Name}> {{");
 
             foreach (var prop in type.GetProperties())
             {
-                description += $"{prop.Name} = ";
+                description.Append($"{prop.Name} = ");
 
-                if (Attribute.IsDefined(prop, typeof(SexadecimalLatitudeAttribute)))
+                var propValue = prop.GetValue(obj);
+                var countProperty = propValue.GetType().GetProperty("Count");
+
+                // Is the property a list?
+                if (countProperty != null)
                 {
-                    description += Sexadecimal.Latitude((double)prop.GetValue(obj));
+                    var listCount = countProperty.GetValue(propValue);
+                    var listType = propValue.GetType().GetGenericArguments()[0].Name;
+
+                    description.Append($"<List[{listType}](Count = {listCount})");
+                }
+                else if (Attribute.IsDefined(prop, typeof(SexadecimalLatitudeAttribute)))
+                {
+                    description.Append(Sexadecimal.Latitude((double)propValue));
                 }
                 else if (Attribute.IsDefined(prop, typeof(SexadecimalLongitudeAttribute)))
                 {
-                    description += Sexadecimal.Longitde((double)prop.GetValue(obj));
+                    description.Append(Sexadecimal.Longitde((double)propValue));
                 }
                 else
                 {
-                    description += prop.GetValue(obj)?.ToString() ?? "null";
+                    description.Append(propValue?.ToString() ?? "null");
                 }
-                description += ", ";
+                description.Append(", ");
             }
 
-            return description + '}';
+            string result = description.ToString();
+
+            // Remove the last comma
+            return result[..result.LastIndexOf(',')] + '}';
         }
     }
 }

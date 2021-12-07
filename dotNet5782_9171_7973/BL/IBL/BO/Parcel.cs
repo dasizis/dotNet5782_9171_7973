@@ -43,7 +43,7 @@ namespace IBL.BO
         public DateTime? Scheduled { get; set; }
         public DateTime? PickedUp { get; set; }
         public DateTime? Supplied { get; set; }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
 
 
     }

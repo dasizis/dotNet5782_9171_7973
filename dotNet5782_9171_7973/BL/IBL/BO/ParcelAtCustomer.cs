@@ -50,7 +50,7 @@ namespace IBL.BO
             }
         }
         public CustomerInDelivery OtherCustomer { get; set; }
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
 
 
     }

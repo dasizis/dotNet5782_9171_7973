@@ -11,6 +11,6 @@ namespace IDAL.DO
         public string Model { get; set; }
         public WeightCategory MaxWeight { get; set; }
 
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
     }
 }

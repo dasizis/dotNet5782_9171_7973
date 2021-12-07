@@ -10,6 +10,6 @@ namespace IDAL.DO
         public int StationId { get; set; }
         public int DroneId { get; set; }
 
-        public override string ToString() => this.ToStringProps();
+        public override string ToString() => this.ToStringProperties();
     }
 }

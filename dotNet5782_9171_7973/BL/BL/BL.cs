@@ -10,7 +10,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        DlApi.IDL dal { get; } = new ;
+        DlApi.IDL dal { get; } = new DlApi.FactoryDL().GetDL();
         const int MAX_CHARGE = 100;
 
         //Electricity confumctiol properties

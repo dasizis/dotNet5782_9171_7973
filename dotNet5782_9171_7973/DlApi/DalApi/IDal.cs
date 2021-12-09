@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DlApi
+namespace DalApi
 {
-    public interface IDL
+    public interface IDal
     {
         (double, double, double, double, double) GetElectricityConfumctiol();
         void Add<T>(T item) where T : DO.IIdentifiable;

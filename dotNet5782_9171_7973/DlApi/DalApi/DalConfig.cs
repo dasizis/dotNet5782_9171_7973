@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DlApi
+namespace DalApi
 {
     class DalConfig
     {
@@ -20,7 +20,6 @@ namespace DlApi
                 DalPackages = (from package in dalConfig.Element("dal-packages").Elements()
                                select package
                               ).ToDictionary(p => $"{p.Name}", p => p.Value);
-                Console.WriteLine("ss");
             }
             catch (Exception e) { Console.WriteLine(e); }
 

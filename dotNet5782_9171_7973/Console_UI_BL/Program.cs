@@ -5,7 +5,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        private static IBL.IBL bl = new BL.BL();
+        private static readonly IBL.IBL bl = new BL.BL();
 
         static T GetInput<T>(Converter<string, T> convert = null, Predicate<T> isValid = null, string prompt = "> ")
         {

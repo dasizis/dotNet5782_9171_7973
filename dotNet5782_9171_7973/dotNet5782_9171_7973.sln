@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalObject", "DalObject\DalO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DS", "DS\DS.csproj", "{3978D1D3-F5BD-4FF2-B599-4C9437EB8A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DlApi", "DlApi\DlApi.csproj", "{72663A85-19C8-44D9-B1D3-D4810F031275}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalApi", "DlApi\DalApi.csproj", "{72663A85-19C8-44D9-B1D3-D4810F031275}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Dal
 {
-    public partial class DalObject : DlApi.IDL
+    public partial class DalObject : DalApi.IDal
     {
         /// <summary>
         /// Add an item to its data list

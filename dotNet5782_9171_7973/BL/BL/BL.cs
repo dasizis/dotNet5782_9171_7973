@@ -10,7 +10,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        DlApi.IDL dal { get; } = new DlApi.FactoryDL().GetDL();
+        DlApi.IDal dal { get; } = new DlApi.FactoryDL().GetDL();
         const int MAX_CHARGE = 100;
 
         //Electricity confumctiol properties
@@ -72,11 +72,11 @@ namespace BL
                 {
                     var suppliedParcels = parcels.FindAll(p => p.Supplied.HasValue).ToList();
 
-                    if (suppliedParcels.Count == 0)
+                    if (suppliedParcels.Count() == 0)
                     {
-                        return stationsLocations[rand.Next(stationsLocations.Count)];
+                        return stationsLocations[rand.Next(stationsLocations.Count())];
                     }
-                    var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
+                    var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count())];
                     var customer = dal.GetById<DO.Customer>(randomParcel.TargetId);
 
                     return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
@@ -86,7 +86,7 @@ namespace BL
                 location = state switch
                 {
                     DroneState.Free => RandomSuppliedParcelLocation(),
-                    DroneState.Meintenence => stationsLocations[rand.Next(stationsLocations.Count)],
+                    DroneState.Meintenence => stationsLocations[rand.Next(stationsLocations.Count())],
                     DroneState.Deliver => parcel.Supplied != null
                                           ? targetLocation.FindClosest(stationsLocations)
                                           : senderLocation,

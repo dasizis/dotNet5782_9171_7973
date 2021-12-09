@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DlApi\DlApi.csproj" />
+    <ProjectReference Include="..\DlApi\DalApi.csproj" />
     <ProjectReference Include="..\StringUtilities\StringUtilities.csproj" />
   </ItemGroup>
 

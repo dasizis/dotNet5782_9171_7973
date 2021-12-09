@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DlApi
+namespace DalApi
 {
     public class FactoryDL
     {
-        public IDL GetDL()
+        public IDal GetDL()
         {
             string dalType = DalConfig.DalName;
             string dalPackage = DalConfig.DalPackages[dalType];
@@ -36,11 +36,12 @@ namespace DlApi
                 throw new DalConfigException("Can't find such project");
             }
 
-            IDL dal = (IDL)type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static).GetValue(null);
+            IDal dal = (IDal)type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static).GetValue(null);
+            
 
             if (dal == null)
             {
-                throw new DalConfigException("Can't Get Dl Instance");
+                throw new DalConfigException("Can't Get Dal Instance");
             }
 
             return dal;

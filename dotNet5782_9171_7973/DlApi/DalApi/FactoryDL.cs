@@ -11,7 +11,7 @@ namespace DalApi
 {
     public class FactoryDL
     {
-        public IDal GetDL()
+        public IDal GetDL()                                                                                                          
         {
             //Assembly.LoadFile($@"{Directory.GetCurrentDirectory()}\{DalConfig.DalType}.dll");            
             Assembly.Load(DalConfig.DalType);

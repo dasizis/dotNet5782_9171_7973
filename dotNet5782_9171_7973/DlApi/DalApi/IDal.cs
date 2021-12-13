@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IDAL
+namespace DalApi
 {
     public interface IDal
     {
-        (int, int, int, int, int) GetElectricityConfumctiol();
+        (double, double, double, double, double) GetElectricityConfumctiol();
         void Add<T>(T item) where T : DO.IIdentifiable;
         IEnumerable<T> GetList<T>();
         T GetById<T>(int id) where T : DO.IIdentifiable;

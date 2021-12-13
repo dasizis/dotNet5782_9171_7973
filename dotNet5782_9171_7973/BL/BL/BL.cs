@@ -139,5 +139,58 @@ namespace BL
                 WeightCategory.Heavy => ElectricityConfumctiolHeavy,
             };
         }
+        //public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
+        //{
+        //    return DataSource.Parcels.Where(parcel => parcel.DroneId == null);
+        //}
+
+        //public IEnumerable<BaseStation> GetAvailableBaseStations()
+        //{
+        //    return from station in DataSource.BaseStations
+        //           let dronesCount = (from charge in DataSource.DroneCharges
+        //                              where charge.StationId == station.Id
+        //                              select charge).Count()
+        //           where station.ChargeSlots > dronesCount
+        //           select station.Clone();
+        //}
+
+        //public void AssignParcelToDrone(int parcelId, int droneId)
+        //{
+        //    Parcel parcel = GetById<Parcel>(parcelId);
+        //    DataSource.Parcels.Remove(parcel);
+
+        //    parcel.DroneId = droneId;
+        //    parcel.Scheduled = DateTime.Now;
+        //    DataSource.Parcels.Add(parcel);
+        //}
+
+        //public void SupplyParcel(int parcelId)
+        //{
+        //    Parcel parcel = GetById<Parcel>(parcelId);
+        //    DataSource.Parcels.Remove(parcel);
+
+        //    parcel.Supplied = DateTime.Now;
+        //    DataSource.Parcels.Add(parcel);
+        //}
+
+        //public void ChargeDroneAtBaseStation(int droneId, int baseStationId)
+        //{
+        //    DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = baseStationId });
+        //}
+
+        //public void FinishCharging(int droneId)
+        //{
+        //    var droneCharge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId);
+        //    DataSource.DroneCharges.Remove(droneCharge);
+        //}
+
+        //public void CollectParcel(int parcelId)
+        //{
+        //    Parcel parcel = GetById<Parcel>(parcelId);
+        //    DataSource.Parcels.Remove(parcel);
+
+        //    parcel.PickedUp = DateTime.Now;
+        //    DataSource.Parcels.Add(parcel);
+        //}
     }
 }

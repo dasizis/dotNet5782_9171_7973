@@ -7,6 +7,7 @@ using System.Linq;
 using DS;
 
 using System.Reflection;
+using DalApi;
 
 namespace Dal
 {
@@ -18,19 +19,18 @@ namespace Dal
         /// <param name="item">the item to add</param>.
         public void Add<T>(T item) where T : IIdentifiable
         {
-            if (DataSource.Data[typeof(T)].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
+            Type type = typeof(T);
+            if (DataSource.Data[type].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
             {
-                throw new IdAlreadyExistsException(typeof(T), item.Id);
+                throw new IdAlreadyExistsException(type, item.Id);
             }
 
-            DataSource.Data[typeof(T)].Add(item);
+            DataSource.Data[type].Add(item);
         }
 
-        public IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable
+        public IEnumerable<T> GetFilteredList<T>(Func<T, bool> predicate)
         {
-            return from item in DataSource.Data[typeof(T)].Cast<T>()
-                   where predicate(item)
-                   select item.Clone();
+            return GetList<T>().Where(predicate);
 
         }
 
@@ -39,7 +39,10 @@ namespace Dal
         /// </summary>
         /// <param name="type">the list type</param>
         /// <returns>a copy of the last</returns>
-        public IEnumerable<T> GetList<T>() where T : IIdentifiable => GetFilteredList<T>(_ => true);
+        public IEnumerable<T> GetList<T>()
+        {
+            return DataSource.Data[typeof(T)].Cast<T>();
+        }
 
         /// <summary>
         /// returns an item with the given type and id 
@@ -76,64 +79,22 @@ namespace Dal
 
         }
 
-        public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
+        public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable
         {
-            return DataSource.Parcels.Where(parcel => parcel.DroneId == null);
-        }
+            Type type = typeof(T);
+            T item = DataSource.Data[type].Cast<T>().FirstOrDefault(item => item.Id == id)
+                     ?? throw new ObjectNotFoundException(type, id);
+            var prop = type.GetProperty(propName)
+                     ?? throw new ArgumentException($"Type {type.Name} does not have property {propName}");
 
-        public IEnumerable<BaseStation> GetAvailableBaseStations()
-        {
-            return from station in DataSource.BaseStations
-                   let dronesCount = (from charge in DataSource.DroneCharges 
-                                      where charge.StationId == station.Id 
-                                      select charge).Count()
-                   where station.ChargeSlots > dronesCount
-                   select station.Clone();
-        }
-
-        public void AssignParcelToDrone(int parcelId, int droneId)
-        {
-            Parcel parcel = GetById<Parcel>(parcelId);
-            DataSource.Parcels.Remove(parcel);
-
-            parcel.DroneId = droneId;
-            parcel.Scheduled = DateTime.Now;
-            DataSource.Parcels.Add(parcel);
-        }
-
-        public void SupplyParcel(int parcelId)
-        {
-            Parcel parcel = GetById<Parcel>(parcelId);
-            DataSource.Parcels.Remove(parcel);
-
-            parcel.Supplied = DateTime.Now;
-            DataSource.Parcels.Add(parcel);
-        }
-
-        public void ChargeDroneAtBaseStation(int droneId, int baseStationId)
-        {
-            DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = baseStationId });
-        }
-
-        public void FinishCharging(int droneId)
-        {
-            var droneCharge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId);
-            DataSource.DroneCharges.Remove(droneCharge);
-        }
-
-        public void CollectParcel(int parcelId)
-        {
-            Parcel parcel = GetById<Parcel>(parcelId);
-            DataSource.Parcels.Remove(parcel);
-
-            parcel.PickedUp = DateTime.Now;
-            DataSource.Parcels.Add(parcel);
-        }
-
-        public void Update<T>(T item) where T : IIdentifiable
-        {
-            Remove<T>(item.Id);
-            Add(item);
+            try
+            {
+                prop.SetValue(item, newValue);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException($"Can not set property {prop.Name} with value {newValue} of type {newValue.GetType().Name}", ex);
+            }
         }
 
         public int GetParcelContNumber()
@@ -146,6 +107,9 @@ namespace Dal
             return DataSource.DroneCharges.Where(_ => true);
         }
 
-
+        public void FinishCharging(int droneId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

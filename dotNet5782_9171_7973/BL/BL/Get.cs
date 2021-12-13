@@ -27,12 +27,12 @@ namespace BL
             }
 
             var sendParcels = from parcel in dal.GetList<DO.Parcel>()
-                                       where parcel.SenderId == id
-                                       select GetParcel(parcel.Id);
+                              where parcel.SenderId == id
+                              select GetParcel(parcel.Id);
 
             var targetParcels = from parcel in dal.GetList<DO.Parcel>()
-                                         where parcel.TargetId == id
-                                         select GetParcel(parcel.Id);
+                                where parcel.TargetId == id
+                                select GetParcel(parcel.Id);
 
             return new Customer()
             {
@@ -92,7 +92,7 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(BaseStation), id);
             }
 
-            var chargeSlots = dal.GetDroneCharges().Where(charge => charge.StationId == id).ToList();
+            var chargeSlots = dal.GetList<DO.DroneCharge>().Where(charge => charge.StationId == id).ToList();
             var dronesInChargeList = chargeSlots.Select(charge => GetDrone(charge.DroneId)).ToList();
 
             return new BaseStation()
@@ -100,7 +100,7 @@ namespace BL
                 Id = baseStation.Id,
                 Name = baseStation.Name,
                 Location = new Location() { Latitude = baseStation.Latitude, Longitude = baseStation.Longitude },
-                EmptyChargeSlots = baseStation.ChargeSlots - chargeSlots.Count,
+                EmptyChargeSlots = baseStation.ChargeSlots - chargeSlots.Count(),
                 DronesInChargeList = dronesInChargeList,
             };
         }

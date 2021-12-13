@@ -51,7 +51,7 @@ namespace BL
                 Location senderLocation = null;
 
                 // Set state
-                if (parcel == null)
+                if (parcel.Equals(default))
                 {
                     state = (DroneState)rand.Next(0, 2);
                 }

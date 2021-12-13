@@ -10,6 +10,8 @@ namespace Dal
 { 
     public partial class DalObject : Singleton<DalObject>, DalApi.IDal
     {
+        private DalObject() { }
+        static DalObject() { }
         /// <summary>
         /// Add an item to its data list
         /// </summary>
@@ -28,7 +30,6 @@ namespace Dal
         public IEnumerable<T> GetFilteredList<T>(Func<T, bool> predicate)
         {
             return GetList<T>().Where(predicate);
-
         }
 
         /// <summary>

@@ -4,13 +4,10 @@ using System.Collections;
 using System.Text;
 using DO;
 using System.Linq;
-using DS;
-
-using System.Reflection;
-using DalApi;
 
 namespace Dal
 {
+
     public partial class DalObject : DalApi.IDal
     {
         /// <summary>
@@ -20,7 +17,7 @@ namespace Dal
         public void Add<T>(T item) where T : IIdentifiable
         {
             Type type = typeof(T);
-            if (DataSource.Data[type].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
+            if (DoesExist<T>(item.Id))
             {
                 throw new IdAlreadyExistsException(type, item.Id);
             }
@@ -84,6 +81,8 @@ namespace Dal
             Type type = typeof(T);
             T item = DataSource.Data[type].Cast<T>().FirstOrDefault(item => item.Id == id)
                      ?? throw new ObjectNotFoundException(type, id);
+            DataSource.Data[type].Remove(item);
+
             var prop = type.GetProperty(propName)
                      ?? throw new ArgumentException($"Type {type.Name} does not have property {propName}");
 
@@ -95,6 +94,7 @@ namespace Dal
             {
                 throw new ArgumentException($"Can not set property {prop.Name} with value {newValue} of type {newValue.GetType().Name}", ex);
             }
+            DataSource.Data[type].Add(item);
         }
 
         public int GetParcelContNumber()
@@ -109,7 +109,36 @@ namespace Dal
 
         public void FinishCharging(int droneId)
         {
-            throw new NotImplementedException();
+            if (DoesExist<Drone>(droneId))
+                throw new ObjectNotFoundException(typeof(Drone), droneId);
+            // TO DO
+
+            var charge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId && !charge.IsDeleted);
+            DataSource.DroneCharges.Remove(charge);
+            charge.IsDeleted = true;
+            DataSource.DroneCharges.Add(charge);
+        }
+
+        public void ChargeDrone(int droneId, int stationId)
+        {
+            if (DoesExist<Drone>(droneId)) 
+                throw new ObjectNotFoundException(typeof(Drone), droneId);
+            if (DoesExist<BaseStation>(stationId)) 
+                throw new ObjectNotFoundException(typeof(BaseStation), stationId);
+
+            DataSource.DroneCharges.Add(
+                new DroneCharge()
+                {
+                    DroneId = droneId,
+                    StationId = stationId,
+                    StartTime = DateTime.Now,
+                    IsDeleted = false,
+                });
+        }
+
+        static private bool DoesExist<T>(int id) where T : IIdentifiable
+        {
+            return DataSource.Data[typeof(T)].Cast<IIdentifiable>().Any(item => item.Id == id);
         }
     }
 }

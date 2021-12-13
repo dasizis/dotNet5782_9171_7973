@@ -9,6 +9,7 @@ namespace DalApi
         void Add<T>(T item) where T : DO.IIdentifiable;
         IEnumerable<T> GetList<T>();
         T GetById<T>(int id) where T : DO.IIdentifiable;
+        void ChargeDrone(int droneId, int stationId);
         void FinishCharging(int droneId);
         void Update<T>(int id, string attribute, object newValue) where T : DO.IIdentifiable;
         int GetParcelContNumber();

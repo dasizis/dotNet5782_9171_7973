@@ -5,7 +5,7 @@ using StringUtilities;
 
 namespace DO
 {
-    public class Customer : IIdentifiable
+    public struct Customer : IIdentifiable
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -5,10 +5,12 @@ using StringUtilities;
 
 namespace DO
 {
-    public class DroneCharge
+    public struct DroneCharge
     {
         public int StationId { get; set; }
         public int DroneId { get; set; }
+        public DateTime StartTime { get; set; }
+        public bool IsDeleted { get; set; }
 
         public override string ToString() => this.ToStringProperties();
     }

@@ -5,7 +5,7 @@ using StringUtilities;
 
 namespace DO
 {
-    public class Drone : IIdentifiable
+    public struct Drone : IIdentifiable
     {
         public int Id { get; set; }
         public string Model { get; set; }

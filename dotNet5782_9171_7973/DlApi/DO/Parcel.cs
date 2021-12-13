@@ -5,7 +5,7 @@ using StringUtilities;
 
 namespace DO
 {
-    public class Parcel : IIdentifiable
+    public struct Parcel : IIdentifiable
     {
         public int? DroneId { get; set; }
         public int Id { get; set; }

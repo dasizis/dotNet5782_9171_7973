@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DO
 {
-    public class BaseStation : IIdentifiable
+    public struct BaseStation : IIdentifiable
     {
         public int Id { get; set; }
         public string Name { get; set; }

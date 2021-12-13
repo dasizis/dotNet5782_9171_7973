@@ -4,11 +4,11 @@ using System.Collections;
 using System.Text;
 using DO;
 using System.Linq;
+using Singelton;
 
 namespace Dal
-{
-
-    public partial class DalObject : DalApi.IDal
+{ 
+    public partial class DalObject : Singleton<DalObject>, DalApi.IDal
     {
         /// <summary>
         /// Add an item to its data list

@@ -9,19 +9,25 @@ namespace DalApi
 {
     class DalConfig
     {
-        internal static string DalName;
-        internal static Dictionary<string, string> DalPackages;
+        internal static string DalType;
+        internal static string Namespace;
+
         static DalConfig()
         {
             try
             {
-                XElement dalConfig = XElement.Load(@"..\..\..\..\config.xml");
-                DalName = dalConfig.Element("dal").Value;
-                DalPackages = (from package in dalConfig.Element("dal-packages").Elements()
-                               select package
-                              ).ToDictionary(p => $"{p.Name}", p => p.Value);
+                XElement dalConfig = XElement.Load(@"config.xml");
+                string dalName = dalConfig.Element("dal").Value;
+                var dalPackage = dalConfig.Element("dal-packages")
+                                          .Element(dalName);
+
+                DalType = dalPackage.Element("class-name").Value;
+                Namespace = dalPackage.Element("namespace").Value;
             }
-            catch (Exception e) { Console.WriteLine(e); }
+            catch (Exception e) 
+            {
+                throw new DalConfigException("Can't get data from config file", e);
+            }
 
         }
     }

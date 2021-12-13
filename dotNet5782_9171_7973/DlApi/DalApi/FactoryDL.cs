@@ -12,25 +12,10 @@ namespace DalApi
     {
         public IDal GetDL()
         {
-            string dalType = DalConfig.DalName;
-            string dalPackage = DalConfig.DalPackages[dalType];
+            Assembly.Load(DalConfig.DalType);
 
-            if (dalPackage == null) throw new DalConfigException("There is no such package");
-
-            try
-            {
-                Assembly.Load(dalPackage);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                throw;
-            }
-            catch (System.IO.FileLoadException)
-            {
-                throw;
-            }
-
-            Type type = Type.GetType($"Dal.{dalPackage}, {dalPackage}");
+            Type type = Type.GetType($"{DalConfig.Namespace}.{DalConfig.DalType}, {DalConfig.DalType}");
+            
             if (type == null)
             {
                 throw new DalConfigException("Can't find such project");

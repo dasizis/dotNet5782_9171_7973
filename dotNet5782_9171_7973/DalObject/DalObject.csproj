@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DlApi\DalApi.csproj" />
+    <ProjectReference Include="..\Singelton\Singelton.csproj" />
   </ItemGroup>
 
 </Project>

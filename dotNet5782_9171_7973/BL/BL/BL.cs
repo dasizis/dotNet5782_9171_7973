@@ -51,7 +51,7 @@ namespace BL
                 Location senderLocation = null;
 
                 // Set state
-                if (parcel == null)
+                if (parcel.Equals(default))
                 {
                     state = (DroneState)rand.Next(0, 2);
                 }
@@ -92,9 +92,8 @@ namespace BL
                                           : senderLocation,
                 };
 
-                var availableStationsLocations = dal.GetAvailableBaseStations()
-                                                    .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
-                                                    .ToList();
+                var availableStationsLocations = GetAvailableBaseStations()
+                                                    .Select(station => GetBaseStation(station.Id).Location);
 
                 // Set battery
                 battery = state switch

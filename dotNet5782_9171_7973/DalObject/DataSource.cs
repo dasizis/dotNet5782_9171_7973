@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using DO;
 
-namespace DS
+namespace Dal
 {
     public static class DataSource
     {
@@ -14,14 +14,14 @@ namespace DS
         const int INIT_CUSTOMERS = 10;
         const int INIT_PARCELS = 10;
 
-        public static List<Drone> Drones { get; } = new();
-        public static List<BaseStation> BaseStations { get; } = new();
-        public static List<Customer> Customers { get; } = new();
-        public static List<Parcel> Parcels { get; } = new();
-        public static List<DroneCharge> DroneCharges { get; } = new();
+        internal static List<Drone> Drones { get; } = new();
+        internal static List<BaseStation> BaseStations { get; } = new();
+        internal static List<Customer> Customers { get; } = new();
+        internal static List<Parcel> Parcels { get; } = new();
+        internal static List<DroneCharge> DroneCharges { get; } = new();
 
         // Another way to acces the data
-        public static Dictionary<Type, IList> Data { get; } = new()
+        internal static Dictionary<Type, IList> Data { get; } = new()
         {
             [typeof(Drone)] = Drones,
             [typeof(BaseStation)] = BaseStations,

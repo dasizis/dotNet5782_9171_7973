@@ -1,17 +1,17 @@
 ﻿using DO;
 using System.Collections.Generic;
 
-namespace DS
+namespace Dal
 {
     static class RandomManager
     {
-        public static System.Random Rand => new();
+        internal static System.Random Rand => new();
 
         /// <summary>
         /// creates a ranodm name in a random length (4-7 letters).
         /// </summary>
         /// <returns>the random name</returns>
-        public static string RandomName()
+        internal static string RandomName()
         {
             const int MIN_NAME_LENGTH = 4;
             const int MAX_NAME_LENGTH = 8;
@@ -32,7 +32,7 @@ namespace DS
         /// creates a ranodm full name
         /// </summary>
         /// <returns>the random full name</returns>
-        public static string RandomFullName()
+        internal static string RandomFullName()
         {
             return $"{RandomName()} {RandomName()}";
         }
@@ -41,7 +41,7 @@ namespace DS
         /// creates a random phone number
         /// </summary>
         /// <returns>the random phone number</returns>
-        public static string RandomPhone()
+        internal static string RandomPhone()
         {
             string phone = "05";
             const int PHONE_LENGTH = 10;
@@ -58,7 +58,7 @@ namespace DS
         /// creates a random date
         /// </summary>
         /// <returns>the random date</returns>
-        public static System.DateTime RandomDate()
+        internal static System.DateTime RandomDate()
         {
             int year = Rand.Next(1950, 2021);
             int month = Rand.Next(1, 12);
@@ -75,7 +75,7 @@ namespace DS
         /// </summary>
         /// <param name="enumType">the enum type</param>
         /// <returns>the random value (int value)</returns>
-        public static int RandomEnumOption(System.Type enumType)
+        internal static int RandomEnumOption(System.Type enumType)
         {
             System.Array enumValues = enumType.GetEnumValues();
             return Rand.Next(enumValues.Length);
@@ -86,7 +86,7 @@ namespace DS
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Parcel instance</returns>
-        public static Parcel RandomParcel(int id, List<Customer> customers)
+        internal static Parcel RandomParcel(int id, List<Customer> customers)
         {
             return new Parcel()
             {
@@ -104,7 +104,7 @@ namespace DS
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Drone instance</returns>
-        public static Drone RandomDrone(int id)
+        internal static Drone RandomDrone(int id)
         {
             return new Drone()
             {
@@ -119,7 +119,7 @@ namespace DS
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Customer instance</returns>
-        public static Customer RandomCustomer(int id)
+        internal static Customer RandomCustomer(int id)
         {
             return new Customer()
             {
@@ -136,7 +136,7 @@ namespace DS
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created BaseStation instance</returns>
-        public static BaseStation RandomBaseStation(int id)
+        internal static BaseStation RandomBaseStation(int id)
         {
             return new BaseStation()
             {

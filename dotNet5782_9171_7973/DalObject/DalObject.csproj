@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DlApi\DalApi.csproj" />
-    <ProjectReference Include="..\DS\DS.csproj" />
   </ItemGroup>
 
 </Project>

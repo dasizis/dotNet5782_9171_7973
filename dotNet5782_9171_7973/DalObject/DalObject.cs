@@ -16,19 +16,16 @@ namespace Dal
         /// Add an item to its data list
         /// </summary>
         /// <param name="item">the item to add</param>.
-
-
-        /// <summary>
-        /// Remove an item from its data list
-        /// </summary>
-        /// <param name="item"></param>
-        public void Remove<T>(int id) where T : IIdentifiable
+        public void Add<T>(T item) where T : IIdentifiable
         {
-            int itemIndex = DataSource.Data[typeof(T)].Cast<T>().ToList().FindIndex(item => item.Id == id);
-            DataSource.Data[typeof(T)].RemoveAt(itemIndex);    
+            if (DataSource.Data[typeof(T)].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
+            {
+                throw new IdAlreadyExistsException(typeof(T), item.Id);
+            }
+
+            DataSource.Data[typeof(T)].Add(item);
         }
 
-    
         public IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IIdentifiable
         {
             return from item in DataSource.Data[typeof(T)].Cast<T>()
@@ -149,14 +146,6 @@ namespace Dal
             return DataSource.DroneCharges.Where(_ => true);
         }
 
-        public void Add<T>(T item) where T : IIdentifiable
-        {
-            if (DataSource.Data[typeof(T)].Cast<IIdentifiable>().Any(obj => obj.Id == item.Id))
-            {
-                throw new IdAlreadyExistsException(typeof(T), item.Id);
-            }
 
-            DataSource.Data[typeof(T)].Add(item);
-        }
     }
 }

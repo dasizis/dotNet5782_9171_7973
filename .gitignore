@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 # Don't ignore from ./bin/net5.0/config.xml
-!config.xml
+!bin/net0.5/config.xml

@@ -92,9 +92,8 @@ namespace BL
                                           : senderLocation,
                 };
 
-                var availableStationsLocations = dal.GetAvailableBaseStations()
-                                                    .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
-                                                    .ToList();
+                var availableStationsLocations = GetAvailableBaseStations()
+                                                    .Select(station => GetBaseStation(station.Id).Location);
 
                 // Set battery
                 battery = state switch

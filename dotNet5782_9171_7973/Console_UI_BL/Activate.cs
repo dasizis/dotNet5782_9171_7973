@@ -211,7 +211,7 @@ namespace ConsoleUI_BL
                     {
                         Console.WriteLine("Drone ID, Please.");
                         int droneId = GetInput(int.Parse);
-                        bl.SendDroneToCharge(droneId);
+                        bl.ChargeDrone(droneId);
 
                         break;
                     }

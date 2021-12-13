@@ -53,7 +53,8 @@ namespace BL
         /// <returns>customers list</returns>
         public IEnumerable<CustomerForList> GetCustomersList()
         {
-            return dal.GetList<DO.Customer>().Select(customer => GetCustomerForList(customer.Id));
+            return from customer in  dal.GetList<DO.Customer>()
+                   select GetCustomerForList(customer.Id);
         }
         /// <summary>
         /// update customer's details
@@ -74,12 +75,8 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(Customer), customerId);
             }
 
-            dal.Remove<DO.Customer>(customer.Id);
-
-            customer.Name = name ?? customer.Name;
-            customer.Phone = phone ?? customer.Phone;
-
-            dal.Add(customer);
+            dal.Update<DO.Customer>(customer.Id, nameof(customer.Name), name ?? customer.Name);
+            dal.Update<DO.Customer>(customer.Id, nameof(customer.Phone), phone ?? customer.Phone);
         }
     }
 }

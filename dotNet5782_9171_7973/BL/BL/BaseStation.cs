@@ -52,7 +52,13 @@ namespace BL
         /// <returns>list of base stations with empty charge slots</returns>
         public IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
-            return dal.GetAvailableBaseStations().Select(station => GetBaseStationForList(station.Id));
+            return from station in dal.GetList<DO.BaseStation>()
+                   let dronesCount = (from charge in dal.GetList<DO.DroneCharge>()
+                                      where charge.StationId == station.Id
+                                      select charge).Count()
+                   where station.ChargeSlots > dronesCount
+                   select GetBaseStationForList(station.Id);
+           
         }
         /// <summary>
         /// return base stations list
@@ -60,7 +66,8 @@ namespace BL
         /// <returns>base stations list</returns>
         public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
-            return dal.GetList<DO.BaseStation>().Select(baseStation => GetBaseStationForList(baseStation.Id));
+            return from baseStation in dal.GetList<DO.BaseStation>()
+                   select GetBaseStationForList(baseStation.Id);
         }
         /// <summary>
         /// update base station details
@@ -81,12 +88,8 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(BaseStation), baseStationId);
             }
 
-            dal.Remove<DO.BaseStation>(station.Id);
-
-            station.Name = name ?? station.Name;
-            station.ChargeSlots = chargeSlots ?? station.ChargeSlots;
-
-            dal.Add(station);
+            dal.Update<DO.BaseStation>(baseStationId, nameof(station.Name), name ?? station.Name);
+            dal.Update<DO.BaseStation>(baseStationId, nameof(station.ChargeSlots), chargeSlots ?? station.ChargeSlots);
         }
     }
 }

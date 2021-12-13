@@ -52,7 +52,8 @@ namespace BL
         /// <returns>list of parcels which weren't assigned to drone yet</returns>
         public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
         {
-            return dal.GetNotAssignedToDroneParcels().Select(parcel => GetParcelForList(parcel.Id));
+            return from parcel in dal.GetFilteredList<DO.Parcel>(parcel => parcel.DroneId == null)
+                   select GetParcelForList(parcel.Id); 
         }
         /// <summary>
         /// return parcels list
@@ -60,7 +61,8 @@ namespace BL
         /// <returns>parcels list</returns>
         public IEnumerable<ParcelForList> GetParcelsList()
         {
-            return dal.GetList<DO.Parcel>().Select(parcel => GetParcelForList(parcel.Id));
+            return from parcel in dal.GetList<DO.Parcel>()
+                   select GetParcelForList(parcel.Id);
         }
         /// <summary>
         /// drone picks up his assigned parcel
@@ -96,7 +98,7 @@ namespace BL
 
             try
             {
-                dal.CollectParcel(parcel.Id);
+                dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
             }
             catch
             {
@@ -139,7 +141,8 @@ namespace BL
             drone.Location = parcelInDeliver.TargetLocation;
             drone.State = DroneState.Free;
 
-            dal.SupplyParcel(parcel.Id);
+            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
         }
+       
     }
 }

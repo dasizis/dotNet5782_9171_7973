@@ -16,5 +16,6 @@ namespace IBL
         void SupplyParcel(int droneId);
         IEnumerable<ParcelForList> GetParcelsList();
         Parcel GetParcel(int id);
+        
     }
 }

@@ -11,7 +11,7 @@ namespace IBL
     {
         void AddDrone(int id, string model, WeightCategory maxWeight, int stationId);
         void RenameDrone(int droneId, string newName);
-        void SendDroneToCharge(int droneId);
+        void ChargeDrone(int droneId);
         void FinishCharging(int droneId, double timeInCharge);
         IEnumerable<DroneForList> GetDronesList();
         Drone GetDrone(int id);

@@ -79,22 +79,23 @@ namespace BL
                 throw new InValidActionException("Cannot assign parcel to busy drone.");
             }
 
-            var parcels = dal.GetNotAssignedToDroneParcels()
+            var parcels = GetNotAssignedToDroneParcels()
+                          .Select(parcel => GetParcel(parcel.Id)).ToList()
                           .Where(parcel =>
                                (int)parcel.Weight < (int)drone.MaxWeight &&
                                IsAbleToPassParcel(drone, GetParcelInDeliver(parcel.Id)))
                           .OrderBy(p => p.Priority)
                           .ThenBy(p => p.Weight)
-                          .ThenBy(p => Location.Distance(GetCustomer(p.SenderId).Location, drone.Location));
+                          .ThenBy(p => Location.Distance(GetCustomer(p.Sender.Id).Location, drone.Location));
 
             if (!parcels.Any())
             {
                 throw new InValidActionException("Couldn't assign any parcel to the drone.");
             }
 
-
-            dal.AssignParcelToDrone(parcels.First().Id, droneId);
-
+            Parcel parcel = parcels.First();
+            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Drone.Id), droneId);
+           
             drone.State = DroneState.Deliver;
         }
         /// <summary>
@@ -137,15 +138,13 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(Drone), droneId);
             }
 
-            dlDrone.Model = model;
-
-            dal.Update(dlDrone);
+            dal.Update<DO.Drone>(dlDrone.Id, nameof(dlDrone.Model), model);
         }
         /// <summary>
         /// put drone in a charge slot to charge
         /// </summary>
         /// <param name="droneId">drone to charge</param>
-        public void SendDroneToCharge(int droneId)
+        public void ChargeDrone(int droneId)
         {
             DroneForList drone = GetDroneForList(droneId);
 
@@ -154,7 +153,7 @@ namespace BL
                 throw new InValidActionException("Can not send a non-free drone to charge.");
             }
 
-            var availableBaseStations = dal.GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
+            var availableBaseStations = GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
 
             BaseStation closest = drone.FindClosest(availableBaseStations);
 
@@ -170,7 +169,7 @@ namespace BL
             // What for?
             closest.EmptyChargeSlots -= 1;
 
-            dal.ChargeDroneAtBaseStation(drone.Id, closest.Id);
+            dal.ChargeDrone(drone.Id, closest.Id);
         }
         /// <summary>
         /// check weather a drone can deliver a parcel

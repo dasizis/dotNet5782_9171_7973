@@ -76,7 +76,7 @@ namespace Dal
 
         }
 
-        public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable
+        public void Update<T>(int id, string propName, object? newValue) where T : IIdentifiable
         {
             Type type = typeof(T);
             T item = DataSource.Data[type].Cast<T>().FirstOrDefault(item => item.Id == id)

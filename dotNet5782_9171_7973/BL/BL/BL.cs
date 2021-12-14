@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace BL
 {
-    public seald partial class BL : Singleton<BL>, BLApi.IBL
+    public sealed partial class BL : Singleton<BL>, BLApi.IBL
     { 
         DalApi.IDal dal { get; } = new DalApi.FactoryDL().GetDL();
         const int MAX_CHARGE = 100;

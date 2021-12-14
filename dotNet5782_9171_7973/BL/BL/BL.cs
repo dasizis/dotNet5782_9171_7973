@@ -1,5 +1,4 @@
-﻿using IBL;
-using IBL.BO;
+﻿using BO;
 using Singelton;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Reflection;
 
 namespace BL
 {
-    public partial class BL : Singleton<BL>, IBL.IBL
+    public partial class BL : Singleton<BL>, BLApi.IBL
     { 
         DalApi.IDal dal { get; } = new DalApi.FactoryDL().GetDL();
         const int MAX_CHARGE = 100;

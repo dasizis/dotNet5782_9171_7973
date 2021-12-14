@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using StringUtilities;
 
 
-namespace IBL.BO
+namespace BO
 {
     public class ParcelInDeliver
     {

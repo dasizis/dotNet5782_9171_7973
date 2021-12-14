@@ -1,7 +1,7 @@
 ﻿using System;
 using StringUtilities;
 
-namespace IBL.BO
+namespace BO
 {
     public class ParcelForList 
     {

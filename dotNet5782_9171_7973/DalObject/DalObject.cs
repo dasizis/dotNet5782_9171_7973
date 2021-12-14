@@ -8,10 +8,10 @@ using Singelton;
 
 namespace Dal
 { 
-    public partial class DalObject : Singleton<DalObject>, DalApi.IDal
+    public sealed partial class DalObject : Singleton<DalObject>, DalApi.IDal
     {
         private DalObject() { }
-        static DalObject() { }
+        static  DalObject() { }
         /// <summary>
         /// Add an item to its data list
         /// </summary>

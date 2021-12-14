@@ -9,8 +9,8 @@ using System.Reflection;
 namespace BL
 {
     public sealed partial class BL : Singleton<BL>, BLApi.IBL
-    { 
-        DalApi.IDal dal { get; } = new DalApi.FactoryDL().GetDL();
+    {
+        DalApi.IDal dal { get; } = Dal.DalObject.Instance;
         const int MAX_CHARGE = 100;
 
         //Electricity confumctiol properties
@@ -21,7 +21,7 @@ namespace BL
         public double ChargeRate { get; set; }
 
         public List<DroneForList> drones = new();
-        public BL()
+        BL()
         {
             (
                 ElectricityConfumctiolFree,

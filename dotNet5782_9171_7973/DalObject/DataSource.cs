@@ -56,22 +56,22 @@ namespace Dal
         public static void Initialize()
         {
             BaseStations.AddRange(
-                Enumerable.Range(1, INIT_BASESTATIONS)
+                Enumerable.Range(0, INIT_BASESTATIONS)
                           .Select(i => RandomManager.RandomBaseStation(i))
             );
 
             Drones.AddRange(
-                Enumerable.Range(1, INIT_DRONES)
+                Enumerable.Range(0, INIT_DRONES)
                           .Select(i => RandomManager.RandomDrone(i))
             );
 
             Customers.AddRange(
-                Enumerable.Range(1, INIT_CUSTOMERS)
+                Enumerable.Range(0, INIT_CUSTOMERS)
                           .Select(i => RandomManager.RandomCustomer(i))
             );
 
             Parcels.AddRange(
-                Enumerable.Range(1, INIT_PARCELS)
+                Enumerable.Range(0, INIT_PARCELS)
                           .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, Customers))    
                           .Select(parcel => RandomManager.Rand.Next(2) == 1
                                             ? parcel

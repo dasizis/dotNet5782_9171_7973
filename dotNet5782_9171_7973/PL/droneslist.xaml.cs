@@ -22,7 +22,9 @@ namespace PL
     {
         public droneslist()
         {
+            
             InitializeComponent();
+            //dronesList.DataContext = 
         }
     }
 }

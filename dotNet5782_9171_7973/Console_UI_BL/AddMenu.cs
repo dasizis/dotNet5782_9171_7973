@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IBL.BO;
+using BO;
 
 namespace ConsoleUI_BL
 {

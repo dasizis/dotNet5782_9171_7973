@@ -44,3 +44,146 @@ this is an extra line
  - [ ] Parcel - check the date 
  - [X] Random
 
+the tree view code
+```cs
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace WpfTrial
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public object List { get; set; } = new List<School>()
+        {
+            new School(),
+            new School(),
+            new School(),
+            new School(),
+            new School(),
+        };
+
+        public MainWindow()
+        {
+            
+            InitializeComponent();
+
+
+            treeFileSystem.Items.Add(createProp("Schools", List));
+
+            
+        }
+
+        private TreeViewItem createProp(string name, object value = null)
+        {           
+            Type type = value.GetType();
+            TreeViewItem treeViewItem = new TreeViewItem();
+
+            if (value == null)
+            {
+                treeViewItem.Header = name;
+            }
+            else if (type.IsValueType || type == typeof(string))
+            {
+                treeViewItem.Header = $"{name}\t{value}";
+            }
+            else
+            {
+                treeViewItem.Header = name;
+                treeViewItem.Items.Add(value);
+            }
+
+            return treeViewItem;
+        }
+
+        private void item_Expanded(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem parent = e.OriginalSource as TreeViewItem;
+            var content = parent.Items[0];
+            parent.Items.Clear();
+            Type contentType = content.GetType();
+
+            // The content is an object
+            if (contentType.GetInterface("IEnumerable") == null)
+            {
+                foreach (var prop in contentType.GetProperties())
+                {
+                    parent.Items.Add(createProp(prop.Name, prop.GetValue(content)));
+                }
+            }
+            // The content is a list
+            else
+            {
+                int count = (int)contentType.GetProperty("Count").GetValue(content);
+                var getItemAt = contentType.GetProperty("Item");
+
+                for (int i = 0; i < count; i++)
+                {
+                    var item = getItemAt.GetValue(content, new object[] { i });
+                    Type itemType = item.GetType();
+
+                    if (itemType.IsValueType || itemType == typeof(string))
+                    {
+                        parent.Items.Add(createProp(item.ToString()));
+                    }
+                    // the list items are objects
+                    else
+                    {
+
+                        var attributeData = itemType.GetCustomAttributes(false).OfType<UniqeKeyAttribute>().Single();
+                        string uniqeValue = itemType.GetProperty(attributeData.UniqeProp).GetValue(item).ToString();
+                        parent.Items.Add(createProp(uniqeValue, item));
+                    }
+                }
+            }
+
+        }  
+
+        //private TreeViewItem BuildTree(string name, object value)
+        //{
+        //    Type type = value.GetType();
+        //    if (HasSimpleType(value)) return new TreeViewItem() { Header = $"{name}\t{value}" };
+
+        //    // Is the value a list?
+        //    if (type.GetInterface("IEnumerable") != null)
+        //    {
+
+        //        var treeView = new TreeViewItem()  {  Header = name };
+        //        int count = (int)type.GetProperty("Count").GetValue(value);
+        //        var itemProp = type.GetProperty("Item");
+
+        //        for (int i = 0; i < count; i++)
+        //        {
+        //            var item = itemProp.GetValue(value, new object[] { i });
+
+        //            treeView.Az
+        //        }
+        //    }
+
+        //}
+
+        //private bool HasSimpleType(object value)
+        //{            
+        //    Type valueType = value.GetType();
+
+        //    return valueType.IsValueType || valueType == typeof(string);
+        //}
+    }
+}
+
+```

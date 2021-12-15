@@ -17,8 +17,7 @@
                 <dragablz:InterTabController Partition="{StaticResource Partition}" />
             </dragablz:TabablzControl.InterTabController>
             <TabItem Header="Tab No. 1" IsSelected="True">
-                <local:DroneDisplay></local:DroneDisplay>
-                
+                <local:AddDrone />
             </TabItem>
             <TabItem Header="Tab No. 2">
                 <materialDesign:Clock></materialDesign:Clock>

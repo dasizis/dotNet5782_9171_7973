@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style x:Name="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="Padding" Value="5"></Setter>
@@ -23,7 +24,7 @@
             <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock FontSize="25" FontWeight="Bold" Text="{Binding Id, StringFormat=Drone #{0} Details}" Margin="0,3,0,0" Foreground="#505050"/>
+            <TextBlock FontSize="25" FontWeight="Bold" x:Name="id" Text="{Binding Id, StringFormat=Drone #{0} Details}" Margin="0,3,0,0" Foreground="#505050"/>
             <TextBlock FontSize="15" FontWeight="Medium" Text="{Binding Model}" Margin="0,1" Foreground="#505050"/>
         </StackPanel>
             <Grid Grid.Row="1">
@@ -36,8 +37,8 @@
                 <materialDesign:PackIcon Kind="Details" Foreground="MediumPurple" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
                 <TextBlock Text="{Binding MaxWeight, StringFormat=Weight: {0}}" />
                 <TextBlock Text="{Binding Battery, StringFormat=Battery: {0}%}"/>
-                <TextBlock Text="{Binding State, StringFormat=State: {0}}"/>
-                <TextBlock Text="{Binding ParcelInDeliver.Id, StringFormat=Connected Parcel: #{0}}" />
+                <TextBlock x:Name="State" Text="{Binding State, StringFormat=State: {0}}"/>
+                <TextBlock x:Name="ParcelId" Text="{Binding ParcelInDeliver.Id, StringFormat=Connected Parcel: #{0}}" />
             </StackPanel>
             <GridSplitter Background="Gray"></GridSplitter>
             <StackPanel Grid.Column="2" >
@@ -48,17 +49,19 @@
                 <TextBlock Text="{Binding Location.Latitude}"/>
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
+        <StackPanel x:Name ="t" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
             <Button
 					Style="{StaticResource MaterialDesignFlatButton}"
                     HorizontalAlignment="Center"
                     Content="UPDATE"
                     Margin="15,0" />
-            <Button
+            <Button 
 					Style="{StaticResource MaterialDesignFlatButton}"
                     HorizontalAlignment="Center"
                     Content="VIEW PARCEL"
-                    Margin="15,0" />
+                    Margin="15,0" 
+                Command="{Binding SmallDisp}" CommandParameter="{Binding}" 
+                Visibility="{Binding Path = isDeliver, Converter={StaticResource BoolToVis}}" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -16,7 +16,7 @@
                 <dragablz:InterTabController Partition="{StaticResource Partition}" />
             </dragablz:TabablzControl.InterTabController>
             <TabItem Header="Tab No. 1" IsSelected="True">
-                <local:droneslist></local:droneslist>
+                <local:AddDrone />
             </TabItem>
             <TabItem Header="Tab No. 2">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">We Have Tearable Tabs!</TextBlock>

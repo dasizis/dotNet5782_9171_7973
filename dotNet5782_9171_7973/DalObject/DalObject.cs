@@ -12,6 +12,8 @@ namespace Dal
     {
         private DalObject() { }
         static  DalObject() { }
+
+        #region Create
         /// <summary>
         /// Add an item to its data list
         /// </summary>
@@ -27,6 +29,9 @@ namespace Dal
             DataSource.Data[type].Add(item);
         }
 
+        #endregion
+
+        #region Request
         public IEnumerable<T> GetFilteredList<T>(Func<T, bool> predicate)
         {
             return GetList<T>().Where(predicate);
@@ -59,6 +64,15 @@ namespace Dal
                 throw new ObjectNotFoundException(typeof(T), id);
             }
         }
+        public int GetParcelContNumber()
+        {
+            return DataSource.Config.NextParcelID++;
+        }
+
+        public IEnumerable<DroneCharge> GetDroneCharges()
+        {
+            return DataSource.DroneCharges.Where(_ => true);
+        }
 
         /// <summary>
         /// returns tuple of all the electricity confumctiol details
@@ -76,8 +90,10 @@ namespace Dal
             );
 
         }
+        #endregion
 
-        public void Update<T>(int id, string propName, object? newValue) where T : IIdentifiable
+        #region Update
+        public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable
         {
             Type type = typeof(T);
             T item = DataSource.Data[type].Cast<T>().FirstOrDefault(item => item.Id == id)
@@ -97,34 +113,11 @@ namespace Dal
             }
             DataSource.Data[type].Add(item);
         }
-
-        public int GetParcelContNumber()
-        {
-            return DataSource.Config.NextParcelID++;
-        }
-
-        public IEnumerable<DroneCharge> GetDroneCharges()
-        {
-            return DataSource.DroneCharges.Where(_ => true);
-        }
-
-        public void FinishCharging(int droneId)
+        public void ChargeDrone(int droneId, int stationId)
         {
             if (DoesExist<Drone>(droneId))
                 throw new ObjectNotFoundException(typeof(Drone), droneId);
-            // TO DO
-
-            var charge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId && !charge.IsDeleted);
-            DataSource.DroneCharges.Remove(charge);
-            charge.IsDeleted = true;
-            DataSource.DroneCharges.Add(charge);
-        }
-
-        public void ChargeDrone(int droneId, int stationId)
-        {
-            if (DoesExist<Drone>(droneId)) 
-                throw new ObjectNotFoundException(typeof(Drone), droneId);
-            if (DoesExist<BaseStation>(stationId)) 
+            if (DoesExist<BaseStation>(stationId))
                 throw new ObjectNotFoundException(typeof(BaseStation), stationId);
 
             DataSource.DroneCharges.Add(
@@ -136,6 +129,22 @@ namespace Dal
                     IsDeleted = false,
                 });
         }
+
+        #endregion
+
+        #region Delete
+        public void FinishCharging(int droneId)
+        {
+            if (DoesExist<Drone>(droneId))
+                throw new ObjectNotFoundException(typeof(Drone), droneId);
+            // TO DO
+
+            var charge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId && !charge.IsDeleted);
+            DataSource.DroneCharges.Remove(charge);
+            charge.IsDeleted = true;
+            DataSource.DroneCharges.Add(charge);
+        }
+        #endregion
 
         static private bool DoesExist<T>(int id) where T : IIdentifiable
         {

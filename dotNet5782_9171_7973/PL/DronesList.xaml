@@ -29,7 +29,7 @@
         </ComboBox>
 
 
-        <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220">
-        </TreeView>
+        <ListView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220">
+        </ListView>
     </StackPanel>
 </UserControl>

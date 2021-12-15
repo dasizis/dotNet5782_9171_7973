@@ -15,7 +15,7 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel>
-            <TextBlock Text="{Binding Id}" />
+            <TextBlock Text="{Binding Id}"/>
             <TextBlock Text="{Binding Model}"/>
             <TextBlock Text="{Binding WeightCategory}"/>
             <TextBlock Text="{Binding Battery}"/>

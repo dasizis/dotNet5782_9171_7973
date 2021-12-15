@@ -8,17 +8,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}"></Style>
+        <Style x:Name="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Padding" Value="5"></Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <StackPanel>
-            <TextBlock Text="{Binding Id}"/>
+            <TextBlock Text="{Binding Id}" />
             <TextBlock Text="{Binding Model}"/>
             <TextBlock Text="{Binding WeightCategory}"/>
             <TextBlock Text="{Binding Battery}"/>
             <TextBlock Text="{Binding State}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding ParcelInDeliver.Id}"/>
+                <TextBlock Text="{Binding ParcelInDeliver.Id}" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"/>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
@@ -30,6 +35,10 @@
                 <TextBlock Text="{Binding Location.Longitude}"/>
                 <TextBlock Text="{Binding Location.Latitude}"/>
             </StackPanel>
-        </StackPanel>  
+            <StackPanel>
+                <Button>Update drone</Button>
+                <Button>View Connected Parcel</Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

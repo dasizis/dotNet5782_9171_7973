@@ -17,13 +17,27 @@
                 <dragablz:InterTabController Partition="{StaticResource Partition}" />
             </dragablz:TabablzControl.InterTabController>
             <TabItem Header="Tab No. 1" IsSelected="True">
-                <local:AddDrone />
+                <materialDesign:DialogHost VerticalAlignment="Center" 
+                                           IsOpen="{Binding IsSample4DialogOpen}" 
+                                           CloseOnClickAway="True" 
+                                           OverlayBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                           DialogTheme="Inherit">
+
+                    <materialDesign:DialogHost.DialogContent>
+                        <local:AddDrone />
+                    </materialDesign:DialogHost.DialogContent>
+                    <Button HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding OpenSample4DialogCommand}"
+                            Content="RUN" />
+
+                </materialDesign:DialogHost>
             </TabItem>
             <TabItem Header="Tab No. 2">
-                <materialDesign:Clock></materialDesign:Clock>
+                <local:AddDrone></local:AddDrone>
             </TabItem>
             <TabItem Header="Tab No. 3">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">yael</TextBlock>
+                <local:DroneDisplay></local:DroneDisplay>
             </TabItem>
 
         </dragablz:TabablzControl>

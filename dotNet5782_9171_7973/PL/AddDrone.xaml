@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PL"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="300">
+             d:DesignHeight="450" d:DesignWidth="250">
     <UserControl.Resources>
         <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="Margin" Value="0,15" />
@@ -22,31 +22,26 @@
             <Setter Property="Margin" Value="0,0,5,0" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="20">
+    <StackPanel Margin="15">
 
-        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Text="Add new drone"/>
+        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Add new drone" Margin="0,20"/>
        
+        <TextBox x:Name="IdTextBox" materialDesign:HintAssist.Hint="Id" />
+        <TextBox x:Name="ModelTextBox" materialDesign:HintAssist.Hint="Model" />
+        <TextBox x:Name="BaseStationIdTextBox" materialDesign:HintAssist.Hint="Base station Id"/>
+        <ComboBox x:Name="WeightCategoryComboBox" materialDesign:HintAssist.Hint="Weight Category" />
 
-        <StackPanel Orientation="Horizontal">
-            <materialDesign:PackIcon Kind="AccountCircle" />
-            <TextBox x:Name="IdTextBox" materialDesign:HintAssist.Hint="Id" />
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal">
-            <materialDesign:PackIcon Kind="Rename" />
-            <TextBox x:Name="ModelTextBox" materialDesign:HintAssist.Hint="Model" />
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal">
-            <materialDesign:PackIcon Kind="EvStation" />
-            <TextBox x:Name="BaseStationIdTextBox" materialDesign:HintAssist.Hint="Base station Id"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Center"
+                    Content="CANCEL" 
+                    Margin="5,0" />
+            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Center"
+                    Content="ADD"
+                    Margin="5,0" />
         </StackPanel>
         
-        <StackPanel Orientation="Horizontal">
-            <materialDesign:PackIcon Kind="WeightLifter" />
-            <ComboBox x:Name="WeightCategoryComboBox" materialDesign:HintAssist.Hint="Weight Category">
-        </ComboBox>
-        </StackPanel>
         
     </StackPanel>
 </UserControl>

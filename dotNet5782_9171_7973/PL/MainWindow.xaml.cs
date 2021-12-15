@@ -24,6 +24,19 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            TabControl.MouseDown += (s, e) =>
+            {
+                if (s is ListViewItem view)
+                {
+                    TabControl.Items.Add(new TabItem() { Header = "blafk", Content = new DroneDisplay() });
+
+                }
+            };
         }  
+
+        public void AddTab()
+        {
+           
+        }
     }
 }

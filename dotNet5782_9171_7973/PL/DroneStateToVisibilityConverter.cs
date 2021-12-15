@@ -9,15 +9,40 @@ using System.Windows.Data;
 
 namespace PL
 {
-
-    class DroneStateToVisibilityConverter : IMultiValueConverter
+    class FreeToVisibilityConverter : IValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int)values[0] == (int)values[1] ? Visibility.Visible: Visibility.Collapsed;
+            return (BO.DroneState)value == BO.DroneState.Free? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class MaintenanceToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (BO.DroneState)value == BO.DroneState.Maintenance ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class DeliverToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (BO.DroneState)value == BO.DroneState.Deliver ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

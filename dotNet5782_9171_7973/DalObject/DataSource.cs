@@ -10,9 +10,9 @@ namespace Dal
     public static class DataSource
     {
         const int INIT_BASESTATIONS = 2;
-        const int INIT_DRONES = 15;
+        const int INIT_DRONES = 20;
         const int INIT_CUSTOMERS = 10;
-        const int INIT_PARCELS = 10;
+        const int INIT_PARCELS = 20;
 
         internal static List<Drone> Drones { get; } = new();
         internal static List<BaseStation> BaseStations { get; } = new();
@@ -73,7 +73,7 @@ namespace Dal
             Parcels.AddRange(
                 Enumerable.Range(0, INIT_PARCELS)
                           .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, Customers))    
-                          .Select(parcel => RandomManager.Rand.Next(3) < 2
+                          .Select(parcel => RandomManager.Rand.Next(3) == 1
                                             ? default(Parcel)
                                             : new Parcel()
                                             {

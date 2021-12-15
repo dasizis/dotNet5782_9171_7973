@@ -9,14 +9,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <local:DroneStateToVisibilityConverter x:Key="DroneStateToVisibilityConverter" />
-            <Style x:Name="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="Padding" Value="5"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Foreground" Value="Gray"/>
-            </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:FreeToVisibilityConverter x:Key="FreeToVisibilityConverter" />
+            <local:MaintenanceToVisibilityConverter x:Key="MaintenanceToVisibilityConverter" />
+            <local:DeliverToVisibilityConverter x:Key="DeliverToVisibilityConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -25,10 +25,16 @@
             <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock  Text="{Binding Id, StringFormat=Drone #{0} Details}" Margin="0,3,0,0" />
-            <TextBlock FontSize="15" FontWeight="Medium" Text="{Binding Model}" Margin="0,1" Foreground="#505050"/>
+            <TextBlock Style="{StaticResource Header1Text}" Text="{Binding Id, StringFormat=Drone #{0}}" Margin="0,3,0,0" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource Header2Text}" Text="{Binding Model}"/>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="Change Model" 
+                        Content="RENAME"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
         </StackPanel>
-            <Grid Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
@@ -48,36 +54,18 @@
             </StackPanel>
         </Grid>
         <StackPanel x:Name ="t" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
-            <StackPanel.Resources>
-                <system:Int32 x:Key="Free">0</system:Int32>
-                <system:Int32 x:Key="Maintenance">1</system:Int32>
-                <system:Int32 x:Key="Deliver">2</system:Int32>
-            </StackPanel.Resources>
+
 
             <!--If The Drone Is Free-->
-            <StackPanel>
-                <StackPanel.Visibility>
-                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
-                        <Binding Path="State"></Binding>
-                        <Binding Source="{StaticResource Free}" />
-                    </MultiBinding>
-                </StackPanel.Visibility>
+            <StackPanel  Visibility="{Binding State, Converter={StaticResource FreeToVisibilityConverter}}">
                 <TextBlock>The drone is free</TextBlock>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
                         Content="SEND TO CHARGE" />
             </StackPanel>
 
-
-
             <!--If The Drone Is in Charge-->
-            <StackPanel>
-                <StackPanel.Visibility>
-                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
-                        <Binding Path="State"></Binding>
-                        <Binding Source="{StaticResource Maintenance}" />
-                    </MultiBinding>
-                </StackPanel.Visibility>
+            <StackPanel Visibility="{Binding State, Converter={StaticResource MaintenanceToVisibilityConverter}}">
                 <TextBlock>The drone in charge</TextBlock>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
@@ -85,13 +73,7 @@
             </StackPanel>
 
             <!--If The Drone Delivers-->
-            <StackPanel>
-                <StackPanel.Visibility>
-                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
-                        <Binding Path="State"></Binding>
-                        <Binding Source="{StaticResource Deliver}" />
-                    </MultiBinding>
-                </StackPanel.Visibility>
+            <StackPanel Visibility="{Binding State, Converter={StaticResource DeliverToVisibilityConverter}}">
                 <TextBlock>The drone is delivering</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource MaterialDesignFlatButton}"

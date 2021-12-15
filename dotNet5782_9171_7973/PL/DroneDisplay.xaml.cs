@@ -23,10 +23,10 @@ namespace PL
     {
         public BLApi.IBL bal { get; set; }
         bool isDeliver; 
-        public DroneDisplay()
+        public DroneDisplay(int id)
         {
             bal = BLApi.FactoryBL.GetBL();
-            Drone drone = bal.GetDrone(0);
+            Drone drone = bal.GetDrone(id);
             DataContext = drone;
             isDeliver = drone.State == DroneState.Deliver ? false : true;
 

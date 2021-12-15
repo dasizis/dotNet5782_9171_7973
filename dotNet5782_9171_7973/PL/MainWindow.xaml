@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PL"
         Title="Quick Start Window" Height="341" Width="617">
@@ -17,9 +18,10 @@
             </dragablz:TabablzControl.InterTabController>
             <TabItem Header="Tab No. 1" IsSelected="True">
                 <local:droneslist></local:droneslist>
+                
             </TabItem>
             <TabItem Header="Tab No. 2">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">We Have Tearable Tabs!</TextBlock>
+                <materialDesign:Clock></materialDesign:Clock>
             </TabItem>
             <TabItem Header="Tab No. 3">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">yael</TextBlock>

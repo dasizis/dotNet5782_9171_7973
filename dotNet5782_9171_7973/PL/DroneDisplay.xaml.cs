@@ -16,15 +16,18 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for droneslist.xaml
+    /// Interaction logic for droneDisplay.xaml
     /// </summary>
-    public partial class droneslist : UserControl
+    public partial class DroneDisplay : UserControl
     {
-        public droneslist()
+        public BLApi.IBL bal { get; set; }
+        public DroneDisplay()
         {
-            
+            bal = BLApi.FactoryBL.GetBL();
+
             InitializeComponent();
-            //dronesList.DataContext = 
+
+            DataContext = bal.GetDrone(2);
         }
     }
 }

@@ -9,8 +9,4 @@
     <OutputPath>../bin</OutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.0" />
-  </ItemGroup>
-
 </Project>

@@ -40,7 +40,8 @@
             <Button Style="{StaticResource MaterialDesignFlatButton}"
                     HorizontalAlignment="Center"
                     Content="ADD"
-                    Margin="5,0" />
+                    Margin="5,0"
+                    Click="Add_Click"/>
         </StackPanel>
         
         

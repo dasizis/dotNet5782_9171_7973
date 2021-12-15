@@ -34,8 +34,11 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem Header="Tab No. 2">
-
-                <local:AddDrone></local:AddDrone>
+                <materialDesign:DialogHost IsOpen="True">
+                    <materialDesign:DialogHost.DialogContent>
+                        <local:AddDrone />
+                    </materialDesign:DialogHost.DialogContent>
+                </materialDesign:DialogHost>
             </TabItem>
             <TabItem Header="Tab No. 3" IsSelected="True">
                 <local:DronesList />

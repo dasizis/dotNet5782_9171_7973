@@ -20,10 +20,12 @@ namespace PL
     /// </summary>
     public partial class DronesList : UserControl
     {
+        public Type FilterBy { get; set; } = null;
+        public int Selcted { get; set; }
         public DronesList()
         {
             InitializeComponent();
             DataContext = BLApi.FactoryBL.GetBL().GetDronesList();
         }
-    }
+    }    
 }

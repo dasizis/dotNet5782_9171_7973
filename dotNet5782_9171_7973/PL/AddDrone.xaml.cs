@@ -24,9 +24,19 @@ namespace PL
         public AddDrone()
         {
             bal = BLApi.FactoryBL.GetBL();
+            
             InitializeComponent();
 
             WeightCategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.WeightCategory)); ;
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            bal.AddDrone(int.Parse(IdTextBox.Text), 
+                         ModelTextBox.Text, 
+                         (BO.WeightCategory)WeightCategoryComboBox.SelectedIndex,
+                         int.Parse(BaseStationIdTextBox.Text));
+
         }
     }
 }

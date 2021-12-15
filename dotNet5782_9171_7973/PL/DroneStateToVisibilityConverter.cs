@@ -14,7 +14,7 @@ namespace PL
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return values[0] == values[1] ? Visibility.Visible: Visibility.Collapsed;
+            return (int)values[0] == (int)values[1] ? Visibility.Visible: Visibility.Collapsed;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

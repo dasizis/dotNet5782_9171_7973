@@ -50,7 +50,7 @@ namespace BL
                 Location senderLocation = null;
 
                 // Set state
-                if (parcel.Equals(default))
+                if (parcel.Equals(default(DO.Parcel)))
                 {
                     state = (DroneState)rand.Next(0, 2);
                 }
@@ -85,7 +85,7 @@ namespace BL
                 location = state switch
                 {
                     DroneState.Free => RandomSuppliedParcelLocation(),
-                    DroneState.Meintenence => stationsLocations[rand.Next(stationsLocations.Count())],
+                    DroneState.Maintenance => stationsLocations[rand.Next(stationsLocations.Count())],
                     DroneState.Deliver => parcel.Supplied != null
                                           ? targetLocation.FindClosest(stationsLocations)
                                           : senderLocation,
@@ -98,7 +98,7 @@ namespace BL
                 battery = state switch
                 {
                     DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree), 100),
-                    DroneState.Meintenence => rand.NextDouble() * 20,
+                    DroneState.Maintenance => rand.NextDouble() * 20,
                     DroneState.Deliver => rand.Next(Math.Min(
                                               (int)(
                                                   Location.Distance(location, senderLocation) * ElectricityConfumctiolFree +

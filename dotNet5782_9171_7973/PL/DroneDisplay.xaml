@@ -5,12 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PL"
-             xmlns:bo="clr-namespace:BO;assembly=BL"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:DroneStateToVisibilityConverter x:Key="DroneStateToVisibilityConverter" />
-        <!--<ResourceDictionary Source="Dictionary.xaml"/>-->
+            <Style x:Name="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="Padding" Value="5"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="Gray"/>
+            </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -42,16 +48,50 @@
             </StackPanel>
         </Grid>
         <StackPanel x:Name ="t" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
+            <StackPanel.Resources>
+                <system:Int32 x:Key="Free">0</system:Int32>
+                <system:Int32 x:Key="Maintenance">1</system:Int32>
+                <system:Int32 x:Key="Deliver">2</system:Int32>
+            </StackPanel.Resources>
+
             <!--If The Drone Is Free-->
             <StackPanel>
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
+                        <Binding Path="State"></Binding>
+                        <Binding Source="{StaticResource Free}" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
                 <TextBlock>The drone is free</TextBlock>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
                         Content="SEND TO CHARGE" />
             </StackPanel>
 
+
+
+            <!--If The Drone Is in Charge-->
+            <StackPanel>
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
+                        <Binding Path="State"></Binding>
+                        <Binding Source="{StaticResource Maintenance}" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
+                <TextBlock>The drone in charge</TextBlock>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        HorizontalAlignment="Center"
+                        Content="VIEW BASE STATION" />
+            </StackPanel>
+
             <!--If The Drone Delivers-->
             <StackPanel>
+                <StackPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
+                        <Binding Path="State"></Binding>
+                        <Binding Source="{StaticResource Deliver}" />
+                    </MultiBinding>
+                </StackPanel.Visibility>
                 <TextBlock>The drone is delivering</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -65,33 +105,6 @@
                         Content="VIEW RECEIVER" />
                 </StackPanel>
             </StackPanel>
-
-            <!--If The Drone Is in Charge-->
-            <StackPanel>
-                <StackPanel.Visibility>
-                    <MultiBinding Converter="{StaticResource DroneStateToVisibilityConverter}">
-                        <Binding Path="State"></Binding>
-                    </MultiBinding>
-                </StackPanel.Visibility>
-                <TextBlock>The drone in charge</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        HorizontalAlignment="Center"
-                        Content="VIEW BASE STATION" />
-            </StackPanel>
-            
-            
-            <Button
-					Style="{StaticResource MaterialDesignFlatButton}"
-                    HorizontalAlignment="Center"
-                    Content="UPDATE"
-                    Margin="15,0" />
-            <Button 
-					Style="{StaticResource MaterialDesignFlatButton}"
-                    HorizontalAlignment="Center"
-                    Content="VIEW PARCEL"
-                    Margin="15,0" 
-                Command="{Binding SmallDisp}" CommandParameter="{Binding}" 
-                Visibility="{Binding Path = isDeliver}" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

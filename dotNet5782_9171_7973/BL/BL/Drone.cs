@@ -28,7 +28,7 @@ namespace BL
                 Battery = 0,
                 Location = station.Location,
                 ParcelInDeliver = null,
-                State = DroneState.Meintenence,
+                State = DroneState.Maintenance,
             };
 
             drones.Add(
@@ -108,7 +108,7 @@ namespace BL
             DroneForList drone = GetDroneForList(droneId);
 
             //TODO logic
-            if (drone.State != DroneState.Meintenence)
+            if (drone.State != DroneState.Maintenance)
             {
                 throw new InValidActionException("Drone already in meintenece.");
             }
@@ -163,7 +163,7 @@ namespace BL
             }
 
             drone.Location = closest.Location;
-            drone.State = DroneState.Meintenence;
+            drone.State = DroneState.Maintenance;
             drone.Battery -= ElectricityConfumctiolFree * Location.Distance(closest.Location, drone.Location);
 
             // What for?

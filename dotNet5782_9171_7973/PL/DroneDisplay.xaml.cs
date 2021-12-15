@@ -28,6 +28,7 @@ namespace PL
             InitializeComponent();
 
             DataContext = bal.GetDrone(1);
+            
         }
     }
 }

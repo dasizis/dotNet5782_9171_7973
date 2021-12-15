@@ -11,34 +11,54 @@
         <Style x:Name="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="Padding" Value="5"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Gray"/>
         </Style>
     </UserControl.Resources>
     <Grid>
-        <StackPanel>
-            <TextBlock Text="{Binding Id}"/>
-            <TextBlock Text="{Binding Model}"/>
-            <TextBlock Text="{Binding WeightCategory}"/>
-            <TextBlock Text="{Binding Battery}"/>
-            <TextBlock Text="{Binding State}"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding ParcelInDeliver.Id}" 
-                           HorizontalAlignment="Center" 
-                           VerticalAlignment="Center"/>
-                <Button
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                    Content="_View Parcel Details"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.4*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock FontSize="25" FontWeight="Bold" Text="{Binding Id, StringFormat=Drone #{0} Details}" Margin="0,3,0,0" Foreground="#505050"/>
+            <TextBlock FontSize="15" FontWeight="Medium" Text="{Binding Model}" Margin="0,1" Foreground="#505050"/>
+        </StackPanel>
+            <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.1"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" >
+                <materialDesign:PackIcon Kind="Details" Foreground="MediumPurple" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
+                <TextBlock Text="{Binding MaxWeight, StringFormat=Weight: {0}}" />
+                <TextBlock Text="{Binding Battery, StringFormat=Battery: {0}%}"/>
+                <TextBlock Text="{Binding State, StringFormat=State: {0}}"/>
+                <TextBlock Text="{Binding ParcelInDeliver.Id, StringFormat=Connected Parcel: #{0}}" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="MapMarkerRadius"/>
+            <GridSplitter Background="Gray"></GridSplitter>
+            <StackPanel Grid.Column="2" >
+                <materialDesign:PackIcon Kind="MapMarkerRadius" Foreground="MediumPurple" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
+                <TextBlock Text="Longitude"/>
                 <TextBlock Text="{Binding Location.Longitude}"/>
+                <TextBlock Text="Latitude"/>
                 <TextBlock Text="{Binding Location.Latitude}"/>
             </StackPanel>
-            <StackPanel>
-                <Button>Update drone</Button>
-                <Button>View Connected Parcel</Button>
-            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
+            <Button
+					Style="{StaticResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Center"
+                    Content="UPDATE"
+                    Margin="15,0" />
+            <Button
+					Style="{StaticResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Center"
+                    Content="VIEW PARCEL"
+                    Margin="15,0" />
         </StackPanel>
     </Grid>
 </UserControl>

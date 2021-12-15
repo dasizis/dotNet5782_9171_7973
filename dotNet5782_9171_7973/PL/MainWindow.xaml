@@ -37,8 +37,8 @@
 
                 <local:AddDrone></local:AddDrone>
             </TabItem>
-            <TabItem Header="Tab No. 3">
-
+            <TabItem Header="Drone Display">
+                <local:DroneDisplay></local:DroneDisplay>
             </TabItem>
 
         </dragablz:TabablzControl>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,14 +22,22 @@ namespace PL
     public partial class DroneDisplay : UserControl
     {
         public BLApi.IBL bal { get; set; }
+        bool isDeliver; 
         public DroneDisplay()
         {
             bal = BLApi.FactoryBL.GetBL();
+            Drone drone = bal.GetDrone(1);
+            DataContext = drone;
+            isDeliver = drone.State == DroneState.Deliver ? false : true;
 
-            InitializeComponent();
+            InitializeComponent();   
+        }
 
-            DataContext = bal.GetDrone(1);
-            
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TextBlock textBlock = new();
+            textBlock.Text = ParcelId.Text;
+            t.Children.Add(textBlock);
         }
     }
 }

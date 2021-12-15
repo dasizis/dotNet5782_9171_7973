@@ -20,7 +20,7 @@
                 <local:AddDrone />
             </TabItem>
             <TabItem Header="Tab No. 2">
-                <materialDesign:Clock></materialDesign:Clock>
+                <local:DroneDisplay></local:DroneDisplay>
             </TabItem>
             <TabItem Header="Tab No. 3">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">yael</TextBlock>

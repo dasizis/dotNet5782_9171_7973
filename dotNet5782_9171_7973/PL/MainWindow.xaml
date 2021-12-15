@@ -34,10 +34,11 @@
                 </materialDesign:DialogHost>
             </TabItem>
             <TabItem Header="Tab No. 2">
+
                 <local:AddDrone></local:AddDrone>
             </TabItem>
             <TabItem Header="Tab No. 3">
-                <local:DroneDisplay></local:DroneDisplay>
+
             </TabItem>
 
         </dragablz:TabablzControl>

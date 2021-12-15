@@ -27,7 +27,7 @@ namespace PL
             
             InitializeComponent();
 
-            WeightCategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.WeightCategory)); ;
+            WeightCategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.WeightCategory)); 
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

@@ -11,40 +11,24 @@
     <Window.Resources>
         <system:String x:Key="Partition">QuickStart</system:String>
     </Window.Resources>
-    <dockablz:Layout Partition="{StaticResource Partition}">
+    <materialDesign:DialogHost>
+        <dockablz:Layout Partition="{StaticResource Partition}">
         <dragablz:TabablzControl Margin="8" ConsolidateOrphanedItems="True">
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController Partition="{StaticResource Partition}" />
             </dragablz:TabablzControl.InterTabController>
             <TabItem Header="Tab No. 1">
-                <materialDesign:DialogHost VerticalAlignment="Center" 
-                                           IsOpen="{Binding IsSample4DialogOpen}" 
-                                           CloseOnClickAway="True" 
-                                           OverlayBackground="{DynamicResource PrimaryHueDarkBrush}"
-                                           DialogTheme="Inherit">
-
-                    <materialDesign:DialogHost.DialogContent>
-                        <local:AddDrone />
-                    </materialDesign:DialogHost.DialogContent>
-                    <Button HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Command="{Binding OpenSample4DialogCommand}"
-                            Content="RUN" />
-
-                </materialDesign:DialogHost>
+                <local:DroneDisplay />
             </TabItem>
-            <TabItem Header="Tab No. 2">
-                <materialDesign:DialogHost IsOpen="True">
-                    <materialDesign:DialogHost.DialogContent>
-                        <local:AddDrone />
-                    </materialDesign:DialogHost.DialogContent>
-                </materialDesign:DialogHost>
-            </TabItem>
+                <TabItem Header="Tab No. 2">
+                </TabItem>
             <TabItem Header="Tab No. 3" IsSelected="True">
                 <local:DronesList />
             </TabItem>
 
         </dragablz:TabablzControl>
     </dockablz:Layout>
+    </materialDesign:DialogHost>
+    
 </Window>
 

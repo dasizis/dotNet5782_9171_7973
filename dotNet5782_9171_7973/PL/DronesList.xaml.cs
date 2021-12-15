@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,46 @@ namespace PL
     /// </summary>
     public partial class DronesList : UserControl
     {
-        public Type FilterBy { get; set; } = null;
-        public int Selcted { get; set; }
+        public List<Type> FilterBy { get; set; } = new()
+        {
+            typeof(BO.WeightCategory),
+            typeof(BO.DroneState),
+        };
+
+        public int SelectedType { get; set; }
+        public int SelectedOption { get; set; }
+        public BLApi.IBL bal { get; set; }
+
+        public ObservableCollection<BO.DroneForList> Drones { get; set; }
         public DronesList()
         {
+            bal = BLApi.FactoryBL.GetBL();
+
+            DataContext = this;
+            Drones = new (bal.GetDronesList()); 
             InitializeComponent();
-            DataContext = BLApi.FactoryBL.GetBL().GetDronesList();
+        }
+
+        private void FilterByComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo = sender as ComboBox;
+            SelectedType = combo.SelectedIndex;
+            ChooseOptionComboBox.ItemsSource = Enum.GetValues(combo.SelectedItem as Type);
+        }
+
+        private void ChooseOptionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedOption = (sender as ComboBox).SelectedIndex;
+            SelectionChanged();
+        }
+
+        private void SelectionChanged()
+        {
+            Drones.Clear();
+            foreach (var item in bal.GetFilteredDronesList(FilterBy[SelectedType], SelectedOption))
+            {
+                Drones.Add(item);
+            }
         }
     }    
 }

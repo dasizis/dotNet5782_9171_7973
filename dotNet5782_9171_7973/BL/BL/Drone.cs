@@ -196,5 +196,13 @@ namespace BL
             return drone.Battery >= neededBattery;
         }
 
+        public IEnumerable<DroneForList> GetFilteredDronesList(Type enumType, int option)
+        {
+            return enumType switch
+            {
+                var t when t == typeof(DroneState) => GetDronesList().Where(d => d.State == (DroneState)option),
+                var t when t == typeof(WeightCategory) => GetDronesList().Where(d => d.MaxWeight == (WeightCategory)option),
+            };
+        }
     }
 }

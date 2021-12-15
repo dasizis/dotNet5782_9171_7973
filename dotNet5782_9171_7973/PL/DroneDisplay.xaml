@@ -29,20 +29,18 @@
         </StackPanel>
             <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="0.1"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" >
-                <materialDesign:PackIcon Kind="Details" Foreground="MediumPurple" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
+                <materialDesign:PackIcon Kind="Details" Foreground="{DynamicResource PrimaryHueLightBrush}" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
                 <TextBlock Text="{Binding MaxWeight, StringFormat=Weight: {0}}" />
                 <TextBlock Text="{Binding Battery, StringFormat=Battery: {0}%}"/>
                 <TextBlock x:Name="State" Text="{Binding State, StringFormat=State: {0}}"/>
                 <TextBlock x:Name="ParcelId" Text="{Binding ParcelInDeliver.Id, StringFormat=Connected Parcel: #{0}}" />
             </StackPanel>
-            <GridSplitter Background="Gray"></GridSplitter>
-            <StackPanel Grid.Column="2" >
-                <materialDesign:PackIcon Kind="MapMarkerRadius" Foreground="MediumPurple" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
+            <StackPanel Grid.Column="1" >
+                <materialDesign:PackIcon Kind="MapMarkerRadius" Foreground="{DynamicResource PrimaryHueLightBrush}" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
                 <TextBlock Text="Longitude"/>
                 <TextBlock Text="{Binding Location.Longitude}"/>
                 <TextBlock Text="Latitude"/>
@@ -61,7 +59,7 @@
                     Content="VIEW PARCEL"
                     Margin="15,0" 
                 Command="{Binding SmallDisp}" CommandParameter="{Binding}" 
-                Visibility="{Binding Path = isDeliver, Converter={StaticResource BoolToVis}}" Click="Button_Click"/>
+                Visibility="{Binding Path = isDeliver, Converter={StaticResource BoolToVis}}"/>
         </StackPanel>
     </Grid>
 </UserControl>

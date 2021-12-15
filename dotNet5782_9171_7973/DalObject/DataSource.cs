@@ -37,7 +37,7 @@ namespace Dal
 
         public class Config
         {
-            public static int NextParcelID = 1;
+            public static int NextParcelID = 0;
 
             public static class ElectricityConfumctiol
             {

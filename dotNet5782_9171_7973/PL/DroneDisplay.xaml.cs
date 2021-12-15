@@ -26,7 +26,7 @@ namespace PL
         public DroneDisplay()
         {
             bal = BLApi.FactoryBL.GetBL();
-            Drone drone = bal.GetDrone(1);
+            Drone drone = bal.GetDrone(0);
             DataContext = drone;
             isDeliver = drone.State == DroneState.Deliver ? false : true;
 

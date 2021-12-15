@@ -15,5 +15,8 @@ namespace BLApi
         void FinishCharging(int droneId, double timeInCharge);
         IEnumerable<DroneForList> GetDronesList();
         Drone GetDrone(int id);
+
+        IEnumerable<DroneForList> GetFilteredDronesList(Type enumType, int option);
+
     }
 }

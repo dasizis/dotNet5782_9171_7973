@@ -34,6 +34,9 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
             <Button Style="{StaticResource MaterialDesignFlatButton}"
+                    IsCancel="True" 
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                    CommandParameter="Sample2Cancel"
                     HorizontalAlignment="Center"
                     Content="CANCEL" 
                     Margin="5,0" />

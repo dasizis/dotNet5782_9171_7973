@@ -40,8 +40,7 @@ namespace BL
                                        .ToList();
 
             foreach (var dlDrone in dlDrones)
-            {
-
+            { 
                 var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
                 double battery;
                 int? parcelInDeliverId = null;

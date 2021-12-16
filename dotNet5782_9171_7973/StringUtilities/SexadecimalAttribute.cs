@@ -16,9 +16,9 @@ namespace StringUtilities
     {
     }
 
-    static class Sexadecimal
+    public static class Sexadecimal
     {
-        internal static string Longitde(double longitude)
+        public static string Longitde(double longitude)
         {
             string ch = "E";
             if (longitude < 0)
@@ -34,7 +34,7 @@ namespace StringUtilities
 
         }
 
-        internal static string Latitude(double latitude)
+        public static string Latitude(double latitude)
         {
             string ch = "N";
             if (latitude < 0)

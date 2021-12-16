@@ -5,6 +5,12 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <local:ObjectToTreeViewPropsConverter x:Key="ObjectToTreeViewPropsConverter" />
     <local:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
+    <local:LongitudeConverter x:Key="LongitudeConverter" />
+    <local:LatitudeConverter x:Key="LatitudeConverter" />
+
+    <Style TargetType="materialDesign:PackIcon">
+        <Setter Property="Margin" Value="0,0,10,0" />
+    </Style>
     
     <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
         <StackPanel Orientation="Horizontal">
@@ -15,27 +21,27 @@
     <HierarchicalDataTemplate DataType="{x:Type local:TreeViewLocationProp}" ItemsSource="{Binding Converter={StaticResource LocationToOrientaionConverter}}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="MapMarker" />
-            <TextBlock Text="Location" />
+            <TextBlock Text="Location" FontWeight="Bold"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <DataTemplate DataType="{x:Type local:Longitude}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="Longitude" />
-            <TextBlock Text="{Binding Long}" />
+            <TextBlock Text="{Binding Long, Converter={StaticResource LongitudeConverter}}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:Latitude}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="Latitude" />
-            <TextBlock Text="{Binding Lat}" />
+            <TextBlock Text="{Binding Lat, Converter={StaticResource LatitudeConverter}}" />
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:TreeViewProp}">
-        <DockPanel Width="200">
-            <TextBlock Text="{Binding PropName}"/>
+        <DockPanel Width="160">
+            <TextBlock Text="{Binding PropName}" FontWeight="Bold"/>
             <TextBlock Text="{Binding propValue}" TextAlignment="Right"/>
         </DockPanel>
     </DataTemplate>

@@ -8,25 +8,41 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary Source="ListDesign/TreeViewDictionary.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ListDesign/TreeViewDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+                <Setter Property="Margin" Value="25,5" />
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="Margin" Value="25,15" />
+            </Style>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+        </ResourceDictionary>
+        
     </UserControl.Resources>
     
-    <StackPanel>
-        <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                Width="128"
-                Content="Add Drone">
-            <Button.CommandParameter>
-                <StackPanel Margin="16">
-                    <local:AddDrone />
-                </StackPanel>
-            </Button.CommandParameter>
-        </Button>
-        <ComboBox ItemsSource="{Binding StateOptions}" SelectedIndex="{Binding SelectedState}" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Choose State"/>
-        <ComboBox ItemsSource="{Binding WeightOptions}" SelectedIndex="{Binding SelectedWeight}" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Choose Max Weight"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="{DynamicResource MaterialDesignLightBackground}">
+            <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                    Content="Add Drone">
+                <Button.CommandParameter>
+                    <StackPanel Margin="16">
+                        <local:AddDrone />
+                    </StackPanel>
+                </Button.CommandParameter>
+            </Button>
+            <ComboBox ItemsSource="{Binding StateOptions}" SelectedIndex="{Binding SelectedState}"  materialDesign:HintAssist.Hint="Choose State"/>
+            <ComboBox ItemsSource="{Binding WeightOptions}" SelectedIndex="{Binding SelectedWeight}"  materialDesign:HintAssist.Hint="Choose Max Weight"/>
+        </StackPanel>
 
-
-
-        <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220">
-        </TreeView>
-    </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">        
+            <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220" />
+        </ScrollViewer>
+    </Grid>
 </UserControl>

@@ -70,7 +70,7 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var parcel = BLApi.FactoryBL.GetBL().GetParcel((int)value);
-            return parcel.Supplied == null ? Visibility.Visible : Visibility.Collapsed;
+            return (parcel.Supplied == null && parcel.PickedUp != null) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -22,11 +22,12 @@ namespace PL
     public partial class DroneDisplay : UserControl
     {
         public BLApi.IBL bal { get; set; }
+        public Drone drone { get; set; }
         bool isDeliver;
         public DroneDisplay(int id)
         {
             bal = BLApi.FactoryBL.GetBL();
-            Drone drone = bal.GetDrone(id);
+            drone = bal.GetDrone(id);
             DataContext = drone;
             isDeliver = drone.State == DroneState.Deliver ? false : true;
             InitializeComponent();   
@@ -40,6 +41,21 @@ namespace PL
         }
 
 
-        
+        private void SendToCharge_Click(object sender, RoutedEventArgs e)
+        {
+            bal.ChargeDrone(drone.Id);
+        }
+
+        private void CollectParcel_Click(object sender, RoutedEventArgs e)
+        {
+            bal.PickUpParcel(drone.Id);
+        }
+
+        private void SupplyParcel_Click(object sender, RoutedEventArgs e)
+        {
+            bal.SupplyParcel(drone.Id);
+        }
+
+
     }
 }

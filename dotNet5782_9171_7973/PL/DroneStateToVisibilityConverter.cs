@@ -47,5 +47,36 @@ namespace PL
             throw new NotImplementedException();
         }
     }
+
+    class CollectedToVIsibilityConverter : IValueConverter
+    {
+        public BLApi.IBL bal { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var parcel = BLApi.FactoryBL.GetBL().GetParcel((int)value);
+            return parcel.PickedUp == null ? Visibility.Visible: Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    class SuppliedToVIsibilityConverter : IValueConverter
+    {
+        public BLApi.IBL bal { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var parcel = BLApi.FactoryBL.GetBL().GetParcel((int)value);
+            return parcel.Supplied == null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 

@@ -22,14 +22,13 @@ namespace PL
     public partial class DroneDisplay : UserControl
     {
         public BLApi.IBL bal { get; set; }
-        bool isDeliver; 
+        bool isDeliver;
         public DroneDisplay(int id)
         {
             bal = BLApi.FactoryBL.GetBL();
             Drone drone = bal.GetDrone(id);
             DataContext = drone;
             isDeliver = drone.State == DroneState.Deliver ? false : true;
-
             InitializeComponent();   
         }
 
@@ -39,5 +38,8 @@ namespace PL
             textBlock.Text = ParcelId.Text;
             t.Children.Add(textBlock);
         }
+
+
+        
     }
 }

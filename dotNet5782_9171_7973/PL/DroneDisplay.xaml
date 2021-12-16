@@ -16,6 +16,8 @@
             <local:FreeToVisibilityConverter x:Key="FreeToVisibilityConverter" />
             <local:MaintenanceToVisibilityConverter x:Key="MaintenanceToVisibilityConverter" />
             <local:DeliverToVisibilityConverter x:Key="DeliverToVisibilityConverter" />
+            <local:CollectedToVIsibilityConverter x:Key="CollectedToVisibilityConverter"/>
+            <local:SuppliedToVIsibilityConverter x:Key="SuppliedToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -28,10 +30,18 @@
             <TextBlock Style="{StaticResource Header1Text}" Text="{Binding Id, StringFormat=Drone #{0}}" Margin="0,3,0,0" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource Header2Text}" Text="{Binding Model}"/>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
                         ToolTip="Change Model" 
                         Content="RENAME"
-                        HorizontalAlignment="Center"/>
+                        HorizontalAlignment="Center">
+                    <Button.CommandParameter>
+                        <StackPanel Margin="16">
+                            <local:ChangeModel DroneId="{Binding Id}"/>
+                        </StackPanel>
+                    </Button.CommandParameter>
+                </Button>
+                
             </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1">
@@ -59,9 +69,17 @@
             <!--If The Drone Is Free-->
             <StackPanel  Visibility="{Binding State, Converter={StaticResource FreeToVisibilityConverter}}">
                 <TextBlock>The drone is free</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        HorizontalAlignment="Center"
-                        Content="SEND TO CHARGE" />
+                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Margin="16"
+                        ToolTip="Send to charge at base station" 
+                        Content="SEND TO CHARGE"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button.CommandParameter>
+                        <StackPanel Margin="16">
+                            <local:Success TextContent="Drone was sent to charge"/>
+                        </StackPanel>
+                    </Button.CommandParameter>
+                </Button>
             </StackPanel>
 
             <!--If The Drone Is in Charge-->
@@ -69,7 +87,8 @@
                 <TextBlock>The drone in charge</TextBlock>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
-                        Content="VIEW BASE STATION" />
+                        Content="VIEW BASE STATION"
+                        IsEnabled="False"/>
             </StackPanel>
 
             <!--If The Drone Delivers-->
@@ -78,13 +97,42 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
-                        Content="VIEW PARCEL" />
+                        Content="VIEW PARCEL" 
+                        IsEnabled="false"/>
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
-                        Content="VIEW SENDER" />
+                        Content="VIEW SENDER" 
+                        IsEnabled="false"/>
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
-                        Content="VIEW RECEIVER" />
+                        Content="VIEW RECEIVER"
+                        IsEnabled="false"/>
+                    <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Visibility="{Binding ParcelInDeliver.Id, Converter={StaticResource CollectedToVisibilityConverter}}"
+                        ToolTip="Collect related parcel" 
+                        Content="COLLECT PARCEL"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                        <Button.CommandParameter>
+                            <StackPanel Margin="16">
+                                <local:Success TextContent="Drone collected parcel"/>
+                            </StackPanel>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Visibility="{Binding ParcelInDeliver.Id, Converter={StaticResource SuppliedToVisibilityConverter}}"
+                        ToolTip="Supply related parcel" 
+                        Content="SUPPLY PARCEL"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                        <Button.CommandParameter>
+                            <StackPanel Margin="16">
+                                <local:Success TextContent="Drone supplied parcel"/>
+                            </StackPanel>
+                        </Button.CommandParameter>
+                    </Button>
+                    
+                    
                 </StackPanel>
             </StackPanel>
         </StackPanel>

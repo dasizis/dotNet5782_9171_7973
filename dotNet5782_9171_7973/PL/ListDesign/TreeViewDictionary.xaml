@@ -11,12 +11,6 @@
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
     </Style>
-    
-    <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Model}" />
-        </StackPanel>
-    </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type local:TreeViewLocationProp}" ItemsSource="{Binding Converter={StaticResource LocationToOrientaionConverter}}">
         <StackPanel Orientation="Horizontal">

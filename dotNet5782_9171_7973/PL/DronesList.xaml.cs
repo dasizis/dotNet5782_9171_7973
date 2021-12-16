@@ -30,7 +30,7 @@ namespace PL
             set { SetValue(SelectedStateProperty, value); LoadDrones(); }
         }
 
-       
+
         public static readonly DependencyProperty SelectedStateProperty =
             DependencyProperty.Register("SelectedDroneState", typeof(BO.DroneState), typeof(ComboBox), new PropertyMetadata((BO.DroneState)3));
 
@@ -68,6 +68,12 @@ namespace PL
             {
                 Drones.Add(item);
             }
+        }
+
+
+        private void Drone_Click(object sender, MouseButtonEventArgs e)
+        {
+            OpenNewTab.AddDroneDisplayTab(((sender as FrameworkElement).Tag as BO.DroneForList).Id);
         }
     }    
 }

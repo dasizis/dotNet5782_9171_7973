@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dragablz;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +22,16 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        public ObservableCollection<BO.DroneForList> Drones { get; set; } 
+        public static UserControl TabToAdd { get; set; } = null;
+        public static string TabHeader { get; set; }
         public MainWindow()
         {
-            
             InitializeComponent();
-
-            //TabControl.MouseDoubleClick += (s, e) =>  
-            TabControl.Items.Add(new TabItem() { Header = "blafk", Content = new DroneDisplay(1) });
-
-        }  
-
-        public void AddTab()
-        {
+            TabControl.NewItemFactory = () => new TabItem() 
+            { 
+                Header = TabHeader ?? throw new InvalidOperationException("No tab to add."), Content = TabToAdd 
+            };
         }
     }
 }

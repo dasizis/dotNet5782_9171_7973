@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:bo="clr-namespace:BO;assembly=BL"
+                    xmlns:local="clr-namespace:PL"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <local:ObjectToTreeViewPropsConverter x:Key="ObjectToTreeViewPropsConverter" />
+    <local:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
+    
+    <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Model}" />
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate DataType="{x:Type local:TreeViewLocationProp}" ItemsSource="{Binding Converter={StaticResource LocationToOrientaionConverter}}">
+        <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="MapMarker" />
+            <TextBlock Text="Location" />
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate DataType="{x:Type local:Longitude}">
+        <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="Longitude" />
+            <TextBlock Text="{Binding Long}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:Latitude}">
+        <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="Latitude" />
+            <TextBlock Text="{Binding Lat}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:TreeViewProp}">
+        <DockPanel Width="200">
+            <TextBlock Text="{Binding PropName}"/>
+            <TextBlock Text="{Binding propValue}" TextAlignment="Right"/>
+        </DockPanel>
+    </DataTemplate>
+</ResourceDictionary>

@@ -22,11 +22,9 @@
                 </StackPanel>
             </Button.CommandParameter>
         </Button>
-        <ComboBox ItemsSource="{Binding FilterBy}" SelectionChanged="FilterByComboBox_SelectionChanged">
-        </ComboBox>
-        <ComboBox x:Name="ChooseOptionComboBox" SelectionChanged="ChooseOptionComboBox_SelectionChanged">
+        <ComboBox ItemsSource="{Binding StateOptions}" SelectedIndex="{Binding SelectedState}" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Choose State"/>
+        <ComboBox ItemsSource="{Binding WeightOptions}" SelectedIndex="{Binding SelectedWeight}" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Choose Max Weight"/>
 
-        </ComboBox>
 
 
         <ListView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220">

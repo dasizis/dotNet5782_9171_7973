@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BLApi;
+using BO;
 using Singelton;
 using System;
 using System.Collections.Generic;
@@ -137,6 +138,7 @@ namespace BL
                 WeightCategory.Heavy => ElectricityConfumctiolHeavy,
             };
         }
+
         //public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
         //{
         //    return DataSource.Parcels.Where(parcel => parcel.DroneId == null);

@@ -16,7 +16,7 @@ namespace BLApi
         IEnumerable<DroneForList> GetDronesList();
         Drone GetDrone(int id);
 
-        IEnumerable<DroneForList> GetFilteredDronesList(Type enumType, int option);
+        IEnumerable<DroneForList> GetFilteredDronesList(int? stateOption, int? weightOption);
 
     }
 }

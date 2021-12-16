@@ -58,7 +58,7 @@
 
             <!--If The Drone Is Free-->
             <StackPanel  Visibility="{Binding State, Converter={StaticResource FreeToVisibilityConverter}}">
-                <TextBlock>The drone is free</TextBlock>
+                <TextBlock>The drone is free</TextBlock>         
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
                         Content="SEND TO CHARGE" />

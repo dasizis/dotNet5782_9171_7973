@@ -21,14 +21,32 @@ namespace PL
     /// </summary>
     public partial class DronesList : UserControl
     {
-        public List<Type> FilterBy { get; set; } = new()
-        {
-            typeof(BO.WeightCategory),
-            typeof(BO.DroneState),
-        };
+        public Array StateOptions { get; set; } = Enum.GetValues(typeof(BO.DroneState)).Cast<BO.DroneState>().Select(o => $"{o}").Append("All").ToArray();
+        public Array WeightOptions { get; set; } = Enum.GetValues(typeof(BO.WeightCategory)).Cast<BO.WeightCategory>().Select(o => $"{o}").Append("All").ToArray();
 
-        public int SelectedType { get; set; }
-        public int SelectedOption { get; set; }
+        public BO.DroneState SelectedState
+        {
+            get { return (BO.DroneState)GetValue(SelectedStateProperty); }
+            set { SetValue(SelectedStateProperty, value); LoadDrones(); }
+        }
+
+       
+        public static readonly DependencyProperty SelectedStateProperty =
+            DependencyProperty.Register("SelectedDroneState", typeof(BO.DroneState), typeof(ComboBox), new PropertyMetadata((BO.DroneState)3));
+
+
+
+        public BO.WeightCategory SelectedWeight
+        {
+            get { return (BO.WeightCategory)GetValue(SelectedWeightProperty); }
+            set { SetValue(SelectedWeightProperty, value); LoadDrones(); }
+        }
+
+        public static readonly DependencyProperty SelectedWeightProperty =
+            DependencyProperty.Register("SelectedWeight", typeof(BO.WeightCategory), typeof(ComboBox), new PropertyMetadata((BO.WeightCategory)3));
+
+
+
         public BLApi.IBL bal { get; set; }
 
         public ObservableCollection<BO.DroneForList> Drones { get; set; }
@@ -41,23 +59,12 @@ namespace PL
             InitializeComponent();
         }
 
-        private void FilterByComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox combo = sender as ComboBox;
-            SelectedType = combo.SelectedIndex;
-            ChooseOptionComboBox.ItemsSource = Enum.GetValues(combo.SelectedItem as Type);
-        }
-
-        private void ChooseOptionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectedOption = (sender as ComboBox).SelectedIndex;
-            SelectionChanged();
-        }
-
-        private void SelectionChanged()
+        private void LoadDrones()
         {
             Drones.Clear();
-            foreach (var item in bal.GetFilteredDronesList(FilterBy[SelectedType], SelectedOption))
+            var drones = bal.GetFilteredDronesList(Enum.IsDefined(typeof(BO.DroneState), SelectedState)? (int?)SelectedState: null ,
+                                                   Enum.IsDefined(typeof(BO.WeightCategory), SelectedWeight) ? (int?)SelectedWeight : null);
+            foreach (var item in drones)
             {
                 Drones.Add(item);
             }

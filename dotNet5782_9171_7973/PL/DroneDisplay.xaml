@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionary.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
             <local:FreeToVisibilityConverter x:Key="FreeToVisibilityConverter" />
             <local:MaintenanceToVisibilityConverter x:Key="MaintenanceToVisibilityConverter" />
@@ -73,7 +74,8 @@
                         Margin="16"
                         ToolTip="Send to charge at base station" 
                         Content="SEND TO CHARGE"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="SendToCharge_Click">
                     <Button.CommandParameter>
                         <StackPanel Margin="16">
                             <local:Success TextContent="Drone was sent to charge"/>
@@ -112,6 +114,7 @@
                         ToolTip="Collect related parcel" 
                         Content="COLLECT PARCEL"
                         HorizontalAlignment="Center"
+                        Click="CollectParcel_Click"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
                             <StackPanel Margin="16">
@@ -124,6 +127,7 @@
                         ToolTip="Supply related parcel" 
                         Content="SUPPLY PARCEL"
                         HorizontalAlignment="Center"
+                        Click="SupplyParcel_Click"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
                             <StackPanel Margin="16">

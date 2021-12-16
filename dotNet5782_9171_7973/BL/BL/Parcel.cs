@@ -105,7 +105,7 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(Parcel), parcel.Id);
             }
 
-            drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree;
+            drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree * 0.1;
             drone.Location = parcelInDeliver.CollectLocation;
 
 

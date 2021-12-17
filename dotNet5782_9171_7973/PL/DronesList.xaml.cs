@@ -46,19 +46,28 @@ namespace PL
             DependencyProperty.Register("SelectedWeight", typeof(BO.WeightCategory), typeof(ComboBox), new PropertyMetadata((BO.WeightCategory)3));
 
 
-
         public BLApi.IBL bal { get; set; }
 
         public ObservableCollection<BO.DroneForList> Drones { get; set; }
         public DronesList()
         {
             bal = BLApi.FactoryBL.GetBL();
-
+            Drones = new (bal.GetDronesList());
             DataContext = this;
-            Drones = new (bal.GetDronesList()); 
             InitializeComponent();
+            DronesHandlers.DroneChangedEvent += DronesHandlers_DroneChangedEvent;
+
         }
 
+        private void DronesHandlers_DroneChangedEvent(object sender, DroneChangedEventArg e)
+        {
+            LoadDrones();
+        }
+
+        private void c()
+        {
+            DataContext = bal.GetDronesList();
+        }
         private void LoadDrones()
         {
             Drones.Clear();
@@ -73,7 +82,7 @@ namespace PL
 
         private void Drone_Click(object sender, MouseButtonEventArgs e)
         {
-            OpenNewTab.AddDroneDisplayTab(((sender as FrameworkElement).Tag as BO.DroneForList).Id);
+            OpenNewTab.AddDroneDisplayTab(((sender as FrameworkElement).Tag as BO.DroneForList).Id, c);
         }
     }    
 }

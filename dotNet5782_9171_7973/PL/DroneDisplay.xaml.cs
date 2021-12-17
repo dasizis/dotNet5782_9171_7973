@@ -21,16 +21,24 @@ namespace PL
     /// </summary>
     public partial class DroneDisplay : UserControl
     {
+        public Action action { get; set; }
         public BLApi.IBL bal { get; set; }
         public Drone drone { get; set; }
         bool isDeliver;
-        public DroneDisplay(int id)
+        public DroneDisplay(int id, Action c)
         {
             bal = BLApi.FactoryBL.GetBL();
             drone = bal.GetDrone(id);
             DataContext = drone;
             isDeliver = drone.State == DroneState.Deliver ? false : true;
-            InitializeComponent();   
+            action = c;
+            DronesHandlers.DroneChangedEvent += Drones_DroneChangedEvent;
+            InitializeComponent();
+        }
+
+        private void Drones_DroneChangedEvent(object sender, DroneChangedEventArg e)
+        {
+            DataContext = bal.GetDrone(drone.Id);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,24 +46,33 @@ namespace PL
             TextBlock textBlock = new();
             textBlock.Text = ParcelId.Text;
             t.Children.Add(textBlock);
+
         }
 
 
         private void SendToCharge_Click(object sender, RoutedEventArgs e)
         {
             bal.ChargeDrone(drone.Id);
+            action();
+            DronesHandlers.NotifyDroneChanged(this,drone.Id);
         }
 
         private void CollectParcel_Click(object sender, RoutedEventArgs e)
         {
             bal.PickUpParcel(drone.Id);
+            DataContext = bal.GetDrone(drone.Id);
+            DronesHandlers.NotifyDroneChanged(this, drone.Id);
         }
+
 
         private void SupplyParcel_Click(object sender, RoutedEventArgs e)
         {
             bal.SupplyParcel(drone.Id);
+            action();
+            DataContext = bal.GetDrone(drone.Id);
         }
-
-
     }
 }
+
+
+    

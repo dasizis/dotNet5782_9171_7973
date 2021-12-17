@@ -12,7 +12,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionary.xaml" />
-                
             </ResourceDictionary.MergedDictionaries>
             <local:FreeToVisibilityConverter x:Key="FreeToVisibilityConverter" />
             <local:MaintenanceToVisibilityConverter x:Key="MaintenanceToVisibilityConverter" />
@@ -38,7 +37,7 @@
                         HorizontalAlignment="Center">
                     <Button.CommandParameter>
                         <StackPanel Margin="16">
-                            <local:ChangeModel DroneId="{Binding Id}"/>
+                            <local:ChangeModel DroneId="{Binding Path=Id}"/>
                         </StackPanel>
                     </Button.CommandParameter>
                 </Button>
@@ -68,7 +67,7 @@
 
 
             <!--If The Drone Is Free-->
-            <StackPanel  Visibility="{Binding State, Converter={StaticResource FreeToVisibilityConverter}}">
+            <StackPanel  Visibility="{Binding Path=State, Converter={StaticResource FreeToVisibilityConverter}}">
                 <TextBlock>The drone is free</TextBlock>
                 <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                         Margin="16"
@@ -85,7 +84,7 @@
             </StackPanel>
 
             <!--If The Drone Is in Charge-->
-            <StackPanel Visibility="{Binding State, Converter={StaticResource MaintenanceToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding Path=State, Converter={StaticResource MaintenanceToVisibilityConverter}}">
                 <TextBlock>The drone in charge</TextBlock>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         HorizontalAlignment="Center"
@@ -94,7 +93,7 @@
             </StackPanel>
 
             <!--If The Drone Delivers-->
-            <StackPanel Visibility="{Binding State, Converter={StaticResource DeliverToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding Path=State, Converter={StaticResource DeliverToVisibilityConverter}}">
                 <TextBlock>The drone is delivering</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -110,7 +109,7 @@
                         Content="VIEW RECEIVER"
                         IsEnabled="false"/>
                     <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                        Visibility="{Binding ParcelInDeliver.Id, Converter={StaticResource CollectedToVisibilityConverter}}"
+                        Visibility="{Binding Path=ParcelInDeliver.Position, Converter={StaticResource CollectedToVisibilityConverter}}"
                         ToolTip="Collect related parcel" 
                         Content="COLLECT PARCEL"
                         HorizontalAlignment="Center"
@@ -123,7 +122,7 @@
                         </Button.CommandParameter>
                     </Button>
                     <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                        Visibility="{Binding ParcelInDeliver.Id, Converter={StaticResource SuppliedToVisibilityConverter}}"
+                        Visibility="{Binding Path=ParcelInDeliver.Position, Converter={StaticResource SuppliedToVisibilityConverter}}"
                         ToolTip="Supply related parcel" 
                         Content="SUPPLY PARCEL"
                         HorizontalAlignment="Center"

@@ -9,9 +9,9 @@ namespace PL
 {
     static class OpenNewTab
     {
-        static public void AddDroneDisplayTab(int id)
+        static public void AddDroneDisplayTab(int id, Action c)
         {
-            MainWindow.TabToAdd = new DroneDisplay(id);
+            MainWindow.TabToAdd = new DroneDisplay(id ,c);
             MainWindow.TabHeader = $"Drone #{id}";
             ExecuteCommand();
             MainWindow.TabToAdd = null;

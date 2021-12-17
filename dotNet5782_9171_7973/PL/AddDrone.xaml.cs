@@ -36,7 +36,6 @@ namespace PL
                          ModelTextBox.Text, 
                          (BO.WeightCategory)WeightCategoryComboBox.SelectedIndex,
                          int.Parse(BaseStationIdTextBox.Text));
-
         }
     }
 }

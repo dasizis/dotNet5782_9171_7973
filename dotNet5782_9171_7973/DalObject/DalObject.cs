@@ -115,9 +115,9 @@ namespace Dal
         }
         public void ChargeDrone(int droneId, int stationId)
         {
-            if (DoesExist<Drone>(droneId))
+            if (!DoesExist<Drone>(droneId))
                 throw new ObjectNotFoundException(typeof(Drone), droneId);
-            if (DoesExist<BaseStation>(stationId))
+            if (!DoesExist<BaseStation>(stationId))
                 throw new ObjectNotFoundException(typeof(BaseStation), stationId);
 
             DataSource.DroneCharges.Add(

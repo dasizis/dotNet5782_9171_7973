@@ -42,7 +42,8 @@ namespace PL
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            bal.RenameDrone((int)DroneId,ModelTextBox.Text);
+            bal.RenameDrone((int)DroneId, ModelTextBox.Text);
+            DronesHandlers.NotifyDroneChanged(this, DroneId);
         }
     }
 }

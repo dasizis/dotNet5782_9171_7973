@@ -17,6 +17,7 @@
                     <dragablz:InterTabController Partition="{StaticResource Partition}" />
                 </dragablz:TabablzControl.InterTabController>
                 <TabItem Header="Tab No. 1">
+                    <local:DroneControl />
                 </TabItem>
                 <TabItem Header="Tab No. 2">
                 </TabItem>

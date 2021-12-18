@@ -12,7 +12,7 @@ namespace BLApi
         void AddDrone(int id, string model, WeightCategory maxWeight, int stationId);
         void RenameDrone(int droneId, string newName);
         void ChargeDrone(int droneId);
-        void FinishCharging(int droneId, double timeInCharge);
+        void FinishCharging(int droneId);
         IEnumerable<DroneForList> GetDronesList();
         Drone GetDrone(int id);
 

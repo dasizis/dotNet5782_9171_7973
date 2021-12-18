@@ -103,17 +103,22 @@ namespace BL
         /// </summary>
         /// <param name="droneId">drone to release</param>
         /// <param name="timeInCharge">time drone was in charge</param>
-        public void FinishCharging(int droneId, double timeInCharge)
+        public void FinishCharging(int droneId)
         {
             DroneForList drone = GetDroneForList(droneId);
 
-            //TODO logic
             if (drone.State != DroneState.Maintenance)
             {
-                throw new InValidActionException("Drone already in meintenece.");
+                throw new InValidActionException("Drone is not in meintenece");
+            }
+ 
+            var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId && !c.IsDeleted).FirstOrDefault();
+            if (dalCharge.Equals(default(DO.DroneCharge)))
+            {
+                throw new InValidActionException("Drone is not being charged");
             }
 
-            drone.Battery += ChargeRate * timeInCharge;
+            drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours;
             drone.State = DroneState.Free;
 
             dal.FinishCharging(drone.Id);

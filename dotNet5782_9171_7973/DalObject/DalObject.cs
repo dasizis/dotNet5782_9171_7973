@@ -137,7 +137,6 @@ namespace Dal
         {
             if (DoesExist<Drone>(droneId))
                 throw new ObjectNotFoundException(typeof(Drone), droneId);
-            // TO DO
 
             var charge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId && !charge.IsDeleted);
             DataSource.DroneCharges.Remove(charge);

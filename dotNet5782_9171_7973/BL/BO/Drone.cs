@@ -42,7 +42,7 @@ namespace BO
             get => battery;
             set
             {
-                if(value < 0)
+                if(value < 0) 
                 {
                     throw new ArgumentException(value.ToString());
                 }

@@ -37,7 +37,7 @@ namespace BL
                 {
                     Id = drone.Id,
                     Model = drone.Model,
-                    MaxWeight = (DO.WeightCategory)drone.MaxWeight,
+                    MaxWeight = (DO.WeightCategory)drone.MaxWeight, 
                 });
             }
             catch

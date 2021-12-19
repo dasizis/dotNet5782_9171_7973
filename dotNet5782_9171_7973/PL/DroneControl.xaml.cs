@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,21 @@ namespace PL
     /// <summary>
     /// Interaction logic for DroneControl.xaml
     /// </summary>
-    public partial class DroneControl : UserControl
-    {
 
-        public int? Id { get; set; } 
+
+    public partial class DroneControl : UserControl, INotifyPropertyChanged
+    {
+        private double battery;
+        private BO.DroneState state;
+
+        public bool IsAddMode { get; set; }
+        public bool IsActionsMode { get; set; }
+
+        public int? Id { get; set; }
 
         public string Model { get; set; }
 
-        public int? SelectedStation { get; set; }
+        public int? SelectedStation { get; set; } = null;
 
         public BO.WeightCategory? SelectedWeight { get; set; } = null;
 
@@ -34,19 +42,69 @@ namespace PL
 
         public List<int> StationsOptions { get; set; }
 
-        public BO.DroneState State { get; set; }
+        public BO.DroneState State { get => state; set { state = value; OnPropertyChangedEvent("State"); } }
 
         public BO.ParcelInDeliver Parcel { get; set; }
 
+        public double Battery { get => battery; set { battery = value; OnPropertyChangedEvent("Battery"); } }
+
+        public BO.Location Location { get; set; }
+
         public BLApi.IBL bal { get; set; }
 
-        public DroneControl()
+        public bool IsInCharge { get; set; }
+
+
+        private void Init()
         {
             InitializeComponent();
 
-            DataContext = this;
             bal = BLApi.FactoryBL.GetBL();
+            DataContext = this;
             StationsOptions = bal.GetAvailableBaseStations().Select(s => s.Id).ToList();
+        }
+
+        public DroneControl()
+        {
+            Init();
+
+            IsAddMode = true;
+            IsActionsMode = !IsAddMode;
+
+        }
+
+        public DroneControl(int id)
+        {
+            Init();
+
+            IsAddMode = false;
+            IsActionsMode = !IsAddMode;
+
+            LoadDrone(id);
+            DronesHandlers.DronesChangedEvent += () => LoadDrone(id);
+        }
+
+        private void LoadDrone(int id)
+        {
+            var drone = bal.GetDrone(id);
+
+            Id = drone.Id;
+            Model = drone.Model;
+            State = drone.State;
+            SelectedWeight = drone.MaxWeight;
+            Parcel = drone.ParcelInDeliver;
+            Battery = drone.Battery;
+            Location = drone.Location;
+            try
+            {
+                SelectedStation = bal.GetDroneBaseStation(drone.Id);
+                IsInCharge = true;
+            }
+            catch (BO.ObjectNotFoundException)
+            {
+                SelectedStation = null;
+                IsInCharge = false;
+            }
         }
 
         private void ProceedButton_Click(object sender, RoutedEventArgs e)
@@ -86,10 +144,11 @@ namespace PL
             DialogHost.OpenDialogCommand.Execute(
                 didSucceed
                 ? new Success() { TextContent = message }
-                : new Success() { TextContent = message }
+                : new Failure() { TextContent = message }
                 , null
             );
 
+            DronesHandlers.NotifyDroneChanged();
 
         }
 
@@ -129,23 +188,49 @@ namespace PL
             DialogHost.OpenDialogCommand.Execute(
                 didSucceed
                 ? new Success() { TextContent = message }
-                : new Success() { TextContent = message }
+                : new Failure() { TextContent = message }
                 , null
             );
 
-
+            DronesHandlers.NotifyDroneChanged();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             bal.RenameDrone((int)Id, Model);
-            DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "Drone renamed"},null );
+            DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "Drone renamed" }, null);
+            DronesHandlers.NotifyDroneChanged();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            bal.AddDrone((int)Id, Model, (BO.WeightCategory)SelectedWeight, (int)SelectedStation);
-            DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "New drone added" }, null);
+            try
+            {
+                bal.AddDrone((int)Id, Model, (BO.WeightCategory)SelectedWeight, (int)SelectedStation);
+                DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "New drone added" }, null);
+                DronesHandlers.NotifyDroneChanged();
+            }
+            catch (BO.IdAlreadyExistsException)
+            {
+                DialogHost.OpenDialogCommand.Execute(new Failure() { TextContent = "Drone id already exists" }, null);
+
+            }
+            ((MainWindow)Window.GetWindow(this)).CloseMyTab();
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChangedEvent(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Window.GetWindow(this)).CloseMyTab();
         }
     }
 }

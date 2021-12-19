@@ -13,11 +13,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <local:FreeToVisibilityConverter x:Key="FreeToVisibilityConverter" />
-            <local:MaintenanceToVisibilityConverter x:Key="MaintenanceToVisibilityConverter" />
-            <local:DeliverToVisibilityConverter x:Key="DeliverToVisibilityConverter" />
-            <local:CollectedToVIsibilityConverter x:Key="CollectedToVisibilityConverter"/>
-            <local:SuppliedToVIsibilityConverter x:Key="SuppliedToVisibilityConverter"/>
+            <local:StateToChargeVisibilityConverter x:Key="FreeToVisibilityConverter" />
+            <local:StateToProceedVisibilityConverter x:Key="MaintenanceToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>

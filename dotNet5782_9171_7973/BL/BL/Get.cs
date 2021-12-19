@@ -340,7 +340,7 @@ namespace BL
                 Priority = (Priority)parcel.Priority,
                 TargetLocation = targetLocation,
                 CollectLocation = senderLocation,
-                Position = parcel.Supplied != null,
+                Position = parcel.PickedUp != null,
                 DeliveryDistance = Location.Distance(senderLocation, targetLocation),
                 Sender = GetCustomerInDelivery(senderCustomer.Id),
                 Target = GetCustomerInDelivery(targetCustomer.Id),

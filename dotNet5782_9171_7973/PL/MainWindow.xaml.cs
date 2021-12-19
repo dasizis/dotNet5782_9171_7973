@@ -22,16 +22,28 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<BO.DroneForList> Drones { get; set; } 
-        public static UserControl TabToAdd { get; set; } = null;
-        public static string TabHeader { get; set; }
+        public void AddDisplayTab(string header, Control content)
+        {
+            DisplayPanel.Items.Add(new TabItem() { Header = header, Content = content });
+            DisplayPanel.SelectedIndex = DisplayPanel.Items.Count - 1;
+        }
+
+        public void AddListTab(string header, Control content)
+        {
+            ListsPanel.Items.Add(new TabItem() { Header = header, Content = content });
+            ListsPanel.SelectedIndex = ListsPanel.Items.Count - 1;
+
+        }
+
+        public void CloseMyTab()
+        {
+            DisplayPanel.Items.RemoveAt(DisplayPanel.SelectedIndex);
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            TabControl.NewItemFactory = () => new TabItem() 
-            { 
-                Header = TabHeader ?? throw new InvalidOperationException("No tab to add."), Content = TabToAdd 
-            };
+            
         }
     }
 }

@@ -31,19 +31,6 @@ namespace BL
                 State = DroneState.Maintenance,
             };
 
-            drones.Add(
-                new DroneForList()
-                {
-                    Id = drone.Id,
-                    Model = drone.Model,
-                    MaxWeight = drone.MaxWeight,
-                    Battery = drone.Battery,
-                    Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
-                    DeliveredParcelId = null,
-                    State = drone.State,
-                }
-            );
-
             try
             {
                 dal.Add(new DO.Drone()
@@ -57,6 +44,21 @@ namespace BL
             {
                 throw new IdAlreadyExistsException(typeof(Drone), id);
             }
+
+            drones.Add(
+                new DroneForList()
+                {
+                    Id = drone.Id,
+                    Model = drone.Model,
+                    MaxWeight = drone.MaxWeight,
+                    Battery = drone.Battery,
+                    Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
+                    DeliveredParcelId = null,
+                    State = drone.State,
+                }
+            );
+
+            dal.ChargeDrone(drone.Id, stationId);
         }
         /// <summary>
         /// return drone list
@@ -118,7 +120,7 @@ namespace BL
                 throw new InValidActionException("Drone is not being charged");
             }
 
-            drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours;
+            drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalSeconds;
             drone.State = DroneState.Free;
 
             dal.FinishCharging(drone.Id);

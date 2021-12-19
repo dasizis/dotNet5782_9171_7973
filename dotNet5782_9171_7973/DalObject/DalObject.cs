@@ -5,6 +5,7 @@ using System.Text;
 using DO;
 using System.Linq;
 using Singelton;
+using System.Reflection;
 
 namespace Dal
 { 
@@ -100,7 +101,7 @@ namespace Dal
                      ?? throw new ObjectNotFoundException(type, id);
             DataSource.Data[type].Remove(item);
 
-            var prop = type.GetProperty(propName)
+            PropertyInfo prop = type.GetProperty(propName)
                      ?? throw new ArgumentException($"Type {type.Name} does not have property {propName}");
 
             try
@@ -135,7 +136,7 @@ namespace Dal
         #region Delete
         public void FinishCharging(int droneId)
         {
-            if (DoesExist<Drone>(droneId))
+            if (!DoesExist<Drone>(droneId))
                 throw new ObjectNotFoundException(typeof(Drone), droneId);
 
             var charge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId && !charge.IsDeleted);

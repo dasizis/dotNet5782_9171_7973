@@ -23,12 +23,9 @@
             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
            
             <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
-                <Button Tag="{Binding}" MouseDoubleClick="Drone_Click">
-                    <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal" Tag="{Binding}">
                     <TextBlock Text="{Binding Model}"/>
                 </StackPanel>
-                </Button>
-                
             </HierarchicalDataTemplate>
         </ResourceDictionary>
         
@@ -40,20 +37,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Background="{DynamicResource MaterialDesignLightBackground}">
-            <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+            <Button Click="AddButton_Click"
                     Content="Add Drone">
-                <Button.CommandParameter>
-                    <StackPanel Margin="16">
-                        <local:AddDrone />
-                    </StackPanel>
-                </Button.CommandParameter>
             </Button>
             <ComboBox ItemsSource="{Binding StateOptions}" SelectedIndex="{Binding SelectedState}"  materialDesign:HintAssist.Hint="Choose State"/>
             <ComboBox ItemsSource="{Binding WeightOptions}" SelectedIndex="{Binding SelectedWeight}"  materialDesign:HintAssist.Hint="Choose Max Weight"/>
         </StackPanel>
-
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">        
-            <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220" />
+            <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220" SelectedItemChanged="DronesListView_SelectedItemChanged"/>
         </ScrollViewer>
     </Grid>
 </UserControl>

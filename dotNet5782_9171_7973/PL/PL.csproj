@@ -18,4 +18,10 @@
     <ProjectReference Include="..\StringUtilities\StringUtilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Failure.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

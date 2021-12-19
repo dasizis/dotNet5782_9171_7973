@@ -9,6 +9,6 @@ namespace BLApi
 {
     public interface IBL:IBLCustomer, IBLBaseStation, IBLDrone, IBLParcel
     {
-
+        int GetDroneBaseStation(int droneId);
     }
 }

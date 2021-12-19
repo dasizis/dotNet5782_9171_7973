@@ -55,19 +55,10 @@ namespace PL
             Drones = new (bal.GetDronesList());
             DataContext = this;
             InitializeComponent();
-            DronesHandlers.DroneChangedEvent += DronesHandlers_DroneChangedEvent;
+            DronesHandlers.DronesChangedEvent += LoadDrones;
 
         }
 
-        private void DronesHandlers_DroneChangedEvent(object sender, DroneChangedEventArg e)
-        {
-            LoadDrones();
-        }
-
-        private void c()
-        {
-            DataContext = bal.GetDronesList();
-        }
         private void LoadDrones()
         {
             Drones.Clear();
@@ -79,10 +70,18 @@ namespace PL
             }
         }
 
-
-        private void Drone_Click(object sender, MouseButtonEventArgs e)
+        private void DronesListView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            OpenNewTab.AddDroneDisplayTab(((sender as FrameworkElement).Tag as BO.DroneForList).Id, c);
+            var drone = (sender as TreeView).SelectedItem as BO.DroneForList;
+            if (drone == null) return;
+
+            int id = drone.Id;
+            ((MainWindow)Window.GetWindow(this)).AddDisplayTab($"Drone {id}", new DroneControl(id));
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Window.GetWindow(this)).AddDisplayTab("Add Drone", new DroneControl());
         }
     }    
 }

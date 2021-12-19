@@ -8,10 +8,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <local:StateToChargeVisibilityConverter x:Key="StateToChargeVisibilityConverter" />
+        <local:StateToProceedVisibilityConverter x:Key="StateToProceedVisibilityConverter" />
+        <local:StateToChargeContentConverter x:Key="DroneToChargeContentConverter" />
+        <local:DroneToProceedContentConverter x:Key="DroneToProceedContentConverter" />
+        <local:AggregateBooleansConverter x:Key="AggregateBooleansConverter" />
+
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}" >
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        
+        <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody2TextBlock}" >
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}" >
+            <Setter Property="Margin" Value="10" />
+        </Style>
+
+        <Style x:Key="PropText" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline6TextBlock}" >
+            <Setter Property="Margin" Value="20" />
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}" >
+            <Setter Property="Margin" Value="10" />
+        </Style>
     </UserControl.Resources>
     <StackPanel>
 
-        <TextBox materialDesign:HintAssist.Hint="Id">
+        <TextBox x:Name="IdInput" materialDesign:HintAssist.Hint="Id" IsEnabled="{Binding IsAddMode}">
             <TextBox.Text>
                 <Binding Path="Id" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
@@ -21,17 +48,17 @@
             </TextBox.Text>
         </TextBox>
 
-        <TextBox materialDesign:HintAssist.Hint="Model">
+        <TextBox x:Name="ModelInput" materialDesign:HintAssist.Hint="Model">
             <TextBox.Text>
                 <Binding Path="Model" UpdateSourceTrigger="PropertyChanged" >
-                    <Binding.ValidationRules>
+                    <Binding.ValidationRules> 
                         <local:NameRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
 
-        <ComboBox ItemsSource="{Binding WeightOptions}" materialDesign:HintAssist.Hint="Weight Category">
+        <ComboBox x:Name="WeightInput" ItemsSource="{Binding WeightOptions}" materialDesign:HintAssist.Hint="Weight Category" IsEnabled="{Binding IsAddMode}">
             <ComboBox.SelectedItem>
                 <Binding Path="SelectedWeight" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -41,7 +68,10 @@
             </ComboBox.SelectedItem>
         </ComboBox>
 
-        <ComboBox  ItemsSource="{Binding StationsOptions}" materialDesign:HintAssist.Hint="Station Id">
+        <ComboBox x:Name="StationInput" 
+                  ItemsSource="{Binding StationsOptions}" 
+                  materialDesign:HintAssist.Hint="Station Id" 
+                  IsEnabled="{Binding IsAddMode}">
             <ComboBox.SelectedItem>
                 <Binding Path="SelectedStation" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -51,39 +81,84 @@
             </ComboBox.SelectedItem>
         </ComboBox>
 
-        <TextBlock Text="{Binding Battery, StringFormat=Battery: {0}%}"/>
-        <TextBlock Text="{Binding ParcelInDeliverId, StringFormat='Parcel In Deliver: {0}%'}"/>
+        <Grid Visibility="{Binding IsActionsMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <materialDesign:PackIcon Kind="Details" Foreground="{DynamicResource PrimaryHueLightBrush}" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
+                <TextBlock Text="{Binding Battery, StringFormat=Battery: {0}%}"/>
+                <TextBlock x:Name="ParcelId" Text="{Binding ParcelInDeliver.Id, StringFormat=Connected Parcel: #{0}}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" >
+                <materialDesign:PackIcon Kind="MapMarkerRadius" Foreground="{DynamicResource PrimaryHueLightBrush}" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
+                <TextBlock Text="Longitude"/>
+                <TextBlock Text="{Binding Location.Longitude}"/>
+                <TextBlock Text="Latitude"/>
+                <TextBlock Text="{Binding Location.Latitude}"/>
+            </StackPanel>
+        </Grid>
 
-        <StackPanel >
-            <materialDesign:PackIcon Kind="MapMarkerRadius" Foreground="{DynamicResource PrimaryHueLightBrush}"  Height="40" Width="40"/>
-            <TextBlock Text="Longitude"/>
-            <TextBlock Text="{Binding Location.Longitude}"/>
-            <TextBlock Text="Latitude"/>
-            <TextBlock Text="{Binding Location.Latitude}"/>
-        </StackPanel>
-        
-        
         <!--Add-->
-        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                    HorizontalAlignment="Center"
-                    Content="ADD"
-                    Margin="5,0"
-                    Click="Add_Click"/>
+        <Button Visibility="{Binding IsAddMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Center"
+                 Content="ADD"
+                 Click="AddButton_Click">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IdInput}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ModelInput}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=WeightInput}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StationInput}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
-        <StackPanel>
-            <TextBlock Text="{Binding State, StringFormat='The drone is {0}'}" />
-            <Button ToolTip="ToDO" 
-                    Content="{Binding Converter=StateToProceedContentConverter}"
-                    Click="ProceedButton_Click" />
+        <StackPanel Visibility="{Binding IsActionsMode, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,20">
+            <TextBlock Text="{Binding State, Mode=OneWay, StringFormat='The drone is {0}'}" />
+            <Button Visibility="{Binding State, Converter={StaticResource StateToProceedVisibilityConverter}}"
+                    ToolTip="ToDO" 
+                    Click="ProceedButton_Click" >
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource DroneToProceedContentConverter}">
+                        <Binding Path="State" />
+                        <Binding Path="Parcel.Position" />
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
 
-            <Button ToolTip="TODO" 
-                    Content="{Binding Converter=}"
+            <Button Visibility="{Binding State, Converter={StaticResource StateToChargeVisibilityConverter}}"
+                    ToolTip="TODO" 
+                    Content="{Binding State,Converter={StaticResource DroneToChargeContentConverter}}"
                     Click="ChargeButton_Click" />
 
             <Button ToolTip="Update Model" 
                     Content="UPDATE MODEL"
-                    Click="UpdateButton_Click" />
-
+                    Click="UpdateButton_Click" >
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ModelInput}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="x" Click="CloseButton_Click"/>
         </StackPanel>
             
 

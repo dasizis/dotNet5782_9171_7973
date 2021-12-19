@@ -26,6 +26,7 @@ namespace PL
     {
         private double battery;
         private BO.DroneState state;
+        private int? selectedStation;
 
         public bool IsAddMode { get; set; }
         public bool IsActionsMode { get; set; }
@@ -34,7 +35,7 @@ namespace PL
 
         public string Model { get; set; }
 
-        public int? SelectedStation { get; set; } = null;
+        public int? SelectedStation { get => selectedStation; set { selectedStation = value; OnPropertyChangedEvent("SelectedStation"); } }
 
         public BO.WeightCategory? SelectedWeight { get; set; } = null;
 
@@ -63,7 +64,6 @@ namespace PL
             DataContext = this;
             StationsOptions = bal.GetAvailableBaseStations().Select(s => s.Id).ToList();
         }
-
         public DroneControl()
         {
             Init();
@@ -72,7 +72,6 @@ namespace PL
             IsActionsMode = !IsAddMode;
 
         }
-
         public DroneControl(int id)
         {
             Init();
@@ -83,7 +82,6 @@ namespace PL
             LoadDrone(id);
             DronesHandlers.DronesChangedEvent += () => LoadDrone(id);
         }
-
         private void LoadDrone(int id)
         {
             var drone = bal.GetDrone(id);
@@ -106,7 +104,6 @@ namespace PL
                 IsInCharge = false;
             }
         }
-
         private void ProceedButton_Click(object sender, RoutedEventArgs e)
         {
             string message = null;
@@ -151,7 +148,6 @@ namespace PL
             DronesHandlers.NotifyDroneChanged();
 
         }
-
         private void ChargeButton_Click(object sender, RoutedEventArgs e)
         {
             string message = null;
@@ -194,14 +190,12 @@ namespace PL
 
             DronesHandlers.NotifyDroneChanged();
         }
-
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             bal.RenameDrone((int)Id, Model);
             DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "Drone renamed" }, null);
             DronesHandlers.NotifyDroneChanged();
         }
-
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -218,9 +212,12 @@ namespace PL
             ((MainWindow)Window.GetWindow(this)).CloseMyTab();
 
         }
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Window.GetWindow(this)).CloseMyTab();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPropertyChangedEvent(string propertyName)
         {
             var handler = PropertyChanged;
@@ -228,9 +225,6 @@ namespace PL
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((MainWindow)Window.GetWindow(this)).CloseMyTab();
-        }
+        
     }
 }

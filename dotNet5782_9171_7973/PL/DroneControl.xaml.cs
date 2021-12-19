@@ -203,13 +203,13 @@ namespace PL
                 bal.AddDrone((int)Id, Model, (BO.WeightCategory)SelectedWeight, (int)SelectedStation);
                 DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "New drone added" }, null);
                 DronesHandlers.NotifyDroneChanged();
+                ((MainWindow)Window.GetWindow(this)).CloseMyTab();
             }
             catch (BO.IdAlreadyExistsException)
             {
                 DialogHost.OpenDialogCommand.Execute(new Failure() { TextContent = "Drone id already exists" }, null);
 
             }
-            ((MainWindow)Window.GetWindow(this)).CloseMyTab();
 
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)

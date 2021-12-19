@@ -89,7 +89,7 @@
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <materialDesign:PackIcon Kind="Details" Foreground="{DynamicResource PrimaryHueLightBrush}" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>
                 <TextBlock Text="{Binding Battery, StringFormat=Battery: {0}%}"/>
-                <TextBlock x:Name="ParcelId" Text="{Binding ParcelInDeliver.Id, StringFormat=Connected Parcel: #{0}}" />
+                <TextBlock x:Name="ParcelId" Text="{Binding Parcel.Id, StringFormat=Connected Parcel: #{0}}" />
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" >
                 <materialDesign:PackIcon Kind="MapMarkerRadius" Foreground="{DynamicResource PrimaryHueLightBrush}" HorizontalAlignment="Center" Margin="40,40,40,10" Height="40" Width="40"/>

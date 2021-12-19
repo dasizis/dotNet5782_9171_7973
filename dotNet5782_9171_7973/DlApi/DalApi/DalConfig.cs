@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,21 +15,22 @@ namespace DalApi
 
         static DalConfig()
         {
+            XElement dalConfig = null;
             try
             {
-                XElement dalConfig = XElement.Load("config.xml");
-                string dalName = dalConfig.Element("dal").Value;
-                var dalPackage = dalConfig.Element("dal-packages")
-                                          .Element(dalName);
+                dalConfig = XElement.Load($@"{Directory.GetCurrentDirectory()}\..\..\..\..\config.xml");
 
-                DalType = dalPackage.Element("class-name").Value;
-                Namespace = dalPackage.Element("namespace").Value;
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 throw new DalConfigException("Can't get data from config file", e);
             }
 
+            string dalName = dalConfig.Element("dal").Value;
+            var dalPackage = dalConfig.Element("dal-packages")
+                                      .Element(dalName);
+            DalType = dalPackage.Element("class-name").Value;
+            Namespace = dalPackage.Element("namespace").Value;
         }
     }
 

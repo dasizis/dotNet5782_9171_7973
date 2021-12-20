@@ -34,11 +34,21 @@ namespace PL
             ListsPanel.SelectedIndex = ListsPanel.Items.Count - 1;
 
         }
-
+        //check if that works when x sign is in header
         public void CloseMyTab()
         {
             DisplayPanel.Items.RemoveAt(DisplayPanel.SelectedIndex);
         }
+
+        //public void CloseMyTab(object content)
+        //{
+        //    Object tab = content;
+        //    while(content.GetType() != typeof(TabControl))
+        //    {
+        //        content = ((FrameworkElement)content).Parent;
+        //    }
+        //    (content as TabControl).Items.Remove(tab as TabItem);
+        //}
 
         public MainWindow()
         {

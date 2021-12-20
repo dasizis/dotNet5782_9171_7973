@@ -54,7 +54,7 @@ namespace BL
         {
             return from station in dal.GetList<DO.BaseStation>()
                    let dronesCount = (from charge in dal.GetList<DO.DroneCharge>()
-                                      where charge.StationId == station.Id
+                                      where charge.StationId == station.Id && charge.IsDeleted == false
                                       select charge).Count()
                    where station.ChargeSlots > dronesCount
                    select GetBaseStationForList(station.Id);

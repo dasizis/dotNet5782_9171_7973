@@ -41,10 +41,10 @@ namespace Dal
 
             public static class ElectricityConfumctiol
             {
-                public static double Free = 0.001;
-                public static double Light = 0.002;
-                public static double Medium = 0.003;
-                public static double Heavy = 0.004;
+                public static double Free = 0.0001;
+                public static double Light = 0.0002;
+                public static double Medium = 0.0003;
+                public static double Heavy = 0.0004;
             }
 
             public static double ChargeRate = 1;

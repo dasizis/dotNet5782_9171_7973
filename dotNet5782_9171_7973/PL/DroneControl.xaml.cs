@@ -28,6 +28,7 @@ namespace PL
         private BO.DroneState state;
         private int? selectedStation;
         private BO.ParcelInDeliver parcel;
+        private List<int> stationsOptions;
 
         public bool IsAddMode { get; set; }
         public bool IsActionsMode { get; set; }
@@ -42,7 +43,7 @@ namespace PL
 
         public Array WeightOptions { get; set; } = Enum.GetValues(typeof(BO.WeightCategory));
 
-        public List<int> StationsOptions { get; set; }
+        public List<int> StationsOptions { get => stationsOptions; set { stationsOptions = value; OnPropertyChangedEvent("StationsOptions"); } }
 
         public BO.DroneState State { get => state; set { state = value; OnPropertyChangedEvent("State"); } }
 

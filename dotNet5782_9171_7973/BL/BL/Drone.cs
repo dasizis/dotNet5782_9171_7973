@@ -123,7 +123,7 @@ namespace BL
                 throw new InValidActionException("Drone is not being charged");
             }
 
-            drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours;
+            drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalSeconds;
             drone.State = DroneState.Free;
 
             dal.FinishCharging(drone.Id);

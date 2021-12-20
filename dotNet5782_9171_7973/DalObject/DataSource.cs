@@ -20,7 +20,7 @@ namespace Dal
         internal static List<Parcel> Parcels { get; } = new();
         internal static List<DroneCharge> DroneCharges { get; } = new();
 
-        // Another way to acces the data
+        // Another way to access the data
         internal static Dictionary<Type, IList> Data { get; } = new()
         {
             [typeof(Drone)] = Drones,
@@ -41,13 +41,13 @@ namespace Dal
 
             public static class ElectricityConfumctiol
             {
-                public static double Free = 0.1;
-                public static double Light = 0.2;
-                public static double Medium = 0.3;
-                public static double Heavy = 0.4;
+                public static double Free = 0.001;
+                public static double Light = 0.002;
+                public static double Medium = 0.003;
+                public static double Heavy = 0.004;
             }
 
-            public static double ChargeRate = 10;
+            public static double ChargeRate = 1;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Dal
                 Enumerable.Range(0, INIT_PARCELS)
                           .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, Customers))    
                           .Select(parcel => RandomManager.Rand.Next(3) == 1
-                                            ? default(Parcel)
+                                            ? parcel
                                             : new Parcel()
                                             {
                                                 Id = parcel.Id,

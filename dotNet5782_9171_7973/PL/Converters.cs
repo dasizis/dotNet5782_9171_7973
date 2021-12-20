@@ -40,6 +40,8 @@ namespace PL
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            if ((BO.DroneState)values[0] == BO.DroneState.Maintenance) return null;
+
             if ((BO.DroneState)values[0] == BO.DroneState.Free)
             {
                 return "ASSIGN PARCEL TO DRONE";

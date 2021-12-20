@@ -99,20 +99,24 @@ namespace Dal
             Type type = typeof(T);
             T item = DataSource.Data[type].Cast<T>().FirstOrDefault(item => item.Id == id)
                      ?? throw new ObjectNotFoundException(type, id);
-            DataSource.Data[type].Remove(item);
 
+            DataSource.Data[type].Remove(item);
+            
             PropertyInfo prop = type.GetProperty(propName)
                      ?? throw new ArgumentException($"Type {type.Name} does not have property {propName}");
 
+            object boxed = item;
             try
             {
-                prop.SetValue(item, newValue);
+                prop.SetValue(boxed, newValue);
             }
             catch (ArgumentException ex)
             {
                 throw new ArgumentException($"Can not set property {prop.Name} with value {newValue} of type {newValue.GetType().Name}", ex);
             }
-            DataSource.Data[type].Add(item);
+
+            var unboxed = (T)boxed;
+            DataSource.Data[type].Add(unboxed);
         }
         public void ChargeDrone(int droneId, int stationId)
         {

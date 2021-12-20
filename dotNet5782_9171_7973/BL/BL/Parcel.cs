@@ -132,7 +132,7 @@ namespace BL
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
 
-            if (parcelInDeliver.Position)
+            if (!parcelInDeliver.Position)
             {
                 throw new InValidActionException("Parcel assigned to drone has already been supplied.");
             }

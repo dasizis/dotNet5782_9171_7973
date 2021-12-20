@@ -96,9 +96,12 @@ namespace BL
             }
 
             Parcel parcel = parcels.First();
-            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Drone.Id), droneId);
-           
-            drone.State = DroneState.Deliver;
+            dal.Update<DO.Parcel>(parcel.Id, nameof(DO.Parcel.DroneId), droneId);
+            dal.Update<DO.Parcel>(parcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
+
+            var droneForList = GetDroneForList(droneId);
+            droneForList.State = DroneState.Deliver;
+            droneForList.DeliveredParcelId = parcel.Id;
         }
         /// <summary>
         /// release drone from charging

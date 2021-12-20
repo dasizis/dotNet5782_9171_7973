@@ -27,6 +27,7 @@ namespace PL
         private double battery;
         private BO.DroneState state;
         private int? selectedStation;
+        private BO.ParcelInDeliver parcel;
 
         public bool IsAddMode { get; set; }
         public bool IsActionsMode { get; set; }
@@ -45,11 +46,13 @@ namespace PL
 
         public BO.DroneState State { get => state; set { state = value; OnPropertyChangedEvent("State"); } }
 
-        public BO.ParcelInDeliver Parcel { get; set; }
+        public BO.ParcelInDeliver Parcel { get => parcel; set { parcel = value; OnPropertyChangedEvent("Parcel"); } }
 
         public double Battery { get => battery; set { battery = value; OnPropertyChangedEvent("Battery"); } }
 
         public BO.Location Location { get; set; }
+
+        public BO.WeightCategory MaxWeight { get; set; }
 
         public BLApi.IBL bal { get; set; }
 
@@ -93,6 +96,7 @@ namespace PL
             Parcel = drone.ParcelInDeliver;
             Battery = drone.Battery;
             Location = drone.Location;
+            MaxWeight = drone.MaxWeight;
             try
             {
                 SelectedStation = bal.GetDroneBaseStation(drone.Id);
@@ -225,6 +229,6 @@ namespace PL
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
     }
 }

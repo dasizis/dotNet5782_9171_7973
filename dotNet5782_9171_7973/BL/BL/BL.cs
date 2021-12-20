@@ -36,9 +36,10 @@ namespace BL
 
             var dlDrones = dal.GetList<DO.Drone>().ToList();
             var parcels = dal.GetList<DO.Parcel>().ToList();
-            var stationsLocations = dal.GetList<DO.BaseStation>()
-                                       .Select(s => new Location() { Latitude = s.Latitude, Longitude = s.Longitude })
-                                       .ToList();
+            var availableStations = GetAvailableBaseStations()
+                                             .Select(station => GetBaseStation(station.Id))
+                                             .ToList();
+                                       
 
             foreach (var dlDrone in dlDrones)
             { 
@@ -74,37 +75,37 @@ namespace BL
 
                     if (suppliedParcels.Count() == 0)
                     {
-                        return stationsLocations[rand.Next(stationsLocations.Count())];
+                        return availableStations[rand.Next(availableStations.Count())].Location;
                     }
                     var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count())];
                     var customer = dal.GetById<DO.Customer>(randomParcel.TargetId);
 
                     return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
                 }
-
+                
+                var randomStation = availableStations[rand.Next(availableStations.Count())];
                 // Set location
                 location = state switch
                 {
                     DroneState.Free => RandomSuppliedParcelLocation(),
-                    DroneState.Maintenance => stationsLocations[rand.Next(stationsLocations.Count())],
+                    DroneState.Maintenance => randomStation.Location,
                     DroneState.Deliver => parcel.Supplied != null
-                                          ? targetLocation.FindClosest(stationsLocations)
+                                          ? targetLocation.FindClosest(availableStations)
                                           : senderLocation,
                 };
 
-                var availableStationsLocations = GetAvailableBaseStations()
-                                                    .Select(station => GetBaseStation(station.Id).Location);
+                
 
                 // Set battery
                 battery = state switch
                 {
-                    DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree), 100),
+                    DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), 100),
                     DroneState.Maintenance => rand.NextDouble() * 20,
                     DroneState.Deliver => rand.Next(Math.Min(
                                               (int)(
                                                   Location.Distance(location, senderLocation) * ElectricityConfumctiolFree +
                                                   Location.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
-                                                  Location.Distance(targetLocation, targetLocation.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree
+                                                  Location.Distance(targetLocation, targetLocation.FindClosest(availableStations)) * ElectricityConfumctiolFree
                                               ), 80)
                                              , 100
                                           ),
@@ -122,6 +123,11 @@ namespace BL
                             DeliveredParcelId = parcelInDeliverId
                         }
                     );
+
+                if(state == DroneState.Maintenance)
+                {
+                    dal.ChargeDrone(dlDrone.Id, randomStation.Id);
+                }
             }
         }
         /// <summary>

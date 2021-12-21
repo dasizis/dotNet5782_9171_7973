@@ -20,7 +20,7 @@ namespace BL
         {
             var parcel = new Parcel()
             {
-                Id = dal.GetParcelContNumber(),
+                Id = dal.GetParcelContinuousNumber(),
                 Priority = priority,
                 Weight = weight,
                 Sender = GetCustomerInDelivery(senderId),

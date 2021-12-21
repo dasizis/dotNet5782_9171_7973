@@ -8,7 +8,7 @@ namespace Dal
         internal static System.Random Rand => new();
 
         /// <summary>
-        /// creates a ranodm name in a random length (4-7 letters).
+        /// Creates a ranodm name in a random length (4-7 letters).
         /// </summary>
         /// <returns>the random name</returns>
         internal static string RandomName()
@@ -29,7 +29,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a ranodm full name
+        /// Creates a ranodm full name
         /// </summary>
         /// <returns>the random full name</returns>
         internal static string RandomFullName()
@@ -38,7 +38,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a random phone number
+        /// Creates a random phone number
         /// </summary>
         /// <returns>the random phone number</returns>
         internal static string RandomPhone()
@@ -55,7 +55,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a random date
+        /// Creates a random date
         /// </summary>
         /// <returns>the random date</returns>
         internal static System.DateTime RandomDate()
@@ -82,7 +82,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a random Parcel instance
+        /// Creates a random Parcel instance
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Parcel instance</returns>
@@ -100,7 +100,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a random Drone instance
+        /// Creates a random Drone instance
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Drone instance</returns>
@@ -115,7 +115,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a random Customer instance
+        /// Creates a random Customer instance
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created Customer instance</returns>
@@ -132,7 +132,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// creates a random BaseStation instance
+        /// Creates a random BaseStation instance
         /// </summary>
         /// <param name="id">the instance id</param>
         /// <returns>the created BaseStation instance</returns>

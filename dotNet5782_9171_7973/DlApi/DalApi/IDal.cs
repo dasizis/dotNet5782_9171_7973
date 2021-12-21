@@ -18,13 +18,13 @@ namespace DalApi
 
         T GetById<T>(int id) where T : DO.IIdentifiable, DO.IDeletable;
 
-        T GetItem<T>(Predicate<T> predicate) where T : DO.IDeletable;
+        T GetSingle<T>(Predicate<T> predicate) where T : DO.IDeletable;
 
         IEnumerable<T> GetList<T>() where T : DO.IDeletable;
 
         IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : DO.IDeletable;
 
-        int GetParcelContNumber();
+        int GetParcelContinuousNumber();
 
         (double, double, double, double, double) GetElectricityConfumctiol();
 
@@ -32,7 +32,9 @@ namespace DalApi
 
         #region Update
 
-        void Update<T>(int id, string attribute, object newValue) where T : DO.IIdentifiable;
+        void Update<T>(int id, string propName, object newValue) where T : DO.IIdentifiable, DO.IDeletable;
+
+        void UpdateWhere<T>(Predicate<T> predicate, string propName, object newValue) where T : DO.IDeletable;
 
         #endregion
 

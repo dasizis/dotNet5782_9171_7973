@@ -7,6 +7,10 @@ using DO;
 
 namespace Dal
 {
+    /// <summary>
+    /// Resotres the data for the <see cref="DalObject"/>
+    /// implementaion of <see cref="DalApi.IDal"/>
+    /// </summary>
     public static class DataSource
     {
         const int INIT_BASESTATIONS = 2;
@@ -51,7 +55,7 @@ namespace Dal
         }
 
         /// <summary>
-        /// initialize all the lists with random items
+        /// Initialize all the lists with random items
         /// </summary>
         public static void Initialize()
         {

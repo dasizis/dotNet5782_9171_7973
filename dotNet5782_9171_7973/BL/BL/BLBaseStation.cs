@@ -19,7 +19,6 @@ namespace BL
 
             try
             {
-
                 dal.Add(
                     new DO.BaseStation()
                     {

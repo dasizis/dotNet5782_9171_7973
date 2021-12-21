@@ -50,11 +50,11 @@ namespace ConsoleUI_BL
                 }
                 catch(ObjectNotFoundException exception)
                 {
-                    WriteException(exception.ToString());
+                    WriteException(exception.Message);
                 }
                 catch (IdAlreadyExistsException exception)
                 {
-                    WriteException(exception.ToString());
+                    WriteException(exception.Message);
                 }
                 catch (InvalidActionException exception)
                 {

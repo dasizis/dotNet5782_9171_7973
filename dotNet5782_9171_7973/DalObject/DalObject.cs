@@ -27,8 +27,8 @@ namespace Dal
                 throw new IdAlreadyExistsException(type, item.Id);
             }
 
-            Update<T>(item.Id, nameof(item.IsDeleted), false);
             DataSource.Data[type].Add(item);
+            Update<T>(item.Id, nameof(item.IsDeleted), false);
         }
 
         public void AddDroneCharge(int droneId, int baseStationId)
@@ -101,9 +101,7 @@ namespace Dal
 
         public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable, IDeletable
         {
-            Type type = typeof(T);
-            T item = GetById<T>(id) ?? throw new ObjectNotFoundException(type, null);
-
+            T item = GetById<T>(id);
             UpdateItem(item, propName, newValue);
         }
 

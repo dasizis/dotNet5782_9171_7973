@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace PL
@@ -20,7 +19,7 @@ namespace PL
                             var propValue = prop.GetValue(value);
                             if (propValue?.GetType() == typeof(BO.Location))
                             {
-                                return new TreeViewLocationProp() { Location = propValue as BO.Location } as object;
+                                return propValue;
                             }
 
                             return new TreeViewProp() { PropName = prop.Name, propValue = propValue } as object;
@@ -37,8 +36,8 @@ namespace PL
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var location = (value as TreeViewLocationProp).Location;
-            return new List<Object>() { new Longitude() { Long = location.Longitude }, new Latitude() { Lat = location.Latitude } };
+            var location = value as BO.Location;
+            return new List<object>() { new Longitude() { Long = location.Longitude }, new Latitude() { Lat = location.Latitude } };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

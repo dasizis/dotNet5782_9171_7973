@@ -22,11 +22,7 @@
             </Style>
             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
            
-            <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
-                <StackPanel Orientation="Horizontal" Tag="{Binding}">
-                    <TextBlock Text="{Binding Model}"/>
-                </StackPanel>
-            </HierarchicalDataTemplate>
+           
         </ResourceDictionary>
         
     </UserControl.Resources>

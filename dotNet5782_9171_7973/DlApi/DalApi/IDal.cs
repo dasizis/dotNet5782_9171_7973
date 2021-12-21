@@ -4,26 +4,42 @@ using System.Collections.Generic;
 namespace DalApi
 {
     /// <summary>
-    /// The dal layer interface
+    /// The Dal layer interface
     /// </summary>
     public interface IDal
     {
-        (double, double, double, double, double) GetElectricityConfumctiol();
+        #region Create
 
-        void Add<T>(T item) where T : DO.IIdentifiable;
+        void Add<T>(T item) where T : DO.IIdentifiable, DO.IDeletable;
 
-        IEnumerable<T> GetList<T>();
+        #endregion
 
-        T GetById<T>(int id) where T : DO.IIdentifiable;
+        #region Request
 
-        void ChargeDrone(int droneId, int stationId);
+        T GetById<T>(int id) where T : DO.IIdentifiable, DO.IDeletable;
 
-        void FinishCharging(int droneId);
+        T GetItem<T>(Predicate<T> predicate) where T : DO.IDeletable;
 
-        void Update<T>(int id, string attribute, object newValue) where T : DO.IIdentifiable;
+        IEnumerable<T> GetList<T>() where T : DO.IDeletable;
+
+        IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : DO.IDeletable;
 
         int GetParcelContNumber();
 
-        IEnumerable<T> GetFilteredList<T>(Func<T, bool> predicate);
+        (double, double, double, double, double) GetElectricityConfumctiol();
+
+        #endregion
+
+        #region Update
+
+        void Update<T>(int id, string attribute, object newValue) where T : DO.IIdentifiable;
+
+        #endregion
+
+        #region Delete
+        void Delete<T>(int id) where T : DO.IIdentifiable, DO.IDeletable;
+
+        void DeleteWhere<T>(Predicate<T> predicate) where T : DO.IDeletable;
+        #endregion
     }
 }

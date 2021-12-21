@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// An exception that occours when there is a trial to make an invalid action 
+    /// in the BL layer
+    /// </summary>
     [Serializable]
-    public class InValidActionException : Exception
+    public class InvalidActionException : Exception
     {
-        public InValidActionException() : base() { }
-        public InValidActionException(string message) : base(message) { }
-        public InValidActionException(string message, Exception inner) : base(message, inner) { }
-        protected InValidActionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        public InvalidActionException() : base() { }
+        public InvalidActionException(string message) : base(message) { }
+        public InvalidActionException(string message, Exception inner) : base(message, inner) { }
+        protected InvalidActionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public override string ToString()
         {
@@ -21,60 +25,35 @@ namespace BO
         }
     }
 
+    /// <summary>
+    /// An exception that occours when the wanted item does not exist
+    /// </summary>
     [Serializable]
-    abstract public class IdException : Exception
+    public class ObjectNotFoundException : Exception
     {
-        public IdException() : base() { }
-        public IdException(string message) : base(message) { }
-        public IdException(string message, Exception inner) : base(message, inner) { }
-        protected IdException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
-        public Type Type { get; }
-        public int Id { get; }
-
-        public IdException(Type type, int id) : base()
-        {
-            Type = type;
-            Id = id;
-        }
-
-        protected abstract string GetExceptionMessage();
-
-        public override string ToString()
-        {
-            return $"{GetType().Name}: {GetExceptionMessage()}";
-        }
-    }
-
-    [Serializable]
-    public class ObjectNotFoundException : IdException
-    {
-        public ObjectNotFoundException() : base() { }
         public ObjectNotFoundException(string message) : base(message) { }
+
         public ObjectNotFoundException(string message, Exception inner) : base(message, inner) { }
+
         protected ObjectNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public ObjectNotFoundException(Type type, int id) : base(type, id) { }
-
-        protected override string GetExceptionMessage()
-        {
-            return $"item #{Id} of type {Type.Name} not found";
-        }
+        public ObjectNotFoundException(Type type, Exception inner) : base($"item of type {type.Name} not found", inner) { }
     }
 
+    /// <summary>
+    /// An exception that occours when there is a try to add an object with existing id
+    /// </summary>
     [Serializable]
-    public class IdAlreadyExistsException : IdException
+    public class IdAlreadyExistsException : Exception
     {
-        public IdAlreadyExistsException() : base() { }
         public IdAlreadyExistsException(string message) : base(message) { }
+
         public IdAlreadyExistsException(string message, Exception inner) : base(message, inner) { }
+
         protected IdAlreadyExistsException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public IdAlreadyExistsException(Type type, int id) : base(type, id) { }
+        public IdAlreadyExistsException(Type type, Exception inner) : base($"item of type {type.Name} not found", inner) { }
 
-        protected override string GetExceptionMessage()
-        {
-            return $"item by id {Id} of type {Type.Name} already exists";
-        }
+        public IdAlreadyExistsException(Type type, int id) : base($"item by id {id} of type {type.Name} already exists") { }
     }
 }

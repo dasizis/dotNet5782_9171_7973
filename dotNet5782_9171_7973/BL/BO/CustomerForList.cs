@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of customer for list
+    /// A class to represent a PDS of customer for list
     /// </summary>
     public class CustomerForList 
     {
@@ -16,6 +12,7 @@ namespace BO
         /// Customer Id
         /// </summary>
         public int Id { get; set; }
+
         string name;
         /// <summary>
         /// Customer name
@@ -32,6 +29,7 @@ namespace BO
                 name = value;
             }
         }
+
         string phone;
         /// <summary>
         /// Customer phone number
@@ -48,6 +46,7 @@ namespace BO
                 phone = value;
             }
         }
+
         int parcelsSendAndSupplied;
         /// <summary>
         /// Number of parcels sent by customer and supplied
@@ -64,6 +63,7 @@ namespace BO
                 parcelsSendAndSupplied = value;
             }
         }
+
         int parcelsSendAndNotSupplied;
         /// <summary>
         /// Number of parcels sent by customer and were not supplied
@@ -80,6 +80,7 @@ namespace BO
                 parcelsSendAndNotSupplied = value;
             }
         }
+
         int parcelsRecieved;
         /// <summary>
         /// Number of parcels customer recieved
@@ -96,6 +97,7 @@ namespace BO
                 parcelsRecieved = value;
             }
         }
+
         int parcelsOnWay;
         /// <summary>
         /// Number of parcels on the way to customer
@@ -119,6 +121,5 @@ namespace BO
         /// </summary>
         /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
-
     }
 }

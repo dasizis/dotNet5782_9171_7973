@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
@@ -10,6 +6,7 @@ namespace BO
     public class Drone : ILocalable
     {
         public int Id { get; set; }
+
         string model;
         public string Model
         {
@@ -23,6 +20,7 @@ namespace BO
                 model = value;
             }
         }
+
         WeightCategory maxWeight;
         public WeightCategory MaxWeight 
         {
@@ -36,6 +34,7 @@ namespace BO
                 maxWeight = value;
             }
         }
+
         double battery;
         public double Battery 
         {
@@ -49,6 +48,7 @@ namespace BO
                 battery = value;
             }
         }
+
         DroneState state;
         public DroneState State
         {
@@ -63,14 +63,15 @@ namespace BO
             }
         }
         public ParcelInDeliver ParcelInDeliver { get; set; }
+
         public Location Location { get; set; }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method
         /// </summary>
         /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
-
 
     }
 }

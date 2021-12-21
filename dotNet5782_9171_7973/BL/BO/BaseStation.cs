@@ -1,14 +1,11 @@
 ﻿using StringUtilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of base station
+    /// A class to represent a PDS of base station
     /// </summary>
     public class BaseStation: ILocalable
     {
@@ -33,10 +30,12 @@ namespace BO
                 name = value;
             }
         }
+
         /// <summary>
         /// Base station location
         /// </summary>
         public Location Location { get; set; }
+
         int emptyChargeSlots;
         /// <summary>
         /// Number of empty charge slots in base station
@@ -53,6 +52,7 @@ namespace BO
                 emptyChargeSlots = value;
             } 
         }
+
         /// <summary>
         /// List of drones beeing in charged at base station
         /// </summary>

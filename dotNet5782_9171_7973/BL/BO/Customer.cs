@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of customer
+    /// A class to represent a PDS of customer
     /// </summary>
     public class Customer: ILocalable
     {
@@ -17,6 +14,7 @@ namespace BO
         /// Customer Id
         /// </summary>
         public int Id { get; set; }
+
         string name;
         /// <summary>
         /// Customer name
@@ -33,6 +31,7 @@ namespace BO
                 name = value;
             }
         }
+
         string phone;
         /// <summary>
         /// Customer phone number
@@ -49,18 +48,22 @@ namespace BO
                 phone = value;
             }
         }
+
         /// <summary>
         /// Customer location
         /// </summary>
         public Location Location { get; set; }
+
         /// <summary>
         /// List of parcels sent from customer
         /// </summary>
         public List<Parcel> Send { get; set; }
+
         /// <summary>
         /// List of parcels sent to customer
         /// </summary>
         public List<Parcel> Recieve { get; set; }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

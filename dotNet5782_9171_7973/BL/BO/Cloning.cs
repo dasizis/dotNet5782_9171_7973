@@ -7,7 +7,6 @@ namespace BO
     /// </summary>
     internal static class Cloning
     {
-
         /// <summary>
         /// Makes a deep clone of an object
         /// (But not of lists)

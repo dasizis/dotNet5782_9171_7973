@@ -50,6 +50,12 @@ namespace BO
             }
         }
         public CustomerInDelivery OtherCustomer { get; set; }
+
+        /// <summary>
+        /// Uses an outer project <see cref="StringUtilities"/>
+        /// to override the <code>ToString()</code> method
+        /// </summary>
+        /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
 
 

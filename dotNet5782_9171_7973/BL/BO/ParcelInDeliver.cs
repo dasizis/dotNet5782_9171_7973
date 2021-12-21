@@ -37,7 +37,7 @@ namespace BO
                 priority = value;
             }
         }
-        public bool Position { get; set; }
+        public bool WasPickedUp { get; set; }
         public Location CollectLocation { get; set; }
         public Location TargetLocation { get; set; }
         public double DeliveryDistance { get; set; }

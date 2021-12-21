@@ -125,6 +125,8 @@ namespace BL
             }
         }
 
+        #region Helpers
+
         /// <summary>
         /// return converted base station to base staion for list
         /// </summary>
@@ -143,5 +145,7 @@ namespace BL
                 BusyChargeSlots = baseStation.DronesInChargeList.Count,
             };
         }
+
+        #endregion
     }
 }

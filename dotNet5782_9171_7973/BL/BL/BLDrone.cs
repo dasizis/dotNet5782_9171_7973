@@ -204,6 +204,8 @@ namespace BL
             }
         }
 
+        #region Helpers
+
         /// <summary>
         /// Checks weather a drone can deliver a parcel
         /// </summary>
@@ -246,5 +248,49 @@ namespace BL
 
             return drone;
         }
+
+        /// <summary>
+        /// Returns a converted drone to drone for list
+        /// </summary>
+        /// <param name="id">The id of requested drone</param>
+        /// <returns>A clone of <see cref="DroneForList"/></returns>
+        /// <exception cref="ObjectNotFoundException" />
+        internal DroneForList GetDroneForList(int id)
+        {
+            return GetDroneForListRef(id).Clone();
+        }
+
+        /// <summary>
+        /// Returns a converted drone to drone in charge
+        /// </summary>
+        /// <param name="id">The drone Id</param>
+        /// <returns>A <see cref="DroneInCharge"/></returns>
+        internal DroneInCharge GetDroneInCharge(int id)
+        {
+            return new DroneInCharge()
+            {
+                Id = id,
+                BatteryState = GetDroneForList(id).Battery,
+            };
+        }
+
+        /// <summary>
+        /// Returns a converted drone to drone in delivery
+        /// </summary>
+        /// <param name="id">The drone Id</param>
+        /// <returns>A <see cref="DroneInDelivery"/></returns>
+        internal DroneInDelivery GetDroneInDelivery(int id)
+        {
+            var drone = GetDrone(id);
+
+            return new DroneInDelivery()
+            {
+                Id = id,
+                BatteryState = drone.Battery,
+                Location = drone.Location,
+            };
+        }
+
+        #endregion
     }
 }

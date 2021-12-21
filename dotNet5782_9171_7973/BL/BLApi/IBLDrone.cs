@@ -16,6 +16,7 @@ namespace BLApi
         /// <param name="maxWeight">The drone max weight to carry</param>
         /// <param name="stationId">A station id for first loading</param>
         /// <exception cref="IdAlreadyExistsException" />
+        /// <exception cref="InvalidPropertyValueException" />
         void AddDrone(int id, string model, WeightCategory maxWeight, int stationId);
 
         /// <summary>

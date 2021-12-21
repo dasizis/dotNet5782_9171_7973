@@ -129,7 +129,7 @@ namespace PL
             }
             else
             {
-                if (!Parcel.Position)
+                if (!Parcel.WasPickedUp)
                 {
                     bal.PickUpParcel((int)Id);
                     didSucceed = true;

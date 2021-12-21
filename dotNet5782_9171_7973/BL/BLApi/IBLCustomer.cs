@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BO;
 
 namespace BLApi
 {
+    /// <summary>
+    /// Declares all <see cref="IBL"/> methods related to <see cref="Customer"/>
+    /// </summary>
     public interface IBLCustomer
     {
         /// <summary>
@@ -16,13 +15,16 @@ namespace BLApi
         /// <param name="name">the customer name</param>
         /// <param name="phone">the customer phone number</param>
         /// <param name="location">the customer location</param>
+        /// <exception cref="IdAlreadyExistsException" />
+        /// <exception cref="InvalidPropertyValueException" />
         void AddCustomer(int id, string name, string phone, Location location);
 
         /// <summary>
         /// return specific customer
         /// </summary>
-        /// <param name="id">id of requested customer</param>
-        /// <returns>customer with id</returns>
+        /// <param name="id">Id of requested customer</param>
+        /// <returns>The <see cref="Customer"/> who has the spesific Id</returns>
+        /// <exception cref="ObjectNotFoundException" />
         Customer GetCustomer(int id);
         
         /// <summary>

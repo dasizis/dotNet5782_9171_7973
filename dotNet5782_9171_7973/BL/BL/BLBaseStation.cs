@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BO;
 
 namespace BL
@@ -134,6 +131,7 @@ namespace BL
         /// </summary>
         /// <param name="id">id of requested base station</param>
         /// <returns>base station for list</returns>
+        /// <exception cref="ObjectNotFoundException" />
         internal BaseStationForList GetBaseStationForList(int id)
         {
             var baseStation = GetBaseStation(id);

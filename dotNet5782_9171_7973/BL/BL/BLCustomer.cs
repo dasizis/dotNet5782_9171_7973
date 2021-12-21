@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BO;
 
 namespace BL
 {
+    /// <summary>
+    /// Implemens the <see cref="BLApi.IBLCustomer"/> part of the <see cref="BLApi.IBL"/>
+    /// </summary>
     partial class BL
     {
         public void AddCustomer(int id, string name, string phone, Location location)
@@ -38,7 +38,6 @@ namespace BL
             {
                 throw new IdAlreadyExistsException(typeof(Customer), id);
             }
-
         }
 
         public Customer GetCustomer(int id)
@@ -87,7 +86,14 @@ namespace BL
                 if (!Validation.IsValidName(name))
                     throw new InvalidPropertyValueException(nameProperty, name);
 
-                dal.Update<DO.Customer>(customerId, nameProperty, name);
+                try
+                {
+                    dal.Update<DO.Customer>(customerId, nameProperty, name);
+                }
+                catch (DO.ObjectNotFoundException e)
+                {
+                    throw new ObjectNotFoundException(typeof(BaseStation), e);
+                }
             }
 
             if (phone != null)
@@ -95,7 +101,14 @@ namespace BL
                 if (!Validation.IsValidPhone(phone))
                     throw new InvalidPropertyValueException(phoneProperty, phone);
 
-                dal.Update<DO.BaseStation>(customerId, phoneProperty, phone);
+                try
+                {
+                    dal.Update<DO.Customer>(customerId, phoneProperty, phone);
+                }
+                catch (DO.ObjectNotFoundException e)
+                {
+                    throw new ObjectNotFoundException(typeof(BaseStation), e);
+                }
             }
         }
 
@@ -109,6 +122,65 @@ namespace BL
             {
                 throw new ObjectNotFoundException(typeof(Customer), e);
             }
+        }
+
+        /// <summary>
+        /// Returns specific customer for list
+        /// </summary>
+        /// <param name="id">id of requested customer</param>
+        /// <returns>customer with id</returns>
+        /// <exception cref="ObjectNotFoundException" />
+        internal CustomerForList GetCustomerForList(int id)
+        {
+            DO.Customer customer;
+
+            try
+            {
+                customer = dal.GetById<DO.Customer>(id);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Customer), e);
+            }
+
+            var parcels = dal.GetList<DO.Parcel>();
+
+            return new CustomerForList()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                ParcelsSendAndSupplied = dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied != null).Count(),
+                ParcelsSendAndNotSupplied = dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied == null).Count(),
+                ParcelsRecieved = dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied != null).Count(),
+                ParcelsOnWay = dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied == null).Count(),
+            };
+        }
+
+        /// <summary>
+        /// return converted customer to customer in delivery
+        /// </summary>
+        /// <param name="id">id of requested customer</param>
+        /// <returns>customer in delivery</returns>
+        /// <exception cref="ObjectNotFoundException" />
+        internal CustomerInDelivery GetCustomerInDelivery(int id)
+        {
+            DO.Customer customer;
+
+            try
+            {
+                customer = dal.GetById<DO.Customer>(id);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Customer), e);
+            }
+
+            return new CustomerInDelivery()
+            {
+                Id = id,
+                Name = customer.Name,
+            };
         }
     }
 }

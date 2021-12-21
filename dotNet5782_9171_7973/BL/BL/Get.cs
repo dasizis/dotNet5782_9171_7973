@@ -74,37 +74,7 @@ namespace BL
 
             };
         }
-        /// <summary>
-        /// return specific customer for list
-        /// </summary>
-        /// <param name="id">id of requested customer</param>
-        /// <returns>customer with id</returns>
-        public CustomerForList GetCustomerForList(int id)
-        {
-            DO.Customer customer;
-
-            try
-            {
-                customer = dal.GetById<DO.Customer>(id);
-            }
-            catch
-            {
-                throw new ObjectNotFoundException(typeof(Customer), id);
-            }
-
-            var parcels = dal.GetList<DO.Parcel>();
-
-            return new CustomerForList()
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                ParcelsSendAndSupplied = parcels.Count(parcel => parcel.SenderId == id && parcel.Supplied != null),
-                ParcelsSendAndNotSupplied = parcels.Count(parcel => parcel.SenderId == id && parcel.Supplied == null),
-                ParcelsRecieved = parcels.Count(parcel => parcel.TargetId == id && parcel.Supplied != null),
-                ParcelsOnWay = parcels.Count(parcel => parcel.TargetId == id && parcel.Supplied == null),
-            };
-        }
+       
         /// <summary>
         /// return converted drone to drone for list
         /// </summary>
@@ -169,30 +139,7 @@ namespace BL
             };
         }
         
-        /// <summary>
-        /// return converted customer to customer in delivery
-        /// </summary>
-        /// <param name="id">id of requested customer</param>
-        /// <returns>customer in delivery</returns>
-        public CustomerInDelivery GetCustomerInDelivery(int id)
-        {
-            DO.Customer customer;
-
-            try
-            {
-                customer = dal.GetById<DO.Customer>(id);
-            }
-            catch
-            {
-                throw new ObjectNotFoundException(typeof(Customer), id);
-            }
-
-            return new CustomerInDelivery()
-            {
-                Id = id,
-                Name = customer.Name,
-            };
-        }
+        
         /// <summary>
         /// return converted parcel to parcel at customer
         /// </summary>

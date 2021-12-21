@@ -29,7 +29,7 @@ namespace StringUtilities
         /// <example>CamelCaseText -> Camel case text</example>
         /// <param name="camelCase">The camelCase string</param>
         /// <returns>The readable text <see cref="string"/></returns>
-        private static string CamelCaseToReadable(this string camelCase)
+        public static string CamelCaseToReadable(this string camelCase)
         {
             char[] letters = camelCase.ToCharArray();
             string result = "";

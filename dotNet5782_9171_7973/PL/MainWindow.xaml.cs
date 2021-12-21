@@ -53,7 +53,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            
+            DisplayListTreeView.DataContext = BLApi.BLFactory.GetBL().GetDronesList();
         }
     }
 }

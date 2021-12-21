@@ -3,10 +3,13 @@
                     xmlns:bo="clr-namespace:BO;assembly=BL"
                     xmlns:local="clr-namespace:PL"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    
+    <!--Converters-->
     <local:ObjectToTreeViewPropsConverter x:Key="ObjectToTreeViewPropsConverter" />
     <local:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
     <local:LongitudeConverter x:Key="LongitudeConverter" />
     <local:LatitudeConverter x:Key="LatitudeConverter" />
+    <local:CamelCaseToRedableConverter x:Key="CamelCaseToRedableConverter" />
 
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
@@ -38,8 +41,8 @@
 
     <!--Object property-->
     <DataTemplate DataType="{x:Type local:TreeViewProp}">
-        <DockPanel Width="160">
-            <TextBlock Text="{Binding PropName}" FontWeight="Bold"/>
+        <DockPanel Width="200">
+            <TextBlock Text="{Binding PropName, Converter={StaticResource CamelCaseToRedableConverter}}" FontWeight="Bold"/>
             <TextBlock Text="{Binding propValue}" TextAlignment="Right"/>
         </DockPanel>
     </DataTemplate>
@@ -68,7 +71,8 @@
     <!--BO.ParcelForList-->
     <HierarchicalDataTemplate DataType="{x:Type bo:ParcelForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
-            <TextBlock Text="{Binding Model}"/>
+            <materialDesign:PackIcon Kind="PackageVariantClosed" />
+            <TextBlock Text="{Binding Id}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 </ResourceDictionary>

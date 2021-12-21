@@ -7,12 +7,12 @@
     <!--Converters-->
     <local:ObjectToTreeViewPropsConverter x:Key="ObjectToTreeViewPropsConverter" />
     <local:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
-    <local:LongitudeConverter x:Key="LongitudeConverter" />
-    <local:LatitudeConverter x:Key="LatitudeConverter" />
     <local:CamelCaseToRedableConverter x:Key="CamelCaseToRedableConverter" />
+    <local:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
 
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="Foreground" Value="#C0C0C0" />
     </Style>
 
 	<!--BO.Location-->
@@ -27,7 +27,7 @@
     <DataTemplate DataType="{x:Type local:Longitude}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="Longitude" />
-            <TextBlock Text="{Binding Long, Converter={StaticResource LongitudeConverter}}" />
+            <TextBlock Text="{Binding}" />
         </StackPanel>
     </DataTemplate>
 
@@ -35,7 +35,7 @@
     <DataTemplate DataType="{x:Type local:Latitude}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="Latitude" />
-            <TextBlock Text="{Binding Lat, Converter={StaticResource LatitudeConverter}}" />
+            <TextBlock Text="{Binding}" />
         </StackPanel>
     </DataTemplate>
 
@@ -45,6 +45,18 @@
             <TextBlock Text="{Binding PropName, Converter={StaticResource CamelCaseToRedableConverter}}" FontWeight="Bold"/>
             <TextBlock Text="{Binding propValue}" TextAlignment="Right"/>
         </DockPanel>
+    </DataTemplate>
+
+    <!--Battery-->
+    <DataTemplate DataType="{x:Type local:Battery}">
+        <DockPanel Width="200">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="{Binding BatteryValue, Converter={StaticResource BatteryValueToIconNameConverter}}" />
+                <TextBlock Text="Battery" FontWeight="Bold" />
+            </StackPanel>
+            <TextBlock Text="{Binding BatteryValue, StringFormat={}{0:F2}% }" TextAlignment="Right"/>
+        </DockPanel>
+        
     </DataTemplate>
 
     <!--BO.BaseStationForList-->

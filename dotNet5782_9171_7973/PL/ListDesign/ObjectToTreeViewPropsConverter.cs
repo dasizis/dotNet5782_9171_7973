@@ -21,6 +21,10 @@ namespace PL
                             {
                                 return propValue;
                             }
+                            if (prop.Name == "Battery")
+                            {
+                                return new Battery() { BatteryValue = (double)propValue };
+                            }
 
                             return new TreeViewProp() { PropName = prop.Name, propValue = propValue } as object;
                         });

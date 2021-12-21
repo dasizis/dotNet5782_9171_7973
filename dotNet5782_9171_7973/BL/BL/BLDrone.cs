@@ -9,13 +9,6 @@ namespace BL
 {
     partial class BL 
     {
-        /// <summary>
-        /// add a drone
-        /// </summary>
-        /// <param name="id">the drone id</param>
-        /// <param name="model">the drone model </param>
-        /// <param name="maxWeight">the drone max weight to carry</param>
-        /// <param name="stationId">first station for drone first charge</param>
         public void AddDrone(int id, string model, WeightCategory maxWeight, int stationId)
         {
             var station = GetBaseStation(stationId);
@@ -40,7 +33,7 @@ namespace BL
                     MaxWeight = (DO.WeightCategory)drone.MaxWeight, 
                 });
             }
-            catch
+            catch (DO.IdAlreadyExistsException)
             {
                 throw new IdAlreadyExistsException(typeof(Drone), id);
             }

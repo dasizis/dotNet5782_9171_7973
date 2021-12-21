@@ -7,6 +7,10 @@ using System.Reflection;
 
 namespace Dal
 { 
+
+    /// <summary>
+    /// Implements the <see cref="DalApi.IDal"/> interface using objects to store the data
+    /// </summary>
     public sealed partial class DalObject : Singleton<DalObject>, DalApi.IDal
     {
         private DalObject() { }

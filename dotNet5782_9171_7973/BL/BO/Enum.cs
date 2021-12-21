@@ -14,10 +14,10 @@
     }
     public enum ParcelState
     {
-        Defined,
-        Associated,
+        Requested,
+        Scheduled,
         PickedUp, 
-        Provided
+        Supplied
     }
     public enum DroneState
     {

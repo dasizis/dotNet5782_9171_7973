@@ -184,10 +184,10 @@ namespace BL
         {
             var parcel = GetParcel(id);
 
-            var state = parcel.Requested == null ? ParcelState.Associated
-                        : parcel.Scheduled == null ? ParcelState.Defined
+            var state = parcel.Requested == null ? ParcelState.Scheduled
+                        : parcel.Scheduled == null ? ParcelState.Requested
                         : parcel.PickedUp == null ? ParcelState.PickedUp
-                        : ParcelState.Provided;
+                        : ParcelState.Supplied;
 
             return new ParcelAtCustomer()
             {

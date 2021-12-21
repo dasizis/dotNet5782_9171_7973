@@ -8,7 +8,7 @@ namespace BO
     internal static class Cloning
     {
         /// <summary>
-        /// Makes a deep clone of an object
+        /// Creates a deep clone of an object
         /// (But not of lists)
         /// </summary>
         /// <typeparam name="T">The object type</typeparam>
@@ -20,7 +20,7 @@ namespace BO
         }
 
         /// <summary>
-        /// An helper method to make a deep clone of an object
+        /// An helper method to create a deep clone of an object
         /// </summary>
         /// <param name="source">The object to clone</param>
         /// <returns>A deep clone of the object</returns>

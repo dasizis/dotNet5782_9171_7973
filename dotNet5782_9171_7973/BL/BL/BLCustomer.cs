@@ -123,6 +123,8 @@ namespace BL
             }
         }
 
+        #region Helpers
+
         /// <summary>
         /// Returns specific customer for list
         /// </summary>
@@ -181,5 +183,7 @@ namespace BL
                 Name = customer.Name,
             };
         }
+
+        #endregion
     }
 }

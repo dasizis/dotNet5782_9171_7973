@@ -205,7 +205,7 @@ namespace BL
         /// <param name="id">The parcel Id</param>
         /// <returns>A <see cref="ParcelInDeliver"/></returns>
         /// <exception cref="ObjectNotFoundException" />
-        public ParcelInDeliver GetParcelInDeliver(int id)
+        internal ParcelInDeliver GetParcelInDeliver(int id)
         {
             DO.Parcel parcel;
             try

@@ -7,10 +7,19 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A struct to represent a PDS of customer for list
+    /// </summary>
     public class CustomerForList 
     {
+        /// <summary>
+        /// Customer Id
+        /// </summary>
         public int Id { get; set; }
         string name;
+        /// <summary>
+        /// Customer name
+        /// </summary>
         public string Name 
         { 
             get => name;
@@ -24,6 +33,9 @@ namespace BO
             }
         }
         string phone;
+        /// <summary>
+        /// Customer phone number
+        /// </summary>
         public string Phone
         {
             get => phone;
@@ -37,6 +49,9 @@ namespace BO
             }
         }
         int parcelsSendAndSupplied;
+        /// <summary>
+        /// Number of parcels sent by customer and supplied
+        /// </summary>
         public int ParcelsSendAndSupplied
         {
             get => parcelsSendAndSupplied;
@@ -50,6 +65,9 @@ namespace BO
             }
         }
         int parcelsSendAndNotSupplied;
+        /// <summary>
+        /// Number of parcels sent by customer and were not supplied
+        /// </summary>
         public int ParcelsSendAndNotSupplied
         {
             get => parcelsSendAndNotSupplied;
@@ -63,6 +81,9 @@ namespace BO
             }
         }
         int parcelsRecieved;
+        /// <summary>
+        /// Number of parcels customer recieved
+        /// </summary>
         public int ParcelsRecieved
         {
             get => parcelsRecieved;
@@ -76,6 +97,9 @@ namespace BO
             }
         }
         int parcelsOnWay;
+        /// <summary>
+        /// Number of parcels on the way to customer
+        /// </summary>
         public int ParcelsOnWay
         {
             get => parcelsOnWay;

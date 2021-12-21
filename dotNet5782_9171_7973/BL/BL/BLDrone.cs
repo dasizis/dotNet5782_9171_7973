@@ -269,7 +269,7 @@ namespace BL
             return new DroneInCharge()
             {
                 Id = id,
-                BatteryState = GetDroneForList(id).Battery,
+                Battery = GetDroneForList(id).Battery,
             };
         }
 

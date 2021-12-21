@@ -11,14 +11,14 @@ namespace BO
     {
         public int Id { get; set; }
         double batteryState;
-        public double BatteryState
+        public double Battery
         {
             get => batteryState;
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(Battery), value);
                 }
                 batteryState = value;
             }

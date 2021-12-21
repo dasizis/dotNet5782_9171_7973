@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace DO
 {
+    /// <summary>
+    /// An exception that occours when the wanted item does not exist
+    /// </summary>
     [Serializable]
     public class ObjectNotFoundException : Exception
     {
@@ -15,6 +18,9 @@ namespace DO
         public ObjectNotFoundException(Type type, Exception inner)  : base($"item of type {type.Name} not found", inner) {}
     }
 
+    /// <summary>
+    /// An exception that occours when there is a try to add an object with existing id
+    /// </summary>
     [Serializable]
     public class IdAlreadyExistsException : Exception
     {

@@ -122,7 +122,7 @@ namespace PL
                     didSucceed = true;
                     message = "A parcel assigned to drone";
                 }
-                catch (BO.InValidActionException)
+                catch (BO.InvalidActionException)
                 {
                     message = "No parcel to assign";
                 }
@@ -166,7 +166,7 @@ namespace PL
                     didSucceed = true;
                     message = "Drone was send to charge";
                 }
-                catch (BO.InValidActionException)
+                catch (BO.InvalidActionException)
                 {
                     message = "Can not get to station";
                 }
@@ -179,7 +179,7 @@ namespace PL
                     didSucceed = true;
                     message = "Drone realesed from charging";
                 }
-                catch (BO.InValidActionException ex)
+                catch (BO.InvalidActionException ex)
                 {
                     message = ex.Message;
                 }

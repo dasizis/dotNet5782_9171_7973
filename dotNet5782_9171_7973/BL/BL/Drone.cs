@@ -78,7 +78,7 @@ namespace BL
 
             if (drone.State == DroneState.Deliver)
             {
-                throw new InValidActionException("Cannot assign parcel to busy drone.");
+                throw new InvalidActionException("Cannot assign parcel to busy drone.");
             }
 
             var parcels = GetNotAssignedToDroneParcels()
@@ -92,7 +92,7 @@ namespace BL
 
             if (!parcels.Any())
             {
-                throw new InValidActionException("Couldn't assign any parcel to the drone.");
+                throw new InvalidActionException("Couldn't assign any parcel to the drone.");
             }
 
             Parcel parcel = parcels.First();
@@ -114,13 +114,13 @@ namespace BL
 
             if (drone.State != DroneState.Maintenance)
             {
-                throw new InValidActionException("Drone is not in meintenece");
+                throw new InvalidActionException("Drone is not in meintenece");
             }
  
             var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId && !c.IsDeleted).FirstOrDefault();
             if (dalCharge.Equals(default(DO.DroneCharge)))
             {
-                throw new InValidActionException("Drone is not being charged");
+                throw new InvalidActionException("Drone is not being charged");
             }
 
             drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalSeconds;
@@ -160,7 +160,7 @@ namespace BL
 
             if (drone.State != DroneState.Free)
             {
-                throw new InValidActionException("Can not send a non-free drone to charge.");
+                throw new InvalidActionException("Can not send a non-free drone to charge.");
             }
 
             var availableBaseStations = GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
@@ -169,7 +169,7 @@ namespace BL
 
             if (!IsEnoughBattery(drone, closest.Location))
             {
-                throw new InValidActionException("Drone cannot get to base station for charging.");
+                throw new InvalidActionException("Drone cannot get to base station for charging.");
             }
 
             drone.Location = closest.Location;

@@ -14,7 +14,7 @@ namespace DalApi
         /// Adds an item to its data list
         /// </summary>
         /// <param name="item">the item to add</param>
-        /// <exception cref="IdAlreadyExistsException"></exception>
+        /// <exception cref="DO.IdAlreadyExistsException"></exception>
         void Add<T>(T item) where T : DO.IIdentifiable, DO.IDeletable;
 
         #endregion
@@ -27,7 +27,7 @@ namespace DalApi
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="id">The item Id</param>
         /// <returns>The found item</returns>
-        /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="DO.ObjectNotFoundException"></exception>
         T GetById<T>(int id) where T : DO.IIdentifiable, DO.IDeletable;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace DalApi
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="predicate">The condition</param>
         /// <returns>The found item</returns>
-        /// <exception cref="ObjectNotFoundException">
+        /// <exception cref="DO.ObjectNotFoundException">
         /// If there is no such item or there is more than one item that qualifies
         /// </exception>
         T GetSingle<T>(Predicate<T> predicate) where T : DO.IDeletable;
@@ -80,7 +80,7 @@ namespace DalApi
         /// <param name="id">The item id</param>
         /// <param name="propName">The property name</param>
         /// <param name="newValue">The new value for the property</param>
-        /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="DO.ObjectNotFoundException"></exception>
         /// <exception cref="ArgumentException">if the newValue type does not much the type of the property</exception>
         void Update<T>(int id, string propName, object newValue) where T : DO.IIdentifiable, DO.IDeletable;
 
@@ -104,7 +104,7 @@ namespace DalApi
         /// </summary>
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="id">The item id</param>
-        /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="DO.ObjectNotFoundException"></exception>
         void Delete<T>(int id) where T : DO.IIdentifiable, DO.IDeletable;
 
         /// <summary>

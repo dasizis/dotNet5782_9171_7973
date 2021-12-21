@@ -9,41 +9,8 @@ namespace BL
 {
     public partial class BL
     {
-        /// <summary>
-        /// return specific customer
-        /// </summary>
-        /// <param name="id">id of requested customer</param>
-        /// <returns>customer with id</returns>
-        public Customer GetCustomer(int id)
-        {
-            DO.Customer customer;
-            try
-            {
-                customer = dal.GetById<DO.Customer>(id);
-            }
-            catch
-            {
-                throw new ObjectNotFoundException(typeof(Customer), id);
-            }
-
-            var sendParcels = from parcel in dal.GetList<DO.Parcel>()
-                              where parcel.SenderId == id
-                              select GetParcel(parcel.Id);
-
-            var targetParcels = from parcel in dal.GetList<DO.Parcel>()
-                                where parcel.TargetId == id
-                                select GetParcel(parcel.Id);
-
-            return new Customer()
-            {
-                Id = customer.Id,
-                Location = new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude },
-                Name = customer.Name,
-                Phone = customer.Phone,
-                Send = sendParcels.ToList(),
-                Recieve = targetParcels.ToList(),
-            };
-        }
+        
+        
         /// <summary>
         /// return specific parcel
         /// </summary>
@@ -75,35 +42,7 @@ namespace BL
                 Supplied = parcel.Supplied,
             };
         }
-        /// <summary>
-        /// return specific base station
-        /// </summary>
-        /// <param name="id">id of requested base station</param>
-        /// <returns>base station with id</returns>
-        public BaseStation GetBaseStation(int id)
-        {
-            DO.BaseStation baseStation;
-            try
-            {
-                baseStation = dal.GetById<DO.BaseStation>(id);
-            }
-            catch
-            {
-                throw new ObjectNotFoundException(typeof(BaseStation), id);
-            }
-
-            var chargeSlots = dal.GetList<DO.DroneCharge>().Where(charge => charge.StationId == id).ToList();
-            var dronesInChargeList = chargeSlots.Select(charge => GetDrone(charge.DroneId)).ToList();
-
-            return new BaseStation()
-            {
-                Id = baseStation.Id,
-                Name = baseStation.Name,
-                Location = new Location() { Latitude = baseStation.Latitude, Longitude = baseStation.Longitude },
-                EmptyChargeSlots = baseStation.ChargeSlots - chargeSlots.Count(),
-                DronesInChargeList = dronesInChargeList,
-            };
-        }
+        
 
         /// <summary>
         /// return specific drone

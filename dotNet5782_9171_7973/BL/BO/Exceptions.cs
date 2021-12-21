@@ -56,4 +56,28 @@ namespace BO
 
         public IdAlreadyExistsException(Type type, int id) : base($"item by id {id} of type {type.Name} already exists") { }
     }
+
+    /// <summary>
+    /// An exception that occours when there is a try to add an object with existing id
+    /// </summary>
+    [Serializable]
+    public class InvalidPropertyValueException : Exception
+    {
+        public string PropertyName { get; set; }
+
+        public object Value { get; set; }
+
+        public InvalidPropertyValueException(string message) : base(message) { }
+
+        public InvalidPropertyValueException(string message, Exception inner) : base(message, inner) { }
+
+        protected InvalidPropertyValueException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        public InvalidPropertyValueException(string propName, object value)
+        {
+            PropertyName = propName;
+            Value = value;
+        }
+    }
+
 }

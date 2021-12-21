@@ -28,7 +28,7 @@ namespace Singleton
         class Nested
         {
             internal static volatile T instatnce = null;
-            internal static readonly object locker = new object();
+            internal static readonly object locker = new ();
         }
         public static T Instance
         {

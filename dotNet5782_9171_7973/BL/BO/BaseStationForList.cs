@@ -7,10 +7,19 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A struct to represent a PDS of base station for list
+    /// </summary>
     public class BaseStationForList
     {
+        /// <summary>
+        /// Base station Id
+        /// </summary>
         public int Id { get; set; }
         string name;
+        /// <summary>
+        /// Base station name
+        /// </summary>
         public string Name
         {
             get => name;
@@ -24,6 +33,9 @@ namespace BO
             }
         }
         int emptyChargeSlots;
+        /// <summary>
+        /// Number of empty charge slots at base station 
+        /// </summary>
         public int EmptyChargeSlots
         {
             get => emptyChargeSlots;
@@ -36,7 +48,11 @@ namespace BO
                 emptyChargeSlots = value;
             }
         }
+        
         private int busyChargeSlots;
+        /// <summary>
+        /// Number of busy charge slots at base station 
+        /// </summary>
         public int BusyChargeSlots
         {
             get => busyChargeSlots;

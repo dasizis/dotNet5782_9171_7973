@@ -8,6 +8,7 @@ using StringUtilities;
 
 namespace BO
 {
+
     public class Customer: ILocalable
     {
         public int Id { get; set; }

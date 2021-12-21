@@ -43,8 +43,8 @@
             <ComboBox ItemsSource="{Binding StateOptions}" SelectedItem="{Binding SelectedState}"  materialDesign:HintAssist.Hint="Choose State"/>
             <ComboBox ItemsSource="{Binding WeightOptions}" SelectedItem="{Binding SelectedWeight}"  materialDesign:HintAssist.Hint="Choose Max Weight"/>
         </StackPanel>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">        
-            <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220" SelectedItemChanged="DronesListView_SelectedItemChanged"/>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <TreeView x:Name="DronesListView" ItemsSource="{Binding Drones}" MinWidth="220" MouseDoubleClick="DronesListView_MouseDoubleClick_1"/>
         </ScrollViewer>
     </Grid>
 </UserControl>

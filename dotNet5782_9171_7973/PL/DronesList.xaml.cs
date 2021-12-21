@@ -70,18 +70,18 @@ namespace PL
             }
         }
 
-        private void DronesListView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Window.GetWindow(this)).AddDisplayTab("Add Drone", new DroneControl());
+        }
+
+        private void DronesListView_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             var drone = (sender as TreeView).SelectedItem as BO.DroneForList;
             if (drone == null) return;
 
             int id = drone.Id;
             ((MainWindow)Window.GetWindow(this)).AddDisplayTab($"Drone {id}", new DroneControl(id));
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            ((MainWindow)Window.GetWindow(this)).AddDisplayTab("Add Drone", new DroneControl());
         }
     }    
 }

@@ -47,20 +47,20 @@ namespace BL
             {
                 baseStation = dal.GetById<DO.BaseStation>(id);
             }
-            catch
+            catch (DO.ObjectNotFoundException e)
             {
-                throw new ObjectNotFoundException(typeof(BaseStation), id);
+                throw new ObjectNotFoundException(typeof(BaseStation), e);
             }
 
-            var chargeSlots = dal.GetList<DO.DroneCharge>().Where(charge => charge.StationId == id).ToList();
-            var dronesInChargeList = chargeSlots.Select(charge => GetDrone(charge.DroneId)).ToList();
+            var charges = dal.GetFilteredList<DO.DroneCharge>(charge => charge.StationId == id);
+            var dronesInChargeList = charges.Select(charge => GetDrone(charge.DroneId)).ToList();
 
             return new BaseStation()
             {
                 Id = baseStation.Id,
                 Name = baseStation.Name,
                 Location = new Location() { Latitude = baseStation.Latitude, Longitude = baseStation.Longitude },
-                EmptyChargeSlots = baseStation.ChargeSlots - chargeSlots.Count(),
+                EmptyChargeSlots = baseStation.ChargeSlots - charges.Count(),
                 DronesInChargeList = dronesInChargeList,
             };
         }
@@ -91,7 +91,14 @@ namespace BL
                 if (!Validation.IsValidName(name))
                     throw new InvalidPropertyValueException(nameProperty, name);
                 
-                dal.Update<DO.BaseStation>(baseStationId, nameProperty, name);
+                try
+                {
+                    dal.Update<DO.BaseStation>(baseStationId, nameProperty, name);
+                }
+                catch (DO.ObjectNotFoundException e)
+                {
+                    throw new ObjectNotFoundException(typeof(BaseStation), e);
+                }
             }
 
             if (chargeSlots != null)
@@ -99,7 +106,14 @@ namespace BL
                 if (chargeSlots < 0)
                     throw new InvalidPropertyValueException(chargeSlotsProperty, chargeSlots);
 
-                dal.Update<DO.BaseStation>(baseStationId, chargeSlotsProperty, chargeSlots);
+                try
+                {
+                    dal.Update<DO.BaseStation>(baseStationId, chargeSlotsProperty, chargeSlots);
+                }
+                catch (DO.ObjectNotFoundException e)
+                {
+                    throw new ObjectNotFoundException(typeof(BaseStation), e);
+                }
             }
         }
 
@@ -113,6 +127,24 @@ namespace BL
             {
                 throw new ObjectNotFoundException(typeof(BaseStation), e);
             }
+        }
+
+        /// <summary>
+        /// return converted base station to base staion for list
+        /// </summary>
+        /// <param name="id">id of requested base station</param>
+        /// <returns>base station for list</returns>
+        internal BaseStationForList GetBaseStationForList(int id)
+        {
+            var baseStation = GetBaseStation(id);
+
+            return new BaseStationForList()
+            {
+                Id = id,
+                Name = baseStation.Name,
+                EmptyChargeSlots = baseStation.EmptyChargeSlots,
+                BusyChargeSlots = baseStation.DronesInChargeList.Count,
+            };
         }
     }
 }

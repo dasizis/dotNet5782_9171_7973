@@ -168,23 +168,7 @@ namespace BL
                 Location = drone.Location,
             };
         }
-        /// <summary>
-        /// return converted base station to base staion for list
-        /// </summary>
-        /// <param name="id">id of requested base station</param>
-        /// <returns>base station for list</returns>
-        public BaseStationForList GetBaseStationForList(int id)
-        {
-            var baseStation = GetBaseStation(id);
-
-            return new BaseStationForList()
-            {
-                Id = id,
-                Name = baseStation.Name,
-                EmptyChargeSlots = baseStation.EmptyChargeSlots,
-                BusyChargeSlots = baseStation.DronesInChargeList.Count,
-            };
-        }
+        
         /// <summary>
         /// return converted customer to customer in delivery
         /// </summary>

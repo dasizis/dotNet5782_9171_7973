@@ -1,9 +1,5 @@
 ﻿using BO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace BLApi
@@ -17,6 +13,8 @@ namespace BLApi
         /// <param name="name">The base station name</param>
         /// <param name="location">The base station location</param>
         /// <param name="chargeSlots">The base station number of charge slots</param>
+        /// <exception cref="InvalidPropertyValueException" />
+        /// <exception cref="IdAlreadyExistsException" />
         void AddBaseStation(int id, string name, Location location, int chargeSlots);
 
         /// <summary>
@@ -24,6 +22,7 @@ namespace BLApi
         /// </summary>
         /// <param name="id">id of requested base station</param>
         /// <returns>base station with id</returns>
+        /// <exception cref="ObjectNotFoundException" />
         BaseStation GetBaseStation(int id);
 
         /// <summary>
@@ -44,6 +43,8 @@ namespace BLApi
         /// <param name="baseStationId">base station to update</param>
         /// <param name="name">new name</param>
         /// <param name="chargeSlots">new number of charge slots</param>
+        /// <exception cref="ObjectNotFoundException" />
+        /// <exception cref="InvalidPropertyValueException" />
         void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null);
 
         /// <summary>

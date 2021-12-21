@@ -28,7 +28,7 @@ namespace ConsoleUI_BL
             return converted;
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             ActivateMainMenu();
         }

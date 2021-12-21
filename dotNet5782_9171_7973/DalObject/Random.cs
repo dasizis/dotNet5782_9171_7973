@@ -146,8 +146,8 @@ namespace Dal
             {
                 Id = id,
                 Name = RandomFullName(),
-                Longitude = Rand.NextDouble() * 100,
-                Latitude = Rand.NextDouble() * 90,
+                Longitude = RandomLongitude(),
+                Latitude = RandomLatitude(),
                 Phone = RandomPhone(),
             };
         }
@@ -163,8 +163,8 @@ namespace Dal
             {
                 Id = id,
                 Name = RandomName(),
-                Longitude = Rand.NextDouble() * 100,
-                Latitude = Rand.NextDouble() * 90,
+                Longitude = RandomLongitude(),
+                Latitude = RandomLatitude(),
                 ChargeSlots = Rand.Next(1, 10),
             };
         }

@@ -169,27 +169,26 @@ namespace BL
                 throw new InvalidActionException("Cannot assign parcel to busy drone.");
             }
 
-            var parcels = GetNotAssignedToDroneParcels()
-                              .Select(parcel => GetParcel(parcel.Id)).ToList()
-                              .Where(parcel =>
-                                   (int)parcel.Weight < (int)drone.MaxWeight &&
-                                   IsAbleToDeliverParcel(drone, GetParcelInDeliver(parcel.Id)))
-                              .OrderBy(p => p.Priority)
-                              .ThenBy(p => p.Weight)
-                              .ThenBy(p => Location.Distance(GetCustomer(p.Sender.Id).Location, drone.Location));
+            var parcels = GetNotAssignedToDroneParcels().Select(parcel => GetParcel(parcel.Id));
+
+            var orderedParcels = from parcel in parcels
+                                 where parcel.Weight < drone.MaxWeight
+                                       && IsAbleToDeliverParcel(drone, GetParcelInDeliver(parcel.Id))
+                                 orderby parcel.Priority, parcel.Weight, Location.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
+                                 select parcel;
 
             if (!parcels.Any())
             {
                 throw new InvalidActionException("Couldn't assign any parcel to the drone.");
             }
 
-            Parcel parcel = parcels.First();
-            dal.Update<DO.Parcel>(parcel.Id, nameof(DO.Parcel.DroneId), droneId);
-            dal.Update<DO.Parcel>(parcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
+            Parcel selectedParcel = parcels.First();
+            dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.DroneId), droneId);
+            dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
 
             var droneForList = GetDroneForListRef(droneId);
             droneForList.State = DroneState.Deliver;
-            droneForList.DeliveredParcelId = parcel.Id;
+            droneForList.DeliveredParcelId = selectedParcel.Id;
         }
 
         public void DeleteDrone(int droneId)

@@ -38,12 +38,10 @@ namespace BL
 
             var dlDrones = dal.GetList<DO.Drone>().ToList();
             var parcels = dal.GetList<DO.Parcel>().ToList();
-            var availableStations = GetAvailableBaseStations()
-                                             .Select(station => GetBaseStation(station.Id))
-                                             .ToList();
                                        
             foreach (var dlDrone in dlDrones)
             { 
+
                 var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
                 double battery;
                 int? parcelInDeliverId = null;
@@ -69,6 +67,10 @@ namespace BL
                     senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
 
                 }
+
+                var availableStations = GetAvailableBaseStations()
+                                             .Select(station => GetBaseStation(station.Id))
+                                             .ToList();
 
                 Location RandomSuppliedParcelLocation()
                 {

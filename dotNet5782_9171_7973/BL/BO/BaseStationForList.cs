@@ -24,7 +24,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException(value);
+                    throw new InvalidPropertyValueException(nameof(Name), value);
                 }
                 name = value;
             }
@@ -41,7 +41,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(EmptyChargeSlots), value);
                 }
                 emptyChargeSlots = value;
             }
@@ -58,7 +58,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(BusyChargeSlots), value);
                 }
                 busyChargeSlots = value;
             }

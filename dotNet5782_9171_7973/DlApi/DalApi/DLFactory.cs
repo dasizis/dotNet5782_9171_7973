@@ -16,8 +16,8 @@ namespace DalApi
         /// <returns>The Dal instance</returns>
         public static IDal GetDal()                                                                                                          
         {
-            Assembly.LoadFrom($@"{Directory.GetCurrentDirectory()}\..\..\..\..\{DalConfig.DalType}\bin\Debug\net5.0\{DalConfig.DalType}.dll");
-            Type type = Type.GetType($"{DalConfig.Namespace}.{DalConfig.DalType}, {DalConfig.DalType}");
+            Assembly.LoadFrom($@"{Directory.GetCurrentDirectory()}\..\..\..\..\{DalConfig.ClassName}\bin\Debug\net5.0\{DalConfig.ClassName}.dll");
+            Type type = Type.GetType($"{DalConfig.Namespace}.{DalConfig.ClassName}, {DalConfig.ClassName}");
 
             if (type == null)
             {

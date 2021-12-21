@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalApi", "DlApi\DalApi.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{413B9D8D-4D44-42C8-88C4-E926A2DE5388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singelton", "Singelton\Singelton.csproj", "{3D709D0D-132C-41EC-AD88-7F07C77512D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singleton", "Singelton\Singleton.csproj", "{3D709D0D-132C-41EC-AD88-7F07C77512D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

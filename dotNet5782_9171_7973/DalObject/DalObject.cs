@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using DO;
 using System.Linq;
-using Singelton;
+using Singleton;
 using System.Reflection;
 
 namespace Dal

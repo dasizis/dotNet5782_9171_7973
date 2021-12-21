@@ -11,7 +11,7 @@ namespace BL
 {
     public sealed partial class BL : Singleton<BL>, BLApi.IBL
     {
-        DalApi.IDal dal { get; } = DalApi.FactoryDL.GetDL();
+        DalApi.IDal dal { get; } = DalApi.DalFactory.GetDal();
         const int MAX_CHARGE = 100;
 
         //Electricity confumctiol properties

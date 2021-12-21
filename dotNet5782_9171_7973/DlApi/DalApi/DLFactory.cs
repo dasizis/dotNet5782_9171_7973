@@ -9,9 +9,9 @@ using System.Xml.Linq;
 
 namespace DalApi
 {
-    public static class FactoryDL
+    public static class DalFactory
     {
-        public static IDal GetDL()                                                                                                          
+        public static IDal GetDal()                                                                                                          
         {
             Assembly.LoadFrom($@"{Directory.GetCurrentDirectory()}\..\..\..\..\{DalConfig.DalType}\bin\Debug\net5.0\{DalConfig.DalType}.dll");
             Type type = Type.GetType($"{DalConfig.Namespace}.{DalConfig.DalType}, {DalConfig.DalType}");

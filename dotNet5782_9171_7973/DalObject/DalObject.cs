@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
-using System.Text;
 using DO;
 using System.Linq;
 using Singelton;

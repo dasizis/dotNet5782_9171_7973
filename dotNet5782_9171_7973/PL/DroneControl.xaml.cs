@@ -64,7 +64,7 @@ namespace PL
         {
             InitializeComponent();
 
-            bal = BLApi.FactoryBL.GetBL();
+            bal = BLApi.BLFactory.GetBL();
             DataContext = this;
             StationsOptions = bal.GetAvailableBaseStations().Select(s => s.Id).ToList();
         }

@@ -51,7 +51,7 @@ namespace PL
         public ObservableCollection<BO.DroneForList> Drones { get; set; }
         public DronesList()
         {
-            bal = BLApi.FactoryBL.GetBL();
+            bal = BLApi.BLFactory.GetBL();
             Drones = new (bal.GetDronesList());
             DataContext = this;
             InitializeComponent();

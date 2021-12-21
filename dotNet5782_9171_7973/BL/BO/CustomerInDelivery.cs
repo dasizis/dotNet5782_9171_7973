@@ -7,10 +7,20 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A struct to represent a PDS of customer in delivery
+    /// (customer related to parcel delivery, sender or reciever)
+    /// </summary>
     public class CustomerInDelivery 
     {
+        /// <summary>
+        /// Customer Id
+        /// </summary>
         public int Id { get; set; }
         string name;
+        /// <summary>
+        /// Customer name
+        /// </summary>
         public string Name 
         { 
             get => name;

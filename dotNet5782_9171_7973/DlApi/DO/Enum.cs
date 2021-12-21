@@ -1,7 +1,8 @@
 ﻿namespace DO
 {
     /// <summary>
-    /// A maximum weight category which a drone can carry
+    /// Parcel weight category
+    /// Or a weight category that a drone can carry at most
     /// </summary>
     public enum WeightCategory
     {

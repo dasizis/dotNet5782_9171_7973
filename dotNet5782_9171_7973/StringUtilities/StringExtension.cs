@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Collections;
-using System.Reflection;
 using System.Text;
 
 namespace StringUtilities
 {
     public static class StringUtilitiesExtension
     {
-        public static string ToStringProperties<T>(this T obj)
+        /// <summary>
+        /// Converts an object to detailed string description
+        /// using reflection
+        /// </summary>
+        /// <param name="obj">The object to describe</param>
+        /// <returns>A detailed <see cref="string"/> description of the object</returns>
+        public static string ToStringProperties(this object obj)
         {
             Type type = obj.GetType();
             StringBuilder description = new($"<{type.Name}> {{");

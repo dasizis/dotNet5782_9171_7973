@@ -154,7 +154,7 @@ namespace BL
             }
 
             drone.Battery = Math.Min(drone.Battery + ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours,
-                                     100);
+                                     MAX_CHARGE);
             drone.State = DroneState.Free;
 
             dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);

@@ -3,7 +3,7 @@
 namespace DO
 {
     /// <summary>
-    /// A Class to represent a PDS of base station
+    /// A struct to represent a PDS of base station
     /// </summary>
     public struct BaseStation : IIdentifiable, IDeletable
     {
@@ -44,7 +44,7 @@ namespace DO
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method
         /// </summary>
-        /// <returns></returns>
+        /// <returns>String representation of base station</returns>
         public override string ToString() => this.ToStringProperties();
     }
 }

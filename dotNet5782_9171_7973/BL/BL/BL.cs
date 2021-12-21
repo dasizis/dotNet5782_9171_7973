@@ -145,17 +145,6 @@ namespace BL
             };
         }
 
-        public int GetDroneBaseStation(int droneId)
-        {
-            var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId && !c.IsDeleted).FirstOrDefault();
-            
-            if (dalCharge.Equals(default(DO.DroneCharge)))
-            {
-                throw new ObjectNotFoundException("Drone is not being charged");
-            }
-
-            return dalCharge.StationId;
-        }
 
         //public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
         //{

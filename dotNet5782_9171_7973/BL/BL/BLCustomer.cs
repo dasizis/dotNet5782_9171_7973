@@ -78,9 +78,7 @@ namespace BL
         
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
-            const string nameProperty = "Name";
-            const string phoneProperty = "Phone";
-
+            const string nameProperty = nameof(DO.Customer.Name);
             if (name != null)
             {
                 if (!Validation.IsValidName(name))
@@ -96,6 +94,7 @@ namespace BL
                 }
             }
 
+            const string phoneProperty = nameof(DO.Customer.Phone);
             if (phone != null)
             {
                 if (!Validation.IsValidPhone(phone))

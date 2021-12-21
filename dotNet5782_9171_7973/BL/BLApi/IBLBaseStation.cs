@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace BLApi
 {
+    /// <summary>
+    /// Declares all <see cref="IBL"/> methods related to <see cref="BaseStation"/>
+    /// </summary>
     public interface IBLBaseStation
     {
         /// <summary>

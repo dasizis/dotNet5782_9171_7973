@@ -10,6 +10,7 @@ namespace BO
 
         /// <summary>
         /// Makes a deep clone of an object
+        /// (But not of lists)
         /// </summary>
         /// <typeparam name="T">The object type</typeparam>
         /// <param name="source">The object to clone</param>
@@ -26,9 +27,10 @@ namespace BO
         /// <returns>A deep clone of the object</returns>
         private static object CloneObject(this object source)
         {
-            object target = Activator.CreateInstance(source.GetType());
+            Type type = source.GetType();
+            object target = Activator.CreateInstance(type);
 
-            foreach (var prop in source.GetType().GetProperties())
+            foreach (var prop in type.GetProperties())
             {
                 var value = prop.GetValue(source);
                 if (!value.GetType().IsValueType)

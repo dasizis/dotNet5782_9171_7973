@@ -6,7 +6,6 @@ namespace BLApi
     public interface IBLParcel
     {
         void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority);
-        void AssignParcelToDrone(int droneId);
         void PickUpParcel(int parcelId);
         IEnumerable<ParcelForList> GetNotAssignedToDroneParcels();
         void SupplyParcel(int droneId);

@@ -22,13 +22,29 @@ namespace Dal
         public void Add<T>(T item) where T : IIdentifiable, IDeletable
         {
             Type type = typeof(T);
-            if (DoesExist<T>(item.Id))
+            if (DoesExist<T>(obj => obj.Id == item.Id))
             {
                 throw new IdAlreadyExistsException(type, item.Id);
             }
 
             Update<T>(item.Id, nameof(item.IsDeleted), false);
             DataSource.Data[type].Add(item);
+        }
+
+        public void AddDroneCharge(int droneId, int baseStationId)
+        {
+            if (DoesExist<DroneCharge>(charge => charge.DroneId == droneId))
+                throw new IdAlreadyExistsException(typeof(DroneCharge), droneId);
+
+            DataSource.DroneCharges.Add(
+                new DroneCharge()
+                {
+                    DroneId = droneId,
+                    StationId = baseStationId,
+                    StartTime = DateTime.Now,
+                    IsDeleted = false,
+                }
+            );
         }
 
         #endregion
@@ -123,9 +139,9 @@ namespace Dal
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="id">The item id</param>
         /// <returns>true if the item exists otherwise false</returns>
-        static private bool DoesExist<T>(int id) where T : IIdentifiable, IDeletable
+        static private bool DoesExist<T>(Predicate<T> predicate) where T : IDeletable
         {
-            return DataSource.Data[typeof(T)].Cast<T>().Any(item => item.Id == id && !item.IsDeleted);
+            return DataSource.Data[typeof(T)].Cast<T>().Any(item => predicate(item) && !item.IsDeleted);
         }
 
         /// <summary>

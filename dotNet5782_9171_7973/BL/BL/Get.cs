@@ -49,31 +49,7 @@ namespace BL
         /// </summary>
         /// <param name="id">id of requested drone</param>
         /// <returns>drone with id</returns>
-        public Drone GetDrone(int id)
-        {
-            
-            DroneForList drone = drones.FirstOrDefault(d => d.Id == id);
-
-            if(drone == null)
-            {
-                throw new ObjectNotFoundException(typeof(Drone), id);
-            }
-
-            ParcelInDeliver parcelInDeliver = drone.State == DroneState.Deliver ?
-                                              GetParcelInDeliver((int)drone.DeliveredParcelId) :
-                                              null;
-            return new Drone()
-            {
-                Id = drone.Id,
-                Battery = drone.Battery,
-                Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
-                MaxWeight = drone.MaxWeight,
-                Model = drone.Model,
-                State = drone.State,
-                ParcelInDeliver = parcelInDeliver,
-
-            };
-        }
+        
        
         /// <summary>
         /// return converted drone to drone for list
@@ -82,14 +58,7 @@ namespace BL
         /// <returns>drone for list</returns>
         public DroneForList GetDroneForList(int id)
         {
-            var drone = drones.FirstOrDefault(d => d.Id == id);
-
-            if (drone == default)
-            {
-                throw new ObjectNotFoundException(typeof(DroneForList), id);
-            }
-
-            return drone;
+            return GetDroneForListRef(id).Clone();
         }
         /// <summary>
         /// return converted parcel to parcel for list

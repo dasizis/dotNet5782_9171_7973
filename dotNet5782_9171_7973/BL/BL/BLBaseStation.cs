@@ -80,9 +80,7 @@ namespace BL
 
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
         {
-            const string nameProperty = "Name";
-            const string chargeSlotsProperty = "ChargeSlots";
-
+            const string nameProperty = nameof(DO.BaseStation.Name);
             if (name != null)
             {
                 if (!Validation.IsValidName(name))
@@ -98,6 +96,7 @@ namespace BL
                 }
             }
 
+            const string chargeSlotsProperty = nameof(DO.BaseStation.ChargeSlots);
             if (chargeSlots != null)
             {
                 if (chargeSlots < 0)

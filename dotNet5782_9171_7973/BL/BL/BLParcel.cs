@@ -9,13 +9,26 @@ namespace BL
     {
         public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
         {
+            CustomerInDelivery sender;
+            CustomerInDelivery target;
+
+            try
+            {
+                sender = GetCustomerInDelivery(senderId);
+                target = GetCustomerInDelivery(targetId);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Customer), e);
+            }
+
             var parcel = new Parcel()
             {
                 Id = dal.GetParcelContinuousNumber(),
                 Priority = priority,
                 Weight = weight,
-                Sender = GetCustomerInDelivery(senderId),
-                Target = GetCustomerInDelivery(targetId),
+                Sender = sender,
+                Target = target,
                 Requested = DateTime.Now,
             };
 

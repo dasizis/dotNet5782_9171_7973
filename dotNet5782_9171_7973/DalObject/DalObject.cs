@@ -109,9 +109,12 @@ namespace Dal
 
         public void UpdateWhere<T>(Predicate<T> predicate, string propName, object newValue) where T : IDeletable
         {
-            foreach (T item in GetFilteredList(predicate))
+            for (int i = 0; i < DataSource.Data[typeof(T)].Count; i++)
             {
-                UpdateItem(item, propName, newValue);
+                T item = DataSource.Data[typeof(T)].Cast<T>().ElementAt(i);
+
+                if (!item.IsDeleted && predicate(item))
+                    UpdateItem(item, propName, newValue);
             }
         }
 

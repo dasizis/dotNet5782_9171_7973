@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace DalApi
 {
+    /// <summary>
+    /// Dal layer factory
+    /// </summary>
     public static class DalFactory
     {
+        /// <summary>
+        /// Dynamically loads the Dal assemly according to the <see cref="DalConfig"/> class 
+        /// and access the dal instance using reflection
+        /// </summary>
+        /// <returns>The Dal instance</returns>
         public static IDal GetDal()                                                                                                          
         {
             Assembly.LoadFrom($@"{Directory.GetCurrentDirectory()}\..\..\..\..\{DalConfig.DalType}\bin\Debug\net5.0\{DalConfig.DalType}.dll");

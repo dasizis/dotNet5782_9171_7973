@@ -74,7 +74,6 @@ namespace BL
                                         .Count()
                    where station.ChargeSlots > dronesCount
                    select GetBaseStationForList(station.Id);
-
         }
 
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)

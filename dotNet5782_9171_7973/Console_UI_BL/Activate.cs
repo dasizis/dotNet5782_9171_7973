@@ -11,16 +11,6 @@ namespace ConsoleUI_BL
     {
         const string ERROR_MESSAGE = "Invalid Option";
 
-        ///// <summary>
-        ///// print an item details acording to its type and id
-        ///// </summary>
-        ///// <param name="type">the type of the item</param>
-        ///// <param name="id">the item id</param>
-        //private static void printItemById<T>(int id)
-        //{
-        //    Console.WriteLine(Bl.GetT(id));
-        //}
-
         /// <summary>
         /// activates the main menu
         /// </summary>
@@ -58,11 +48,15 @@ namespace ConsoleUI_BL
                 {
                     WriteException($"Wrong format: {exception.Message}");
                 }
-                catch(BL.IdException exception)
+                catch(ObjectNotFoundException exception)
                 {
                     WriteException(exception.ToString());
                 }
-                catch(BL.InValidActionException exception)
+                catch (IdAlreadyExistsException exception)
+                {
+                    WriteException(exception.ToString());
+                }
+                catch (InvalidActionException exception)
                 {
                     WriteException($"Invalid action: {exception.Message}");
                 }
@@ -219,9 +213,7 @@ namespace ConsoleUI_BL
                     {
                         Console.WriteLine("Drone ID, Please.");
                         int droneId = GetInput(int.Parse);
-                        Console.WriteLine("Time in Charge:");
-                        double timeInCharge = GetInput(double.Parse, input => input > 0);
-                        bl.FinishCharging(droneId, timeInCharge);
+                        bl.FinishCharging(droneId);
 
                         break;
                     }

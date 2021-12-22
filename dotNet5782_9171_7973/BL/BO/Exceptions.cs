@@ -38,6 +38,9 @@ namespace BO
         protected ObjectNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public ObjectNotFoundException(Type type, Exception inner) : base($"item of type {type.Name} not found", inner) { }
+
+        public ObjectNotFoundException(Type type) : base($"item of type {type.Name} not found") { }
+
     }
 
     /// <summary>

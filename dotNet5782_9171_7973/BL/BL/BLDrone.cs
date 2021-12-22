@@ -57,7 +57,7 @@ namespace BL
 
             if (drone == null)
             {
-                throw new ObjectNotFoundException(typeof(Drone), null);
+                throw new ObjectNotFoundException(typeof(Drone));
             }
 
             ParcelInDeliver parcelInDeliver = drone.State == DroneState.Deliver 
@@ -242,7 +242,7 @@ namespace BL
 
             if (drone == default)
             {
-                throw new ObjectNotFoundException(typeof(DroneForList), null);
+                throw new ObjectNotFoundException(typeof(DroneForList));
             }
 
             return drone;

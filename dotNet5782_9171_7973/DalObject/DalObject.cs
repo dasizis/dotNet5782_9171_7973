@@ -36,6 +36,12 @@ namespace Dal
             if (DoesExist<DroneCharge>(charge => charge.DroneId == droneId))
                 throw new IdAlreadyExistsException(typeof(DroneCharge), droneId);
 
+            if (!DoesExist<Drone>(d => d.Id == droneId))
+                throw new ObjectNotFoundException(typeof(Drone));
+
+            if (!DoesExist<BaseStation>(s => s.Id == baseStationId))
+                throw new ObjectNotFoundException(typeof(BaseStation));
+
             DataSource.DroneCharges.Add(
                 new DroneCharge()
                 {

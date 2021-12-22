@@ -9,7 +9,7 @@ using StringUtilities;
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of customer
+    /// A class to represent a PDS of customer
     /// </summary>
     public class Customer: ILocalable
     {

@@ -8,7 +8,7 @@ using StringUtilities;
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of base station for list
+    /// A class to represent a PDS of base station for list
     /// </summary>
     public class BaseStationForList
     {

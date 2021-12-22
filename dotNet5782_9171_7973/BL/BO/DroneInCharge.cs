@@ -11,6 +11,10 @@ namespace BO
     {
         public int Id { get; set; }
         double batteryState;
+        /// <summary>
+        /// Drone battery 
+        /// (in parcents)
+        /// </summary>
         public double BatteryState
         {
             get => batteryState;

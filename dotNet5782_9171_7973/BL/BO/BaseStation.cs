@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of base station
+    /// A class to represent a PDS of base station
     /// </summary>
     public class BaseStation: ILocalable
     {

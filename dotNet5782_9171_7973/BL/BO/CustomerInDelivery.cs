@@ -8,7 +8,7 @@ using StringUtilities;
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of customer in delivery
+    /// A class to represent a PDS of customer in delivery
     /// (customer related to parcel delivery, sender or reciever)
     /// </summary>
     public class CustomerInDelivery 

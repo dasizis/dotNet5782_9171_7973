@@ -8,7 +8,7 @@ using StringUtilities;
 namespace BO
 {
     /// <summary>
-    /// A struct to represent a PDS of drone
+    /// A class to represent a PDS of drone
     /// </summary>
     public class Drone : ILocalable
     {
@@ -34,7 +34,7 @@ namespace BO
         }
         WeightCategory maxWeight;
         /// <summary>
-        /// highest weight drone can carry
+        /// Highest weight drone can carry
         /// </summary>
         public WeightCategory MaxWeight 
         {

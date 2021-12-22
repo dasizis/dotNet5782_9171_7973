@@ -16,6 +16,7 @@ namespace BO
         /// Base station Id
         /// </summary>
         public int Id { get; set; }
+
         string name;
         /// <summary>
         /// Base station name
@@ -32,6 +33,7 @@ namespace BO
                 name = value;
             }
         }
+
         int emptyChargeSlots;
         /// <summary>
         /// Number of empty charge slots at base station 
@@ -65,6 +67,7 @@ namespace BO
                 busyChargeSlots = value;
             }
         }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

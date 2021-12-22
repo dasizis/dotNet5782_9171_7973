@@ -16,6 +16,7 @@ namespace BO
         /// Drone Id
         /// </summary>
         public int Id { get; set; }
+
         string model;
         /// <summary>
         /// Drone model
@@ -32,9 +33,10 @@ namespace BO
                 model = value;
             }
         }
+
         WeightCategory maxWeight;
         /// <summary>
-        /// Highest weight drone can carry
+        /// Category of max weight drone can carry
         /// </summary>
         public WeightCategory MaxWeight 
         {
@@ -48,6 +50,7 @@ namespace BO
                 maxWeight = value;
             }
         }
+
         double battery;
         /// <summary>
         /// Drone battery 
@@ -65,6 +68,7 @@ namespace BO
                 battery = value;
             }
         }
+
         DroneState state;
         /// <summary>
         /// Drone state
@@ -81,15 +85,18 @@ namespace BO
                 state = value;
             }
         }
+
         /// <summary>
         /// Drone's related parcel
         /// (parcel drone delivers)
         /// </summary>
         public ParcelInDeliver ParcelInDeliver { get; set; }
+
         /// <summary>
         /// Drone location
         /// </summary>
         public Location Location { get; set; }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

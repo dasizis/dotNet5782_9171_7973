@@ -33,10 +33,12 @@ namespace BO
                 name = value;
             }
         }
+
         /// <summary>
         /// Base station location
         /// </summary>
         public Location Location { get; set; }
+
         int emptyChargeSlots;
         /// <summary>
         /// Number of empty charge slots in base station
@@ -53,6 +55,7 @@ namespace BO
                 emptyChargeSlots = value;
             } 
         }
+
         /// <summary>
         /// List of drones beeing in charged at base station
         /// </summary>

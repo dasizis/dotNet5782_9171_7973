@@ -16,6 +16,7 @@ namespace BO
         /// Customer Id
         /// </summary>
         public int Id { get; set; }
+
         string name;
         /// <summary>
         /// Customer name
@@ -32,6 +33,7 @@ namespace BO
                 name = value;
             }
         }
+
         string phone;
         /// <summary>
         /// Customer phone number
@@ -48,6 +50,7 @@ namespace BO
                 phone = value;
             }
         }
+
         int parcelsSendAndSupplied;
         /// <summary>
         /// Number of parcels sent by customer and supplied
@@ -64,6 +67,7 @@ namespace BO
                 parcelsSendAndSupplied = value;
             }
         }
+
         int parcelsSendAndNotSupplied;
         /// <summary>
         /// Number of parcels sent by customer and were not supplied
@@ -80,6 +84,7 @@ namespace BO
                 parcelsSendAndNotSupplied = value;
             }
         }
+
         int parcelsRecieved;
         /// <summary>
         /// Number of parcels customer recieved
@@ -96,6 +101,7 @@ namespace BO
                 parcelsRecieved = value;
             }
         }
+
         int parcelsOnWay;
         /// <summary>
         /// Number of parcels on the way to customer

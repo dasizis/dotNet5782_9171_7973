@@ -49,6 +49,7 @@ namespace BO
                 latitude = value;
             }
         }
+
         /// <summary>
         /// Calculate distance between two locations
         /// </summary>

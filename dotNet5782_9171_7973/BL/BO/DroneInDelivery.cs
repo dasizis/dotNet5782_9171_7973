@@ -16,6 +16,7 @@ namespace BO
         /// Drone Id
         /// </summary>
         public int Id { get; set; }
+
         double batteryState;
         /// <summary>
         /// Drone battery state 
@@ -33,10 +34,12 @@ namespace BO
                 batteryState = value;
             }
         }
+
         /// <summary>
         /// Drone location
         /// </summary>
         public Location Location { get; set; }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

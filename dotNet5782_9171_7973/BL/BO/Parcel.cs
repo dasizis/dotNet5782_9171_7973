@@ -16,14 +16,17 @@ namespace BO
         /// Parcel Id
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Parcel sender
         /// </summary>
         public CustomerInDelivery Sender { get; set; }
+
         /// <summary>
         /// Parcel reciever
         /// </summary>
         public CustomerInDelivery Target { get; set; }
+
         WeightCategory weight;
         /// <summary>
         /// Parcel weight
@@ -40,6 +43,7 @@ namespace BO
                 weight = value;
             }
         }
+
         Priority priority;
         /// <summary>
         /// Parcel priority
@@ -56,10 +60,12 @@ namespace BO
                 priority = value;
             }
         }
+
         /// <summary>
         /// Drone which delivers parcel
         /// </summary>
         public Drone Drone { get; set; }
+
         /// <summary>
         /// Parcel requested time (If has already occurred)
         /// </summary>

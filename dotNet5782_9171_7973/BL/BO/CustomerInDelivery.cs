@@ -17,6 +17,7 @@ namespace BO
         /// Customer Id
         /// </summary>
         public int Id { get; set; }
+
         string name;
         /// <summary>
         /// Customer name
@@ -33,6 +34,7 @@ namespace BO
                 name = value;
             }
         }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

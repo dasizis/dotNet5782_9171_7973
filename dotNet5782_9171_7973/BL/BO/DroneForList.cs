@@ -16,6 +16,7 @@ namespace BO
         /// Drone Id
         /// </summary>
         public int Id { get; set; }
+
         string model;
         /// <summary>
         /// Drone model
@@ -32,6 +33,7 @@ namespace BO
                 model = value;
             }
         }
+
         WeightCategory maxWeight;
         /// <summary>
         /// Highest weight drone can carry

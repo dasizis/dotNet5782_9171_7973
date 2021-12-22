@@ -87,6 +87,5 @@ namespace BO
         /// </summary>
         /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
-
     }
 }

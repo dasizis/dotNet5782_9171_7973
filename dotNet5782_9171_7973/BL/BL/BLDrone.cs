@@ -133,7 +133,7 @@ namespace BL
 
             drone.Location = closest.Location;
             drone.State = DroneState.Maintenance;
-            drone.Battery -= ElectricityConfumctiolFree * Location.Distance(closest.Location, drone.Location);
+            drone.Battery -= ElectricityConfumctiolFree * Localable.Distance(closest.Location, drone.Location);
 
             dal.AddDroneCharge(drone.Id, closest.Id);
         }
@@ -174,7 +174,7 @@ namespace BL
             var orderedParcels = from parcel in parcels
                                  where parcel.Weight < drone.MaxWeight
                                        && IsAbleToDeliverParcel(drone, GetParcelInDeliver(parcel.Id))
-                                 orderby parcel.Priority, parcel.Weight, Location.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
+                                 orderby parcel.Priority, parcel.Weight, Localable.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
                                  select parcel;
 
             if (!parcels.Any())
@@ -213,9 +213,9 @@ namespace BL
         /// <returns>true if the drone can deliver the parcel otherwise false</returns>
         private bool IsAbleToDeliverParcel(Drone drone, ParcelInDeliver parcel)
         {
-            var neededBattery = Location.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
-                                Location.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
-                                Location.Distance(parcel.TargetLocation, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
+            var neededBattery = Localable.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
+                                Localable.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
+                                Localable.Distance(parcel.TargetLocation, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
         }
 
@@ -227,7 +227,7 @@ namespace BL
         /// <returns>true if the drone can get the location otherwise false</returns>
         private bool IsEnoughBattery(DroneForList drone, Location location)
         {
-            var neededBattery = Location.Distance(drone.Location, location) * ElectricityConfumctiolFree;
+            var neededBattery = Localable.Distance(drone.Location, location) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
         }
 

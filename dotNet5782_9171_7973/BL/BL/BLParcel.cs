@@ -119,7 +119,7 @@ namespace BL
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
             dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
 
-            drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree * 0.1;
+            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree * 0.1;
             drone.Location = parcelInDeliver.CollectLocation;
         }
        
@@ -146,7 +146,7 @@ namespace BL
                 throw new InvalidActionException("Parcel assigned to drone has already been supplied.");
             }
 
-            drone.Battery -= Location.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
+            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
             drone.Location = parcelInDeliver.TargetLocation;
             drone.State = DroneState.Free;
 
@@ -261,7 +261,7 @@ namespace BL
                 TargetLocation = targetLocation,
                 CollectLocation = senderLocation,
                 WasPickedUp = parcel.PickedUp != null,
-                DeliveryDistance = Location.Distance(senderLocation, targetLocation),
+                DeliveryDistance = Localable.Distance(senderLocation, targetLocation),
                 Sender = GetCustomerInDelivery(senderCustomer.Id),
                 Target = GetCustomerInDelivery(targetCustomer.Id),
             };

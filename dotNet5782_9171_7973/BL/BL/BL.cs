@@ -81,7 +81,7 @@ namespace BL
                         location = new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
                     }
 
-                    battery = rand.Next((int)(Location.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), MAX_CHARGE);
+                    battery = rand.Next((int)(Localable.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), MAX_CHARGE);
                 }
                 else if (state == DroneState.Maintenance)
                 {
@@ -104,9 +104,9 @@ namespace BL
                                ? targetLocation.FindClosest(availableStations)
                                : senderLocation;
 
-                    battery = rand.Next((int)(Location.Distance(location, senderLocation) * ElectricityConfumctiolFree +
-                                         Location.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
-                                         Location.Distance(targetLocation, targetLocation.FindClosest(availableStations)) * ElectricityConfumctiolFree)
+                    battery = rand.Next((int)(Localable.Distance(location, senderLocation) * ElectricityConfumctiolFree +
+                                         Localable.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
+                                         Localable.Distance(targetLocation, targetLocation.FindClosest(availableStations)) * ElectricityConfumctiolFree)
                                          , MAX_CHARGE);
 
                 }

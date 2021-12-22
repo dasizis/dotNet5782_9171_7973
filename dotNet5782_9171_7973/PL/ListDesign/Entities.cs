@@ -1,12 +1,13 @@
 ﻿using StringUtilities;
 
-namespace PL
+namespace PL.ListDesign
 {
     class TreeViewProp
     {
         public string PropName { get; set; }
         public object propValue { get; set; }
     }
+    
     class Longitude 
     { 
         public double Long { get; set; }
@@ -15,6 +16,7 @@ namespace PL
             return Sexadecimal.Longitde(Long);
         }
     }
+
     class Latitude 
     {
         public double Lat { get; set; }

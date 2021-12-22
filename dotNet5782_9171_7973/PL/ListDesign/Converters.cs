@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Data;
 
-namespace PL
+namespace PL.ListDesign
 {
     class ObjectToTreeViewProperitesConverter : IValueConverter
     {

@@ -1,14 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:bo="clr-namespace:BO;assembly=BL"
-                    xmlns:local="clr-namespace:PL"
+                    xmlns:listDesign="clr-namespace:PL.ListDesign"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     
     <!--Converters-->
-    <local:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
-    <local:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
-    <local:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
+    <listDesign:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
+    <listDesign:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
+    <listDesign:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
 
+    <!--Icon Style-->
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}" />
@@ -23,7 +24,7 @@
     </HierarchicalDataTemplate>
 
     <!--Longitude-->
-    <DataTemplate DataType="{x:Type local:Longitude}">
+    <DataTemplate DataType="{x:Type listDesign:Longitude}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="Longitude" />
             <TextBlock Text="{Binding}" />
@@ -31,7 +32,7 @@
     </DataTemplate>
 
     <!--Latitude-->
-    <DataTemplate DataType="{x:Type local:Latitude}">
+    <DataTemplate DataType="{x:Type listDesign:Latitude}">
         <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon Kind="Latitude" />
             <TextBlock Text="{Binding}" />
@@ -39,7 +40,7 @@
     </DataTemplate>
 
     <!--Object property-->
-    <DataTemplate DataType="{x:Type local:TreeViewProp}">
+    <DataTemplate DataType="{x:Type listDesign:TreeViewProp}">
         <DockPanel Width="200">
             <TextBlock Text="{Binding PropName}" FontWeight="Bold"/>
             <TextBlock Text="{Binding propValue}" TextAlignment="Right"/>
@@ -47,7 +48,7 @@
     </DataTemplate>
 
     <!--Battery-->
-    <DataTemplate DataType="{x:Type local:Battery}">
+    <DataTemplate DataType="{x:Type listDesign:Battery}">
         <DockPanel Width="200">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="{Binding BatteryValue, Converter={StaticResource BatteryValueToIconNameConverter}}" />

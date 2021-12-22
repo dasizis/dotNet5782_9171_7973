@@ -53,9 +53,9 @@ namespace BO
         }
 
         /// <summary>
-        /// 
+        /// Determines whether parcel was picked up
         /// </summary>
-        public bool Position { get; set; }
+        public bool WasPickedUp { get; set; }
 
         /// <summary>
         /// Location to collect parcel from

@@ -17,21 +17,21 @@ namespace BO
         /// </summary>
         public int Id { get; set; }
 
-        double batteryState;
+        double battery;
         /// <summary>
         /// Drone battery state 
         /// (in parcents)
         /// </summary>
-        public double BatteryState
+        public double Battery
         {
-            get => batteryState;
+            get => battery;
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException(value.ToString());
                 }
-                batteryState = value;
+                battery = value;
             }
         }
 

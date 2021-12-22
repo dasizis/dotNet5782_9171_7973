@@ -3,10 +3,20 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of parcel for list
+    /// </summary>
     public class ParcelForList 
     {
+        /// <summary>
+        /// Parcel Id
+        /// </summary>
         public int Id { get; set; }
+
         string senderName;
+        /// <summary>
+        /// Name of parcel sender
+        /// </summary>
         public string SenderName
         {
             get => senderName;
@@ -19,7 +29,11 @@ namespace BO
                 senderName = value;
             }
         }
+
         string targetName;
+        /// <summary>
+        /// Name of parcel target (reciever)
+        /// </summary>
         public string TargetName
         {
             get => targetName;
@@ -32,7 +46,11 @@ namespace BO
                 targetName = value;
             }
         }
+
         WeightCategory weight;
+        /// <summary>
+        /// Parcel weight category
+        /// </summary>
         public WeightCategory Weight
         {
             get => weight;
@@ -45,7 +63,11 @@ namespace BO
                 weight = value;
             }
         }
+
         Priority priority;
+        /// <summary>
+        /// Parcel priority
+        /// </summary>
         public Priority Priority
         {
             get => priority;

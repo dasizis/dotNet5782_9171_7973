@@ -7,22 +7,34 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone in charge
+    /// </summary>
     public class DroneInCharge
     {
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
-        double batteryState;
+
+        double battery;
+        /// <summary>
+        /// Drone battery 
+        /// (in parcents)
+        /// </summary>
         public double Battery
         {
-            get => batteryState;
+            get => battery;
             set
             {
                 if (value < 0)
                 {
                     throw new InvalidPropertyValueException(nameof(Battery), value);
                 }
-                batteryState = value;
+                battery = value;
             }
         }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

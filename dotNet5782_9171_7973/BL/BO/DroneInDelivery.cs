@@ -7,23 +7,39 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone in delivery
+    /// </summary>
     public class DroneInDelivery : ILocalable
     {
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
-        double batteryState;
-        public double BatteryState
+
+        double battery;
+        /// <summary>
+        /// Drone battery state 
+        /// (in parcents)
+        /// </summary>
+        public double Battery
         {
-            get => batteryState;
+            get => battery;
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException(value.ToString());
                 }
-                batteryState = value;
+                battery = value;
             }
         }
+
+        /// <summary>
+        /// Drone location
+        /// </summary>
         public Location Location { get; set; }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <code>ToString()</code> method

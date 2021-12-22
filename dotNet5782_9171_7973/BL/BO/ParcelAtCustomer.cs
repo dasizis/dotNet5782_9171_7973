@@ -7,10 +7,20 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of parcel at customer
+    /// </summary>
     public class ParcelAtCustomer 
     {
+        /// <summary>
+        /// Parcel Id
+        /// </summary>
         public int Id { get; set; }
+
         WeightCategory weight;
+        /// <summary>
+        /// Parcel weight category
+        /// </summary>
         public WeightCategory Weight
         {
             get => weight;
@@ -23,7 +33,11 @@ namespace BO
                 weight = value;
             }
         }
+
         Priority priority;
+        /// <summary>
+        /// Parcel priority
+        /// </summary>
         public Priority Priority
         {
             get => priority;
@@ -36,7 +50,11 @@ namespace BO
                 priority = value;
             }
         }
+
         ParcelState state;
+        /// <summary>
+        /// Parcel state
+        /// </summary>
         public ParcelState State
         {
             get => state;
@@ -49,6 +67,11 @@ namespace BO
                 state = value;
             }
         }
+
+        /// <summary>
+        /// The other customer related to parcel delivery
+        /// (sender or reciever)
+        /// </summary>
         public CustomerInDelivery OtherCustomer { get; set; }
 
         /// <summary>

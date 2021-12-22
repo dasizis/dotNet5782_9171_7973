@@ -285,7 +285,7 @@ namespace BL
             return new DroneInDelivery()
             {
                 Id = id,
-                BatteryState = drone.Battery,
+                Battery = drone.Battery,
                 Location = drone.Location,
             };
         }

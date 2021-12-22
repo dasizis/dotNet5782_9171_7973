@@ -3,11 +3,20 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone
+    /// </summary>
     public class Drone : ILocalable
     {
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
 
         string model;
+        /// <summary>
+        /// Drone model
+        /// </summary>
         public string Model
         {
             get => model;
@@ -22,6 +31,9 @@ namespace BO
         }
 
         WeightCategory maxWeight;
+        /// <summary>
+        /// Category of max weight drone can carry
+        /// </summary>
         public WeightCategory MaxWeight 
         {
             get => maxWeight;
@@ -36,6 +48,10 @@ namespace BO
         }
 
         double battery;
+        /// <summary>
+        /// Drone battery 
+        /// (in parcents)
+        /// </summary>
         public double Battery 
         {
             get => battery;
@@ -50,6 +66,9 @@ namespace BO
         }
 
         DroneState state;
+        /// <summary>
+        /// Drone state
+        /// </summary>
         public DroneState State
         {
             get => state;
@@ -62,8 +81,16 @@ namespace BO
                 state = value;
             }
         }
+
+        /// <summary>
+        /// Drone's related parcel
+        /// (parcel drone delivers)
+        /// </summary>
         public ParcelInDeliver ParcelInDeliver { get; set; }
 
+        /// <summary>
+        /// Drone location
+        /// </summary>
         public Location Location { get; set; }
 
         /// <summary>

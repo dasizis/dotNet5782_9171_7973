@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// Describes the ability to be located
+    /// </summary>
     public interface ILocalable
     {
         public Location Location { get; set; } 

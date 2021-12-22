@@ -7,11 +7,20 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone for list
+    /// </summary>
     public class DroneForList : ILocalable
     {
-
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
+
         string model;
+        /// <summary>
+        /// Drone model
+        /// </summary>
         public string Model
         {
             get => model;
@@ -24,7 +33,11 @@ namespace BO
                 model = value;
             }
         }
+
         WeightCategory maxWeight;
+        /// <summary>
+        /// Highest weight drone can carry
+        /// </summary>
         public WeightCategory MaxWeight
         {
             get => maxWeight;
@@ -38,6 +51,10 @@ namespace BO
             }
         }
         double battery;
+        /// <summary>
+        /// Drone battery 
+        /// (in parcents)
+        /// </summary>
         public double Battery
         {
             get => battery;
@@ -52,6 +69,9 @@ namespace BO
         }
 
         DroneState state;
+        /// <summary>
+        /// Drone state
+        /// </summary>
         public DroneState State
         {
             get => state;
@@ -64,7 +84,14 @@ namespace BO
                 state = value;
             }
         }
+        /// <summary>
+        /// Drone location
+        /// </summary>
         public Location Location { get; set; }
+        /// <summary>
+        /// Id of drone's related parcel
+        /// (if exists)
+        /// </summary>
         public int? DeliveredParcelId { get; set; }
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

@@ -29,7 +29,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(Battery), value);
                 }
                 batteryState = value;
             }

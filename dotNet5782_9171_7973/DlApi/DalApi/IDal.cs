@@ -17,6 +17,14 @@ namespace DalApi
         /// <exception cref="DO.IdAlreadyExistsException"></exception>
         void Add<T>(T item) where T : DO.IIdentifiable, DO.IDeletable;
 
+        /// <summary>
+        /// Adds a drone charge 
+        /// </summary>
+        /// <param name="droneId">The drone Id</param>
+        /// <param name="baseStationId">The base station Id</param>
+        /// <exception cref="DO.IdAlreadyExistsException" />
+        void AddDroneCharge(int droneId, int baseStationId);
+
         #endregion
 
         #region Request

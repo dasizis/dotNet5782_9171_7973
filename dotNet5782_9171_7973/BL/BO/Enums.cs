@@ -25,10 +25,10 @@
     /// </summary>
     public enum ParcelState
     {
-        Defined,
-        Associated,
+        Requested,
+        Scheduled,
         PickedUp, 
-        Provided
+        Supplied
     }
 
     /// <summary>

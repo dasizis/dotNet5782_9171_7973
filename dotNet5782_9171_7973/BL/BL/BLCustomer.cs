@@ -78,9 +78,7 @@ namespace BL
         
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
-            const string nameProperty = "Name";
-            const string phoneProperty = "Phone";
-
+            const string nameProperty = nameof(DO.Customer.Name);
             if (name != null)
             {
                 if (!Validation.IsValidName(name))
@@ -96,6 +94,7 @@ namespace BL
                 }
             }
 
+            const string phoneProperty = nameof(DO.Customer.Phone);
             if (phone != null)
             {
                 if (!Validation.IsValidPhone(phone))
@@ -123,6 +122,8 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(Customer), e);
             }
         }
+
+        #region Helpers
 
         /// <summary>
         /// Returns specific customer for list
@@ -182,5 +183,7 @@ namespace BL
                 Name = customer.Name,
             };
         }
+
+        #endregion
     }
 }

@@ -7,6 +7,27 @@ namespace Dal
     {
         internal static System.Random Rand => new();
 
+        internal static double RandomDouble(double a, double b)
+        {
+            return Rand.NextDouble() * (b - a) + a;
+        }
+
+        internal static double RandomLongitude()
+        {
+            const double ISRAEL_LONG_START = 34.2;
+            const double ISRAEL_LONG_END = 42.8;
+
+            return RandomDouble(ISRAEL_LONG_START, ISRAEL_LONG_END);
+        }
+
+        internal static double RandomLatitude()
+        {
+            const double ISRAEL_LAT_START = 33.5;
+            const double ISRAEL_LAT_END = 36.15;
+
+            return RandomDouble(ISRAEL_LAT_START, ISRAEL_LAT_END);
+        }
+
         /// <summary>
         /// Creates a ranodm name in a random length (4-7 letters).
         /// </summary>
@@ -125,8 +146,8 @@ namespace Dal
             {
                 Id = id,
                 Name = RandomFullName(),
-                Longitude = Rand.NextDouble() * 100,
-                Latitude = Rand.NextDouble() * 90,
+                Longitude = RandomLongitude(),
+                Latitude = RandomLatitude(),
                 Phone = RandomPhone(),
             };
         }
@@ -142,8 +163,8 @@ namespace Dal
             {
                 Id = id,
                 Name = RandomName(),
-                Longitude = Rand.NextDouble() * 100,
-                Latitude = Rand.NextDouble() * 90,
+                Longitude = RandomLongitude(),
+                Latitude = RandomLatitude(),
                 ChargeSlots = Rand.Next(1, 10),
             };
         }

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BO;
 
 namespace BL
 {
@@ -11,15 +9,13 @@ namespace BL
     {
         public void AddDrone(int id, string model, WeightCategory maxWeight, int stationId)
         {
-            var station = GetBaseStation(stationId);
-
             var drone = new Drone()
             {
                 Id = id,
                 Model = model,
                 MaxWeight = maxWeight,
                 Battery = 0,
-                Location = station.Location,
+                Location = GetBaseStation(stationId).Location,
                 ParcelInDeliver = null,
                 State = DroneState.Maintenance,
             };
@@ -45,111 +41,81 @@ namespace BL
                     Model = drone.Model,
                     MaxWeight = drone.MaxWeight,
                     Battery = drone.Battery,
-                    Location = new Location() { Latitude = drone.Location.Latitude, Longitude = drone.Location.Longitude },
+                    Location = drone.Location.Clone(),
                     DeliveredParcelId = null,
                     State = drone.State,
                 }
             );
 
-            dal.ChargeDrone(drone.Id, stationId);
+            dal.AddDroneCharge(drone.Id, stationId);
         }
-        /// <summary>
-        /// return drone list
-        /// </summary>
-        /// <returns>drone list</returns>
+
+        public Drone GetDrone(int id)
+        {
+
+            DroneForList drone = drones.FirstOrDefault(d => d.Id == id);
+
+            if (drone == null)
+            {
+                throw new ObjectNotFoundException(typeof(Drone), null);
+            }
+
+            ParcelInDeliver parcelInDeliver = drone.State == DroneState.Deliver 
+                                              ? GetParcelInDeliver((int)drone.DeliveredParcelId) 
+                                              : null;
+            return new Drone()
+            {
+                Id = drone.Id,
+                Battery = drone.Battery,
+                Location = drone.Location.Clone(),
+                MaxWeight = drone.MaxWeight,
+                Model = drone.Model,
+                State = drone.State,
+                ParcelInDeliver = parcelInDeliver,
+            };
+        }
+
         public IEnumerable<DroneForList> GetDronesList()
         {
-            return drones.Where(_ => true);
+            return drones.Select(drone => drone.Clone());
         }
-        /// <summary>
-        /// find a suitable parcel and assigns it to the drone
-        /// </summary>
-        /// <param name="droneId">drone id to assign a parcel to</param>
-        public void AssignParcelToDrone(int droneId)
+
+        public IEnumerable<DroneForList> GetFilteredDronesList(int? stateOption, int? weightOption)
         {
-            Drone drone = GetDrone(droneId);
-
-            if (drone.State == DroneState.Deliver)
-            {
-                throw new InvalidActionException("Cannot assign parcel to busy drone.");
-            }
-
-            var parcels = GetNotAssignedToDroneParcels()
-                          .Select(parcel => GetParcel(parcel.Id)).ToList()
-                          .Where(parcel =>
-                               (int)parcel.Weight < (int)drone.MaxWeight &&
-                               IsAbleToPassParcel(drone, GetParcelInDeliver(parcel.Id)))
-                          .OrderBy(p => p.Priority)
-                          .ThenBy(p => p.Weight)
-                          .ThenBy(p => Location.Distance(GetCustomer(p.Sender.Id).Location, drone.Location));
-
-            if (!parcels.Any())
-            {
-                throw new InvalidActionException("Couldn't assign any parcel to the drone.");
-            }
-
-            Parcel parcel = parcels.First();
-            dal.Update<DO.Parcel>(parcel.Id, nameof(DO.Parcel.DroneId), droneId);
-            dal.Update<DO.Parcel>(parcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
-
-            var droneForList = GetDroneForList(droneId);
-            droneForList.State = DroneState.Deliver;
-            droneForList.DeliveredParcelId = parcel.Id;
+            return GetDronesList().Where(d => (stateOption == null || d.State == (DroneState)stateOption) && 
+                                              (weightOption == null || d.MaxWeight == (WeightCategory)weightOption));
         }
-        /// <summary>
-        /// release drone from charging
-        /// </summary>
-        /// <param name="droneId">drone to release</param>
-        /// <param name="timeInCharge">time drone was in charge</param>
-        public void FinishCharging(int droneId)
+
+        public int GetDroneBaseStation(int droneId)
         {
-            DroneForList drone = GetDroneForList(droneId);
-
-            if (drone.State != DroneState.Maintenance)
-            {
-                throw new InvalidActionException("Drone is not in meintenece");
-            }
- 
-            var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId && !c.IsDeleted).FirstOrDefault();
-            if (dalCharge.Equals(default(DO.DroneCharge)))
-            {
-                throw new InvalidActionException("Drone is not being charged");
-            }
-
-            drone.Battery += ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalSeconds;
-            drone.State = DroneState.Free;
-
-            dal.FinishCharging(drone.Id);
-        }
-        /// <summary>
-        /// rename drone
-        /// </summary>
-        /// <param name="droneId">drone to rename</param>
-        /// <param name="model">new name for updating</param>
-        public void RenameDrone(int droneId, string model)
-        {
-            DroneForList drone = GetDroneForList(droneId);
-            drone.Model = model;
-
-            DO.Drone dlDrone;
             try
             {
-                dlDrone = dal.GetById<DO.Drone>(droneId);
+                return dal.GetSingle<DO.DroneCharge>(c => c.DroneId == droneId).StationId;
             }
-            catch
+            catch (DO.ObjectNotFoundException)
             {
-                throw new ObjectNotFoundException(typeof(Drone), droneId);
+                throw new ObjectNotFoundException("Drone is not being charged");
             }
-
-            dal.Update<DO.Drone>(dlDrone.Id, nameof(dlDrone.Model), model);
         }
-        /// <summary>
-        /// put drone in a charge slot to charge
-        /// </summary>
-        /// <param name="droneId">drone to charge</param>
+
+        public void RenameDrone(int droneId, string model)
+        {
+            DroneForList drone = GetDroneForListRef(droneId);
+            drone.Model = model;
+
+            try
+            {
+                dal.Update<DO.Drone>(droneId, nameof(drone.Model), model);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Drone), e);
+            }
+        }
+
         public void ChargeDrone(int droneId)
         {
-            DroneForList drone = GetDroneForList(droneId);
+            DroneForList drone = GetDroneForListRef(droneId);
 
             if (drone.State != DroneState.Free)
             {
@@ -169,41 +135,161 @@ namespace BL
             drone.State = DroneState.Maintenance;
             drone.Battery -= ElectricityConfumctiolFree * Location.Distance(closest.Location, drone.Location);
 
-            // What for?
-            closest.EmptyChargeSlots -= 1;
-
-            dal.ChargeDrone(drone.Id, closest.Id);
+            dal.AddDroneCharge(drone.Id, closest.Id);
         }
+        
+        public void FinishCharging(int droneId)
+        {
+            DroneForList drone = GetDroneForListRef(droneId);
+
+            if (drone.State != DroneState.Maintenance)
+            {
+                throw new InvalidActionException("Drone is not in meintenece");
+            }
+ 
+            var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId).FirstOrDefault();
+            if (dalCharge.Equals(default(DO.DroneCharge)))
+            {
+                throw new InvalidActionException("Drone is not being charged");
+            }
+
+            drone.Battery = Math.Min(drone.Battery + ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours,
+                                     MAX_CHARGE);
+            drone.State = DroneState.Free;
+
+            dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
+        }
+
+        public void AssignParcelToDrone(int droneId)
+        {
+            Drone drone = GetDrone(droneId);
+
+            if (drone.State == DroneState.Deliver)
+            {
+                throw new InvalidActionException("Cannot assign parcel to busy drone.");
+            }
+
+            var parcels = GetNotAssignedToDroneParcels().Select(parcel => GetParcel(parcel.Id));
+
+            var orderedParcels = from parcel in parcels
+                                 where parcel.Weight < drone.MaxWeight
+                                       && IsAbleToDeliverParcel(drone, GetParcelInDeliver(parcel.Id))
+                                 orderby parcel.Priority, parcel.Weight, Location.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
+                                 select parcel;
+
+            if (!parcels.Any())
+            {
+                throw new InvalidActionException("Couldn't assign any parcel to the drone.");
+            }
+
+            Parcel selectedParcel = parcels.First();
+            dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.DroneId), droneId);
+            dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
+
+            var droneForList = GetDroneForListRef(droneId);
+            droneForList.State = DroneState.Deliver;
+            droneForList.DeliveredParcelId = selectedParcel.Id;
+        }
+
+        public void DeleteDrone(int droneId)
+        {
+            try
+            {
+                dal.Delete<DO.Drone>(droneId);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Drone), e);
+            }
+        }
+
+        #region Helpers
+
         /// <summary>
-        /// check weather a drone can deliver a parcel
+        /// Checks weather a drone can deliver a parcel
         /// </summary>
-        /// <param name="drone">deliver drone</param>
-        /// <param name="parcel">delivered parcel</param>
-        /// <returns></returns>
-        private bool IsAbleToPassParcel(Drone drone, ParcelInDeliver parcel)
+        /// <param name="drone">The deliver drone</param>
+        /// <param name="parcel">The delivered parcel</param>
+        /// <returns>true if the drone can deliver the parcel otherwise false</returns>
+        private bool IsAbleToDeliverParcel(Drone drone, ParcelInDeliver parcel)
         {
             var neededBattery = Location.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
-                               Location.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
-                               Location.Distance(parcel.TargetLocation, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
+                                Location.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
+                                Location.Distance(parcel.TargetLocation, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
         }
+
         /// <summary>
-        /// check weather a drone has enough battery to get to location
+        /// Checks weather a drone has enough battery to get to location
         /// </summary>
         /// <param name="drone">drone</param>
         /// <param name="location">location to get to</param>
-        /// <returns></returns>
+        /// <returns>true if the drone can get the location otherwise false</returns>
         private bool IsEnoughBattery(DroneForList drone, Location location)
         {
             var neededBattery = Location.Distance(drone.Location, location) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
         }
 
-        public IEnumerable<DroneForList> GetFilteredDronesList(int? stateOption, int? weightOption)
+        /// <summary>
+        /// Returns a refrence to the drone in the BL drones list
+        /// </summary>
+        /// <param name="id">The drone Id</param>
+        /// <returns>A refrence to <see cref="DroneForList"/> from BL drones list</returns>
+        internal DroneForList GetDroneForListRef(int id)
         {
-            return GetDronesList().Where(d => (stateOption == null || d.State == (DroneState)stateOption) && 
-                                              (weightOption == null || d.MaxWeight == (WeightCategory)weightOption));
+            var drone = drones.FirstOrDefault(d => d.Id == id);
+
+            if (drone == default)
+            {
+                throw new ObjectNotFoundException(typeof(DroneForList), null);
+            }
+
+            return drone;
         }
 
+        /// <summary>
+        /// Returns a converted drone to drone for list
+        /// </summary>
+        /// <param name="id">The id of requested drone</param>
+        /// <returns>A clone of <see cref="DroneForList"/></returns>
+        /// <exception cref="ObjectNotFoundException" />
+        internal DroneForList GetDroneForList(int id)
+        {
+            return GetDroneForListRef(id).Clone();
+        }
+
+        /// <summary>
+        /// Returns a converted drone to drone in charge
+        /// </summary>
+        /// <param name="id">The drone Id</param>
+        /// <returns>A <see cref="DroneInCharge"/></returns>
+        internal DroneInCharge GetDroneInCharge(int id)
+        {
+            return new DroneInCharge()
+            {
+                Id = id,
+                Battery = GetDroneForList(id).Battery,
+            };
+        }
+
+        /// <summary>
+        /// Returns a converted drone to drone in delivery
+        /// </summary>
+        /// <param name="id">The drone Id</param>
+        /// <returns>A <see cref="DroneInDelivery"/></returns>
+        internal DroneInDelivery GetDroneInDelivery(int id)
+        {
+            var drone = GetDrone(id);
+
+            return new DroneInDelivery()
+            {
+                Id = id,
+                BatteryState = drone.Battery,
+                Location = drone.Location,
+            };
+        }
+
+        #endregion
     }
 }

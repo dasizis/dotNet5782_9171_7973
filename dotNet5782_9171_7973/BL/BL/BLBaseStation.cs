@@ -19,7 +19,6 @@ namespace BL
 
             try
             {
-
                 dal.Add(
                     new DO.BaseStation()
                     {
@@ -75,14 +74,11 @@ namespace BL
                                         .Count()
                    where station.ChargeSlots > dronesCount
                    select GetBaseStationForList(station.Id);
-
         }
 
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
         {
-            const string nameProperty = "Name";
-            const string chargeSlotsProperty = "ChargeSlots";
-
+            const string nameProperty = nameof(DO.BaseStation.Name);
             if (name != null)
             {
                 if (!Validation.IsValidName(name))
@@ -98,6 +94,7 @@ namespace BL
                 }
             }
 
+            const string chargeSlotsProperty = nameof(DO.BaseStation.ChargeSlots);
             if (chargeSlots != null)
             {
                 if (chargeSlots < 0)
@@ -126,6 +123,8 @@ namespace BL
             }
         }
 
+        #region Helpers
+
         /// <summary>
         /// return converted base station to base staion for list
         /// </summary>
@@ -144,5 +143,7 @@ namespace BL
                 BusyChargeSlots = baseStation.DronesInChargeList.Count,
             };
         }
+
+        #endregion
     }
 }

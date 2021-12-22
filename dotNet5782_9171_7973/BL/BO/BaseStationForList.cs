@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
@@ -28,7 +24,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException(value);
+                    throw new InvalidPropertyValueException(nameof(Name), value);
                 }
                 name = value;
             }
@@ -45,7 +41,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(EmptyChargeSlots), value);
                 }
                 emptyChargeSlots = value;
             }
@@ -62,7 +58,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(BusyChargeSlots), value);
                 }
                 busyChargeSlots = value;
             }
@@ -74,6 +70,5 @@ namespace BO
         /// </summary>
         /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
-
     }
 }

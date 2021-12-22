@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
@@ -41,6 +37,5 @@ namespace BO
         /// </summary>
         /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
-
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
@@ -28,7 +24,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException(value);
+                    throw new InvalidPropertyValueException(nameof(Model), value);
                 }
                 model = value;
             }
@@ -45,7 +41,7 @@ namespace BO
             {
                 if(!Validation.IsValidEnumOption<WeightCategory>((int)value))
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(MaxWeight), value.ToString());
                 }
                 maxWeight = value;
             }
@@ -63,7 +59,7 @@ namespace BO
             {
                 if(value < 0) 
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(Battery), value);
                 }
                 battery = value;
             }
@@ -80,7 +76,7 @@ namespace BO
             {
                 if (!Validation.IsValidEnumOption<DroneState>((int)value))
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(State), value.ToString());
                 }
                 state = value;
             }
@@ -103,7 +99,6 @@ namespace BO
         /// </summary>
         /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
-
 
     }
 }

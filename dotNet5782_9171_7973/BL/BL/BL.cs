@@ -1,20 +1,21 @@
-﻿using BLApi;
-using BO;
+﻿using BO;
 using Singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 
 namespace BL
 {
+    /// <summary>
+    /// The Implementation of <see cref="BLApi.IBL"/>
+    /// </summary>
     public sealed partial class BL : Singleton<BL>, BLApi.IBL
     {
         DalApi.IDal dal { get; } = DalApi.DalFactory.GetDal();
         const int MAX_CHARGE = 100;
 
-        //Electricity confumctiol properties
+        // Electricity confumctiol properties
         public double ElectricityConfumctiolFree { get; set; }
         public double ElectricityConfumctiolLight { get; set; }
         public double ElectricityConfumctiolMedium { get; set; }
@@ -22,6 +23,7 @@ namespace BL
         public double ChargeRate { get; set; }
 
         public List<DroneForList> drones = new();
+        
         BL()
         {
             (
@@ -36,13 +38,10 @@ namespace BL
 
             var dlDrones = dal.GetList<DO.Drone>().ToList();
             var parcels = dal.GetList<DO.Parcel>().ToList();
-            var availableStations = GetAvailableBaseStations()
-                                             .Select(station => GetBaseStation(station.Id))
-                                             .ToList();
                                        
-
             foreach (var dlDrone in dlDrones)
             { 
+
                 var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
                 double battery;
                 int? parcelInDeliverId = null;
@@ -69,21 +68,26 @@ namespace BL
 
                 }
 
+                var availableStations = GetAvailableBaseStations()
+                                             .Select(station => GetBaseStation(station.Id))
+                                             .ToList();
+
                 Location RandomSuppliedParcelLocation()
                 {
-                    var suppliedParcels = parcels.FindAll(p => p.Supplied.HasValue).ToList();
+                    var suppliedParcels = parcels.FindAll(p => p.Supplied != null).ToList();
 
-                    if (suppliedParcels.Count() == 0)
+                    if (suppliedParcels.Count == 0)
                     {
-                        return availableStations[rand.Next(availableStations.Count())].Location;
+                        return availableStations[rand.Next(availableStations.Count)].Location;
                     }
-                    var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count())];
+                    var randomParcel = suppliedParcels[rand.Next(suppliedParcels.Count)];
                     var customer = dal.GetById<DO.Customer>(randomParcel.TargetId);
 
                     return new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
                 }
                 
-                var randomStation = availableStations[rand.Next(availableStations.Count())];
+                var randomStation = availableStations[rand.Next(availableStations.Count)];
+                
                 // Set location
                 location = state switch
                 {
@@ -92,14 +96,15 @@ namespace BL
                     DroneState.Deliver => parcel.Supplied != null
                                           ? targetLocation.FindClosest(availableStations)
                                           : senderLocation,
+                    _ => throw new ArgumentException("Invalid drone state"),
+
                 };
 
                 
-
                 // Set battery
                 battery = state switch
                 {
-                    DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), 100),
+                    DroneState.Free => rand.Next((int)((int)Location.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), MAX_CHARGE),
                     DroneState.Maintenance => rand.NextDouble() * 20,
                     DroneState.Deliver => rand.Next(Math.Min(
                                               (int)(
@@ -107,8 +112,9 @@ namespace BL
                                                   Location.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
                                                   Location.Distance(targetLocation, targetLocation.FindClosest(availableStations)) * ElectricityConfumctiolFree
                                               ), 80)
-                                             , 100
+                                             , MAX_CHARGE
                                           ),
+                    _ => throw new ArgumentException("Invalid drone state"),
                 };
 
                 drones.Add(
@@ -124,12 +130,13 @@ namespace BL
                         }
                     );
 
-                if(state == DroneState.Maintenance)
+                if (state == DroneState.Maintenance)
                 {
-                    dal.ChargeDrone(dlDrone.Id, randomStation.Id);
+                    dal.AddDroneCharge(dlDrone.Id, randomStation.Id);
                 }
             }
         }
+
         /// <summary>
         /// returns suitable parameter of electricity 
         /// </summary>
@@ -142,73 +149,8 @@ namespace BL
                 WeightCategory.Light => ElectricityConfumctiolLight,
                 WeightCategory.Medium => ElectricityConfumctiolMedium,
                 WeightCategory.Heavy => ElectricityConfumctiolHeavy,
+                _ => throw new ArgumentException("Invalid weight category"),
             };
         }
-
-        public int GetDroneBaseStation(int droneId)
-        {
-            var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId && !c.IsDeleted).FirstOrDefault();
-            
-            if (dalCharge.Equals(default(DO.DroneCharge)))
-            {
-                throw new ObjectNotFoundException("Drone is not being charged");
-            }
-
-            return dalCharge.StationId;
-        }
-
-        //public IEnumerable<Parcel> GetNotAssignedToDroneParcels()
-        //{
-        //    return DataSource.Parcels.Where(parcel => parcel.DroneId == null);
-        //}
-
-        //public IEnumerable<BaseStation> GetAvailableBaseStations()
-        //{
-        //    return from station in DataSource.BaseStations
-        //           let dronesCount = (from charge in DataSource.DroneCharges
-        //                              where charge.StationId == station.Id
-        //                              select charge).Count()
-        //           where station.ChargeSlots > dronesCount
-        //           select station.Clone();
-        //}
-
-        //public void AssignParcelToDrone(int parcelId, int droneId)
-        //{
-        //    Parcel parcel = GetById<Parcel>(parcelId);
-        //    DataSource.Parcels.Remove(parcel);
-
-        //    parcel.DroneId = droneId;
-        //    parcel.Scheduled = DateTime.Now;
-        //    DataSource.Parcels.Add(parcel);
-        //}
-
-        //public void SupplyParcel(int parcelId)
-        //{
-        //    Parcel parcel = GetById<Parcel>(parcelId);
-        //    DataSource.Parcels.Remove(parcel);
-
-        //    parcel.Supplied = DateTime.Now;
-        //    DataSource.Parcels.Add(parcel);
-        //}
-
-        //public void ChargeDroneAtBaseStation(int droneId, int baseStationId)
-        //{
-        //    DataSource.DroneCharges.Add(new DroneCharge() { DroneId = droneId, StationId = baseStationId });
-        //}
-
-        //public void FinishCharging(int droneId)
-        //{
-        //    var droneCharge = DataSource.DroneCharges.First(charge => charge.DroneId == droneId);
-        //    DataSource.DroneCharges.Remove(droneCharge);
-        //}
-
-        //public void CollectParcel(int parcelId)
-        //{
-        //    Parcel parcel = GetById<Parcel>(parcelId);
-        //    DataSource.Parcels.Remove(parcel);
-
-        //    parcel.PickedUp = DateTime.Now;
-        //    DataSource.Parcels.Add(parcel);
-        //}
     }
 }

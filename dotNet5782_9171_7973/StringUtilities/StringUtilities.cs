@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StringUtilities
 {
     public static class StringUtilities
     {
         /// <summary>
-        /// prints a given enum
+        /// Prints a given enum
         /// each value in the following format:
         /// (numeric-value) - value
         /// </summary>
-        /// <param name="enumType">the type of the enum</param>
-        /// <param name="numOfTabs">tabs before each enum value</param>
+        /// <param name="enumType">The type of the enum</param>
         public static string EnumToString(Type enumType)
         {
             StringBuilder result = new ();
@@ -29,27 +25,28 @@ namespace StringUtilities
 
         /// <summary>
         /// Converts a cameCase string to readable text 
-        /// Example: CamelCaseText -> Camel case text
         /// </summary>
-        /// <param name="camelCase">the camelCase string</param>
-        /// <returns>the readable text</returns>
-        static string CamelCaseToReadable(this string camelCase)
+        /// <example>CamelCaseText -> Camel case text</example>
+        /// <param name="camelCase">The camelCase string</param>
+        /// <returns>The readable text <see cref="string"/></returns>
+        public static string CamelCaseToReadable(this string camelCase)
         {
             char[] letters = camelCase.ToCharArray();
             string result = "";
 
             foreach (var letter in letters)
             {
-                result += Char.IsUpper(letter) ? $" {Char.ToLower(letter)}" : letter;
+                result += char.IsUpper(letter) ? $" {char.ToLower(letter)}" : letter;
             }
 
             return letters[0] + result[2..];
         }
 
         /// <summary>
-        /// prints a title
+        /// Retutns a string in a title format
         /// </summary>
-        /// <param name="title">the title string</param>
+        /// <param name="title"><The title string/param>
+        /// <returns>The string in a title format</returns>
         public static string ToTitleFormat(this string title)
         {
             return "=================================" +
@@ -57,6 +54,12 @@ namespace StringUtilities
                    "=================================";
         }
 
+        /// <summary>
+        /// Indents a string by the wanted indention level
+        /// </summary>
+        /// <param name="str">The string to be indented</param>
+        /// <param name="indentionLevel">The indention level</param>
+        /// <returns></returns>
         public static string Indent(this string str, int indentionLevel = 1)
         {
             var indention = new string('\t', indentionLevel);

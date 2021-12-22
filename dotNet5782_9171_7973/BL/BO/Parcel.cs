@@ -29,7 +29,7 @@ namespace BO
 
         WeightCategory weight;
         /// <summary>
-        /// Parcel weight
+        /// Parcel weight category
         /// </summary>
         public WeightCategory Weight
         {

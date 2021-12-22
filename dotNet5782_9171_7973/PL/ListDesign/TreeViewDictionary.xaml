@@ -5,14 +5,13 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     
     <!--Converters-->
-    <local:ObjectToTreeViewPropsConverter x:Key="ObjectToTreeViewPropsConverter" />
+    <local:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
     <local:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
-    <local:CamelCaseToRedableConverter x:Key="CamelCaseToRedableConverter" />
     <local:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
 
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
-        <Setter Property="Foreground" Value="#C0C0C0" />
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}" />
     </Style>
 
 	<!--BO.Location-->
@@ -42,7 +41,7 @@
     <!--Object property-->
     <DataTemplate DataType="{x:Type local:TreeViewProp}">
         <DockPanel Width="200">
-            <TextBlock Text="{Binding PropName, Converter={StaticResource CamelCaseToRedableConverter}}" FontWeight="Bold"/>
+            <TextBlock Text="{Binding PropName}" FontWeight="Bold"/>
             <TextBlock Text="{Binding propValue}" TextAlignment="Right"/>
         </DockPanel>
     </DataTemplate>
@@ -60,28 +59,28 @@
     </DataTemplate>
 
     <!--BO.BaseStationForList-->
-    <HierarchicalDataTemplate DataType="{x:Type bo:BaseStationForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
+    <HierarchicalDataTemplate DataType="{x:Type bo:BaseStationForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <!--BO.CustomerForList-->
-    <HierarchicalDataTemplate DataType="{x:Type bo:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
+    <HierarchicalDataTemplate DataType="{x:Type bo:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <!--BO.DroneForList-->
-    <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
+    <HierarchicalDataTemplate DataType="{x:Type bo:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
             <TextBlock Text="{Binding Model}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <!--BO.ParcelForList-->
-    <HierarchicalDataTemplate DataType="{x:Type bo:ParcelForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewPropsConverter}}">
+    <HierarchicalDataTemplate DataType="{x:Type bo:ParcelForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
             <materialDesign:PackIcon Kind="PackageVariantClosed" />
             <TextBlock Text="{Binding Id}"/>

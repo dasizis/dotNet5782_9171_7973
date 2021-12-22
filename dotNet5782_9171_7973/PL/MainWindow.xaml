@@ -14,7 +14,69 @@
         </ResourceDictionary>
     </Window.Resources>
     <materialDesign:DialogHost>
-        <Grid>
+        <DockPanel>
+            <Menu IsMainMenu="True" DockPanel.Dock="Top" Margin="10">
+                <MenuItem Header="_File">
+                    <MenuItem
+                        Header="Save"
+                        Icon="{materialDesign:PackIcon Kind=ContentSave}">
+                    </MenuItem>
+
+                    <MenuItem Header="Save As.."/>
+
+                    <MenuItem
+                        Header="Exit"
+                        InputGestureText="Ctrl+E"
+                        Icon="{materialDesign:PackIcon Kind=ExitToApp}"/>
+
+                    <Separator/>
+
+                    <MenuItem
+                        Header="Excellent"
+                        IsCheckable="True"
+                        IsChecked="True"/>
+
+                    <MenuItem
+                        Header="Rubbish"
+                        IsCheckable="True"/>
+
+                    <MenuItem
+                        Header="Dig Deeper"
+                        InputGestureText="Ctrl+D">
+                        <MenuItem
+                            Header="Enlightenment?"
+                            IsCheckable="True"/>
+                        <MenuItem
+                            Header="Disappointment"
+                            IsCheckable="True"/>
+                    </MenuItem>
+
+                    <MenuItem
+                        Header="Look Deeper"
+                        InputGestureText="Ctrl+D">
+                        <MenuItem Header="Plain"/>
+                        <MenuItem Header="Ice Cream"/>
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="_Edit">
+                    <MenuItem
+                        Header="_Cut"
+                        Command="Cut"
+                        Icon="{materialDesign:PackIcon Kind=ContentCut}"/>
+
+                    <MenuItem
+                        Header="_Copy"
+                        Command="Copy"
+                        Icon="{materialDesign:PackIcon Kind=ContentCopy}"/>
+
+                    <MenuItem
+                        Header="_Paste"
+                        Command="Paste"
+                        Icon="{materialDesign:PackIcon Kind=ContentPaste}"/>
+                </MenuItem>
+            </Menu>
+            <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -30,9 +92,10 @@
                           HorizontalAlignment="Stretch" 
                           ShowsPreview="False"></GridSplitter>
             <TabControl x:Name="DisplayPanel" Grid.Column="2">
-                
+
             </TabControl>
         </Grid>
+        </DockPanel>
     </materialDesign:DialogHost>
 
 </Window>

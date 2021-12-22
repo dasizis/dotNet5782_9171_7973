@@ -1,7 +1,6 @@
 ﻿using BO;
 using System.Collections.Generic;
 
-
 namespace BLApi
 {
     /// <summary>

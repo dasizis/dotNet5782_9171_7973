@@ -7,8 +7,14 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone in charge
+    /// </summary>
     public class DroneInCharge
     {
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
         double batteryState;
         /// <summary>

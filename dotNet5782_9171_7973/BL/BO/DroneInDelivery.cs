@@ -7,10 +7,20 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone in delivery
+    /// </summary>
     public class DroneInDelivery : ILocalable
     {
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
         double batteryState;
+        /// <summary>
+        /// Drone battery state 
+        /// (in parcents)
+        /// </summary>
         public double BatteryState
         {
             get => batteryState;
@@ -23,6 +33,9 @@ namespace BO
                 batteryState = value;
             }
         }
+        /// <summary>
+        /// Drone location
+        /// </summary>
         public Location Location { get; set; }
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

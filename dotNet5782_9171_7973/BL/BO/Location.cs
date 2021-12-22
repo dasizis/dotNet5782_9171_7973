@@ -7,11 +7,17 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a location
+    /// </summary>
     public class Location
     {
         const int EARTH_RADIUS_KM = 6371;
         
         double longitude;
+        /// <summary>
+        /// Location longitude
+        /// </summary>
         [SexadecimalLongitude]
         public double Longitude 
         { 
@@ -27,6 +33,9 @@ namespace BO
         }
         
         double latitude;
+        /// <summary>
+        /// Location latitude
+        /// </summary>
         [SexadecimalLatitude]
         public double Latitude
         { 
@@ -40,7 +49,12 @@ namespace BO
                 latitude = value;
             }
         }
-
+        /// <summary>
+        /// Calculate distance between two locations
+        /// </summary>
+        /// <param name="locationA">first location</param>
+        /// <param name="locationB">second location</param>
+        /// <returns>the distance</returns>
         public static double Distance(Location locationA, Location locationB)
         {
             static double DegreesToRadians(double degrees) => degrees * Math.PI / 180;

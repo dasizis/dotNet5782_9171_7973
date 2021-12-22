@@ -7,12 +7,27 @@ using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of parcel
+    /// </summary>
     public class Parcel 
     {
+        /// <summary>
+        /// Parcel Id
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Parcel sender
+        /// </summary>
         public CustomerInDelivery Sender { get; set; }
+        /// <summary>
+        /// Parcel reciever
+        /// </summary>
         public CustomerInDelivery Target { get; set; }
         WeightCategory weight;
+        /// <summary>
+        /// Parcel weight
+        /// </summary>
         public WeightCategory Weight
         {
             get => weight;
@@ -26,6 +41,9 @@ namespace BO
             }
         }
         Priority priority;
+        /// <summary>
+        /// Parcel priority
+        /// </summary>
         public Priority Priority
         {
             get => priority;
@@ -38,11 +56,33 @@ namespace BO
                 priority = value;
             }
         }
+        /// <summary>
+        /// Drone which delivers parcel
+        /// </summary>
         public Drone Drone { get; set; }
+        /// <summary>
+        /// Parcel requested time (If has already occurred)
+        /// </summary>
         public DateTime? Requested { get; set; }
+
+        /// <summary>
+        /// Parcel scheduled time, the time the parcel was associated with drone
+        /// (If has already occurred)
+        /// </summary>
         public DateTime? Scheduled { get; set; }
+
+        /// <summary>
+        /// Parcel picked up time, the time the parcel was picked up by a drone
+        /// (If has already occurred)
+        /// </summary>
         public DateTime? PickedUp { get; set; }
+
+        /// <summary>
+        /// Parcel supplied time, the time the parcel was supplied to the target customer up
+        /// (If has already occurred)
+        /// </summary>
         public DateTime? Supplied { get; set; }
+
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

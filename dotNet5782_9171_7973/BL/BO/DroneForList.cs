@@ -55,7 +55,7 @@ namespace BO
             get => battery;
             set
             {
-                if (value < 0)
+                if (!Validation.IsValidBattery(value))
                 {
                     throw new InvalidPropertyValueException(nameof(Battery), value);
                 }

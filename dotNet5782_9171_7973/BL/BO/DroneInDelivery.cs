@@ -23,9 +23,9 @@ namespace BO
             get => battery;
             set
             {
-                if (value < 0)
+                if (!Validation.IsValidBattery(value))
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(nameof(Battery), value);
                 }
                 battery = value;
             }

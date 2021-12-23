@@ -8,6 +8,6 @@ namespace PL
 {
     class AddDroneViewModel
     {
-
+        
     }
 }

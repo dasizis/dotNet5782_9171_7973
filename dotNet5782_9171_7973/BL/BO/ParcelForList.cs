@@ -58,7 +58,7 @@ namespace BO
             {
                 if (!Validation.IsValidEnumOption<WeightCategory>((int)value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Weight), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 weight = value;
             }
@@ -75,7 +75,7 @@ namespace BO
             {
                 if (!Validation.IsValidEnumOption<Priority>((int)value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Priority), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 priority = value;
             }

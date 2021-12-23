@@ -4,24 +4,14 @@ using StringUtilities;
 namespace BO
 {
     /// <summary>
-    /// A class to represent a PDS of parcel
+    /// A class to represent a PDS of parcel at customer
     /// </summary>
-    public class Parcel 
+    public class ParcelAtCustomer 
     {
         /// <summary>
         /// Parcel Id
         /// </summary>
         public int Id { get; set; }
-
-        /// <summary>
-        /// Parcel sender
-        /// </summary>
-        public CustomerInDelivery Sender { get; set; }
-
-        /// <summary>
-        /// Parcel reciever
-        /// </summary>
-        public CustomerInDelivery Target { get; set; }
 
         WeightCategory weight;
         /// <summary>
@@ -57,34 +47,28 @@ namespace BO
             }
         }
 
+        ParcelState state;
         /// <summary>
-        /// Drone which delivers parcel
+        /// Parcel state
         /// </summary>
-        public Drone Drone { get; set; }
+        public ParcelState State
+        {
+            get => state;
+            set
+            {
+                if (!Validation.IsValidEnumOption<ParcelState>((int)value))
+                {
+                    throw new InvalidPropertyValueException(value);
+                }
+                state = value;
+            }
+        }
 
         /// <summary>
-        /// Parcel requested time (If has already occurred)
+        /// The other customer related to parcel delivery
+        /// (sender or reciever)
         /// </summary>
-        public DateTime? Requested { get; set; }
-
-        /// <summary>
-        /// Parcel scheduled time, the time the parcel was associated with drone
-        /// (If has already occurred)
-        /// </summary>
-        public DateTime? Scheduled { get; set; }
-
-        /// <summary>
-        /// Parcel picked up time, the time the parcel was picked up by a drone
-        /// (If has already occurred)
-        /// </summary>
-        public DateTime? PickedUp { get; set; }
-
-        /// <summary>
-        /// Parcel supplied time, the time the parcel was supplied to the target customer up
-        /// (If has already occurred)
-        /// </summary>
-        public DateTime? Supplied { get; set; }
-
+        public CustomerInDelivery OtherCustomer { get; set; }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

@@ -23,7 +23,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Name), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 name = value;
             }
@@ -40,7 +40,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new InvalidPropertyValueException(nameof(EmptyChargeSlots), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 emptyChargeSlots = value;
             }
@@ -57,7 +57,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new InvalidPropertyValueException(nameof(BusyChargeSlots), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 busyChargeSlots = value;
             }

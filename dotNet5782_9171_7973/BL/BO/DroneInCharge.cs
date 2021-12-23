@@ -24,7 +24,7 @@ namespace BO
             {
                 if (!Validation.IsValidBattery(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Battery), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 battery = value;
             }

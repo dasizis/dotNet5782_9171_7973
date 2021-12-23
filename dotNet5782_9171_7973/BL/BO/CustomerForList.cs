@@ -24,7 +24,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Name), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 name = value;
             }
@@ -41,7 +41,7 @@ namespace BO
             {
                 if (!Validation.IsValidPhone(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Phone), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 phone = value;
             }
@@ -58,7 +58,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new InvalidPropertyValueException(nameof(ParcelsSendAndSupplied), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsSendAndSupplied = value;
             }
@@ -75,7 +75,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new InvalidPropertyValueException(nameof(ParcelsSendAndSupplied), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsSendAndNotSupplied = value;
             }
@@ -92,7 +92,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new InvalidPropertyValueException(nameof(ParcelsRecieved), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsRecieved = value;
             }
@@ -109,7 +109,7 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new InvalidPropertyValueException(nameof(ParcelsOnWay), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsOnWay = value;
             }

@@ -13,6 +13,9 @@ namespace PO
     /// </summary>
     internal abstract class PropertyChangedNotification : INotifyPropertyChanged, IDataErrorInfo
     {
+        /// <summary>
+        /// Event which Occurs when a property was changed
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

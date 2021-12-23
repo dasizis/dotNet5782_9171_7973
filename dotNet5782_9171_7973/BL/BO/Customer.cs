@@ -25,7 +25,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Name), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 name = value;
             }
@@ -42,7 +42,7 @@ namespace BO
             {
                 if (!Validation.IsValidPhone(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Phone), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 phone = value;
             }

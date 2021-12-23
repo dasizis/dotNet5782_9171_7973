@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace BO
@@ -72,7 +73,7 @@ namespace BO
 
         protected InvalidPropertyValueException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public InvalidPropertyValueException(string propName, object value)
+        public InvalidPropertyValueException(object value, [CallerMemberName] string propName = "")
         {
             PropertyName = propName;
             Value = value;

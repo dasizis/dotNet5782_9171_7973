@@ -78,15 +78,14 @@ namespace BL
 
         public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
         {
-            const string nameProperty = nameof(DO.BaseStation.Name);
             if (name != null)
             {
                 if (!Validation.IsValidName(name))
-                    throw new InvalidPropertyValueException(nameProperty, name);
+                    throw new InvalidPropertyValueException(name, nameof(DO.BaseStation.Name));
                 
                 try
                 {
-                    dal.Update<DO.BaseStation>(baseStationId, nameProperty, name);
+                    dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.Name), name);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -94,15 +93,14 @@ namespace BL
                 }
             }
 
-            const string chargeSlotsProperty = nameof(DO.BaseStation.ChargeSlots);
             if (chargeSlots != null)
             {
                 if (chargeSlots < 0)
-                    throw new InvalidPropertyValueException(chargeSlotsProperty, chargeSlots);
+                    throw new InvalidPropertyValueException(chargeSlots, nameof(DO.BaseStation.ChargeSlots));
 
                 try
                 {
-                    dal.Update<DO.BaseStation>(baseStationId, chargeSlotsProperty, chargeSlots);
+                    dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.ChargeSlots), chargeSlots);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -113,14 +111,20 @@ namespace BL
 
         public void DeleteBaseStation(int baseStationId)
         {
+            BaseStationForList baseStation; 
             try
             {
-                dal.Delete<DO.BaseStation>(baseStationId);
+                baseStation = GetBaseStationForList(baseStationId);
             }
             catch (DO.ObjectNotFoundException e)
             {
                 throw new ObjectNotFoundException(typeof(BaseStation), e);
             }
+
+            if (baseStation.BusyChargeSlots > 0)
+                throw new InvalidActionException("Can not delete a busy base station");
+
+            dal.Delete<DO.BaseStation>(baseStationId);
         }
 
         #region Helpers

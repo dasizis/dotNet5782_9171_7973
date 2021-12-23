@@ -54,6 +54,7 @@ namespace BLApi
         /// </summary>
         /// <param name="baseStationId">The base station Id</param>
         /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="InvalidActionException" />
         void DeleteBaseStation(int baseStationId);
     }
 }

@@ -21,9 +21,9 @@ namespace BO
             get => model;
             set
             {
-                if (!Validation.IsValidName(value))
+                if (!Validation.IsValidModel(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Model), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 model = value;
             }
@@ -40,7 +40,7 @@ namespace BO
             {
                 if (!Validation.IsValidEnumOption<WeightCategory>((int)value))
                 {
-                    throw new InvalidPropertyValueException(nameof(MaxWeight), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 maxWeight = value;
             }
@@ -57,7 +57,7 @@ namespace BO
             {
                 if (!Validation.IsValidBattery(value))
                 {
-                    throw new InvalidPropertyValueException(nameof(Battery), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 battery = value;
             }
@@ -74,7 +74,7 @@ namespace BO
             {
                 if (!Validation.IsValidEnumOption<DroneState>((int)value))
                 {
-                    throw new InvalidPropertyValueException(nameof(State), value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 state = value;
             }

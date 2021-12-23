@@ -26,12 +26,19 @@ namespace BO
 
         internal static bool IsValidName(string name)
         {
+            if (string.IsNullOrEmpty(name)) return false;
+
             foreach (char ch in name)
             {
                 if (ch == ' ') continue;
                 if (!char.IsLetter(ch)) return false;
             }
             return true;
+        }
+
+        internal static bool IsValidModel(string model)
+        {
+            return !string.IsNullOrEmpty(model) && model.Length > 3 && model.Length < 11;
         }
 
         internal static bool IsValidBattery(double battery)

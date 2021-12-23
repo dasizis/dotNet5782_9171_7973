@@ -21,7 +21,7 @@ namespace StringUtilities
                 description.Append($"{prop.Name} = ");
 
                 var propValue = prop.GetValue(obj);
-                var countProperty = propValue?.GetType()?.GetProperty("Count");
+                var countProperty = prop.PropertyType.GetProperty("Count");
 
                 // Is the property a list?
                 if (countProperty != null)

@@ -113,14 +113,20 @@ namespace BL
 
         public void DeleteBaseStation(int baseStationId)
         {
+            BaseStationForList baseStation; 
             try
             {
-                dal.Delete<DO.BaseStation>(baseStationId);
+                baseStation = GetBaseStationForList(baseStationId);
             }
             catch (DO.ObjectNotFoundException e)
             {
                 throw new ObjectNotFoundException(typeof(BaseStation), e);
             }
+
+            if (baseStation.BusyChargeSlots > 0)
+                throw new InvalidActionException("Can not delete a busy base station");
+
+            dal.Delete<DO.BaseStation>(baseStationId);
         }
 
         #region Helpers

@@ -24,7 +24,7 @@ namespace PL.ListDesign
         {
             var propValue = prop.GetValue(owner);
 
-            if (propValue?.GetType() == typeof(BO.Location)) return propValue;
+            if (prop.PropertyType == typeof(BO.Location)) return propValue;
 
             if (prop.Name == "Battery")
             {

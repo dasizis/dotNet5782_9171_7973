@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StringUtilities;
 
 namespace BO
 {
@@ -14,27 +9,43 @@ namespace BO
             foreach (char ch in phone)
             {
                 if (ch == '-') continue;
-                if (!Char.IsDigit(ch)) return false;
+                if (!char.IsDigit(ch)) return false;
             }
             return true;
         }
+
         internal static bool IsValidLongitude(double longitude)
         {
             return longitude >= -180 && longitude <= 180;
         }
+
         internal static bool IsValidLatitude(double lat)
         {
             return lat >= -90 && lat <= 90;
         }
+
         internal static bool IsValidName(string name)
         {
+            if (string.IsNullOrEmpty(name)) return false;
+
             foreach (char ch in name)
             {
                 if (ch == ' ') continue;
-                if (!Char.IsLetter(ch)) return false;
+                if (!char.IsLetter(ch)) return false;
             }
             return true;
         }
+
+        internal static bool IsValidModel(string model)
+        {
+            return !string.IsNullOrEmpty(model) && model.Length > 4 && model.Length < 11;
+        }
+
+        internal static bool IsValidBattery(double battery)
+        {
+            return battery >= 0 && battery <= 100;
+        }
+
         internal static bool IsValidEnumOption<T>(int option)
         {
             return option >= 0 && option < Enum.GetValues(typeof(T)).Length;

@@ -38,7 +38,7 @@ namespace BO
 
         internal static bool IsValidModel(string model)
         {
-            return !string.IsNullOrEmpty(model) && model.Length > 4 && model.Length < 11;
+            return !string.IsNullOrEmpty(model) && model.Length > 3 && model.Length < 11;
         }
 
         internal static bool IsValidBattery(double battery)

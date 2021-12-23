@@ -5,12 +5,12 @@ namespace PO
 {
     class DroneToAdd : PropertyChangedNotification
     {
-        int id;
+        int? id;
         /// <summary>
         /// Drone Id
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        public int Id 
+        public int? Id 
         {
             get => id;
             set => SetField(ref id, value);
@@ -19,7 +19,8 @@ namespace PO
         string model;
         /// <summary>
         /// Drone model
-        /// </summary>
+        /// </summary>       
+        [Required(ErrorMessage = "Required")]
         [StringLength(10, MinimumLength = 3, ErrorMessage = "Model length must be between 3-10")]
         public string Model
         {
@@ -27,26 +28,26 @@ namespace PO
             set => SetField(ref model, value);
         }
 
-        BO.WeightCategory maxWeight;
+        BO.WeightCategory? maxWeight;
         /// <summary>
         /// Highest weight drone can carry
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        public BO.WeightCategory MaxWeight
+        public BO.WeightCategory? MaxWeight
         {
             get => maxWeight;
             set => SetField(ref maxWeight, value);
         }
         
-        BO.DroneState state;
+        int? stationId;
         /// <summary>
-        /// Drone state
+        /// The base station id for first charging
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        public BO.DroneState State
+        public int? StationId
         {
-            get => state;
-            set => SetField(ref state, value);
+            get => stationId;
+            set => SetField(ref stationId, value);
         }
 
         public override string ToString() => this.ToStringProperties();

@@ -43,7 +43,21 @@ namespace PO
             return true;
         }
 
-        public string Error => throw new NotImplementedException();
+        public string Error
+        {
+            get
+            {
+                foreach (var prop in GetType().GetProperties())
+                {
+                    if (prop.GetCustomAttributes(typeof(ValidationAttribute), false).Length == 0) continue;
+
+                    if (this[prop.Name] != null)
+                        return "One or more of the properties are not correct";
+                }
+
+                return null;
+            }
+        }
 
         /// <summary>
         /// Returns the property validation result

@@ -92,8 +92,11 @@
                           HorizontalAlignment="Stretch" 
                           ShowsPreview="False"></GridSplitter>
             <TabControl x:Name="DisplayPanel" Grid.Column="2">
-
-            </TabControl>
+                    <TabItem>
+                    <local:AddDroneView />
+                        
+                    </TabItem>
+             </TabControl>
         </Grid>
         </DockPanel>
     </materialDesign:DialogHost>

@@ -72,7 +72,9 @@ namespace BL
 
                     if (suppliedParcels.Count == 0)
                     {
-                        location = availableStations[rand.Next(availableStations.Count)].Location;
+                        var stations = dal.GetList<DO.BaseStation>().ToList();
+                        var randomStation = stations[rand.Next(stations.Count)];
+                        location = GetBaseStation(randomStation.Id).Location;
                     }
                     else
                     {

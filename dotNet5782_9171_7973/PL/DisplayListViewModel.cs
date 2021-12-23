@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace PL
@@ -51,11 +49,9 @@ namespace PL
             DataList.Filter = Filter;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged()
         {
-            DataList.SortDescriptions.Prepend(new SortDescription() { PropertyName = SortKey });
+            DataList.SortDescriptions.Add(new SortDescription() { PropertyName = SortKey });
             DataList.Refresh();
         }
 

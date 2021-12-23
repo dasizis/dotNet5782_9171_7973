@@ -34,7 +34,5 @@
                     HorizontalAlignment="Center"
                     Content="ADD"
                     Command="{Binding AddDroneCommand}"/>
-
-
     </StackPanel>
 </UserControl>

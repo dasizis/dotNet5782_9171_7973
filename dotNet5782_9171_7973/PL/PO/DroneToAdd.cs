@@ -33,6 +33,7 @@ namespace PO
         /// Highest weight drone can carry
         /// </summary>
         [Required(ErrorMessage = "Required")]
+        [EnumDataType(typeof(BO.WeightCategory), ErrorMessage = "Max weight should be of type WeightCategory")]
         public BO.WeightCategory? MaxWeight
         {
             get => maxWeight;

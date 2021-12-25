@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace PO
@@ -32,12 +28,12 @@ namespace PO
             set => SetField(ref name, value);
         }
 
-        BO.Location location;
+        Location location;
         /// <summary>
         /// Base station location
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        public BO.Location Location
+        public Location Location
         {
             get => location;
             set => SetField(ref location, value);

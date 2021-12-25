@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PO
 {
@@ -48,12 +43,12 @@ namespace PO
         }
 
 
-        BO.Location location;
+        Location location;
         /// <summary>
         /// Customer location
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        public BO.Location Location
+        public Location Location
         {
             get => location;
             set => SetField(ref location, value);

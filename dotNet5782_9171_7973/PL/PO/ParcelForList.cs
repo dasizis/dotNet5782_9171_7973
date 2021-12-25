@@ -26,12 +26,12 @@ namespace PO
         /// <summary>
         /// Parcel weight category
         /// </summary>
-        public BO.WeightCategory Weight { get; set; }
+        public WeightCategory Weight { get; set; }
 
         /// <summary>
         /// Parcel priority
         /// </summary>
-        public BO.Priority Priority { get; set; }
+        public Priority Priority { get; set; }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

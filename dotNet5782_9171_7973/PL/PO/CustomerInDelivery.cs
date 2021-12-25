@@ -14,22 +14,10 @@ namespace PO
         /// </summary>
         public int Id { get; set; }
 
-        string name;
         /// <summary>
         /// Customer name
         /// </summary>
-        public string Name
-        {
-            get => name;
-            set
-            {
-                if (!Validation.IsValidName(value))
-                {
-                    throw new ArgumentException();
-                }
-                name = value;
-            }
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

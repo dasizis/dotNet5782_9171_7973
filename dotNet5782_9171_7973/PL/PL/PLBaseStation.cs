@@ -43,7 +43,11 @@ namespace PL
             {
                 Id = baseStation.Id,
                 Name = baseStation.Name,
-                Location = new Location() { Latitude = baseStation.Location.Latitude, Longitude = baseStation.Location.Longitude },
+                Location = new Location()
+                { 
+                    Latitude = baseStation.Location.Latitude,
+                    Longitude = baseStation.Location.Longitude 
+                },
                 EmptyChargeSlots = baseStation.EmptyChargeSlots,
                 DronesInCharge = drones,
             };

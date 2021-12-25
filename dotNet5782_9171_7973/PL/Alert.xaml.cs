@@ -24,7 +24,7 @@ namespace PL
         public bool IsSuccess { get; set; }
 
         bool isFailure = false;
-        public bool IsFailure { get => !IsSuccess }
+        public bool IsFailure { get => !IsSuccess; }
 
         public Alert()
         {

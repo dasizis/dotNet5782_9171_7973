@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ListDesign/TreeViewDictionary.xaml" />
+                <ResourceDictionary Source="Views/Style/ListDesign/TreeViewDictionary.xaml" />
                 
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">

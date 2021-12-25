@@ -16,8 +16,8 @@ namespace PL
             bl.AddCustomer((int)customer.Id,
                            customer.Name,
                            customer.Phone,
-                           (double)customer.Location.Longitude,
-                           (double)customer.Location.Latitude);
+                           (double)customer.Longitude,
+                           (double)customer.Latitude);
 
             CustomersNotification.NotifyCustomerChanged();
         }

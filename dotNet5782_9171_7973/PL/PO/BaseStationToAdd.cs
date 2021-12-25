@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StringUtilities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PO
@@ -28,15 +29,30 @@ namespace PO
             set => SetField(ref name, value);
         }
 
-        Location location;
+        double? longitude;
         /// <summary>
-        /// Base station location
-        /// </summary>       
+        /// Base station location longitude
+        /// </summary>
+        [SexadecimalLongitude]
+        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
         [Required(ErrorMessage = "Required")]
-        public Location Location
+        public double? Longitude
         {
-            get => location;
-            set => SetField(ref location, value);
+            get => longitude;
+            set => SetField(ref longitude, value);
+        }
+
+        double? latitude;
+        /// <summary>
+        /// Base station location latitude
+        /// </summary>
+        [SexadecimalLatitude]
+        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
+        [Required(ErrorMessage = "Required")]
+        public double? Latitude
+        {
+            get => latitude;
+            set => SetField(ref latitude, value);
         }
 
         int? chargeSlots;

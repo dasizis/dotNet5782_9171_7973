@@ -47,6 +47,6 @@
             ItemsSource="{Binding WeightOptions}" 
             materialDesign:HintAssist.Hint="Weight Category" />
         </StackPanel>
-        <Button Command="{Binding AddDroneCommand}"/>
+        <Button Command="{Binding AddCommand}"/>
     </StackPanel>
 </UserControl>

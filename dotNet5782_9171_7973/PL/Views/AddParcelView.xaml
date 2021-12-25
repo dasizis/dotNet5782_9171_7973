@@ -49,6 +49,6 @@
             ItemsSource="{Binding PriorityOptions}" 
             materialDesign:HintAssist.Hint="Priority" />
         </StackPanel>
-        <Button Command="{Binding AddDroneCommand}"/>
+        <Button Command="{Binding AddCommand}"/>
     </StackPanel>
 </UserControl>

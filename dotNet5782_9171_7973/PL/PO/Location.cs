@@ -15,6 +15,7 @@ namespace PO
         /// </summary>
         [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
         [SexadecimalLongitude]
+        [Required(ErrorMessage = "Required")]
         public double? Longitude
         {
             get => longitude;
@@ -27,6 +28,7 @@ namespace PO
         /// </summary>
         [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
         [SexadecimalLatitude]
+        [Required(ErrorMessage = "Required")]
         public double? Latitude
         {
             get => latitude;

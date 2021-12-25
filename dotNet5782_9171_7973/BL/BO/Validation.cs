@@ -26,7 +26,7 @@ namespace BO
 
         internal static bool IsValidName(string name)
         {
-            if (string.IsNullOrEmpty(name) || name.Length > 3 || name.Length < 15) return false;
+            if (string.IsNullOrEmpty(name) || name.Length < 4 || name.Length > 20) return false;
 
             foreach (char ch in name)
             {

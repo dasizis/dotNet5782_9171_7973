@@ -96,7 +96,7 @@ namespace PL
         /// <summary>
         /// Converts <see cref="BO.BaseStationForList"/> to <see cref="BaseStationForList"/>
         /// </summary>
-        /// <param name="boBaseStation">The BO base station</param>
+        /// <param name="boBaseStation">The <see cref="BO.BaseStationForList"/></param>
         /// <returns>A <see cref="BaseStationForList"/></returns>
         private static BaseStationForList ConvertBaseStation(BO.BaseStationForList boBaseStation)
         {

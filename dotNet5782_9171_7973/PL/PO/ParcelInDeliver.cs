@@ -5,7 +5,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of parcel in deliver
     /// </summary>
-    public class ParcelInDeliver
+    class ParcelInDeliver
     {
         /// <summary>
         /// Parcel Id

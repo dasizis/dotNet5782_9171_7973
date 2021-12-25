@@ -14,7 +14,7 @@ namespace BL
                 Name = name,
                 Location = location,
                 EmptyChargeSlots = chargeSlots,
-                DronesInChargeList = new(),
+                DronesInCharge = new(),
             };
 
             try
@@ -26,7 +26,7 @@ namespace BL
                         Name = station.Name,
                         Latitude = station.Location.Latitude,
                         Longitude = station.Location.Longitude,
-                        ChargeSlots = station.EmptyChargeSlots + station.DronesInChargeList.Count,
+                        ChargeSlots = station.EmptyChargeSlots + station.DronesInCharge.Count,
                     }
                 );
             }
@@ -57,7 +57,7 @@ namespace BL
                 Name = baseStation.Name,
                 Location = new Location() { Latitude = baseStation.Latitude, Longitude = baseStation.Longitude },
                 EmptyChargeSlots = baseStation.ChargeSlots - charges.Count(),
-                DronesInChargeList = dronesInChargeList,
+                DronesInCharge = dronesInChargeList,
             };
         }
         
@@ -144,7 +144,7 @@ namespace BL
                 Id = id,
                 Name = baseStation.Name,
                 EmptyChargeSlots = baseStation.EmptyChargeSlots,
-                BusyChargeSlots = baseStation.DronesInChargeList.Count,
+                BusyChargeSlots = baseStation.DronesInCharge.Count,
             };
         }
 

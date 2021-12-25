@@ -106,11 +106,12 @@ namespace BL
                                ? targetLocation.FindClosest(availableStations)
                                : senderLocation;
 
-                    battery = rand.Next((int)(Localable.Distance(location, senderLocation) * ElectricityConfumctiolFree +
+                    battery = availableStations.Count == 0
+                              ? MAX_CHARGE
+                              : rand.Next((int)(Localable.Distance(location, senderLocation) * ElectricityConfumctiolFree +
                                          Localable.Distance(senderLocation, targetLocation) * GetElectricity((WeightCategory)parcel.Weight) +
                                          Localable.Distance(targetLocation, targetLocation.FindClosest(availableStations)) * ElectricityConfumctiolFree)
                                          , MAX_CHARGE);
-
                 }
                 else
                 {
@@ -128,15 +129,15 @@ namespace BL
                             Location = location,
                             DeliveredParcelId = parcelInDeliverId
                         }
-                    );
+                );
             }
         }
 
         /// <summary>
-        /// returns suitable parameter of electricity 
+        /// Returns suitable parameter of electricity 
         /// </summary>
-        /// <param name="weight">weight category</param>
-        /// <returns></returns>
+        /// <param name="weight">The weight category to suit to</param>
+        /// <returns>The electricity confumctiol per km</returns>
         private double GetElectricity(WeightCategory weight)
         {
             return weight switch

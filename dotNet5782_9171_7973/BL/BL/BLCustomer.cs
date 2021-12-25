@@ -79,15 +79,14 @@ namespace BL
         
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
-            const string nameProperty = nameof(DO.Customer.Name);
             if (name != null)
             {
                 if (!Validation.IsValidName(name))
-                    throw new InvalidPropertyValueException(nameProperty, name);
+                    throw new InvalidPropertyValueException(nameof(DO.Customer.Name), name);
 
                 try
                 {
-                    dal.Update<DO.Customer>(customerId, nameProperty, name);
+                    dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Name), name);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -95,15 +94,14 @@ namespace BL
                 }
             }
 
-            const string phoneProperty = nameof(DO.Customer.Phone);
             if (phone != null)
             {
                 if (!Validation.IsValidPhone(phone))
-                    throw new InvalidPropertyValueException(phoneProperty, phone);
+                    throw new InvalidPropertyValueException(nameof(DO.Customer.Phone), phone);
 
                 try
                 {
-                    dal.Update<DO.Customer>(customerId, phoneProperty, phone);
+                    dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Phone), phone);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -135,7 +133,6 @@ namespace BL
         internal CustomerForList GetCustomerForList(int id)
         {
             DO.Customer customer;
-
             try
             {
                 customer = dal.GetById<DO.Customer>(id);
@@ -168,7 +165,6 @@ namespace BL
         internal CustomerInDelivery GetCustomerInDelivery(int id)
         {
             DO.Customer customer;
-
             try
             {
                 customer = dal.GetById<DO.Customer>(id);

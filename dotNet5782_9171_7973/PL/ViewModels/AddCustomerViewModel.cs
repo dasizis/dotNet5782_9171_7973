@@ -12,7 +12,7 @@ namespace PL.ViewModels
 
         protected override void Add()
         {
-            PL.AddCustomer(Customer);
+            PLService.AddCustomer(Customer);
         }
     }
 }

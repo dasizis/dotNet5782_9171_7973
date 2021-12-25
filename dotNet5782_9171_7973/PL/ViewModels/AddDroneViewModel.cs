@@ -16,12 +16,12 @@ namespace PL.ViewModels
 
         public AddDroneViewModel()
         {
-            StationsOptions = PL.GetAvailableBaseStations().Select(station => station.Id).ToList();
+            StationsOptions = PLService.GetAvailableBaseStations().Select(station => station.Id).ToList();
         }
 
         protected override void Add()
         {
-            PL.AddDrone(Drone);
+            PLService.AddDrone(Drone);
         }
     }
 }

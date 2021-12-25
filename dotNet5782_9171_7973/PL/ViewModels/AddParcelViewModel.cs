@@ -18,12 +18,12 @@ namespace PL.ViewModels
 
         public AddParcelViewModel()
         {
-            CustomersOptions = PL.GetCustomersList().Select(station => station.Id).ToList();
+            CustomersOptions = PLService.GetCustomersList().Select(station => station.Id).ToList();
         }
 
         protected override void Add()
         {
-            PL.AddParcel(Parcel);
+            PLService.AddParcel(Parcel);
         }
     }
 }

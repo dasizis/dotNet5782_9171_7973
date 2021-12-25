@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PL
 {
-    partial class PL
+    partial class PLService
     {
         static readonly BLApi.IBL bl = BLApi.BLFactory.GetBL();
 

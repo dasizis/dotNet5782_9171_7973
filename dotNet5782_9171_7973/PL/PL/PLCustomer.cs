@@ -3,7 +3,7 @@ using PO;
 
 namespace PL
 {
-    static partial class PL
+    static partial class PLService
     {
         /// <summary>
         /// add customer

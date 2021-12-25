@@ -24,7 +24,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException();
+                    throw new InvalidPropertyValueException(value);
                 }
                 senderName = value;
             }
@@ -41,7 +41,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException();
+                    throw new InvalidPropertyValueException(value);
                 }
                 targetName = value;
             }

@@ -55,7 +55,7 @@ namespace BO
         /// <summary>
         /// List of drones beeing in charged at base station
         /// </summary>
-        public List<Drone> DronesInChargeList { get; set; }
+        public List<Drone> DronesInCharge { get; set; }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

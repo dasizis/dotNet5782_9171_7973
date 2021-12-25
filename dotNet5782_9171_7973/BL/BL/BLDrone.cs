@@ -52,13 +52,10 @@ namespace BL
 
         public Drone GetDrone(int id)
         {
-
             DroneForList drone = drones.FirstOrDefault(d => d.Id == id);
 
             if (drone == null)
-            {
                 throw new ObjectNotFoundException(typeof(Drone));
-            }
 
             ParcelInDeliver parcelInDeliver = drone.State == DroneState.Deliver 
                                               ? GetParcelInDeliver((int)drone.DeliveredParcelId) 

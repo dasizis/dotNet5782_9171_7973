@@ -7,11 +7,21 @@ namespace Dal
     {
         internal static System.Random Rand => new();
 
-        internal static double RandomDouble(double a, double b)
+        /// <summary>
+        /// Returns a double random number in a given range
+        /// </summary>
+        /// <param name="start">The range start</param>
+        /// <param name="end">The range end</param>
+        /// <returns>A double random number between start to end</returns>
+        internal static double RandomDouble(double start, double end)
         {
-            return Rand.NextDouble() * (b - a) + a;
+            return Rand.NextDouble() * (end - start) + start;
         }
 
+        /// <summary>
+        /// Randomize a longitude in Israel area
+        /// </summary>
+        /// <returns>A random longitude in Israel area</returns>
         internal static double RandomLongitude()
         {
             const double ISRAEL_LONG_START = 34.2;
@@ -20,6 +30,10 @@ namespace Dal
             return RandomDouble(ISRAEL_LONG_START, ISRAEL_LONG_END);
         }
 
+        /// <summary>
+        /// Randomize a latitude in Israel area
+        /// </summary>
+        /// <returns>A random latitude in Israel area</returns>
         internal static double RandomLatitude()
         {
             const double ISRAEL_LAT_START = 33.5;

@@ -25,14 +25,14 @@
                                    ValidatesOnDataErrors=true, 
                                    NotifyOnValidationError=true, 
                                    UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding SenderOptions}" 
+            ItemsSource="{Binding CustomersOptions}" 
             materialDesign:HintAssist.Hint="Sender customer Id" />
             <ComboBox 
             SelectedItem="{Binding Parcel.TargetId, 
                                    ValidatesOnDataErrors=true, 
                                    NotifyOnValidationError=true,
                                    UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding TargetOptions}" 
+            ItemsSource="{Binding CustomersOptions}" 
             materialDesign:HintAssist.Hint="Target customer Id" />
             <ComboBox 
             SelectedItem="{Binding Parcel.Weight, 

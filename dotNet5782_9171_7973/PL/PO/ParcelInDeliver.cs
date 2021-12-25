@@ -12,39 +12,15 @@ namespace PO
         /// </summary>
         public int Id { get; set; }
 
-        WeightCategory weight;
         /// <summary>
         /// Parcel weight category
         /// </summary>
-        public WeightCategory Weight
-        {
-            get => weight;
-            set
-            {
-                if (!Validation.IsValidEnumOption<WeightCategory>((int)value))
-                {
-                    throw new InvalidPropertyValueException(value);
-                }
-                weight = value;
-            }
-        }
+        public WeightCategory Weight { get; set; }
 
-        Priority priority;
         /// <summary>
         /// Parcel priority
         /// </summary>
-        public Priority Priority
-        {
-            get => priority;
-            set
-            {
-                if (!Validation.IsValidEnumOption<Priority>((int)value))
-                {
-                    throw new InvalidPropertyValueException(value);
-                }
-                priority = value;
-            }
-        }
+        public Priority Priority { get; set; }
 
         /// <summary>
         /// Determines whether parcel was picked up

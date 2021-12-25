@@ -52,7 +52,7 @@ namespace PO
                     if (prop.GetCustomAttributes(typeof(ValidationAttribute), false).Length == 0) continue;
 
                     if (this[prop.Name] != null)
-                        return "One or more of the properties are not correct";
+                        return "One or more of the fields are innvalid";
                 }
 
                 return null;

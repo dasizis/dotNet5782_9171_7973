@@ -24,8 +24,4 @@
     </Page>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="PL\" />
-  </ItemGroup>
-
 </Project>

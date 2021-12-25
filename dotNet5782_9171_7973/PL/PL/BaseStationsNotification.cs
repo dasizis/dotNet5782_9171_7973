@@ -1,0 +1,23 @@
+﻿namespace PL
+{
+    static class BaseStationsNotification
+    {
+        /// <summary>
+        /// Delegate type for <see cref="BaseStationsChangedEvent"/>
+        /// </summary>
+        public delegate void BaseStationsChangedHandler();
+
+        /// <summary>
+        /// Occurs when one or more drones were modified
+        /// </summary>
+        public static event BaseStationsChangedHandler BaseStationsChangedEvent;
+
+        /// <summary>
+        /// Used to notify from outer class the one or more drones were modified
+        /// </summary>
+        public static void NotifyBaseStationChanged()
+        {
+            BaseStationsChangedEvent?.Invoke();
+        }
+    }
+}

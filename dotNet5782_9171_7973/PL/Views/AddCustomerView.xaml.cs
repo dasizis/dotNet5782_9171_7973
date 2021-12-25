@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PL.Views
 {
     /// <summary>
-    /// Interaction logic for AddDroneView.xaml
+    /// Interaction logic for AddCustomerView.xaml
     /// </summary>
-    public partial class AddDroneView : UserControl
+    public partial class AddCustomerView : UserControl
     {
-        public AddDroneView()
+        public AddCustomerView()
         {
             InitializeComponent();
         }

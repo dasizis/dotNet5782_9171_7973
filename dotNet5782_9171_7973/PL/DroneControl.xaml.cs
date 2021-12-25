@@ -84,7 +84,7 @@ namespace PL
             IsActionsMode = !IsAddMode;
 
             LoadDrone(id);
-            DronesHandlers.DronesChangedEvent += () => LoadDrone(id);
+            DronesNotification.DronesChangedEvent += () => LoadDrone(id);
         }
         private void LoadDrone(int id)
         {
@@ -150,7 +150,7 @@ namespace PL
                 , null
             );
 
-            DronesHandlers.NotifyDroneChanged();
+            DronesNotification.NotifyDroneChanged();
 
         }
         private void ChargeButton_Click(object sender, RoutedEventArgs e)
@@ -193,13 +193,13 @@ namespace PL
                 , null
             );
 
-            DronesHandlers.NotifyDroneChanged();
+            DronesNotification.NotifyDroneChanged();
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             bal.RenameDrone((int)Id, Model);
             DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "Drone renamed" }, null);
-            DronesHandlers.NotifyDroneChanged();
+            DronesNotification.NotifyDroneChanged();
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -207,7 +207,7 @@ namespace PL
             {
                 bal.AddDrone((int)Id, Model, (BO.WeightCategory)SelectedWeight, (int)SelectedStation);
                 DialogHost.OpenDialogCommand.Execute(new Success() { TextContent = "New drone added" }, null);
-                DronesHandlers.NotifyDroneChanged();
+                DronesNotification.NotifyDroneChanged();
                 ((MainWindow)Window.GetWindow(this)).CloseMyTab();
             }
             catch (BO.IdAlreadyExistsException)

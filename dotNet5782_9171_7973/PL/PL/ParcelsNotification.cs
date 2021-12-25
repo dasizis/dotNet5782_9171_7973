@@ -1,11 +1,14 @@
-﻿namespace PL
+﻿using System.Runtime.CompilerServices;
+
+namespace PL
 {
     static class ParcelsNotification
     {
         /// <summary>
         /// Delegate type for <see cref="ParcelsChangedEvent"/>
         /// </summary>
-        public delegate void ParcelsChangedHandler();
+        /// <param name="callerMethodName">The caller method name</param>
+        public delegate void ParcelsChangedHandler(string callerMethodName);
 
         /// <summary>
         /// Occurs when one or more customers were modified
@@ -15,9 +18,10 @@
         /// <summary>
         /// Used to notify from outer class the one or more customers were modified
         /// </summary>
-        public static void NotifyParcelChanged()
+        /// <param name="callerMethodName">The caller method name</param>
+        public static void NotifyParcelChanged([CallerMemberName] string callerMethodName = "")
         {
-            ParcelsChangedEvent?.Invoke();
+            ParcelsChangedEvent?.Invoke(callerMethodName);
         }
     }
 }

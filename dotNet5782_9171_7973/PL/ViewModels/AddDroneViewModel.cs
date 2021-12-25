@@ -4,27 +4,24 @@ using System.Linq;
 using System.Windows;
 using PO;
 
-namespace PL
+namespace PL.ViewModels
 {
-    class AddDroneViewModel
+    class AddDroneViewModel : AddItemViewModel<DroneToAdd>
     {
-        public DroneToAdd Drone { get; set; } = new();
+        public DroneToAdd Drone => Model;
 
-        public Array WeightOptions { get; set; } = Enum.GetValues(typeof(BO.WeightCategory));
+        public Array WeightOptions { get; } = Enum.GetValues(typeof(WeightCategory));
 
         public List<int> StationsOptions { get; set; }
 
-        public RelayCommand<object> AddDroneCommand { get; set; }
-
         public AddDroneViewModel()
         {
-            AddDroneCommand = new RelayCommand<object>(AddDrone, param => Drone.Error == null);
-            StationsOptions = BLApi.BLFactory.GetBL().GetAvailableBaseStations().Select(station => station.Id).ToList();
+            StationsOptions = PL.GetAvailableBaseStations().Select(station => station.Id).ToList();
         }
 
-        private void AddDrone(object parameter)
+        protected override void Add()
         {
-            MessageBox.Show("Add drone");
+            PL.AddDrone(Drone);
         }
     }
 }

@@ -32,12 +32,12 @@ namespace PO
             set => SetField(ref name, value);
         }
 
-        BO.Location location;
+        Location location;
         /// <summary>
         /// Base station location
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        public BO.Location Location
+        public Location Location
         {
             get => location;
             set => SetField(ref location, value);

@@ -28,13 +28,13 @@ namespace PO
             set => SetField(ref model, value);
         }
 
-        BO.WeightCategory? maxWeight;
+        WeightCategory? maxWeight;
         /// <summary>
         /// Highest weight drone can carry
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [EnumDataType(typeof(BO.WeightCategory), ErrorMessage = "Max weight should be of type WeightCategory")]
-        public BO.WeightCategory? MaxWeight
+        [EnumDataType(typeof(WeightCategory), ErrorMessage = "Max weight should be of type WeightCategory")]
+        public WeightCategory? MaxWeight
         {
             get => maxWeight;
             set => SetField(ref maxWeight, value);

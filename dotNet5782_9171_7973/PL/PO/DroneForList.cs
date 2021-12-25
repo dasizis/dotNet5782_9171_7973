@@ -20,7 +20,7 @@ namespace PO
         /// <summary>
         /// Highest weight drone can carry
         /// </summary>
-        public BO.WeightCategory MaxWeight { get; set; }
+        public WeightCategory MaxWeight { get; set; }
 
         /// <summary>
         /// Drone battery 
@@ -31,7 +31,7 @@ namespace PO
         /// <summary>
         /// Drone state
         /// </summary>
-        public BO.DroneState State { get; set; }
+        public DroneState State { get; set; }
 
         /// <summary>
         /// Drone location

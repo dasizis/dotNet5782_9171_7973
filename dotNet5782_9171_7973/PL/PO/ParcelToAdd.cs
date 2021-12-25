@@ -32,25 +32,25 @@ namespace PO
             set => SetField(ref targetId, value);
         }
 
-        BO.WeightCategory? weight;
+        WeightCategory? weight;
         /// <summary>
         /// Parcel weight
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [EnumDataType(typeof(BO.WeightCategory), ErrorMessage = "Weight should be of type WeightCategory")]
-        public BO.WeightCategory? Weight
+        [EnumDataType(typeof(WeightCategory), ErrorMessage = "Weight should be of type WeightCategory")]
+        public WeightCategory? Weight
         {
             get => weight;
             set => SetField(ref weight, value);
         }
 
-        BO.Priority? priority;
+        Priority? priority;
         /// <summary>
         /// Parcel priority
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [EnumDataType(typeof(BO.Priority), ErrorMessage = "Priority should be of type Priority")]
-        public BO.Priority? Priority
+        [EnumDataType(typeof(Priority), ErrorMessage = "Priority should be of type Priority")]
+        public Priority? Priority
         {
             get => priority;
             set => SetField(ref priority, value);

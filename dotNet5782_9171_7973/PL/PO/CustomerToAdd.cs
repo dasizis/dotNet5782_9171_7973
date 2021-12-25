@@ -48,12 +48,12 @@ namespace PO
         }
 
 
-        BO.Location location;
+        Location location;
         /// <summary>
         /// Customer location
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        public BO.Location Location
+        public Location Location
         {
             get => location;
             set => SetField(ref location, value);

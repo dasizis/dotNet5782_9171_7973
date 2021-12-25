@@ -15,8 +15,8 @@ namespace PL
         {
             bl.AddBaseStation((int)baseStation.Id,
                               baseStation.Name,
-                              baseStation.Location.Longitude,
-                              baseStation.Location.Latitude,
+                              (double)baseStation.Location.Longitude,
+                              (double)baseStation.Location.Latitude,
                               (int)baseStation.ChargeSlots);
                
             BaseStationsNotification.NotifyBaseStationChanged();

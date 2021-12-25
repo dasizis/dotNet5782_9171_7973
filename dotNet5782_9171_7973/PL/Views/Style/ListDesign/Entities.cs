@@ -1,6 +1,6 @@
 ﻿using StringUtilities;
 
-namespace PL.View.Style.ListDesign
+namespace PL.Views.Style.ListDesign
 {
     class TreeViewProp
     {

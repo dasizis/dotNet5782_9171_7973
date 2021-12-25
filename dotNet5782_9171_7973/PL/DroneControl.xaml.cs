@@ -84,7 +84,7 @@ namespace PL
             IsActionsMode = !IsAddMode;
 
             LoadDrone(id);
-            DronesNotification.DronesChangedEvent += () => LoadDrone(id);
+            //DronesNotification.DronesChangedEvent += () => LoadDrone(id);
         }
         private void LoadDrone(int id)
         {

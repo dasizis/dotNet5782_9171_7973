@@ -55,7 +55,6 @@ namespace PL
             Drones = new (bal.GetDronesList());
             DataContext = this;
             InitializeComponent();
-            DronesHandlers.DronesChangedEvent += LoadDrones;
 
         }
 

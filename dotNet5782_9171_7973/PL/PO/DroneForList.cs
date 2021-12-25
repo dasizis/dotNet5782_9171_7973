@@ -5,7 +5,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of drone for list
     /// </summary>
-    public class DroneForList : ILocalable
+    public class DroneForList
     {
         /// <summary>
         /// Drone Id

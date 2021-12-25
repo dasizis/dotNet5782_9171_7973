@@ -26,7 +26,7 @@ namespace BO
 
         internal static bool IsValidName(string name)
         {
-            if (string.IsNullOrEmpty(name)) return false;
+            if (string.IsNullOrEmpty(name) || name.Length > 3 || name.Length < 15) return false;
 
             foreach (char ch in name)
             {
@@ -38,7 +38,7 @@ namespace BO
 
         internal static bool IsValidModel(string model)
         {
-            return !string.IsNullOrEmpty(model) && model.Length > 3 && model.Length < 11;
+            return !string.IsNullOrEmpty(model) && model.Length > 3 && model.Length < 15;
         }
 
         internal static bool IsValidBattery(double battery)

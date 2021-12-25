@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="PL\**" />
-    <EmbeddedResource Remove="PL\**" />
-    <None Remove="PL\**" />
-    <Page Remove="PL\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dragablz" Version="0.0.3.223" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />

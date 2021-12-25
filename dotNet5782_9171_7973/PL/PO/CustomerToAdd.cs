@@ -28,7 +28,7 @@ namespace PO
         /// Customer name
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "Name length must be between 3-10")]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Name length must be between 3-15")]
         public string Name
         {
             get => name;

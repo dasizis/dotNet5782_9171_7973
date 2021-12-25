@@ -1,6 +1,6 @@
 ﻿using StringUtilities;
 
-namespace BO
+namespace PO
 {
     /// <summary>
     /// A class to represent a PDS of parcel in deliver

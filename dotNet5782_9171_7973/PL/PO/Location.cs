@@ -6,42 +6,28 @@ namespace PO
     /// <summary>
     /// A class to represent a location
     /// </summary>
-    public class Location
+    class Location : PropertyChangedNotification
     {
-        double longitude;
+        double? longitude;
         /// <summary>
         /// Location longitude
         /// </summary>
         [SexadecimalLongitude]
-        public double Longitude
+        public double? Longitude
         {
             get => longitude;
-            set
-            {
-                if (!Validation.IsValidLongitude(value))
-                {
-                    throw new ArgumentException();
-                }
-                longitude = value;
-            }
+            set => SetField(ref longitude, value);
         }
 
-        double latitude;
+        double? latitude;
         /// <summary>
         /// Location latitude
         /// </summary>
         [SexadecimalLatitude]
-        public double Latitude
+        public double? Latitude
         {
             get => latitude;
-            set
-            {
-                if (!Validation.IsValidLatitude(value))
-                {
-                    throw new ArgumentException();
-                }
-                latitude = value;
-            }
+            set => SetField(ref latitude, value);
         }
 
         /// <summary>

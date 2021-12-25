@@ -28,7 +28,36 @@ namespace PL
         /// <param name="id">Id of requested customer</param>
         /// <returns>The <see cref="Customer"/> who has the spesific Id</returns>
         /// <exception cref="ObjectNotFoundException" />
-        public static Customer GetCustomer(int id);
+        public static Customer GetCustomer(int id)
+        {
+            BO.Customer customer = bl.GetCustomer(id);
+
+            List<Parcel> send = null;
+            foreach(var parcel in customer.Send)
+            {
+                send.Add(GetParcel(parcel.Id));
+            }
+
+            List<Parcel> recieve = null;
+            foreach (var parcel in customer.Recieve)
+            {
+                recieve.Add(GetParcel(parcel.Id));
+            }
+
+            return new Customer()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                Location = new Location() 
+                { 
+                    Latitude = customer.Location.Latitude,
+                    Longitude = customer.Location.Longitude 
+                },
+                Send = send,
+                Recieve = recieve,
+            };
+        }
 
         /// <summary>
         /// return customers list

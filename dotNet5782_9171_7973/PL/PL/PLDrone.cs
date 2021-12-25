@@ -30,10 +30,47 @@ namespace PL
         /// <param name="id">The drone id</param>
         /// <returns>A <see cref="Drone"/> with the given id</returns>
         /// <exception cref="ObjectNotFoundException" />
-        public static BO.Drone GetDrone(int id)
+        public static Drone GetDrone(int id)
         {
             BO.Drone boDrone = bl.GetDrone(id);
-            
+
+            return new()
+            {
+                Id = id,
+                Model = boDrone.Model,
+                Battery = boDrone.Battery,
+                State = (DroneState)boDrone.State,
+                Location = new() { Longitude = boDrone.Location.Longitude, Latitude = boDrone.Location.Latitude },
+                MaxWeight = (WeightCategory)boDrone.MaxWeight,
+                ParcelInDeliver = new()
+                {
+                    Id = boDrone.ParcelInDeliver.Id,
+                    Weight = (WeightCategory)boDrone.ParcelInDeliver.Weight,
+                    Priority = (Priority)boDrone.ParcelInDeliver.Priority,
+                    WasPickedUp = boDrone.ParcelInDeliver.WasPickedUp,
+                    DeliveryDistance = boDrone.ParcelInDeliver.DeliveryDistance,
+                    TargetLocation = new()
+                    {
+                        Longitude = boDrone.ParcelInDeliver.TargetLocation.Longitude,
+                        Latitude = boDrone.ParcelInDeliver.TargetLocation.Latitude
+                    },
+                    CollectLocation = new()
+                    {
+                        Longitude = boDrone.ParcelInDeliver.CollectLocation.Longitude,
+                        Latitude = boDrone.ParcelInDeliver.CollectLocation.Latitude
+                    },
+                    Sender = new()
+                    {
+                        Id = boDrone.ParcelInDeliver.Sender.Id,
+                        Name = boDrone.ParcelInDeliver.Sender.Name,
+                    },
+                    Target = new()
+                    {
+                        Id = boDrone.ParcelInDeliver.Target.Id,
+                        Name = boDrone.ParcelInDeliver.Target.Name,
+                    },
+                }
+            };
         }
 
         /// <summary>

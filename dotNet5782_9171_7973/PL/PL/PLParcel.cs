@@ -115,6 +115,11 @@ namespace PL
             ParcelsNotification.NotifyParcelChanged();
         }
 
+        /// <summary>
+        /// Converts <see cref="BO.ParcelForList"/> to <see cref="ParcelForList"/>
+        /// </summary>
+        /// <param name="boParcel">The <see cref="BO.ParcelForList"/></param>
+        /// <returns>A <see cref="ParcelForList"/></returns>
         private static ParcelForList ConvertParcel(BO.ParcelForList boParcel)
         {
             return new ParcelForList()

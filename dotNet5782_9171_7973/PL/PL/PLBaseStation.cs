@@ -32,7 +32,21 @@ namespace PL
         {
             BO.BaseStation baseStation = bl.GetBaseStation(id);
 
-            return new BaseStation
+            List<Drone> drones = null;
+            foreach(var drone in baseStation.DronesInCharge)
+            {
+                drones.Add(GetDrone(drone.Id));
+            }
+
+
+            return new BaseStation()
+            {
+                Id = baseStation.Id,
+                Name = baseStation.Name,
+                Location = new Location() { Latitude = baseStation.Location.Latitude, Longitude = baseStation.Location.Longitude },
+                EmptyChargeSlots = baseStation.EmptyChargeSlots,
+                DronesInCharge = drones,
+            };
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace PL
         /// Used to notify from outer class the one or more customers were modified
         /// </summary>
         /// <param name="callerMethodName">The caller method name</param>
-        public static void NotifyDroneChanged([CallerMemberName] string callerMethodName = "")
+        public static void NotifyCustomerChanged([CallerMemberName] string callerMethodName = "")
         {
             CustomersChanged?.Invoke(callerMethodName);
         }

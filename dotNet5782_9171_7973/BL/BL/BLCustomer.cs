@@ -10,14 +10,14 @@ namespace BL
     /// </summary>
     partial class BL
     {
-        public void AddCustomer(int id, string name, string phone, Location location)
+        public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {
             var customer = new Customer()
             {
                 Id = id,
                 Name = name,
                 Phone = phone,
-                Location = location,
+                Location = new Location() { Longitude = longitude, Latitude = latitude },
                 Send = new(),
                 Recieve = new(),
             };

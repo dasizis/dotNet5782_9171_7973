@@ -6,13 +6,13 @@ namespace BL
 {
     partial class BL
     {
-        public void AddBaseStation(int id, string name, Location location, int chargeSlots)
+        public void AddBaseStation(int id, string name, double longitude, double latitude, int chargeSlots)
         {
             var station = new BaseStation()
             {
                 Id = id,
                 Name = name,
-                Location = location,
+                Location = new Location() { Longitude = longitude, Latitude = latitude },
                 EmptyChargeSlots = chargeSlots,
                 DronesInCharge = new(),
             };

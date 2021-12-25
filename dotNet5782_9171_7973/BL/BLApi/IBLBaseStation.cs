@@ -13,11 +13,12 @@ namespace BLApi
         /// </summary>
         /// <param name="id">The base station id</param>
         /// <param name="name">The base station name</param>
-        /// <param name="location">The base station location</param>
+        /// <param name="longitude">The base station longitude</param>
+        /// <param name="latitude">The base station latitude</param>
         /// <param name="chargeSlots">The base station number of charge slots</param>
         /// <exception cref="InvalidPropertyValueException" />
         /// <exception cref="IdAlreadyExistsException" />
-        void AddBaseStation(int id, string name, Location location, int chargeSlots);
+        void AddBaseStation(int id, string name, double longitude, double latitude, int chargeSlots);
 
         /// <summary>
         /// return specific base station

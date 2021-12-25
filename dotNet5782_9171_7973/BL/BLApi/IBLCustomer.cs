@@ -14,10 +14,11 @@ namespace BLApi
         /// <param name="id">the customer id</param>
         /// <param name="name">the customer name</param>
         /// <param name="phone">the customer phone number</param>
-        /// <param name="location">the customer location</param>
+        /// <param name="longitude">The customer location longitude</param>
+        /// <param name="latitude">The customer location latitude</param>
         /// <exception cref="IdAlreadyExistsException" />
         /// <exception cref="InvalidPropertyValueException" />
-        void AddCustomer(int id, string name, string phone, Location location);
+        void AddCustomer(int id, string name, string phone, double longitude, double latitude);
 
         /// <summary>
         /// return specific customer

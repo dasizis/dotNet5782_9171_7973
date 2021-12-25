@@ -27,7 +27,24 @@ namespace PL
         /// <param name="id">id of requested parcel</param>
         /// <returns>parcel with id</returns>
         /// <exception cref="ObjectNotFoundException" />
-        public static Parcel GetParcel(int id);
+        public static Parcel GetParcel(int id)
+        {
+            BO.Parcel parcel = bl.GetParcel(id);
+
+            return new()
+            {
+                Id = id,
+                Drone = GetDrone(parcel.Drone.Id),
+                Priority = (Priority)parcel.Priority,
+                PickedUp = parcel.PickedUp,
+                Requested = parcel.Requested,
+                Scheduled = parcel.Scheduled,
+                Supplied = parcel.Supplied,
+                Weight = (WeightCategory)parcel.Weight,
+                Sender = new() { Id = parcel.Sender.Id, Name = parcel.Sender.Name },
+                Target = new() { Id = parcel.Target.Id, Name = parcel.Target.Name },
+            };
+        }
 
         /// <summary>
         /// Returns the parcels list

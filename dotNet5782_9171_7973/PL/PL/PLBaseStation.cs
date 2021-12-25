@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using PO;
 
 namespace PL
 {
-    public static partial class PL
+    static partial class PL
     {
         /// <summary>
         /// Adds a base station 
@@ -12,7 +13,12 @@ namespace PL
         /// <exception cref="IdAlreadyExistsException" />
         public static void AddBaseStation(BaseStationToAdd baseStation)
         {
-
+            bl.AddBaseStation((int)baseStation.Id,
+                              baseStation.Name,
+                              baseStation.Location.Longitude,
+                              baseStation.Location.Latitude,
+                              (int)baseStation.ChargeSlots);
+               
             BaseStationsNotification.NotifyBaseStationChanged();
         }
 
@@ -22,19 +28,44 @@ namespace PL
         /// <param name="id">id of requested base station</param>
         /// <returns>base station with id</returns>
         /// <exception cref="ObjectNotFoundException" />
-        public static BaseStation GetBaseStation(int id);
+        public static BaseStation GetBaseStation(int id)
+        {
+            BO.BaseStation baseStation = bl.GetBaseStation(id);
+
+            return new BaseStation
+        }
 
         /// <summary>
         /// return base stations list
         /// </summary>
         /// <returns>base stations list</returns>
-        public static IEnumerable<BaseStationForList> GetBaseStationsList();
+        public static IEnumerable<BaseStationForList> GetBaseStationsList()
+        {
+            List<BaseStationForList> stationsList = new();
+
+            foreach (var station in bl.GetBaseStationsList())
+            {
+                stationsList.Add(ConvertBaseStation(station));
+            }
+
+            return stationsList;
+        }
 
         /// <summary>
         /// return list of base stations with empty charge slots
         /// </summary>
         /// <returns>list of base stations with empty charge slots</returns>
-        public static IEnumerable<BaseStationForList> GetAvailableBaseStations();
+        public static IEnumerable<BaseStationForList> GetAvailableBaseStations()
+        {
+            List<BaseStationForList> stationsList = new();
+
+            foreach (var station in bl.GetAvailableBaseStations())
+            {
+                stationsList.Add(ConvertBaseStation(station));
+            }
+
+            return stationsList;
+        }
 
         /// <summary>
         /// update base station details
@@ -60,6 +91,22 @@ namespace PL
         {
             bl.DeleteBaseStation(baseStationId);
             BaseStationsNotification.NotifyBaseStationChanged();
+        }
+
+        /// <summary>
+        /// Converts <see cref="BO.BaseStationForList"/> to <see cref="BaseStationForList"/>
+        /// </summary>
+        /// <param name="boBaseStation">The BO base station</param>
+        /// <returns>A <see cref="BaseStationForList"/></returns>
+        private static BaseStationForList ConvertBaseStation(BO.BaseStationForList boBaseStation)
+        {
+            return new BaseStationForList()
+            {
+                Id = boBaseStation.Id,
+                Name = boBaseStation.Name,
+                BusyChargeSlots = boBaseStation.BusyChargeSlots,
+                EmptyChargeSlots = boBaseStation.EmptyChargeSlots,
+            };
         }
     }
 }

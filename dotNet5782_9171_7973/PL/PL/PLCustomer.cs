@@ -1,17 +1,24 @@
 ﻿using System.Collections.Generic;
+using PO;
 
 namespace PL
 {
-    public static partial class PL
+    static partial class PL
     {
         /// <summary>
         /// add customer
         /// </summary>
-        /// <param name="cutomer">The customer to add</param>
+        /// <param name="customer">The customer to add</param>
         /// <exception cref="IdAlreadyExistsException" />
         /// <exception cref="InvalidPropertyValueException" />
-        public static void AddCustomer(CustomerToAdd cutomer)
+        public static void AddCustomer(CustomerToAdd customer)
         {
+            bl.AddCustomer((int)customer.Id,
+                           customer.Name,
+                           customer.Phone,
+                           (double)customer.Location.Longitude,
+                           (double)customer.Location.Latitude);
+
             CustomersNotification.NotifyCustomerChanged();
         }
 
@@ -27,7 +34,26 @@ namespace PL
         /// return customers list
         /// </summary>
         /// <returns>customers list</returns>
-        public static IEnumerable<CustomerForList> GetCustomersList();
+        public static IEnumerable<CustomerForList> GetCustomersList()
+        {
+            List<CustomerForList> customersList = new();
+
+            foreach (var customer in bl.GetCustomersList())
+            {
+                customersList.Add(new CustomerForList()
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Phone = customer.Phone,
+                    ParcelsOnWay = customer.ParcelsOnWay,
+                    ParcelsRecieved = customer.ParcelsRecieved,
+                    ParcelsSendAndNotSupplied = customer.ParcelsSendAndNotSupplied,
+                    ParcelsSendAndSupplied = customer.ParcelsSendAndSupplied,
+                });
+            }
+
+            return customersList;
+        }
 
         /// <summary>
         /// update customer's details

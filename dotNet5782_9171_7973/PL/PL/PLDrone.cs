@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PL
 {
-    static partial class PL
+    partial class PL
     {
         static readonly BLApi.IBL bl = BLApi.BLFactory.GetBL();
 
@@ -42,7 +42,23 @@ namespace PL
         /// <returns>An <see cref="IEnumerable{DroneForList}"/> of the drones list</returns>
         public static IEnumerable<DroneForList> GetDronesList()
         {
+            List<DroneForList> customersList = new();
 
+            foreach (var drone in bl.GetDronesList())
+            {
+                customersList.Add(new DroneForList()
+                {
+                    Id = drone.Id,
+                    Model = drone.Model,
+                    Battery = drone.Battery,
+                    State = (DroneState)drone.State,
+                    MaxWeight = (WeightCategory)drone.MaxWeight,
+                    Location = new Location() { Longitude = drone.Location.Longitude, Latitude = drone.Location.Latitude },
+                    DeliveredParcelId = drone.DeliveredParcelId,
+                });
+            }
+
+            return customersList;
         }
 
         /// <summary>

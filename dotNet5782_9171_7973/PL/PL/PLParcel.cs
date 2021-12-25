@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using PO;
 
 namespace PL
 {
-    public static partial class PL
+    static partial class PL
     {
         /// <summary>
         /// Adds a parcel
@@ -10,7 +11,15 @@ namespace PL
         /// <param name="parcel">The parcel to add</param>
         /// <exception cref="IdAlreadyExistsException" />
         /// <exception cref="InvalidPropertyValueException" />
-        public static void AddParcel(ParcelToAdd parcel);
+        public static void AddParcel(ParcelToAdd parcel)
+        {
+            bl.AddParcel((int)parcel.SenderId,
+                         (int)parcel.TargetId,
+                         (BO.WeightCategory)parcel.Weight,
+                         (BO.Priority)parcel.Priority);
+
+            ParcelsNotification.NotifyParcelChanged();
+        }
 
         /// <summary>
         /// Returns a specific parcel
@@ -24,13 +33,33 @@ namespace PL
         /// Returns the parcels list
         /// </summary>
         /// <returns>An <see cref="IEnumerable{T}"/> parcels list</returns>
-        public static IEnumerable<ParcelForList> GetParcelsList();
+        public static IEnumerable<ParcelForList> GetParcelsList()
+        {
+            List<ParcelForList> parcelsList = new();
+
+            foreach (var parcel in bl.GetParcelsList())
+            {
+                parcelsList.Add(ConvertParcel(parcel));
+            }
+
+            return parcelsList;
+        }
 
         /// <summary>
         /// Returns a list of parcels which weren't assigned to drone yet
         /// </summary>
         /// <returns>list of parcels which weren't assigned to drone yet</returns>
-        public static IEnumerable<ParcelForList> GetNotAssignedToDroneParcels();
+        public static IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
+        {
+            List<ParcelForList> parcelsList = new();
+
+            foreach (var parcel in bl.GetNotAssignedToDroneParcels())
+            {
+                parcelsList.Add(ConvertParcel(parcel));
+            }
+
+            return parcelsList;
+        }
 
         /// <summary>
         /// Picks a parcel up by a drone
@@ -67,6 +96,18 @@ namespace PL
         {
             bl.DeleteParcel(parcelId);
             ParcelsNotification.NotifyParcelChanged();
+        }
+
+        private static ParcelForList ConvertParcel(BO.ParcelForList boParcel)
+        {
+            return new ParcelForList()
+            {
+                Id = boParcel.Id,
+                Priority = (Priority)boParcel.Priority,
+                Weight = (WeightCategory)boParcel.Weight,
+                SenderName = boParcel.SenderName,
+                TargetName = boParcel.TargetName,
+            };
         }
     }
 }

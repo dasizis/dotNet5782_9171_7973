@@ -66,7 +66,7 @@ namespace Dal
         {
             try
             {
-                return DataSource.Data[typeof(T)].Cast<T>().Single(i => predicate(i) && !i.IsDeleted);
+                return GetFilteredList(predicate).Single();
             }
             catch (InvalidOperationException e)
             {
@@ -128,12 +128,12 @@ namespace Dal
 
         public void Delete<T>(int id) where T : IIdentifiable, IDeletable
         {
-            Update<T>(id, "IsDeleted", true);
+            Update<T>(id, nameof(IDeletable.IsDeleted), true);
         }
 
         public void DeleteWhere<T>(Predicate<T> predicate) where T : IDeletable
         {
-            UpdateWhere(predicate, "IsDeleted", true);
+            UpdateWhere(predicate, nameof(IDeletable.IsDeleted), true);
         }
 
         #endregion
@@ -146,9 +146,9 @@ namespace Dal
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="id">The item id</param>
         /// <returns>true if the item exists otherwise false</returns>
-        static private bool DoesExist<T>(Predicate<T> predicate) where T : IDeletable
+        private bool DoesExist<T>(Predicate<T> predicate) where T : IDeletable
         {
-            return DataSource.Data[typeof(T)].Cast<T>().Any(item => predicate(item) && !item.IsDeleted);
+            return GetFilteredList(predicate).Any();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Dal
             Type type = typeof(T);
             DataSource.Data[type].Remove(item);
             PropertyInfo prop = type.GetProperty(propName)
-                     ?? throw new ArgumentException($"Type {type.Name} does not have property {propName}");
+                                ?? throw new ArgumentException($"Type {type.Name} does not have property {propName}");
 
             object boxed = item;
             try

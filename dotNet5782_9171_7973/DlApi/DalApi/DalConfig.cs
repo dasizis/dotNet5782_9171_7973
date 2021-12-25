@@ -5,16 +5,6 @@ using System.Xml.Linq;
 namespace DalApi
 {
     /// <summary>
-    /// 
-    /// </summary>
-    public class DalConfigException : Exception
-    {
-        public DalConfigException(string message) : base(message) { }
-        public DalConfigException(string message, Exception inner) : base(message, inner) { }
-    }
-
-
-    /// <summary>
     /// Loads from a config.xml file the IDal implementation namespace and class-name
     /// then saves them in its own properites
     /// </summary>
@@ -36,7 +26,15 @@ namespace DalApi
         /// <exception cref="DalConfigException"></exception>
         static DalConfig()
         {
-            XElement dalConfig = XElement.Load($@"{Directory.GetCurrentDirectory()}\..\..\..\..\config.xml");
+            XElement dalConfig;
+            try
+            {
+                dalConfig = XElement.Load($@"{Directory.GetCurrentDirectory()}\..\..\..\..\config.xml");
+            }
+            catch (FileNotFoundException e)
+            {
+                throw new DalConfigException("Could not load config.xml file", e);
+            }
 
             string dalName = dalConfig.Element("dal").Value;
             var dalPackage = dalConfig.Element("dal-packages")

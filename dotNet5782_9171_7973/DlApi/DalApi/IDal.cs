@@ -23,6 +23,7 @@ namespace DalApi
         /// <param name="droneId">The drone Id</param>
         /// <param name="baseStationId">The base station Id</param>
         /// <exception cref="DO.IdAlreadyExistsException" />
+        /// <exception cref="DO.ObjectNotFoundException" />
         void AddDroneCharge(int droneId, int baseStationId);
 
         #endregion

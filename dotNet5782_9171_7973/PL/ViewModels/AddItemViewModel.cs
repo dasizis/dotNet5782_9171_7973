@@ -27,7 +27,6 @@ namespace PL.ViewModels
                 Add();
                 UserControl dialog = new Alert() { Text = "Drone added successfully" , IsSuccess = true };
                 DialogHost.OpenDialogCommand.Execute(dialog, null);
-                // Close Tab
             }
             catch (BO.IdAlreadyExistsException e)
             {

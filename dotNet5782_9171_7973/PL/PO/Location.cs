@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using StringUtilities;
 
 namespace PO
@@ -12,6 +13,7 @@ namespace PO
         /// <summary>
         /// Location longitude
         /// </summary>
+        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
         [SexadecimalLongitude]
         public double? Longitude
         {
@@ -23,6 +25,7 @@ namespace PO
         /// <summary>
         /// Location latitude
         /// </summary>
+        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
         [SexadecimalLatitude]
         public double? Latitude
         {

@@ -96,7 +96,11 @@
                     <local:AddDroneView />
                         
                     </TabItem>
-             </TabControl>
+                    <TabItem>
+                        <local:DroneControl />
+
+                    </TabItem>
+                </TabControl>
         </Grid>
         </DockPanel>
     </materialDesign:DialogHost>

@@ -22,9 +22,8 @@ namespace PL
     {
         public string Text { get; set; }
         public bool IsSuccess { get; set; }
-
-        bool isFailure = false;
         public bool IsFailure { get => !IsSuccess; }
+        public string Message { get => IsSuccess? "Success": "Failure"; }
 
         public Alert()
         {

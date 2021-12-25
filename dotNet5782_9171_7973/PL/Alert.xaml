@@ -28,11 +28,11 @@
         <TextBlock 
             FontSize="25" 
             FontWeight="Bold" 
-            Text="{Binding Text}"  
+            Text="{Binding Message}"  
             Margin="0,20,0,10" 
             HorizontalAlignment="Center" 
             Foreground="#505050"/>
-        <TextBlock Text="{Binding TextContent}" TextAlignment="Center"/>
+        <TextBlock Text="{Binding Text}" TextAlignment="Center"/>
         <Button Style="{StaticResource MaterialDesignFlatButton}"
                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                     CommandParameter="Sample2Cancel"

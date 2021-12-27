@@ -76,7 +76,7 @@ namespace BL
                    select GetBaseStationForList(station.Id);
         }
 
-        public void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
+        public void UpdateBaseStation(int baseStationId, string name = null, int? emptyChargeSlots = null)
         {
             if (name != null)
             {
@@ -93,14 +93,18 @@ namespace BL
                 }
             }
 
-            if (chargeSlots != null)
+            if (emptyChargeSlots != null)
             {
-                if (chargeSlots < 0)
-                    throw new InvalidPropertyValueException(chargeSlots, nameof(DO.BaseStation.ChargeSlots));
+                if (emptyChargeSlots < 0)
+                    throw new InvalidPropertyValueException(emptyChargeSlots, nameof(DO.BaseStation.ChargeSlots));
+
+                int sumChargeSlots = (int)emptyChargeSlots + dal.GetList<DO.DroneCharge>()
+                                                                .Where(d => d.StationId == baseStationId)
+                                                                .Count();
 
                 try
                 {
-                    dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.ChargeSlots), chargeSlots);
+                    dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.ChargeSlots), sumChargeSlots);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {

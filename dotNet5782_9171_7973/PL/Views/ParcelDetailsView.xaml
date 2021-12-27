@@ -29,6 +29,9 @@
         <Button 
             Content="VIEW DRONE DETAILS"
             Command="{Binding ShowDroneCommand}"/>
+        <Button 
+            Content="DELETE PARCEL"
+            Command="{Binding DeleteCommand}"/>
 
     </StackPanel>
 </UserControl>

@@ -219,7 +219,8 @@ namespace PL
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Window.GetWindow(this)).CloseMyTab();
+            ((MainWindow)Window.GetWindow(this))
+                .CloseMyTab();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

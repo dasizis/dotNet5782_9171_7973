@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PO;
+using System.Linq;
 
 namespace PL
 {
@@ -32,13 +33,6 @@ namespace PL
         {
             BO.BaseStation baseStation = bl.GetBaseStation(id);
 
-            List<Drone> drones = null;
-            foreach(var drone in baseStation.DronesInCharge)
-            {
-                drones.Add(GetDrone(drone.Id));
-            }
-
-
             return new BaseStation()
             {
                 Id = baseStation.Id,
@@ -49,7 +43,7 @@ namespace PL
                     Longitude = baseStation.Location.Longitude 
                 },
                 EmptyChargeSlots = baseStation.EmptyChargeSlots,
-                DronesInCharge = drones,
+                DronesInCharge = baseStation.DronesInCharge.Select(drone => GetDrone(drone.Id)).ToList(),
             };
         }
 

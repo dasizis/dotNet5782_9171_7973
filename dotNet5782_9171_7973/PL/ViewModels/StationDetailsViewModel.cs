@@ -9,15 +9,15 @@ namespace PL.ViewModels
     class StationDetailsViewModel 
     {
         public BaseStation station { get; set; }
-        public RelayCommand<object> UpdateDetails { get; set; }
-        public RelayCommand<object> OpenDronesList { get; set; }
+        public RelayCommand<object> UpdateDetailsCommand { get; set; }
+        public RelayCommand<object> OpenDronesListCommand { get; set; }
 
         public StationDetailsViewModel(int id)
         {
             station = PLService.GetBaseStation(id);
 
-            UpdateDetails = new(ExecuteUpdateDetails);
-            OpenDronesList = new(ExecuteOpenDronesList);
+            UpdateDetailsCommand = new(ExecuteUpdateDetails);
+            OpenDronesListCommand = new(ExecuteOpenDronesList);
 
             BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
         }

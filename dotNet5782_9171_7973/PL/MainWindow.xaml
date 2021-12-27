@@ -56,6 +56,20 @@
                             <views:DroneDetailsView />
                         </AdornerDecorator>
                     </TabItem>
+                    <TabItem>
+                        <AdornerDecorator>
+                            <views:StationDetailsView />
+                        </AdornerDecorator>
+                    </TabItem>
+                    <TabItem>
+                        <AdornerDecorator>
+                            <views:ParcelDetailsView />
+                        </AdornerDecorator>
+                    </TabItem>
+                    <TabItem>
+                        <AdornerDecorator>
+                        </AdornerDecorator>
+                    </TabItem>
                 </TabControl>
         </Grid>
         </DockPanel>

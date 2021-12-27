@@ -23,6 +23,7 @@ namespace PL.Views
         public ParcelDetailsView()
         {
             InitializeComponent();
+            DataContext = new ViewModels.ParcelDetailsViewModel(1);
         }
     }
 }

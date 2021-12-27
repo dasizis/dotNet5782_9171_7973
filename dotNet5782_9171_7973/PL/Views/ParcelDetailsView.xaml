@@ -6,9 +6,6 @@
              xmlns:vm="clr-namespace:PL.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <vm:ParcelDetailsViewModel/>
-    </UserControl.DataContext>
     <StackPanel>
         <TextBlock Text="{Binding Parcel.Id}"/>
         <TextBlock Text="{Binding Parcel.Sender.Id}"/>

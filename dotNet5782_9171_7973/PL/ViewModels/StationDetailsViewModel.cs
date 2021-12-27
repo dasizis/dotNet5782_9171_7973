@@ -43,7 +43,7 @@ namespace PL.ViewModels
             int emptyslots = Station.EmptyChargeSlots;
             string name = Station.Name;
 
-            Station = PLService.GetBaseStation(Station.Id);
+            Station.Reload(PLService.GetBaseStation(Station.Id));
 
             Station.EmptyChargeSlots = emptyslots;
             Station.Name = name;

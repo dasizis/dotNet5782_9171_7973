@@ -22,13 +22,13 @@
         <TextBlock Text="{Binding Supplied}"/>
         <Button 
             Content="VIEW SENDER DETAILS"
-            Command="ShowSenderCommand"/>
+            Command="{Binding ShowSenderCommand}"/>
         <Button
             Content="VIEW RECIEVER DETAILS"
-            Command="ShowTargetCommand"/>
+            Command="{Binding ShowTargetCommand}"/>
         <Button 
             Content="VIEW DRONE DETAILS"
-            Command="ShowDroneCommand"/>
+            Command="{Binding ShowDroneCommand}"/>
 
     </StackPanel>
 </UserControl>

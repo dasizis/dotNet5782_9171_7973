@@ -1,4 +1,5 @@
 ﻿using StringUtilities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PO
 {
@@ -21,6 +22,8 @@ namespace PO
         /// <summary>
         /// Drone model
         /// </summary>
+        [Required(ErrorMessage = "Required")]
+        [StringLength(10, MinimumLength = 3, ErrorMessage = "Model length must be between 3-10")]
         public string Model
         {
             get => model;

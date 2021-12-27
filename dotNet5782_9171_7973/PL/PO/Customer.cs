@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using StringUtilities;
 
 
@@ -18,6 +19,8 @@ namespace PO
         /// <summary>
         /// Customer name
         /// </summary>
+        [Required(ErrorMessage = "Required")]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Name length must be between 3-15")]
         public string Name
         {
             get => name;
@@ -28,6 +31,8 @@ namespace PO
         /// <summary>
         /// Customer phone number
         /// </summary>
+        [Required(ErrorMessage = "Required")]
+        [Phone(ErrorMessage = "Phone length must be 10")]
         public string Phone
         {
             get => phone;

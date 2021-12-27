@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PO;
 
 namespace PL
@@ -65,23 +66,16 @@ namespace PL
         /// <returns>customers list</returns>
         public static IEnumerable<CustomerForList> GetCustomersList()
         {
-            List<CustomerForList> customersList = new();
-
-            foreach (var customer in bl.GetCustomersList())
+            return bl.GetCustomersList().Select(customer => new CustomerForList()
             {
-                customersList.Add(new CustomerForList()
-                {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    Phone = customer.Phone,
-                    ParcelsOnWay = customer.ParcelsOnWay,
-                    ParcelsRecieved = customer.ParcelsRecieved,
-                    ParcelsSendAndNotSupplied = customer.ParcelsSendAndNotSupplied,
-                    ParcelsSendAndSupplied = customer.ParcelsSendAndSupplied,
-                });
-            }
-
-            return customersList;
+                Id = customer.Id,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                ParcelsOnWay = customer.ParcelsOnWay,
+                ParcelsRecieved = customer.ParcelsRecieved,
+                ParcelsSendAndNotSupplied = customer.ParcelsSendAndNotSupplied,
+                ParcelsSendAndSupplied = customer.ParcelsSendAndSupplied,
+            });
         }
 
         /// <summary>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using PO;
 
 namespace PL.ViewModels
@@ -18,13 +13,16 @@ namespace PL.ViewModels
 
         public RelayCommand RenameDroneCommand { get; set; }
 
+        public RelayCommand DeleteCommand { get; set; }
+
         public DroneDetailsViewModel(int id)
         {
             DronesNotification.DronesChangedEvent += LoadDrone;
 
             ProceedWithParcelCommand = new(ProceedWithParcel, () => Drone.State != DroneState.Maintenance);
             HandleChargeCommand = new(HandleCharge, () => Drone.State != DroneState.Deliver);
-            RenameDroneCommand = new(RenameDrone);
+            RenameDroneCommand = new(RenameDrone, () => Drone.Error == null);
+            DeleteCommand = new(Delete, () => Drone.State == DroneState.Free);
 
             Drone.Id = id;
             LoadDrone();
@@ -94,7 +92,14 @@ namespace PL.ViewModels
             MessageBox.Show($"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
         }
 
-        private void LoadDrone(string changer = "")
+        private void Delete()
+        {
+            PLService.DeleteDrone(Drone.Id);
+            MessageBox.Show($"Drone {Drone.Id} deleted");
+            // Close Tab 
+        }
+
+        private void LoadDrone()
         {
             string model = Drone.Model;
             Drone = PLService.GetDrone(Drone.Id);

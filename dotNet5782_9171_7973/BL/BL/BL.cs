@@ -38,6 +38,9 @@ namespace BL
             var dlDrones = dal.GetList<DO.Drone>().ToList();
             var parcels = dal.GetList<DO.Parcel>().ToList();
 
+            var defalutStation = dal.GetList<DO.BaseStation>().First();
+            Location defaultLocation = new() { Longitude = defalutStation.Longitude, Latitude = defalutStation.Latitude };
+
             foreach (var dlDrone in dlDrones)
             {
 
@@ -82,7 +85,9 @@ namespace BL
                         location = new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude };
                     }
 
-                    battery = rand.Next((int)(Localable.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), MAX_CHARGE);
+                    battery = availableStations.Count == 0
+                              ? MAX_CHARGE
+                              : rand.Next((int)(Localable.Distance(location, location.FindClosest(availableStations)) * ElectricityConfumctiolFree), MAX_CHARGE);
                 }
                 else if (state == DroneState.Maintenance)
                 {
@@ -102,7 +107,7 @@ namespace BL
                     senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
 
                     location = parcel.Supplied != null
-                               ? targetLocation.FindClosest(availableStations)
+                               ? availableStations.Count == 0 ? defaultLocation : targetLocation.FindClosest(availableStations)
                                : senderLocation;
 
                     battery = availableStations.Count == 0

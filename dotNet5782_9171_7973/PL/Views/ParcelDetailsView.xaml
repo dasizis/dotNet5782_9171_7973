@@ -10,16 +10,16 @@
         <vm:ParcelDetailsViewModel/>
     </UserControl.DataContext>
     <StackPanel>
-        <TextBlock Text="{Binding Id}"/>
-        <TextBlock Text="{Binding Sender.Id}"/>
-        <TextBlock Text="{Binding Target.Id}"/>
-        <TextBlock Text="{Binding Weight}"/>
-        <TextBlock Text="{Binding Priority}"/>
-        <TextBlock Text="{Binding Drone.Id}"/>
-        <TextBlock Text="{Binding Requested}"/>
-        <TextBlock Text="{Binding Scheduled}"/>
-        <TextBlock Text="{Binding PickedUp}"/>
-        <TextBlock Text="{Binding Supplied}"/>
+        <TextBlock Text="{Binding Parcel.Id}"/>
+        <TextBlock Text="{Binding Parcel.Sender.Id}"/>
+        <TextBlock Text="{Binding Parcel.Target.Id}"/>
+        <TextBlock Text="{Binding Parcel.Weight}"/>
+        <TextBlock Text="{Binding Parcel.Priority}"/>
+        <TextBlock Text="{Binding Parcel.Drone.Id}"/>
+        <TextBlock Text="{Binding Parcel.Requested}"/>
+        <TextBlock Text="{Binding Parcel.Scheduled}"/>
+        <TextBlock Text="{Binding Parcel.PickedUp}"/>
+        <TextBlock Text="{Binding Parcel.Supplied}"/>
         <Button 
             Content="VIEW SENDER DETAILS"
             Command="{Binding ShowSenderCommand}"/>

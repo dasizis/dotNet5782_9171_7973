@@ -5,15 +5,15 @@ namespace PL.ViewModels
 {
     class StationDetailsViewModel 
     {
-        public BaseStation station { get; set; }
+        public BaseStation Station { get; set; }
         public RelayCommand UpdateDetailsCommand { get; set; }
         public RelayCommand OpenDronesListCommand { get; set; }
 
         public StationDetailsViewModel(int id)
         {
-            station = PLService.GetBaseStation(id);
+            Station = PLService.GetBaseStation(id);
 
-            UpdateDetailsCommand = new(ExecuteUpdateDetails, () => station.Error == null);
+            UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             OpenDronesListCommand = new(ExecuteOpenDronesList);
 
             BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
@@ -21,7 +21,7 @@ namespace PL.ViewModels
 
         private void ExecuteUpdateDetails()
         {
-            PLService.UpdateBaseStation(station.Id, station.Name, station.EmptyChargeSlots);
+            PLService.UpdateBaseStation(Station.Id, Station.Name, Station.EmptyChargeSlots);
         }
 
         private void ExecuteOpenDronesList()
@@ -31,13 +31,13 @@ namespace PL.ViewModels
 
         private void LoadStation()
         {
-            int emptyslots = station.EmptyChargeSlots;
-            string name = station.Name;
+            int emptyslots = Station.EmptyChargeSlots;
+            string name = Station.Name;
 
-            station = PLService.GetBaseStation(station.Id);
+            Station = PLService.GetBaseStation(Station.Id);
 
-            station.EmptyChargeSlots = emptyslots;
-            station.Name = name;
+            Station.EmptyChargeSlots = emptyslots;
+            Station.Name = name;
         }
     }
 }

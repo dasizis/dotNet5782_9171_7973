@@ -78,5 +78,17 @@ namespace PO
                 return validationResults.First().ErrorMessage;
             }
         }
+
+        public void Reload(object source)
+        {
+            if (source.GetType() != GetType())
+                throw new ArgumentException("Source object has different type");
+
+            foreach (var prop in GetType().GetProperties())
+            {
+                if (prop.CanWrite)
+                    prop.SetValue(this, prop.GetValue(source));
+            }
+        }
     }
 }

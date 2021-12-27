@@ -104,7 +104,7 @@ namespace PL.ViewModels
         private void LoadDrone()
         {
             string model = Drone.Model;
-            Drone = PLService.GetDrone(Drone.Id);
+            Drone.Reload(PLService.GetDrone(Drone.Id));
             Drone.Model = model;
         }
     }

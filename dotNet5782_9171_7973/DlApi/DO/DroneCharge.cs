@@ -31,7 +31,7 @@ namespace DO
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
-        /// to override the <code>ToString()</code> method
+        /// to override the <c>ToString()</c> method
         /// </summary>
         /// <returns>String representation of drone charge</returns>
         public override string ToString() => this.ToStringProperties();

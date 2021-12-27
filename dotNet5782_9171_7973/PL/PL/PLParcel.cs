@@ -41,8 +41,8 @@ namespace PL
                 Scheduled = parcel.Scheduled,
                 Supplied = parcel.Supplied,
                 Weight = (WeightCategory)parcel.Weight,
-                Sender = parcel.Sender == null? null: new() { Id = parcel.Sender.Id, Name = parcel.Sender.Name },
-                Target = parcel.Target == null ? null : new() { Id = parcel.Target.Id, Name = parcel.Target.Name },
+                Sender = new() { Id = parcel.Sender.Id, Name = parcel.Sender.Name },
+                Target = new() { Id = parcel.Target.Id, Name = parcel.Target.Name },
             };
         }
 

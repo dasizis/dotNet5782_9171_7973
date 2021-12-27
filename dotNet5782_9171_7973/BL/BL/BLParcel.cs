@@ -155,14 +155,20 @@ namespace BL
 
         public void DeleteParcel(int parcelId)
         {
+            DO.Parcel parcel;
             try
             {
-                dal.Delete<DO.Drone>(parcelId);
+                parcel = dal.GetById<DO.Parcel>(parcelId);
             }
             catch (DO.ObjectNotFoundException e)
             {
-                throw new ObjectNotFoundException(typeof(Drone), e);
+                throw new ObjectNotFoundException(typeof(Parcel), e);
             }
+
+            if (parcel.Requested != null && parcel.Supplied == null)
+                throw new InvalidActionException("Can not delete a parcel in delivery");
+
+            dal.Delete<DO.Parcel>(parcelId);
         }
 
         #region Helpers

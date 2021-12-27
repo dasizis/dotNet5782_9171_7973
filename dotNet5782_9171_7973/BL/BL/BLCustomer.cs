@@ -112,14 +112,12 @@ namespace BL
 
         public void DeleteCustomer(int customerId)
         {
-            try
-            {
-                dal.Delete<DO.Customer>(customerId);
-            }
-            catch (DO.ObjectNotFoundException e)
-            {
-                throw new ObjectNotFoundException(typeof(Customer), e);
-            }
+            CustomerForList customer = GetCustomerForList(customerId);
+
+            if (customer.ParcelsOnWay != 0 || customer.ParcelsSendAndNotSupplied != 0)
+                throw new InvalidActionException("Can not delete a customer with parcels");
+
+            dal.Delete<DO.Customer>(customerId);
         }
 
         #region Helpers

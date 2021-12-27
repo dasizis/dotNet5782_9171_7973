@@ -87,6 +87,7 @@ namespace BLApi
         /// </summary>
         /// <param name="customerId">The customer Id</param>
         /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="InvalidActionException" />
         void DeleteDrone(int droneId);
     }
 }

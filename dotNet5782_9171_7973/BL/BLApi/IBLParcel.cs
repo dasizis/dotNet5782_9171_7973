@@ -60,6 +60,7 @@ namespace BLApi
         /// </summary>
         /// <param name="parcelId">The parcel Id</param>
         /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="InvalidActionException" />
         void DeleteParcel(int parcelId);
     }
 }

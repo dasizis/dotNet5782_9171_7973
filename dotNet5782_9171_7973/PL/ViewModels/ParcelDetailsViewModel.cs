@@ -52,7 +52,7 @@ namespace PL.ViewModels
 
         private void LoadParcel()
         {
-            Parcel = PLService.GetParcel(Parcel.Id);
+            Parcel.Reload(PLService.GetParcel(Parcel.Id));
         }
     }
 }

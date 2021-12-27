@@ -43,7 +43,7 @@ namespace PL.ViewModels
         {
             string name = Customer.Name;
             string phone = Customer.Phone;
-            Customer = PLService.GetCustomer(Customer.Id);
+            Customer.Reload(PLService.GetCustomer(Customer.Id));
             Customer.Name = name;
             Customer.Phone = phone;
 

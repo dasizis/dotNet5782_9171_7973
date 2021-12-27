@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <TextBlock Text="{Binding Id}"/>
-        <TextBox Text="{Binding Name}"/>
-        <TextBox Text="{Binding EmptyChargeSlots}"/>
-        <TextBlock Text="{Binding Location.Longitude}"/>
-        <TextBlock Text="{Binding Location.Latitude}"/>
-        <Button Content="VIEW DRONES IN CHARGE LIST" Command="{Binding OpenDronesList}"/>
-        <Button Content="UPDATE DETAILS" Command="{Binding UpdateDetails}"/>
+        <TextBlock Text="{Binding Station.Id}"/>
+        <TextBox Text="{Binding Station.Name}"/>
+        <TextBox Text="{Binding Station.EmptyChargeSlots}"/>
+        <TextBlock Text="{Binding Station.Location.Longitude}"/>
+        <TextBlock Text="{Binding Station.Location.Latitude}"/>
+        <Button Content="VIEW DRONES IN CHARGE LIST" Command="{Binding OpenDronesListCommand}"/>
+        <Button Content="UPDATE DETAILS" Command="{Binding UpdateDetailsCommand}"/>
     </StackPanel>
 </UserControl>

@@ -7,8 +7,7 @@ namespace PL
         /// <summary>
         /// Delegate type for <see cref="BaseStationsChangedEvent"/>
         /// </summary>
-        /// <param name="callerMethodName">The caller method name</param>
-        public delegate void BaseStationsChangedHandler(string callerMethodName);
+        public delegate void BaseStationsChangedHandler();
 
         /// <summary>
         /// Occurs when one or more drones were modified
@@ -21,7 +20,7 @@ namespace PL
         /// <param name="callerMethodName">The caller method name</param>
         public static void NotifyBaseStationChanged([CallerMemberName] string callerMethodName = "")
         {
-            BaseStationsChangedEvent?.Invoke(callerMethodName);
+            BaseStationsChangedEvent?.Invoke();
         }
     }
 }

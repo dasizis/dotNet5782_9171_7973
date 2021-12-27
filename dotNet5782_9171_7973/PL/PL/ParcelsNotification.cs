@@ -7,8 +7,7 @@ namespace PL
         /// <summary>
         /// Delegate type for <see cref="ParcelsChangedEvent"/>
         /// </summary>
-        /// <param name="callerMethodName">The caller method name</param>
-        public delegate void ParcelsChangedHandler(string callerMethodName);
+        public delegate void ParcelsChangedHandler();
 
         /// <summary>
         /// Occurs when one or more customers were modified
@@ -21,7 +20,7 @@ namespace PL
         /// <param name="callerMethodName">The caller method name</param>
         public static void NotifyParcelChanged([CallerMemberName] string callerMethodName = "")
         {
-            ParcelsChangedEvent?.Invoke(callerMethodName);
+            ParcelsChangedEvent?.Invoke();
         }
     }
 }

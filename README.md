@@ -1,6 +1,8 @@
 I'm the first
 # dotNet5782_9171_7973
 
+https://s3.amazonaws.com/files2.syncfusion.com/Installs/v19.4.0.38/syncfusionessentialstudiowebinstaller.exe
+
 https://docs.microsoft.com/en-us/archive/msdn-magazine/2009/february/patterns-wpf-apps-with-the-model-view-viewmodel-design-pattern
 לדעתי זה לא מדי יעזור לך
 

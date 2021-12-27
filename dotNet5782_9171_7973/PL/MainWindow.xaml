@@ -30,46 +30,13 @@
             <GridSplitter Grid.Column="1" Width="3"  
                           HorizontalAlignment="Stretch" 
                           ShowsPreview="False"></GridSplitter>
-            <TabControl x:Name="DisplayPanel" Grid.Column="2">
-                    <TabItem>
-                        <AdornerDecorator>
-                            <views:AddDroneView />
-                        </AdornerDecorator>
-                    </TabItem>
-                    <TabItem IsSelected="True">
-                        <AdornerDecorator>
-                            <views:AddCustomerView />
-                        </AdornerDecorator>
-                    </TabItem>
-                    <TabItem>
-                        <AdornerDecorator>
-                            <views:AddParcelView />
-                        </AdornerDecorator>
-                    </TabItem>
-                    <TabItem>
-                        <AdornerDecorator>
-                            <views:AddStationView />
-                        </AdornerDecorator>
-                    </TabItem>
+                <TabControl x:Name="DisplayPanel" Grid.Column="2">
                     <TabItem>
                         <AdornerDecorator>
                             <views:DroneDetailsView />
                         </AdornerDecorator>
                     </TabItem>
-                    <TabItem>
-                        <AdornerDecorator>
-                            <views:StationDetailsView />
-                        </AdornerDecorator>
-                    </TabItem>
-                    <TabItem>
-                        <AdornerDecorator>
-                            <views:ParcelDetailsView />
-                        </AdornerDecorator>
-                    </TabItem>
-                    <TabItem>
-                        <AdornerDecorator>
-                        </AdornerDecorator>
-                    </TabItem>
+                    
                 </TabControl>
         </Grid>
         </DockPanel>

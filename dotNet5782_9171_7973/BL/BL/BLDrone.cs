@@ -188,6 +188,39 @@ namespace BL
             droneForList.DeliveredParcelId = selectedParcel.Id;
         }
 
+        public void PickUpParcel(int droneId)
+        {
+            DroneForList drone = GetDroneForListRef(droneId);
+
+            // Does the drone have a parcel?
+            if (drone.DeliveredParcelId == null)
+            {
+                throw new InvalidActionException("No parcel is assigned to drone.");
+            }
+
+            DO.Parcel parcel;
+            try
+            {
+                parcel = dal.GetById<DO.Parcel>((int)drone.DeliveredParcelId);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Parcel), e);
+            }
+
+            // Was the parcel collected?
+            if (parcel.PickedUp != null)
+            {
+                throw new InvalidActionException("Parcel assigned to drone was already picked.");
+            }
+
+            ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
+            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
+
+            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree * 0.1;
+            drone.Location = parcelInDeliver.CollectLocation;
+        }
+
         public void DeleteDrone(int droneId)
         {
             Drone drone = GetDrone(droneId);

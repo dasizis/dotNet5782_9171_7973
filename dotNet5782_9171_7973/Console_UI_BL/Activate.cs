@@ -187,9 +187,9 @@ namespace ConsoleUI_BL
                     }
                 case UpdateOption.CollectParcel:
                     {
-                        Console.WriteLine("Parcel ID, Please.");
-                        int parcelId = GetInput(int.Parse);
-                        bl.PickUpParcel(parcelId);
+                        Console.WriteLine("Drone ID, Please.");
+                        int droneId = GetInput(int.Parse);
+                        bl.PickUpParcel(droneId);
 
                         break;
                     }

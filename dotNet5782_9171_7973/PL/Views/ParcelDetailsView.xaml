@@ -11,7 +11,7 @@
         <TextBlock Text="{Binding Parcel.Target.Id}"/>
         <TextBlock Text="{Binding Parcel.Weight}"/>
         <TextBlock Text="{Binding Parcel.Priority}"/>
-        <TextBlock Text="{Binding Parcel.Drone.Id}"/>
+        <TextBlock Text="{Binding Parcel}"/>
         <TextBlock Text="{Binding Parcel.Requested}"/>
         <TextBlock Text="{Binding Parcel.Scheduled}"/>
         <TextBlock Text="{Binding Parcel.PickedUp}"/>

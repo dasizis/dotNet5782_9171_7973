@@ -83,6 +83,14 @@ namespace BLApi
         void AssignParcelToDrone(int droneId);
 
         /// <summary>
+        /// Picks a parcel up by a drone
+        /// </summary>
+        /// <param name="droneId">The drone id</param>
+        /// <exception cref="ObjectNotFoundException" />
+        /// <exception cref="InvalidActionException" />
+        void PickUpParcel(int droneId);
+
+        /// <summary>
         /// Deletes a drone
         /// </summary>
         /// <param name="customerId">The customer Id</param>

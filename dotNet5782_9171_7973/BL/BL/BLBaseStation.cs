@@ -98,8 +98,7 @@ namespace BL
                 if (emptyChargeSlots < 0)
                     throw new InvalidPropertyValueException(emptyChargeSlots, nameof(DO.BaseStation.ChargeSlots));
 
-                int sumChargeSlots = (int)emptyChargeSlots + dal.GetList<DO.DroneCharge>()
-                                                                .Where(d => d.StationId == baseStationId)
+                int sumChargeSlots = (int)emptyChargeSlots + dal.GetFilteredList<DO.DroneCharge>(d => d.StationId == baseStationId)
                                                                 .Count();
 
                 try

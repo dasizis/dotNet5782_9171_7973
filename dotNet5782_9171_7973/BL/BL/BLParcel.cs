@@ -89,39 +89,6 @@ namespace BL
             return from parcel in dal.GetFilteredList<DO.Parcel>(parcel => parcel.DroneId == null)
                    select GetParcelForList(parcel.Id); 
         }
-
-        public void PickUpParcel(int droneId)
-        {
-            DroneForList drone = GetDroneForListRef(droneId);
-
-            // Does the drone have a parcel?
-            if (drone.DeliveredParcelId == null)
-            {
-                throw new InvalidActionException("No parcel is assigned to drone.");
-            }
-
-            DO.Parcel parcel;
-            try
-            {
-                parcel = dal.GetById<DO.Parcel>((int)drone.DeliveredParcelId);
-            }
-            catch (DO.ObjectNotFoundException e)
-            {
-                throw new ObjectNotFoundException(typeof(Parcel), e);
-            }
-
-            // Was the parcel collected?
-            if (parcel.PickedUp != null)
-            {
-                throw new InvalidActionException("Parcel assigned to drone was already picked.");
-            }
-
-            ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
-            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
-
-            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree * 0.1;
-            drone.Location = parcelInDeliver.CollectLocation;
-        }
        
         public void SupplyParcel(int droneId)
         {
@@ -146,7 +113,14 @@ namespace BL
                 throw new InvalidActionException("Parcel assigned to drone has already been supplied.");
             }
 
-            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
+            double neededBattery = Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
+
+            if (drone.Battery - neededBattery < 0)
+            {
+                throw new InvalidActionException("Drone does not have enough battery to get to target customer");
+            }
+
+            drone.Battery -= neededBattery;
             drone.Location = parcelInDeliver.TargetLocation;
             drone.State = DroneState.Free;
 

@@ -43,35 +43,14 @@ namespace PL
                 Location = new() { Longitude = boDrone.Location.Longitude, Latitude = boDrone.Location.Latitude },
                 MaxWeight = (WeightCategory)boDrone.MaxWeight,
                 ParcelInDeliver = boDrone.ParcelInDeliver == null
-                ? null
-                : new()
-                {
-                    Id = boDrone.ParcelInDeliver.Id,
-                    Weight = (WeightCategory)boDrone.ParcelInDeliver.Weight,
-                    Priority = (Priority)boDrone.ParcelInDeliver.Priority,
-                    WasPickedUp = boDrone.ParcelInDeliver.WasPickedUp,
-                    DeliveryDistance = boDrone.ParcelInDeliver.DeliveryDistance,
-                    TargetLocation = new()
-                    {
-                        Longitude = boDrone.ParcelInDeliver.TargetLocation.Longitude,
-                        Latitude = boDrone.ParcelInDeliver.TargetLocation.Latitude
-                    },
-                    CollectLocation = new()
-                    {
-                        Longitude = boDrone.ParcelInDeliver.CollectLocation.Longitude,
-                        Latitude = boDrone.ParcelInDeliver.CollectLocation.Latitude
-                    },
-                    Sender = new()
-                    {
-                        Id = boDrone.ParcelInDeliver.Sender.Id,
-                        Name = boDrone.ParcelInDeliver.Sender.Name,
-                    },
-                    Target = new()
-                    {
-                        Id = boDrone.ParcelInDeliver.Target.Id,
-                        Name = boDrone.ParcelInDeliver.Target.Name,
-                    },
-                }
+                                  ? null
+                                  : new()
+                                  { 
+                                      Id = boDrone.ParcelInDeliver.Id,
+                                      WasPickedUp = boDrone.ParcelInDeliver.WasPickedUp,
+                                      DeliveryDistance = boDrone.ParcelInDeliver.DeliveryDistance,
+                                  }
+                
             };
         }
 

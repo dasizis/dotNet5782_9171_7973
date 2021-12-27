@@ -10,7 +10,7 @@ namespace PL.ViewModels
 {
     class ParcelDetailsViewModel
     {
-        public Parcel Parcel { get; set; }
+        public Parcel Parcel { get; set; } = new();
 
         public RelayCommand ShowSenderCommand { get; set; }
         public RelayCommand ShowTargetCommand { get; set; }

@@ -74,25 +74,30 @@ namespace Dal
             );
 
             Parcels.AddRange(
-                Enumerable.Range(0, INIT_PARCELS)
-                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelId++, Customers))    
-                          .Select(parcel => RandomManager.Rand.Next(3) == 1
-                                            ? parcel
-                                            : new Parcel()
-                                            {
-                                                Id = parcel.Id,
-                                                Weight = parcel.Weight,
-                                                Priority = parcel.Priority,
-                                                Requested = parcel.Requested,
-                                                DroneId = Drones[RandomManager.Rand.Next(Drones.Count)].Id,
-                                                Scheduled = parcel.Requested + TimeSpan.FromHours(RandomManager.Rand.NextDouble() * 20),
-                                                SenderId = Customers[RandomManager.Rand.Next(Customers.Count)].Id,
-                                                TargetId = Customers[RandomManager.Rand.Next(Customers.Count)].Id,
-                                            }
-
-                          )
-
+                Enumerable.Range(0, INIT_PARCELS).Select(_ => InitilzeParcel()) 
             );
+        }
+
+        private static Parcel InitilzeParcel()
+        {
+            const int ChancesOfUnAssignedParcel = 50;
+
+            Parcel parcel = RandomManager.RandomParcel(Config.NextParcelId++, Customers);
+
+            if (RandomManager.Rand.Next(100) < ChancesOfUnAssignedParcel)
+                return parcel;
+
+            var notDeliveredDrones = Drones.Where(drone => !Parcels.Any(parcel => parcel.DroneId == drone.Id));
+
+            return new()
+            {
+                Id = parcel.Id,
+                Weight = parcel.Weight,
+                Priority = parcel.Priority,
+                Requested = parcel.Requested,
+                DroneId = notDeliveredDrones.ElementAt(RandomManager.Rand.Next(notDeliveredDrones.Count())).Id,
+                Scheduled = parcel.Requested + TimeSpan.FromHours(RandomManager.Rand.NextDouble() * 20),
+            };
         }
     }
 }

@@ -26,7 +26,6 @@ namespace PL.ViewModels
             RenameDroneCommand = new(RenameDrone, () => Drone.Error == null);
             DeleteCommand = new(Delete, () => Drone.State == DroneState.Free);
 
-            Drone.Id = id;
             LoadDrone();
         }
 
@@ -37,7 +36,7 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.AssignParcelToDrone(Drone.Id);
-                    MessageBox.Show($"Drone {Drone.Id} assigned to parcel");
+                    MessageBox.Show($"Drone {Drone.Id} assigned to parcel {Drone.ParcelInDeliver.Id}");
                 }
                 catch (BO.InvalidActionException e)
                 {
@@ -48,13 +47,13 @@ namespace PL.ViewModels
             {
                 if (!Drone.ParcelInDeliver.WasPickedUp)
                 {
-                    PLService.PickUpParcel(Drone.ParcelInDeliver.Id);
+                    PLService.PickUpParcel(Drone.Id);
                     MessageBox.Show($"Drone {Drone.Id} Pick parcel {Drone.ParcelInDeliver.Id} up");
                 }
                 else
                 {
                     PLService.SupplyParcel(Drone.Id);
-                    MessageBox.Show($"Drone {Drone.Id} supplied parcel {Drone.ParcelInDeliver.Id}");
+                    MessageBox.Show($"Drone {Drone.Id} supplied parcel");
                 }
             }
         }
@@ -92,6 +91,7 @@ namespace PL.ViewModels
         {
             PLService.RenameDrone(Drone.Id, Drone.Model);
             MessageBox.Show($"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
+            WasChanged = false;
         }
 
         private void Delete()

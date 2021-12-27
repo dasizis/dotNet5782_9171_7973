@@ -12,20 +12,16 @@
         <TextBlock Text="{Binding Drone.MaxWeight}"/>
         <TextBlock Text="{Binding Drone.Battery}"/>
         <TextBlock Text="{Binding Drone.State}"/>
-        <TextBlock Text="{Binding Drone.ParcelInDeliver}"/>
         <TextBlock Text="{Binding Drone.Location.Longitude}"/>
         <TextBlock Text="{Binding Drone.Location.Latitude}"/>
 
         <Button Content="UPDATE"
-            Command="{Binding RenameDroneCommand}"/>
-        <Button
-            Content="DELETE"
-            Command="{Binding DeleteCommand}"/>
-        <Button 
-            Content="PROCEED WITH PARCEL"
-            Command="{Binding ProceedWithParcelCommand}"/>
-        <Button 
-            Content="CHARGE"
-            Command="{Binding HandleChargeCommand}"/>
+                Command="{Binding RenameDroneCommand}"/>
+        <Button Content="DELETE"
+                Command="{Binding DeleteCommand}"/>
+        <Button Content="PROCEED WITH PARCEL"
+                Command="{Binding ProceedWithParcelCommand}"/>
+        <Button Content="CHARGE"
+                Command="{Binding HandleChargeCommand}"/>
     </StackPanel>
 </UserControl>

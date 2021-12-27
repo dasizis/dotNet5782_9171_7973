@@ -5,7 +5,7 @@ namespace PL.ViewModels
 {
     class DroneDetailsViewModel
     {
-        public Drone Drone { get; set; } = new();
+        public Drone Drone { get; set; }
 
         public RelayCommand ProceedWithParcelCommand { get; set; }
 
@@ -17,6 +17,8 @@ namespace PL.ViewModels
 
         public DroneDetailsViewModel(int id)
         {
+            Drone = PLService.GetDrone(id);
+
             DronesNotification.DronesChangedEvent += LoadDrone;
 
             ProceedWithParcelCommand = new(ProceedWithParcel, () => Drone.State != DroneState.Maintenance);
@@ -103,7 +105,7 @@ namespace PL.ViewModels
         {
             string model = Drone.Model;
             Drone = PLService.GetDrone(Drone.Id);
-            //Drone.Model = model;
+            Drone.Model = model;
         }
     }
 }

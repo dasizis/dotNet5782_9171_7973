@@ -5,7 +5,7 @@ namespace PL.ViewModels
 {
     class CustomerDetailsViewModel
     {
-        public Customer Customer { get; set; } = new();
+        public Customer Customer { get; set; }
 
         public RelayCommand DeleteCommand { get; set; }
 
@@ -15,6 +15,8 @@ namespace PL.ViewModels
 
         public CustomerDetailsViewModel(int id)
         {
+            Customer = PLService.GetCustomer(id);
+
             CustomersNotification.CustomersChanged += LoadCustomer;
 
             DeleteCommand = new(Delete, () => CanBeDeleted);

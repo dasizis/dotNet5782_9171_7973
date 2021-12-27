@@ -12,7 +12,7 @@
         <TextBox Text="{Binding EmptyChargeSlots}"/>
         <TextBlock Text="{Binding Location.Longitude}"/>
         <TextBlock Text="{Binding Location.Latitude}"/>
-        <Button Content="VIEW DRONES IN CHARGE LIST" Command="OpenDronesList"/>
-        <Button Content="UPDATE DETAILS" Command="UpdateDetails"/>
+        <Button Content="VIEW DRONES IN CHARGE LIST" Command="{Binding OpenDronesList}"/>
+        <Button Content="UPDATE DETAILS" Command="{Binding UpdateDetails}"/>
     </StackPanel>
 </UserControl>

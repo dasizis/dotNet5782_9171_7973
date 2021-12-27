@@ -1,5 +1,6 @@
 ﻿using StringUtilities;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PO
 {
@@ -16,6 +17,7 @@ namespace PO
         /// <summary>
         /// Base station name
         /// </summary>
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Name length must be between 3-15")]
         public string Name { get; set; }
 
         /// <summary>
@@ -26,6 +28,7 @@ namespace PO
         /// <summary>
         /// Number of empty charge slots in base station
         /// </summary>
+        [Range(0, int.MaxValue, ErrorMessage = "Charge slots number should be greater than zero")]
         public int EmptyChargeSlots { get; set; }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace PL.ViewModels
 {
     class ParcelDetailsViewModel
     {
-        public Parcel Parcel { get; set; } = new();
+        public Parcel Parcel { get; set; }
 
         public RelayCommand ShowSenderCommand { get; set; }
         public RelayCommand ShowTargetCommand { get; set; }
@@ -19,14 +19,14 @@ namespace PL.ViewModels
 
         public ParcelDetailsViewModel(int id)
         {
+            ParcelsNotification.ParcelsChangedEvent += LoadParcel;
+
             Parcel = PLService.GetParcel(id);
 
             ShowSenderCommand = new(ExecuteShowSenderDetails);
             ShowTargetCommand = new(ExecuteShowTargetDetails);
             ShowDroneCommand = new(ExecuteShowDroneDetails, () => Parcel.Scheduled != null);
-            DeleteCommand = new(ExecuteDelete, () => Parcel.Scheduled == null || Parcel.Supplied != null);
-
-            ParcelsNotification.ParcelsChangedEvent += LoadParcel;
+            DeleteCommand = new(Delete, () => Parcel.Scheduled == null || Parcel.Supplied != null);
         }
 
         private void ExecuteShowSenderDetails()
@@ -44,8 +44,10 @@ namespace PL.ViewModels
             MessageBox.Show("Drone Details");
         }
 
-        private void ExecuteDelete()
+        private void Delete()
         {
+            ParcelsNotification.ParcelsChangedEvent -= LoadParcel;
+
             PLService.DeleteParcel(Parcel.Id);
             MessageBox.Show($"Parcel {Parcel.Id} deleted");
         }

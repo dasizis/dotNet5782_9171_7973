@@ -34,7 +34,7 @@ namespace PL
             return new()
             {
                 Id = id,
-                DroneId = parcel.Drone.Id,
+                DroneId = parcel.Drone?.Id,
                 Priority = (Priority)parcel.Priority,
                 PickedUp = parcel.PickedUp,
                 Requested = parcel.Requested,

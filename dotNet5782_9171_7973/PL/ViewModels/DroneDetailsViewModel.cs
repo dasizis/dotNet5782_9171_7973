@@ -25,8 +25,6 @@ namespace PL.ViewModels
             HandleChargeCommand = new(HandleCharge, () => Drone.State != DroneState.Deliver);
             RenameDroneCommand = new(RenameDrone, () => Drone.Error == null);
             DeleteCommand = new(Delete, () => Drone.State == DroneState.Free);
-
-            LoadDrone();
         }
 
         private void ProceedWithParcel()
@@ -89,9 +87,10 @@ namespace PL.ViewModels
 
         private void RenameDrone()
         {
+            DronesNotification.DronesChangedEvent -= LoadDrone;
+
             PLService.RenameDrone(Drone.Id, Drone.Model);
             MessageBox.Show($"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
-            WasChanged = false;
         }
 
         private void Delete()

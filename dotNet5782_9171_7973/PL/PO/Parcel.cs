@@ -36,7 +36,7 @@ namespace PO
         /// <summary>
         /// Drone which delivers parcel
         /// </summary>
-        public int DroneId { get; set; }
+        public int? DroneId { get; set; }
 
         /// <summary>
         /// Parcel requested time (If has already occurred)

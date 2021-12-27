@@ -17,9 +17,9 @@ namespace StringUtilities
             Type type = obj.GetType();
             StringBuilder description = new($"<{type.Name}> {{");
 
-            foreach (var prop in type.GetProperties(BindingFlags.Public
-    |                                               BindingFlags.Instance
-    |                                               BindingFlags.DeclaredOnly))
+            foreach (var prop in type.GetProperties(BindingFlags.Public |
+                                                    BindingFlags.Instance |
+                                                    BindingFlags.DeclaredOnly))
             {
                 description.Append($"{prop.Name} = ");
 

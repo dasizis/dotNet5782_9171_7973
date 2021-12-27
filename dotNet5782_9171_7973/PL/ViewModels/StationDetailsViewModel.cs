@@ -12,13 +12,13 @@ namespace PL.ViewModels
 
         public StationDetailsViewModel(int id)
         {
+            BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
+
             Station = PLService.GetBaseStation(id);
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             OpenDronesListCommand = new(ExecuteOpenDronesList);
-            DeleteCommand = new(ExecuteDelete, () => Station.DronesInCharge.Count == 0);
-
-            BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
+            DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
         }
 
         private void ExecuteUpdateDetails()
@@ -32,8 +32,10 @@ namespace PL.ViewModels
             MessageBox.Show("Open drones list");
         }
 
-        public void ExecuteDelete()
+        public void Delete()
         {
+            BaseStationsNotification.BaseStationsChangedEvent -= LoadStation;
+
             PLService.DeleteBaseStation(Station.Id);
             MessageBox.Show($"Station {Station.Id} deleted");
         }

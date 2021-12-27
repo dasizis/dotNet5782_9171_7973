@@ -11,19 +11,14 @@ namespace PL.ViewModels
 
         public RelayCommand UpdateCommand { get; set; }
 
-        public bool CanBeDeleted { get; set; }
-
         public CustomerDetailsViewModel(int id)
         {
             Customer = PLService.GetCustomer(id);
 
             CustomersNotification.CustomersChanged += LoadCustomer;
 
-            DeleteCommand = new(Delete, () => CanBeDeleted);
+            DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);
-
-            Customer.Id = id;
-            LoadCustomer();
         }
 
         private void Update()
@@ -32,9 +27,17 @@ namespace PL.ViewModels
             MessageBox.Show($"Customer {Customer.Name} updated");
         }
 
+        private bool CanBeDeleted()
+        {
+            return Customer.Send.TrueForAll(parcel => parcel.Supplied != null)
+                   && Customer.Recieve.TrueForAll(parcel => parcel.Supplied != null);
+        }
+
         private void Delete()
         {
-            PLService.DeleteDrone(Customer.Id);
+            CustomersNotification.CustomersChanged -= LoadCustomer;
+
+            PLService.DeleteCustomer(Customer.Id);
             MessageBox.Show($"Customer {Customer.Name} deleted");
             // Close Tab 
         }
@@ -46,8 +49,6 @@ namespace PL.ViewModels
             Customer.Reload(PLService.GetCustomer(Customer.Id));
             Customer.Name = name;
             Customer.Phone = phone;
-
-            CanBeDeleted = true;/*How To check it?*/
         }
     }
 }

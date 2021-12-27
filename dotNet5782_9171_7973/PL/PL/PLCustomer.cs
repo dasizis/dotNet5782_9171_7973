@@ -33,13 +33,13 @@ namespace PL
         {
             BO.Customer customer = bl.GetCustomer(id);
 
-            List<Parcel> send = null;
+            List<Parcel> send = new();
             foreach(var parcel in customer.Send)
             {
                 send.Add(GetParcel(parcel.Id));
             }
 
-            List<Parcel> recieve = null;
+            List<Parcel> recieve = new();
             foreach (var parcel in customer.Recieve)
             {
                 recieve.Add(GetParcel(parcel.Id));

@@ -33,7 +33,7 @@
                 <TabControl x:Name="DisplayPanel" Grid.Column="2">
                     <TabItem>
                         <AdornerDecorator>
-                            <views:DroneDetailsView />
+                            <views:CustomerDetailsView />
                         </AdornerDecorator>
                     </TabItem>
                     

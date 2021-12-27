@@ -12,7 +12,14 @@
         <TextBox Text="{Binding Station.EmptyChargeSlots}"/>
         <TextBlock Text="{Binding Station.Location.Longitude}"/>
         <TextBlock Text="{Binding Station.Location.Latitude}"/>
-        <Button Content="VIEW DRONES IN CHARGE LIST" Command="{Binding OpenDronesListCommand}"/>
-        <Button Content="UPDATE DETAILS" Command="{Binding UpdateDetailsCommand}"/>
+        <Button 
+            Content="VIEW DRONES IN CHARGE LIST" 
+            Command="{Binding OpenDronesListCommand}"/>
+        <Button 
+            Content="UPDATE DETAILS" 
+            Command="{Binding UpdateDetailsCommand}"/>
+        <Button 
+            Content="DELETE STATION"
+            Command="{Binding DeleteCommand}"/>
     </StackPanel>
 </UserControl>

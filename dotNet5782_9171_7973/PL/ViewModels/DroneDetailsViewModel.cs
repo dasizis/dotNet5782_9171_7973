@@ -103,7 +103,7 @@ namespace PL.ViewModels
         {
             string model = Drone.Model;
             Drone = PLService.GetDrone(Drone.Id);
-            Drone.Model = model;
+            //Drone.Model = model;
         }
     }
 }

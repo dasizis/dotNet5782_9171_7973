@@ -51,6 +51,11 @@
                             <views:AddStationView />
                         </AdornerDecorator>
                     </TabItem>
+                    <TabItem>
+                        <AdornerDecorator>
+                            <views:StationDetailsView />
+                        </AdornerDecorator>
+                    </TabItem>
                 </TabControl>
         </Grid>
         </DockPanel>

@@ -71,4 +71,27 @@ namespace PL
 
         #endregion
     }
+
+    /// <summary>
+    /// A command which takes no arguments
+    /// </summary>
+    public class RelayCommand : RelayCommand<object>
+    {
+        /// <summary>
+        /// Initializes a new instance of <see cref="DelegateCommand{T}"/>.
+        /// </summary>
+        /// <param name="execute">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+        /// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
+        public RelayCommand(Action execute) 
+            : base(param => execute(), null) { }
+
+        /// <summary>
+        /// Creates a new command.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <param name="canExecute">The execution status logic.</param>
+        public RelayCommand(Action execute, Func<bool> canExecute)
+            : base(param => execute(), param => canExecute())
+        { }
+    }
 }

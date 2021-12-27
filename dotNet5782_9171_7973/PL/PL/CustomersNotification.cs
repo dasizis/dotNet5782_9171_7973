@@ -7,8 +7,7 @@ namespace PL
         /// <summary>
         /// Delegate type for <see cref="CustomersChangedHandler"/>
         /// </summary>
-        /// <param name="callerMethodName">The caller method name</param>
-        public delegate void CustomersChangedHandler(string callerMethodName);
+        public delegate void CustomersChangedHandler();
 
         /// <summary>
         /// Occurs when one or more customers were modified
@@ -21,7 +20,7 @@ namespace PL
         /// <param name="callerMethodName">The caller method name</param>
         public static void NotifyCustomerChanged([CallerMemberName] string callerMethodName = "")
         {
-            CustomersChanged?.Invoke(callerMethodName);
+            CustomersChanged?.Invoke();
         }
     }
 }

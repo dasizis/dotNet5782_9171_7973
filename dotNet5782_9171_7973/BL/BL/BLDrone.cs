@@ -190,14 +190,12 @@ namespace BL
 
         public void DeleteDrone(int droneId)
         {
-            try
-            {
-                dal.Delete<DO.Drone>(droneId);
-            }
-            catch (DO.ObjectNotFoundException e)
-            {
-                throw new ObjectNotFoundException(typeof(Drone), e);
-            }
+            Drone drone = GetDrone(droneId);
+
+            if (drone.State != DroneState.Free)
+                throw new InvalidActionException("Can not delete a non free drone");
+
+            dal.Delete<DO.Drone>(droneId);
         }
 
         #region Helpers

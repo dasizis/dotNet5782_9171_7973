@@ -46,7 +46,8 @@ namespace BLApi
         /// Deletes a customer
         /// </summary>
         /// <param name="customerId">The customer Id</param>
-        /// <exception cref="ObjectNotFoundException"></exception>
+        /// <exception cref="ObjectNotFoundException" />
+        /// <exception cref="InvalidActionException" />
         void DeleteCustomer(int customerId);
     }
 }

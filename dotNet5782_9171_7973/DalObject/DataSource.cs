@@ -40,7 +40,7 @@ namespace Dal
 
         public static class Config
         {
-            public static int NextParcelID = 0;
+            public static int NextParcelId = 0;
 
             public static class ElectricityConfumctiol
             {
@@ -75,7 +75,7 @@ namespace Dal
 
             Parcels.AddRange(
                 Enumerable.Range(0, INIT_PARCELS)
-                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelID++, Customers))    
+                          .Select(_ => RandomManager.RandomParcel(Config.NextParcelId++, Customers))    
                           .Select(parcel => RandomManager.Rand.Next(3) == 1
                                             ? parcel
                                             : new Parcel()

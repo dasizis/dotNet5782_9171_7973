@@ -86,7 +86,7 @@ namespace Dal
 
         public int GetParcelContinuousNumber()
         {
-            return DataSource.Config.NextParcelID++;
+            return DataSource.Config.NextParcelId++;
         }
 
         public (double, double, double, double, double) GetElectricityConfumctiol()
@@ -159,7 +159,7 @@ namespace Dal
         /// <param name="item">The item itself</param>
         /// <param name="propName">The property name</param>
         /// <param name="newValue">The new value for the property</param>
-        static private void UpdateItem<T>(T item, string propName, object newValue)
+        private void UpdateItem<T>(T item, string propName, object newValue)
         {
             Type type = typeof(T);
             DataSource.Data[type].Remove(item);

@@ -42,7 +42,9 @@ namespace PL
                 State = (DroneState)boDrone.State,
                 Location = new() { Longitude = boDrone.Location.Longitude, Latitude = boDrone.Location.Latitude },
                 MaxWeight = (WeightCategory)boDrone.MaxWeight,
-                ParcelInDeliver = new()
+                ParcelInDeliver = boDrone.ParcelInDeliver == null
+                ? null
+                : new()
                 {
                     Id = boDrone.ParcelInDeliver.Id,
                     Weight = (WeightCategory)boDrone.ParcelInDeliver.Weight,

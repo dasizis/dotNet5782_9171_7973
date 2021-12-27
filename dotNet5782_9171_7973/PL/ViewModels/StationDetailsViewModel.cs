@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using PO;
 
 namespace PL.ViewModels
@@ -9,25 +6,25 @@ namespace PL.ViewModels
     class StationDetailsViewModel 
     {
         public BaseStation station { get; set; }
-        public RelayCommand<object> UpdateDetailsCommand { get; set; }
-        public RelayCommand<object> OpenDronesListCommand { get; set; }
+        public RelayCommand UpdateDetailsCommand { get; set; }
+        public RelayCommand OpenDronesListCommand { get; set; }
 
         public StationDetailsViewModel(int id)
         {
             station = PLService.GetBaseStation(id);
 
-            UpdateDetailsCommand = new(ExecuteUpdateDetails);
+            UpdateDetailsCommand = new(ExecuteUpdateDetails, () => station.Error == null);
             OpenDronesListCommand = new(ExecuteOpenDronesList);
 
             BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
         }
 
-        private void ExecuteUpdateDetails(object param)
+        private void ExecuteUpdateDetails()
         {
             PLService.UpdateBaseStation(station.Id, station.Name, station.EmptyChargeSlots);
         }
 
-        private void ExecuteOpenDronesList(object param)
+        private void ExecuteOpenDronesList()
         {
             MessageBox.Show("Open drones list");
         }

@@ -16,8 +16,8 @@ namespace PL.ViewModels
         {
             station = PLService.GetBaseStation(id);
 
-            UpdateDetails = new RelayCommand<object>(ExecuteUpdateDetails, param => station.Error == null);
-            OpenDronesList = new RelayCommand<object>(ExecuteOpenDronesList, param => station.Error == null);
+            UpdateDetails = new(ExecuteUpdateDetails);
+            OpenDronesList = new(ExecuteOpenDronesList);
 
             BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
         }
@@ -32,9 +32,15 @@ namespace PL.ViewModels
             MessageBox.Show("Open drones list");
         }
 
-        private void LoadStation(object param)
+        private void LoadStation()
         {
+            int emptyslots = station.EmptyChargeSlots;
+            string name = station.Name;
+
             station = PLService.GetBaseStation(station.Id);
+
+            station.EmptyChargeSlots = emptyslots;
+            station.Name = name;
         }
     }
 }

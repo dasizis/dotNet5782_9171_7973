@@ -9,7 +9,7 @@
              xmlns:po="clr-namespace:PO"
              mc:Ignorable="d" 
              d:DesignHeight="1450" d:DesignWidth="800"
-             x:Name="User">
+             x:Name="DroneDetailsUserControl">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -71,7 +71,7 @@
                    Style="{StaticResource Text}"/>
 
         <!--Buttons-->
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <Button Content="Update"                
                     Style="{DynamicResource WPFPrimaryButtonStyle}"
                     Command="{Binding RenameDroneCommand}"
@@ -102,7 +102,7 @@
         </StackPanel>
 
         <!--Map-->
-        <local:Map Margin="0,20" Item="{Binding DataContext.Drone, ElementName=User}"/>
+        <local:Map Margin="0,20" Item="{Binding DataContext.Drone, ElementName=DroneDetailsUserControl}"/>
 
     </StackPanel>
 </UserControl>

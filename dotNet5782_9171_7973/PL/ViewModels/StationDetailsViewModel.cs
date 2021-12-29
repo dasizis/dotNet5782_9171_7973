@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using PO;
 
 namespace PL.ViewModels
@@ -17,8 +18,9 @@ namespace PL.ViewModels
             Station = PLService.GetBaseStation(id);
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
-            OpenDronesListCommand = new(ViewDronesList);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
+            OpenDronesListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronesListPanel(Station.DronesInCharge)),
+                                    () => Station.DronesInCharge.Count != 0);
         }
 
         private void ExecuteUpdateDetails()
@@ -27,10 +29,11 @@ namespace PL.ViewModels
             MessageBox.Show($"Station {Station.Id}' details changed");
         }
 
-        private void ViewDronesList()
+        private bool IsDroneInStation(int droneId)
         {
-            MessageBox.Show("Open drones list");
+            return Station.DronesInCharge.FindAll(drone => drone.Id == droneId).Count > 0;
         }
+
 
         public void Delete()
         {

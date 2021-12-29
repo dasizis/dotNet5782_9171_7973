@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using PO;
 using StringUtilities;
 
@@ -64,8 +63,15 @@ namespace PL.ViewModels
                 }
                 else
                 {
-                    PLService.SupplyParcel(Drone.Id);
-                    MessageBox.Show($"Drone {Drone.Id} supplied parcel");
+                    try
+                    {
+                        PLService.SupplyParcel(Drone.Id);
+                        MessageBox.Show($"Drone {Drone.Id} supplied parcel");
+                    }
+                    catch (BO.InvalidActionException e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
                 }
             }
         }

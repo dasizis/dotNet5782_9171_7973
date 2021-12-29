@@ -7,6 +7,7 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:convereters="clr-namespace:PL.Views.Converters"
              xmlns:po="clr-namespace:PO"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="1450" d:DesignWidth="800"
              x:Name="DroneDetailsUserControl">
@@ -17,7 +18,7 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <convereters:ItmeToListConverter x:Key="ItmeToListConverter" />
+            <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
             <convereters:DroneStateToHandleChargeText x:Key="DroneStateToHandleChargeText" />
             <convereters:StateToProceedWithParcelText x:Key="StateToProceedWithParcelText" />
             <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
@@ -102,7 +103,14 @@
         </StackPanel>
 
         <!--Map-->
-        <local:Map Margin="0,20" Item="{Binding DataContext.Drone, ElementName=DroneDetailsUserControl}"/>
+        <local:Map Margin="0,20">
+            <local:Map.Markers>
+                <MultiBinding Converter="{StaticResource PairsOfLocationTypeToMarkers}">
+                    <Binding Path="DataContext.Drone.Location" ElementName="DroneDetailsUserControl" />
+                    <Binding Source="{x:Type po:Drone}" />
+                </MultiBinding>
+            </local:Map.Markers>
+        </local:Map>
 
     </StackPanel>
 </UserControl>

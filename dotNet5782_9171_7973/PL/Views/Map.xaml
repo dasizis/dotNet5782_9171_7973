@@ -15,16 +15,11 @@
     </UserControl.Resources>
     <syncfusion:SfMap>
         <syncfusion:SfMap.Layers>
-            <syncfusion:ShapeFileLayer x:Name="ShapeFileLayer" Markers="{Binding Item, Converter={StaticResource ItemToExtandedListConverter} }">
+            <syncfusion:ShapeFileLayer x:Name="ShapeFileLayer" Markers="{Binding Markers}">
                 <syncfusion:ShapeFileLayer.MarkerTemplate>
                     <DataTemplate>
-                        <Ellipse Height="8" Width="8" Fill="{Binding Data.Color}" Stroke="Gray" />
-                    </DataTemplate>
-                </syncfusion:ShapeFileLayer.MarkerTemplate>
-                <syncfusion:ShapeFileLayer.MarkerToolTipSettings>
-                    <syncfusion:ToolTipSetting Margin="8">
-                        <syncfusion:ToolTipSetting.ToolTipTemplate>
-                            <DataTemplate>
+                        <Ellipse Height="8" Width="8" Fill="{Binding Data.Color}" Stroke="Gray">
+                            <Ellipse.ToolTip>
                                 <Border CornerRadius="5">
                                     <StackPanel>
                                         <TextBlock HorizontalAlignment="Center"
@@ -35,21 +30,18 @@
                                         <Rectangle Height="1"
                                                    Margin="0,5,0,5"
                                                    Stroke="White" />
-                                        
-                                        <StackPanel>
-                                            
-                                        <StackPanel Orientation="Horizontal">
-                                            
-                                            <materialDesign:PackIcon Kind="Longitude" Foreground="White" />
 
-                                            <TextBlock HorizontalAlignment="Center"
+                                        <StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Longitude" Foreground="White" />
+
+                                                <TextBlock HorizontalAlignment="Center"
                                                        FontSize="14"
                                                        Foreground="White"
                                                        Text="{Binding Data.Longitude, StringFormat={}{0:F4}}" />
+                                            </StackPanel>
                                         </StackPanel>
-                                        </StackPanel>
-                                        
-                                       
 
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Latitude" Foreground="White" />
@@ -59,12 +51,14 @@
                                                        Foreground="White"
                                                        Text="{Binding Data.Latitude, StringFormat={}{0:F4}}" />
                                         </StackPanel>
-
                                     </StackPanel>
                                 </Border>
-                            </DataTemplate>
-                        </syncfusion:ToolTipSetting.ToolTipTemplate>
-                    </syncfusion:ToolTipSetting>
+                            </Ellipse.ToolTip>
+                        </Ellipse>
+                    </DataTemplate>
+                </syncfusion:ShapeFileLayer.MarkerTemplate>
+                <syncfusion:ShapeFileLayer.MarkerToolTipSettings>
+                    <syncfusion:ToolTipSetting Margin="8" ShowDuration="2000" />
                 </syncfusion:ShapeFileLayer.MarkerToolTipSettings>
 
             </syncfusion:ShapeFileLayer>

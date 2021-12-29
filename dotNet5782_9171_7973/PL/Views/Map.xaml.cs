@@ -1,6 +1,7 @@
 ﻿using PO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +24,16 @@ namespace PL.Views
     {
 
 
-        public ILocalable Item
+
+
+        public List<object>  Markers
         {
-            get { return (ILocalable)GetValue(ItemProperty); }
-            set { SetValue(ItemProperty, value); }
+            get { return (List<object>)GetValue(MarkersProperty); }
+            set { SetValue(MarkersProperty, value); }
         }
 
-        public static readonly DependencyProperty ItemProperty =
-            DependencyProperty.Register("Item", typeof(ILocalable), typeof(Map), new PropertyMetadata(null));
-
+        public static readonly DependencyProperty MarkersProperty =
+            DependencyProperty.Register("Markers", typeof(List<object>), typeof(Map), new PropertyMetadata(new List<object>()));
 
 
         public Map()
@@ -39,7 +41,7 @@ namespace PL.Views
             InitializeComponent();
             ShapeFileLayer.Uri = $@"{System.IO.Directory.GetCurrentDirectory()}/../../../Assest/world.shp";
 
-            ShapeFileLayer.DataContext = this;
+            DataContext = this;
         }
     }
 }

@@ -120,6 +120,10 @@ namespace BL
             }
 
             var availableBaseStations = GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
+            if (!availableBaseStations.Any())
+            {
+                throw new InvalidActionException("There is no empty base station");
+            }
 
             BaseStation closest = drone.FindClosest(availableBaseStations);
 

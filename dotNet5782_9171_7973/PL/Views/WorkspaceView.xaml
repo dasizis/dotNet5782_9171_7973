@@ -20,9 +20,13 @@
     <syncfusion:DockingManager x:Name="Dock" 
                                syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
                                CloseButtonClick="Dock_CloseButtonClick">
-        <ContentControl syncfusion:DockingManager.Header="Bottom" syncfusion:DockingManager.SideInDockedMode="Bottom"/>
+        <ContentControl syncfusion:DockingManager.Header="Bottom" syncfusion:DockingManager.SideInDockedMode="Bottom">
+            <local:MainMapView />
+        </ContentControl>
         <ContentControl syncfusion:DockingManager.Header="Top" 
-                        syncfusion:DockingManager.CanClose="False" />
+                        syncfusion:DockingManager.CanClose="False">
+            <local:AllListsView />
+        </ContentControl>
         <ContentControl syncfusion:DockingManager.Header="Welcome" syncfusion:DockingManager.State="Document" />
 
     </syncfusion:DockingManager>

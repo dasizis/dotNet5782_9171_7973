@@ -24,7 +24,7 @@ namespace PL.Views.Style.ListDesign
         {
             var propValue = prop.GetValue(owner);
 
-            if (prop.PropertyType == typeof(BO.Location)) return propValue;
+            if (prop.PropertyType == typeof(PO.Location)) return propValue;
 
             if (prop.Name == "Battery")
             {
@@ -43,8 +43,8 @@ namespace PL.Views.Style.ListDesign
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var location = value as BO.Location;
-            return new List<object>() { new Longitude() { Long = location.Longitude }, new Latitude() { Lat = location.Latitude } };
+            var location = value as PO.Location;
+            return new List<object>() { new Longitude() { Long = (double)location.Longitude }, new Latitude() { Lat = (double)location.Latitude } };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

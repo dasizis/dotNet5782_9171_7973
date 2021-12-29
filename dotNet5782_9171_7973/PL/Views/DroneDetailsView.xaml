@@ -26,7 +26,7 @@
     </UserControl.Resources>
 
 
-    <StackPanel Margin="30">
+    <StackPanel Margin="30"> 
         <!--Header-->
         <Grid>
             <Grid.ColumnDefinitions>

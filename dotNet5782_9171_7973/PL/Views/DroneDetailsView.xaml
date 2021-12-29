@@ -4,41 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PL.Views"
-             xmlns:vm="clr-namespace:PL.ViewModels"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             xmlns:maps="clr-namespace:Syncfusion.Licensing;assembly=Syncfusion.SfMaps.WPF"
              xmlns:convereters="clr-namespace:PL.Views.Converters"
+             xmlns:po="clr-namespace:PO"
              mc:Ignorable="d" 
-             d:DesignHeight="1450" d:DesignWidth="800" >
-    
+             d:DesignHeight="1450" d:DesignWidth="800"
+             x:Name="User">
+
     <UserControl.Resources>
-        <convereters:ItmeToListConverter x:Key="ItmeToListConverter" />
-        <convereters:DroneStateToHandleChargeText x:Key="DroneStateToHandleChargeText" />
-        <convereters:StateToProceedWithParcelText x:Key="StateToProceedWithParcelText" />
-        <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <convereters:ItmeToListConverter x:Key="ItmeToListConverter" />
+            <convereters:DroneStateToHandleChargeText x:Key="DroneStateToHandleChargeText" />
+            <convereters:StateToProceedWithParcelText x:Key="StateToProceedWithParcelText" />
+            <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
+
+
     <StackPanel Margin="30">
-        <Grid  VerticalAlignment="Stretch">
+        <!--Header-->
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
-                Text="{Binding Drone.Id, StringFormat=Drone {0}}"
-                   FontSize="30"
-                   Foreground="Gray"
-                   Margin="0,0,0,30"
-                        HorizontalAlignment="Center"/>
-            <syncfusion:SfBusyIndicator 
-                AnimationSpeed="{Binding Drone.State, Converter={StaticResource DroneStateToAnimationSpeedConverter}}"
-                Grid.Column="1" 
-                AnimationType="Battery" 
-                Width="Auto" 
-                HorizontalAlignment="Right" 
-                ViewboxHeight="30" 
-                VerticalAlignment="Top">
+                       Text="{Binding Drone.Id, StringFormat=Drone {0}}"
+                       Style="{StaticResource Header}" />
+
+            <syncfusion:SfBusyIndicator Grid.Column="1"
+                                        AnimationType="Battery" 
+                                        AnimationSpeed="{Binding Drone.State, Converter={StaticResource DroneStateToAnimationSpeedConverter}}"
+                                        HorizontalAlignment="Right" 
+                                        ViewboxHeight="30" 
+                                        VerticalAlignment="Top" >
                 <syncfusion:SfBusyIndicator.Header>
                     <TextBlock Text="{Binding Drone.Battery, StringFormat={}{0:F2}%}" Margin="5"/>
                 </syncfusion:SfBusyIndicator.Header>
@@ -46,6 +50,7 @@
 
         </Grid>
 
+        <!--Model Input-->
         <syncfusion:SfTextInputLayout Hint="Model" 
                                       HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}"
@@ -59,18 +64,25 @@
                                     UpdateSourceTrigger=PropertyChanged}"/>
         </syncfusion:SfTextInputLayout>
 
-        <TextBlock Text="{Binding Drone.MaxWeight, StringFormat='Max weight: {0}'}" FontSize="15" Foreground="DarkGray" Margin="3"/>
-        <TextBlock Text="{Binding Drone.State, StringFormat='State: {0}'}"  FontSize="15" Foreground="DarkGray" Margin="3"/>
+        <!--Details-->
+        <TextBlock Text="{Binding Drone.MaxWeight, StringFormat='Max weight: {0}'}" 
+                   Style="{StaticResource Text}"/>
+        <TextBlock Text="{Binding Drone.State, StringFormat='State: {0}'}"  
+                   Style="{StaticResource Text}"/>
 
+        <!--Buttons-->
         <StackPanel Orientation="Horizontal">
-
             <Button Content="Update"                
                     Style="{DynamicResource WPFPrimaryButtonStyle}"
-                    Command="{Binding RenameDroneCommand}" Margin="5" Padding="5"/>
-        <Button Content="Delete"
-                Command="{Binding DeleteCommand}" Margin="5" Padding="5"/>
+                    Command="{Binding RenameDroneCommand}"
+                    Margin="5" Padding="5"/>
 
-            <Button Command="{Binding ProceedWithParcelCommand}" Margin="5" Padding="5">
+            <Button Content="Delete"
+                    Command="{Binding DeleteCommand}" 
+                    Margin="5" Padding="5"/>
+
+            <Button Command="{Binding ProceedWithParcelCommand}" 
+                    Margin="5" Padding="5">
                 <Button.Content>
                     <MultiBinding Converter="{StaticResource StateToProceedWithParcelText}">
                         <Binding Path="Drone.State"/>
@@ -79,19 +91,18 @@
                 </Button.Content>
             </Button>
 
+            <Button Content="{Binding Drone.State, Converter={StaticResource DroneStateToHandleChargeText}}"
+                    Command="{Binding HandleChargeCommand}"
+                    Margin="5" Padding="5"/>
 
-            <Button Content="{Binding Drone.State,Converter={StaticResource DroneStateToHandleChargeText}}"
-                Command="{Binding HandleChargeCommand}" Margin="5" Padding="5"/>
-        <Button Content="View Parcel"
-                Command="{x:Static local:WorkspaceView.AddPanelCommand}"
-                CommandParameter="{Binding ParcelPanel}" Margin="5" Padding="5">
-        </Button>
+            <Button Content="View Parcel"
+                    Command="{Binding ViewParcelCommand}"
+                    Margin="5" Padding="5"/>
+
         </StackPanel>
-        <local:Map Margin="0,20"
-            Drones="{Binding DataContext.Drone, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, 
-            Converter={StaticResource ItmeToListConverter}}"/>
+
+        <!--Map-->
+        <local:Map Margin="0,20" Item="{Binding DataContext.Drone, ElementName=User}"/>
 
     </StackPanel>
-
-
 </UserControl>

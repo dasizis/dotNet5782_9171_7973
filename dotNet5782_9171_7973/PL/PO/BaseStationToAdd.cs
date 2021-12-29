@@ -46,7 +46,6 @@ namespace PO
         /// <summary>
         /// Base station location latitude
         /// </summary>
-        [SexadecimalLatitude]
         [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
         [Required(ErrorMessage = "Required")]
         public double? Latitude

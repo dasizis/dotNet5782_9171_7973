@@ -14,7 +14,6 @@ namespace PO
         /// Location longitude
         /// </summary>
         [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
-        [SexadecimalLongitude]
         [Required(ErrorMessage = "Required")]
         public double? Longitude
         {
@@ -27,7 +26,6 @@ namespace PO
         /// Location latitude
         /// </summary>
         [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
-        [SexadecimalLatitude]
         [Required(ErrorMessage = "Required")]
         public double? Latitude
         {

@@ -6,18 +6,23 @@
              xmlns:local="clr-namespace:PL.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:converters="clr-namespace:PL.Views.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ItmeToListConverter x:Key="ItmeToListConverter" />
+        <converters:ItemToExtandedListConverter x:Key="ItemToExtandedListConverter" />
+    </UserControl.Resources>
     <syncfusion:SfMap>
         <syncfusion:SfMap.Layers>
-            <syncfusion:ShapeFileLayer x:Name="ShapeFileLayer" Markers="{Binding DataList}">
+            <syncfusion:ShapeFileLayer x:Name="ShapeFileLayer" Markers="{Binding Item, Converter={StaticResource ItemToExtandedListConverter} }">
                 <syncfusion:ShapeFileLayer.MarkerTemplate>
                     <DataTemplate>
                         <Ellipse Height="8" Width="8" Fill="{Binding Data.Color}" Stroke="Gray" />
                     </DataTemplate>
                 </syncfusion:ShapeFileLayer.MarkerTemplate>
                 <syncfusion:ShapeFileLayer.MarkerToolTipSettings>
-                    <syncfusion:ToolTipSetting Margin="8" ValuePath="Country">
+                    <syncfusion:ToolTipSetting Margin="8">
                         <syncfusion:ToolTipSetting.ToolTipTemplate>
                             <DataTemplate>
                                 <Border CornerRadius="5">
@@ -27,10 +32,9 @@
                                                    Foreground="White"
                                                    Text="{Binding Data.Name}"/>
 
-                                        <Rectangle 
-                                                       Height="1"
-                                                       Margin="0,5,0,5"
-                                                       Stroke="White" />
+                                        <Rectangle Height="1"
+                                                   Margin="0,5,0,5"
+                                                   Stroke="White" />
                                         
                                         <StackPanel>
                                             
@@ -66,5 +70,4 @@
             </syncfusion:ShapeFileLayer>
         </syncfusion:SfMap.Layers>
     </syncfusion:SfMap>
-
 </UserControl>

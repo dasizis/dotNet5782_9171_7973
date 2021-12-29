@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PO;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -6,16 +7,47 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PL.Views.Converters
 {
-
     public class ItmeToListConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return new List<object>() { value };
         }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ItemToExtandedListConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            ILocalable localable = (ILocalable)value;
+
+            return new List<object>() { 
+                new 
+                { 
+                    localable.Location.Latitude, 
+                    localable.Location.Longitude, 
+                    Name = value.GetType().Name, 
+                    Color = ColorsDictionary[value.GetType()].ToString()
+                } 
+            };
+        }
+
+        public Dictionary<Type, Color> ColorsDictionary { get; set; } = new()
+        {
+            [typeof(Drone)] = Colors.Pink,
+            [typeof(Customer)] = Colors.LightBlue,
+            [typeof(Parcel)] = Colors.Lavender,
+            [typeof(BaseStation)] = Colors.Lavender,
+        };
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

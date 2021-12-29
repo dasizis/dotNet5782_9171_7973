@@ -33,7 +33,7 @@ namespace PL.ViewModels
         private void ViewSenderDetails()
         {
             Views.WorkspaceView.AddPanelCommand.Execute(
-                new Panel(PanelType.Dispaly, 
+                new Panel(PanelType.Display, 
                           new Views.CustomerDetailsView(Parcel.Target.Id), 
                           $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.Target.Id}"));
         }
@@ -41,7 +41,7 @@ namespace PL.ViewModels
         private void ViewTargetDetails()
         {
             Views.WorkspaceView.AddPanelCommand.Execute(
-                new Panel(PanelType.Dispaly,
+                new Panel(PanelType.Display,
                           new Views.CustomerDetailsView(Parcel.Sender.Id),
                           $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.Sender.Id}"));
         }
@@ -49,7 +49,7 @@ namespace PL.ViewModels
         private void ViewDroneDetails()
         {
             Views.WorkspaceView.AddPanelCommand.Execute(
-                            new Panel(PanelType.Dispaly,
+                            new Panel(PanelType.Display,
                                       new Views.DroneDetailsView((int)Parcel.DroneId),
                                       $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.DroneId}"));
         }

@@ -3,31 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:convereters="clr-namespace:PL.Views.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding Parcel.Id}"/>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
+            <convereters:ParcelToSteperIndex x:Key="ParcelToSteperIndex"/>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <StackPanel Margin="30">
+        <!--Header-->
+        <TextBlock Grid.Column="0"
+                       Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
+                       Style="{StaticResource Header}" />
+        
+        <!--Details-->
+        <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
+                   Style="{StaticResource Text}"/>
+        <TextBlock Text="{Binding Parcel.Priority, StringFormat='Priority: {0}'}" 
+                   Style="{StaticResource Text}"/>
         <TextBlock Text="{Binding Parcel.Sender.Id}"/>
         <TextBlock Text="{Binding Parcel.Target.Id}"/>
-        <TextBlock Text="{Binding Parcel.Weight}"/>
-        <TextBlock Text="{Binding Parcel.Priority}"/>
-        <TextBlock Text="{Binding Parcel}"/>
-        <TextBlock Text="{Binding Parcel.Requested}"/>
-        <TextBlock Text="{Binding Parcel.Scheduled}"/>
-        <TextBlock Text="{Binding Parcel.PickedUp}"/>
-        <TextBlock Text="{Binding Parcel.Supplied}"/>
-        <Button 
-            Content="VIEW SENDER DETAILS"
-            Command="{Binding ViewSenderCommand}"/>
-        <Button
-            Content="VIEW RECIEVER DETAILS"
-            Command="{Binding ViewTargetCommand}"/>
-        <Button 
-            Content="VIEW DRONE DETAILS"
-            Command="{Binding ViewDroneCommand}"/>
-        <Button 
-            Content="DELETE PARCEL"
-            Command="{Binding DeleteCommand}"/>
 
+        <syncfusion:SfStepProgressBar SelectedIndex="{Binding Parcel.Id, Converter={StaticResource ParcelToSteperIndex}}" AnimationDuration="0:0:0">
+            <syncfusion:StepViewItem Content="{Binding Parcel.Requested}" />
+            <syncfusion:StepViewItem Content="{Binding Parcel.Scheduled}" />
+            <syncfusion:StepViewItem Content="{Binding Parcel.PickedUp}" />
+            <syncfusion:StepViewItem Content="{Binding Parcel.Supplied}"/>
+        </syncfusion:SfStepProgressBar>
+
+        <!--Buttons-->
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="View sender details"                
+                    Command="{Binding ViewSenderCommand}"
+                    Margin="5" Padding="5"/>
+
+            <Button Content="View reciever details"                
+                    Command="{Binding ViewTargetCommand}"
+                    Margin="5" Padding="5"/>
+
+            <Button Content="View drone details"                
+                    Command="{Binding ViewDroneCommand}"
+                    Margin="5" Padding="5"/>
+
+            <Button Content="Delete parcel"                
+                    Style="{DynamicResource WPFPrimaryButtonStyle}"
+                    Command="{Binding DeleteCommand}"
+                    Margin="5" Padding="5"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

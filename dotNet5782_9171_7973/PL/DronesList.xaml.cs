@@ -71,7 +71,7 @@ namespace PL
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Window.GetWindow(this)).AddDisplayTab("Add Drone", new DroneControl());
+            //((MainWindow)Window.GetWindow(this)).AddDisplayTab("Add Drone", new DroneControl());
         }
 
         private void DronesListView_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
@@ -80,7 +80,7 @@ namespace PL
             if (drone == null) return;
 
             int id = drone.Id;
-            ((MainWindow)Window.GetWindow(this)).AddDisplayTab($"Drone {id}", new DroneControl(id));
+            //((MainWindow)Window.GetWindow(this)).AddDisplayTab($"Drone {id}", new DroneControl(id));
         }
     }    
 }

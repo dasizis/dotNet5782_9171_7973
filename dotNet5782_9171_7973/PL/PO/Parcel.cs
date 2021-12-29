@@ -6,7 +6,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of parcel
     /// </summary>
-    class Parcel : PropertyChangedNotification
+    public class Parcel : PropertyChangedNotification
     {
         /// <summary>
         /// Parcel Id

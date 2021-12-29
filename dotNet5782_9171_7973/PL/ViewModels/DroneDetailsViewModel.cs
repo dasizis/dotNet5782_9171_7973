@@ -1,11 +1,17 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using PO;
+using StringUtilities;
 
 namespace PL.ViewModels
 {
     class DroneDetailsViewModel
     {
         public Drone Drone { get; set; }
+
+        public bool IsInCharge => Drone.State == DroneState.Maintenance;
+
+        public List<Location> Location => new () { Drone.Location };
 
         public RelayCommand ProceedWithParcelCommand { get; set; }
 
@@ -14,6 +20,8 @@ namespace PL.ViewModels
         public RelayCommand RenameDroneCommand { get; set; }
 
         public RelayCommand DeleteCommand { get; set; }
+
+        public Panel ParcelPanel => Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id);
 
         public DroneDetailsViewModel(int id)
         {
@@ -96,7 +104,7 @@ namespace PL.ViewModels
         private void Delete()
         {
             PLService.DeleteDrone(Drone.Id);
-            MessageBox.Show($"Drone {Drone.Id} deleted");
+            Views.WorkspaceView.RemovePanelCommand.Execute($"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {Drone.Id}");
             // Close Tab 
         }
 

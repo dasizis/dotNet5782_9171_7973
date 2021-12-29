@@ -1,20 +1,21 @@
 ﻿using PO;
+using StringUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using PL.Views;
 
 namespace PL.ViewModels
 {
-    class ParcelDetailsViewModel
+    class ParcelDetailsViewModel : DependencyObject
     {
         public Parcel Parcel { get; set; }
-
-        public RelayCommand ShowSenderCommand { get; set; }
-        public RelayCommand ShowTargetCommand { get; set; }
-        public RelayCommand ShowDroneCommand { get; set; }
+        public RelayCommand ViewSenderCommand { get; set; }
+        public RelayCommand ViewTargetCommand { get; set; }
+        public RelayCommand ViewDroneCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
 
         public ParcelDetailsViewModel(int id)
@@ -23,25 +24,34 @@ namespace PL.ViewModels
 
             Parcel = PLService.GetParcel(id);
 
-            ShowSenderCommand = new(ExecuteShowSenderDetails);
-            ShowTargetCommand = new(ExecuteShowTargetDetails);
-            ShowDroneCommand = new(ExecuteShowDroneDetails, () => Parcel.Scheduled != null);
+            ViewSenderCommand = new(ViewSenderDetails);
+            ViewTargetCommand = new(ViewTargetDetails);
+            ViewDroneCommand = new(ViewDroneDetails, () => Parcel.Scheduled != null);
             DeleteCommand = new(Delete, () => Parcel.Scheduled == null || Parcel.Supplied != null);
         }
 
-        private void ExecuteShowSenderDetails()
+        private void ViewSenderDetails()
         {
-            MessageBox.Show("Sender Details");
+            Views.WorkspaceView.AddPanelCommand.Execute(
+                new Panel(PanelType.Dispaly, 
+                          new Views.CustomerDetailsView(Parcel.Target.Id), 
+                          $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.Target.Id}"));
         }
 
-        private void ExecuteShowTargetDetails()
+        private void ViewTargetDetails()
         {
-            MessageBox.Show("Target Details");
+            Views.WorkspaceView.AddPanelCommand.Execute(
+                new Panel(PanelType.Dispaly,
+                          new Views.CustomerDetailsView(Parcel.Sender.Id),
+                          $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.Sender.Id}"));
         }
 
-        private void ExecuteShowDroneDetails()
+        private void ViewDroneDetails()
         {
-            MessageBox.Show("Drone Details");
+            Views.WorkspaceView.AddPanelCommand.Execute(
+                            new Panel(PanelType.Dispaly,
+                                      new Views.DroneDetailsView((int)Parcel.DroneId),
+                                      $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.DroneId}"));
         }
 
         private void Delete()
@@ -49,7 +59,7 @@ namespace PL.ViewModels
             ParcelsNotification.ParcelsChangedEvent -= LoadParcel;
 
             PLService.DeleteParcel(Parcel.Id);
-            MessageBox.Show($"Parcel {Parcel.Id} deleted");
+            WorkspaceView.RemovePanelCommand.Execute($"{nameof(Views.ParcelDetailsView).CamelCaseToReadable()} {Parcel.Id}");
         }
 
         private void LoadParcel()

@@ -18,13 +18,13 @@
         <TextBlock Text="{Binding Parcel.Supplied}"/>
         <Button 
             Content="VIEW SENDER DETAILS"
-            Command="{Binding ShowSenderCommand}"/>
+            Command="{Binding ViewSenderCommand}"/>
         <Button
             Content="VIEW RECIEVER DETAILS"
-            Command="{Binding ShowTargetCommand}"/>
+            Command="{Binding ViewTargetCommand}"/>
         <Button 
             Content="VIEW DRONE DETAILS"
-            Command="{Binding ShowDroneCommand}"/>
+            Command="{Binding ViewDroneCommand}"/>
         <Button 
             Content="DELETE PARCEL"
             Command="{Binding DeleteCommand}"/>

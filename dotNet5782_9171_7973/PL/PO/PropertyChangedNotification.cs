@@ -11,7 +11,7 @@ namespace PO
     /// A base class for models which implements <see cref="INotifyPropertyChanged"/>
     /// and <see cref="IDataErrorInfo"/> interfaces
     /// </summary>
-    internal abstract class PropertyChangedNotification : INotifyPropertyChanged, IDataErrorInfo
+    public abstract class PropertyChangedNotification : INotifyPropertyChanged, IDataErrorInfo
     {
         /// <summary>
         /// Event which Occurs when a property was changed

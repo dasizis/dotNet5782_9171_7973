@@ -20,10 +20,10 @@ namespace PL.Views
     /// </summary>
     public partial class CustomerDetailsView : UserControl
     {
-        public CustomerDetailsView()
+        public CustomerDetailsView(int id)
         {
             InitializeComponent();
-            DataContext = new ViewModels.CustomerDetailsViewModel(2);
+            DataContext = new ViewModels.CustomerDetailsViewModel(id);
         }
     }
 }

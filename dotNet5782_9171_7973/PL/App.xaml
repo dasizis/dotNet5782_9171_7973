@@ -17,6 +17,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
                 <!--<ResourceDictionary Source="Dictionary.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

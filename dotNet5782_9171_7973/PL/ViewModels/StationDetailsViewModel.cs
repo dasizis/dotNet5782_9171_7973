@@ -17,7 +17,7 @@ namespace PL.ViewModels
             Station = PLService.GetBaseStation(id);
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
-            OpenDronesListCommand = new(ExecuteOpenDronesList);
+            OpenDronesListCommand = new(ViewDronesList);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
         }
 
@@ -27,7 +27,7 @@ namespace PL.ViewModels
             MessageBox.Show($"Station {Station.Id}' details changed");
         }
 
-        private void ExecuteOpenDronesList()
+        private void ViewDronesList()
         {
             MessageBox.Show("Open drones list");
         }

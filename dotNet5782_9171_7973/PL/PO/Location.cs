@@ -7,7 +7,7 @@ namespace PO
     /// <summary>
     /// A class to represent a location
     /// </summary>
-    class Location : PropertyChangedNotification
+    public class Location : PropertyChangedNotification
     {
         double? longitude;
         /// <summary>

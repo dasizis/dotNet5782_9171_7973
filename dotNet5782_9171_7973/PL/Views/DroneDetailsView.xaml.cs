@@ -20,10 +20,12 @@ namespace PL.Views
     /// </summary>
     public partial class DroneDetailsView : UserControl
     {
-        public DroneDetailsView()
+        public DroneDetailsView(int id)
         {
             InitializeComponent();
-            DataContext = new ViewModels.DroneDetailsViewModel(3);
+            DataContext = new ViewModels.DroneDetailsViewModel(id);
+
+            ShapeFileLayer.Uri = $@"{System.IO.Directory.GetCurrentDirectory()}/../../../Assest/world.shp";
         }
     }
 }

@@ -4,24 +4,135 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PL.Views"
+             xmlns:vm="clr-namespace:PL.ViewModels"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:maps="clr-namespace:Syncfusion.Licensing;assembly=Syncfusion.SfMaps.WPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:po="clr-namespace:PO" d:DataContext="{d:DesignInstance Type=po:Drone}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding Drone.Id}"/>
-        <TextBox Text="{Binding Drone.Model}"/>
-        <TextBlock Text="{Binding Drone.MaxWeight}"/>
-        <TextBlock Text="{Binding Drone.Battery}"/>
-        <TextBlock Text="{Binding Drone.State}"/>
-        <TextBlock Text="{Binding Drone.Location.Longitude}"/>
-        <TextBlock Text="{Binding Drone.Location.Latitude}"/>
+             d:DesignHeight="1450" d:DesignWidth="800" >
+    
+    <UserControl.Resources>
 
-        <Button Content="UPDATE"
-                Command="{Binding RenameDroneCommand}"/>
+    </UserControl.Resources>
+    <StackPanel Margin="30">
+        <Grid  VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                Text="{Binding Drone.Id, StringFormat=Drone {0}}"
+                   FontSize="30"
+                   Foreground="Gray"
+                   Margin="0,0,0,30"
+                        HorizontalAlignment="Center"/>
+            <syncfusion:SfBusyIndicator 
+                Grid.Column="1" 
+                AnimationType="Battery" 
+                Width="Auto" 
+                HorizontalAlignment="Right" 
+                ViewboxHeight="30" 
+                VerticalAlignment="Top">
+                <syncfusion:SfBusyIndicator.Header>
+                    <TextBlock Text="{Binding Drone.Battery, StringFormat={}{0:F2}%}" Margin="5"/>
+                </syncfusion:SfBusyIndicator.Header>
+            </syncfusion:SfBusyIndicator>
+
+        </Grid>
+
+        <syncfusion:SfTextInputLayout Hint="Model" 
+                                      HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}">
+            <syncfusion:SfTextInputLayout.LeadingView>
+                <materialDesign:PackIcon Kind="Pencil" Height="10"/>
+            </syncfusion:SfTextInputLayout.LeadingView>
+            <TextBox x:Name="ModelInput"
+                     Text="{Binding Drone.Model, 
+                                    ValidatesOnDataErrors=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+        </syncfusion:SfTextInputLayout>
+
+        <TextBlock Text="{Binding Drone.MaxWeight, StringFormat='Drone max weight: {0}'}"/>
+        <TextBlock Text="{Binding Drone.State, StringFormat='Drone state: {0}'}"/>
+        
+        <syncfusion:SfMap>
+            <syncfusion:SfMap.Layers>
+                <syncfusion:ShapeFileLayer x:Name="ShapeFileLayer" Markers="{Binding Location}">
+                    <syncfusion:ShapeFileLayer.MarkerTemplate>
+                        <DataTemplate>
+                            <Ellipse Height="8" Width="8" Fill="Pink" Stroke="Gray" />
+                        </DataTemplate>
+                    </syncfusion:ShapeFileLayer.MarkerTemplate>
+                    <syncfusion:ShapeFileLayer.MarkerToolTipSettings>
+                        <syncfusion:ToolTipSetting Margin="8" ValuePath="Country">
+                            <syncfusion:ToolTipSetting.ToolTipTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="5">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Longitude" Foreground="White" />
+                                                
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="14"
+                                                       Foreground="White"
+                                                       Text="{Binding Data.Longitude, StringFormat={}{0:F4}}" />
+                                            </StackPanel>
+                                            <Rectangle Grid.Row="1"
+                                                       Height="1"
+                                                       Margin="0,5,0,5"
+                                                       Stroke="White" />
+                                            <Grid Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Latitude" Foreground="White" />
+
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="14"
+                                                       Foreground="White"
+                                                       Text="{Binding Data.Latitude, StringFormat={}{0:F4}}" />
+                                                </StackPanel>
+                                            </Grid>
+
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </syncfusion:ToolTipSetting.ToolTipTemplate>
+                        </syncfusion:ToolTipSetting>
+                    </syncfusion:ShapeFileLayer.MarkerToolTipSettings>
+                    
+                </syncfusion:ShapeFileLayer>
+            </syncfusion:SfMap.Layers>
+        </syncfusion:SfMap>
+
+        <StackPanel Orientation="Horizontal">
+
+            <Button Content="UPDATE"                
+                    Style="{DynamicResource WPFPrimaryButtonStyle}"
+                    Width=""
+                    Command="{Binding RenameDroneCommand}"/>
         <Button Content="DELETE"
                 Command="{Binding DeleteCommand}"/>
         <Button Content="PROCEED WITH PARCEL"
                 Command="{Binding ProceedWithParcelCommand}"/>
         <Button Content="CHARGE"
                 Command="{Binding HandleChargeCommand}"/>
-    </StackPanel>
+        <Button Content="VIEW PARCEL"
+                Command="{x:Static local:WorkspaceView.AddPanelCommand}"
+                CommandParameter="{Binding ParcelPanel}">
+        </Button>
+        </StackPanel>
+        </StackPanel>
+
+
 </UserControl>

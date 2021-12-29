@@ -11,8 +11,6 @@ namespace PL.ViewModels
 
         public bool IsInCharge => Drone.State == DroneState.Maintenance;
 
-        public List<Location> Location => new () { Drone.Location };
-
         public RelayCommand ProceedWithParcelCommand { get; set; }
 
         public RelayCommand HandleChargeCommand { get; set; }
@@ -22,6 +20,13 @@ namespace PL.ViewModels
         public RelayCommand DeleteCommand { get; set; }
 
         public Panel ParcelPanel => Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id);
+
+        public string ProceedWithParcelText
+        {
+            get => Drone.State == DroneState.Deliver
+                   ? Drone.ParcelInDeliver.WasPickedUp ? "Supply Parcel" : "Pick Parcel Up"
+                   : "Assign Parcel to Drone";
+        }
 
         public DroneDetailsViewModel(int id)
         {
@@ -111,6 +116,7 @@ namespace PL.ViewModels
         private void LoadDrone()
         {
             string model = Drone.Model;
+
             Drone.Reload(PLService.GetDrone(Drone.Id));
             Drone.Model = model;
         }

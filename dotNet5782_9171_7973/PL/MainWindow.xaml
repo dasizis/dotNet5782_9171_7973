@@ -13,10 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <materialDesign:DialogHost>
         <views:WorkspaceView />
-
-    </materialDesign:DialogHost>
 
 </Window>
 

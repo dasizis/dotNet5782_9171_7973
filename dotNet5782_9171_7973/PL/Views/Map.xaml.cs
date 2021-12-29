@@ -23,16 +23,14 @@ namespace PL.Views
     {
 
 
-        public List<Drone> Parcels
+        public List<Parcel> Parcels
         {
-            get { return (List<Drone>)GetValue(ParcelsProperty); }
+            get { return (List<Parcel>)GetValue(ParcelsProperty); }
             set { SetValue(ParcelsProperty, value); }
         }
 
         public static readonly DependencyProperty ParcelsProperty =
-            DependencyProperty.Register("Parcels", typeof(List<Drone>), typeof(Map), new PropertyMetadata(new List<Drone>()));
-
-
+            DependencyProperty.Register("Parcels", typeof(List<Parcel>), typeof(Map), new PropertyMetadata(new List<Parcel>()));
 
 
         public List<BaseStation> BaseStations
@@ -45,8 +43,6 @@ namespace PL.Views
             DependencyProperty.Register("BaseStations", typeof(List<BaseStation>), typeof(Map), new PropertyMetadata(new List<BaseStation>()));
 
 
-
-
         public List<Customer> Customers
         {
             get { return (List<Customer>)GetValue(CustomersProperty); }
@@ -55,8 +51,6 @@ namespace PL.Views
 
         public static readonly DependencyProperty CustomersProperty =
             DependencyProperty.Register("Customers", typeof(List<Customer>), typeof(Map), new PropertyMetadata(new List<Customer>()));
-
-
 
 
         public List<Drone> Drones
@@ -69,23 +63,30 @@ namespace PL.Views
             DependencyProperty.Register("Drones", typeof(List<Drone>), typeof(Map), new PropertyMetadata(new List<Drone>()));
 
 
-        public Dictionary<Type, Color> Colors { get; set; } = new()
+        public Dictionary<Type, Color> ColorsDictionary { get; set; } = new()
         {
-            [typeof(Drone)] = Color.FromRgb(111, 0, 0),
-            [typeof(Customer)] = Color.FromRgb(111, 111, 0),
-            [typeof(Parcel)] = Color.FromRgb(111, 0, 111),
-            [typeof(BaseStation)] = Color.FromRgb(0, 111, 0),
+            [typeof(Drone)] = Colors.Pink,
+            [typeof(Customer)] = Colors.LightBlue,
+            [typeof(Parcel)] = Colors.Lavender,
+            [typeof(BaseStation)] = Colors.Lavender,
         };
 
         public List<object> DataList => BaseStations.Cast<ILocalable>()
                                                     .Concat(Customers)
                                                     .Concat(Drones)
-                                                    .Select(item => new { item.Location, Color = Colors[item.GetType()] })
+                                                    .Select(item => new { item.Location.Longitude, 
+                                                                          item.Location.Latitude, 
+                                                                          Color = ColorsDictionary[item.GetType()].ToString() , 
+                                                                          Name = item.GetType().Name })
                                                     .Cast<object>()
                                                     .ToList();
         public Map()
         {
             InitializeComponent();
+            ShapeFileLayer.Uri = $@"{System.IO.Directory.GetCurrentDirectory()}/../../../Assest/world.shp";
+
+            DataContext = this;
+
         }
     }
 }

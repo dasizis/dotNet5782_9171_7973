@@ -25,7 +25,6 @@ namespace PL.Views
             InitializeComponent();
             DataContext = new ViewModels.DroneDetailsViewModel(id);
 
-            ShapeFileLayer.Uri = $@"{System.IO.Directory.GetCurrentDirectory()}/../../../Assest/world.shp";
         }
     }
 }

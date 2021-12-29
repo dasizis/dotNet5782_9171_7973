@@ -5,7 +5,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of drone for list
     /// </summary>
-    class DroneForList
+    public class DroneForList
     {
         /// <summary>
         /// Drone Id

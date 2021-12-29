@@ -58,7 +58,6 @@ namespace PL
             {
                 parcelsList.Add(ConvertParcel(parcel));
             }
-
             return parcelsList;
         }
 

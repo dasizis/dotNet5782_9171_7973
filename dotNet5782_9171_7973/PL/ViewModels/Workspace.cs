@@ -28,6 +28,7 @@ namespace PL.ViewModels
         public static string ParcelPanelName(int id) => $"{nameof(Views.ParcelDetailsView).CamelCaseToReadable()} {id}";
         public static string CustomerPanelName(int id) => $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {id}";
         public static string BaseStationPanelName(int id) => $"{nameof(Views.StationDetailsView).CamelCaseToReadable()} {id}";
+        public static string ListPanelName(Type type) => $"{type.Name}";
 
         public static Panel DronePanel(int? id) => id == null 
             ? null 
@@ -44,6 +45,9 @@ namespace PL.ViewModels
         public static Panel BaseStationPanel(int? id) => id == null
             ? null
             : new(PanelType.Display, new Views.StationDetailsView((int)id), BaseStationPanelName((int)id));
+
+        public static Panel DronesListPanel(List<PO.Drone> list) =>
+            new(PanelType.List, new Views.DronesListView(list), ListPanelName(typeof(PO.Drone)));
 
     }
 }

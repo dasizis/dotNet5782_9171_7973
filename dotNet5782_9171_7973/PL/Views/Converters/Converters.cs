@@ -100,4 +100,23 @@ namespace PL.Views.Converters
             throw new NotImplementedException();
         }
     }
+
+    public class ParcelToSteperIndex : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var parcel = PLService.GetParcel((int)value);
+            return parcel.Scheduled == null ?
+                0 : parcel.PickedUp == null ?
+                1 : parcel.Supplied == null ?
+                2 : 3;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
 }

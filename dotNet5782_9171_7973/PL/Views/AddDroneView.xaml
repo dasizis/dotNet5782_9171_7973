@@ -34,6 +34,7 @@
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
             </syncfusion:SfTextInputLayout>
+            
             <!--Model Input-->
             <syncfusion:SfTextInputLayout Hint="Model" 
                                       HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
@@ -47,6 +48,8 @@
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
             </syncfusion:SfTextInputLayout>
+            
+            <!--Station Id input-->
             <syncfusion:SfTextInputLayout Hint="Base station Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=StationIdInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=StationIdInput}">
@@ -60,6 +63,8 @@
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding StationsOptions}"/>
             </syncfusion:SfTextInputLayout>
+            
+            <!--Max weight input-->
             <syncfusion:SfTextInputLayout Hint="Weight category" 
                                       HasError="{Binding (Validation.HasError), ElementName=WeightInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=WeightInput}">

@@ -15,6 +15,11 @@ namespace PL.ViewModels
         public ObservableCollection<BaseStationForList> BaseStations { get; set; } = new();
         public ObservableCollection<ParcelForList> Parcels { get; set; } = new();
 
+        public RelayCommand AddDroneCommand { get; set; }
+        public RelayCommand AddParcelCommand { get; set; }
+        public RelayCommand AddStationCommand { get; set; }
+        public RelayCommand AddCustomerCommand { get; set; }
+
         public AllListsViewModel()
         {
             LoadCustomers();
@@ -26,6 +31,8 @@ namespace PL.ViewModels
             CustomersNotification.CustomersChanged += LoadCustomers;
             BaseStationsNotification.BaseStationsChangedEvent += LoadBaseStations;
             ParcelsNotification.ParcelsChangedEvent += LoadParcels;
+
+            AddDroneCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronePanel()));
         }
 
         void LoadCustomers()

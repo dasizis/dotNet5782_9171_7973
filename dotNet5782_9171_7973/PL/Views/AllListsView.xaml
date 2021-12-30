@@ -15,8 +15,15 @@
         <ResourceDictionary Source="Style/ListDesign/TreeViewDictionary.xaml" />
     </UserControl.Resources>
     <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="20,5">
+            <Button Content="+ Drone" Margin="5" Command="{Binding AddDroneCommand}"/>
+            <Button Content="+ Parcel" Margin="5" Command="{Binding AddParcelCommand}"/>
+            <Button Content="+ Station" Margin="5" Command="{Binding AddStationCommand}" />
+            <Button Content="+ Customer" Margin="5" Command="{Binding AddCustomerCommand}"/>
+        </StackPanel>
+
         <syncfusion:TreeViewAdv ShowRootLines="False">
-            <syncfusion:TreeViewItemAdv Header="Drones" ItemsSource="{Binding Drones}"/>
+            <syncfusion:TreeViewItemAdv Header="Drones" ItemsSource="{Binding Drones}" DockPanel.Dock="Left"/>
         </syncfusion:TreeViewAdv>
 
         <syncfusion:TreeViewAdv ShowRootLines="False">

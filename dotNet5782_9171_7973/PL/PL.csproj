@@ -11,7 +11,6 @@
     <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.0" />
-    <PackageReference Include="Syncfusion.SfProgressBar.WPF" Version="19.4.0.40" />
   </ItemGroup>
 
   <ItemGroup>
@@ -370,5 +369,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+	<ItemGroup>
+		<None Update="Assest\world.shp">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

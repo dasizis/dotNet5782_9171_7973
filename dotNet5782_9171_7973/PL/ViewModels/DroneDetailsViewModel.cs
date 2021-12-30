@@ -36,7 +36,7 @@ namespace PL.ViewModels
             HandleChargeCommand = new(HandleCharge, () => Drone.State != DroneState.Deliver);
             RenameDroneCommand = new(RenameDrone, () => Drone.Error == null);
             DeleteCommand = new(Delete, () => Drone.State == DroneState.Free);
-            ViewParcelCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id)), 
+            ViewParcelCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id)), 
                                     () => Drone.ParcelInDeliver != null);
         }
 
@@ -116,7 +116,7 @@ namespace PL.ViewModels
         private void Delete()
         {
             PLService.DeleteDrone(Drone.Id);
-            Views.WorkspaceView.RemovePanelCommand.Execute($"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {Drone.Id}");
+            Workspace.RemovePanelCommand.Execute($"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {Drone.Id}");
             // Close Tab 
         }
 

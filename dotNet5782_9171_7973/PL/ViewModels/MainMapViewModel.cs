@@ -24,13 +24,18 @@ namespace PL.ViewModels
             BaseStationsNotification.BaseStationsChangedEvent += LoadBaseStations;
         }
 
+        object ItemToMaker(PO.ILocalable localable)
+        {
+            return new { localable.Location.Longitude, localable.Location.Latitude, Color = Views.Converters.Mapping.ColorsDictionary[localable.GetType()].ToString(), Name = localable.GetType().Name };
+        }
+
         void LoadCustomers()
         {
             Customers.Clear();
 
             foreach (var customer in PLService.GetCustomersList().Select(c => PLService.GetCustomer(c.Id)))
             {
-                Customers.Add(customer);
+                Customers.Add(ItemToMaker(customer));
             }
         }
 
@@ -40,7 +45,7 @@ namespace PL.ViewModels
 
             foreach (var drone in PLService.GetDronesList().Select(d => PLService.GetDrone(d.Id)))
             {
-                Drones.Add(drone);
+                Drones.Add(ItemToMaker(drone));
             }
         }
 

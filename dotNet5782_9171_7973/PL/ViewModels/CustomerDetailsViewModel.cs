@@ -23,9 +23,9 @@ namespace PL.ViewModels
             DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);
             //TODO
-            OpenSentParcelsListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.SenderName == Customer.Name, "A")),
+            OpenSentParcelsListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.SenderName == Customer.Name, "A")),
                                     () => Customer.Send.Count != 0);
-            OpenRecievedParcelsListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.TargetName == Customer.Name, "B")),
+            OpenRecievedParcelsListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.TargetName == Customer.Name, "B")),
                                     () => Customer.Recieve.Count != 0);
         }
 

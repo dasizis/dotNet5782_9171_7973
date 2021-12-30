@@ -32,10 +32,10 @@ namespace PL.ViewModels
             BaseStationsNotification.BaseStationsChangedEvent += LoadBaseStations;
             ParcelsNotification.ParcelsChangedEvent += LoadParcels;
 
-            AddDroneCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronePanel()));
-            AddParcelCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelPanel()));
-            AddStationCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.BaseStationPanel()));
-            AddCustomerCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel()));
+            AddDroneCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.DronePanel()));
+            AddParcelCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel()));
+            AddStationCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.BaseStationPanel()));
+            AddCustomerCommand = new(() =>Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel()));
         }
 
         void LoadCustomers()

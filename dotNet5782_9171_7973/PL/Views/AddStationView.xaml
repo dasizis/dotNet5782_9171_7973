@@ -92,6 +92,6 @@
             </syncfusion:SfTextInputLayout>
         </StackPanel>
 
-        <Button Command="{Binding AddCommand}"/>
+        <syncfusion:ButtonAdv Content="Add" Command="{Binding AddCommand}"/>
     </StackPanel>
 </UserControl>

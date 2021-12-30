@@ -46,8 +46,8 @@ namespace PL.ViewModels
             ? null
             : new(PanelType.Display, new Views.StationDetailsView((int)id), BaseStationPanelName((int)id));
 
-        public static Panel DronesListPanel(List<PO.Drone> list) =>
-            new(PanelType.List, new Views.DronesListView(list), ListPanelName(typeof(PO.Drone)));
+        public static Panel DronesListPanel(Predicate<PO.DroneForList> predicate) =>
+            new(PanelType.List, new Views.DronesListView(predicate), ListPanelName(typeof(PO.Drone)));
 
     }
 }

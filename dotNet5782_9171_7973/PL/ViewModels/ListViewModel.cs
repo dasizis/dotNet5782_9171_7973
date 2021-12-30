@@ -9,11 +9,11 @@ namespace PL.ViewModels
 {
     abstract class ListViewModel<T>
     {
-        public ObservableCollection<T> list { get; set; }
+        public ObservableCollection<T> list { get; set; } = new();
         public RelayCommand<T> OpenItemCommand { get; set; }
         public ListViewModel(Predicate<T> predicate)
         {
-           foreach(var item in GetList().Where(item => predicate(item)))
+           foreach(var item in GetList().Where(item => predicate(item)).ToList())
            {
                 list.Add(item);
            }

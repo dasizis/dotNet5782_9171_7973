@@ -19,7 +19,7 @@ namespace PL.ViewModels
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
-            OpenDronesListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronesListPanel(Station.DronesInCharge)),
+            OpenDronesListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronesListPanel((d) => d.Id == 3)),
                                     () => Station.DronesInCharge.Count != 0);
         }
 
@@ -28,12 +28,6 @@ namespace PL.ViewModels
             PLService.UpdateBaseStation(Station.Id, Station.Name, Station.EmptyChargeSlots);
             MessageBox.Show($"Station {Station.Id}' details changed");
         }
-
-        private bool IsDroneInStation(int droneId)
-        {
-            return Station.DronesInCharge.FindAll(drone => drone.Id == droneId).Count > 0;
-        }
-
 
         public void Delete()
         {

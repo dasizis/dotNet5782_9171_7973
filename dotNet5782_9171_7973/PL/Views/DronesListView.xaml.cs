@@ -20,10 +20,10 @@ namespace PL.Views
     /// </summary>
     public partial class DronesListView : UserControl
     {
-        public DronesListView(List<PO.Drone> list)
+        public DronesListView(Predicate<PO.DroneForList> p)
         {
             InitializeComponent();
-            DataContext = new ViewModels.DronesListViewModel(list);
+            DataContext = new ViewModels.DronesListViewModel(p);
         }
     }
 }

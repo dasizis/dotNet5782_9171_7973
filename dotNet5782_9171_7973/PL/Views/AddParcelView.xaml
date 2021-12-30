@@ -4,51 +4,83 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:vm="clr-namespace:PL.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:AddParcelViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <StackPanel>
-        <TextBlock Text="Add a parcel" Style="{StaticResource Header}"/>
-        <StackPanel Style="{StaticResource Form}">
-            <ComboBox 
-            SelectedItem="{Binding Parcel.SenderId, 
-                                   ValidatesOnDataErrors=true, 
-                                   NotifyOnValidationError=true, 
-                                   UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding CustomersOptions}" 
-            materialDesign:HintAssist.Hint="Sender customer Id" />
-            <ComboBox 
-            SelectedItem="{Binding Parcel.TargetId, 
-                                   ValidatesOnDataErrors=true, 
-                                   NotifyOnValidationError=true,
-                                   UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding CustomersOptions}" 
-            materialDesign:HintAssist.Hint="Target customer Id" />
-            <ComboBox 
-            SelectedItem="{Binding Parcel.Weight, 
-                                   ValidatesOnDataErrors=true, 
-                                   NotifyOnValidationError=true,
-                                   UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding WeightOptions}" 
-            materialDesign:HintAssist.Hint="Weight" />
-            <ComboBox 
-            SelectedItem="{Binding Parcel.Priority, 
-                                   ValidatesOnDataErrors=true, 
-                                   NotifyOnValidationError=true,
-                                   UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding PriorityOptions}" 
-            materialDesign:HintAssist.Hint="Priority" />
+        <TextBlock Text="Add a Drone"/>
+        <StackPanel>
+            <!--Sender input-->
+            <syncfusion:SfTextInputLayout Hint="Sender customer Id" 
+                                      HasError="{Binding (Validation.HasError), ElementName=SenderIdInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=SenderIdInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Arrow" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <ComboBox x:Name="SenderIdInput"
+                     SelectedItem="{Binding Parcel.SenderId,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding CustomersOptions}"/>
+            </syncfusion:SfTextInputLayout>
+
+            <!--Target input-->
+            <syncfusion:SfTextInputLayout Hint="Target customer Id" 
+                                      HasError="{Binding (Validation.HasError), ElementName=TargetIdInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=TargetIdInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="ArrowBack" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <ComboBox x:Name="TargetIdInput"
+                     SelectedItem="{Binding Parcel.TargetId,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding CustomersOptions}"/>
+            </syncfusion:SfTextInputLayout>
+
+            <!--Weight input-->
+            <syncfusion:SfTextInputLayout Hint="Weight category" 
+                                      HasError="{Binding (Validation.HasError), ElementName=WeightInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=WeightInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Weight" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <ComboBox x:Name="WeightInput"
+                     SelectedItem="{Binding Parcel.Weight,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding WeightOptions}"/>
+            </syncfusion:SfTextInputLayout>
+
+            <!--Priority input-->
+            <syncfusion:SfTextInputLayout Hint="Priority" 
+                                      HasError="{Binding (Validation.HasError), ElementName=PriorityInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=PriorityInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Exclamation" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <ComboBox x:Name="PriorityInput"
+                     SelectedItem="{Binding Parcel.Priority,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding PriorityOptions}"/>
+            </syncfusion:SfTextInputLayout>
         </StackPanel>
-        <Button Command="{Binding AddCommand}"/>
+        <syncfusion:ButtonAdv Command="{Binding AddCommand}"/>
     </StackPanel>
 </UserControl>

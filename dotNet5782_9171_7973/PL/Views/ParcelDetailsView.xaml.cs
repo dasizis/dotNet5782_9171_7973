@@ -20,13 +20,10 @@ namespace PL.Views
     /// </summary>
     public partial class ParcelDetailsView : UserControl
     {
-        
-
         public ParcelDetailsView(int id)
         {
             InitializeComponent();
-
-            DataContext = new ViewModels.ParcelDetailsViewModel(id);
+            DataContext = new ViewModels.ParcelViewModel(id).Content;
         }
     }
 }

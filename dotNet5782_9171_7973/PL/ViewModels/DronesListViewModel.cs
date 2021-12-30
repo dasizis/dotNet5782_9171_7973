@@ -8,12 +8,15 @@ namespace PL.ViewModels
 {
     class DronesListViewModel
     {
-        public int Id { get; set; }
-        List<PO.Drone> drones;
+        public int SelectedItem { get; set; }
+        public List<PO.Drone> Drones { get; set; }
+        public RelayCommand OpenDroneCommand { get; set; }
         public DronesListViewModel(List<PO.Drone> droneslist)
         {
-            drones = droneslist;
-            Id = drones.First().Id;
+            Drones = droneslist.ToList();
+            OpenDroneCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronePanel()),
+                                    () => true);
         }
-    }
+    }   
+
 }

@@ -6,5 +6,14 @@
              xmlns:local="clr-namespace:PL.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <TextBlock Text="{Binding Id}"></TextBlock>
+    <ListView ItemsSource="{Binding Drones}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <WrapPanel>
+                    <TextBlock Text="{Binding Id}"/>
+                    <Button Content="Detail" Command="{Binding OpenDroneCommand}" CommandParameter="{Binding .}"/>
+                </WrapPanel>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </UserControl>

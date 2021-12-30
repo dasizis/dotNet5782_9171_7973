@@ -33,6 +33,9 @@ namespace PL.ViewModels
             ParcelsNotification.ParcelsChangedEvent += LoadParcels;
 
             AddDroneCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronePanel()));
+            AddParcelCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelPanel()));
+            AddStationCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.BaseStationPanel()));
+            AddCustomerCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel()));
         }
 
         void LoadCustomers()

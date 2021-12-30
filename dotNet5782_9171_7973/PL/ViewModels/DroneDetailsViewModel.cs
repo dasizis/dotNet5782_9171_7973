@@ -107,17 +107,16 @@ namespace PL.ViewModels
 
         private void RenameDrone()
         {
-            DronesNotification.DronesChangedEvent -= LoadDrone;
-
             PLService.RenameDrone(Drone.Id, Drone.Model);
             MessageBox.Show($"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
         }
 
         private void Delete()
         {
+            DronesNotification.DronesChangedEvent -= LoadDrone;
+
             PLService.DeleteDrone(Drone.Id);
             Workspace.RemovePanelCommand.Execute($"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {Drone.Id}");
-            // Close Tab 
         }
 
         private void LoadDrone()

@@ -2,12 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:po="clr-namespace:PO"
                     xmlns:listDesign="clr-namespace:PL.Views.Style.ListDesign"
+                    xmlns:vm="clr-namespace:PL.ViewModels"
+                    xmlns:v="clr-namespace:PL.Views"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     
     <!--Converters-->
     <listDesign:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
     <listDesign:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
     <listDesign:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
+    <listDesign:TypeAndIdToPanelConverter x:Key="TypeAndIdToPanelConverter" />
 
     <!--Icon Style-->
     <Style TargetType="materialDesign:PackIcon">
@@ -63,6 +67,16 @@
     <!--PO.BaseStationForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:BaseStationForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:BaseStation}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -70,6 +84,16 @@
     <!--PO.CustomerForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:Customer}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -77,6 +101,16 @@
     <!--PO.DroneForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:Drone}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
             <TextBlock Text="{Binding Model}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -84,6 +118,16 @@
     <!--PO.ParcelForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:ParcelForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:Parcel}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
             <TextBlock Text="{Binding Id}"/>
         </StackPanel>
     </HierarchicalDataTemplate>

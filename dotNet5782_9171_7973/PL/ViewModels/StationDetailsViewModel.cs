@@ -14,6 +14,7 @@ namespace PL.ViewModels
         public StationDetailsViewModel(int id)
         {
             BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
+            DronesNotification.DronesChangedEvent += LoadStation;
 
             Station = PLService.GetBaseStation(id);
 

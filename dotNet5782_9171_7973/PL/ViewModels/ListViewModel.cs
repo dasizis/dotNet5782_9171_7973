@@ -13,6 +13,7 @@ namespace PL.ViewModels
         public ObservableCollection<T> list { get; set; } = new();
         public Predicate<T> Predicate { get; set; }
         public RelayCommand<T> OpenItemCommand { get; set; }
+
         public ListViewModel(Predicate<T> predicate)
         {
             Predicate = predicate;

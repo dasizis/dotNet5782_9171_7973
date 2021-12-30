@@ -25,13 +25,13 @@ namespace PL.ViewModels
             try
             {
                 Add();
-                UserControl dialog = new Alert() { Text = "Drone added successfully" , IsSuccess = true };
-                DialogHost.OpenDialogCommand.Execute(dialog, null);
+                //UserControl dialog = new Alert() { Text = "Drone added successfully" , IsSuccess = true };
+                //DialogHost.OpenDialogCommand.Execute(dialog, null);
             }
             catch (BO.IdAlreadyExistsException e)
             {
-                UserControl dialog = new Alert() { Text = e.Message, IsSuccess = false };
-                DialogHost.OpenDialogCommand.Execute(dialog, null);
+                //UserControl dialog = new Alert() { Text = e.Message, IsSuccess = false };
+               // DialogHost.OpenDialogCommand.Execute(dialog, null);
             }
         }
 

@@ -4,49 +4,76 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:vm="clr-namespace:PL.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:AddDroneViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <StackPanel>
-        <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
-        <StackPanel Style="{StaticResource Form}">
-            <TextBox 
-            Text="{Binding Drone.Id,
-                           ValidatesOnDataErrors=true,
-                           NotifyOnValidationError=true,
-                           UpdateSourceTrigger=PropertyChanged}" 
-            materialDesign:HintAssist.Hint="Id" />
-            <TextBox 
-            Text="{Binding Drone.Model, 
-                           ValidatesOnDataErrors=true, 
-                           NotifyOnValidationError=true, 
-                           UpdateSourceTrigger=PropertyChanged}"
-            materialDesign:HintAssist.Hint="Model" />
-            <ComboBox 
-            SelectedItem="{Binding Drone.StationId, 
-                                   ValidatesOnDataErrors=true, 
-                                   NotifyOnValidationError=true, 
-                                   UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding StationsOptions}" 
-            materialDesign:HintAssist.Hint="Base station Id" />
-            <ComboBox 
-            SelectedItem="{Binding Drone.MaxWeight, 
-                                   ValidatesOnDataErrors=true, 
-                                   NotifyOnValidationError=true,
-                                   UpdateSourceTrigger=PropertyChanged}" 
-            ItemsSource="{Binding WeightOptions}" 
-            materialDesign:HintAssist.Hint="Weight Category" />
+        <TextBlock Text="Add a Drone"/>
+        <StackPanel>
+            <!--Id Input-->
+            <syncfusion:SfTextInputLayout Hint="Id" 
+                                      HasError="{Binding (Validation.HasError), ElementName=IdInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Identifier" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <TextBox x:Name="IdInput"
+                     Text="{Binding Drone.Id, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+            </syncfusion:SfTextInputLayout>
+            <!--Model Input-->
+            <syncfusion:SfTextInputLayout Hint="Model" 
+                                      HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Rename" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <TextBox x:Name="ModelInput"
+                     Text="{Binding Drone.Model, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+            </syncfusion:SfTextInputLayout>
+            <syncfusion:SfTextInputLayout Hint="Base station Id" 
+                                      HasError="{Binding (Validation.HasError), ElementName=StationIdInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=StationIdInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="EvCharger" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <ComboBox x:Name="StationIdInput"
+                     SelectedItem="{Binding Drone.StationId, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding StationsOptions}"/>
+            </syncfusion:SfTextInputLayout>
+            <syncfusion:SfTextInputLayout Hint="Weight category" 
+                                      HasError="{Binding (Validation.HasError), ElementName=WeightInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=WeightInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Carriage" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <ComboBox x:Name="WeightInput"
+                     SelectedItem="{Binding Drone.MaxWeight, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding WeightOptions}"/>
+            </syncfusion:SfTextInputLayout>
         </StackPanel>
-        <Button Command="{Binding AddCommand}"/>
+        <syncfusion:ButtonAdv Command="{Binding AddCommand}"/>
     </StackPanel>
 </UserControl>

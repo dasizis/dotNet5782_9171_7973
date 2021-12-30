@@ -11,17 +11,24 @@ namespace PL.ViewModels
     abstract class ListViewModel<T>
     {
         public ObservableCollection<T> list { get; set; } = new();
+        public Predicate<T> Predicate { get; set; }
         public RelayCommand<T> OpenItemCommand { get; set; }
         public ListViewModel(Predicate<T> predicate)
         {
-           foreach(var item in GetList().Where(item => predicate(item)).ToList())
-           {
-                list.Add(item);
-           }
-           OpenItemCommand = new((e)=>ExecuteOpen(e));
+            Predicate = predicate;
+            LoadList();
+            OpenItemCommand = new((e) => ExecuteOpen(e));
         }
 
         protected abstract IEnumerable<T> GetList();
         protected abstract void ExecuteOpen(T item);
+        protected void LoadList()
+        {
+            list.Clear();
+            foreach (var item in GetList().Where(item => Predicate(item)).ToList())
+            {
+                list.Add(item);
+            }
+        }
     }
 }

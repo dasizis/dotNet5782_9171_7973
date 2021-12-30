@@ -81,6 +81,6 @@
                      ItemsSource="{Binding PriorityOptions}"/>
             </syncfusion:SfTextInputLayout>
         </StackPanel>
-        <syncfusion:ButtonAdv Command="{Binding AddCommand}"/>
+        <syncfusion:ButtonAdv Content="Add" Command="{Binding AddCommand}"/>
     </StackPanel>
 </UserControl>

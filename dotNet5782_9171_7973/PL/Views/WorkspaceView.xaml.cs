@@ -66,7 +66,7 @@ namespace PL.Views
 
             // Temp
             (Dock.Children[2] as ContentControl).Content = new StationDetailsView(0);
-            DockingManager.SetHeader(Dock.Children[2] as ContentControl, $"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {2}");
+            DockingManager.SetHeader(Dock.Children[2] as ContentControl, $"{nameof(Views.StationDetailsView).CamelCaseToReadable()} {2}");
         }
 
         /// <summary>

@@ -8,6 +8,7 @@ namespace PL.ViewModels
     {
         Display,
         List,
+        Add,
         Other,
     }
 
@@ -20,10 +21,14 @@ namespace PL.ViewModels
         public static string ParcelPanelName(int id) => $"{nameof(Views.ParcelDetailsView).CamelCaseToReadable()} {id}";
         public static string CustomerPanelName(int id) => $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {id}";
         public static string BaseStationPanelName(int id) => $"{nameof(Views.StationDetailsView).CamelCaseToReadable()} {id}";
+        public static string AddDronePanelName() => $"{nameof(Views.AddDroneView).CamelCaseToReadable()}";
+        public static string AddParcelPanelName() => $"{nameof(Views.AddParcelView).CamelCaseToReadable()}";
+        public static string AddCustomerPanelName() => $"{nameof(Views.AddCustomerView).CamelCaseToReadable()}";
+        public static string AddBaseStationPanelName() => $"{nameof(Views.AddStationView).CamelCaseToReadable()}";
         public static string ListPanelName(Type type) => $"{type.Name}";
 
-        public static Panel DronePanel(int? id) => id == null 
-            ? null 
+        public static Panel DronePanel(int? id = null) => id == null 
+            ? new(PanelType.Add, new Views.AddDroneView(), AddDronePanelName()) 
             : new(PanelType.Display, new Views.DroneDetailsView((int)id), DronePanelName((int)id));
 
         public static Panel ParcelPanel(int? id) => id == null 

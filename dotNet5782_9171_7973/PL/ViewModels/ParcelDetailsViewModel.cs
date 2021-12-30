@@ -27,7 +27,7 @@ namespace PL.ViewModels
             ViewSenderCommand = new(ViewSenderDetails);
             ViewTargetCommand = new(ViewTargetDetails);
             ViewDroneCommand = new(ViewDroneDetails, () => Parcel.Scheduled != null);
-            DeleteCommand = new(Delete, () => Parcel.Scheduled == null || Parcel.Supplied != null);
+            DeleteCommand = new(Delete, () => Parcel.Scheduled == null || Parcel.Supplied != null);     
         }
 
         private void ViewSenderDetails()

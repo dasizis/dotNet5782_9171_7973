@@ -12,11 +12,13 @@
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding Id}"/>
-                        <Button Content="Detail" Command="{Binding DataContext.OpenItemCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
+                        <Button Content="Detail" 
+                                Command="{Binding DataContext.OpenItemCommand, 
+                                                  RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                CommandParameter="{Binding}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="click" Command="{Binding OpenItemCommand}" CommandParameter="{Binding list[0]}"/>
     </StackPanel>
 </UserControl>

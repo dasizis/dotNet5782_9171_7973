@@ -49,8 +49,8 @@ namespace PL.ViewModels
         public static Panel DronesListPanel(Predicate<PO.DroneForList> predicate) =>
             new(PanelType.List, new Views.DronesListView(predicate), ListPanelName(typeof(PO.Drone)));
 
-        public static Panel ParcelsListPanel(Predicate<PO.ParcelForList> predicate) =>
-            new(PanelType.List, new Views.ParcelsListView(predicate), ListPanelName(typeof(PO.Parcel)));
+        public static Panel ParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header) =>
+            new(PanelType.List, new Views.ParcelsListView(predicate), header);
 
     }
 }

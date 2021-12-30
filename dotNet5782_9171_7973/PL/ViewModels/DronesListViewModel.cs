@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace PL.ViewModels
 {
-    class DronesListViewModel
+    class DronesListViewModel : ListViewModel<PO.DroneForList>
     {
-        public int SelectedItem { get; set; }
-        public List<PO.Drone> Drones { get; set; }
         public RelayCommand OpenDroneCommand { get; set; }
-        public DronesListViewModel(List<PO.Drone> droneslist)
-        {
-            Drones = droneslist.ToList();
-            OpenDroneCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronePanel()),
-                                    () => true);
-        }
-    }   
+        public DronesListViewModel(Predicate<PO.DroneForList> predicate) : base(predicate) { }
 
+        protected override void ExecuteOpen(DroneForList item)
+        {
+            Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelPanel(item.Id));
+        }
+
+        protected override IEnumerable<DroneForList> GetList()
+        {
+            return PLService.GetDronesList();
+        }
+    }
 }

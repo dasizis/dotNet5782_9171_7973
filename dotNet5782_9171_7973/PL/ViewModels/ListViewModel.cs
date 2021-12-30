@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 
 namespace PL.ViewModels
 {
-    class ListViewModel<T>
+    abstract class ListViewModel<T>
     {
         public ObservableCollection<T> list { get; set; }
-
+        public RelayCommand<T> OpenItemCommand { get; set; }
         public ListViewModel(Predicate<T> predicate)
         {
            foreach(var item in GetList().Where(item => predicate(item)))
-            {
+           {
                 list.Add(item);
-            }
-            
+           }
+           OpenItemCommand = new((e) => ExecuteOpen(e), null);
         }
 
         protected abstract IEnumerable<T> GetList();
+        protected abstract void ExecuteOpen(T item);
     }
 }

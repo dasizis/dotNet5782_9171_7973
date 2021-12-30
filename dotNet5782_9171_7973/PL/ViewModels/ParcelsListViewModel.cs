@@ -9,7 +9,7 @@ namespace PL.ViewModels
 {
     class ParcelsListViewModel : ListViewModel<ParcelForList>
     {
-        public ParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) { }
+        public ParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) { ParcelsNotification.ParcelsChangedEvent += LoadList; }
 
         protected override void ExecuteOpen(ParcelForList item)
         {

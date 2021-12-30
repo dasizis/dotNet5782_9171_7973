@@ -32,15 +32,15 @@ namespace PL.ViewModels
             : new(PanelType.Display, new Views.DroneDetailsView((int)id), DronePanelName((int)id));
 
         public static Panel ParcelPanel(int? id) => id == null 
-            ? null
+            ? new(PanelType.Add, new Views.AddParcelView(), AddParcelPanelName())
             : new(PanelType.Display, new Views.ParcelDetailsView((int)id), ParcelPanelName((int)id));
 
         public static Panel CustomerPanel(int? id) => id == null 
-            ? null
+            ? new(PanelType.Add, new Views.AddCustomerView(), AddCustomerPanelName())
             : new(PanelType.Display, new Views.CustomerDetailsView((int)id), CustomerPanelName((int)id));
 
         public static Panel BaseStationPanel(int? id) => id == null
-            ? null
+            ? new(PanelType.Add, new Views.AddStationView(), AddBaseStationPanelName())
             : new(PanelType.Display, new Views.StationDetailsView((int)id), BaseStationPanelName((int)id));
 
         public static Panel DronesListPanel(Predicate<PO.DroneForList> predicate) =>

@@ -19,7 +19,7 @@ namespace PL.ViewModels
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
-            OpenDronesListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronesListPanel((d) => d.Id == 3)),
+            OpenDronesListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronesListPanel((d) => Station.DronesInCharge.Exists(drone => drone.Id == d.Id))),
                                     () => Station.DronesInCharge.Count != 0);
         }
 

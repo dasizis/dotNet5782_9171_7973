@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PL.ViewModels
 {
@@ -17,7 +18,7 @@ namespace PL.ViewModels
            {
                 list.Add(item);
            }
-           OpenItemCommand = new((e) => ExecuteOpen(e), null);
+           OpenItemCommand = new((e)=>ExecuteOpen(e));
         }
 
         protected abstract IEnumerable<T> GetList();

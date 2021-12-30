@@ -6,14 +6,17 @@
              xmlns:local="clr-namespace:PL.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ListView ItemsSource="{Binding list}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <WrapPanel>
-                    <TextBlock Text="{Binding Id}"/>
-                    <Button Content="Detail" Command="{Binding OpenDroneCommand}" CommandParameter="{Binding .}"/>
-                </WrapPanel>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <StackPanel>
+        <ListView ItemsSource="{Binding list}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Id}"/>
+                        <Button Content="Detail" Command="{Binding DataContext.OpenItemCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Content="click" Command="{Binding OpenItemCommand}" CommandParameter="{Binding list[0]}"/>
+    </StackPanel>
 </UserControl>

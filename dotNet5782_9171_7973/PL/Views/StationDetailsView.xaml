@@ -3,23 +3,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:convereters="clr-namespace:PL.Views.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:po="clr-namespace:PO"
              xmlns:vm="clr-namespace:PL.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding Station.Id}"/>
-        <TextBox Text="{Binding Station.Name}"/>
-        <TextBox Text="{Binding Station.EmptyChargeSlots}"/>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
+            <convereters:DroneStateToHandleChargeText x:Key="DroneStateToHandleChargeText" />
+            <convereters:StateToProceedWithParcelText x:Key="StateToProceedWithParcelText" />
+            <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Margin="30">
+        <!--header-->
+        <TextBlock Text="{Binding Station.Id, StringFormat=Station {0}}"
+                   Style="{StaticResource Header}" />
+        <!--name input-->
+        <syncfusion:SfTextInputLayout Hint="Name" 
+                                      HasError="{Binding (Validation.HasError), ElementName=NameInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
+            <syncfusion:SfTextInputLayout.LeadingView>
+                <materialDesign:PackIcon Kind="Pencil" Height="10"/>
+            </syncfusion:SfTextInputLayout.LeadingView>
+            <TextBox x:Name="NameInput"
+                     Text="{Binding Station.Name, 
+                                    ValidatesOnDataErrors=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+        </syncfusion:SfTextInputLayout>
+
+        <!--empty slots input-->
+        <syncfusion:SfTextInputLayout Hint="Empty Slots" 
+                                      HasError="{Binding (Validation.HasError), ElementName=EmptySlotsInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=EmptySlotsInput}">
+            <syncfusion:SfTextInputLayout.LeadingView>
+                <materialDesign:PackIcon Kind="Pencil" Height="10"/>
+            </syncfusion:SfTextInputLayout.LeadingView>
+            <TextBox x:Name="EmptySlotsInput"
+                     Text="{Binding Station.EmptyChargeSlots, 
+                                    ValidatesOnDataErrors=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+        </syncfusion:SfTextInputLayout>
+
         <TextBlock Text="{Binding Station.Location.Longitude}"/>
         <TextBlock Text="{Binding Station.Location.Latitude}"/>
-        <Button 
-            Content="VIEW DRONES IN CHARGE LIST" 
-            Command="{Binding OpenDronesListCommand}"/>
-        <Button 
-            Content="UPDATE DETAILS" 
-            Command="{Binding UpdateDetailsCommand}"/>
-        <Button 
-            Content="DELETE STATION"
-            Command="{Binding DeleteCommand}"/>
+        
+        <!--buttons-->
+        <!--Buttons-->
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="Update"                
+                    Style="{DynamicResource WPFPrimaryButtonStyle}"
+                    Command="{Binding UpdateDetailsCommand}"
+                    Margin="5" Padding="5"/>
+            <Button Content="View drones in charge"                
+                    Command="{Binding OpenDronesListCommand}"
+                    Margin="5" Padding="5"/>
+            <Button Content="Delete"                
+                    Command="{Binding DeleteCommand}"
+                    Margin="5" Padding="5"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

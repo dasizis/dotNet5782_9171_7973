@@ -11,6 +11,9 @@ namespace PL.ViewModels
 
         public RelayCommand UpdateCommand { get; set; }
 
+        public RelayCommand OpenSentParcelsListCommand { get; set; }
+        public RelayCommand OpenRecievedParcelsListCommand { get; set; }
+
         public CustomerDetailsViewModel(int id)
         {
             Customer = PLService.GetCustomer(id);
@@ -19,6 +22,11 @@ namespace PL.ViewModels
 
             DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);
+            //TODO
+            OpenSentParcelsListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.SenderName == Customer.Name)),
+                                    () => Customer.Send.Count != 0);
+            OpenSentParcelsListCommand = new(() => Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.TargetName == Customer.Name)),
+                                    () => Customer.Recieve.Count != 0);
         }
 
         private void Update()

@@ -55,6 +55,13 @@
             <Button Content="Delete"                
                     Command="{Binding DeleteCommand}"
                     Margin="5" Padding="5"/>
+            <Button Content="View sent parcels"                
+                    Command="{Binding OpenSentParcelsListCommand}"
+                    Margin="5" Padding="5"/>
+            <Button Content="View recieved parcels"                
+                    Command="{Binding OpenRecievedParcelsListCommand}"
+                    Margin="5" Padding="5"/>
+            
         </StackPanel>
         
         <!--Map-->

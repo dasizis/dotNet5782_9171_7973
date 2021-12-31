@@ -11,7 +11,6 @@ namespace PL.ViewModels
     {
         public ParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) { ParcelsNotification.ParcelsChangedEvent += LoadList; }
 
-
         protected override void ExecuteOpen(ParcelForList item)
         {
             Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelPanel(item.Id));

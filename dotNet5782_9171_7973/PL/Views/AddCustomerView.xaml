@@ -11,15 +11,15 @@
     <UserControl.DataContext>
         <vm:AddCustomerViewModel/>
     </UserControl.DataContext>
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>-->
-    <StackPanel>
-        <TextBlock Text="Add a Customer"/>
+    </UserControl.Resources>
+    <StackPanel Style="{StaticResource Form}">
+        <TextBlock Text="Add a Customer" Style="{StaticResource Header}"/>
         <StackPanel>
             <!--Id input-->
             <syncfusion:SfTextInputLayout Hint="Id" 
@@ -91,6 +91,6 @@
                                     UpdateSourceTrigger=PropertyChanged}"/>
             </syncfusion:SfTextInputLayout>
         </StackPanel>
-        <syncfusion:ButtonAdv Content="Add" Command="{Binding AddCommand}"/>
+        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
     </StackPanel>
 </UserControl>

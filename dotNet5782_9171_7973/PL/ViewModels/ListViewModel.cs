@@ -23,6 +23,7 @@ namespace PL.ViewModels
 
         protected abstract IEnumerable<T> GetList();
         protected abstract void ExecuteOpen(T item);
+        protected abstract void Close();
         protected void LoadList()
         {
             list.Clear();
@@ -30,6 +31,7 @@ namespace PL.ViewModels
             {
                 list.Add(item);
             }
+            if (list.Count() == 0) Close();
         }
     }
 }

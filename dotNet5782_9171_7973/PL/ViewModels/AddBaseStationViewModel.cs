@@ -13,6 +13,7 @@ namespace PL.ViewModels
         protected override void Add()
         {
             PLService.AddBaseStation(BaseStation);
+            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.AddBaseStationPanelName());
         }
     }
 }

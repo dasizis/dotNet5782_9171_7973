@@ -9,6 +9,7 @@ namespace PL.ViewModels
         protected override void Add()
         {
             PLService.AddCustomer(Customer);
+            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.AddCustomerPanelName());
         }
     }
 }

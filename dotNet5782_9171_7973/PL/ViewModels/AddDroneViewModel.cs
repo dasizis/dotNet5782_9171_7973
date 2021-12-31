@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using PO;
 
@@ -11,7 +12,7 @@ namespace PL.ViewModels
 
         public Array WeightOptions { get; } = Enum.GetValues(typeof(WeightCategory));
 
-        public List<int> StationsOptions { get; set; }
+        public List<int> StationsOptions { get; set; } 
 
         public AddDroneViewModel()
         {
@@ -21,6 +22,7 @@ namespace PL.ViewModels
         protected override void Add()
         {
             PLService.AddDrone(Drone);
+            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.AddDronePanelName());
         }
     }
 }

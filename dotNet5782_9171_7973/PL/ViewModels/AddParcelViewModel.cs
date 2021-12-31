@@ -23,6 +23,7 @@ namespace PL.ViewModels
         protected override void Add()
         {
             PLService.AddParcel(Parcel);
+            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.AddParcelPanelName());
         }
     }
 }

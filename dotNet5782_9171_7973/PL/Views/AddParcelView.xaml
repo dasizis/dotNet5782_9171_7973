@@ -11,16 +11,16 @@
     <UserControl.DataContext>
         <vm:AddParcelViewModel/>
     </UserControl.DataContext>
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Add a Drone"/>
-        <StackPanel>
+        <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
+        <StackPanel Style="{StaticResource Form}">
             <!--Sender input-->
             <syncfusion:SfTextInputLayout Hint="Sender customer Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=SenderIdInput}"
@@ -81,6 +81,6 @@
                      ItemsSource="{Binding PriorityOptions}"/>
             </syncfusion:SfTextInputLayout>
         </StackPanel>
-        <syncfusion:ButtonAdv Content="Add" Command="{Binding AddCommand}"/>
+        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
     </StackPanel>
 </UserControl>

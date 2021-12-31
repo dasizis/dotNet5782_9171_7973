@@ -11,16 +11,16 @@
     <UserControl.DataContext>
         <vm:AddDroneViewModel/>
     </UserControl.DataContext>
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Add a Drone"/>
-        <StackPanel>
+        <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
+        <StackPanel Style="{StaticResource Form}">
             <!--Id Input-->
             <syncfusion:SfTextInputLayout Hint="Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=IdInput}"
@@ -79,6 +79,6 @@
                      ItemsSource="{Binding WeightOptions}"/>
             </syncfusion:SfTextInputLayout>
         </StackPanel>
-        <syncfusion:ButtonAdv Content="Add" Command="{Binding AddCommand}"/>
+        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
     </StackPanel>
 </UserControl>

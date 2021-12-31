@@ -11,16 +11,16 @@
     <UserControl.DataContext>
         <vm:AddBaseStationViewModel/>
     </UserControl.DataContext>
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Add a Base station"/>
-        <StackPanel>
+        <TextBlock Text="Add a Base station" Style="{StaticResource Header}"/>
+        <StackPanel Style="{StaticResource Form}">
             <!--Id input-->
             <syncfusion:SfTextInputLayout Hint="Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=IdInput}"
@@ -92,6 +92,6 @@
             </syncfusion:SfTextInputLayout>
         </StackPanel>
 
-        <syncfusion:ButtonAdv Content="Add" Command="{Binding AddCommand}"/>
+        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
     </StackPanel>
 </UserControl>

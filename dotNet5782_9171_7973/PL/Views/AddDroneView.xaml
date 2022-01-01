@@ -11,13 +11,13 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Style/AddWindowDictionary.xaml" />
+                <ResourceDictionary Source="Style/StyleDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel  Style="{StaticResource Container}">
         <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
-        <StackPanel Style="{StaticResource Form}">
+        <StackPanel>
             <!--Id Input-->
             <syncfusion:SfTextInputLayout Hint="Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=IdInput}"

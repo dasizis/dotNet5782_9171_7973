@@ -4,14 +4,14 @@ namespace PL.ViewModels
 {
     class ParcelViewModel: ContentControl
     {
-        public ParcelViewModel(int id)
+        public ParcelViewModel()
         {
             Content = new ParcelDetailsViewModel(id);
         }
 
-        public ParcelViewModel()
+        public ParcelViewModel(int id)
         {
-            Content = new AddParcelViewModel();
+            Content = new ParcelDetailsViewModel(id);
         }
     }
 }

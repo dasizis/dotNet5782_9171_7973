@@ -15,28 +15,39 @@
             </ResourceDictionary.MergedDictionaries>
             <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
             <convereters:ParcelToSteperIndex x:Key="ParcelToSteperIndex"/>
+            <convereters:DateToToolTipConverter x:Key="DateToToolTipConverter"/>
         </ResourceDictionary>
 
     </UserControl.Resources>
     <StackPanel Style="{StaticResource Container}">
         <!--Header-->
-        <TextBlock Grid.Column="0"
-                       Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
-                       Style="{StaticResource Header}" />
+        <TextBlock Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
+                   Style="{StaticResource Header}" />
         
         <!--Details-->
         <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
                    Style="{StaticResource Text}"/>
         <TextBlock Text="{Binding Parcel.Priority, StringFormat='Priority: {0}'}" 
                    Style="{StaticResource Text}"/>
-        <TextBlock Text="{Binding Parcel.Sender.Id}"/>
-        <TextBlock Text="{Binding Parcel.Target.Id}"/>
+        <TextBlock Text="{Binding Parcel.Sender.Id, StringFormat='Sender: customer #{0}'}" 
+                   Style="{StaticResource Text}"/>
+        <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
+                   Style="{StaticResource Text}"/>
+        
 
-        <syncfusion:SfStepProgressBar SelectedIndex="{Binding Parcel.Id, Converter={StaticResource ParcelToSteperIndex}}" AnimationDuration="0:0:0">
-            <syncfusion:StepViewItem Content="{Binding Parcel.Requested}" />
-            <syncfusion:StepViewItem Content="{Binding Parcel.Scheduled}" />
-            <syncfusion:StepViewItem Content="{Binding Parcel.PickedUp}" />
-            <syncfusion:StepViewItem Content="{Binding Parcel.Supplied}"/>
+        <syncfusion:SfStepProgressBar SelectedIndex="{Binding Parcel.Id, Converter={StaticResource ParcelToSteperIndex}}" AnimationDuration="0:0:0" Margin="0, 50">
+            <syncfusion:StepViewItem 
+                Content="Requested" 
+                ToolTip="{Binding Parcel.Requested, Converter={StaticResource DateToToolTipConverter}}"/>
+            <syncfusion:StepViewItem 
+                Content="Scheduled" 
+                ToolTip="{Binding Parcel.Scheduled, Converter={StaticResource DateToToolTipConverter}}"/>
+            <syncfusion:StepViewItem 
+                Content="Picked up" 
+                ToolTip="{Binding Parcel.PickedUp, Converter={StaticResource DateToToolTipConverter}}"/>
+            <syncfusion:StepViewItem 
+                Content="Supplied" 
+                ToolTip="{Binding Parcel.Supplied, Converter={StaticResource DateToToolTipConverter}}"/>
         </syncfusion:SfStepProgressBar>
 
         <!--Buttons-->
@@ -60,13 +71,13 @@
             
            
         </StackPanel>
-        <syncfusion:SfMap>
+        <!--<syncfusion:SfMap>
             <syncfusion:SfMap.Layers>
                 <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            Markers="{Binding Parent.DataContext.Markers, 
                                                              RelativeSource={RelativeSource Mode=Self}}" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"/>
             </syncfusion:SfMap.Layers>
-        </syncfusion:SfMap>
+        </syncfusion:SfMap>-->
     </StackPanel>
 </UserControl>

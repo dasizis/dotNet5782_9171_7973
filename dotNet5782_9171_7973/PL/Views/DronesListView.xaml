@@ -7,11 +7,18 @@
              xmlns:local="clr-namespace:PL.Views"
              xmlns:vm="clr-namespace:PL.ViewModels"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:converters="clr-namespace:PL.Views.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary Source="Style/ListDesign/TreeViewDictionary.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/ListDesign/TreeViewDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:ValueToInputTypeConverter x:Key="ValueToInputTypeConverter" />
+            <converters:ValueToInputEnableConverter x:Key="ValueToInputEnableConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.DataContext>
         <vm:DronesListViewModel />
@@ -36,14 +43,19 @@
                 </ComboBox>
             </syncfusion:SfTextInputLayout>
 
-            <TextBox Text="{Binding FilterValue, UpdateSourceTrigger=PropertyChanged}">
+            <local:Input IsEnabled="{Binding Parent.DataContext.FilterKey, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ValueToInputEnableConverter}}"
+                         Type="{Binding Parent.DataContext.FilterKey, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ValueToInputTypeConverter}}"
+                         Value="{Binding Parent.DataContext.FilterValue, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}"
+                         Command="{Binding Parent.DataContext.FilterCommand, RelativeSource={RelativeSource Mode=Self}}"/>
+
+            <!--<TextBox Text="{Binding FilterValue, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
                         <i:InvokeCommandAction Command="{Binding FilterCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-            </TextBox>
-            
+            </TextBox>-->
+
             <syncfusion:SfTextInputLayout Hint="Sort By" InputViewPadding="10" >
                 <ComboBox ItemsSource="{Binding Options}" 
                           SelectedItem="{Binding SortKey, UpdateSourceTrigger=PropertyChanged}"
@@ -60,11 +72,11 @@
                 <ComboBox ItemsSource="{Binding Options}" 
                           SelectedItem="{Binding GroupKey, UpdateSourceTrigger=PropertyChanged}"
                           Margin="10">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding GroupCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding GroupCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ComboBox>
             </syncfusion:SfTextInputLayout>
         </StackPanel>

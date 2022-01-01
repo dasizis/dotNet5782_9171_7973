@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace PL.ViewModels
 
         public ICollectionView View { get; set; }
 
-        public string FilterKey { get; set; }
+        public object FilterKey { get; set; }
 
         public object FilterValue { get; set; }
 
-        public List<string> Options { get; set; }
+        public IEnumerable Options { get; set; }
 
         public string SortKey { get; set; }
 
@@ -35,12 +36,9 @@ namespace PL.ViewModels
             View = (CollectionView)CollectionViewSource.GetDefaultView(List);
 
             Options = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                                     .Where(property => property.PropertyType.IsValueType || property.PropertyType == typeof(string))
-                                     .Select(property => property.Name)
-                                     .Union(new List<string>() { RESET_VALUE })
-                                     .ToList();
-
-
+                               .Where(property => property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+                               .Cast<object>()
+                               .Union(new List<object> { RESET_VALUE });
 
             View.Filter = Filter;
 
@@ -55,7 +53,7 @@ namespace PL.ViewModels
             if (FilterValue == null)
                 return true;
 
-            PropertyInfo property = typeof(T).GetProperty(FilterKey);
+            PropertyInfo property = typeof(T).GetProperty(FilterKey.ToString());
 
             if (property.PropertyType == typeof(string))
                 return property.GetValue(item).ToString().Contains((string)FilterValue);

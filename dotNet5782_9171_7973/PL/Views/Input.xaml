@@ -4,9 +4,76 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PL.Views"
+             xmlns:converters="clr-namespace:PL.Views.Converters"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:InputTypeToVisiblity x:Key="InputTypeToVisiblity" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--<UserControl.DataContext>
+        <local:Input />
+    </UserControl.DataContext>-->
+    <StackPanel>
+        <syncfusion:SfRangeSlider Visibility="{Binding Type, Converter={StaticResource InputTypeToVisiblity}, ConverterParameter={x:Static local:InputType.Range}}"
+                                  Maximum="{Binding Maximum}"
+                                  Minimum="{Binding Minimum}"
+                                  RangeStart="{Binding StartValue, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                                  RangeEnd="{Binding EndValue, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
+                                  TargetUpdated="SfRangeSlider_TargetUpdated"
+                                  SourceUpdated="SfRangeSlider_TargetUpdated"
+                                  ShowRange="True"
+                                  ShowValueLabels="True"
+                                  TickPlacement="None"
+                                  AllowRangeDrag="True"
+                                  StepFrequency="5"
+                                  ThumbToolTipPlacement="TopLeft"
+                                  TickFrequency="10"
+                                  TickLength="5">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+                    <i:InvokeCommandAction Command="{Binding Command}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </syncfusion:SfRangeSlider>
+
+        <TextBox Visibility="{Binding Type, Converter={StaticResource InputTypeToVisiblity}, ConverterParameter={x:Static local:InputType.Text}}"
+                 Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Command}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+
+        <!--<syncfusion:IntegerTextBox Visibility="{Binding Type, Converter={StaticResource InputTypeToVisiblity}, ConverterParameter={x:Static local:InputType.Int}}"
+                                   Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Command}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </syncfusion:IntegerTextBox>
+
+        <syncfusion:DoubleTextBox Visibility="{Binding Type, Converter={StaticResource InputTypeToVisiblity}, ConverterParameter={x:Static local:InputType.Double}}"
+                                  Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Command}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </syncfusion:DoubleTextBox>-->
+
+        <ComboBox Visibility="{Binding Type, Converter={StaticResource InputTypeToVisiblity}, ConverterParameter={x:Static local:InputType.ComboBox}}"
+                  ItemsSource="{Binding ItemsSource}" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Command}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+    </StackPanel>
 </UserControl>

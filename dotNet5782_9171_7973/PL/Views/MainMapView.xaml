@@ -33,4 +33,6 @@
                                        MarkerTemplate="{StaticResource MarkerTemplate}"/>
         </syncfusion:SfMap.Layers>
     </syncfusion:SfMap>
+    
+    
 </UserControl>

@@ -7,12 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using PL.Views;
+using System.Collections.ObjectModel;
 
 namespace PL.ViewModels
 {
     class ParcelDetailsViewModel : DependencyObject
     {
         public Parcel Parcel { get; set; }
+        public ObservableCollection<object> Markers { get; set; } = new();
+
         public RelayCommand ViewSenderCommand { get; set; }
         public RelayCommand ViewTargetCommand { get; set; }
         public RelayCommand ViewDroneCommand { get; set; }
@@ -23,6 +26,7 @@ namespace PL.ViewModels
             ParcelsNotification.ParcelsChangedEvent += LoadParcel;
 
             Parcel = PLService.GetParcel(id);
+            LoadParcel();
 
             ViewSenderCommand = new(ViewSenderDetails);
             ViewTargetCommand = new(ViewTargetDetails);
@@ -65,6 +69,15 @@ namespace PL.ViewModels
         private void LoadParcel()
         {
             Parcel.Reload(PLService.GetParcel(Parcel.Id));
+
+            Markers.Clear();
+            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Sender Customer"));
+            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Target Customer"));
+
+            if (Parcel.DroneId != null)
+            {
+                Markers.Add(MapMarker.FromType(PLService.GetDrone((int)Parcel.DroneId)));
+            }
         }
     }
 }

@@ -36,10 +36,7 @@ namespace PL.ViewModels
 
         private void ViewSenderDetails()
         {
-            Views.WorkspaceView.AddPanelCommand.Execute(
-                new Panel(PanelType.Display, 
-                          new Views.CustomerDetailsView(Parcel.Target.Id), 
-                          $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.Target.Id}"));
+            Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Sender.Id));
         }
 
         private void ViewTargetDetails()
@@ -63,7 +60,7 @@ namespace PL.ViewModels
             ParcelsNotification.ParcelsChangedEvent -= LoadParcel;
 
             PLService.DeleteParcel(Parcel.Id);
-            WorkspaceView.RemovePanelCommand.Execute($"{nameof(Views.ParcelDetailsView).CamelCaseToReadable()} {Parcel.Id}");
+            Workspace.RemovePanelCommand.Execute(Workspace.ParcelPanelName(Parcel.Id));
         }
 
         private void LoadParcel()

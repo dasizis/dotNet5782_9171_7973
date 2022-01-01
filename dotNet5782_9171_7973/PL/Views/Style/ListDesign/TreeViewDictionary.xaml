@@ -5,7 +5,8 @@
                     xmlns:vm="clr-namespace:PL.ViewModels"
                     xmlns:v="clr-namespace:PL.Views"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
     
     <!--Converters-->
     <listDesign:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
@@ -13,6 +14,17 @@
     <listDesign:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
     <listDesign:TypeAndIdToPanelConverter x:Key="TypeAndIdToPanelConverter" />
 
+    <!--Query Area-->
+    <Style x:Key="QueryArea" TargetType="StackPanel">
+        <Setter Property="Background" Value="#F8F8F8" />
+
+    </Style>
+    
+    <!--Query Inputs-->
+    <Style TargetType="{x:Type syncfusion:SfTextInputLayout}">
+        <Setter Property="Margin" Value="10,10,10,0" />
+    </Style>
+    
     <!--Icon Style-->
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
@@ -131,4 +143,10 @@
             <TextBlock Text="{Binding Id}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
+
+    <!--Group Style-->
+    <ControlTemplate x:Key="TreeViewGroup">
+        <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Items}" />
+    </ControlTemplate>
+
 </ResourceDictionary>

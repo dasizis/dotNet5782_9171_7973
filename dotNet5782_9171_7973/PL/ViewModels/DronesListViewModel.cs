@@ -26,6 +26,11 @@ namespace PL.ViewModels
 
     class DronesListViewModel : QueriableListViewModel<DroneForList>
     {
+        protected override Panel GetAddPanel()
+        {
+            return new Panel(PanelType.Add, new DroneViewModel(), Workspace.AddDronePanelName());
+        }
+
         protected override IEnumerable<DroneForList> GetList()
         {
             return PLService.GetDronesList();

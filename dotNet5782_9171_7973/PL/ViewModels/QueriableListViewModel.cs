@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Windows.Data;
 
 namespace PL.ViewModels
 {
     abstract class QueriableListViewModel<T>
     {
+        private const string RESET_VALUE = "None";
         public ObservableCollection<T> List { get; set; }
 
         public ICollectionView View { get; set; }
@@ -38,6 +37,7 @@ namespace PL.ViewModels
             Options = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                                      .Where(property => property.PropertyType.IsValueType || property.PropertyType == typeof(string))
                                      .Select(property => property.Name)
+                                     .Union(new List<string>() { RESET_VALUE })
                                      .ToList();
 
 
@@ -69,6 +69,9 @@ namespace PL.ViewModels
         void Sort()
         {
             View.SortDescriptions.Clear();
+
+            if (GroupKey == RESET_VALUE) return;
+
             View.SortDescriptions.Add(new SortDescription() { PropertyName = SortKey, Direction = ListSortDirection.Ascending });
             View.Refresh();
         }
@@ -76,6 +79,9 @@ namespace PL.ViewModels
         void Group()
         {
             View.GroupDescriptions.Clear();
+
+            if (GroupKey == RESET_VALUE) return;
+
             View.GroupDescriptions.Add(new PropertyGroupDescription(GroupKey));
             View.Refresh();
         }

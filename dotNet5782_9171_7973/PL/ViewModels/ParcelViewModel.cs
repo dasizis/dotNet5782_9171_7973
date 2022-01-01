@@ -6,7 +6,6 @@ namespace PL.ViewModels
     {
         public ParcelViewModel()
         {
-            Content = new ParcelDetailsViewModel(id);
         }
 
         public ParcelViewModel(int id)

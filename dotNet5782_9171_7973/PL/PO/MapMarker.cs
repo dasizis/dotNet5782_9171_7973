@@ -19,10 +19,10 @@ namespace PO
 
         private static Dictionary<Type, Color> ColorsDictionary { get; set; } = new()
         {
-            [typeof(Drone)] = Colors.Red,
-            [typeof(Customer)] = Colors.Blue,
-            [typeof(Parcel)] = Colors.Green,
-            [typeof(BaseStation)] = Colors.AliceBlue,
+            [typeof(Drone)] = Colors.LightBlue,
+            [typeof(Customer)] = Colors.LightPink,
+            [typeof(Parcel)] = Colors.DarkSeaGreen,
+            [typeof(BaseStation)] = Colors.MediumPurple,
         };
 
         public static MapMarker FromType(ILocalable localable)

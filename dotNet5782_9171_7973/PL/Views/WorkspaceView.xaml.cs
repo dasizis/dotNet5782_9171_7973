@@ -65,8 +65,8 @@ namespace PL.Views
             RemovePanelCommand = new(Remove);
 
             // Temp
-            (Dock.Children[2] as ContentControl).Content = new ParcelDetailsView(0);
-            DockingManager.SetHeader(Dock.Children[2] as ContentControl, $"{nameof(Views.ParcelDetailsView).CamelCaseToReadable()} {0}");
+            (Dock.Children[2] as ContentControl).Content = new StationDetailsView(0);
+            DockingManager.SetHeader(Dock.Children[2] as ContentControl, ViewModels.Workspace.BaseStationPanelName(0));
         }
 
         /// <summary>

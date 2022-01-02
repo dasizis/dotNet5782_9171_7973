@@ -13,8 +13,8 @@ namespace PL.ViewModels
 {
     class ParcelDetailsViewModel : DependencyObject
     {
-        public Parcel Parcel { get; set; }
-        public ObservableCollection<object> Markers { get; set; } = new();
+        public Parcel Parcel { get; set; } = new();
+        public ObservableCollection<MapMarker> Markers { get; set; } = new();
 
         public RelayCommand ViewSenderCommand { get; set; }
         public RelayCommand ViewTargetCommand { get; set; }
@@ -25,7 +25,7 @@ namespace PL.ViewModels
         {
             ParcelsNotification.ParcelsChangedEvent += LoadParcel;
 
-            Parcel = PLService.GetParcel(id);
+            Parcel.Id = id;
             LoadParcel();
 
             ViewSenderCommand = new(ViewSenderDetails);
@@ -68,13 +68,13 @@ namespace PL.ViewModels
             Parcel.Reload(PLService.GetParcel(Parcel.Id));
 
             Markers.Clear();
-            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Sender Customer"));
-            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Target Customer"));
-
             if (Parcel.DroneId != null)
             {
                 Markers.Add(MapMarker.FromType(PLService.GetDrone((int)Parcel.DroneId)));
             }
+
+            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Sender Customer"));
+            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Target Customer"));
         }
     }
 }

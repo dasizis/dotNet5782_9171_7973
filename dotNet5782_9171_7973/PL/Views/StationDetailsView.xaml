@@ -14,6 +14,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+                <ResourceDictionary Source="Style/MapDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
@@ -52,14 +53,10 @@
                                     UpdateSourceTrigger=PropertyChanged}"/>
         </syncfusion:SfTextInputLayout>
 
-        <TextBlock Text="{Binding Station.Location.Longitude}"/>
-        <TextBlock Text="{Binding Station.Location.Latitude}"/>
-
         <!--buttons-->
         <!--Buttons-->
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <Button Content="Update"                
-                    Style="{DynamicResource WPFPrimaryButtonStyle}"
                     Command="{Binding UpdateDetailsCommand}"
                     Margin="5" Padding="5"/>
             <Button Content="View drones in charge"                
@@ -69,5 +66,14 @@
                     Command="{Binding DeleteCommand}"
                     Margin="5" Padding="5"/>
         </StackPanel>
+        <!--Map-->
+        <syncfusion:SfMap>
+            <syncfusion:SfMap.Layers>
+                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
+                                           MarkerTemplate="{StaticResource MarkerTemplate}"
+                                           Markers="{Binding Markers}">
+                </syncfusion:ShapeFileLayer>
+            </syncfusion:SfMap.Layers>
+        </syncfusion:SfMap>
     </StackPanel>
 </UserControl>

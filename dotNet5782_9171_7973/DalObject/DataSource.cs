@@ -50,7 +50,7 @@ namespace Dal
                 public static readonly double Heavy = 0.04;
             }
 
-            public static readonly double ChargeRate = 10;
+            public static readonly double ChargeRate = 40;
         }
 
         /// <summary>

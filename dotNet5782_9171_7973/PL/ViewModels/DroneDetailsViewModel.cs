@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
 using PO;
 using StringUtilities;
 
@@ -6,9 +8,9 @@ namespace PL.ViewModels
 {
     class DroneDetailsViewModel
     {
-        public Drone Drone { get; set; }
+        public Drone Drone { get; set; } = new();
 
-        public bool IsInCharge => Drone.State == DroneState.Maintenance;
+        public ObservableCollection<MapMarker> Markers { get; set; } = new();
 
         public RelayCommand ProceedWithParcelCommand { get; set; }
 
@@ -19,16 +21,11 @@ namespace PL.ViewModels
         public RelayCommand DeleteCommand { get; set; }
 
         public RelayCommand ViewParcelCommand { get; set; }
-        public string ProceedWithParcelText
-        {
-            get => Drone.State == DroneState.Deliver
-                   ? Drone.ParcelInDeliver.WasPickedUp ? "Supply Parcel" : "Pick Parcel Up"
-                   : "Assign Parcel to Drone";
-        }
 
         public DroneDetailsViewModel(int id)
         {
-            Drone = PLService.GetDrone(id);
+            Drone.Id = id;
+            LoadDrone();
 
             DronesNotification.DronesChangedEvent += LoadDrone;
 
@@ -121,10 +118,10 @@ namespace PL.ViewModels
 
         private void LoadDrone()
         {
-            string model = Drone.Model;
-
             Drone.Reload(PLService.GetDrone(Drone.Id));
-            Drone.Model = model;
+
+            Markers.Clear();
+            Markers.Add(MapMarker.FromType(Drone));
         }
     }
 }

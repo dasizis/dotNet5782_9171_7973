@@ -77,13 +77,14 @@
             
            
         </StackPanel>
-        <!--<syncfusion:SfMap>
+        <!--Map-->
+        <syncfusion:SfMap>
             <syncfusion:SfMap.Layers>
-                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
-                                           Markers="{Binding Parent.DataContext.Markers, 
-                                                             RelativeSource={RelativeSource Mode=Self}}" 
-                                           MarkerTemplate="{StaticResource MarkerTemplate}"/>
+                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
+                                           MarkerTemplate="{StaticResource MarkerTemplate}"
+                                           Markers="{Binding Markers}">
+                </syncfusion:ShapeFileLayer>
             </syncfusion:SfMap.Layers>
-        </syncfusion:SfMap>-->
+        </syncfusion:SfMap>
     </StackPanel>
 </UserControl>

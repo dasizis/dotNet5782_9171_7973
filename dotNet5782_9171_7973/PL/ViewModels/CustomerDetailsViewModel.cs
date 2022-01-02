@@ -1,11 +1,13 @@
 ﻿using PO;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace PL.ViewModels
 {
     class CustomerDetailsViewModel
     {
-        public Customer Customer { get; set; }
+        public Customer Customer { get; set; } = new();
+        public ObservableCollection<MapMarker> Markers { get; set; } = new();
 
         public RelayCommand DeleteCommand { get; set; }
 
@@ -16,13 +18,14 @@ namespace PL.ViewModels
 
         public CustomerDetailsViewModel(int id)
         {
-            Customer = PLService.GetCustomer(id);
+            Customer.Id = id;
+            LoadCustomer();
 
             CustomersNotification.CustomersChanged += LoadCustomer;
 
             DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);
-            //TODO
+
             OpenSentParcelsListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.SenderName == Customer.Name, "A")),
                                     () => Customer.Send.Count != 0);
             OpenRecievedParcelsListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel((p) => p.TargetName == Customer.Name, "B")),
@@ -52,11 +55,9 @@ namespace PL.ViewModels
 
         private void LoadCustomer()
         {
-            string name = Customer.Name;
-            string phone = Customer.Phone;
             Customer.Reload(PLService.GetCustomer(Customer.Id));
-            Customer.Name = name;
-            Customer.Phone = phone;
+            Markers.Clear();
+            Markers.Add(MapMarker.FromType(Customer));
         }
     }
 }

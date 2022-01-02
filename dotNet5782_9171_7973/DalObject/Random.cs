@@ -123,14 +123,15 @@ namespace Dal
         /// <returns>the created Parcel instance</returns>
         internal static Parcel RandomParcel(int id, List<Customer> customers)
         {
+            int random = Rand.Next();
             return new Parcel()
             {
                 Id = id,
                 Requested = RandomDate(),
                 Weight = (WeightCategory)RandomEnumOption(typeof(WeightCategory)),
                 Priority = (Priority)RandomEnumOption(typeof(Priority)),
-                SenderId = customers[Rand.Next(customers.Count)].Id,
-                TargetId = customers[Rand.Next(customers.Count)].Id,
+                SenderId = customers[random % customers.Count].Id,
+                TargetId = customers[(random + 7) % customers.Count].Id,
             };
         }
 

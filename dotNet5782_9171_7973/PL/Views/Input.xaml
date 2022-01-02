@@ -28,13 +28,14 @@
                                   RangeEnd="100"
                                   ShowRange="True"
                                   ShowValueLabels="True"
-                                  TickPlacement="None"
+                                  TickPlacement="BottomRight"
                                   AllowRangeDrag="True"
                                   StepFrequency="5"
+                                  MinorTickFrequency="3"
                                   ThumbToolTipPlacement="TopLeft"
-                                  TickFrequency="10"
-                                  TickLength="10"
-                                  Margin="20,5,20,0">
+                                  TickFrequency="20"
+                                  SnapsTo="StepValues"
+                                  Margin="30,5,30,0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="RangeChanged">
                     <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding ElementName=RangeInput}"/>

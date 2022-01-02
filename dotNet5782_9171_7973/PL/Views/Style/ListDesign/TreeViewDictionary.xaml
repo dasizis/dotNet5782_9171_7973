@@ -44,14 +44,14 @@
     <!--Icon Style-->
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
-        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}" />
+        <Setter Property="Foreground" Value="Gray" />
     </Style>
 
     <!--PO.Location-->
     <HierarchicalDataTemplate DataType="{x:Type po:Location}" ItemsSource="{Binding Converter={StaticResource LocationToOrientaionConverter}}">
-        <StackPanel Orientation="Horizontal">
-            <materialDesign:PackIcon Kind="MapMarker" />
-            <TextBlock Text="Location" FontWeight="Bold"/>
+        <StackPanel Orientation="Horizontal"  Width="200" Height="30">
+            <materialDesign:PackIcon Kind="MapMarker"  VerticalAlignment="Center" />
+            <TextBlock Text="Location" FontWeight="Bold" VerticalAlignment="Center" />
         </StackPanel>
     </HierarchicalDataTemplate>
 
@@ -74,7 +74,7 @@
     <!--Object property-->
     <DataTemplate DataType="{x:Type listDesign:TreeViewProp}">
         <DockPanel Width="200" Height="30">
-            <TextBlock Text="{Binding PropName}" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding PropName}" FontWeight="DemiBold" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding propValue}" TextAlignment="Right" VerticalAlignment="Center"/>
         </DockPanel>
     </DataTemplate>
@@ -128,7 +128,7 @@
 
     <!--PO.DroneForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
-        <StackPanel Orientation="Horizontal" Tag="{Binding}">
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
             <StackPanel.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
                     <MouseBinding.CommandParameter>
@@ -139,7 +139,7 @@
                     </MouseBinding.CommandParameter>
                 </MouseBinding>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Model}"/>
+            <TextBlock Text="{Binding Model}"  VerticalAlignment="Center" />
         </StackPanel>
     </HierarchicalDataTemplate>
 

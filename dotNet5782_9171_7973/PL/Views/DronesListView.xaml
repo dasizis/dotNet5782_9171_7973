@@ -89,8 +89,6 @@
             </syncfusion:SfTextInputLayout>
         </StackPanel>
 
-        <syncfusion:SfTreeView FullRowSelect="True" Nodes="{Binding View}">
-        </syncfusion:SfTreeView>
 
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <TreeView ItemsSource="{Binding View}">

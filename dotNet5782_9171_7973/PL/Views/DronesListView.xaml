@@ -7,67 +7,63 @@
              xmlns:local="clr-namespace:PL.Views"
              xmlns:vm="clr-namespace:PL.ViewModels"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-             xmlns:po="clr-namespace:PO"
              xmlns:converters="clr-namespace:PL.Views.Converters"
-             xmlns:listDesign="clr-namespace:PL.Views.Style.ListDesign"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:Engine="clr-namespace:Syncfusion.UI.Xaml.TreeView.Engine;assembly=Syncfusion.SfTreeView.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml" />
                 <ResourceDictionary Source="Style/ListDesign/TreeViewDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:ValueToInputTypeConverter x:Key="ValueToInputTypeConverter" />
             <converters:ValueToInputEnableConverter x:Key="ValueToInputEnableConverter" />
-            <listDesign:ObjectToTreeConverter x:Key="ObjectToTreeConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <UserControl.DataContext>
         <vm:DronesListViewModel />
     </UserControl.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Style="{StaticResource QueryArea}">
+            <!--Filter Key-->
             <syncfusion:SfTextInputLayout Hint="Filter By" InputViewPadding="10" >
                 <ComboBox ItemsSource="{Binding FilterOptions}" 
-                          SelectedItem="{Binding FilterKey, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="10">
+                          SelectedItem="{Binding FilterKey, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type ComboBoxItem}">
                             <TextBlock Text="{Binding Name}" Tag="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding FilterCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                 </ComboBox>
             </syncfusion:SfTextInputLayout>
 
-            <local:Input IsEnabled="{Binding Parent.DataContext.FilterKey, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ValueToInputEnableConverter}}"
-                         Type="{Binding Parent.DataContext.FilterKey, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ValueToInputTypeConverter}}"
-                         Value="{Binding Parent.DataContext.FilterValue, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}"
-                         Command="{Binding Parent.DataContext.FilterCommand, RelativeSource={RelativeSource Mode=Self}}"/>
+            <!--Dynamic Filter Value Input-->
+            <local:Input IsEnabled="{Binding Parent.DataContext.FilterKey, 
+                                             RelativeSource={RelativeSource Mode=Self}, 
+                                             Converter={StaticResource ValueToInputEnableConverter}}"
+                         Type="{Binding Parent.DataContext.FilterKey, 
+                                        RelativeSource={RelativeSource Mode=Self}, 
+                                        UpdateSourceTrigger=PropertyChanged, 
+                                        Converter={StaticResource ValueToInputTypeConverter}}"
+                         Command="{Binding Parent.DataContext.FilterCommand, 
+                                           RelativeSource={RelativeSource Mode=Self}}"
+                         ComboBoxItemsSourceEnumType="{Binding Parent.DataContext.FilterKey.PropertyType, 
+                                                               RelativeSource={RelativeSource Mode=Self}}"/>
+            
 
-            <!--<TextBox Text="{Binding FilterValue, UpdateSourceTrigger=PropertyChanged}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding FilterCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>-->
-
+            <!--Sort key-->
             <syncfusion:SfTextInputLayout Hint="Sort By" InputViewPadding="10" >
                 <ComboBox ItemsSource="{Binding SortOptions}" 
-                          SelectedItem="{Binding SortKey, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="10">
+                          SelectedItem="{Binding SortKey, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding SortCommand}" />
@@ -75,11 +71,11 @@
                     </i:Interaction.Triggers>
                 </ComboBox>
             </syncfusion:SfTextInputLayout>
-
+            
+            <!--Group Key-->
             <syncfusion:SfTextInputLayout Hint="Group By" InputViewPadding="10" >
                 <ComboBox ItemsSource="{Binding GroupOptions}" 
-                          SelectedItem="{Binding GroupKey, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="10">
+                          SelectedItem="{Binding GroupKey, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding GroupCommand}" />
@@ -89,9 +85,9 @@
             </syncfusion:SfTextInputLayout>
         </StackPanel>
 
-
+        <!--List Area-->
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <TreeView ItemsSource="{Binding View}">
+            <TreeView ItemsSource="{Binding View}" Margin="10">
                 <TreeView.GroupStyle>
                     <GroupStyle>
                         <GroupStyle.ContainerStyle>
@@ -103,5 +99,12 @@
                 </TreeView.GroupStyle>
             </TreeView>
         </ScrollViewer>
+
+        <!--Add Button-->
+        <StackPanel Grid.Row="2" Style="{StaticResource QueryArea}">
+            <Button Command="{Binding OpenAddWindowCommand}" Margin="30,20">
+                Add Drone
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

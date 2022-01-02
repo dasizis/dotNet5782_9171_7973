@@ -25,6 +25,20 @@ namespace PL.Views.Converters
         }
     }
 
+    public class EnumTypeToValues : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || !((Type)value).IsEnum) return null;
+            return Enum.GetValues((Type)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class ValueToInputTypeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

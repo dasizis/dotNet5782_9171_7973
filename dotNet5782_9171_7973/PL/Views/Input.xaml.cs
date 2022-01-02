@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.Windows.Controls.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,8 +38,6 @@ namespace PL.Views
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(InputType), typeof(Input), new PropertyMetadata(InputType.Text));
 
-
-
         public object Value
         {
             get { return GetValue(ValueProperty); }
@@ -49,88 +48,52 @@ namespace PL.Views
             DependencyProperty.Register("Value", typeof(object), typeof(Input), new PropertyMetadata(null));
 
 
-
-        public List<object> ItemsSource
+        public Type ComboBoxItemsSourceEnumType
         {
-            get { return (List<object>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get { return (Type)GetValue(ComboBoxItemsSourceEnumTypeProperty); }
+            set { SetValue(ComboBoxItemsSourceEnumTypeProperty, value); }
         }
 
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(List<object>), typeof(Input), new PropertyMetadata(null));
+        public static readonly DependencyProperty ComboBoxItemsSourceEnumTypeProperty =
+            DependencyProperty.Register("ComboBoxItemsSourceEnumType", typeof(Type), typeof(Input), new PropertyMetadata(null));
 
-
-
-        public double Minimum
+        public RelayCommand<object> Command
         {
-            get { return (double)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
-        }
-
-        public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register("Minimum", typeof(double), typeof(Input), new PropertyMetadata(0.0));
-
-
-        public double Maximum
-        {
-            get { return (double)GetValue(MaximunProperty); }
-            set { SetValue(MaximunProperty, value); }
-        }
-
-        public static readonly DependencyProperty MaximunProperty =
-            DependencyProperty.Register("Maximun", typeof(double), typeof(Input), new PropertyMetadata(100.0));
-
-
-        public double StartValue
-        {
-            get { return (double)GetValue(StartValueProperty); }
-            set { SetValue(StartValueProperty, value); }
-        }
-
-        public static readonly DependencyProperty StartValueProperty =
-            DependencyProperty.Register("StartValue", typeof(double), typeof(Input), new PropertyMetadata(0.0));
-
-
-        public double EndValue
-        {
-            get { return (double)GetValue(EndValueProperty); }
-            set { SetValue(EndValueProperty, value); }
-        }
-
-        public static readonly DependencyProperty EndValueProperty =
-            DependencyProperty.Register("EndValue", typeof(double), typeof(Input), new PropertyMetadata(100.0));
-
-
-
-
-        public ICommand Command
-        {
-            get { return (ICommand)GetValue(CommandProperty); }
+            get { return (RelayCommand<object>)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
 
         public static readonly DependencyProperty CommandProperty =
-            DependencyProperty.Register("Command", typeof(ICommand), typeof(Input), new PropertyMetadata(null));
+            DependencyProperty.Register("Command", typeof(RelayCommand<object>), typeof(Input), new PropertyMetadata(null));
+
+
+        public RelayCommand<object> NotifyValueChangedCommand { get; set; }
 
         public Input()
         {
             InitializeComponent();
             DataContext = this;
+
+            NotifyValueChangedCommand = new(NotifyValueChanged);
         }
 
-        private void SfRangeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+
+        private void NotifyValueChanged(object value)
         {
+            if (value is SfRangeSlider slider)
+            {
+                Command.Execute(new double[] { slider.RangeStart, slider.RangeEnd });
+            }
+            else
+            {
+                Command.Execute(value);
+            }
         }
 
-        private void SfRangeSlider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void SfRangeSlider_RangeChanged(object sender, Syncfusion.Windows.Controls.Input.RangeChangedEventArgs e)
         {
-
+            var slider = (SfRangeSlider)sender;
+            Command.Execute(new double[] { slider.RangeStart, slider.RangeEnd });
         }
-
-        private void SfRangeSlider_TargetUpdated(object sender, DataTransferEventArgs e)
-        {
-            Value = new double[] { StartValue, EndValue };
-        }
-
     }
 }

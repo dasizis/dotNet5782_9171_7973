@@ -33,7 +33,7 @@ namespace PL.ViewModels
 
         public RelayCommand SortCommand { get; set; }
 
-        public RelayCommand FilterCommand { get; set; }
+        public RelayCommand<object> FilterCommand { get; set; }
 
         public RelayCommand GroupCommand { get; set; }
 
@@ -52,31 +52,42 @@ namespace PL.ViewModels
 
             View.Filter = Filter;
 
-            FilterCommand = new(View.Refresh, () => FilterKey != null);
+            FilterCommand = new(ActivateFilter, param => FilterKey != null);
             GroupCommand = new(Group, () => GroupKey != null);
             SortCommand = new(Sort);
             OpenAddWindowCommand = new(() => Workspace.AddPanelCommand.Execute(GetAddPanel()));
         }
 
+        private void ActivateFilter(object parameter)
+        {
+            FilterValue = parameter;
+            View.Refresh();
+        }
+
         private bool Filter(object item)
         {
-            if (FilterValue == null || (string)FilterKey == RESET_VALUE)
+            if (FilterValue == null || FilterKey  == null || (FilterKey is string && (string)FilterKey == RESET_VALUE))
                 return true;
 
             PropertyInfo property = FilterKey as PropertyInfo;
             var propertyValue = property.GetValue(item);
 
+            if (propertyValue == null)
+                return false;
+
             if (property.PropertyType == typeof(string))
-                return propertyValue.ToString().Contains((string)FilterValue);
+                return propertyValue.ToString().ToUpper().Contains(FilterValue.ToString().ToUpper());
 
             if (property.PropertyType.IsEnum)
                 return (int)FilterValue == (int)propertyValue;
 
             if (property.PropertyType == typeof(int) ||
-                property.PropertyType == typeof(int?) ||
-                property.PropertyType == typeof(double) ||
+                property.PropertyType == typeof(int?))
+                return (int)propertyValue > ((double[])FilterValue)[0] && (int)propertyValue < ((double[])FilterValue)[1];
+
+            if (property.PropertyType == typeof(double) ||
                 property.PropertyType == typeof(double?))
-                return (int)propertyValue > (int)((IList)FilterValue)[0] && (int)propertyValue < (int)((IList)FilterValue)[1];
+                return (double)propertyValue > ((double[])FilterValue)[0] && (double)propertyValue < ((double[])FilterValue)[1];
 
             return true;
         }

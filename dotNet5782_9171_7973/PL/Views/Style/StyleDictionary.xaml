@@ -30,7 +30,7 @@
     </Style>
 
     <Style TargetType="{x:Type syncfusion:SfTextInputLayout}">
-        <Setter Property="Margin" Value="10,10,30,10" />
+        <Setter Property="Margin" Value="30,10,30,10" />
         <Setter Property="MaxWidth" Value="1500" />
     </Style>
 

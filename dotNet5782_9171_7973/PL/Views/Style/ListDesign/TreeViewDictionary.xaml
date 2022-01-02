@@ -20,26 +20,15 @@
         <Setter Property="Background" Value="Red" />
     </Style>-->
 
-    <HierarchicalDataTemplate x:Key="TreeViewItemTemplate" ItemsSource="{Binding Converter={StaticResource ObjectToTreeConverter}}">
-        <TextBlock Text="{Binding Converter={StaticResource ObjectToTreeConverter}}" />
-    </HierarchicalDataTemplate>
-
-
     <!--Query Area-->
     <Style x:Key="QueryArea" TargetType="StackPanel">
-        <Setter Property="Background" Value="#F8F8F8" />
-
+        <Setter Property="Background" Value="#FAFAFA" />
     </Style>
 
     <!--Query Inputs-->
     <Style TargetType="{x:Type syncfusion:SfTextInputLayout}">
-        <Setter Property="Margin" Value="10,10,10,0" />
+        <Setter Property="Margin" Value="30,10,30,0" />
     </Style>
-
-    <!--ComboBox Item-->
-    <DataTemplate DataType="{x:Type ComboBoxItem}" x:Key="ComboBoxItem">
-        <TextBlock Text="{Binding Name}" Tag="{Binding}" />
-    </DataTemplate>
 
     <!--Icon Style-->
     <Style TargetType="materialDesign:PackIcon">

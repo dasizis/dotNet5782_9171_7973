@@ -111,6 +111,5 @@
                 </syncfusion:ShapeFileLayer>
             </syncfusion:SfMap.Layers>
         </syncfusion:SfMap>
-
     </StackPanel>
 </UserControl>

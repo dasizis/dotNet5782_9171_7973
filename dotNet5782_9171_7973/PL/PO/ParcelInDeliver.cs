@@ -5,20 +5,35 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of parcel in deliver
     /// </summary>
-    public class ParcelInDeliver
+    public class ParcelInDeliver : PropertyChangedNotification
     {
+        int id;
         /// <summary>
         /// Parcel Id
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => id;
+            set => SetField(ref id, value);
+        }
 
-        public bool WasPickedUp { get; set; }
+        bool wasPickedUp;
+        public bool WasPickedUp
+        {
+            get => wasPickedUp;
+            set => SetField(ref wasPickedUp, value);
+        }
 
+        double deliveryDistance;
         /// <summary>
         /// Delivery distance
         /// (distance from sender to target)
         /// </summary>
-        public double DeliveryDistance { get; set; }
+        public double DeliveryDistance
+        {
+            get => deliveryDistance;
+            set => SetField(ref deliveryDistance, value);
+        }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

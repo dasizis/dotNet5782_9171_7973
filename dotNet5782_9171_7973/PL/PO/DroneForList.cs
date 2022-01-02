@@ -5,44 +5,80 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of drone for list
     /// </summary>
-    public class DroneForList
+    public class DroneForList : PropertyChangedNotification
     {
+        int id;
         /// <summary>
         /// Drone Id
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => id;
+            set => SetField(ref id, value);
+        }
 
+        string model;
         /// <summary>
         /// Drone model
         /// </summary>
-        public string Model { get; set; }
+        public string Model
+        {
+            get => model;
+            set => SetField(ref model, value);
+        }
 
+        WeightCategory maxWeight;
         /// <summary>
         /// Highest weight drone can carry
         /// </summary>
-        public WeightCategory MaxWeight { get; set; }
+        public WeightCategory MaxWeight
+        {
+            get => maxWeight;
+            set => SetField(ref maxWeight, value);
+        }
 
+        double battery;
         /// <summary>
         /// Drone battery 
         /// (in parcents)
         /// </summary>
-        public double Battery { get; set; }
+        public double Battery
+        {
+            get => battery;
+            set => SetField(ref battery, value);
+        }
 
+        DroneState state;
         /// <summary>
         /// Drone state
         /// </summary>
-        public DroneState State { get; set; }
+        public DroneState State
+        {
+            get => state;
+            set => SetField(ref state, value);
+        }
 
+        Location location;
         /// <summary>
         /// Drone location
         /// </summary>
-        public Location Location { get; set; }
+        public Location Location
+        {
+            get => location;
+            set => SetField(ref location, value);
+        }
 
+        int? deliveredParcelId;
         /// <summary>
         /// Id of drone's related parcel
         /// (if exists)
         /// </summary>
-        public int? DeliveredParcelId { get; set; }
+        public int? DeliveredParcelId
+        {
+            get => deliveredParcelId;
+            set => SetField(ref deliveredParcelId, value);
+        }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <c>ToString()</c> method

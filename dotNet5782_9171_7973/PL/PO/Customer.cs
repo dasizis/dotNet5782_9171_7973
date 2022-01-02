@@ -10,10 +10,15 @@ namespace PO
     /// </summary>
     public class Customer : PropertyChangedNotification, ILocalable
     {
+        int id;
         /// <summary>
         /// Customer Id
         /// </summary>
-        public int Id { get; set; }
+        public int Id 
+        {
+            get => id;
+            set => SetField(ref id, value);
+        }
 
         string name;
         /// <summary>
@@ -39,20 +44,35 @@ namespace PO
             set => SetField(ref phone, value);
         }
 
+        Location location;
         /// <summary>
         /// Customer location
         /// </summary>
-        public Location Location { get; set; }
+        public Location Location
+        {
+            get => location;
+            set => SetField(ref location, value);
+        }
 
+        List<Parcel> send;
         /// <summary>
         /// List of parcels sent from customer
         /// </summary>
-        public List<Parcel> Send { get; set; }
+        public List<Parcel> Send
+        {
+            get => send;
+            set => SetField(ref send, value);
+        }
 
+        List<Parcel> recieve;
         /// <summary>
         /// List of parcels sent to customer
         /// </summary>
-        public List<Parcel> Recieve { get; set; }
+        public List<Parcel> Recieve
+        {
+            get => recieve;
+            set => SetField(ref recieve, value);
+        }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

@@ -118,6 +118,20 @@ namespace PL.Views.Converters
         }
     }
 
+    public class ParcelDatesToSteperIndex : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!values.Contains(null)) return values.Length - 1;
+            return values.ToList().FindIndex(value => value == null) - 1;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class DateToToolTipConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

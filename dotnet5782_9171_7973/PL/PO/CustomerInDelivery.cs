@@ -7,17 +7,27 @@ namespace PO
     /// A class to represent a PDS of customer in delivery
     /// (customer related to parcel delivery, sender or reciever)
     /// </summary>
-    public class CustomerInDelivery
+    public class CustomerInDelivery : PropertyChangedNotification
     {
+        int id;
         /// <summary>
         /// Customer Id
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => id;
+            set => SetField(ref id, value);
+        }
 
+        string name;
         /// <summary>
         /// Customer name
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get => name;
+            set => SetField(ref name, value);
+        }
 
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>

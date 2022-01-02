@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Data;
 
 namespace PL.ViewModels
@@ -19,15 +21,22 @@ namespace PL.ViewModels
 
         public object FilterValue { get; set; }
 
-        public IEnumerable Options { get; set; }
+        public IEnumerable FilterOptions { get; set; }
+        public IEnumerable GroupOptions { get; set; }
+        public IEnumerable SortOptions { get; set; }
 
-        public string SortKey { get; set; }
+        public Array EnumOptions { get; set; }
 
-        public string GroupKey { get; set; }
+        public object SortKey { get; set; }
+
+        public object GroupKey { get; set; }
 
         public RelayCommand SortCommand { get; set; }
+
         public RelayCommand FilterCommand { get; set; }
+
         public RelayCommand GroupCommand { get; set; }
+
         public RelayCommand OpenAddWindowCommand { get; set; }
 
         public QueriableListViewModel()
@@ -35,10 +44,11 @@ namespace PL.ViewModels
             List = new(GetList());
             View = (CollectionView)CollectionViewSource.GetDefaultView(List);
 
-            Options = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                               .Where(property => property.PropertyType.IsValueType || property.PropertyType == typeof(string))
-                               .Cast<object>()
-                               .Union(new List<object> { RESET_VALUE });
+            FilterOptions = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                                     .Where(property => property.PropertyType.IsValueType || property.PropertyType == typeof(string));
+                                     
+            SortOptions  =  FilterOptions.Cast<PropertyInfo>().Select(option => option.Name).Union(new List<string> { RESET_VALUE });
+            GroupOptions = FilterOptions.Cast<PropertyInfo>().Where(property => property.PropertyType.IsEnum).Select(option => option.Name).Union(new List<string> { RESET_VALUE });
 
             View.Filter = Filter;
 
@@ -50,13 +60,23 @@ namespace PL.ViewModels
 
         private bool Filter(object item)
         {
-            if (FilterValue == null)
+            if (FilterValue == null || (string)FilterKey == RESET_VALUE)
                 return true;
 
-            PropertyInfo property = typeof(T).GetProperty(FilterKey.ToString());
+            PropertyInfo property = FilterKey as PropertyInfo;
+            var propertyValue = property.GetValue(item);
 
             if (property.PropertyType == typeof(string))
-                return property.GetValue(item).ToString().Contains((string)FilterValue);
+                return propertyValue.ToString().Contains((string)FilterValue);
+
+            if (property.PropertyType.IsEnum)
+                return (int)FilterValue == (int)propertyValue;
+
+            if (property.PropertyType == typeof(int) ||
+                property.PropertyType == typeof(int?) ||
+                property.PropertyType == typeof(double) ||
+                property.PropertyType == typeof(double?))
+                return (int)propertyValue > (int)((IList)FilterValue)[0] && (int)propertyValue < (int)((IList)FilterValue)[1];
 
             return true;
         }
@@ -68,9 +88,9 @@ namespace PL.ViewModels
         {
             View.SortDescriptions.Clear();
 
-            if (GroupKey == RESET_VALUE) return;
+            if ((string)SortKey == RESET_VALUE) return;
 
-            View.SortDescriptions.Add(new SortDescription() { PropertyName = SortKey, Direction = ListSortDirection.Ascending });
+            View.SortDescriptions.Add(new SortDescription() { PropertyName = (string)SortKey, Direction = ListSortDirection.Ascending });
             View.Refresh();
         }
 
@@ -78,9 +98,9 @@ namespace PL.ViewModels
         {
             View.GroupDescriptions.Clear();
 
-            if (GroupKey == RESET_VALUE) return;
+            if ((string)GroupKey == RESET_VALUE) return;
 
-            View.GroupDescriptions.Add(new PropertyGroupDescription(GroupKey));
+            View.GroupDescriptions.Add(new PropertyGroupDescription((string)GroupKey));
             View.Refresh();
         }
     }

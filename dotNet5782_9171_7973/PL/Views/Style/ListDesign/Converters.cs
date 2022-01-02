@@ -1,6 +1,7 @@
 ﻿using PO;
 using StringUtilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,82 @@ using System.Windows.Data;
 
 namespace PL.Views.Style.ListDesign
 {
+    class ObjectToTreeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.GetType()
+                        .GetProperties(BindingFlags.Public |
+                                       BindingFlags.Instance |
+                                       BindingFlags.DeclaredOnly)
+                        .Select(prop => CreateProperty(prop, value));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        private object CreateProperty(PropertyInfo prop, object owner)
+        {
+            var propValue = prop.GetValue(owner);
+
+            if (prop.PropertyType == typeof(PO.Location))
+            {
+                new List<object>() { new Longitude() { Long = (double)((Location)propValue).Longitude }, new Latitude() { Lat = (double)((Location)propValue).Latitude } };
+            };
+
+            if (prop.Name == "Battery")
+            {
+                return new Battery() { BatteryValue = (double)propValue };
+            }
+
+            return new TreeViewProp()
+            {
+                PropName = prop.Name.CamelCaseToReadable(),
+                propValue = propValue
+            };
+        }
+    }
+     class CollapseListConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((IEnumerable)value).Cast<object>()
+                                       .GetType()
+                                       .GetProperties(BindingFlags.Public |
+                                                      BindingFlags.Instance |
+                                                      BindingFlags.DeclaredOnly)
+                                       .Select(prop => CreateProperty(prop, value));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        private object CreateProperty(PropertyInfo prop, object owner)
+        {
+            var propValue = prop.GetValue(owner);
+
+            if (prop.PropertyType == typeof(PO.Location))
+            {
+                new List<object>() { new Longitude() { Long = (double)((Location)propValue).Longitude }, new Latitude() { Lat = (double)((Location)propValue).Latitude } };
+            };
+
+            if (prop.Name == "Battery")
+            {
+                return new Battery() { BatteryValue = (double)propValue };
+            }
+
+            return new TreeViewProp()
+            {
+                PropName = prop.Name.CamelCaseToReadable(),
+                propValue = propValue
+            };
+        }
+    }
+
     class TypeAndIdToPanelConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -35,7 +112,11 @@ namespace PL.Views.Style.ListDesign
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.GetType().GetProperties().Select(prop => CreateProperty(prop, value));
+            return value.GetType()
+                        .GetProperties(BindingFlags.Public |
+                                       BindingFlags.Instance |
+                                       BindingFlags.DeclaredOnly)
+                        .Select(prop => CreateProperty(prop, value));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

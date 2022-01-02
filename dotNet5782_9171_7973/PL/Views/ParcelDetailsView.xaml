@@ -14,12 +14,12 @@
                 <ResourceDictionary Source="Style/MapDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
-            <convereters:ParcelToSteperIndex x:Key="ParcelToSteperIndex"/>
+            <convereters:ParcelDatesToSteperIndex x:Key="ParcelDatesToSteperIndex"/>
             <convereters:DateToToolTipConverter x:Key="DateToToolTipConverter"/>
         </ResourceDictionary>
-
     </UserControl.Resources>
     <StackPanel Style="{StaticResource Container}">
+        
         <!--Header-->
         <TextBlock Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
                    Style="{StaticResource Header}" />
@@ -33,9 +33,16 @@
                    Style="{StaticResource Text}"/>
         <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
                    Style="{StaticResource Text}"/>
-        
 
-        <syncfusion:SfStepProgressBar SelectedIndex="{Binding Parcel.Id, Converter={StaticResource ParcelToSteperIndex}}" AnimationDuration="0:0:0" Margin="0, 50">
+        <syncfusion:SfStepProgressBar AnimationDuration="0:0:0" Margin="0, 50">
+            <syncfusion:SfStepProgressBar.SelectedIndex>
+                <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
+                    <Binding Path="Parcel.Requested" />
+                    <Binding Path="Parcel.Scheduled" />
+                    <Binding Path="Parcel.PickedUp" />
+                    <Binding Path="Parcel.Supplied" />
+                </MultiBinding>
+            </syncfusion:SfStepProgressBar.SelectedIndex>
             <syncfusion:StepViewItem 
                 Content="Requested" 
                 ToolTip="{Binding Parcel.Requested, Converter={StaticResource DateToToolTipConverter}}"/>
@@ -65,7 +72,6 @@
                     Margin="5" Padding="5"/>
 
             <Button Content="Delete parcel"                
-                    Style="{DynamicResource WPFPrimaryButtonStyle}"
                     Command="{Binding DeleteCommand}"
                     Margin="5" Padding="5"/>
             

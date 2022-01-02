@@ -6,25 +6,41 @@
                     xmlns:v="clr-namespace:PL.Views"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                     xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
-    
+
     <!--Converters-->
     <listDesign:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
     <listDesign:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
     <listDesign:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
     <listDesign:TypeAndIdToPanelConverter x:Key="TypeAndIdToPanelConverter" />
+    <listDesign:CollapseListConverter x:Key="CollapseListConverter" />
+
+    <!--<Style TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Background" Value="Red" />
+    </Style>-->
+
+    <HierarchicalDataTemplate x:Key="TreeViewItemTemplate" ItemsSource="{Binding Converter={StaticResource ObjectToTreeConverter}}">
+        <TextBlock Text="{Binding Converter={StaticResource ObjectToTreeConverter}}" />
+    </HierarchicalDataTemplate>
+
 
     <!--Query Area-->
     <Style x:Key="QueryArea" TargetType="StackPanel">
         <Setter Property="Background" Value="#F8F8F8" />
 
     </Style>
-    
+
     <!--Query Inputs-->
     <Style TargetType="{x:Type syncfusion:SfTextInputLayout}">
         <Setter Property="Margin" Value="10,10,10,0" />
     </Style>
-    
+
+    <!--ComboBox Item-->
+    <DataTemplate DataType="{x:Type ComboBoxItem}" x:Key="ComboBoxItem">
+        <TextBlock Text="{Binding Name}" Tag="{Binding}" />
+    </DataTemplate>
+
     <!--Icon Style-->
     <Style TargetType="materialDesign:PackIcon">
         <Setter Property="Margin" Value="0,0,10,0" />
@@ -73,7 +89,7 @@
             <TextBlock Text="{Binding BatteryValue, StringFormat={}{0:F2}% }" TextAlignment="Right"
                         VerticalAlignment="Center"/>
         </DockPanel>
-        
+
     </DataTemplate>
 
     <!--PO.BaseStationForList-->

@@ -17,13 +17,16 @@
         <converters:PanelsToDockItemsConverter x:Key="PanelsToDockItemsConverter" />
         <converters:TempConveter x:Key="TempConveter" />
     </UserControl.Resources>-->
-    <syncfusion:DockingManager x:Name="Dock" 
+    <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
                                CloseButtonClick="Dock_CloseButtonClick">
-        <ContentControl syncfusion:DockingManager.Header="Bottom" syncfusion:DockingManager.SideInDockedMode="Bottom">
+        <ContentControl syncfusion:DockingManager.Header="Bottom" 
+                        syncfusion:DockingManager.SideInDockedMode="Bottom"
+                        syncfusion:DockingManager.DesiredHeightInDockedMode="200">
             <local:MainMapView />
         </ContentControl>
         <ContentControl syncfusion:DockingManager.Header="Top" 
+                        syncfusion:DockingManager.DesiredWidthInDockedMode="350"
                         syncfusion:DockingManager.CanClose="False">
             <local:DronesListView />
         </ContentControl>

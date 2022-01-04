@@ -71,7 +71,7 @@
                     Command="{Binding ViewDroneCommand}"
                     Margin="5" Padding="5"/>
 
-            <Button Content="Delete parcel"                
+            <Button Content="Delete parcel"               
                     Command="{Binding DeleteCommand}"
                     Margin="5" Padding="5"/>
             

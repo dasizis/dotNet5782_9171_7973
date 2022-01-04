@@ -36,5 +36,11 @@ namespace PL.ViewModels
         {
             return PLService.GetDronesList();
         }
+
+        DronesListViewModel(): base()
+        {
+            DronesNotification.DronesChangedEvent += ReloadList;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StringUtilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace PO
 
         public string Color { get; set; }
 
-        public string Name { get; set; }
+        public string Label { get; set; }
 
         private static Dictionary<Type, Color> ColorsDictionary { get; set; } = new()
         {
@@ -27,7 +28,7 @@ namespace PO
 
         public static MapMarker FromType(ILocalable localable)
         {
-            return FromTypeAndName(localable, localable.GetType().Name);
+            return FromTypeAndName(localable, localable.GetType().Name.CamelCaseToReadable());
        }
 
         public static MapMarker FromTypeAndName(ILocalable localable, string name)
@@ -37,7 +38,7 @@ namespace PO
                 Longitude = (double)localable.Location.Longitude,
                 Latitude = (double)localable.Location.Latitude,
                 Color = ColorsDictionary[localable.GetType()].ToString(),
-                Name = name,
+                Label = name,
             };
         }
     }

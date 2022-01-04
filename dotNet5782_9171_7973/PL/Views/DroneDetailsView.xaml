@@ -105,7 +105,7 @@
         <!--Map-->
         <syncfusion:SfMap>
             <syncfusion:SfMap.Layers>
-                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
+                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"
                                            Markers="{Binding Markers}">
                 </syncfusion:ShapeFileLayer>

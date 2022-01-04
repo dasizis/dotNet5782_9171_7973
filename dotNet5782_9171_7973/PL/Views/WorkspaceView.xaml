@@ -25,7 +25,7 @@
         </ContentControl>
         <ContentControl syncfusion:DockingManager.Header="Top" 
                         syncfusion:DockingManager.CanClose="False">
-            <local:DronesListView />
+            <local:AddCustomerView />
         </ContentControl>
         <ContentControl syncfusion:DockingManager.Header="Welcome" syncfusion:DockingManager.State="Document" >
             <local:DronesListView />

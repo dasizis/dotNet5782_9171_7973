@@ -95,6 +95,16 @@ namespace PL.ViewModels
         protected abstract IEnumerable<T> GetList();
         protected abstract Panel GetAddPanel();
 
+        protected void ReloadList()
+        {
+            List.Clear();
+
+            foreach (var item in GetList())
+            {
+                List.Add(item);
+            }
+        }
+
         void Sort()
         {
             View.SortDescriptions.Clear();

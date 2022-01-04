@@ -19,9 +19,9 @@
         <Setter Property="Foreground" Value="DarkGray" />
     </Style>
 
-    <Style x:Key="Icon" TargetType="{x:Type materialDesign:PackIcon}">
+    <!--<Style x:Key="Icon" TargetType="{x:Type materialDesign:PackIcon}">
         <Setter Property="Height" Value="10" />
-    </Style>
+    </Style>-->
 
     <Style x:Key="AddButton" TargetType="Button">
         <Setter Property="Padding" Value="5"/>
@@ -39,6 +39,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Height" Value="30"/>
         <Setter Property="FontFamily" Value="Aharon"/>
+        <Setter Property="Padding" Value="50"/>
         <!--<Setter Property="Button.Effect">
             <Setter.Value>
                 <DropShadowEffect Color="DarkGray" Direction="360" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
@@ -49,7 +50,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border CornerRadius="3" Background="{TemplateBinding Background}" x:Name="Border">
                         <Grid>
-                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,5"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

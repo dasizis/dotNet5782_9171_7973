@@ -34,6 +34,7 @@
         <Setter Property="MaxWidth" Value="1500" />
     </Style>
 
+
     <Style TargetType="Button" x:Key="BaseButton">
         <Setter Property="FontSize" Value="13" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -55,22 +56,23 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#0893ff" />
+                            <Setter Property="Background" Value="WhiteSmoke" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="#0893ff"/>
                             <Setter Property="BorderThickness" Value="1,1,2,2" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="Background" Value="Gray"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
+
+
+    <Style TargetType="{x:Type Button}" x:Key="PrimaryButton" BasedOn="{StaticResource BaseButton}">
         <Setter Property="Background" Value="#0179ff" />
-        <Setter Property="Foreground" Value="white" />
+        <Setter Property="Foreground" Value="LightGray" />
     </Style>
 
 </ResourceDictionary>

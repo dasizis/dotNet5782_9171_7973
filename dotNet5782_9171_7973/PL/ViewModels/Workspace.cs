@@ -12,7 +12,8 @@ namespace PL.ViewModels
         Other,
     }
 
-    public record Panel(PanelType PanelType, ContentControl View, string Header);
+    //I changed here to make it work from ContentControl to UserControl
+    public record Panel(PanelType PanelType, UserControl View, string Header);
 
     static class Workspace
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StringUtilities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -55,16 +56,8 @@ namespace PL.ViewModels
         }
         protected bool Filter(object item)
         {
-            string allProps = null;
-            Type type = item.GetType();
-
-            foreach (PropertyInfo prop in type.GetProperties())
-            {
-                if (prop.PropertyType == typeof(PO.Location)) break;
-
-                allProps += prop.GetValue(item, null) + " ";
-            }
-            return allProps.Contains(FilterValue ?? "");
+           if (FilterValue == null) return true;
+           return item.ToStringProperties().ToUpper().Contains(FilterValue.ToUpper());
         }
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {

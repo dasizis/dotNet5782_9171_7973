@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +55,16 @@ namespace PL.ViewModels
         }
         protected bool Filter(object item)
         {
-            return item.ToString().Contains(FilterValue ?? "");
+            string allProps = null;
+            Type type = item.GetType();
+
+            foreach (PropertyInfo prop in type.GetProperties())
+            {
+                if (prop.PropertyType == typeof(PO.Location)) break;
+
+                allProps += prop.GetValue(item, null) + " ";
+            }
+            return allProps.Contains(FilterValue ?? "");
         }
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {

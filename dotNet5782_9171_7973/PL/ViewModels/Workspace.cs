@@ -26,6 +26,10 @@ namespace PL.ViewModels
         public static string AddParcelPanelName() => $"{nameof(Views.AddParcelView).CamelCaseToReadable()}";
         public static string AddCustomerPanelName() => $"{nameof(Views.AddCustomerView).CamelCaseToReadable()}";
         public static string AddBaseStationPanelName() => $"{nameof(Views.AddStationView).CamelCaseToReadable()}";
+        public static string CustomerSentListName(int id) => $"Sent Parcels Customer {id}";
+        public static string CustomerRecievedListName(int id) => $"Recieved Parcels Customer {id}";
+
+
         public static string ListPanelName(Type type) => $"{type.Name}";
 
         public static Panel DronePanel(int? id = null) => id == null 
@@ -48,7 +52,7 @@ namespace PL.ViewModels
             new(PanelType.List, new Views.DronesListView(), ListPanelName(typeof(PO.Drone)));
 
         public static Panel ParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header = null) =>
-            new(PanelType.List, new Views.ParcelsListView(predicate), header ?? ListPanelName(typeof(PO.Parcel)));
+            new(PanelType.List, new Views.FilteredParcelsListView(predicate), header ?? ListPanelName(typeof(PO.Parcel)));
 
         public static RelayCommand<Panel> AddPanelCommand { get; set; } = Views.WorkspaceView.AddPanelCommand;
         public static RelayCommand<string> RemovePanelCommand { get; set; } = Views.WorkspaceView.RemovePanelCommand;

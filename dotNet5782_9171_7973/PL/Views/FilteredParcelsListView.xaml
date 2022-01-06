@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-        <!--Id input-->
+        <!--Filter value input-->
         <syncfusion:SfTextInputLayout Hint="Search for...">
 
             <syncfusion:SfTextInputLayout.LeadingView>

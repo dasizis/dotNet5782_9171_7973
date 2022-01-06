@@ -24,7 +24,7 @@ namespace PL.Views
         public StationDetailsView(int id)
         {
             InitializeComponent();
-            DataContext = new ViewModels.BaseStationViewModel(id).Content;
+            DataContext = new BaseStationView(id).Content;
         }
     }
 }

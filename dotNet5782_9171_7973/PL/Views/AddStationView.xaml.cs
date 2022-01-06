@@ -10,7 +10,7 @@ namespace PL.Views
         public AddStationView()
         {
             InitializeComponent();
-            DataContext = new ViewModels.BaseStationViewModel().Content;
+            DataContext = new BaseStationView().Content;
         }
     }
 }

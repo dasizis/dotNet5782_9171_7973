@@ -19,9 +19,9 @@
         <Setter Property="Foreground" Value="DarkGray" />
     </Style>
 
-    <!--<Style x:Key="Icon" TargetType="{x:Type materialDesign:PackIcon}">
+    <Style x:Key="Icon" TargetType="{x:Type materialDesign:PackIcon}">
         <Setter Property="Height" Value="10" />
-    </Style>-->
+    </Style>
 
     <Style x:Key="AddButton" TargetType="Button">
         <Setter Property="Padding" Value="5"/>

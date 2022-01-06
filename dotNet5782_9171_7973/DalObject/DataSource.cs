@@ -74,11 +74,11 @@ namespace Dal
             );
 
             Parcels.AddRange(
-                Enumerable.Range(0, INIT_PARCELS).Select(_ => InitilzeParcel()) 
+                Enumerable.Range(0, INIT_PARCELS).Select(_ => InitializeParcel()) 
             );
         }
 
-        private static Parcel InitilzeParcel()
+        private static Parcel InitializeParcel()
         {
             const int ChancesOfUnAssignedParcel = 50;
 
@@ -89,6 +89,8 @@ namespace Dal
 
             var notDeliveredDrones = Drones.Where(drone => !Parcels.Any(parcel => parcel.DroneId == drone.Id));
 
+            int rand = RandomManager.Rand.Next();
+
             return new()
             {
                 Id = parcel.Id,
@@ -97,6 +99,8 @@ namespace Dal
                 Requested = parcel.Requested,
                 DroneId = notDeliveredDrones.ElementAt(RandomManager.Rand.Next(notDeliveredDrones.Count())).Id,
                 Scheduled = parcel.Requested + TimeSpan.FromHours(RandomManager.Rand.NextDouble() * 20),
+                SenderId = Customers[rand % Customers.Count].Id,
+                TargetId = Customers[(rand + 7) % Customers.Count].Id,
             };
         }
     }

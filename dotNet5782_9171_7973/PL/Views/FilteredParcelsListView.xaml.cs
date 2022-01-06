@@ -18,12 +18,12 @@ namespace PL.Views
     /// <summary>
     /// Interaction logic for ParcelListView.xaml
     /// </summary>
-    public partial class ParcelsListView : UserControl
+    public partial class FilteredParcelsListView : UserControl
     {
-        public ParcelsListView(Predicate<PO.ParcelForList> p)
+        public FilteredParcelsListView(Predicate<PO.ParcelForList> p)
         {
             InitializeComponent();
-            DataContext = new ViewModels.ParcelsListViewModel(p);
+            DataContext = new ViewModels.FilteredParcelsListViewModel(p);
         }
     }
 }

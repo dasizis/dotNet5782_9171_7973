@@ -28,7 +28,7 @@
         <ContentControl syncfusion:DockingManager.Header="Top" 
                         syncfusion:DockingManager.DesiredWidthInDockedMode="350"
                         syncfusion:DockingManager.CanClose="False">
-            <local:AddCustomerView />
+            <local:DronesListView />
         </ContentControl>
         <ContentControl syncfusion:DockingManager.Header="Welcome" syncfusion:DockingManager.State="Document" >
             <local:DronesListView />

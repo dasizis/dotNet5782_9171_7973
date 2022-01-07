@@ -23,7 +23,7 @@ namespace PL.Views
         public DronesListView()
         {
             InitializeComponent();
-            //DataContext = new ViewModels.DronesListViewModel(p);
+            //DataContext = new ViewModels.DronesListViewModel();
         }
     }
 }

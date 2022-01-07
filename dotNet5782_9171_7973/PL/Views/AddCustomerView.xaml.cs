@@ -23,7 +23,7 @@ namespace PL.Views
         public AddCustomerView()
         {
             InitializeComponent();
-            DataContext = new ViewModels.CustomerViewModel().Content;
+            DataContext = new CustomerView().Content;
         }
     }
 }

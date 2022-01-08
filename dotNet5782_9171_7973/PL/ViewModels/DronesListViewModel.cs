@@ -26,6 +26,7 @@ namespace PL.ViewModels
 
     class DronesListViewModel : QueriableListViewModel<DroneForList>
     {
+        public RelayCommand<object> DeleteItemCommand { get; set; }
         //I changed here to make it work
         protected override Panel GetAddPanel()
         {
@@ -40,6 +41,12 @@ namespace PL.ViewModels
         public DronesListViewModel(): base()
         {
             DronesNotification.DronesChangedEvent += ReloadList;
+            DeleteItemCommand = new((e) => Delete(e));
+        }
+
+        private void Delete(object item)
+        {    
+           PLService.DeleteDrone((item as DroneForList).Id);
         }
 
     }

@@ -6,11 +6,11 @@ namespace PL.Views
     {
         public BaseStationView()
         {
-            Content = new ViewModels.AddBaseStationViewModel();
+            Content = new AddStationView();
         }
         public BaseStationView(int id)
         {
-            Content = new ViewModels.StationDetailsViewModel(id);
+            Content = new StationDetailsView(id);
         }
     }
 }

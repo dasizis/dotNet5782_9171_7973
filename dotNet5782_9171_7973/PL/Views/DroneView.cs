@@ -6,11 +6,11 @@ namespace PL.Views
     {
         public DroneView()
         {
-            Content = new ViewModels.AddDroneViewModel();
+            Content = new AddDroneView();
         }
         public DroneView(int id)
         {
-            Content = new ViewModels.DroneDetailsViewModel(id);
+            Content = new DroneDetailsView(id);
         }
     }
 }

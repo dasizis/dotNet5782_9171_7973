@@ -6,12 +6,12 @@ namespace PL.Views
     {
         public ParcelView()
         {
-            Content = new ViewModels.AddParcelViewModel();
+            Content = new AddParcelView();
         }
 
         public ParcelView(int id)
         {
-            Content = new ViewModels.ParcelDetailsViewModel(id);
+            Content = new ParcelDetailsView(id);
         }
     }
 }

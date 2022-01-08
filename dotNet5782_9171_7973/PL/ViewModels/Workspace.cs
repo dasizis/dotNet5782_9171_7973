@@ -56,8 +56,8 @@ namespace PL.ViewModels
         public static Panel ParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header) =>
             new(PanelType.List, new Views.FilteredParcelsListView(predicate), header);
 
-        public static RelayCommand<Panel> AddPanelCommand { get; set; } = Views.WorkspaceView.AddPanelCommand;
-        public static RelayCommand<string> RemovePanelCommand { get; set; } = Views.WorkspaceView.RemovePanelCommand;
+        public static RelayCommand<Panel> AddPanelCommand => Views.WorkspaceView.AddPanelCommand;
+        public static RelayCommand<string> RemovePanelCommand => Views.WorkspaceView.RemovePanelCommand;
 
         public static readonly string TargerNameOfListPanelType = "ListArea";
     }

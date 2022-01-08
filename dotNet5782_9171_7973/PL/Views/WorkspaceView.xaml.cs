@@ -42,7 +42,7 @@ namespace PL.Views
             {
                 DockingManager.SetState(panel.View, DockState.Dock);
                 DockingManager.SetSideInDockedMode(panel.View, DockSide.Tabbed);
-                DockingManager.SetTargetNameInDockedMode(panel.View, "ListArea");
+                DockingManager.SetTargetNameInDockedMode(panel.View, ViewModels.Workspace.TargerNameOfListPanelType);
             }
             else
             {

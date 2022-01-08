@@ -6,11 +6,11 @@ namespace PL.Views
     {
         public CustomerView()
         {
-            Content = new ViewModels.AddCustomerViewModel();
+            Content = new AddCustomerView();
         }
         public CustomerView(int id)
         {
-            Content = new ViewModels.CustomerDetailsViewModel(id);
+            Content = new CustomerDetailsView(id);
         }
     }
 }

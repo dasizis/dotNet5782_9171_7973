@@ -232,6 +232,8 @@ namespace BL
             if (drone.State != DroneState.Free)
                 throw new InvalidActionException("Can not delete a non free drone");
 
+            drones.RemoveAll(drone => drone.Id == droneId);
+
             dal.Delete<DO.Drone>(droneId);
         }
 

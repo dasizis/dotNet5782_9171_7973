@@ -27,7 +27,7 @@ namespace PL.ViewModels
             Drone.Id = id;
             LoadDrone();
 
-            DronesNotification.DronesChangedEvent += LoadDrone;
+            PLNotification.AddHandler<Drone>(LoadDrone, id);
 
             ProceedWithParcelCommand = new(ProceedWithParcel, () => Drone.State != DroneState.Maintenance);
             HandleChargeCommand = new(HandleCharge, () => Drone.State != DroneState.Deliver);
@@ -110,8 +110,6 @@ namespace PL.ViewModels
 
         private void Delete()
         {
-            DronesNotification.DronesChangedEvent -= LoadDrone;
-
             PLService.DeleteDrone(Drone.Id);
             Workspace.RemovePanelCommand.Execute($"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {Drone.Id}");
         }

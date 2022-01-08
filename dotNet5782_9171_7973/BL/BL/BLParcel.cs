@@ -155,7 +155,7 @@ namespace BL
         /// <exception cref="ObjectNotFoundException" />
         internal ParcelForList GetParcelForList(int id)
         {
-            var parcel = GetParcel(id);
+            Parcel parcel = GetParcel(id);
 
             return new ParcelForList()
             {
@@ -164,6 +164,7 @@ namespace BL
                 Weight = parcel.Weight,
                 SenderName = parcel.Sender.Name,
                 TargetName = parcel.Target.Name,
+                IsOnWay = parcel.Scheduled != null && parcel.Supplied == null,
             };
         }
 

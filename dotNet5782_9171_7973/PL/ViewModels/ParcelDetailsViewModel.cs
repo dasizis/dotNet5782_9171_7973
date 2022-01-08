@@ -1,12 +1,6 @@
 ﻿using PO;
 using StringUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using PL.Views;
 using System.Collections.ObjectModel;
 
 namespace PL.ViewModels
@@ -23,10 +17,10 @@ namespace PL.ViewModels
 
         public ParcelDetailsViewModel(int id)
         {
-            ParcelsNotification.ParcelsChangedEvent += LoadParcel;
-
             Parcel.Id = id;
             LoadParcel();
+
+            PLNotification.AddHandler<Parcel>(LoadParcel, id);
 
             ViewSenderCommand = new(ViewSenderDetails);
             ViewTargetCommand = new(ViewTargetDetails);
@@ -57,8 +51,6 @@ namespace PL.ViewModels
 
         private void Delete()
         {
-            ParcelsNotification.ParcelsChangedEvent -= LoadParcel;
-
             PLService.DeleteParcel(Parcel.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.ParcelPanelName(Parcel.Id));
         }

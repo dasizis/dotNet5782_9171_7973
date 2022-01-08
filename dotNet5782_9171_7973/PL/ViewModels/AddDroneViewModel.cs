@@ -21,7 +21,7 @@ namespace PL.ViewModels
         protected override void Add()
         {
             PLService.AddDrone(Drone);
-            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.AddDronePanelName());
+            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.DronePanelName());
         }
     }
 }

@@ -19,8 +19,8 @@ namespace PL
                               (double)baseStation.Longitude,
                               (double)baseStation.Latitude,
                               (int)baseStation.ChargeSlots);
-               
-            BaseStationsNotification.NotifyBaseStationChanged();
+
+            PLNotification.NotifyItemChanged<BaseStation>();
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace PL
         public static void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
         {
             bl.UpdateBaseStation(baseStationId, name, chargeSlots);
-            BaseStationsNotification.NotifyBaseStationChanged();
+            PLNotification.NotifyItemChanged<BaseStation>(baseStationId);
         }
 
         /// <summary>
@@ -102,7 +102,8 @@ namespace PL
         public static void DeleteBaseStation(int baseStationId)
         {
             bl.DeleteBaseStation(baseStationId);
-            BaseStationsNotification.NotifyBaseStationChanged();
+            PLNotification.RemoveHandlers<BaseStation>(baseStationId);
+            PLNotification.NotifyItemChanged<BaseStation>();
         }
 
         /// <summary>

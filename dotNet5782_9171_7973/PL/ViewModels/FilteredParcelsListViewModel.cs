@@ -6,7 +6,10 @@ namespace PL.ViewModels
 {
     class FilteredParcelsListViewModel : FilteredListViewModel<ParcelForList>
     {
-        public FilteredParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) { ParcelsNotification.ParcelsChangedEvent += LoadList; }
+        public FilteredParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) 
+        {
+            PLNotification.AddHandler<Parcel>(LoadList);
+        }
 
         protected override void ExecuteOpen(ParcelForList item)
         {

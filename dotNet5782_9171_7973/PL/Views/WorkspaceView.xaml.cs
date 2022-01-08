@@ -37,7 +37,18 @@ namespace PL.Views
             }
 
             DockingManager.SetHeader(panel.View, panel.Header);
-            DockingManager.SetState(panel.View, DockState.Document);
+
+            if (panel.PanelType == ViewModels.PanelType.List)
+            {
+                DockingManager.SetState(panel.View, DockState.Dock);
+                DockingManager.SetSideInDockedMode(panel.View, DockSide.Tabbed);
+                DockingManager.SetTargetNameInDockedMode(panel.View, "ListArea");
+            }
+            else
+            {
+                DockingManager.SetState(panel.View, DockState.Document);
+            }
+
             Dock.Children.Add(panel.View);
         }
 
@@ -50,8 +61,7 @@ namespace PL.Views
             var panel = Dock.Children.Cast<ContentControl>()
                                      .SingleOrDefault(panel => (string)DockingManager.GetHeader(panel) == header);
 
-            if (panel == null)
-                throw new ArgumentException("Panel not exists");
+            if (panel == null) return;
 
             Dock.Children.Remove(panel);
         }
@@ -63,10 +73,6 @@ namespace PL.Views
 
             AddPanelCommand = new(AddPanel);
             RemovePanelCommand = new(Remove);
-
-            // Temp
-            (Dock.Children[2] as ContentControl).Content = new StationDetailsView(0);
-            DockingManager.SetHeader(Dock.Children[2] as ContentControl, ViewModels.Workspace.BaseStationPanelName(0));
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace PL.ViewModels
             Customer.Id = id;
             LoadCustomer();
 
-            CustomersNotification.CustomersChanged += LoadCustomer;
+            PLNotification.AddHandler<Customer>(LoadCustomer, id);
 
             DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);
@@ -46,8 +46,6 @@ namespace PL.ViewModels
 
         private void Delete()
         {
-            CustomersNotification.CustomersChanged -= LoadCustomer;
-
             PLService.DeleteCustomer(Customer.Id);
             MessageBox.Show($"Customer {Customer.Name} deleted");
             // Close Tab 

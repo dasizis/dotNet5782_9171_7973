@@ -10,8 +10,7 @@
                     xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
     <ContextMenu x:Key="ItemMenu">
         <MenuItem Header="Delete" 
-                  Command="{Binding Path=PlacementTarget.Tag.DeleteItemCommand,
-                                    RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                  Command="{x:Static vm:GlobalCommands.DeleteCommand}" 
                   CommandParameter="{Binding}">
             <MenuItem.Icon>
                 <materialDesign:PackIcon Kind="Delete" Height="20" Width="20"/>
@@ -93,8 +92,8 @@
 
     <!--PO.BaseStationForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:BaseStationForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
-        
-        <StackPanel Orientation="Horizontal" Tag="{Binding}">
+
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
             <StackPanel.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
                     <MouseBinding.CommandParameter>
@@ -111,7 +110,7 @@
 
     <!--PO.CustomerForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
-        <StackPanel Orientation="Horizontal" Tag="{Binding}">
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
             <StackPanel.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
                     <MouseBinding.CommandParameter>
@@ -147,7 +146,7 @@
 
     <!--PO.ParcelForList-->
     <HierarchicalDataTemplate DataType="{x:Type po:ParcelForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
-        <StackPanel Orientation="Horizontal" Tag="{Binding}">
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
             <StackPanel.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
                     <MouseBinding.CommandParameter>

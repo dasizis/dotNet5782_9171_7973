@@ -81,6 +81,8 @@ namespace BO
             }
         }
 
+        public bool IsOnWay { get; set; }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <c>ToString()</c> method

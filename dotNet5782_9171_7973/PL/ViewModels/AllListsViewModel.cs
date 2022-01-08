@@ -22,10 +22,10 @@ namespace PL.ViewModels
             LoadBaseStations();
             LoadParcels();
 
-            DronesNotification.DronesChangedEvent += LoadDrones;
-            CustomersNotification.CustomersChanged += LoadCustomers;
-            BaseStationsNotification.BaseStationsChangedEvent += LoadBaseStations;
-            ParcelsNotification.ParcelsChangedEvent += LoadParcels;
+            PLNotification.AddHandler<BaseStation>(LoadBaseStations);
+            PLNotification.AddHandler<Customer>(LoadCustomers);
+            PLNotification.AddHandler<Drone>(LoadDrones);
+            PLNotification.AddHandler<Parcel>(LoadParcels);
 
             AddDroneCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.DronePanel()));
             AddParcelCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel()));

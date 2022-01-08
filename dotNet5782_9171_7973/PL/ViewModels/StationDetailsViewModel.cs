@@ -16,11 +16,11 @@ namespace PL.ViewModels
 
         public StationDetailsViewModel(int id)
         {
-            BaseStationsNotification.BaseStationsChangedEvent += LoadStation;
-            DronesNotification.DronesChangedEvent += LoadStation;
-
             Station.Id = id;
             LoadStation();
+
+            PLNotification.AddHandler<BaseStation>(LoadStation, id);
+            PLNotification.AddHandler<Drone>(LoadStation);
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
@@ -36,8 +36,6 @@ namespace PL.ViewModels
 
         public void Delete()
         {
-            BaseStationsNotification.BaseStationsChangedEvent -= LoadStation;
-
             PLService.DeleteBaseStation(Station.Id);
             MessageBox.Show($"Station {Station.Id} deleted");
         }

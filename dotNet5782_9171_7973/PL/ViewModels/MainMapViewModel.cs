@@ -19,9 +19,9 @@ namespace PL.ViewModels
             LoadDrones();
             LoadBaseStations();
 
-            DronesNotification.DronesChangedEvent += LoadDrones;
-            CustomersNotification.CustomersChanged += LoadCustomers;
-            BaseStationsNotification.BaseStationsChangedEvent += LoadBaseStations;
+            PLNotification.AddHandler<PO.Drone>(LoadDrones);
+            PLNotification.AddHandler<PO.Customer>(LoadCustomers);
+            PLNotification.AddHandler<PO.BaseStation>(LoadBaseStations);
         }
 
         object ItemToMaker(PO.ILocalable localable)

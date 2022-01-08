@@ -18,7 +18,7 @@ namespace PL
                          (BO.WeightCategory)parcel.Weight,
                          (BO.Priority)parcel.Priority);
 
-            ParcelsNotification.NotifyParcelChanged();
+            PLNotification.NotifyItemChanged<Parcel>();
         }
 
         /// <summary>
@@ -83,11 +83,11 @@ namespace PL
         /// <param name="droneId">The drone id</param>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidActionException" />
-        public static void PickUpParcel(int parcelId)
+        public static void PickUpParcel(int droneId)
         {
-            bl.PickUpParcel(parcelId);
-            ParcelsNotification.NotifyParcelChanged();
-            DronesNotification.NotifyDroneChanged();
+            bl.PickUpParcel(droneId);
+            PLNotification.NotifyItemChanged<Parcel>();
+            PLNotification.NotifyItemChanged<Drone>(droneId);
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace PL
         public static void SupplyParcel(int droneId)
         {
             bl.SupplyParcel(droneId);
-            ParcelsNotification.NotifyParcelChanged();
-            DronesNotification.NotifyDroneChanged();
+            PLNotification.NotifyItemChanged<Parcel>();
+            PLNotification.NotifyItemChanged<Drone>(droneId);
         }
 
         /// <summary>
@@ -111,7 +111,8 @@ namespace PL
         public static void DeleteParcel(int parcelId)
         {
             bl.DeleteParcel(parcelId);
-            ParcelsNotification.NotifyParcelChanged();
+            PLNotification.RemoveHandlers<Parcel>(parcelId);
+            PLNotification.NotifyItemChanged<Parcel>();
         }
 
         /// <summary>
@@ -128,6 +129,7 @@ namespace PL
                 Weight = (WeightCategory)boParcel.Weight,
                 SenderName = boParcel.SenderName,
                 TargetName = boParcel.TargetName,
+                IsOnWay = boParcel.IsOnWay,
             };
         }
     }

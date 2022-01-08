@@ -57,6 +57,13 @@ namespace PO
             set => SetField(ref priority, value);
         }
 
+        bool isOnWay;
+        public bool IsOnWay 
+        {
+            get => isOnWay;
+            set => SetField(ref isOnWay, value);
+        }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <c>ToString()</c> method

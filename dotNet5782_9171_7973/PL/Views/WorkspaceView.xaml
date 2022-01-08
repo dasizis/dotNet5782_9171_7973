@@ -15,22 +15,37 @@
         <vm:WorkspaceViewModel />
     </UserControl.DataContext>-->
     <UserControl.Resources>
-        <System:Double x:Key="ListPanelWidth">350</System:Double>
+        <System:Double x:Key="ListPanelWidth">250</System:Double>
         <System:Double x:Key="ButtomPanelHeight">200</System:Double>
     </UserControl.Resources>
     <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
                                CloseButtonClick="Dock_CloseButtonClick">
-        <ContentControl syncfusion:DockingManager.Header="Bottom" 
-                        syncfusion:DockingManager.SideInDockedMode="Bottom"
-                        syncfusion:DockingManager.DesiredHeightInDockedMode="{StaticResource ButtomPanelHeight}">
-            <local:MainMapView />
-        </ContentControl>
-        <ContentControl syncfusion:DockingManager.Header="Top" 
-                        syncfusion:DockingManager.DesiredWidthInDockedMode="{StaticResource ListPanelWidth}"
-                        syncfusion:DockingManager.CanClose="False">
-            <local:DronesListView />
-        </ContentControl>
+        
+        <!--Lists Area-->
+        
+        <local:DronesListView x:Name="ListArea"
+                              syncfusion:DockingManager.CanClose="False"
+                              syncfusion:DockingManager.Header="Drones List" 
+                              syncfusion:DockingManager.SideInDockedMode="Tabbed"
+                              syncfusion:DockingManager.DesiredWidthInDockedMode="{StaticResource ListPanelWidth}"/>
+
+        <local:ParcelsListView syncfusion:DockingManager.Header="Parcels List" 
+                              syncfusion:DockingManager.CanClose="False"
+                               syncfusion:DockingManager.SideInDockedMode="Tabbed"
+                               syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
+
+        <local:BaseStationsListView syncfusion:DockingManager.Header="BaseStations List" 
+                              syncfusion:DockingManager.CanClose="False"
+                                    syncfusion:DockingManager.SideInDockedMode="Tabbed"
+                                    syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
+
+        <local:CustomersListView syncfusion:DockingManager.Header="Customers List" 
+                                 syncfusion:DockingManager.CanClose="False"
+                                 syncfusion:DockingManager.SideInDockedMode="Tabbed"
+                                 syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
+        <!--End Of List Area-->
+
         <ContentControl syncfusion:DockingManager.Header="Welcome" syncfusion:DockingManager.State="Document" >
             <local:DronesListView />
         </ContentControl>

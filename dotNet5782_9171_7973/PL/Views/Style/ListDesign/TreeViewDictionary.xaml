@@ -8,6 +8,16 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                     xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+    <ContextMenu x:Key="ItemMenu">
+        <MenuItem Header="Delete" 
+                  Command="{Binding Path=PlacementTarget.Tag.DeleteItemCommand,
+                                    RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                  CommandParameter="{Binding}">
+            <MenuItem.Icon>
+                <materialDesign:PackIcon Kind="Delete" Height="20" Width="20"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
 
     <!--Converters-->
     <listDesign:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
@@ -129,7 +139,9 @@
                     </MouseBinding.CommandParameter>
                 </MouseBinding>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Model}"  VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Model}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 

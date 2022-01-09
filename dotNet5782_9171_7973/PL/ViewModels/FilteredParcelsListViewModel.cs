@@ -13,7 +13,7 @@ namespace PL.ViewModels
 
         protected override void ExecuteOpen(ParcelForList item)
         {
-            Views.WorkspaceView.AddPanelCommand.Execute(Workspace.ParcelPanel(item.Id));
+            Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel(item.Id));
         }
         protected override IEnumerable<ParcelForList> GetList()
         {
@@ -21,7 +21,7 @@ namespace PL.ViewModels
         }
         protected override void Close()
         {
-            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.ListPanelName(typeof(Parcel)));
+            Workspace.RemovePanelCommand.Execute(Workspace.ListPanelName(typeof(Parcel)));
         }
     }
 }

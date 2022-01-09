@@ -40,14 +40,6 @@ namespace BLApi
         IEnumerable<ParcelForList> GetNotAssignedToDroneParcels();
 
         /// <summary>
-        /// Supply a parcel by a drone
-        /// </summary>
-        /// <param name="droneId">The drone Id</param>
-        /// <exception cref="ObjectNotFoundException" />
-        /// <exception cref="InvalidActionException" />
-        void SupplyParcel(int droneId);
-
-        /// <summary>
         /// Deletes a parcel
         /// </summary>
         /// <param name="parcelId">The parcel Id</param>

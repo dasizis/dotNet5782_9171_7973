@@ -16,7 +16,7 @@ namespace PL.ViewModels
 
         protected override void ExecuteOpen(DroneForList item)
         {
-            Views.WorkspaceView.AddPanelCommand.Execute(Workspace.DronePanel(item.Id));
+            Workspace.AddPanelCommand.Execute(Workspace.DronePanel(item.Id));
         }
         protected override IEnumerable<DroneForList> GetList()
         {
@@ -24,7 +24,7 @@ namespace PL.ViewModels
         }
         protected override void Close()
         {
-            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.ListPanelName(typeof(Drone)));
+            Workspace.RemovePanelCommand.Execute(Workspace.ListPanelName(typeof(Drone)));
         }
     }
 }

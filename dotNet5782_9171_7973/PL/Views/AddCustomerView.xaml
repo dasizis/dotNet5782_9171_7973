@@ -94,17 +94,6 @@
                                        UpdateSourceTrigger=PropertyChanged}"/>
             </syncfusion:SfTextInputLayout>
 
-            <syncfusion:SfMap>
-                <syncfusion:SfMap.Layers>
-                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
-                                               x:Name="shapeLayer"
-                                               CrossCursorStroke="#686868"
-                                               CrossCursorStrokeThickness="0.5"
-                                               EnableMultiSelection="True"
-                                               EnableSelection="True">
-                    </syncfusion:ShapeFileLayer>
-                </syncfusion:SfMap.Layers>
-            </syncfusion:SfMap>
         </StackPanel>
         <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
     </StackPanel>

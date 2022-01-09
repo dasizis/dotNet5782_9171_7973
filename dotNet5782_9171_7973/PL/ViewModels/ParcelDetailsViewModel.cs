@@ -35,18 +35,12 @@ namespace PL.ViewModels
 
         private void ViewTargetDetails()
         {
-            Views.WorkspaceView.AddPanelCommand.Execute(
-                new Panel(PanelType.Display,
-                          new Views.CustomerDetailsView(Parcel.Sender.Id),
-                          $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.Sender.Id}"));
+            Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Target.Id));
         }
 
         private void ViewDroneDetails()
         {
-            Views.WorkspaceView.AddPanelCommand.Execute(
-                            new Panel(PanelType.Display,
-                                      new Views.DroneDetailsView((int)Parcel.DroneId),
-                                      $"{nameof(Views.CustomerDetailsView).CamelCaseToReadable()} {Parcel.DroneId}"));
+            Workspace.AddPanelCommand.Execute(Workspace.DronePanel(Parcel.DroneId));
         }
 
         private void Delete()

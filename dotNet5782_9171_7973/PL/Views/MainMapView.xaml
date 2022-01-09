@@ -6,33 +6,46 @@
              xmlns:local="clr-namespace:PL.Views"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:converters="clr-namespace:PL.Views.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:PL.ViewModels"
              x:Name="MainMapUserControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary Source="Style/MapDictionary.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml" />
+                <ResourceDictionary Source="Style/MapDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:AggregateListsConverter x:Key="AggregateListsConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.DataContext>
         <vm:MainMapViewModel />
     </UserControl.DataContext>
-    <!--<local:Map>
-        <local:Map.Markers>
-            <MultiBinding Converter="{StaticResource ListsToMarkers}">
-                <Binding Path="DataContext.Customers" ElementName="MainMapUserControl"/>
-                <Binding Path="DataContext.BaseStations" ElementName="MainMapUserControl"/>
-                <Binding Path="DataContext.Drones" ElementName="MainMapUserControl"/>
-            </MultiBinding>
-        </local:Map.Markers>
-    </local:Map>-->
-    <syncfusion:SfMap>
-        <syncfusion:SfMap.Layers>
-            <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
-                                       Markers="{Binding Parent.DataContext.Drones, 
-                                                         RelativeSource={RelativeSource Mode=Self}}" 
-                                       MarkerTemplate="{StaticResource MarkerTemplate}"/>
-        </syncfusion:SfMap.Layers>
+    <StackPanel>
+
+
+        <syncfusion:SfMap>
+            <syncfusion:SfMap.Layers>
+                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
+                                           MarkerTemplate="{StaticResource MarkerTemplate}"
+                                           Markers="{Binding Markers}">
+                    <syncfusion:ShapeFileLayer.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Reload" 
+                                      Command="{Binding LoadCommand}">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </syncfusion:ShapeFileLayer.ContextMenu>
+                </syncfusion:ShapeFileLayer>
+            </syncfusion:SfMap.Layers>
     </syncfusion:SfMap>
+
+    </StackPanel>
     
     
 </UserControl>

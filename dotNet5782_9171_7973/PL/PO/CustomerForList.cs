@@ -73,7 +73,7 @@ namespace PO
         /// </summary>
         public int ParcelsOnWay
         {
-            get => ParcelsOnWay;
+            get => parcelsOnWay;
             set => SetField(ref parcelsOnWay, value);
         }
 

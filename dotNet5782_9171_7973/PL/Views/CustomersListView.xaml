@@ -23,7 +23,7 @@
     </UserControl.Resources>
 
     <UserControl.DataContext>
-        <vm:ParcelsListViewModel />
+        <vm:CustomersListViewModel />
     </UserControl.DataContext>
 
     <Grid>
@@ -103,7 +103,7 @@
         <!--Add Button-->
         <StackPanel Grid.Row="2" Style="{StaticResource QueryArea}">
             <Button Command="{Binding OpenAddWindowCommand}" Margin="30,20">
-                Add Parcel
+                Add Customer
             </Button>
         </StackPanel>
 

@@ -20,14 +20,14 @@
     </UserControl.Resources>
     <StackPanel>
         <!--Filter value input-->
-        <syncfusion:SfTextInputLayout Hint="Search for">
+        <syncfusion:SfTextInputLayout Hint="Search for" LeadingViewPosition="Inside" Margin="20,20,20,0">
 
             <syncfusion:SfTextInputLayout.LeadingView>
                 <materialDesign:PackIcon Kind="Search" Style="{StaticResource Icon}"/>
             </syncfusion:SfTextInputLayout.LeadingView>
             <TextBox x:Name="IdInput"
-                         Text="{Binding FilterValue, 
-                                        UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FilterValue, 
+                                    UpdateSourceTrigger=PropertyChanged}"/>
         </syncfusion:SfTextInputLayout>
         <!--<TextBox x:Name="Filter"/>
         <Button Content="Filter" Command="{Binding FilterCommand}" CommandParameter="{Binding Text, ElementName=Filter}"/>-->

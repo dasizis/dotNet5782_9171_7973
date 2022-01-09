@@ -49,7 +49,7 @@ namespace Dal
         internal static string RandomName()
         {
             const int MIN_NAME_LENGTH = 4;
-            const int MAX_NAME_LENGTH = 8;
+            const int MAX_NAME_LENGTH = 6;
 
             int length = Rand.Next(MIN_NAME_LENGTH, MAX_NAME_LENGTH);
 

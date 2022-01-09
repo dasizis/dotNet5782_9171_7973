@@ -221,8 +221,46 @@ namespace BL
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
             dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
 
-            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree * 0.1;
+            drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree;
             drone.Location = parcelInDeliver.CollectLocation;
+        }
+
+
+        public void SupplyParcel(int droneId)
+        {
+            DroneForList drone = GetDroneForListRef(droneId);
+
+            if (drone.DeliveredParcelId == null)
+            {
+                throw new InvalidActionException("No parcel is assigned to drone.");
+            }
+
+            var parcel = GetParcel((int)drone.DeliveredParcelId);
+
+            if (parcel.PickedUp == null)
+            {
+                throw new InvalidActionException("Parcel assigned to drone was not picked up yet.");
+            }
+
+            ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
+
+            if (!parcelInDeliver.WasPickedUp)
+            {
+                throw new InvalidActionException("Parcel assigned to drone has already been supplied.");
+            }
+
+            double neededBattery = Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
+
+            if (drone.Battery - neededBattery < 0)
+            {
+                throw new InvalidActionException("Drone does not have enough battery to get to target customer");
+            }
+
+            drone.Battery -= neededBattery;
+            drone.Location = parcelInDeliver.TargetLocation;
+            drone.State = DroneState.Free;
+
+            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
         }
 
         public void DeleteDrone(int droneId)
@@ -249,7 +287,7 @@ namespace BL
         {
             var neededBattery = Localable.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
                                 Localable.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
-                                Localable.Distance(parcel.TargetLocation, drone.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id))).Location) * ElectricityConfumctiolFree;
+                                Localable.Distance(parcel.TargetLocation, parcel.TargetLocation.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id)))) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
         }
 

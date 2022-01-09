@@ -61,23 +61,24 @@ namespace PL
         /// <param name="callerMethodName">The caller method name</param>
         public static void NotifyItemChanged<T>(int? id = null, [CallerMemberName] string callerMethodName = "")
         {
+            if (listHandlers.ContainsKey(typeof(T)))
+            {
+                listHandlers[typeof(T)]?.Invoke();
+            }
+
             if (id == null)
             {
                 InvokeAll<T>();
             }
             else if (handlers.ContainsKey(typeof(T)) && handlers[typeof(T)].ContainsKey((int)id))
             {
+
                 handlers[typeof(T)][(int)id]?.Invoke();
             }
         }
 
         static void InvokeAll<T>()
         {
-            if (listHandlers.ContainsKey(typeof(T)))
-            {
-                listHandlers[typeof(T)]?.Invoke();
-            }
-
             if (handlers.ContainsKey(typeof(T)))
             {
                 foreach (var handler in handlers[typeof(T)].Values)

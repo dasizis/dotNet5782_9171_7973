@@ -10,7 +10,7 @@
                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="14"
                                                    Foreground="White"
-                                                   Text="{Binding Data.Name}"/>
+                                                   Text="{Binding Data.Label}"/>
 
                         <Rectangle Height="1"
                                                    Margin="0,5,0,5"

@@ -56,6 +56,19 @@ namespace PL.Views.Converters
             throw new NotImplementedException();
         }
     }
+    
+    class AggregateListsConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            return values.ToList().Cast<IEnumerable<object>>().Aggregate((list1, list2) => list1.Concat(list2));
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     class TripletsOfLocationTypeHeaderToMarkers : IMultiValueConverter
     {

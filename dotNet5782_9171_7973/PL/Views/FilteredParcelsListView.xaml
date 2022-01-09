@@ -22,7 +22,7 @@
     </UserControl.Resources>
     <StackPanel>
         <!--Filter value input-->
-        <syncfusion:SfTextInputLayout Hint="Search for...">
+        <syncfusion:SfTextInputLayout Hint="Search for" LeadingViewPosition="Inside" Margin="20,20,20,0">
 
             <syncfusion:SfTextInputLayout.LeadingView>
                 <materialDesign:PackIcon Kind="Search" Style="{StaticResource Icon}"/>

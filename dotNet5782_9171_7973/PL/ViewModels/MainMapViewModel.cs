@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,53 +10,28 @@ namespace PL.ViewModels
 {
     class MainMapViewModel
     {
-        public ObservableCollection<object> Customers { get; set; } = new();
-        public ObservableCollection<object> Drones { get; set; } = new();
-        public ObservableCollection<object> BaseStations { get; set; } = new();
+        public ObservableCollection<MapMarker> Markers { get; set; } = new();
+
+        public RelayCommand LoadCommand { get; set; }
 
         public MainMapViewModel()
         {
-            LoadCustomers();
-            LoadDrones();
-            LoadBaseStations();
+            Load();
 
-            PLNotification.AddHandler<PO.Drone>(LoadDrones);
-            PLNotification.AddHandler<PO.Customer>(LoadCustomers);
-            PLNotification.AddHandler<PO.BaseStation>(LoadBaseStations);
+            LoadCommand = new(Load);
         }
 
-        object ItemToMaker(PO.ILocalable localable)
+        void Load()
         {
-            return new { localable.Location.Longitude, localable.Location.Latitude, Color = Views.Converters.Mapping.ColorsDictionary[localable.GetType()].ToString(), Name = localable.GetType().Name };
-        }
+            Markers.Clear();
 
-        void LoadCustomers()
-        {
-            Customers.Clear();
+            IEnumerable<ILocalable> list = PLService.GetCustomersList().Select(c => PLService.GetCustomer(c.Id)).Cast<ILocalable>()
+                                                    .Union(PLService.GetDronesList().Select(d => PLService.GetDrone(d.Id)))
+                                                    .Union(PLService.GetBaseStationsList().Select(b => PLService.GetBaseStation(b.Id)));
 
-            foreach (var customer in PLService.GetCustomersList().Select(c => PLService.GetCustomer(c.Id)))
+            foreach (var item in list)
             {
-                Customers.Add(ItemToMaker(customer));
-            }
-        }
-
-        void LoadDrones()
-        {
-            Drones.Clear();
-
-            foreach (var drone in PLService.GetDronesList().Select(d => PLService.GetDrone(d.Id)))
-            {
-                Drones.Add(ItemToMaker(drone));
-            }
-        }
-
-        void LoadBaseStations()
-        {
-            BaseStations.Clear();
-
-            foreach (var baseStation in PLService.GetBaseStationsList().Select(b => PLService.GetBaseStation(b.Id)))
-            {
-                BaseStations.Add(baseStation);
+                Markers.Add(MapMarker.FromType(item));
             }
         }
     }

@@ -78,10 +78,6 @@
                     Command="{Binding RenameDroneCommand}"
                     Margin="5" Padding="5"/>
 
-            <Button Content="Delete"
-                    Command="{Binding DeleteCommand}" 
-                    Margin="5" Padding="5"/>
-
             <Button Command="{Binding ProceedWithParcelCommand}" 
                     Margin="5" Padding="5">
                 <Button.Content>
@@ -100,10 +96,14 @@
                     Command="{Binding ViewParcelCommand}"
                     Margin="5" Padding="5"/>
 
+            <Button Content="Delete"
+                    Command="{Binding DeleteCommand}" 
+                    Margin="5" Padding="5"/>
+
         </StackPanel>
 
         <!--Map-->
-        <syncfusion:SfMap>
+        <syncfusion:SfMap EnableZoom="True">
             <syncfusion:SfMap.Layers>
                 <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"

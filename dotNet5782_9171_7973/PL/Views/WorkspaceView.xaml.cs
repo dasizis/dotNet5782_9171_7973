@@ -50,6 +50,7 @@ namespace PL.Views
             }
 
             Dock.Children.Add(panel.View);
+            Dock.SelectItem(panel.View);
         }
 
         /// <summary>
@@ -73,6 +74,15 @@ namespace PL.Views
 
             AddPanelCommand = new(AddPanel);
             RemovePanelCommand = new(Remove);
+
+            Dock.DockStateChanged += Dock_DockStateChanged;
+
+        }
+
+        private void Dock_DockStateChanged(FrameworkElement sender, DockStateEventArgs e)
+        {
+            if (e.NewState == DockState.Hidden)
+                Remove((string)DockingManager.GetHeader(sender));
         }
 
         /// <summary>

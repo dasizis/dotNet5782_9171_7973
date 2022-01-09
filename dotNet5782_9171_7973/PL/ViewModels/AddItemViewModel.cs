@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using PO;
@@ -25,13 +26,15 @@ namespace PL.ViewModels
             try
             {
                 Add();
-                //UserControl dialog = new Alert() { Text = "Drone added successfully" , IsSuccess = true };
-                //DialogHost.OpenDialogCommand.Execute(dialog, null);
+
+                string name = typeof(T).Name.Replace("ToAdd", "");
+                MessageBox.Show($"{name} added successfully");
+                Workspace.RemovePanelCommand.Execute($"Add {name}");
             }
             catch (BO.IdAlreadyExistsException e)
             {
-                //UserControl dialog = new Alert() { Text = e.Message, IsSuccess = false };
-               // DialogHost.OpenDialogCommand.Execute(dialog, null);
+                MessageBox.Show(e.Message);
+
             }
         }
 

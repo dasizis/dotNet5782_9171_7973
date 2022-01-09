@@ -11,7 +11,7 @@ namespace PL.ViewModels
     {
         protected override Panel GetAddPanel()
         {
-            return new Panel(PanelType.Add, new Views.ParcelView(), Workspace.ParcelPanelName());
+            return new Panel(PanelType.Add, new Views.CustomerView(), Workspace.CustomerPanelName());
         }
 
         protected override IEnumerable<CustomerForList> GetList()

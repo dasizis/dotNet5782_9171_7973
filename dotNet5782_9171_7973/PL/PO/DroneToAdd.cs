@@ -21,7 +21,7 @@ namespace PO
         /// Drone model
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "Model length must be between 3-10")]
+        [StringLength(14, MinimumLength = 4, ErrorMessage = "Model length must be between 4-14")]
         public string Model
         {
             get => model;

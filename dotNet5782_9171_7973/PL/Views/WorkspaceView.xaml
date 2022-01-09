@@ -19,8 +19,12 @@
         <System:Double x:Key="ButtomPanelHeight">200</System:Double>
     </UserControl.Resources>
     <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
-                               syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
-                               CloseButtonClick="Dock_CloseButtonClick">
+                               syncfusionskin:SfSkinManager.VisualStyle="MaterialLight">
+
+        <local:MainMapView syncfusion:DockingManager.Header="MainMap" 
+                           syncfusion:DockingManager.CanClose="False" 
+                           syncfusion:DockingManager.SideInDockedMode="Bottom"
+                           syncfusion:DockingManager.DesiredHeightInDockedMode="180"/>
         
         <!--Lists Area-->
         <local:DronesListView x:Name="ListArea"

@@ -89,43 +89,7 @@ namespace BL
             return from parcel in dal.GetFilteredList<DO.Parcel>(parcel => parcel.DroneId == null)
                    select GetParcelForList(parcel.Id); 
         }
-       
-        public void SupplyParcel(int droneId)
-        {
-            DroneForList drone = GetDroneForListRef(droneId);
 
-            if (drone.DeliveredParcelId == null)
-            {
-                throw new InvalidActionException("No parcel is assigned to drone.");
-            }
-
-            var parcel = GetParcel((int)drone.DeliveredParcelId);
-
-            if (parcel.PickedUp == null)
-            {
-                throw new InvalidActionException("Parcel assigned to drone was not picked up yet.");
-            }
-
-            ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
-
-            if (!parcelInDeliver.WasPickedUp)
-            {
-                throw new InvalidActionException("Parcel assigned to drone has already been supplied.");
-            }
-
-            double neededBattery = Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
-
-            if (drone.Battery - neededBattery < 0)
-            {
-                throw new InvalidActionException("Drone does not have enough battery to get to target customer");
-            }
-
-            drone.Battery -= neededBattery;
-            drone.Location = parcelInDeliver.TargetLocation;
-            drone.State = DroneState.Free;
-
-            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
-        }
 
         public void DeleteParcel(int parcelId)
         {

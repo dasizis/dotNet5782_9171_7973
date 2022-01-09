@@ -15,13 +15,19 @@ namespace PL.ViewModels
 
         public AddDroneViewModel()
         {
-            StationsOptions = PLService.GetAvailableBaseStations().Select(station => station.Id).ToList();
+            Load();
+            PLNotification.AddHandler<BaseStation>(Load);
         }
 
         protected override void Add()
         {
             PLService.AddDrone(Drone);
-            Views.WorkspaceView.RemovePanelCommand.Execute(Workspace.DronePanelName());
+            Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName());
+        }
+
+        void Load()
+        {
+            StationsOptions = PLService.GetAvailableBaseStations().Select(station => station.Id).ToList();
         }
     }
 }

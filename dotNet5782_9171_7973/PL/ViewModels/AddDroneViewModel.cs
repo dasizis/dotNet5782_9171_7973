@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using PO;
 
@@ -11,7 +12,7 @@ namespace PL.ViewModels
 
         public Array WeightOptions { get; } = Enum.GetValues(typeof(WeightCategory));
 
-        public List<int> StationsOptions { get; set; } 
+        public ObservableCollection<int> StationsOptions { get; set; } = new();
 
         public AddDroneViewModel()
         {
@@ -27,7 +28,12 @@ namespace PL.ViewModels
 
         void Load()
         {
-            StationsOptions = PLService.GetAvailableBaseStations().Select(station => station.Id).ToList();
+            StationsOptions.Clear();
+
+            foreach (int stationId in PLService.GetAvailableBaseStations().Select(station => station.Id))
+            {
+                StationsOptions.Add(stationId);
+            }
         }
     }
 }

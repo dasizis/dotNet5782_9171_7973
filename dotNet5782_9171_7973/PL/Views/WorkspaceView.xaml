@@ -19,9 +19,12 @@
         <System:Double x:Key="ButtomPanelHeight">200</System:Double>
     </UserControl.Resources>
     <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
-                               syncfusionskin:SfSkinManager.VisualStyle="MaterialLight">
+                               syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
+                                MaximizeButtonEnabled="True">
 
-        <local:MainMapView syncfusion:DockingManager.Header="MainMap" 
+        <local:MainMapView syncfusion:DockingManager.Header="MainMap"
+                           syncfusion:DockingManager.CanMaximize="True"
+                           syncfusion:DockingManager.CanFloatMaximize="True"
                            syncfusion:DockingManager.CanClose="False" 
                            syncfusion:DockingManager.SideInDockedMode="Bottom"
                            syncfusion:DockingManager.DesiredHeightInDockedMode="180"/>

@@ -23,8 +23,8 @@
         <StackPanel>
             <!--Id Input-->
             <syncfusion:SfTextInputLayout Hint="Id" 
-                                      HasError="{Binding (Validation.HasError), ElementName=IdInput}"
-                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
+                                          HasError="{Binding (Validation.HasError), ElementName=IdInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
                     <materialDesign:PackIcon Kind="Identifier" Height="10"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
@@ -37,8 +37,8 @@
             
             <!--Model Input-->
             <syncfusion:SfTextInputLayout Hint="Model" 
-                                      HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
-                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}">
+                                          HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
                     <materialDesign:PackIcon Kind="Rename" Height="10"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
@@ -51,8 +51,8 @@
             
             <!--Station Id input-->
             <syncfusion:SfTextInputLayout Hint="Base station Id" 
-                                      HasError="{Binding (Validation.HasError), ElementName=StationIdInput}"
-                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=StationIdInput}">
+                                          HasError="{Binding (Validation.HasError), ElementName=StationIdInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=StationIdInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
                     <materialDesign:PackIcon Kind="EvCharger" Height="10"/>
                 </syncfusion:SfTextInputLayout.LeadingView>

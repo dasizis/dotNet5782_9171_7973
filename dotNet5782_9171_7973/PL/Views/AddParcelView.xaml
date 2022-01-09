@@ -15,8 +15,11 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:AddParcelViewModel />
+    </UserControl.DataContext>
     <StackPanel Style="{StaticResource Container}">
-        <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
+        <TextBlock Text="Add a Parcel" Style="{StaticResource Header}"/>
         <StackPanel>
             <!--Sender input-->
             <syncfusion:SfTextInputLayout Hint="Sender customer Id" 

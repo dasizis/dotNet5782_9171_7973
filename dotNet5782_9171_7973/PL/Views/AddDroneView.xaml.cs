@@ -23,7 +23,6 @@ namespace PL.Views
         public AddDroneView()
         {
             InitializeComponent();
-            DataContext = new DroneView().Content;
         }
     }
 }

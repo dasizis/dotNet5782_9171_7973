@@ -23,7 +23,6 @@
                                CloseButtonClick="Dock_CloseButtonClick">
         
         <!--Lists Area-->
-        
         <local:DronesListView x:Name="ListArea"
                               syncfusion:DockingManager.CanClose="False"
                               syncfusion:DockingManager.Header="Drones List" 
@@ -46,9 +45,6 @@
                                  syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
         <!--End Of List Area-->
 
-        <ContentControl syncfusion:DockingManager.Header="Welcome" syncfusion:DockingManager.State="Document" >
-            <local:DronesListView />
-        </ContentControl>
 
     </syncfusion:DockingManager>
 </UserControl>

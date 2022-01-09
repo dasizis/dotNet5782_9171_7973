@@ -15,6 +15,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:AddDroneViewModel />
+    </UserControl.DataContext>
     <StackPanel  Style="{StaticResource Container}">
         <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
         <StackPanel>

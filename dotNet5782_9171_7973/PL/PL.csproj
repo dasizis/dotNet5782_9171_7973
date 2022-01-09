@@ -19,12 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Failure.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Views\Behaviors\" />
   </ItemGroup>
 

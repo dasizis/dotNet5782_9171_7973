@@ -15,6 +15,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <vm:AddCustomerViewModel />
+    </UserControl.DataContext>
     <StackPanel Style="{StaticResource Container}">
         
         <TextBlock Text="Add a Customer" Style="{StaticResource Header}"/>

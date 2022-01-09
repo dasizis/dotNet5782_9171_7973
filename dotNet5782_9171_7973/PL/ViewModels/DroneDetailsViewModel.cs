@@ -111,7 +111,7 @@ namespace PL.ViewModels
         private void Delete()
         {
             PLService.DeleteDrone(Drone.Id);
-            Workspace.RemovePanelCommand.Execute($"{nameof(Views.DroneDetailsView).CamelCaseToReadable()} {Drone.Id}");
+            Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(Drone.Id));
         }
 
         private void LoadDrone()

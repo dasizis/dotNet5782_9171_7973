@@ -7,7 +7,7 @@ namespace PL.ViewModels
     {
         protected override Panel GetAddPanel()
         {
-            return new Panel(PanelType.Add, new Views.DroneView(), Workspace.BaseStationPanelName());
+            return new Panel(PanelType.Add, new Views.BaseStationView(), Workspace.BaseStationPanelName());
         }
 
         protected override IEnumerable<BaseStationForList> GetList()

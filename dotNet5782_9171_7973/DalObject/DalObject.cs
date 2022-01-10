@@ -27,8 +27,8 @@ namespace Dal
                 throw new IdAlreadyExistsException(type, item.Id);
             }
 
+            item.IsDeleted = false;
             DataSource.Data[type].Add(item);
-            Update<T>(item.Id, nameof(item.IsDeleted), false);
         }
 
         public void AddDroneCharge(int droneId, int baseStationId)

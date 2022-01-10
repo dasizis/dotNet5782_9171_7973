@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BaseStations></BaseStations>
+<BaseStations>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>12</Id>
+    <Name>adfdaf</Name>
+    <Longitude>12</Longitude>
+    <Latitude>12</Latitude>
+    <ChargeSlots>5</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+</BaseStations>

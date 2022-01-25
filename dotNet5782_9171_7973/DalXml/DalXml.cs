@@ -101,7 +101,8 @@ namespace Dal
             return XDocument.Load(GetXmlFilePath(typeof(T)))
                             .Root
                             .Elements(typeof(T).Name)
-                            .Select(xelement => xelement.FromXElement<T>());
+                            .Select(xelement => xelement.FromXElement<T>())
+                            .Where(item => !item.IsDeleted);
         }
 
         public IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T : IDeletable
@@ -139,7 +140,7 @@ namespace Dal
 
         public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable, IDeletable
         {
-            if (DoesExist<T>(item => item.Id == id))
+            if (!DoesExist<T>(item => item.Id == id))
                 throw new ObjectNotFoundException(typeof(T));
 
             UpdateWhere<T>(item => item.Id == id, propName, newValue);

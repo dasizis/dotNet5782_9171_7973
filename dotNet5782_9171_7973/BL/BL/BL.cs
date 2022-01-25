@@ -38,14 +38,13 @@ namespace BL
                 ChargeRate
             ) = dal.GetElectricityConfumctiol();
 
-            var dlDrones = dal.GetList<DO.Drone>().ToList();
-            var parcels = dal.GetList<DO.Parcel>().ToList();
+            var dlDrones = dal.GetList<DO.Drone>();
+            var parcels = dal.GetList<DO.Parcel>();
+            var charges = dal.GetList<DO.DroneCharge>();
 
             foreach (var dlDrone in dlDrones)
             {
                 var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
-
-                var availableStations = GetAvailableBaseStations();
 
                 int rand = Rand.Next(2);
 
@@ -55,7 +54,7 @@ namespace BL
                     drones.Add(SetDeliverDrone(dlDrone));
                 }
                 // Does the drone in Maintenance?
-                else if (availableStations.Any() && rand == 1)
+                else if (charges.Any(charge => charge.DroneId == dlDrone.Id))
                 {
                     drones.Add(SetMaintenanceDrone(dlDrone));
                 }
@@ -116,11 +115,7 @@ namespace BL
         private DroneForList SetMaintenanceDrone(DO.Drone drone)
         {
             const double MAX_INIT_CHARGE = 20;
-
-            var availableStations = GetAvailableBaseStations();
-            var randomStation = RandomItem(availableStations);
-
-            dal.AddDroneCharge(drone.Id, randomStation.Id);
+            var charge = dal.GetSingle<DO.DroneCharge>(c => c.DroneId == drone.Id);
 
             return new()
             {
@@ -129,7 +124,7 @@ namespace BL
                 MaxWeight = (WeightCategory)drone.MaxWeight,
                 Battery = Rand.NextDouble() * MAX_INIT_CHARGE,
                 State = DroneState.Maintenance,
-                Location = GetBaseStationLocation(randomStation.Id),
+                Location = GetBaseStationLocation(charge.StationId),
             };
         }
 

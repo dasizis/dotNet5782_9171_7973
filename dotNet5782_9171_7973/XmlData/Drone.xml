@@ -1,4 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Drones>
-	
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>10</Id>
+    <Model>JG86D</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>true</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>10</Id>
+    <Model>TjQ33</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>true</IsDeleted>
+  </Drone>
 </Drones>

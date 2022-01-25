@@ -24,34 +24,25 @@ namespace Dal
         /// <returns>A random longitude in Israel area</returns>
         internal static double RandomLongitude()
         {
-            const double ISRAEL_LONG_START = 34.2;
-            const double ISRAEL_LONG_END = 42.8;
-
-            return RandomDouble(ISRAEL_LONG_START, ISRAEL_LONG_END);
+            return RandomDouble(-180, 180);
         }
 
         /// <summary>
-        /// Randomize a latitude in Israel area
+        /// Randomize a latitude
         /// </summary>
-        /// <returns>A random latitude in Israel area</returns>
+        /// <returns>A random latitude</returns>
         internal static double RandomLatitude()
         {
-            const double ISRAEL_LAT_START = 33.5;
-            const double ISRAEL_LAT_END = 36.15;
-
-            return RandomDouble(ISRAEL_LAT_START, ISRAEL_LAT_END);
+            return RandomDouble(-90, 90);
         }
 
         /// <summary>
         /// Creates a ranodm name in a random length (4-7 letters).
         /// </summary>
         /// <returns>the random name</returns>
-        internal static string RandomName()
+        internal static string RandomName(int minLength, int maxLength)
         {
-            const int MIN_NAME_LENGTH = 4;
-            const int MAX_NAME_LENGTH = 6;
-
-            int length = Rand.Next(MIN_NAME_LENGTH, MAX_NAME_LENGTH);
+            int length = Rand.Next(minLength, maxLength);
 
             string name = ((char)Rand.Next('A', 'Z' + 1)).ToString();
 
@@ -69,7 +60,7 @@ namespace Dal
         /// <returns>the random full name</returns>
         internal static string RandomFullName()
         {
-            return $"{RandomName()} {RandomName()}";
+            return $"{RandomName(4, 8)} {RandomName(4, 8)}";
         }
 
         /// <summary>
@@ -145,7 +136,7 @@ namespace Dal
             return new Drone()
             {
                 Id = id,
-                Model = RandomName(),
+                Model = RandomName(4, 10),
                 MaxWeight = (WeightCategory)RandomEnumOption(typeof(WeightCategory)),
             };
         }
@@ -177,10 +168,10 @@ namespace Dal
             return new BaseStation()
             {
                 Id = id,
-                Name = RandomName(),
+                Name = RandomName(4, 10),
                 Longitude = RandomLongitude(),
                 Latitude = RandomLatitude(),
-                ChargeSlots = Rand.Next(1, 10),
+                ChargeSlots = Rand.Next(1, 50),
             };
         }
     }

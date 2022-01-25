@@ -68,6 +68,21 @@ namespace Dal
                           .Select(i => RandomManager.RandomDrone(i))
             );
 
+            int chargeSlots = BaseStations.Select(s => s.ChargeSlots).Aggregate((s1, s2) => s1 + s2);
+            int dronesInCharge = Math.Min(chargeSlots / 2, Drones.Count / 2);            
+            
+            IEnumerable<int> shuffledDrones = Drones.OrderBy(item => RandomManager.Rand.Next()).Take(dronesInCharge).Select(drone => drone.Id);
+            IEnumerable<int> shuffledBaseStationsId = AvailableStationsId(dronesInCharge);
+            // Choose some of the drones to be in charge
+            DroneCharges.AddRange(
+                shuffledDrones.Zip(shuffledBaseStationsId).Select(pair => new DroneCharge()
+                {
+                    DroneId = pair.First,
+                    StationId = pair.Second,
+                    StartTime = DateTime.Now,
+                })
+            );
+
             Customers.AddRange(
                 Enumerable.Range(0, INIT_CUSTOMERS)
                           .Select(i => RandomManager.RandomCustomer(i))
@@ -76,6 +91,20 @@ namespace Dal
             Parcels.AddRange(
                 Enumerable.Range(0, INIT_PARCELS).Select(_ => InitializeParcel()) 
             );
+        }
+        
+        private static IEnumerable<int> AvailableStationsId(int count)
+        {
+            var stationsCharges = (from station in BaseStations
+                                   select Enumerable.Repeat(station.Id, station.ChargeSlots)
+                                  ).SelectMany(list => list)
+                                   .OrderBy(item => RandomManager.Rand.Next())
+                                   .Take(count);
+
+            foreach (var id in stationsCharges)
+            {
+                yield return id;
+            }
         }
 
         private static Parcel InitializeParcel()

@@ -1,2 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DroneCharges></DroneCharges>
+<DroneCharges>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>12</StationId>
+    <DroneId>10</DroneId>
+    <StartTime>2022-01-25T20:17:08.0751253+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>12</StationId>
+    <DroneId>10</DroneId>
+    <StartTime>2022-01-25T20:37:05.8381525+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+</DroneCharges>

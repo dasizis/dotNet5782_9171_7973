@@ -26,8 +26,6 @@ namespace Dal
 
         private string GetXmlFilePath(Type type) => $@"{XmlFilesLocation}\{type.Name}.xml";
 
-        private string GetRootElementName(Type type) => $"{type.Name}s";
-
         private string ConfigFilePath => $@"{XmlFilesLocation}\config.xml";
 
         private DalXml() { }

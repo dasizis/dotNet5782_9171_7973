@@ -92,7 +92,13 @@ namespace Dal
                 Enumerable.Range(0, INIT_PARCELS).Select(_ => InitializeParcel()) 
             );
         }
-        
+
+        /// <summary>
+        /// Creates an iterator which yields for each station its own id as 
+        /// its charges slots number
+        /// </summary>
+        /// <param name="count">The number of charge slots you need</param>
+        /// <returns>An <see cref="IEnumerable{int}"/></returns>
         private static IEnumerable<int> AvailableStationsId(int count)
         {
             var stationsCharges = (from station in BaseStations
@@ -107,6 +113,10 @@ namespace Dal
             }
         }
 
+        /// <summary>
+        /// Initialize a parcel with random values
+        /// </summary>
+        /// <returns>A <see cref="Parcel"/></returns>
         private static Parcel InitializeParcel()
         {
             const int ChancesOfUnAssignedParcel = 50;

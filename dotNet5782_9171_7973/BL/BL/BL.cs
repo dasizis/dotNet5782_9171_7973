@@ -11,7 +11,7 @@ namespace BL
     /// </summary>
     public sealed partial class BL : Singleton<BL>, BLApi.IBL
     {
-        DalApi.IDal dal { get; } = DalApi.DalFactory.GetDal();
+        private DalApi.IDal dal { get; } = DalApi.DalFactory.GetDal();
 
         const int MAX_CHARGE = 100;
 
@@ -38,34 +38,37 @@ namespace BL
                 ChargeRate
             ) = dal.GetElectricityConfumctiol();
 
-            var dlDrones = dal.GetList<DO.Drone>();
+            var dalDrones = dal.GetList<DO.Drone>();
             var parcels = dal.GetList<DO.Parcel>();
             var charges = dal.GetList<DO.DroneCharge>();
 
-            foreach (var dlDrone in dlDrones)
+            foreach (var dalDrone in dalDrones)
             {
-                var parcel = parcels.FirstOrDefault(p => p.DroneId == dlDrone.Id);
-
-                int rand = Rand.Next(2);
+                var parcel = parcels.FirstOrDefault(p => p.DroneId == dalDrone.Id);
 
                 // Does the drone have a parcel?
                 if (!parcel.Equals(default(DO.Parcel)))
                 {
-                    drones.Add(SetDeliverDrone(dlDrone));
+                    drones.Add(SetDeliverDrone(dalDrone));
                 }
                 // Does the drone in Maintenance?
-                else if (charges.Any(charge => charge.DroneId == dlDrone.Id))
+                else if (charges.Any(charge => charge.DroneId == dalDrone.Id))
                 {
-                    drones.Add(SetMaintenanceDrone(dlDrone));
+                    drones.Add(SetMaintenanceDrone(dalDrone));
                 }
                 // Is the drone free?
                 else
                 {
-                    drones.Add(SetFreeDrone(dlDrone));
+                    drones.Add(SetFreeDrone(dalDrone));
                 }
             }
         }
 
+        /// <summary>
+        /// Sets all details of <see cref="DroneForList"/> which is in Delivery
+        /// </summary>
+        /// <param name="drone">The <see cref="DO.Drone"/></param>
+        /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetDeliverDrone(DO.Drone drone)
         {
             DO.Parcel parcel = dal.GetSingle<DO.Parcel>(parcel => parcel.DroneId == drone.Id);
@@ -112,6 +115,11 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// Sets all details of <see cref="DroneForList"/> which is in maintenance
+        /// </summary>
+        /// <param name="drone">The <see cref="DO.Drone"/></param>
+        /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetMaintenanceDrone(DO.Drone drone)
         {
             const double MAX_INIT_CHARGE = 20;
@@ -128,6 +136,11 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// Sets all details of <see cref="DroneForList"/> which is free
+        /// </summary>
+        /// <param name="drone">The <see cref="DO.Drone"/></param>
+        /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetFreeDrone(DO.Drone drone)
         {
             var suppliedParcels = dal.GetFilteredList<DO.Parcel>(p => p.Supplied != null);
@@ -163,12 +176,23 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// Randomize an item from a list
+        /// </summary>
+        /// <typeparam name="T">The list generic type</typeparam>
+        /// <param name="list">The list</param>
+        /// <returns>A random item from the list</returns>
         private T RandomItem<T>(IEnumerable<T> list)
         {
             return list.ElementAt(Rand.Next(list.Count()));
 
         }
 
+        /// <summary>
+        /// Finds the base station location
+        /// </summary>
+        /// <param name="id">The base station id</param>
+        /// <returns>The base station <see cref="Location"/></returns>
         private Location GetBaseStationLocation(int id)
         {
             DO.BaseStation baseStation = dal.GetById<DO.BaseStation>(id);

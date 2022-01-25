@@ -74,10 +74,10 @@ namespace BL
             DO.Parcel parcel = dal.GetSingle<DO.Parcel>(parcel => parcel.DroneId == drone.Id);
 
             var targetCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
-            Location targetLocation = new Location() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
+            Location targetLocation = new() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
 
             var senderCustomer = dal.GetById<DO.Customer>(parcel.SenderId);
-            Location senderLocation = new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
+            Location senderLocation = GetSenderLocation(senderCustomer);
 
             Location location;
             double battery;
@@ -113,6 +113,11 @@ namespace BL
                 Location = location,
                 DeliveredParcelId = parcel.Id,
             };
+        }
+
+        private static Location GetSenderLocation(DO.Customer senderCustomer)
+        {
+            return new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
         }
 
         /// <summary>

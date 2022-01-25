@@ -15,6 +15,7 @@ namespace PL.ViewModels
         {
             DeleteCommand = new(Delete, CanDelete);
         }
+        
         static bool CanDelete(object item)
         {
             if (item == null) return false;

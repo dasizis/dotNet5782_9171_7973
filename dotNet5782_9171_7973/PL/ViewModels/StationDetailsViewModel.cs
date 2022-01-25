@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using PO;
 
@@ -24,8 +23,10 @@ namespace PL.ViewModels
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);
-            OpenDronesListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.DronesListPanel(d => Station.DronesInCharge.Exists(drone => drone.Id == d.Id), Workspace.StationChrgedDronesName(Station.Id))),
-                                        () => Station.DronesInCharge.Count != 0);
+            OpenDronesListCommand = new(
+                () => Workspace.AddPanelCommand.Execute(Workspace.DronesListPanel(d => Station.DronesInCharge.Exists(drone => drone.Id == d.Id), 
+                                                                                  Workspace.StationChrgedDronesName(Station.Id))),
+                () => Station.DronesInCharge.Count != 0);
         }
 
         private void ExecuteUpdateDetails()

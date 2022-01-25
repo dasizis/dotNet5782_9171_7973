@@ -13,12 +13,12 @@ namespace Dal
         /// <typeparam name="T">The object type</typeparam>
         /// <param name="obj">The object</param>
         /// <returns>An <see cref="XElement"/> representation of the object</returns>
-        internal static XElement ToXElement<T>(this object obj)
+        internal static XElement ToXElement(this object obj)
         {
             using var memoryStream = new MemoryStream();
             using TextWriter streamWriter = new StreamWriter(memoryStream);
 
-            var xmlSerializer = new XmlSerializer(typeof(T));
+            var xmlSerializer = new XmlSerializer(obj.GetType());
             xmlSerializer.Serialize(streamWriter, obj);
 
             return XElement.Parse(Encoding.ASCII.GetString(memoryStream.ToArray()));

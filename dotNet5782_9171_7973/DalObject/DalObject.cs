@@ -6,8 +6,7 @@ using Singleton;
 using System.Reflection;
 
 namespace Dal
-{ 
-
+{
     /// <summary>
     /// Implements the <see cref="DalApi.IDal"/> interface using objects to store the data
     /// </summary>

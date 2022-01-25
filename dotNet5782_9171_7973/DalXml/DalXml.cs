@@ -45,7 +45,7 @@ namespace Dal
             item.IsDeleted = false;
 
             XDocument document = XDocument.Load(GetXmlFilePath(typeof(T)));
-            document.Root.Add(item.ToXElement<T>());
+            document.Root.Add(item.ToXElement());
             document.Save(GetXmlFilePath(typeof(T)));
         }
 
@@ -69,7 +69,7 @@ namespace Dal
             };
 
             XDocument document = XDocument.Load(GetXmlFilePath(typeof(DroneCharge)));
-            document.Root.Add(charge.ToXElement<DroneCharge>());
+            document.Root.Add(charge.ToXElement());
             document.Save(GetXmlFilePath(typeof(DroneCharge)));
         }
 

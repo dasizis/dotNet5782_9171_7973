@@ -6,9 +6,9 @@ namespace PL
 {
     static class PLNotification
     {
-        static Dictionary<Type, Dictionary<int, ItemChangedHandler>> handlers = new();
+        private static Dictionary< Type, Dictionary<int, ItemChangedHandler> > handlers = new();
 
-        static Dictionary<Type, ItemChangedHandler> listHandlers = new();
+        private static Dictionary<Type, ItemChangedHandler> listHandlers = new();
 
         /// <summary>
         /// Adds a handler for spesific type (and id)   
@@ -33,7 +33,15 @@ namespace PL
             }
         }
 
-        static void AddToDictionary<TKey>(Dictionary<TKey, ItemChangedHandler> dictionary, TKey key, ItemChangedHandler handler)
+        /// <summary>
+        /// Helper method which add new value to dictionary, if the key exists push the item to the key's list 
+        /// otherwise adds a new key
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="dictionary"></param>
+        /// <param name="key"></param>
+        /// <param name="handler"></param>
+        private static void AddToDictionary<TKey>(Dictionary<TKey, ItemChangedHandler> dictionary, TKey key, ItemChangedHandler handler)
         {
             if (dictionary.ContainsKey(key))
             {
@@ -45,6 +53,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Removes an handler of a item 
+        /// </summary>
+        /// <typeparam name="T">The item type</typeparam>
+        /// <param name="id">The item id</param>
         public static void RemoveHandlers<T>(int id)
         {
             if (handlers.ContainsKey(typeof(T)) && handlers[typeof(T)].ContainsKey(id))
@@ -77,7 +90,11 @@ namespace PL
             }
         }
 
-        static void InvokeAll<T>()
+        /// <summary>
+        /// Invokes all handlers of type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        private static void InvokeAll<T>()
         {
             if (handlers.ContainsKey(typeof(T)))
             {

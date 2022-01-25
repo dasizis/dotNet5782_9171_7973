@@ -26,10 +26,17 @@ namespace PL.ViewModels
             DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);
 
-            OpenSentParcelsListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel(p => p.SenderName == Customer.Name, Workspace.CustomerSentListName(Customer.Id))),
-                                    () => Customer.Send.Count != 0);
-            OpenRecievedParcelsListCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel(p => p.TargetName == Customer.Name, Workspace.CustomerRecievedListName(Customer.Id))),
-                                    () => Customer.Recieve.Count != 0);
+            OpenSentParcelsListCommand = new(
+                () => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel(p => p.SenderName == Customer.Name, 
+                                                                                   Workspace.CustomerSentListName(Customer.Id))),
+                () => Customer.Send.Count != 0
+            );
+
+            OpenRecievedParcelsListCommand = new(
+                () => Workspace.AddPanelCommand.Execute(Workspace.ParcelsListPanel(p => p.TargetName == Customer.Name, 
+                                                                                   Workspace.CustomerRecievedListName(Customer.Id))),
+                () => Customer.Recieve.Count != 0
+            );
         }
 
         private void Update()
@@ -48,7 +55,6 @@ namespace PL.ViewModels
         {
             PLService.DeleteCustomer(Customer.Id);
             MessageBox.Show($"Customer {Customer.Name} deleted");
-            // Close Tab 
         }
 
         private void LoadCustomer()

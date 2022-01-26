@@ -50,7 +50,7 @@
                      Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding Text, ElementName=TextInput}" />
+                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding ElementName=TextInput}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>
@@ -66,7 +66,7 @@
                       ItemsSource="{Binding ComboBoxItemsSourceEnumType, Converter={StaticResource EnumTypeToValues}}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=ComboBoxInput}"/>
+                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding ElementName=ComboBoxInput}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>

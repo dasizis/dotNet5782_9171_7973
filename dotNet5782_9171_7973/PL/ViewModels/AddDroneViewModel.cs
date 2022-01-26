@@ -30,9 +30,9 @@ namespace PL.ViewModels
         {
             StationsOptions.Clear();
 
-            foreach (int stationId in PLService.GetAvailableBaseStations().Select(station => station.Id))
+            foreach (var station in PLService.GetAvailableBaseStations())
             {
-                StationsOptions.Add(stationId);
+                StationsOptions.Add(station.Id);
             }
         }
     }

@@ -84,16 +84,14 @@ namespace PL.Views
             {
                 Command.Execute(new double[] { slider.RangeStart, slider.RangeEnd });
             }
-            else
+            else if (value is TextBox textBox)
             {
-                Command.Execute(value);
+                Command.Execute(textBox.Text);
             }
-        }
-
-        private void SfRangeSlider_RangeChanged(object sender, Syncfusion.Windows.Controls.Input.RangeChangedEventArgs e)
-        {
-            var slider = (SfRangeSlider)sender;
-            Command.Execute(new double[] { slider.RangeStart, slider.RangeEnd });
+            else if (value is ComboBox comboBox)
+            {
+                Command.Execute(comboBox.SelectedItem);
+            }
         }
     }
 }

@@ -12,4 +12,10 @@
     <MaxWeight>Heavy</MaxWeight>
     <IsDeleted>true</IsDeleted>
   </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>12</Id>
+    <Model>SSad3</Model>
+    <MaxWeight>Medium</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
 </Drones>

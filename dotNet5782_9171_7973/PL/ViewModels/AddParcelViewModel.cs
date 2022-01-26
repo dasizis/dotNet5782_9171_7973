@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using PO;
 
@@ -13,17 +14,28 @@ namespace PL.ViewModels
 
         public Array WeightOptions { get; } = Enum.GetValues(typeof(WeightCategory));
 
-        public List<int> CustomersOptions { get; set; }
+        public ObservableCollection<int> CustomersOptions { get; set; } = new();
 
         public AddParcelViewModel()
         {
-            CustomersOptions = PLService.GetCustomersList().Select(station => station.Id).ToList();
+            Load();
+            PLNotification.AddHandler<Customer>(Load);
         }
 
         protected override void Add()
         {
             PLService.AddParcel(Parcel);
             Workspace.RemovePanelCommand.Execute(Workspace.ParcelPanelName());
+        }
+
+        void Load()
+        {
+            CustomersOptions.Clear();
+
+            foreach (var customer in PLService.GetCustomersList())
+            {
+                CustomersOptions.Add(customer.Id);
+            }
         }
     }
 }

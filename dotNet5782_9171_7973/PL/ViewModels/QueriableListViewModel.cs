@@ -83,11 +83,11 @@ namespace PL.ViewModels
 
             if (property.PropertyType == typeof(int) ||
                 property.PropertyType == typeof(int?))
-                return (int)propertyValue > ((double[])FilterValue)[0] && (int)propertyValue < ((double[])FilterValue)[1];
+                return (int)propertyValue >= ((double[])FilterValue)[0] && (int)propertyValue <= ((double[])FilterValue)[1];
 
             if (property.PropertyType == typeof(double) ||
                 property.PropertyType == typeof(double?))
-                return (double)propertyValue > ((double[])FilterValue)[0] && (double)propertyValue < ((double[])FilterValue)[1];
+                return (double)propertyValue >= ((double[])FilterValue)[0] && (double)propertyValue <= ((double[])FilterValue)[1];
 
             return true;
         }

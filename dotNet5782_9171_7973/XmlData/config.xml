@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
-	<NextParcelId>0</NextParcelId>
-	<ElectricityConfumctiol>
-		<Free>0.01</Free>
-		<Light>0.02</Light>
-		<Medium>0.03</Medium>
-		<Heavy>0.04</Heavy>
-	</ElectricityConfumctiol>
-	<ChargeRate>10</ChargeRate>
+  <NextParcelId>3</NextParcelId>
+  <ElectricityConfumctiol>
+    <Free>0.01</Free>
+    <Light>0.02</Light>
+    <Medium>0.03</Medium>
+    <Heavy>0.04</Heavy>
+  </ElectricityConfumctiol>
+  <ChargeRate>10</ChargeRate>
 </Config>

@@ -110,10 +110,12 @@ namespace Dal
 
         public int GetParcelContinuousNumber()
         {
-            XElement element = XElement.Load(ConfigFilePath).Element("NextParcelId");
+            XDocument document = XDocument.Load(ConfigFilePath);
+            XElement element = document.Root.Element("NextParcelId");
             int value = int.Parse(element.Value);
 
             element.SetValue(value + 1);
+            document.Save(ConfigFilePath);
 
             return value;
         }

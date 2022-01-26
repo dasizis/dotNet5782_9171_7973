@@ -1,4 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Customers>
-	
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>123</Id>
+    <Name>asdfg</Name>
+    <Phone>12345678787</Phone>
+    <Longitude>89</Longitude>
+    <Latitude>45</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>1</Id>
+    <Name>John Smith</Name>
+    <Phone>050412345</Phone>
+    <Longitude>90</Longitude>
+    <Latitude>87</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </Customers>

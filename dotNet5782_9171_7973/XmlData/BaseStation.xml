@@ -2,18 +2,10 @@
 <BaseStations>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>12</Id>
-    <Name>MyBaseStation</Name>
-    <Longitude>89</Longitude>
-    <Latitude>3</Latitude>
-    <ChargeSlots>19</ChargeSlots>
-    <IsDeleted>false</IsDeleted>
-  </BaseStation>
-  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>126</Id>
-    <Name>DSSADSA</Name>
-    <Longitude>56</Longitude>
-    <Latitude>67</Latitude>
-    <ChargeSlots>12</ChargeSlots>
+    <Name>gggggg</Name>
+    <Longitude>126</Longitude>
+    <Latitude>56</Latitude>
+    <ChargeSlots>3</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
 </BaseStations>

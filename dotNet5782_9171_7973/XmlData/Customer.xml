@@ -1,3 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Customers>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>45</Id>
+    <Name>hghghg</Name>
+    <Phone>67676</Phone>
+    <Longitude>90</Longitude>
+    <Latitude>56</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>676</Id>
+    <Name>yhghjh</Name>
+    <Phone>6768766888</Phone>
+    <Longitude>90</Longitude>
+    <Latitude>67</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>78</Id>
+    <Name>hjhjh</Name>
+    <Phone>098765432</Phone>
+    <Longitude>126</Longitude>
+    <Latitude>57</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>50</Id>
+    <Name>yael</Name>
+    <Phone>345567678899</Phone>
+    <Longitude>126</Longitude>
+    <Latitude>56</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </Customers>

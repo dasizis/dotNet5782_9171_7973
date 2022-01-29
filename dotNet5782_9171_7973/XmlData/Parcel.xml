@@ -178,8 +178,8 @@
     <Priority>Regular</Priority>
     <Requested>2022-01-28T11:52:26.5409136+02:00</Requested>
     <Scheduled>2022-01-28T12:27:01.6800486+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Supplied xsi:nil="true" />
+    <PickedUp>2022-01-29T23:32:44.266652+02:00</PickedUp>
+    <Supplied>2022-01-29T23:32:47.5243335+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
 </Parcels>

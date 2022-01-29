@@ -178,12 +178,12 @@ namespace BL
                                  orderby parcel.Priority, parcel.Weight, Localable.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
                                  select parcel;
 
-            if (!parcels.Any())
+            if (!orderedParcels.Any())
             {
                 throw new InvalidActionException("Couldn't assign any parcel to the drone.");
             }
 
-            ParcelInDeliver selectedParcel = parcels.First();
+            ParcelInDeliver selectedParcel = orderedParcels.First();
             dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.DroneId), droneId);
             dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
 

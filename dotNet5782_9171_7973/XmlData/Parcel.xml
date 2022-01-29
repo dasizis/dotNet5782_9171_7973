@@ -1,3 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Parcels>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>1</Id>
+    <SenderId>6</SenderId>
+    <TargetId>7</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-01-29T23:59:47.830507+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>2</Id>
+    <SenderId>6</SenderId>
+    <TargetId>7</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-01-29T23:59:56.7042701+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
 </Parcels>

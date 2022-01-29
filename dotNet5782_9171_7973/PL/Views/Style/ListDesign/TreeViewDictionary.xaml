@@ -105,7 +105,9 @@
                     </MouseBinding.CommandParameter>
                 </MouseBinding>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
@@ -122,8 +124,9 @@
                     </MouseBinding.CommandParameter>
                 </MouseBinding>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
-        </StackPanel>
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>        </StackPanel>
     </HierarchicalDataTemplate>
 
     <!--PO.DroneForList-->
@@ -158,8 +161,9 @@
                     </MouseBinding.CommandParameter>
                 </MouseBinding>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Id}" VerticalAlignment="Center" />
-        </StackPanel>
+            <TextBlock Text="{Binding Id}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>        </StackPanel>
     </HierarchicalDataTemplate>
 
     <!--Group Style-->

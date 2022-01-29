@@ -119,13 +119,13 @@ namespace BL
                 throw new InvalidActionException("Can not send a non-free drone to charge.");
             }
 
-            var availableBaseStations = GetAvailableBaseStations().Select(b => GetBaseStation(b.Id));
+            var availableBaseStations = GetAvailableBaseStationsId();
             if (!availableBaseStations.Any())
             {
                 throw new InvalidActionException("There is no empty base station");
             }
 
-            BaseStation closest = drone.FindClosest(availableBaseStations);
+            BaseStation closest = drone.FindClosest(availableBaseStations.Select(id => GetBaseStation(id)));
 
             if (!IsEnoughBattery(drone, closest.Location))
             {
@@ -170,11 +170,11 @@ namespace BL
                 throw new InvalidActionException("Cannot assign parcel to busy drone.");
             }
 
-            var parcels = GetNotAssignedToDroneParcels().Select(parcel => GetParcel(parcel.Id));
+            var parcels = GetNotAssignedToDroneParcels().Select(parcel => GetParcelInDeliver(parcel.Id));
 
             var orderedParcels = from parcel in parcels
-                                 where parcel.Weight < drone.MaxWeight
-                                       && IsAbleToDeliverParcel(drone, GetParcelInDeliver(parcel.Id))
+                                 where parcel.Weight <= drone.MaxWeight
+                                       && IsAbleToDeliverParcel(drone, parcel)
                                  orderby parcel.Priority, parcel.Weight, Localable.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
                                  select parcel;
 
@@ -183,7 +183,7 @@ namespace BL
                 throw new InvalidActionException("Couldn't assign any parcel to the drone.");
             }
 
-            Parcel selectedParcel = parcels.First();
+            ParcelInDeliver selectedParcel = parcels.First();
             dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.DroneId), droneId);
             dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
 
@@ -287,7 +287,7 @@ namespace BL
         {
             var neededBattery = Localable.Distance(drone.Location, parcel.CollectLocation) * ElectricityConfumctiolFree +
                                 Localable.Distance(parcel.CollectLocation, parcel.TargetLocation) * GetElectricity(parcel.Weight) +
-                                Localable.Distance(parcel.TargetLocation, parcel.TargetLocation.FindClosest(GetAvailableBaseStations().Select(s => GetBaseStation(s.Id)))) * ElectricityConfumctiolFree;
+                                Localable.Distance(parcel.TargetLocation, parcel.TargetLocation.FindClosest(GetAvailableBaseStationsId().Select(id => GetBaseStation(id)))) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
         }
 

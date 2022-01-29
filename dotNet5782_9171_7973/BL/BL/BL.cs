@@ -44,7 +44,7 @@ namespace BL
 
             foreach (var dalDrone in dalDrones)
             {
-                var parcel = parcels.FirstOrDefault(p => p.DroneId == dalDrone.Id);
+                var parcel = parcels.FirstOrDefault(p => p.DroneId == dalDrone.Id && p.Supplied == null);
 
                 // Does the drone have a parcel?
                 if (!parcel.Equals(default(DO.Parcel)))
@@ -71,7 +71,7 @@ namespace BL
         /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetDeliverDrone(DO.Drone drone)
         {
-            DO.Parcel parcel = dal.GetSingle<DO.Parcel>(parcel => parcel.DroneId == drone.Id);
+            DO.Parcel parcel = dal.GetSingle<DO.Parcel>(parcel => parcel.DroneId == drone.Id && parcel.Supplied == null);
 
             var targetCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
             Location targetLocation = new() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
@@ -82,8 +82,8 @@ namespace BL
             Location location;
             double battery;
 
-            var availableStationsLocations = from station in GetAvailableBaseStations()
-                                             select GetBaseStationLocation(station.Id);
+            var availableStationsLocations = from stationId in GetAvailableBaseStationsId()
+                                             select GetBaseStationLocation(stationId);
 
             if (availableStationsLocations.Any())
             {
@@ -117,7 +117,7 @@ namespace BL
 
         private static Location GetSenderLocation(DO.Customer senderCustomer)
         {
-            return new Location() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
+            return new() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
         }
 
         /// <summary>
@@ -148,27 +148,20 @@ namespace BL
         /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetFreeDrone(DO.Drone drone)
         {
-            var suppliedParcels = dal.GetFilteredList<DO.Parcel>(p => p.Supplied != null);
+            var customers = dal.GetList<DO.Customer>();
+            var randomCustomer = RandomItem(customers);
 
-            Location location;
-            if (suppliedParcels.Any())
-            {
-                var randomParcel = RandomItem(suppliedParcels);
-                var target = dal.GetById<DO.Customer>(randomParcel.TargetId);
-                location = new() { Longitude = target.Longitude, Latitude = target.Latitude };
-            }
-            else
-            {
-                var randomCustomer = RandomItem(dal.GetList<DO.Customer>());
-                location = new() { Longitude = randomCustomer.Longitude, Latitude = randomCustomer.Latitude };
-            }
+            Location location = new() { Longitude = randomCustomer.Longitude, Latitude = randomCustomer.Latitude };
 
-            var availableStationsLocations = from station in GetAvailableBaseStations()
-                                             select GetBaseStationLocation(station.Id);
+            var availableStationsLocations = from stationId in GetAvailableBaseStationsId()
+                                             select GetBaseStationLocation(stationId);
 
             double battery = availableStationsLocations.Count() == 0
                              ? MAX_CHARGE
-                             : Rand.Next((int)(Localable.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree), MAX_CHARGE);
+                             : Rand.Next(
+                                 (int)Math.Min(Localable.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree, 80), 
+                                 MAX_CHARGE
+                              );
 
             return new()
             {

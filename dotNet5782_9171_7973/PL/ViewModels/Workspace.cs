@@ -35,7 +35,7 @@ namespace PL.ViewModels
 
         public static string StationChrgedDronesName(int id) => $"Station #{id} Charged Drones";
 
-        public static string ListPanelName(Type type) => $"{type.Name} List";
+        public static string ListPanelName(Type type) => $"{type.Name}s";
 
         public static Panel DronePanel(int? id = null) => id == null 
             ? new(PanelType.Add, new Views.AddDroneView(), DronePanelName()) 

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:PL.Views"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:convereters="clr-namespace:PL.Views.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:po="clr-namespace:PO"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
@@ -96,9 +97,12 @@
                     Command="{Binding ViewParcelCommand}"
                     Margin="5" Padding="5"/>
 
-            <Button Content="Delete"
-                    Command="{Binding DeleteCommand}" 
-                    Margin="5" Padding="5"/>
+            <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock>Delete</TextBlock>
+                </StackPanel>
+            </Button>
 
         </StackPanel>
 

@@ -67,13 +67,19 @@ namespace BL
                    select GetBaseStationForList(baseStation.Id);
         }
 
-        public IEnumerable<BaseStationForList> GetAvailableBaseStations()
+        public IEnumerable<int> GetAvailableBaseStationsId()
         {
             return from station in dal.GetList<DO.BaseStation>()
                    let dronesCount = dal.GetFilteredList<DO.DroneCharge>(charge => charge.StationId == station.Id)
                                         .Count()
                    where station.ChargeSlots > dronesCount
-                   select GetBaseStationForList(station.Id);
+                   select station.Id;
+        }
+
+
+        public IEnumerable<BaseStationForList> GetAvailableBaseStations()
+        {
+            return GetAvailableBaseStationsId().Select(id => GetBaseStationForList(id));
         }
 
         public void UpdateBaseStation(int baseStationId, string name = null, int? emptyChargeSlots = null)

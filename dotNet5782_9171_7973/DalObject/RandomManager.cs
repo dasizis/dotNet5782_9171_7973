@@ -60,7 +60,7 @@ namespace Dal
         /// <returns>the random full name</returns>
         internal static string RandomFullName()
         {
-            return $"{RandomName(4, 8)} {RandomName(4, 8)}";
+            return $"{RandomName(3, 7)} {RandomName(4, 8)}";
         }
 
         /// <summary>

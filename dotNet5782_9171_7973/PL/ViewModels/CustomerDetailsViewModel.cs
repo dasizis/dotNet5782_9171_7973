@@ -47,8 +47,7 @@ namespace PL.ViewModels
 
         private bool CanBeDeleted()
         {
-            return Customer.Send.TrueForAll(parcel => parcel.Supplied != null)
-                   && Customer.Recieve.TrueForAll(parcel => parcel.Supplied != null);
+            return Customer.Send.Count == 0 && Customer.Recieve.Count == 0;
         }
 
         private void Delete()

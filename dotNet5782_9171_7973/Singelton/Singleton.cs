@@ -43,7 +43,9 @@ namespace Singleton
                             Type type = typeof(T);
 
                             if (type == null || !type.IsSealed)
+                            {
                                 throw new SingletonException($"{type.Name} must be a seald class");
+                            }
 
                             ConstructorInfo ctor = null;
                             try
@@ -57,7 +59,9 @@ namespace Singleton
                             }
 
                             if (ctor == null || ctor.IsAssembly)
+                            {
                                 throw new SingletonException($"A private/protected constructor is missing for {type.Name}");
+                            }
 
                             Nested.instatnce = (T)ctor.Invoke(null);
                         }

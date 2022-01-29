@@ -2,8 +2,8 @@
 <Customers>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>123</Id>
-    <Name>asdfg</Name>
-    <Phone>12345678787</Phone>
+    <Name>asdfgFD</Name>
+    <Phone>123456787873</Phone>
     <Longitude>89</Longitude>
     <Latitude>45</Latitude>
     <IsDeleted>false</IsDeleted>
@@ -14,6 +14,14 @@
     <Phone>050412345</Phone>
     <Longitude>90</Longitude>
     <Latitude>87</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>2</Id>
+    <Name>Jane Smith</Name>
+    <Phone>0783456789</Phone>
+    <Longitude>0</Longitude>
+    <Latitude>0</Latitude>
     <IsDeleted>false</IsDeleted>
   </Customer>
 </Customers>

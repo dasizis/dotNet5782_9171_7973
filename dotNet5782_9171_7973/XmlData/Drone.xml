@@ -18,4 +18,46 @@
     <MaxWeight>Medium</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>78</Id>
+    <Model>J*t:(</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>5</Id>
+    <Model>OB77#</Model>
+    <MaxWeight>Medium</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>45</Id>
+    <Model>gDD3</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>3</Id>
+    <Model>D9@ED</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>4</Id>
+    <Model>#dsEd</Model>
+    <MaxWeight>Light</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>53</Id>
+    <Model>dsfdsfds</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>33</Id>
+    <Model>33333</Model>
+    <MaxWeight>Medium</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
 </Drones>

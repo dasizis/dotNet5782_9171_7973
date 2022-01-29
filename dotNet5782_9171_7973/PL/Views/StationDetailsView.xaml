@@ -58,7 +58,7 @@
                     Command="{Binding UpdateDetailsCommand}"
                     Margin="5" Padding="5"/>
             
-            <Button Content="View drones in charge"                
+            <Button Content="View Drones in Charge"                
                     Command="{Binding OpenDronesListCommand}">
                 <syncfusion:SfBadge.Badge>
                     <syncfusion:SfBadge
@@ -69,9 +69,12 @@
                                 VerticalAnchor="Center"/>
                 </syncfusion:SfBadge.Badge>
             </Button>
-            <Button Content="Delete"                
-                    Command="{Binding DeleteCommand}"
-                    Margin="5" Padding="5"/>
+
+            <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Delete</TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <!--Map-->
         <syncfusion:SfMap>

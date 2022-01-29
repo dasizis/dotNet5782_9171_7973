@@ -27,8 +27,12 @@ namespace PL.ViewModels
             }
             else if (type == typeof(CustomerForList))
             {
-                return ((CustomerForList)item).ParcelsSendAndNotSupplied == 0 
-                       && ((CustomerForList)item).ParcelsOnWay == 0;
+                CustomerForList customer = (CustomerForList)item;
+
+                return customer.ParcelsSendAndNotSupplied == 0
+                       && customer.ParcelsSendAndSupplied == 0
+                       && customer.ParcelsOnWay == 0
+                       && customer.ParcelsRecieved == 0;
             }
             else if (type == typeof(DroneForList))
             {

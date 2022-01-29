@@ -60,7 +60,7 @@ namespace PL.ViewModels
             }
 
             Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Sender Customer"));
-            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Sender.Id), "Target Customer"));
+            Markers.Add(MapMarker.FromTypeAndName(PLService.GetCustomer(Parcel.Target.Id), "Target Customer"));
         }
     }
 }

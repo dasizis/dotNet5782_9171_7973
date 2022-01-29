@@ -52,15 +52,20 @@
             <Button Content="Update" Style="{StaticResource PrimaryButton}"              
                     Command="{Binding UpdateCommand}"
                     Margin="5" Padding="5"/>
-            <Button Content="Delete"                
-                    Command="{Binding DeleteCommand}"
-                    Margin="5" Padding="5"/>
-            <Button Content="View sent parcels"                
+            
+            <Button Content="View Sent Parcels"                
                     Command="{Binding OpenSentParcelsListCommand}"
                     Margin="5" Padding="5"/>
-            <Button Content="View recieved parcels"                
+            
+            <Button Content="View Recieved Parcels"                
                     Command="{Binding OpenRecievedParcelsListCommand}"
                     Margin="5" Padding="5"/>
+            
+            <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center">Delete</TextBlock>
+                </StackPanel>
+            </Button>
             
         </StackPanel>
         

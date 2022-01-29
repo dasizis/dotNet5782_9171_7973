@@ -35,6 +35,12 @@ namespace BLApi
         IEnumerable<BaseStationForList> GetBaseStationsList();
 
         /// <summary>
+        /// return list of base stations id with empty charge slots
+        /// </summary>
+        /// <returns>list of base stations id with empty charge slots</returns>
+        IEnumerable<int> GetAvailableBaseStationsId();
+
+        /// <summary>
         /// return list of base stations with empty charge slots
         /// </summary>
         /// <returns>list of base stations with empty charge slots</returns>

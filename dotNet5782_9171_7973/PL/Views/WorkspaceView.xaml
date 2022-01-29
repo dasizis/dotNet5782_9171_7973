@@ -32,21 +32,21 @@
         <!--Lists Area-->
         <local:DronesListView x:Name="ListArea"
                               syncfusion:DockingManager.CanClose="False"
-                              syncfusion:DockingManager.Header="Drones List" 
+                              syncfusion:DockingManager.Header="Drones" 
                               syncfusion:DockingManager.SideInDockedMode="Tabbed"
                               syncfusion:DockingManager.DesiredWidthInDockedMode="{StaticResource ListPanelWidth}"/>
 
-        <local:ParcelsListView syncfusion:DockingManager.Header="Parcels List" 
+        <local:ParcelsListView syncfusion:DockingManager.Header="Parcels" 
                               syncfusion:DockingManager.CanClose="False"
                                syncfusion:DockingManager.SideInDockedMode="Tabbed"
                                syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
 
-        <local:BaseStationsListView syncfusion:DockingManager.Header="BaseStations List" 
+        <local:BaseStationsListView syncfusion:DockingManager.Header="Base Stations" 
                               syncfusion:DockingManager.CanClose="False"
                                     syncfusion:DockingManager.SideInDockedMode="Tabbed"
                                     syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
 
-        <local:CustomersListView syncfusion:DockingManager.Header="Customers List" 
+        <local:CustomersListView syncfusion:DockingManager.Header="Customers" 
                                  syncfusion:DockingManager.CanClose="False"
                                  syncfusion:DockingManager.SideInDockedMode="Tabbed"
                                  syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>

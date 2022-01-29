@@ -178,7 +178,7 @@ namespace BL
             DO.Customer targetCustomer;
             try
             {
-                targetCustomer = dal.GetById<DO.Customer>(parcel.SenderId);
+                targetCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -188,7 +188,7 @@ namespace BL
             DO.Customer senderCustomer;
             try
             {
-                senderCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
+                senderCustomer = dal.GetById<DO.Customer>(parcel.SenderId);
             }
             catch (DO.ObjectNotFoundException e)
             {

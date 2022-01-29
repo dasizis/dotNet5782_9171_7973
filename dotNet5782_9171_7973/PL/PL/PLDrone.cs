@@ -45,7 +45,7 @@ namespace PL
                 ParcelInDeliver = boDrone.ParcelInDeliver == null
                                   ? null
                                   : new()
-                                  { 
+                                  {
                                       Id = boDrone.ParcelInDeliver.Id,
                                       WasPickedUp = boDrone.ParcelInDeliver.WasPickedUp,
                                       DeliveryDistance = boDrone.ParcelInDeliver.DeliveryDistance,
@@ -60,11 +60,11 @@ namespace PL
         /// <returns>An <see cref="IEnumerable{DroneForList}"/> of the drones list</returns>
         public static IEnumerable<DroneForList> GetDronesList()
         {
-            List<DroneForList> customersList = new();
+            List<DroneForList> dronesList = new();
 
             foreach (var drone in bl.GetDronesList())
             {
-                customersList.Add(new DroneForList()
+                dronesList.Add(new DroneForList()
                 {
                     Id = drone.Id,
                     Model = drone.Model,
@@ -76,7 +76,7 @@ namespace PL
                 });
             }
 
-            return customersList;
+            return dronesList;
         }
 
         /// <summary>

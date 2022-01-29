@@ -8,7 +8,7 @@ namespace BL
     /// <summary>
     /// Implemens the <see cref="BLApi.IBLCustomer"/> part of the <see cref="BLApi.IBL"/>
     /// </summary>
-    partial class BL
+    public partial class BL
     {
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {
@@ -76,7 +76,7 @@ namespace BL
             return from customer in dal.GetList<DO.Customer>()
                    select GetCustomerForList(customer.Id);
         }
-        
+
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
             if (name != null)
@@ -97,7 +97,9 @@ namespace BL
             if (phone != null)
             {
                 if (!Validation.IsValidPhone(phone))
+                {
                     throw new InvalidPropertyValueException(nameof(DO.Customer.Phone), phone);
+                }
 
                 try
                 {
@@ -114,7 +116,7 @@ namespace BL
         {
             CustomerForList customer = GetCustomerForList(customerId);
 
-            if (customer.ParcelsOnWay != 0 || customer.ParcelsSendAndNotSupplied != 0)
+            if (customer.ParcelsOnWay != 0 || customer.ParcelsSendAndNotSupplied != 0 || customer.ParcelsRecieved != 0 || customer.ParcelsSendAndSupplied != 0)
                 throw new InvalidActionException("Can not delete a customer with parcels");
 
             dal.Delete<DO.Customer>(customerId);

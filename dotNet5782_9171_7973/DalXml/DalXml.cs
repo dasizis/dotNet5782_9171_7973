@@ -1,8 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using DO;
-//using System.Linq;
-using Singleton;
+﻿using Singleton;
 using System.Reflection;
 using System.IO;
 using System.Xml.Linq;
@@ -140,10 +136,23 @@ namespace Dal
 
         public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable, IDeletable
         {
-            if (!DoesExist<T>(item => item.Id == id))
-                throw new ObjectNotFoundException(typeof(T));
+            XDocument document = XDocument.Load(GetXmlFilePath(typeof(T)));
+            XElement element;
 
-            UpdateWhere<T>(item => item.Id == id, propName, newValue);
+            try
+            {
+                element = document.Root.Elements()
+                                       .Single(xElement => id == int.Parse(xElement.Element(nameof(IIdentifiable.Id)).Value));
+            }
+            catch (InvalidOperationException)
+            {
+                throw new ObjectNotFoundException(typeof(T));
+            }
+
+            element.Element(propName).RemoveAttributes();
+            element.SetElementValue(propName, newValue);
+
+            document.Save(GetXmlFilePath(typeof(T)));
         }
 
         public void UpdateWhere<T>(Predicate<T> predicate, string propName, object newValue) where T : IDeletable
@@ -153,6 +162,7 @@ namespace Dal
             {
                 if (predicate(xElement.FromXElement<T>()))
                 {
+                    xElement.Element(propName).RemoveAttributes();
                     xElement.SetElementValue(propName, newValue);
                 }
             });

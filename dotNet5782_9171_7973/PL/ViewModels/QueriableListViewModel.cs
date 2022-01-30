@@ -13,30 +13,75 @@ namespace PL.ViewModels
     abstract class QueriableListViewModel<T>
     {
         private const string RESET_VALUE = "None";
+        /// <summary>
+        /// The list to present
+        /// </summary>
         public ObservableCollection<T> List { get; set; }
 
+        /// <summary>
+        /// The collection that is actually seen 
+        /// (filtering is done on this list)
+        /// </summary>
         public ICollectionView View { get; set; }
 
+        /// <summary>
+        /// The key, or property by which to filter
+        /// </summary>
         public object FilterKey { get; set; }
 
+        /// <summary>
+        /// The value to filter for
+        /// </summary>
         public object FilterValue { get; set; }
 
+        /// <summary>
+        /// List of properties options to filter by
+        /// </summary>
         public IEnumerable FilterOptions { get; set; }
+
+        /// <summary>
+        /// List of properties options to group by
+        /// </summary>
         public IEnumerable GroupOptions { get; set; }
+
+        /// <summary>
+        /// List of properties options to sort by
+        /// </summary>
         public IEnumerable SortOptions { get; set; }
 
+        /// <summary>
+        /// Enum options to present for a key value
+        /// </summary>
         public Array EnumOptions { get; set; }
 
+        /// <summary>
+        /// The key, or property by which to sort
+        /// </summary>
         public object SortKey { get; set; }
 
+        /// <summary>
+        /// The key, or property by which to group
+        /// </summary>
         public object GroupKey { get; set; }
 
+        /// <summary>
+        /// Sort command
+        /// </summary>
         public RelayCommand SortCommand { get; set; }
 
+        /// <summary>
+        /// Filter command
+        /// </summary>
         public RelayCommand<object> FilterCommand { get; set; }
 
+        /// <summary>
+        /// Group command
+        /// </summary>
         public RelayCommand GroupCommand { get; set; }
 
+        /// <summary>
+        /// Open add window command
+        /// </summary>
         public RelayCommand OpenAddWindowCommand { get; set; }
 
         public QueriableListViewModel()

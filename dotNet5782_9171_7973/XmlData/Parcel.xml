@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Parcels>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <DroneId xsi:nil="true" />
+    <DroneId>12</DroneId>
     <Id>1</Id>
     <SenderId>676</SenderId>
     <TargetId>45</TargetId>
     <Weight>Medium</Weight>
     <Priority>Fast</Priority>
     <Requested>2022-01-30T00:09:26.4371675+02:00</Requested>
-    <Scheduled xsi:nil="true" />
+    <Scheduled>2022-01-30T00:16:00.2691481+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Supplied xsi:nil="true" />
     <IsDeleted>false</IsDeleted>
@@ -22,8 +22,8 @@
     <Priority>Regular</Priority>
     <Requested>2022-01-30T00:09:34.1529773+02:00</Requested>
     <Scheduled>2022-01-30T00:10:34.9087438+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Supplied xsi:nil="true" />
+    <PickedUp>2022-01-30T00:15:54.6255629+02:00</PickedUp>
+    <Supplied>2022-01-30T00:15:56.9206518+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -34,6 +34,32 @@
     <Weight>Light</Weight>
     <Priority>Urgent</Priority>
     <Requested>2022-01-30T00:09:44.0236705+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>4</Id>
+    <SenderId>45</SenderId>
+    <TargetId>50</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Urgent</Priority>
+    <Requested>2022-01-30T00:12:57.6758424+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>5</Id>
+    <SenderId>78</SenderId>
+    <TargetId>676</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-01-30T00:13:10.0561705+02:00</Requested>
     <Scheduled xsi:nil="true" />
     <PickedUp xsi:nil="true" />
     <Supplied xsi:nil="true" />

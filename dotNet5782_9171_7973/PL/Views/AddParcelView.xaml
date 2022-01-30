@@ -18,69 +18,71 @@
     <UserControl.DataContext>
         <vm:AddParcelViewModel />
     </UserControl.DataContext>
-    <StackPanel Style="{StaticResource Container}">
-        <TextBlock Text="Add a Parcel" Style="{StaticResource Header}"/>
-        <StackPanel>
-            <!--Sender input-->
-            <syncfusion:SfTextInputLayout Hint="Sender customer Id" 
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Style="{StaticResource Container}">
+            <TextBlock Text="Add a Parcel" Style="{StaticResource Header}"/>
+            <StackPanel>
+                <!--Sender input-->
+                <syncfusion:SfTextInputLayout Hint="Sender customer Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=SenderIdInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=SenderIdInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Arrow" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <ComboBox x:Name="SenderIdInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Arrow" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <ComboBox x:Name="SenderIdInput"
                      SelectedItem="{Binding Parcel.SenderId,
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding CustomersOptions}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Target input-->
-            <syncfusion:SfTextInputLayout Hint="Target customer Id" 
+                <!--Target input-->
+                <syncfusion:SfTextInputLayout Hint="Target customer Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=TargetIdInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=TargetIdInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="ArrowBack" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <ComboBox x:Name="TargetIdInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="ArrowBack" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <ComboBox x:Name="TargetIdInput"
                      SelectedItem="{Binding Parcel.TargetId,
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding CustomersOptions}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Weight input-->
-            <syncfusion:SfTextInputLayout Hint="Weight category" 
+                <!--Weight input-->
+                <syncfusion:SfTextInputLayout Hint="Weight category" 
                                       HasError="{Binding (Validation.HasError), ElementName=WeightInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=WeightInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Weight" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <ComboBox x:Name="WeightInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Weight" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <ComboBox x:Name="WeightInput"
                      SelectedItem="{Binding Parcel.Weight,
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding WeightOptions}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Priority input-->
-            <syncfusion:SfTextInputLayout Hint="Priority" 
+                <!--Priority input-->
+                <syncfusion:SfTextInputLayout Hint="Priority" 
                                       HasError="{Binding (Validation.HasError), ElementName=PriorityInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=PriorityInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Exclamation" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <ComboBox x:Name="PriorityInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Exclamation" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <ComboBox x:Name="PriorityInput"
                      SelectedItem="{Binding Parcel.Priority,
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding PriorityOptions}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
+            </StackPanel>
+            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
         </StackPanel>
-        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -19,82 +19,84 @@
     <UserControl.DataContext>
         <vm:AddCustomerViewModel />
     </UserControl.DataContext>
-    <StackPanel Style="{StaticResource Container}">
-        
-        <TextBlock Text="Add a Customer" Style="{StaticResource Header}"/>
-        
-        <StackPanel>
-            <!--Id input-->
-            <syncfusion:SfTextInputLayout Hint="Id" 
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Style="{StaticResource Container}">
+
+            <TextBlock Text="Add a Customer" Style="{StaticResource Header}"/>
+
+            <StackPanel>
+                <!--Id input-->
+                <syncfusion:SfTextInputLayout Hint="Id" 
                                           HasError="{Binding (Validation.HasError), ElementName=IdInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource Icon}"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="IdInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource Icon}"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="IdInput"
                          Text="{Binding Customer.Id, 
                                         ValidatesOnDataErrors=true,
                                         NotifyOnValidationError=true,
                                         UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Name input-->
-            <syncfusion:SfTextInputLayout Hint="Name" 
+                <!--Name input-->
+                <syncfusion:SfTextInputLayout Hint="Name" 
                                           HasError="{Binding (Validation.HasError), ElementName=NameInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Rename" Style="{StaticResource Icon}"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="NameInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Rename" Style="{StaticResource Icon}"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="NameInput"
                      Text="{Binding Customer.Name, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Phone input-->
-            <syncfusion:SfTextInputLayout Hint="Phone number" 
+                <!--Phone input-->
+                <syncfusion:SfTextInputLayout Hint="Phone number" 
                                       HasError="{Binding (Validation.HasError), ElementName=PhoneInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=PhoneInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Phone" Style="{StaticResource Icon}"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="PhoneInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Phone" Style="{StaticResource Icon}"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="PhoneInput"
                      Text="{Binding Customer.Phone, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Longitude input-->
-            <syncfusion:SfTextInputLayout Hint="Longitude" 
+                <!--Longitude input-->
+                <syncfusion:SfTextInputLayout Hint="Longitude" 
                                       HasError="{Binding (Validation.HasError), ElementName=LongitudeInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LongitudeInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Longitude" Style="{StaticResource Icon}"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="LongitudeInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Longitude" Style="{StaticResource Icon}"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="LongitudeInput"
                      Text="{Binding Customer.Longitude, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Latitude input-->
-            <syncfusion:SfTextInputLayout Hint="Latitude" 
+                <!--Latitude input-->
+                <syncfusion:SfTextInputLayout Hint="Latitude" 
                                       HasError="{Binding (Validation.HasError), ElementName=LatitudeInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LatitudeInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Latitude" Style="{StaticResource Icon}"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="LatitudeInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Latitude" Style="{StaticResource Icon}"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="LatitudeInput"
                         Text="{Binding Customer.Latitude, 
                                        ValidatesOnDataErrors=true,
                                        NotifyOnValidationError=true,
                                        UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
+            </StackPanel>
+            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
         </StackPanel>
-        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

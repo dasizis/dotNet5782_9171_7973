@@ -18,67 +18,69 @@
     <UserControl.DataContext>
         <vm:AddDroneViewModel />
     </UserControl.DataContext>
-    <StackPanel  Style="{StaticResource Container}">
-        <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
-        <StackPanel>
-            <!--Id Input-->
-            <syncfusion:SfTextInputLayout Hint="Id" 
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel  Style="{StaticResource Container}">
+            <TextBlock Text="Add a Drone" Style="{StaticResource Header}"/>
+            <StackPanel>
+                <!--Id Input-->
+                <syncfusion:SfTextInputLayout Hint="Id" 
                                           HasError="{Binding (Validation.HasError), ElementName=IdInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Identifier" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="IdInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Identifier" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="IdInput"
                      Text="{Binding Drone.Id, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
-            
-            <!--Model Input-->
-            <syncfusion:SfTextInputLayout Hint="Model" 
+                </syncfusion:SfTextInputLayout>
+
+                <!--Model Input-->
+                <syncfusion:SfTextInputLayout Hint="Model" 
                                           HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Rename" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="ModelInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Rename" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="ModelInput"
                      Text="{Binding Drone.Model, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
-            
-            <!--Station Id input-->
-            <syncfusion:SfTextInputLayout Hint="Base station Id" 
+                </syncfusion:SfTextInputLayout>
+
+                <!--Station Id input-->
+                <syncfusion:SfTextInputLayout Hint="Base station Id" 
                                           HasError="{Binding (Validation.HasError), ElementName=StationIdInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=StationIdInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="EvCharger" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <ComboBox x:Name="StationIdInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="EvCharger" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <ComboBox x:Name="StationIdInput"
                      SelectedItem="{Binding Drone.StationId, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding StationsOptions}"/>
-            </syncfusion:SfTextInputLayout>
-            
-            <!--Max weight input-->
-            <syncfusion:SfTextInputLayout Hint="Weight category" 
+                </syncfusion:SfTextInputLayout>
+
+                <!--Max weight input-->
+                <syncfusion:SfTextInputLayout Hint="Weight category" 
                                       HasError="{Binding (Validation.HasError), ElementName=WeightInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=WeightInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Carriage" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <ComboBox x:Name="WeightInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Carriage" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <ComboBox x:Name="WeightInput"
                      SelectedItem="{Binding Drone.MaxWeight, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding WeightOptions}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
+            </StackPanel>
+            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
         </StackPanel>
-        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

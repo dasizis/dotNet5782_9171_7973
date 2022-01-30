@@ -22,10 +22,6 @@ namespace PL.Views
     /// </summary>
     public partial class Map : UserControl
     {
-
-
-
-
         public List<object>  Markers
         {
             get { return (List<object>)GetValue(MarkersProperty); }

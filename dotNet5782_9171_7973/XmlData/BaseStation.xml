@@ -2,7 +2,7 @@
 <BaseStations>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>12</Id>
-    <Name>gggggg</Name>
+    <Name>yael</Name>
     <Longitude>126</Longitude>
     <Latitude>56</Latitude>
     <ChargeSlots>3</ChargeSlots>

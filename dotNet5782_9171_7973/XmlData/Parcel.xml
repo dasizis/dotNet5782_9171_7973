@@ -22,8 +22,8 @@
     <Priority>Regular</Priority>
     <Requested>2022-01-30T00:09:34.1529773+02:00</Requested>
     <Scheduled>2022-01-30T00:10:34.9087438+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Supplied xsi:nil="true" />
+    <PickedUp>2022-01-30T00:31:52.8591349+02:00</PickedUp>
+    <Supplied>2022-01-30T00:32:18.4829958+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -34,6 +34,45 @@
     <Weight>Light</Weight>
     <Priority>Urgent</Priority>
     <Requested>2022-01-30T00:09:44.0236705+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>4</Id>
+    <SenderId>45</SenderId>
+    <TargetId>78</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2022-01-30T00:12:37.2169109+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>5</Id>
+    <SenderId>78</SenderId>
+    <TargetId>45</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-01-30T00:15:06.5581128+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId xsi:nil="true" />
+    <Id>6</Id>
+    <SenderId>676</SenderId>
+    <TargetId>45</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-01-30T00:15:15.3313469+02:00</Requested>
     <Scheduled xsi:nil="true" />
     <PickedUp xsi:nil="true" />
     <Supplied xsi:nil="true" />

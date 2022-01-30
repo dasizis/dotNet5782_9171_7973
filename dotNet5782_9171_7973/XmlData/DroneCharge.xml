@@ -18,4 +18,10 @@
     <StartTime>2022-01-29T23:56:15.5203722+02:00</StartTime>
     <IsDeleted>true</IsDeleted>
   </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>12</StationId>
+    <DroneId>12</DroneId>
+    <StartTime>2022-01-30T00:32:28.0033018+02:00</StartTime>
+    <IsDeleted>false</IsDeleted>
+  </DroneCharge>
 </DroneCharges>

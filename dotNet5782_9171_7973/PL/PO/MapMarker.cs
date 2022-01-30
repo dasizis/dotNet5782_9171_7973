@@ -29,7 +29,7 @@ namespace PO
         public static MapMarker FromType(ILocalable localable)
         {
             return FromTypeAndName(localable, localable.GetType().Name.CamelCaseToReadable());
-       }
+        }
 
         public static MapMarker FromTypeAndName(ILocalable localable, string name)
         {

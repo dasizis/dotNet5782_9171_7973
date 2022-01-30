@@ -23,7 +23,7 @@ namespace PO
         /// <summary>
         /// Base station name
         /// </summary>
-        [StringLength(14, MinimumLength = 4, ErrorMessage = "Name length must be between 4-14")]
+        [RegularExpression(@"[a-zA-Z]{4,14}", ErrorMessage = "Name must match a 4-14 letters only format")]
         public string Name
         {
             get => name;

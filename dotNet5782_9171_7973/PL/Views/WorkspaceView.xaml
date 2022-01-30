@@ -15,7 +15,7 @@
         <vm:WorkspaceViewModel />
     </UserControl.DataContext>-->
     <UserControl.Resources>
-        <System:Double x:Key="ListPanelWidth">250</System:Double>
+        <System:Double x:Key="ListPanelWidth">280</System:Double>
         <System:Double x:Key="ButtomPanelHeight">200</System:Double>
     </UserControl.Resources>
     <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"

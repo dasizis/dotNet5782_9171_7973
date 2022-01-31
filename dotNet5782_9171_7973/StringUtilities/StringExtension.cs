@@ -40,7 +40,7 @@ namespace StringUtilities
                 }
                 else if (Attribute.IsDefined(prop, typeof(SexadecimalLongitudeAttribute)))
                 {
-                    description.Append(Sexadecimal.Longitde((double)propValue));
+                    description.Append(Sexadecimal.Longitude((double)propValue));
                 }
                 else
                 {

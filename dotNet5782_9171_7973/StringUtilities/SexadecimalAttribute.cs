@@ -31,7 +31,7 @@ namespace StringUtilities
         /// </summary>
         /// <param name="longitude">The longitude value</param>
         /// <returns>The longitde in a sexadecimal <see cref="string"/> representation</returns>
-        public static string Longitde(double longitude)
+        public static string Longitude(double longitude)
         {
             string ch = "E";
             if (longitude < 0)

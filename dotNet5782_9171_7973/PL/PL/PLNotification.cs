@@ -6,7 +6,7 @@ namespace PL
 {
     static class PLNotification
     {
-        private static Dictionary< Type, Dictionary<int, ItemChangedHandler> > handlers = new();
+        private static Dictionary<Type, Dictionary<int, ItemChangedHandler>> handlers = new();
 
         private static Dictionary<Type, ItemChangedHandler> listHandlers = new();
 

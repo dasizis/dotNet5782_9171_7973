@@ -13,7 +13,7 @@ namespace PL.Views.Style.ListDesign
         public double Long { get; set; }
         public override string ToString()
         {
-            return Sexadecimal.Longitde(Long);
+            return Sexadecimal.Longitude(Long);
         }
     }
 

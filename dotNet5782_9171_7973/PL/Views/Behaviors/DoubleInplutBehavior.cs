@@ -9,8 +9,17 @@ namespace PL.Views.Behaviors
         {
             AssociatedObject.PreviewTextInput += (s, e) =>
             {
-                if (!double.TryParse(e.Text, out double number))
+                TextBox textBox = s as TextBox;
+
+                if (int.TryParse(textBox.Text, out int _) && e.Text == ".")
+                {
+                    return;
+                }
+                
+                if (!double.TryParse(textBox.Text + e.Text, out double __))
+                {
                     e.Handled = true;
+                }
             };
         }
     }

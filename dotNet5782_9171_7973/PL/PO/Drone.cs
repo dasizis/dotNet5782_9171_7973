@@ -23,7 +23,7 @@ namespace PO
         /// Drone model
         /// </summary>
         [Required(ErrorMessage = "Required")]
-        [StringLength(14, MinimumLength = 4, ErrorMessage = "Model length must be between 4-14")]
+        [RegularExpression(@"[a-zA-Z0-9]{4,14}", ErrorMessage = "Model length must be between 4-14")]
         public string Model
         {
             get => model;

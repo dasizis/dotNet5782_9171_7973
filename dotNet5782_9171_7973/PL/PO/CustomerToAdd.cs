@@ -24,7 +24,7 @@ namespace PO
         /// Customer name
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        [StringLength(14, MinimumLength = 4, ErrorMessage = "Name length must be between 4-14")]
+        [RegularExpression(@"[a-zA-Z ]{4,14}", ErrorMessage = "Name must match a 4-14 letters only format")]
         public string Name
         {
             get => name;
@@ -36,7 +36,7 @@ namespace PO
         /// Customer name
         /// </summary>       
         [Required(ErrorMessage = "Required")]
-        [Phone(ErrorMessage = "Phone length must be 10")]
+        [RegularExpression(@"^0\d{9}", ErrorMessage = "Phone must match a 10 digits begins with 0 format")]
         public string Phone
         {
             get => phone;

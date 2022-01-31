@@ -2,10 +2,26 @@
 <BaseStations>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>12</Id>
-    <Name>gggggg</Name>
+    <Name>yaelrtrtrt</Name>
     <Longitude>126</Longitude>
     <Latitude>56</Latitude>
     <ChargeSlots>3</ChargeSlots>
+    <IsDeleted>true</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>1</Id>
+    <Name>Center</Name>
+    <Longitude>-80.7</Longitude>
+    <Latitude>32</Latitude>
+    <ChargeSlots>8</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>2</Id>
+    <Name>Atlantis</Name>
+    <Longitude>56.7</Longitude>
+    <Latitude>-73</Latitude>
+    <ChargeSlots>7</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
 </BaseStations>

@@ -10,6 +10,10 @@ using PO;
 
 namespace PL.ViewModels
 {
+    /// <summary>
+    /// An abstarct class to represent a view model for add an entity view model
+    /// </summary>
+    /// <typeparam name="T">Type of the entity to add</typeparam>
     abstract class AddItemViewModel<T> where T : PropertyChangedNotification, new()
     {
         public T Model { get; set; } = new();

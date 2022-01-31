@@ -9,89 +9,93 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Style/StyleDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <ResourceDictionary Source="Style/StyleDictionary.xaml" />
     </UserControl.Resources>
+    
     <UserControl.DataContext>
         <vm:AddBaseStationViewModel />
     </UserControl.DataContext>
-    <StackPanel Style="{StaticResource Container}">
-        <TextBlock Text="Add a Base station" Style="{StaticResource Header}"/>
-        <StackPanel>
-            <!--Id input-->
-            <syncfusion:SfTextInputLayout Hint="Id" 
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Style="{StaticResource Container}">
+            <TextBlock Text="Add a Base station" Style="{StaticResource Header}"/>
+            <StackPanel>
+                <!--Id input-->
+                <syncfusion:SfTextInputLayout Hint="Id" 
                                       HasError="{Binding (Validation.HasError), ElementName=IdInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Identifier" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="IdInput"
-                     Text="{Binding BaseStation.Id, 
-                                    ValidatesOnDataErrors=true,
-                                    NotifyOnValidationError=true,
-                                    UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Identifier" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="IdInput"
+                             Text="{Binding BaseStation.Id, 
+                                            ValidatesOnDataErrors=true,
+                                            NotifyOnValidationError=true,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Name input-->
-            <syncfusion:SfTextInputLayout Hint="Name" 
+                <!--Name input-->
+                <syncfusion:SfTextInputLayout Hint="Name" 
                                       HasError="{Binding (Validation.HasError), ElementName=NameInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Rename" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="NameInput"
-                     Text="{Binding BaseStation.Name, 
-                                    ValidatesOnDataErrors=true,
-                                    NotifyOnValidationError=true,
-                                    UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Rename" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="NameInput"
+                             Text="{Binding BaseStation.Name, 
+                                            ValidatesOnDataErrors=true,
+                                            NotifyOnValidationError=true,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Slots input-->
-            <syncfusion:SfTextInputLayout Hint="Charge slots" 
+                <!--Slots input-->
+                <syncfusion:SfTextInputLayout Hint="Charge slots" 
                                       HasError="{Binding (Validation.HasError), ElementName=SlotsInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=SlotsInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="ChargingStation" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="SlotsInput"
-                     Text="{Binding BaseStation.ChargeSlots, 
-                                    ValidatesOnDataErrors=true,
-                                    NotifyOnValidationError=true,
-                                    UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="ChargingStation" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="SlotsInput"
+                             Text="{Binding BaseStation.ChargeSlots, 
+                                            ValidatesOnDataErrors=true,
+                                            NotifyOnValidationError=true,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Longitude input-->
-            <syncfusion:SfTextInputLayout Hint="Longitude" 
+                <!--Longitude input-->
+                <syncfusion:SfTextInputLayout Hint="Longitude" 
                                       HasError="{Binding (Validation.HasError), ElementName=LongitudeInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LongitudeInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Longitude" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="LongitudeInput"
-                     Text="{Binding BaseStation.Longitude, 
-                                    ValidatesOnDataErrors=true,
-                                    NotifyOnValidationError=true,
-                                    UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Longitude" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <syncfusion:DoubleTextBox x:Name="LongitudeInput"
+                                              Text="{Binding BaseStation.Longitude, 
+                                                             ValidatesOnDataErrors=true,
+                                                             NotifyOnValidationError=true,
+                                                             UpdateSourceTrigger=PropertyChanged,
+                                                             StringFormat=N2}"
+                                              ShowSpinButton="True"/>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Latitude input-->
-            <syncfusion:SfTextInputLayout Hint="Latitude" 
+                <!--Latitude input-->
+                <syncfusion:SfTextInputLayout Hint="Latitude" 
                                       HasError="{Binding (Validation.HasError), ElementName=LatitudeInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LatitudeInput}">
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Latitude" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="LatitudeInput"
-                     Text="{Binding BaseStation.Latitude, 
-                                    ValidatesOnDataErrors=true,
-                                    NotifyOnValidationError=true,
-                                    UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
-        </StackPanel>
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Latitude" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <syncfusion:DoubleTextBox x:Name="LatitudeInput"
+                                              Text="{Binding BaseStation.Latitude, 
+                                                             ValidatesOnDataErrors=true,
+                                                             NotifyOnValidationError=true,
+                                                             UpdateSourceTrigger=PropertyChanged,
+                                                             StringFormat=N2}"
+                                              ShowSpinButton="True"/>
+                </syncfusion:SfTextInputLayout>
+            </StackPanel>
 
-        <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
-    </StackPanel>
+            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

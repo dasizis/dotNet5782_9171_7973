@@ -17,15 +17,12 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml" />
                 <ResourceDictionary Source="Style/MapDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <converters:AggregateListsConverter x:Key="AggregateListsConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.DataContext>
         <vm:MainMapViewModel />
     </UserControl.DataContext>
     <StackPanel>
-
-
         <syncfusion:SfMap>
             <syncfusion:SfMap.Layers>
                 <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
@@ -43,9 +40,6 @@
                     </syncfusion:ShapeFileLayer.ContextMenu>
                 </syncfusion:ShapeFileLayer>
             </syncfusion:SfMap.Layers>
-    </syncfusion:SfMap>
-
+        </syncfusion:SfMap>
     </StackPanel>
-    
-    
 </UserControl>

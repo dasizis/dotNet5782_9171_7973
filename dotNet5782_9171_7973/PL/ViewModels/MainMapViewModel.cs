@@ -21,7 +21,7 @@ namespace PL.ViewModels
             LoadCommand = new(Load);
         }
 
-        void Load()
+        private void Load()
         {
             Markers.Clear();
 

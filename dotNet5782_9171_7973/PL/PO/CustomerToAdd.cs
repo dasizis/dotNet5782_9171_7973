@@ -44,25 +44,27 @@ namespace PO
         }
 
 
-        double? longitude;
+        string longitude;
         /// <summary>
         /// Customer location longitude
         /// </summary>
         [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
+        [RegularExpression(@"^\d+(.\d+)?$", ErrorMessage = "Latitude must be a float number")]
         [Required(ErrorMessage = "Required")]
-        public double? Longitude
+        public string Longitude
         {
             get => longitude;
             set => SetField(ref longitude, value);
         }
 
-        double? latitude;
+        string latitude;
         /// <summary>
         /// Customer location latitude
         /// </summary>
         [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
+        [RegularExpression(@"^\d+(.\d+)?$", ErrorMessage = "Latitude must be a float number")]
         [Required(ErrorMessage = "Required")]
-        public double? Latitude
+        public string Latitude
         {
             get => latitude;
             set => SetField(ref latitude, value);

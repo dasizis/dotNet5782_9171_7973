@@ -23,7 +23,7 @@ namespace PO
         /// <summary>
         /// Base station name
         /// </summary>
-        [RegularExpression(@"[a-zA-Z]{4,14}", ErrorMessage = "Name must match a 4-14 letters only format")]
+        [RegularExpression(@"[a-zA-Z ]{4,14}", ErrorMessage = "Name must match a 4-14 letters only format")]
         public string Name
         {
             get => name;

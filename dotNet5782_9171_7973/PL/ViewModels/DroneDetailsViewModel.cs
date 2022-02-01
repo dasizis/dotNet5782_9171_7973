@@ -46,7 +46,7 @@ namespace PL.ViewModels
             Drone.Id = id;
             LoadDrone();
 
-            PLNotification.AddHandler<Drone>(LoadDrone, id);
+            PLNotification.DroneNotification.AddHandler(LoadDrone, id);
 
             ProceedWithParcelCommand = new(ProceedWithParcel, () => Drone.State != DroneState.Maintenance);
             HandleChargeCommand = new(HandleCharge, () => Drone.State != DroneState.Deliver);

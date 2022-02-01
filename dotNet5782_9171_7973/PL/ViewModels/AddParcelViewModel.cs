@@ -34,7 +34,7 @@ namespace PL.ViewModels
         public AddParcelViewModel()
         {
             Load();
-            PLNotification.AddHandler<Customer>(Load);
+            PLNotification.CustomerNotification.AddHandler(Load);
         }
 
         /// <summary>

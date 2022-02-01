@@ -41,7 +41,7 @@ namespace PL.ViewModels
             Customer.Id = id;
             LoadCustomer();
 
-            PLNotification.AddHandler<Customer>(LoadCustomer, id);
+            PLNotification.CustomerNotification.AddHandler(LoadCustomer, id);
 
             DeleteCommand = new(Delete, CanBeDeleted);
             UpdateCommand = new(Update, () => Customer.Error == null);

@@ -28,7 +28,7 @@ namespace PL.ViewModels
 
         public BaseStationListViewModel() : base()
         {
-            PLNotification.AddHandler<BaseStation>(ReloadList);
+            PLNotification.BaseStationNotification.AddHandler(ReloadList);
         }
     }
 }

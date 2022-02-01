@@ -18,7 +18,7 @@ namespace PL
                          (BO.WeightCategory)parcel.Weight,
                          (BO.Priority)parcel.Priority);
 
-            PLNotification.NotifyItemChanged<Parcel>();
+            PLNotification.ParcelNotification.NotifyItemChanged();
         }
 
         /// <summary>
@@ -86,8 +86,8 @@ namespace PL
         public static void PickUpParcel(int droneId)
         {
             bl.PickUpParcel(droneId);
-            PLNotification.NotifyItemChanged<Parcel>();
-            PLNotification.NotifyItemChanged<Drone>(droneId);
+            PLNotification.ParcelNotification.NotifyItemChanged();
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace PL
         public static void SupplyParcel(int droneId)
         {
             bl.SupplyParcel(droneId);
-            PLNotification.NotifyItemChanged<Parcel>();
-            PLNotification.NotifyItemChanged<Drone>(droneId);
+            PLNotification.ParcelNotification.NotifyItemChanged();
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace PL
         public static void DeleteParcel(int parcelId)
         {
             bl.DeleteParcel(parcelId);
-            PLNotification.RemoveHandlers<Parcel>(parcelId);
-            PLNotification.NotifyItemChanged<Parcel>();
+            PLNotification.ParcelNotification.RemoveHandler(parcelId);
+            PLNotification.ParcelNotification.NotifyItemChanged();
         }
 
         /// <summary>

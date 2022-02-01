@@ -8,7 +8,7 @@ namespace PL.ViewModels
     {
         public FilteredParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) 
         {
-            PLNotification.AddHandler<Parcel>(LoadList);
+            PLNotification.ParcelNotification.AddHandler(LoadList);
         }
 
         protected override void ExecuteOpen(ParcelForList item)

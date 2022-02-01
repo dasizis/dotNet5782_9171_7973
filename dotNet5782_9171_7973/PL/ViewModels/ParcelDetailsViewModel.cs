@@ -20,7 +20,7 @@ namespace PL.ViewModels
             Parcel.Id = id;
             LoadParcel();
 
-            PLNotification.AddHandler<Parcel>(LoadParcel, id);
+            PLNotification.ParcelNotification.AddHandler(LoadParcel, id);
 
             ViewSenderCommand = new(ViewSenderDetails);
             ViewTargetCommand = new(ViewTargetDetails);

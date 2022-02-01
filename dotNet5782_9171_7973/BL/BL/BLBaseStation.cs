@@ -76,7 +76,6 @@ namespace BL
                    select station.Id;
         }
 
-
         public IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
             return GetAvailableBaseStationsId().Select(id => GetBaseStationForList(id));

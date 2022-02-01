@@ -21,7 +21,7 @@ namespace PL.ViewModels
 
         public CustomersListViewModel() : base()
         {
-            PLNotification.AddHandler<Customer>(ReloadList);
+            PLNotification.CustomerNotification.AddHandler(ReloadList);
         }
     }
 }

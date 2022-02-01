@@ -18,7 +18,7 @@ namespace PL.ViewModels
 
         public ParcelsListViewModel() : base()
         {
-            PLNotification.AddHandler<Parcel>(ReloadList);
+            PLNotification.ParcelNotification.AddHandler(ReloadList);
         }
     }
 }

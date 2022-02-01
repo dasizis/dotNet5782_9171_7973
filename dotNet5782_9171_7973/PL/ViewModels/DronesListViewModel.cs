@@ -18,7 +18,7 @@ namespace PL.ViewModels
 
         public DronesListViewModel(): base()
         {
-            PLNotification.AddHandler<Drone>(ReloadList);
+            PLNotification.DroneNotification.AddHandler(ReloadList);
         }
     }
 }

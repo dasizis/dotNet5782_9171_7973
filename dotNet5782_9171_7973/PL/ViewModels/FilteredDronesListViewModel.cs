@@ -11,7 +11,7 @@ namespace PL.ViewModels
     {
         public FilteredDronesListViewModel(Predicate<DroneForList> predicate) : base(predicate) 
         { 
-            PLNotification.AddHandler<Drone>(LoadList); 
+            PLNotification.DroneNotification.AddHandler(LoadList); 
         }
 
         protected override void ExecuteOpen(DroneForList item)

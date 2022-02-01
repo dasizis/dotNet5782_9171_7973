@@ -58,6 +58,6 @@
     <StationId>1</StationId>
     <DroneId>12</DroneId>
     <StartTime>2022-02-01T20:51:43.7892748+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
 </DroneCharges>

@@ -21,7 +21,7 @@ namespace PL
             {
                 globalHandleres += handler;
             }
-            if (handlers.ContainsKey((int)id))
+            else if (handlers.ContainsKey((int)id))
             {
                 handlers[(int)id] += handler;
             }
@@ -29,7 +29,6 @@ namespace PL
             {
                 handlers.Add((int)id, handler);
             }
-
         }
 
         /// <summary>
@@ -51,10 +50,10 @@ namespace PL
         /// <param name="callerMethodName">The caller method name</param>
         public void NotifyItemChanged(int? id = null, [CallerMemberName] string callerMethodName = "")
         {
+            globalHandleres?.Invoke();
+
             if (id == null)
             {
-                globalHandleres?.Invoke();
-
                 foreach (var (handlerId, handler) in handlers)
                 {
                     handler?.Invoke();
@@ -66,12 +65,12 @@ namespace PL
             }
         }
 
-        public static PLNotification BaseStationNotification => new();
+        public static PLNotification BaseStationNotification { get; } = new();
 
-        public static PLNotification CustomerNotification => new();
+        public static PLNotification CustomerNotification { get; } = new();
 
-        public static PLNotification DroneNotification => new();
+        public static PLNotification DroneNotification { get; } = new();
 
-        public static PLNotification ParcelNotification => new();
+        public static PLNotification ParcelNotification { get; } = new();
     }
 }

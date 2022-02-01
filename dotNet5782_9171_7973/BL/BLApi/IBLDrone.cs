@@ -32,14 +32,6 @@ namespace BLApi
         /// </summary>
         /// <returns>An <see cref="IEnumerable{DroneForList}"/> of the drones list</returns>
         IEnumerable<DroneForList> GetDronesList();
-
-        /// <summary>
-        /// Returns a filtered drones list
-        /// </summary>
-        /// <param name="stateOption">The wanted drones state</param>
-        /// <param name="weightOption">The wanted drones max weight category</param>
-        /// <returns>An <see cref="IEnumerable{DroneForList}"/> of the filtered drones list</returns>
-        IEnumerable<DroneForList> GetFilteredDronesList(int? stateOption, int? weightOption);
         
         /// <summary>
         /// Finds the base station id that the drone is being charged in

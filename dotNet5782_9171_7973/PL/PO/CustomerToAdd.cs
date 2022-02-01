@@ -48,7 +48,7 @@ namespace PO
         /// <summary>
         /// Customer location longitude
         /// </summary>
-        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
+        [Range(typeof(double), "-180", "80", ErrorMessage = "Latitude must be between -90 - 90")]
         [RegularExpression(@"^\d+(.\d+)?$", ErrorMessage = "Latitude must be a float number")]
         [Required(ErrorMessage = "Required")]
         public string Longitude
@@ -61,7 +61,7 @@ namespace PO
         /// <summary>
         /// Customer location latitude
         /// </summary>
-        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
+        [Range(typeof(double), "-90", "90", ErrorMessage = "Latitude must be between -90 - 90")]
         [RegularExpression(@"^\d+(.\d+)?$", ErrorMessage = "Latitude must be a float number")]
         [Required(ErrorMessage = "Required")]
         public string Latitude

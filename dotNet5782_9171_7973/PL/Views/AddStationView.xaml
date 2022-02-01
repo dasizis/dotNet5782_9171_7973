@@ -6,6 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:vm="clr-namespace:PL.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:PL.Views.Behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -73,7 +75,11 @@
                              Text="{Binding BaseStation.Longitude, 
                                             ValidatesOnDataErrors=true,
                                             NotifyOnValidationError=true,
-                                            UpdateSourceTrigger=PropertyChanged}"/>
+                                            UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:DoubleInputBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </syncfusion:SfTextInputLayout>
 
                 
@@ -88,7 +94,11 @@
                              Text="{Binding BaseStation.Latitude, 
                                             ValidatesOnDataErrors=true,
                                             NotifyOnValidationError=true,
-                                            UpdateSourceTrigger=PropertyChanged}"/>
+                                            UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:DoubleInputBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </syncfusion:SfTextInputLayout>
             </StackPanel>
 

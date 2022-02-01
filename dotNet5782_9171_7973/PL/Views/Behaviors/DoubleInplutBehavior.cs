@@ -10,13 +10,21 @@ namespace PL.Views.Behaviors
             AssociatedObject.PreviewTextInput += (s, e) =>
             {
                 TextBox textBox = s as TextBox;
-
+                
                 if (e.Text == ".")
                 {
                     e.Handled = !int.TryParse(textBox.Text, out int _);
                 }
                 
                 if (!double.TryParse(textBox.Text + e.Text, out double __))
+                {
+                    e.Handled = true;
+                }
+            };
+
+            AssociatedObject.PreviewKeyDown += (s, e) =>
+            {
+                if (e.Key == System.Windows.Input.Key.Space)
                 {
                     e.Handled = true;
                 }

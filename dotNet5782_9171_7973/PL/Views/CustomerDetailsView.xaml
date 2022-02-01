@@ -16,7 +16,6 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
                 <ResourceDictionary Source="Style/MapDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
         </ResourceDictionary>
     </UserControl.Resources>
 

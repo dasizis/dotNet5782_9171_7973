@@ -20,7 +20,7 @@ namespace PL
                            double.Parse(customer.Longitude),
                            double.Parse(customer.Latitude));
 
-            PLNotification.NotifyItemChanged<Customer>();
+            PLNotification.CustomerNotification.NotifyItemChanged();
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace PL
         public static void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
             bl.UpdateCustomer(customerId, name, phone);
-            PLNotification.NotifyItemChanged<Customer>(customerId);
+            PLNotification.CustomerNotification.NotifyItemChanged(customerId);
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace PL
         public static void DeleteCustomer(int customerId)
         {
             bl.DeleteCustomer(customerId);
-            PLNotification.RemoveHandlers<Customer>(customerId);
-            PLNotification.NotifyItemChanged<Customer>();
+            PLNotification.CustomerNotification.RemoveHandler(customerId);
+            PLNotification.CustomerNotification.NotifyItemChanged();
         }
     }
 }

@@ -20,8 +20,8 @@ namespace PL
                         (BO.WeightCategory)drone.MaxWeight,
                         (int)drone.StationId);
 
-            PLNotification.NotifyItemChanged<Drone>();
-            PLNotification.NotifyItemChanged<BaseStation>();
+            PLNotification.DroneNotification.NotifyItemChanged();
+            PLNotification.BaseStationNotification.NotifyItemChanged();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace PL
         public static void RenameDrone(int droneId, string newName)
         {
             bl.RenameDrone(droneId, newName);
-            PLNotification.NotifyItemChanged<Drone>(droneId);
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
         }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace PL
         public static void ChargeDrone(int droneId)
         {
             bl.ChargeDrone(droneId);
-            PLNotification.NotifyItemChanged<Drone>(droneId);
-            PLNotification.NotifyItemChanged<BaseStation>();
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
+            PLNotification.BaseStationNotification.NotifyItemChanged();
         }
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace PL
         public static void FinishCharging(int droneId)
         {
             bl.FinishCharging(droneId);
-            PLNotification.NotifyItemChanged<Drone>(droneId);
-            PLNotification.NotifyItemChanged<BaseStation>();
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
+            PLNotification.BaseStationNotification.NotifyItemChanged();
         }
 
         /// <summary>
@@ -138,8 +138,8 @@ namespace PL
         public static void AssignParcelToDrone(int droneId)
         {
             bl.AssignParcelToDrone(droneId);
-            PLNotification.NotifyItemChanged<Drone>(droneId);
-            PLNotification.NotifyItemChanged<Parcel>();
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
+            PLNotification.ParcelNotification.NotifyItemChanged();
         }
 
         /// <summary>
@@ -150,8 +150,8 @@ namespace PL
         public static void DeleteDrone(int droneId)
         {
             bl.DeleteDrone(droneId);
-            PLNotification.RemoveHandlers<Drone>(droneId);
-            PLNotification.NotifyItemChanged<Drone>();
+            PLNotification.DroneNotification.RemoveHandler(droneId);
+            PLNotification.DroneNotification.NotifyItemChanged();
         }
     }
 }

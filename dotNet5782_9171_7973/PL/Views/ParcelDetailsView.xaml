@@ -14,8 +14,7 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
                 <ResourceDictionary Source="Style/MapDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
-            <convereters:ParcelDatesToSteperIndex x:Key="ParcelDatesToSteperIndex"/>
+            <convereters:ParcelDatesToSteperIndexConverter x:Key="ParcelDatesToSteperIndex"/>
             <convereters:DateToToolTipConverter x:Key="DateToToolTipConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>

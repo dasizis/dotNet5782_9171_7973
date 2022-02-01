@@ -4,107 +4,74 @@ using System.Runtime.CompilerServices;
 
 namespace PL
 {
-    static class PLNotification
+    class PLNotification
     {
-        private static Dictionary<Type, Dictionary<int, ItemChangedHandler>> handlers = new();
+        protected Dictionary<int, Action> handlers = new();
 
-        private static Dictionary<Type, ItemChangedHandler> listHandlers = new();
+        protected event Action globalHandleres;
 
         /// <summary>
-        /// Adds a handler for spesific type (and id)   
+        /// Add a new handler
         /// </summary>
-        /// <typeparam name="T">
-        ///     The <see cref="PO"/> Type of the item (use <see cref="PO.Drone"/> and not <see cref="PO.DroneForList"/> for example
-        /// </typeparam>
-        /// <param name="handler">The handler function</param>
-        /// <param name="id">The id of the related item</param>
-        public static void AddHandler<T>(ItemChangedHandler handler, int? id = null)
+        /// <param name="handler">The handler to add</param>
+        /// <param name="id">The item id</param>
+        public void AddHandler(Action handler, int? id = null)
         {
             if (id == null)
             {
-                AddToDictionary(listHandlers, typeof(T), handler);
+                globalHandleres += handler;
             }
-            else if (handlers.ContainsKey(typeof(T)))
+            if (handlers.ContainsKey((int)id))
             {
-                AddToDictionary(handlers[typeof(T)], (int)id, handler);
+                handlers[(int)id] += handler;
             }
             else
             {
-                handlers.Add(typeof(T), new());
-                AddToDictionary(handlers[typeof(T)], (int)id, handler);
+                handlers.Add((int)id, handler);
             }
-        }
 
-        /// <summary>
-        /// Helper method which add new value to dictionary, if the key exists push the item to the key's list 
-        /// otherwise adds a new key
-        /// </summary>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="dictionary"></param>
-        /// <param name="key"></param>
-        /// <param name="handler"></param>
-        private static void AddToDictionary<TKey>(Dictionary<TKey, ItemChangedHandler> dictionary, TKey key, ItemChangedHandler handler)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                dictionary[key] += handler;
-            }
-            else
-            {
-                dictionary.Add(key, handler);
-            }
         }
 
         /// <summary>
         /// Removes an handler of a item 
         /// </summary>
-        /// <typeparam name="T">The item type</typeparam>
         /// <param name="id">The item id</param>
-        public static void RemoveHandlers<T>(int id)
+        public void RemoveHandler(int id)
         {
-            if (handlers.ContainsKey(typeof(T)) && handlers[typeof(T)].ContainsKey(id))
+            if (handlers.ContainsKey(id))
             {
-                handlers[typeof(T)][id] = null;
+                handlers[id] = null;
             }
         }
-
-        public delegate void ItemChangedHandler();
 
         /// <summary>
         /// Used to notify from outer class the one or more drones were modified
         /// </summary>
+        /// <param name="id">The item id which was changed</param>
         /// <param name="callerMethodName">The caller method name</param>
-        public static void NotifyItemChanged<T>(int? id = null, [CallerMemberName] string callerMethodName = "")
+        public void NotifyItemChanged(int? id = null, [CallerMemberName] string callerMethodName = "")
         {
-            if (listHandlers.ContainsKey(typeof(T)))
-            {
-                listHandlers[typeof(T)]?.Invoke();
-            }
-
             if (id == null)
             {
-                InvokeAll<T>();
-            }
-            else if (handlers.ContainsKey(typeof(T)) && handlers[typeof(T)].ContainsKey((int)id))
-            {
+                globalHandleres?.Invoke();
 
-                handlers[typeof(T)][(int)id]?.Invoke();
-            }
-        }
-
-        /// <summary>
-        /// Invokes all handlers of type
-        /// </summary>
-        /// <typeparam name="T">The type</typeparam>
-        private static void InvokeAll<T>()
-        {
-            if (handlers.ContainsKey(typeof(T)))
-            {
-                foreach (var handler in handlers[typeof(T)].Values)
+                foreach (var (handlerId, handler) in handlers)
                 {
                     handler?.Invoke();
                 }
             }
+            else if (handlers.ContainsKey((int)id))
+            {
+                handlers[(int)id]?.Invoke();
+            }
         }
+
+        public static PLNotification BaseStationNotification => new();
+
+        public static PLNotification CustomerNotification => new();
+
+        public static PLNotification DroneNotification => new();
+
+        public static PLNotification ParcelNotification => new();
     }
 }

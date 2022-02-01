@@ -14,11 +14,10 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml" />
                 <ResourceDictionary Source="Style/ListDesign/TreeViewDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <!--<converters:ValueToInputTypeConverter x:Key="ValueToInputTypeConverter" />
-            <converters:ValueToInputEnableConverter x:Key="ValueToInputEnableConverter" />-->
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
+        
         <!--Filter value input-->
         <syncfusion:SfTextInputLayout Hint="Search for" LeadingViewPosition="Inside" Margin="20,20,20,0">
 

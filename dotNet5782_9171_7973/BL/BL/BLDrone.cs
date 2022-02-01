@@ -77,12 +77,6 @@ namespace BL
             return drones.Select(drone => drone.Clone());
         }
 
-        public IEnumerable<DroneForList> GetFilteredDronesList(int? stateOption, int? weightOption)
-        {
-            return GetDronesList().Where(d => (stateOption == null || d.State == (DroneState)stateOption) && 
-                                              (weightOption == null || d.MaxWeight == (WeightCategory)weightOption));
-        }
-
         public int GetDroneBaseStation(int droneId)
         {
             try
@@ -224,7 +218,6 @@ namespace BL
             drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree;
             drone.Location = parcelInDeliver.CollectLocation;
         }
-
 
         public void SupplyParcel(int droneId)
         {

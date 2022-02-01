@@ -20,9 +20,8 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <convereters:PairsOfLocationTypeToMarkers x:Key="PairsOfLocationTypeToMarkers" />
-            <convereters:DroneStateToHandleChargeText x:Key="DroneStateToHandleChargeText" />
-            <convereters:StateToProceedWithParcelText x:Key="StateToProceedWithParcelText" />
+            <convereters:DroneStateToHandleChargeTextConverter x:Key="DroneStateToHandleChargeText" />
+            <convereters:StateToProceedWithParcelTextConverter x:Key="StateToProceedWithParcelText" />
             <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
         </ResourceDictionary>
     </UserControl.Resources>

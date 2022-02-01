@@ -90,7 +90,6 @@ namespace BL
                    select GetParcelForList(parcel.Id); 
         }
 
-
         public void DeleteParcel(int parcelId)
         {
             DO.Parcel parcel;

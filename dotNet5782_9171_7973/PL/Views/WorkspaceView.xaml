@@ -7,28 +7,17 @@
              xmlns:vm="clr-namespace:PL.ViewModels"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF" 
-             xmlns:converters="clr-namespace:PL.Views.Converters"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<UserControl.DataContext>
-        <vm:WorkspaceViewModel />
-    </UserControl.DataContext>-->
     <UserControl.Resources>
         <System:Double x:Key="ListPanelWidth">280</System:Double>
         <System:Double x:Key="ButtomPanelHeight">200</System:Double>
     </UserControl.Resources>
     <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
-                                MaximizeButtonEnabled="True">
+                               MaximizeButtonEnabled="True">
 
-        <local:MainMapView syncfusion:DockingManager.Header="MainMap"
-                           syncfusion:DockingManager.CanMaximize="True"
-                           syncfusion:DockingManager.CanFloatMaximize="True"
-                           syncfusion:DockingManager.CanClose="False" 
-                           syncfusion:DockingManager.SideInDockedMode="Bottom"
-                           syncfusion:DockingManager.DesiredHeightInDockedMode="180"/>
-        
         <!--Lists Area-->
         <local:DronesListView x:Name="ListArea"
                               syncfusion:DockingManager.CanClose="False"
@@ -42,7 +31,7 @@
                                syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
 
         <local:BaseStationsListView syncfusion:DockingManager.Header="Base Stations" 
-                              syncfusion:DockingManager.CanClose="False"
+                                    syncfusion:DockingManager.CanClose="False"
                                     syncfusion:DockingManager.SideInDockedMode="Tabbed"
                                     syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
 
@@ -52,6 +41,12 @@
                                  syncfusion:DockingManager.TargetNameInDockedMode="{x:Static vm:Workspace.TargerNameOfListPanelType}"/>
         <!--End Of List Area-->
 
+        <local:MainMapView syncfusion:DockingManager.Header="MainMap"
+                           syncfusion:DockingManager.CanMaximize="True"
+                           syncfusion:DockingManager.CanFloatMaximize="True"
+                           syncfusion:DockingManager.CanClose="False" 
+                           syncfusion:DockingManager.SideInDockedMode="Bottom"
+                           syncfusion:DockingManager.DesiredHeightInDockedMode="180"/>
 
     </syncfusion:DockingManager>
 </UserControl>

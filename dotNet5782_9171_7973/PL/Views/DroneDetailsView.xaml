@@ -44,7 +44,7 @@
                                         AnimationSpeed="{Binding Drone.State, Converter={StaticResource DroneStateToAnimationSpeedConverter}}"
                                         HorizontalAlignment="Right" 
                                         ViewboxHeight="30" 
-                                        VerticalAlignment="Top" >
+                                        VerticalAlignment="Top">
                 <syncfusion:SfBusyIndicator.Header>
                     <TextBlock Text="{Binding Drone.Battery, StringFormat={}{0:F2}%}" Margin="5"/>
                 </syncfusion:SfBusyIndicator.Header>

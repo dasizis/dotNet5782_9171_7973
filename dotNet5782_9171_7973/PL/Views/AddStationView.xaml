@@ -69,15 +69,14 @@
                     <syncfusion:SfTextInputLayout.LeadingView>
                         <materialDesign:PackIcon Kind="Longitude" Height="10"/>
                     </syncfusion:SfTextInputLayout.LeadingView>
-                    <syncfusion:DoubleTextBox x:Name="LongitudeInput"
-                                              Text="{Binding BaseStation.Longitude, 
-                                                             ValidatesOnDataErrors=true,
-                                                             NotifyOnValidationError=true,
-                                                             UpdateSourceTrigger=PropertyChanged,
-                                                             StringFormat=N2}"
-                                              ShowSpinButton="True"/>
+                    <TextBox x:Name="LongitudeInput"
+                             Text="{Binding BaseStation.Longitude, 
+                                            ValidatesOnDataErrors=true,
+                                            NotifyOnValidationError=true,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
                 </syncfusion:SfTextInputLayout>
 
+                
                 <!--Latitude input-->
                 <syncfusion:SfTextInputLayout Hint="Latitude" 
                                       HasError="{Binding (Validation.HasError), ElementName=LatitudeInput}"
@@ -85,13 +84,11 @@
                     <syncfusion:SfTextInputLayout.LeadingView>
                         <materialDesign:PackIcon Kind="Latitude" Height="10"/>
                     </syncfusion:SfTextInputLayout.LeadingView>
-                    <syncfusion:DoubleTextBox x:Name="LatitudeInput"
-                                              Text="{Binding BaseStation.Latitude, 
-                                                             ValidatesOnDataErrors=true,
-                                                             NotifyOnValidationError=true,
-                                                             UpdateSourceTrigger=PropertyChanged,
-                                                             StringFormat=N2}"
-                                              ShowSpinButton="True"/>
+                    <TextBox x:Name="LatitudeInput"
+                             Text="{Binding BaseStation.Latitude, 
+                                            ValidatesOnDataErrors=true,
+                                            NotifyOnValidationError=true,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
                 </syncfusion:SfTextInputLayout>
             </StackPanel>
 

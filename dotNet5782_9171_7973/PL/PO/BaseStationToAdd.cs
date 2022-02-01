@@ -29,27 +29,27 @@ namespace PO
             set => SetField(ref name, value);
         }
 
-        double? longitude;
+        string longitude;
         /// <summary>
         /// Base station location longitude
         /// </summary>
-        [SexadecimalLongitude]
-        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 - 180")]
+        [RegularExpression(@"^\d+(.\d+)?$", ErrorMessage = "Latitude must be a float number")]
+        [Range(typeof(double), "-180", "80", ErrorMessage = "Latitude must be between -90 - 90")]
         [Required(ErrorMessage = "Required")]
-        public double? Longitude
+        public string Longitude
         {
             get => longitude;
             set => SetField(ref longitude, value);
         }
 
-        double? latitude;
+        string latitude;
         /// <summary>
         /// Base station location latitude
         /// </summary>
-        [SexadecimalLatitude]
-        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 - 90")]
+        [RegularExpression(@"^\d+(.\d+)?$", ErrorMessage ="Latitude must be a float number")]
+        [Range(typeof(double), "-90", "90", ErrorMessage = "Latitude must be between -90 - 90")]
         [Required(ErrorMessage = "Required")]
-        public double? Latitude
+        public string Latitude
         {
             get => latitude;
             set => SetField(ref latitude, value);

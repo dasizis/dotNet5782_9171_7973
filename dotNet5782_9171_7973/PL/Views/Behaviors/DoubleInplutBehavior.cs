@@ -11,9 +11,9 @@ namespace PL.Views.Behaviors
             {
                 TextBox textBox = s as TextBox;
 
-                if (int.TryParse(textBox.Text, out int _) && e.Text == ".")
+                if (e.Text == ".")
                 {
-                    return;
+                    e.Handled = !int.TryParse(textBox.Text, out int _);
                 }
                 
                 if (!double.TryParse(textBox.Text + e.Text, out double __))

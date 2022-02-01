@@ -10,13 +10,16 @@ namespace PL.Views.Behaviors
             AssociatedObject.PreviewTextInput += (s, e) =>
             {
                 TextBox textBox = s as TextBox;
-                
+
                 if (e.Text == ".")
                 {
                     e.Handled = !int.TryParse(textBox.Text, out int _);
                 }
-                
-                if (!double.TryParse(textBox.Text + e.Text, out double __))
+                else if (e.Text == "-")
+                {
+                    e.Handled = textBox.CaretIndex != 0;
+                }  
+                else if (!double.TryParse(textBox.Text + e.Text, out double __))
                 {
                     e.Handled = true;
                 }

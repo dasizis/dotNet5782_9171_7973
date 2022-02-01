@@ -13,7 +13,9 @@ namespace PL
         /// <summary>
         /// Adds a handler for spesific type (and id)   
         /// </summary>
-        /// <typeparam name="T">The <see cref="PO"/> Type of the item (use <see cref="PO.Drone"/> and not <see cref="PO.DroneForList"/> for example</typeparam>
+        /// <typeparam name="T">
+        ///     The <see cref="PO"/> Type of the item (use <see cref="PO.Drone"/> and not <see cref="PO.DroneForList"/> for example
+        /// </typeparam>
         /// <param name="handler">The handler function</param>
         /// <param name="id">The id of the related item</param>
         public static void AddHandler<T>(ItemChangedHandler handler, int? id = null)

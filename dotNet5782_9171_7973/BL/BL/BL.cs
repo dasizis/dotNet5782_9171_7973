@@ -203,7 +203,7 @@ namespace BL
         /// </summary>
         /// <param name="weight">The weight category to suit to</param>
         /// <returns>The electricity confumctiol per km</returns>
-        private double GetElectricity(WeightCategory weight)
+        internal double GetElectricity(WeightCategory weight)
         {
             return weight switch
             {

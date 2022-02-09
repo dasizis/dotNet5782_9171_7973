@@ -5,22 +5,35 @@ using PO;
 
 namespace PL.ViewModels
 {
-    class DroneDetailsViewModel
+    class DroneDetailsViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// The drone 
         /// </summary>
         public Drone Drone { get; set; } = new();
 
+        private bool isAutoMode = false;
         /// <summary>
         /// Indicates whether the drone is ruuning automaticaly or not (manualy)
         /// </summary>
-        public bool IsAutoMode { get; set; } = false;
-
+        public bool IsAutoMode 
+        { 
+            get => isAutoMode;
+            set 
+            {
+                isAutoMode = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsAutoMode"));
+                }
+            }
+        }
         /// <summary>
         /// Background worker which runs simulator
         /// </summary>
         BackgroundWorker worker;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// List of markers to display on drone's map
@@ -69,7 +82,7 @@ namespace PL.ViewModels
             RenameDroneCommand = new(RenameDrone, () => Drone.Error == null);
             DeleteCommand = new(Delete, () => Drone.State == DroneState.Free);
             HandleSimulatorCommand = new(HandleSimulator);
-            ViewParcelCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id)), 
+            ViewParcelCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id)),
                                     () => Drone.ParcelInDeliver != null);
         }
 

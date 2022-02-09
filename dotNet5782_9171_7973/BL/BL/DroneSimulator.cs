@@ -1,12 +1,8 @@
-﻿using BLApi;
-using BO;
+﻿using BO;
 using DalApi;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -15,6 +11,7 @@ namespace BL
         const int SECONDS_PER_HOUR = 3600;
         const int MS_PER_SECOND = 1000;
         const double KM_PER_MS = 100;
+
 
         private DroneForList drone;
         private BL bl;
@@ -25,7 +22,7 @@ namespace BL
 
         public int Delay { get; private set; }
 
-        public DroneSimulator(int id, Action updateAction, Func<bool> shouldStop, int delay = 500)
+        public DroneSimulator(int id, Action updateAction, Func<bool> shouldStop, int delay = 200)
         {
             bl = BL.Instance;
             dal = DalFactory.GetDal();
@@ -120,16 +117,16 @@ namespace BL
             {
                 double fraction = KM_PER_MS / distance;
 
-                double longitudeDistance = drone.Location.Longitude - location.Longitude;
-                double latitudeDistance = drone.Location.Latitude - location.Latitude;
+                double longitudeDistance = location.Longitude - drone.Location.Longitude;
+                double latitudeDistance = location.Latitude - drone.Location.Latitude;
 
                 drone.Location = new()
                 {
-                    Longitude = drone.Location.Longitude,
-                    Latitude = drone.Location.Latitude,
+                    Longitude =  location.Longitude,
+                    Latitude = location.Latitude,
                 };
-
-                drone.Battery -= KM_PER_MS * electricityConfumctiol;
+                //temp
+                drone.Battery -= KM_PER_MS * electricityConfumctiol * 0.001;
                 updateAction();
             }
         }

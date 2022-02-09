@@ -4,6 +4,7 @@ using DO;
 using System.Linq;
 using Singleton;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Dal
 {
@@ -18,6 +19,7 @@ namespace Dal
 
         #region Create
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Add<T>(T item) where T : IIdentifiable, IDeletable
         {
             Type type = typeof(T);
@@ -30,6 +32,7 @@ namespace Dal
             DataSource.Data[type].Add(item);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDroneCharge(int droneId, int baseStationId)
         {
             if (DoesExist<DroneCharge>(charge => charge.DroneId == droneId))
@@ -56,11 +59,13 @@ namespace Dal
 
         #region Request
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public T GetById<T>(int id) where T : IIdentifiable, IDeletable
         {
             return GetSingle<T>(item => item.Id == id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public T GetSingle<T>(Predicate<T> predicate) where T : IDeletable
         {
             try
@@ -73,21 +78,25 @@ namespace Dal
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<T> GetList<T>() where T: IDeletable
         {
             return DataSource.Data[typeof(T)].Cast<T>().Where(item => !item.IsDeleted);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<T> GetFilteredList<T>(Predicate<T> predicate) where T: IDeletable
         {
             return GetList<T>().Where(item => predicate(item));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int GetParcelContinuousNumber()
         {
             return DataSource.Config.NextParcelId++;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public (double, double, double, double, double) GetElectricityConfumctiol()
         {
             return
@@ -104,12 +113,14 @@ namespace Dal
 
         #region Update
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update<T>(int id, string propName, object newValue) where T : IIdentifiable, IDeletable
         {
             T item = GetById<T>(id);
             UpdateItem(item, propName, newValue);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateWhere<T>(Predicate<T> predicate, string propName, object newValue) where T : IDeletable
         {
             for (int i = 0; i < DataSource.Data[typeof(T)].Count; i++)
@@ -125,11 +136,13 @@ namespace Dal
 
         #region Delete
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Delete<T>(int id) where T : IIdentifiable, IDeletable
         {
             Update<T>(id, nameof(IDeletable.IsDeleted), true);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteWhere<T>(Predicate<T> predicate) where T : IDeletable
         {
             UpdateWhere(predicate, nameof(IDeletable.IsDeleted), true);

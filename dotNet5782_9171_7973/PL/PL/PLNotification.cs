@@ -72,5 +72,6 @@ namespace PL
         public static PLNotification DroneNotification { get; } = new();
 
         public static PLNotification ParcelNotification { get; } = new();
+
     }
 }

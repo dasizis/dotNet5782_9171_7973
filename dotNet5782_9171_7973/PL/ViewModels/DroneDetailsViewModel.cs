@@ -190,7 +190,7 @@ namespace PL.ViewModels
             worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true, };
             worker.DoWork += (sender, args) => BLApi.BLFactory.GetBL().StartDroneSimulator((int)args.Argument, UpdateDrone, ShouldStop);
             worker.RunWorkerCompleted += (sender, args) => IsAutoMode = false;
-            worker.ProgressChanged += (sender, args) => LoadDrone();
+            worker.ProgressChanged += (sender, args) => PLNotification.DroneNotification.NotifyItemChanged(Drone.Id);
             worker.RunWorkerAsync(Drone.Id);
         }
 

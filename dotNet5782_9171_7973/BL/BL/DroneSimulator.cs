@@ -115,15 +115,16 @@ namespace BL
             double distance;
             while (SleepDelayTime() && (distance = Localable.Distance(drone.Location, location)) > 0)
             {
-                double fraction = KM_PER_MS / distance;
 
-                double longitudeDistance = location.Longitude - drone.Location.Longitude;
+                double fraction = Math.Min(KM_PER_MS, distance) / distance;
+
+                double longitudeDistance = location.Longitude - drone.Location.Longitude ;
                 double latitudeDistance = location.Latitude - drone.Location.Latitude;
 
                 drone.Location = new()
                 {
-                    Longitude =  location.Longitude,
-                    Latitude = location.Latitude,
+                    Longitude = drone.Location.Longitude + longitudeDistance * fraction,
+                    Latitude = drone.Location.Latitude + latitudeDistance * fraction,
                 };
                 //temp
                 drone.Battery -= KM_PER_MS * electricityConfumctiol * 0.001;

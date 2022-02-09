@@ -23,6 +23,7 @@
             <convereters:DroneStateToHandleChargeTextConverter x:Key="DroneStateToHandleChargeText" />
             <convereters:StateToProceedWithParcelTextConverter x:Key="StateToProceedWithParcelText" />
             <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
+            <convereters:IsAutoModeToChangeModeTextConverter x:Key="IsAutoModeToChangeModeText" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -102,6 +103,10 @@
                     <TextBlock>Delete</TextBlock>
                 </StackPanel>
             </Button>
+
+            <Button Content="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeText}}"
+                    Command="{Binding HandleSimulatorCommand}"
+                    Margin="5" Padding="5"/>
 
         </StackPanel>
 

@@ -213,5 +213,7 @@ namespace BL
                 _ => throw new ArgumentException("Invalid weight category"),
             };
         }
+
+        public void StartDroneSimulator(int id, Action update, Func<bool> shouldStop) => new DroneSimulator(id, update, shouldStop);
     }
 }

@@ -17,7 +17,6 @@ namespace BL
         const double KM_PER_MS = 100;
 
         private DroneForList drone;
-
         private BL bl;
         private IDal dal;
 
@@ -79,14 +78,19 @@ namespace BL
 
         private void HandleMaintenanceState()
         {
-            while (drone.Battery < 100)
+            while (drone.Battery < 95)
             {
                 if (shouldStop() || !SleepDelayTime()) return;
 
-                drone.Battery += (Delay / MS_PER_SECOND) * (bl.ChargeRate / SECONDS_PER_HOUR);
+                //temp TODO
+                double batteryToAdd = ((double)Delay / MS_PER_SECOND) * ((double)bl.ChargeRate / 6);
+                if (drone.Battery + batteryToAdd > 100) break;
+
+                drone.Battery += batteryToAdd;
                 updateAction();
             }
 
+            dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
             drone.State = DroneState.Free;
         }
 
@@ -96,7 +100,7 @@ namespace BL
             {
                 bl.AssignParcelToDrone(drone.Id);
             }
-            catch (ObjectNotFoundException)
+            catch (InvalidActionException)
             {
                 // TODO: there is no empty base station
                 BaseStation station = drone.FindClosest(bl.GetAvailableBaseStationsId().Select(id => bl.GetBaseStation(id)));

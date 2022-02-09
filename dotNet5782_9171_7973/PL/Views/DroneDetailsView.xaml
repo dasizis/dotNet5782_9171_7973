@@ -107,6 +107,7 @@
             <Button Content="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeText}}"
                     Command="{Binding HandleSimulatorCommand}"
                     Margin="5" Padding="5"/>
+            <TextBlock Text="{Binding Drone.ParcelInDeliver.Id}"/>
 
         </StackPanel>
 

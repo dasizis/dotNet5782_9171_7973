@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using BO;
 
 namespace BL
 {
     partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddBaseStation(int id, string name, double longitude, double latitude, int chargeSlots)
         {
             var station = new BaseStation()
@@ -36,6 +38,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BaseStation GetBaseStation(int id)
         {
             DO.BaseStation baseStation;
@@ -60,13 +63,15 @@ namespace BL
                 DronesInCharge = dronesInChargeList,
             };
         }
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
             return from baseStation in dal.GetList<DO.BaseStation>()
                    select GetBaseStationForList(baseStation.Id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<int> GetAvailableBaseStationsId()
         {
             return from station in dal.GetList<DO.BaseStation>()
@@ -76,11 +81,13 @@ namespace BL
                    select station.Id;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
             return GetAvailableBaseStationsId().Select(id => GetBaseStationForList(id));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateBaseStation(int baseStationId, string name = null, int? emptyChargeSlots = null)
         {
             if (name != null)
@@ -117,6 +124,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteBaseStation(int baseStationId)
         {
             BaseStationForList baseStation; 

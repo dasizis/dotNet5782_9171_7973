@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     partial class BL 
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, WeightCategory maxWeight, int stationId)
         {
             var drone = new Drone()
@@ -50,6 +52,7 @@ namespace BL
             dal.AddDroneCharge(drone.Id, stationId);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int id)
         {
             DroneForList drone = drones.FirstOrDefault(d => d.Id == id);
@@ -72,11 +75,13 @@ namespace BL
             };
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneForList> GetDronesList()
         {
             return drones.Select(drone => drone.Clone());
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int GetDroneBaseStation(int droneId)
         {
             try
@@ -89,6 +94,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RenameDrone(int droneId, string model)
         {
             DroneForList drone = GetDroneForListRef(droneId);
@@ -104,6 +110,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ChargeDrone(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
@@ -132,7 +139,8 @@ namespace BL
 
             dal.AddDroneCharge(drone.Id, closest.Id);
         }
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void FinishCharging(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
@@ -155,6 +163,7 @@ namespace BL
             dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AssignParcelToDrone(int droneId)
         {
             Drone drone = GetDrone(droneId);
@@ -186,6 +195,7 @@ namespace BL
             droneForList.DeliveredParcelId = selectedParcel.Id;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickUpParcel(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
@@ -219,6 +229,7 @@ namespace BL
             drone.Location = parcelInDeliver.CollectLocation;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SupplyParcel(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
@@ -256,6 +267,7 @@ namespace BL
             dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int droneId)
         {
             Drone drone = GetDrone(droneId);

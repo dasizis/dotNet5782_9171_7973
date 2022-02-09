@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using BO;
 
 namespace BL
@@ -10,6 +11,7 @@ namespace BL
     /// </summary>
     public partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
         {
             var customer = new Customer()
@@ -41,6 +43,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int id)
         {
             DO.Customer customer;
@@ -71,12 +74,14 @@ namespace BL
             };
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerForList> GetCustomersList()
         {
             return from customer in dal.GetList<DO.Customer>()
                    select GetCustomerForList(customer.Id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int customerId, string name = null, string phone = null)
         {
             if (name != null)
@@ -112,6 +117,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteCustomer(int customerId)
         {
             CustomerForList customer = GetCustomerForList(customerId);

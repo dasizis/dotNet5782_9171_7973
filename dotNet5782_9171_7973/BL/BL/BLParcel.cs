@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using BO;
 
 namespace BL
 {
     partial class BL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
         {
             CustomerInDelivery sender;
@@ -51,6 +53,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel GetParcel(int id)
         {
             DO.Parcel parcel;
@@ -78,18 +81,21 @@ namespace BL
             };
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelForList> GetParcelsList()
         {
             return from parcel in dal.GetList<DO.Parcel>()
                    select GetParcelForList(parcel.Id);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
         {
             return from parcel in dal.GetFilteredList<DO.Parcel>(parcel => parcel.DroneId == null)
                    select GetParcelForList(parcel.Id); 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int parcelId)
         {
             DO.Parcel parcel;

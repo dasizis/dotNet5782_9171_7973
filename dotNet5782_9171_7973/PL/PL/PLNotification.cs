@@ -11,7 +11,7 @@ namespace PL
         protected event Action globalHandleres;
 
         /// <summary>
-        /// Add a new handler
+        /// Adds a new handler
         /// </summary>
         /// <param name="handler">The handler to add</param>
         /// <param name="id">The item id</param>
@@ -32,7 +32,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Removes an handler of a item 
+        /// Removes an handler of the item 
         /// </summary>
         /// <param name="id">The item id</param>
         public void RemoveHandler(int id)
@@ -44,7 +44,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Used to notify from outer class the one or more drones were modified
+        /// Used to notify from an outer class the one or more drones were modified
         /// </summary>
         /// <param name="id">The item id which was changed</param>
         /// <param name="callerMethodName">The caller method name</param>

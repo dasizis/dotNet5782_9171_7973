@@ -156,12 +156,12 @@ namespace BL
             var availableStationsLocations = from stationId in GetAvailableBaseStationsId()
                                              select GetBaseStationLocation(stationId);
 
-            double battery = availableStationsLocations.Count() == 0
-                             ? MAX_CHARGE
-                             : Rand.Next(
-                                 (int)Math.Min(Localable.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree, 80), 
-                                 MAX_CHARGE
-                              );
+            double battery = availableStationsLocations.Any()
+                             ? Rand.Next(
+                                (int)Math.Min(Localable.Distance(location, location.FindClosest(availableStationsLocations)) * ElectricityConfumctiolFree, 80), 
+                                MAX_CHARGE
+                             ) 
+                             : MAX_CHARGE;
 
             return new()
             {
@@ -203,7 +203,7 @@ namespace BL
         /// </summary>
         /// <param name="weight">The weight category to suit to</param>
         /// <returns>The electricity confumctiol per km</returns>
-        private double GetElectricity(WeightCategory weight)
+        internal double GetElectricity(WeightCategory weight)
         {
             return weight switch
             {

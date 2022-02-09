@@ -111,20 +111,26 @@ namespace PL.ViewModels
 
         private bool Filter(object item)
         {
-            if (FilterValue == null || FilterKey  == null || (FilterKey is string && (string)FilterKey == RESET_VALUE))
+            if (FilterValue == null || FilterKey  == null || (FilterKey is string filterString && filterString == RESET_VALUE))
                 return true;
 
             PropertyInfo property = FilterKey as PropertyInfo;
             var propertyValue = property.GetValue(item);
 
             if (propertyValue == null)
+            {
                 return false;
+            }
 
             if (property.PropertyType == typeof(string))
+            {
                 return propertyValue.ToString().ToUpper().Contains(FilterValue.ToString().ToUpper());
+            }
 
             if (property.PropertyType.IsEnum)
+            {
                 return (int)FilterValue == (int)propertyValue;
+            }
 
             if (property.PropertyType == typeof(int) ||
                 property.PropertyType == typeof(int?))

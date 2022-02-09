@@ -58,7 +58,6 @@
                                            RelativeSource={RelativeSource Mode=Self}}"
                          ComboBoxItemsSourceEnumType="{Binding Parent.DataContext.FilterKey.PropertyType, 
                                                                RelativeSource={RelativeSource Mode=Self}}"/>
-            
 
             <!--Sort key-->
             <syncfusion:SfTextInputLayout Hint="Sort By" InputViewPadding="10" >

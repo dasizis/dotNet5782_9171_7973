@@ -8,6 +8,7 @@
              xmlns:convereters="clr-namespace:PL.Views.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:po="clr-namespace:PO"
+             xmlns:pl="clr-namespace:PL"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="1450" d:DesignWidth="800"
@@ -26,12 +27,17 @@
             <convereters:IsAutoModeToChangeModeTextConverter x:Key="IsAutoModeToChangeModeText" />
             <convereters:IsAutoModeToChangeModeColorConverter x:Key="IsAutoModeToChangeModeColorConverter" />
             <convereters:IsAutoModeToChangeModeIconConverter x:Key="IsAutoModeToChangeModeIconConverter" />
+            <convereters:TempConverter x:Key="TempConverter" />
             <convereters:NotConverter x:Key="NotConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+    <StackPanel Margin="30" Grid.Column="0">
 
-
-    <StackPanel Margin="30"> 
         <!--Header-->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -40,11 +46,12 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,20">
-                <Button Command="{Binding HandleSimulatorCommand}"
+                <Button Command="{x:Static pl:PLSimulators.ToggleSimulatorCommand}"
+                        CommandParameter="{Binding Drone.Id}"
                         Style="{StaticResource MaterialDesignIconButton}"
-                        ToolTip="MaterialDesignIconButton"
-                        Foreground="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeColorConverter}}">
-                    <materialDesign:PackIcon Kind="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeIconConverter}}" />
+                        ToolTip="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeText}}" 
+                        Foreground="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeColorConverter}}">
+                    <materialDesign:PackIcon Kind="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeIconConverter}}" />
                 </Button>
                 <TextBlock Text="{Binding Drone.Id, StringFormat=Drone {0}}"
                            Style="{StaticResource DroneHeader}" />
@@ -83,8 +90,9 @@
         <TextBlock Text="{Binding Drone.State, StringFormat='State: {0}'}"  
                    Style="{StaticResource Text}"/>
 
+
         <!--Buttons-->
-        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" IsEnabled="{Binding IsAutoMode, Converter={StaticResource NotConverter}}">
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" IsEnabled="{Binding Drone.IsAutoMode, Converter={StaticResource NotConverter}}">
             <Button Content="Update" 
                     Style="{StaticResource PrimaryButton}"                 
                     Command="{Binding RenameDroneCommand}"
@@ -125,4 +133,7 @@
             </syncfusion:SfMap.Layers>
         </syncfusion:SfMap>
     </StackPanel>
+    <syncfusion:SfBusyIndicator Visibility="{Binding Drone.IsNowStopping, Converter={StaticResource BooleanToVisibilityConverter}}" IsBusy="True" AnimationType="ArrowTrack"  Grid.Column="0" Opacity="0.7" />
+
+    </Grid>
 </UserControl>

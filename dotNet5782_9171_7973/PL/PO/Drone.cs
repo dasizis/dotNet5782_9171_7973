@@ -83,6 +83,26 @@ namespace PO
             set => SetField(ref location, value);
         }
 
+        bool isAutoMode;
+        /// <summary>
+        /// Indicates wheather the drone is in Auto mode
+        /// </summary>
+        public bool IsAutoMode 
+        {
+            get => isAutoMode;
+            set => SetField(ref isAutoMode, value);
+        }
+
+        bool isNowStopping;
+        /// <summary>
+        /// Indicates wheather the drone is in now stopping the simulator 
+        /// </summary>
+        public bool IsNowStopping
+        {
+            get => isNowStopping;
+            set => SetField(ref isNowStopping, value);
+        }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <c>ToString()</c> method

@@ -112,7 +112,7 @@
     </HierarchicalDataTemplate>
 
     <!--PO.CustomerForList-->
-    <HierarchicalDataTemplate DataType="{x:Type po:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
+    <HierarchicalDataTemplate   DataType="{x:Type po:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
         <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
             <StackPanel.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">

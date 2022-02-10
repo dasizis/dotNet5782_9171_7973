@@ -79,6 +79,16 @@ namespace PO
             set => SetField(ref deliveredParcelId, value);
         }
 
+        bool isAutoMode;
+        /// <summary>
+        /// Indicates wheather the drone is in Auto mode
+        /// </summary>
+        public bool IsAutoMode
+        {
+            get => isAutoMode;
+            set => SetField(ref isAutoMode, value);
+        }
+
         /// <summary>
         /// Uses an outer project <see cref="StringUtilities"/>
         /// to override the <c>ToString()</c> method

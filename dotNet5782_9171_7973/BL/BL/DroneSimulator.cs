@@ -12,7 +12,7 @@ namespace BL
         const int SECONDS_PER_HOUR = 3600;
         const int MS_PER_SECOND = 1000;
         const double KM_PER_S = 50000;
-
+        const int WAIT_TIME = 10_000;
 
         private DroneForList drone;
         private BL bl;
@@ -95,9 +95,8 @@ namespace BL
         {
             while (drone.Battery < 100)
             {
-                if (shouldStop() || !SleepDelayTime()) return;
+                if (shouldStop() || !SleepDelayTime(Delay)) return;
 
-                //temp TODO
                 double batteryToAdd = (double)Delay / MS_PER_SECOND * (double)bl.ChargeRate;
 
                 drone.Battery = Math.Min(drone.Battery + batteryToAdd, 100);
@@ -119,8 +118,12 @@ namespace BL
             }
             catch (InvalidActionException)
             {
-                // TODO: there is no empty base station
                 BaseStation station = drone.FindClosest(bl.GetAvailableBaseStationsId().Select(id => bl.GetBaseStation(id)));
+
+                if (drone.Battery == 100 || station == null)
+                {
+                    WaitState();
+                }
 
                 lock (dal)
                 {
@@ -137,7 +140,7 @@ namespace BL
         private void GoToLocation(Location location, double electricityConfumctiol)
         {
             double distance;
-            while (SleepDelayTime() && (distance = Localable.Distance(drone.Location, location)) > 0)
+            while (SleepDelayTime(Delay) && (distance = Localable.Distance(drone.Location, location)) > 0)
             {
                 double fraction = Math.Min(KM_PER_S / MS_PER_SECOND, distance) / distance;
 
@@ -155,11 +158,16 @@ namespace BL
             }
         }
 
-        private bool SleepDelayTime()
+        private void WaitState()
+        {
+            SleepDelayTime(WAIT_TIME);
+        }
+
+        private bool SleepDelayTime(int delay)
         {
             try
             {
-                Thread.Sleep(Delay);
+                Thread.Sleep(delay);
             }
             catch (ThreadInterruptedException)
             {

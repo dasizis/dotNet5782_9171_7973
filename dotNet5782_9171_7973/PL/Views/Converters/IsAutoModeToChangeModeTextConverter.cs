@@ -12,7 +12,7 @@ namespace PL.Views.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value == true ? "Stop Simulator" : "Start Simulator";
+            return (bool)value ? "Stop Simulator" : "Start Simulator";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -25,7 +25,7 @@ namespace PL.Views.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value == true ? "Pause" : "Play";
+            return (bool)value ? "Pause" : "Play";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -38,7 +38,7 @@ namespace PL.Views.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value == true ? "Red" : "Green";
+            return (bool)value ? "Red" : "Green";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

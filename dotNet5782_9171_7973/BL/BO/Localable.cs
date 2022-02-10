@@ -42,9 +42,10 @@ namespace BO
         /// <typeparam name="T"></typeparam>
         /// <param name="location">localable starting point location</param>
         /// <param name="localables">list of localables to find from</param>
-        /// <returns>closest location to the starting point</returns>
+        /// <returns>closest location to the starting point or <c>default(T)</c> if the locables list is empty</returns>
         public static T FindClosest<T>(this ILocalable location,IEnumerable<T> localables) where T: ILocalable
         {
+            if (!localables.Any()) return default(T);
             return localables.OrderBy(l => Distance(location.Location, l.Location)).First();
         }
 

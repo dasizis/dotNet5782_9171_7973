@@ -49,8 +49,9 @@ namespace PL
                                       Id = boDrone.ParcelInDeliver.Id,
                                       WasPickedUp = boDrone.ParcelInDeliver.WasPickedUp,
                                       DeliveryDistance = boDrone.ParcelInDeliver.DeliveryDistance,
-                                  }
-                
+                                  },
+                IsAutoMode = !PLSimulators.CanStartSimulator(id),
+                IsNowStopping = PLSimulators.IsNowStopping(id),
             };
         }
 
@@ -73,6 +74,7 @@ namespace PL
                     MaxWeight = (WeightCategory)drone.MaxWeight,
                     Location = new Location() { Longitude = drone.Location.Longitude, Latitude = drone.Location.Latitude },
                     DeliveredParcelId = drone.DeliveredParcelId,
+                    IsAutoMode = !PLSimulators.CanStartSimulator(drone.Id),
                 });
             }
 

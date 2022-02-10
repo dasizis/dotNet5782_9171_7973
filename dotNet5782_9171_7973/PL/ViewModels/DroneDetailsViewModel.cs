@@ -12,27 +12,6 @@ namespace PL.ViewModels
         /// </summary>
         public Drone Drone { get; set; } = new();
 
-        private bool isAutoMode = false;
-        /// <summary>
-        /// Indicates whether the drone is ruuning automaticaly or not (manualy)
-        /// </summary>
-        public bool IsAutoMode 
-        { 
-            get => isAutoMode;
-            set 
-            {
-                isAutoMode = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("IsAutoMode"));
-                }
-            }
-        }
-        /// <summary>
-        /// Background worker which runs simulator
-        /// </summary>
-        BackgroundWorker worker;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -65,11 +44,6 @@ namespace PL.ViewModels
         /// </summary>
         public RelayCommand ViewParcelCommand { get; set; }
 
-        /// <summary>
-        /// Handle simulator command (run or stop)
-        /// </summary>
-        public RelayCommand HandleSimulatorCommand { get; set; }
-
         public DroneDetailsViewModel(int id)
         {
             Drone.Id = id;
@@ -81,7 +55,6 @@ namespace PL.ViewModels
             HandleChargeCommand = new(HandleCharge, () => Drone.State != DroneState.Deliver);
             RenameDroneCommand = new(RenameDrone, () => Drone.Error == null);
             DeleteCommand = new(Delete, () => Drone.State == DroneState.Free);
-            HandleSimulatorCommand = new(HandleSimulator);
             ViewParcelCommand = new(() => Workspace.AddPanelCommand.Execute(Workspace.ParcelPanel(Drone.ParcelInDeliver?.Id)),
                                     () => Drone.ParcelInDeliver != null);
         }
@@ -170,26 +143,6 @@ namespace PL.ViewModels
         {
             PLService.DeleteDrone(Drone.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(Drone.Id));
-        }
-
-        private void UpdateDrone() => worker.ReportProgress(0);
-        private bool ShouldStop() => worker.CancellationPending;
-
-        private void HandleSimulator()
-        {
-            if (IsAutoMode)
-            {
-                IsAutoMode = false;
-                worker?.CancelAsync();
-                return;
-            }
-
-            IsAutoMode = true;
-            worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true, };
-            worker.DoWork += (sender, args) => BLApi.BLFactory.GetBL().StartDroneSimulator((int)args.Argument, UpdateDrone, ShouldStop);
-            worker.RunWorkerCompleted += (sender, args) => IsAutoMode = false;
-            worker.ProgressChanged += (sender, args) => PLNotification.DroneNotification.NotifyItemChanged(Drone.Id);
-            worker.RunWorkerAsync(Drone.Id);
         }
 
         private void LoadDrone()

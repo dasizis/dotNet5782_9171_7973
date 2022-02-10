@@ -163,7 +163,8 @@
             </StackPanel.InputBindings>
             <TextBlock Text="{Binding Id}" VerticalAlignment="Center" 
                        Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                       ContextMenu="{StaticResource ItemMenu}"/>        </StackPanel>
+                       ContextMenu="{StaticResource ItemMenu}"/>        
+        </StackPanel>
     </HierarchicalDataTemplate>
 
     <!--Group Style-->

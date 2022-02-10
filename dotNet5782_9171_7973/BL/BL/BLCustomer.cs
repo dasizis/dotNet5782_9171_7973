@@ -24,9 +24,9 @@ namespace BL
                 Recieve = new(),
             };
 
-            try
+            lock(Dal) try
             {
-                dal.Add(
+                Dal.Add(
                     new DO.Customer()
                     {
                         Id = customer.Id,
@@ -49,17 +49,17 @@ namespace BL
             DO.Customer customer;
             try
             {
-                customer = dal.GetById<DO.Customer>(id);
+                customer = Dal.GetById<DO.Customer>(id);
             }
             catch (DO.ObjectNotFoundException e)
             {
                 throw new ObjectNotFoundException(typeof(Customer), e);
             }
 
-            var sendParcels = dal.GetFilteredList<DO.Parcel>(parcel => parcel.SenderId == id)
+            var sendParcels = Dal.GetFilteredList<DO.Parcel>(parcel => parcel.SenderId == id)
                                  .Select(parcel => GetParcel(parcel.Id));
 
-            var targetParcels = dal.GetFilteredList<DO.Parcel>(parcel => parcel.TargetId == id)
+            var targetParcels = Dal.GetFilteredList<DO.Parcel>(parcel => parcel.TargetId == id)
                                    .Select(parcel => GetParcel(parcel.Id));
 
 
@@ -77,7 +77,7 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerForList> GetCustomersList()
         {
-            return from customer in dal.GetList<DO.Customer>()
+            return from customer in Dal.GetList<DO.Customer>()
                    select GetCustomerForList(customer.Id);
         }
 
@@ -91,7 +91,7 @@ namespace BL
 
                 try
                 {
-                    dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Name), name);
+                    Dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Name), name);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -106,9 +106,9 @@ namespace BL
                     throw new InvalidPropertyValueException(nameof(DO.Customer.Phone), phone);
                 }
 
-                try
+                lock (Dal) try
                 {
-                    dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Phone), phone);
+                    Dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Phone), phone);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -125,7 +125,10 @@ namespace BL
             if (customer.ParcelsOnWay != 0 || customer.ParcelsSendAndNotSupplied != 0 || customer.ParcelsRecieved != 0 || customer.ParcelsSendAndSupplied != 0)
                 throw new InvalidActionException("Can not delete a customer with parcels");
 
-            dal.Delete<DO.Customer>(customerId);
+            lock (Dal)
+            {
+                Dal.Delete<DO.Customer>(customerId);
+            }
         }
 
         #region Helpers
@@ -141,24 +144,24 @@ namespace BL
             DO.Customer customer;
             try
             {
-                customer = dal.GetById<DO.Customer>(id);
+                customer = Dal.GetById<DO.Customer>(id);
             }
             catch (DO.ObjectNotFoundException e)
             {
                 throw new ObjectNotFoundException(typeof(Customer), e);
             }
 
-            var parcels = dal.GetList<DO.Parcel>();
+            var parcels = Dal.GetList<DO.Parcel>();
 
             return new CustomerForList()
             {
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
-                ParcelsSendAndSupplied = dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied != null).Count(),
-                ParcelsSendAndNotSupplied = dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied == null).Count(),
-                ParcelsRecieved = dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied != null).Count(),
-                ParcelsOnWay = dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied == null).Count(),
+                ParcelsSendAndSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied != null).Count(),
+                ParcelsSendAndNotSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied == null).Count(),
+                ParcelsRecieved = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied != null).Count(),
+                ParcelsOnWay = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied == null).Count(),
             };
         }
 
@@ -173,7 +176,7 @@ namespace BL
             DO.Customer customer;
             try
             {
-                customer = dal.GetById<DO.Customer>(id);
+                customer = Dal.GetById<DO.Customer>(id);
             }
             catch (DO.ObjectNotFoundException e)
             {

@@ -179,14 +179,12 @@ namespace PL.ViewModels
         {
             if (IsAutoMode)
             {
-                MessageBox.Show("canceled");
                 IsAutoMode = false;
                 worker?.CancelAsync();
                 return;
             }
 
             IsAutoMode = true;
-            MessageBox.Show("auto");
             worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true, };
             worker.DoWork += (sender, args) => BLApi.BLFactory.GetBL().StartDroneSimulator((int)args.Argument, UpdateDrone, ShouldStop);
             worker.RunWorkerCompleted += (sender, args) => IsAutoMode = false;

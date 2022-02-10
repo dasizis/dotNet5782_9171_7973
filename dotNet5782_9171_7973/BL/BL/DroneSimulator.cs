@@ -3,6 +3,7 @@ using DalApi;
 using System;
 using System.Linq;
 using System.Threading;
+using static BL.BL;
 
 namespace BL
 {
@@ -10,7 +11,7 @@ namespace BL
     {
         const int SECONDS_PER_HOUR = 3600;
         const int MS_PER_SECOND = 1000;
-        const double KM_PER_MS = 100;
+        const double KM_PER_S = 50000;
 
 
         private DroneForList drone;
@@ -22,10 +23,10 @@ namespace BL
 
         public int Delay { get; private set; }
 
-        public DroneSimulator(int id, Action updateAction, Func<bool> shouldStop, int delay = 200)
+        public DroneSimulator(int id, Action updateAction, Func<bool> shouldStop, int delay = 500)
         {
             bl = BL.Instance;
-            dal = DalFactory.GetDal();
+            dal = bl.Dal;
 
             this.updateAction = updateAction;
             this.shouldStop = shouldStop;
@@ -55,39 +56,58 @@ namespace BL
 
         private void HandleDeliverState()
         {
-            Parcel parcel = bl.GetParcel((int)drone.DeliveredParcelId);
-            Customer sender = bl.GetCustomer(parcel.Sender.Id);
-            Customer target = bl.GetCustomer(parcel.Target.Id);
+            Parcel parcel;
+            Customer sender;
+            Customer target;
+            lock (bl)
+            {
+                parcel = bl.GetParcel((int)drone.DeliveredParcelId);
+                sender = bl.GetCustomer(parcel.Sender.Id);
+                target = bl.GetCustomer(parcel.Target.Id);
+            }
+            
 
             if (parcel.PickedUp == null)
             {
                 GoToLocation(sender.Location, bl.ElectricityConfumctiolFree);
-                bl.PickUpParcel(drone.Id);
+
+                lock (bl)
+                {
+                    bl.PickUpParcel(drone.Id);
+                }
+
                 updateAction();
             }
             else if (parcel.Supplied == null)
             {
                 GoToLocation(target.Location, bl.GetElectricity(parcel.Weight));
-                bl.SupplyParcel(drone.Id);
+
+                lock (bl)
+                {
+                    bl.SupplyParcel(drone.Id);
+                }
+
                 updateAction();
             }
         }
 
         private void HandleMaintenanceState()
         {
-            while (drone.Battery < 95)
+            while (drone.Battery < 100)
             {
                 if (shouldStop() || !SleepDelayTime()) return;
 
                 //temp TODO
-                double batteryToAdd = ((double)Delay / MS_PER_SECOND) * ((double)bl.ChargeRate / 6);
-                if (drone.Battery + batteryToAdd > 100) break;
+                double batteryToAdd = (double)Delay / MS_PER_SECOND * (double)bl.ChargeRate;
 
-                drone.Battery += batteryToAdd;
+                drone.Battery = Math.Min(drone.Battery + batteryToAdd, 100);
                 updateAction();
             }
 
-            dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
+            lock (bl)
+            {
+                bl.FinishCharging(drone.Id);
+            }
             drone.State = DroneState.Free;
         }
 
@@ -101,7 +121,11 @@ namespace BL
             {
                 // TODO: there is no empty base station
                 BaseStation station = drone.FindClosest(bl.GetAvailableBaseStationsId().Select(id => bl.GetBaseStation(id)));
-                dal.AddDroneCharge(drone.Id, station.Id);
+
+                lock (dal)
+                {
+                    dal.AddDroneCharge(drone.Id, station.Id);
+                }
 
                 GoToLocation(station.Location, bl.ElectricityConfumctiolFree);
                 drone.State = DroneState.Maintenance;
@@ -115,8 +139,7 @@ namespace BL
             double distance;
             while (SleepDelayTime() && (distance = Localable.Distance(drone.Location, location)) > 0)
             {
-
-                double fraction = Math.Min(KM_PER_MS, distance) / distance;
+                double fraction = Math.Min(KM_PER_S / MS_PER_SECOND, distance) / distance;
 
                 double longitudeDistance = location.Longitude - drone.Location.Longitude ;
                 double latitudeDistance = location.Latitude - drone.Location.Latitude;
@@ -126,8 +149,8 @@ namespace BL
                     Longitude = drone.Location.Longitude + longitudeDistance * fraction,
                     Latitude = drone.Location.Latitude + latitudeDistance * fraction,
                 };
-                //temp
-                drone.Battery -= KM_PER_MS * electricityConfumctiol * 0.001;
+               
+                drone.Battery -= KM_PER_S / MS_PER_SECOND * electricityConfumctiol;
                 updateAction();
             }
         }

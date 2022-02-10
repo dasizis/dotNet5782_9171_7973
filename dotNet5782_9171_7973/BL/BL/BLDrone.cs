@@ -22,9 +22,9 @@ namespace BL
                 State = DroneState.Maintenance,
             };
 
-            try
+            lock(Dal) try
             {
-                dal.Add(new DO.Drone()
+                Dal.Add(new DO.Drone()
                 {
                     Id = drone.Id,
                     Model = drone.Model,
@@ -49,7 +49,7 @@ namespace BL
                 }
             );
 
-            dal.AddDroneCharge(drone.Id, stationId);
+            Dal.AddDroneCharge(drone.Id, stationId);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -86,7 +86,7 @@ namespace BL
         {
             try
             {
-                return dal.GetSingle<DO.DroneCharge>(c => c.DroneId == droneId).StationId;
+                return Dal.GetSingle<DO.DroneCharge>(c => c.DroneId == droneId).StationId;
             }
             catch (DO.ObjectNotFoundException)
             {
@@ -100,9 +100,9 @@ namespace BL
             DroneForList drone = GetDroneForListRef(droneId);
             drone.Model = model;
 
-            try
+            lock(Dal) try
             {
-                dal.Update<DO.Drone>(droneId, nameof(drone.Model), model);
+                Dal.Update<DO.Drone>(droneId, nameof(drone.Model), model);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -137,7 +137,10 @@ namespace BL
             drone.State = DroneState.Maintenance;
             drone.Battery -= ElectricityConfumctiolFree * Localable.Distance(closest.Location, drone.Location);
 
-            dal.AddDroneCharge(drone.Id, closest.Id);
+            lock (Dal)
+            {
+                Dal.AddDroneCharge(drone.Id, closest.Id);
+            }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -150,7 +153,7 @@ namespace BL
                 throw new InvalidActionException("Drone is not in meintenece");
             }
  
-            var dalCharge = dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId).FirstOrDefault();
+            var dalCharge = Dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId).FirstOrDefault();
             if (dalCharge.Equals(default(DO.DroneCharge)))
             {
                 throw new InvalidActionException("Drone is not being charged");
@@ -159,8 +162,11 @@ namespace BL
             drone.Battery = Math.Min(drone.Battery + ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours,
                                      MAX_CHARGE);
             drone.State = DroneState.Free;
-
-            dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
+            
+            lock (Dal)
+            {
+                Dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
+            }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -178,7 +184,7 @@ namespace BL
             var orderedParcels = from parcel in parcels
                                  where parcel.Weight <= drone.MaxWeight
                                        && IsAbleToDeliverParcel(drone, parcel)
-                                 orderby parcel.Priority, parcel.Weight, Localable.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
+                                 orderby parcel.Priority descending, parcel.Weight descending, Localable.Distance(GetCustomer(parcel.Sender.Id).Location, drone.Location)
                                  select parcel;
 
             if (!orderedParcels.Any())
@@ -187,8 +193,12 @@ namespace BL
             }
 
             ParcelInDeliver selectedParcel = orderedParcels.First();
-            dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.DroneId), droneId);
-            dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
+
+            lock (Dal)
+            {
+                Dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.DroneId), droneId);
+                Dal.Update<DO.Parcel>(selectedParcel.Id, nameof(DO.Parcel.Scheduled), DateTime.Now);
+            }
 
             var droneForList = GetDroneForListRef(droneId);
             droneForList.State = DroneState.Deliver;
@@ -209,7 +219,7 @@ namespace BL
             DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<DO.Parcel>((int)drone.DeliveredParcelId);
+                parcel = Dal.GetById<DO.Parcel>((int)drone.DeliveredParcelId);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -223,7 +233,11 @@ namespace BL
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
-            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
+
+            lock (Dal)
+            {
+                Dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.PickedUp), DateTime.Now);
+            }
 
             drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree;
             drone.Location = parcelInDeliver.CollectLocation;
@@ -264,7 +278,10 @@ namespace BL
             drone.Location = parcelInDeliver.TargetLocation;
             drone.State = DroneState.Free;
 
-            dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
+            lock (Dal)
+            {
+                Dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
+            }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -277,7 +294,10 @@ namespace BL
 
             drones.RemoveAll(drone => drone.Id == droneId);
 
-            dal.Delete<DO.Drone>(droneId);
+            lock (Dal)
+            {
+                Dal.Delete<DO.Drone>(droneId);
+            }
         }
 
         #region Helpers

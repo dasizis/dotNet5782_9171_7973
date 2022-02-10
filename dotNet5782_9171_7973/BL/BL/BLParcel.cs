@@ -26,7 +26,7 @@ namespace BL
 
             var parcel = new Parcel()
             {
-                Id = dal.GetParcelContinuousNumber(),
+                Id = Dal.GetParcelContinuousNumber(),
                 Priority = priority,
                 Weight = weight,
                 Sender = sender,
@@ -34,9 +34,9 @@ namespace BL
                 Requested = DateTime.Now,
             };
 
-            try
+            lock (Dal) try
             {
-                dal.Add(new DO.Parcel()
+                Dal.Add(new DO.Parcel()
                 {
                     Id = parcel.Id,
                     SenderId = parcel.Sender.Id,
@@ -59,7 +59,7 @@ namespace BL
             DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<DO.Parcel>(id);
+                parcel = Dal.GetById<DO.Parcel>(id);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -84,14 +84,14 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelForList> GetParcelsList()
         {
-            return from parcel in dal.GetList<DO.Parcel>()
+            return from parcel in Dal.GetList<DO.Parcel>()
                    select GetParcelForList(parcel.Id);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelForList> GetNotAssignedToDroneParcels()
         {
-            return from parcel in dal.GetFilteredList<DO.Parcel>(parcel => parcel.DroneId == null)
+            return from parcel in Dal.GetFilteredList<DO.Parcel>(parcel => parcel.DroneId == null)
                    select GetParcelForList(parcel.Id); 
         }
 
@@ -101,7 +101,7 @@ namespace BL
             DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<DO.Parcel>(parcelId);
+                parcel = Dal.GetById<DO.Parcel>(parcelId);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -111,7 +111,10 @@ namespace BL
             if (parcel.Requested != null && parcel.Supplied == null)
                 throw new InvalidActionException("Can not delete a parcel in delivery");
 
-            dal.Delete<DO.Parcel>(parcelId);
+            lock (Dal)
+            {
+                Dal.Delete<DO.Parcel>(parcelId);
+            }
         }
 
         #region Helpers
@@ -173,7 +176,7 @@ namespace BL
             DO.Parcel parcel;
             try
             {
-                parcel = dal.GetById<DO.Parcel>(id);
+                parcel = Dal.GetById<DO.Parcel>(id);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -183,7 +186,7 @@ namespace BL
             DO.Customer targetCustomer;
             try
             {
-                targetCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
+                targetCustomer = Dal.GetById<DO.Customer>(parcel.TargetId);
             }
             catch (DO.ObjectNotFoundException e)
             {
@@ -193,7 +196,7 @@ namespace BL
             DO.Customer senderCustomer;
             try
             {
-                senderCustomer = dal.GetById<DO.Customer>(parcel.SenderId);
+                senderCustomer = Dal.GetById<DO.Customer>(parcel.SenderId);
             }
             catch (DO.ObjectNotFoundException e)
             {

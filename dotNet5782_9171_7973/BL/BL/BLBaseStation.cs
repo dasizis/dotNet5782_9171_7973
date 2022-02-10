@@ -19,9 +19,9 @@ namespace BL
                 DronesInCharge = new(),
             };
 
-            try
+            lock (Dal) try
             {
-                dal.Add(
+                Dal.Add(
                     new DO.BaseStation()
                     {
                         Id = station.Id,
@@ -44,14 +44,14 @@ namespace BL
             DO.BaseStation baseStation;
             try
             {
-                baseStation = dal.GetById<DO.BaseStation>(id);
+                baseStation = Dal.GetById<DO.BaseStation>(id);
             }
             catch (DO.ObjectNotFoundException e)
             {
                 throw new ObjectNotFoundException(typeof(BaseStation), e);
             }
 
-            var charges = dal.GetFilteredList<DO.DroneCharge>(charge => charge.StationId == id);
+            var charges = Dal.GetFilteredList<DO.DroneCharge>(charge => charge.StationId == id);
             var dronesInChargeList = charges.Select(charge => GetDrone(charge.DroneId)).ToList();
 
             return new BaseStation()
@@ -67,15 +67,15 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BaseStationForList> GetBaseStationsList()
         {
-            return from baseStation in dal.GetList<DO.BaseStation>()
+            return from baseStation in Dal.GetList<DO.BaseStation>()
                    select GetBaseStationForList(baseStation.Id);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<int> GetAvailableBaseStationsId()
         {
-            return from station in dal.GetList<DO.BaseStation>()
-                   let dronesCount = dal.GetFilteredList<DO.DroneCharge>(charge => charge.StationId == station.Id)
+            return from station in Dal.GetList<DO.BaseStation>()
+                   let dronesCount = Dal.GetFilteredList<DO.DroneCharge>(charge => charge.StationId == station.Id)
                                         .Count()
                    where station.ChargeSlots > dronesCount
                    select station.Id;
@@ -97,7 +97,7 @@ namespace BL
                 
                 try
                 {
-                    dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.Name), name);
+                    Dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.Name), name);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -110,12 +110,12 @@ namespace BL
                 if (emptyChargeSlots < 0)
                     throw new InvalidPropertyValueException(emptyChargeSlots, nameof(DO.BaseStation.ChargeSlots));
 
-                int sumChargeSlots = (int)emptyChargeSlots + dal.GetFilteredList<DO.DroneCharge>(d => d.StationId == baseStationId)
+                int sumChargeSlots = (int)emptyChargeSlots + Dal.GetFilteredList<DO.DroneCharge>(d => d.StationId == baseStationId)
                                                                 .Count();
 
-                try
+                lock (Dal) try 
                 {
-                    dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.ChargeSlots), sumChargeSlots);
+                    Dal.Update<DO.BaseStation>(baseStationId, nameof(DO.BaseStation.ChargeSlots), sumChargeSlots);
                 }
                 catch (DO.ObjectNotFoundException e)
                 {
@@ -140,7 +140,10 @@ namespace BL
             if (baseStation.BusyChargeSlots > 0)
                 throw new InvalidActionException("Can not delete a busy base station");
 
-            dal.Delete<DO.BaseStation>(baseStationId);
+            lock (Dal)
+            {
+                Dal.Delete<DO.BaseStation>(baseStationId);
+            }
         }
 
         #region Helpers

@@ -11,7 +11,7 @@ namespace BL
     /// </summary>
     public sealed partial class BL : Singleton<BL>, BLApi.IBL
     {
-        private DalApi.IDal dal { get; } = DalApi.DalFactory.GetDal();
+        internal DalApi.IDal Dal { get; } = DalApi.DalFactory.GetDal();
 
         const int MAX_CHARGE = 100;
 
@@ -36,11 +36,11 @@ namespace BL
                 ElectricityConfumctiolMedium,
                 ElectricityConfumctiolHeavy,
                 ChargeRate
-            ) = dal.GetElectricityConfumctiol();
+            ) = Dal.GetElectricityConfumctiol();
 
-            var dalDrones = dal.GetList<DO.Drone>();
-            var parcels = dal.GetList<DO.Parcel>();
-            var charges = dal.GetList<DO.DroneCharge>();
+            var dalDrones = Dal.GetList<DO.Drone>();
+            var parcels = Dal.GetList<DO.Parcel>();
+            var charges = Dal.GetList<DO.DroneCharge>();
 
             foreach (var dalDrone in dalDrones)
             {
@@ -71,13 +71,13 @@ namespace BL
         /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetDeliverDrone(DO.Drone drone)
         {
-            DO.Parcel parcel = dal.GetSingle<DO.Parcel>(parcel => parcel.DroneId == drone.Id && parcel.Supplied == null);
+            DO.Parcel parcel = Dal.GetSingle<DO.Parcel>(parcel => parcel.DroneId == drone.Id && parcel.Supplied == null);
 
-            var targetCustomer = dal.GetById<DO.Customer>(parcel.TargetId);
-            Location targetLocation = new() { Latitude = targetCustomer.Latitude, Longitude = targetCustomer.Longitude };
+            var targetCustomer = Dal.GetById<DO.Customer>(parcel.TargetId);
+            Location targetLocation = GetCustomerLocation(targetCustomer);
 
-            var senderCustomer = dal.GetById<DO.Customer>(parcel.SenderId);
-            Location senderLocation = GetSenderLocation(senderCustomer);
+            var senderCustomer = Dal.GetById<DO.Customer>(parcel.SenderId);
+            Location senderLocation = GetCustomerLocation(senderCustomer);
 
             Location location;
             double battery;
@@ -99,7 +99,7 @@ namespace BL
             }
             else
             {
-                location = GetBaseStation(RandomItem(dal.GetList<DO.BaseStation>()).Id).Location;
+                location = GetBaseStation(RandomItem(Dal.GetList<DO.BaseStation>()).Id).Location;
                 battery = MAX_CHARGE;
             }
 
@@ -115,9 +115,12 @@ namespace BL
             };
         }
 
-        private static Location GetSenderLocation(DO.Customer senderCustomer)
+        private static Location GetCustomerLocation(DO.Customer customer)
         {
-            return new() { Latitude = senderCustomer.Latitude, Longitude = senderCustomer.Longitude };
+            return new() { 
+                Latitude = customer.Latitude, 
+                Longitude = customer.Longitude 
+            };
         }
 
         /// <summary>
@@ -128,7 +131,7 @@ namespace BL
         private DroneForList SetMaintenanceDrone(DO.Drone drone)
         {
             const double MAX_INIT_CHARGE = 20;
-            var charge = dal.GetSingle<DO.DroneCharge>(c => c.DroneId == drone.Id);
+            var charge = Dal.GetSingle<DO.DroneCharge>(c => c.DroneId == drone.Id);
 
             return new()
             {
@@ -148,7 +151,7 @@ namespace BL
         /// <returns>A <see cref="DroneForList"/></returns>
         private DroneForList SetFreeDrone(DO.Drone drone)
         {
-            var customers = dal.GetList<DO.Customer>();
+            var customers = Dal.GetList<DO.Customer>();
             var randomCustomer = RandomItem(customers);
 
             Location location = new() { Longitude = randomCustomer.Longitude, Latitude = randomCustomer.Latitude };
@@ -193,7 +196,7 @@ namespace BL
         /// <returns>The base station <see cref="Location"/></returns>
         private Location GetBaseStationLocation(int id)
         {
-            DO.BaseStation baseStation = dal.GetById<DO.BaseStation>(id);
+            DO.BaseStation baseStation = Dal.GetById<DO.BaseStation>(id);
             return new() { Longitude = baseStation.Longitude, Latitude = baseStation.Latitude };
         }
 

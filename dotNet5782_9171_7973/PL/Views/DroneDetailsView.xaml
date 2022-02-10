@@ -24,6 +24,9 @@
             <convereters:StateToProceedWithParcelTextConverter x:Key="StateToProceedWithParcelText" />
             <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
             <convereters:IsAutoModeToChangeModeTextConverter x:Key="IsAutoModeToChangeModeText" />
+            <convereters:IsAutoModeToChangeModeColorConverter x:Key="IsAutoModeToChangeModeColorConverter" />
+            <convereters:IsAutoModeToChangeModeIconConverter x:Key="IsAutoModeToChangeModeIconConverter" />
+            <convereters:NotConverter x:Key="NotConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -36,9 +39,17 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0"
-                       Text="{Binding Drone.Id, StringFormat=Drone {0}}"
-                       Style="{StaticResource Header}" />
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,20">
+                <Button Command="{Binding HandleSimulatorCommand}"
+                        Style="{StaticResource MaterialDesignIconButton}"
+                        ToolTip="MaterialDesignIconButton"
+                        Foreground="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeColorConverter}}">
+                    <materialDesign:PackIcon Kind="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeIconConverter}}" />
+                </Button>
+                <TextBlock Text="{Binding Drone.Id, StringFormat=Drone {0}}"
+                           Style="{StaticResource DroneHeader}" />
+            </StackPanel>
+            
 
             <syncfusion:SfBusyIndicator Grid.Column="1"
                                         AnimationType="Battery" 
@@ -73,7 +84,7 @@
                    Style="{StaticResource Text}"/>
 
         <!--Buttons-->
-        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" IsEnabled="{Binding IsAutoMode, Converter={StaticResource NotConverter}}">
             <Button Content="Update" 
                     Style="{StaticResource PrimaryButton}"                 
                     Command="{Binding RenameDroneCommand}"
@@ -99,16 +110,9 @@
 
             <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
                 <StackPanel Orientation="Horizontal">
-
                     <TextBlock>Delete</TextBlock>
                 </StackPanel>
             </Button>
-
-            <Button Content="{Binding IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeText}}"
-                    Command="{Binding HandleSimulatorCommand}"
-                    Margin="5" Padding="5"/>
-            <TextBlock Text="{Binding Drone.ParcelInDeliver.Id}"/>
-
         </StackPanel>
 
         <!--Map-->

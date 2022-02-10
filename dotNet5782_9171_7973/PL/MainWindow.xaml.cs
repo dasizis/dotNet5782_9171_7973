@@ -1,4 +1,5 @@
 ﻿using Dragablz;
+using PL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,7 +54,6 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-
         }
     }
 }

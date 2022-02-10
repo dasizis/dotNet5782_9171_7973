@@ -5,7 +5,7 @@
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
              xmlns:local="clr-namespace:PL"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Views/WelcomeWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

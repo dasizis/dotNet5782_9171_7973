@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-        <views:WorkspaceView />
+        <views:WorkspaceView/>
 
 </Window>
 

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="PL.Views.SignInCustomerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:local="clr-namespace:PL.Views"
+        mc:Ignorable="d"
+        d:DesignHeight="600" d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+                <ResourceDictionary Source="Style/MapDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Style="{StaticResource Container}">
+
+        <TextBlock Text="Sign In" Style="{StaticResource Header}"/>
+
+        <!--Id input-->
+        <syncfusion:SfTextInputLayout Hint="Id" 
+                                          HasError="{Binding (Validation.HasError), ElementName=IdInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
+            <syncfusion:SfTextInputLayout.LeadingView>
+                <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource Icon}"/>
+            </syncfusion:SfTextInputLayout.LeadingView>
+            <TextBox x:Name="IdInput"
+                     Text="{Binding Id, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+        </syncfusion:SfTextInputLayout>
+
+        <!--Name input-->
+        <syncfusion:SfTextInputLayout Hint="Name" 
+                                          HasError="{Binding (Validation.HasError), ElementName=NameInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
+            <syncfusion:SfTextInputLayout.LeadingView>
+                <materialDesign:PackIcon Kind="Rename" Style="{StaticResource Icon}"/>
+            </syncfusion:SfTextInputLayout.LeadingView>
+            <TextBox x:Name="NameInput"
+                     Text="{Binding Name, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+        </syncfusion:SfTextInputLayout>
+
+        <Button Content="Sign In" Command="{Binding SignInCommand}"/>
+
+    </StackPanel>
+</UserControl>

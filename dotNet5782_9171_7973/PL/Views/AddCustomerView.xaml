@@ -21,7 +21,7 @@
     <UserControl.DataContext>
         <vm:AddCustomerViewModel />
     </UserControl.DataContext>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel Style="{StaticResource Container}">
 
             <TextBlock Text="Add a Customer" Style="{StaticResource Header}"/>

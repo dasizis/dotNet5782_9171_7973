@@ -66,7 +66,6 @@ namespace BL
                 target = bl.GetCustomer(parcel.Target.Id);
             }
             
-
             if (parcel.PickedUp == null)
             {
                 GoToLocation(sender.Location, bl.ElectricityConfumctiolFree);
@@ -125,13 +124,16 @@ namespace BL
                     WaitState();
                 }
 
-                lock (dal)
+                else
                 {
-                    dal.AddDroneCharge(drone.Id, station.Id);
-                }
+                    lock (dal)
+                    {
+                        dal.AddDroneCharge(drone.Id, station.Id);
+                    }
 
-                GoToLocation(station.Location, bl.ElectricityConfumctiolFree);
-                drone.State = DroneState.Maintenance;
+                    GoToLocation(station.Location, bl.ElectricityConfumctiolFree);
+                    drone.State = DroneState.Maintenance;
+                }
             }
 
             updateAction();
@@ -144,7 +146,8 @@ namespace BL
             {
                 double fraction = Math.Min(KM_PER_S / MS_PER_SECOND, distance) / distance;
 
-                double longitudeDistance = location.Longitude - drone.Location.Longitude ;
+
+                double longitudeDistance = location.Longitude - drone.Location.Longitude;
                 double latitudeDistance = location.Latitude - drone.Location.Latitude;
 
                 drone.Location = new()
@@ -153,7 +156,7 @@ namespace BL
                     Latitude = drone.Location.Latitude + latitudeDistance * fraction,
                 };
                
-                drone.Battery -= KM_PER_S / MS_PER_SECOND * electricityConfumctiol;
+                drone.Battery -= Math.Min(KM_PER_S / MS_PER_SECOND, distance) * electricityConfumctiol;
                 updateAction();
             }
         }

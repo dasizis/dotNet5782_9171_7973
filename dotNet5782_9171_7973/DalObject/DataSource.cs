@@ -28,9 +28,9 @@ namespace Dal
         {
             [typeof(Drone)] = Drones,
             [typeof(BaseStation)] = BaseStations,
-            [typeof(Customer)] = Customers,
-            [typeof(Parcel)] = Parcels,
+            [typeof(Customer)] = Customers,      
             [typeof(DroneCharge)] = DroneCharges,
+            [typeof(Parcel)] = Parcels,
         };
 
         static DataSource()
@@ -126,7 +126,7 @@ namespace Dal
             if (RandomManager.Rand.Next(100) < ChancesOfUnAssignedParcel)
                 return parcel;
 
-            var notDeliveredDrones = Drones.Where(drone => !Parcels.Any(parcel => parcel.DroneId == drone.Id));
+            var freeDrones = Drones.Where(drone => !Parcels.Any(parcel => parcel.DroneId == drone.Id) && !DroneCharges.Any(slot => slot.DroneId == drone.Id));
 
             int rand = RandomManager.Rand.Next();
 
@@ -136,7 +136,7 @@ namespace Dal
                 Weight = parcel.Weight,
                 Priority = parcel.Priority,
                 Requested = parcel.Requested,
-                DroneId = notDeliveredDrones.ElementAt(RandomManager.Rand.Next(notDeliveredDrones.Count())).Id,
+                DroneId = freeDrones.ElementAt(RandomManager.Rand.Next(freeDrones.Count())).Id,
                 Scheduled = parcel.Requested + TimeSpan.FromHours(RandomManager.Rand.NextDouble() * 20),
                 SenderId = Customers[rand % Customers.Count].Id,
                 TargetId = Customers[(rand + 7) % Customers.Count].Id,

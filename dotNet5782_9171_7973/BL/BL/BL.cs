@@ -52,7 +52,7 @@ namespace BL
                     drones.Add(SetDeliverDrone(dalDrone));
                 }
                 // Does the drone in Maintenance?
-                else if (charges.Any(charge => charge.DroneId == dalDrone.Id))
+                else if (charges.Any(charge => charge.DroneId == dalDrone.Id && !charge.IsDeleted))
                 {
                     drones.Add(SetMaintenanceDrone(dalDrone));
                 }

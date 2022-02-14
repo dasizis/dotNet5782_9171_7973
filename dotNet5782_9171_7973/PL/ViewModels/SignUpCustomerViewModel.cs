@@ -24,7 +24,7 @@ namespace PL.ViewModels
                 PLService.AddCustomer(Customer);
                 //Get In with proper customer 
                 //temp
-                new MainWindow().Show();
+                new Views.WorkspaceWindow((int)Customer.Id).Show();
                 Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel(Customer.Id));
             }
             catch(BO.IdAlreadyExistsException e)

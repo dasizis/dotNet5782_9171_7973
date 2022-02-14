@@ -17,24 +17,24 @@ namespace PO
             set => SetField(ref id, value);
         }
 
-        string senderName;
+        int senderId;
         /// <summary>
         /// Name of parcel sender
         /// </summary>
-        public string SenderName
+        public int SenderId
         {
-            get => senderName;
-            set => SetField(ref senderName, value);
+            get => senderId;
+            set => SetField(ref senderId, value);
         }
 
-        string targetName;
+        int targetId;
         /// <summary>
         /// Name of target sender
         /// </summary>
-        public string TargetName
+        public int TargetId
         {
-            get => targetName;
-            set => SetField(ref targetName, value);
+            get => targetId;
+            set => SetField(ref targetId, value);
         }
 
         WeightCategory weight;

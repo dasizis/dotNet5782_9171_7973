@@ -127,8 +127,8 @@ namespace PL
                 Id = boParcel.Id,
                 Priority = (Priority)boParcel.Priority,
                 Weight = (WeightCategory)boParcel.Weight,
-                SenderName = boParcel.SenderName,
-                TargetName = boParcel.TargetName,
+                SenderId = boParcel.SenderId,
+                TargetId = boParcel.TargetId,
                 IsOnWay = boParcel.IsOnWay,
             };
         }

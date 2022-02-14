@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PO;
+using System;
 using System.Windows.Controls;
 
 namespace PL.ViewModels
@@ -53,11 +54,19 @@ namespace PL.ViewModels
             ? new(PanelType.Add, new Views.AddStationView(), BaseStationPanelName())
             : new(PanelType.Display, new Views.StationDetailsView((int)id), BaseStationPanelName(id));
 
-        public static Panel DronesListPanel(Predicate<PO.DroneForList> predicate, string header) =>
+        public static Panel FilteredDronesListPanel(Predicate<PO.DroneForList> predicate, string header) =>
             new(PanelType.List, new Views.FilteredDronesListView(predicate), header);
 
-        public static Panel ParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header) =>
+        public static Panel FilteredParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header) =>
             new(PanelType.List, new Views.FilteredParcelsListView(predicate), header);
+
+        public static Panel ParcelsListPanel => new(PanelType.List, new Views.ParcelsListView(), ListPanelName(typeof(Parcel)));
+        public static Panel DronesListPanel => new(PanelType.List, new Views.DronesListView(), ListPanelName(typeof(Drone)));
+        public static Panel CustomersListPanel => new(PanelType.List, new Views.CustomersListView(), ListPanelName(typeof(Customer)));
+        public static Panel BaseStationsListPanel => new(PanelType.List, new Views.BaseStationsListView(), ListPanelName(typeof(BaseStation)));
+
+        public static Panel MainMapPanel => new(PanelType.Other, new Views.MainMapView(), "Main Map");
+
 
         public static RelayCommand<Panel> AddPanelCommand => Views.WorkspaceView.AddPanelCommand;
 

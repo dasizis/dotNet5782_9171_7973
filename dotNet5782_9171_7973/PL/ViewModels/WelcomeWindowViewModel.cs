@@ -65,7 +65,7 @@ namespace PL.ViewModels
 
         public void SignInManager()
         {
-            new MainWindow().Show();
+            new Views.WorkspaceWindow().Show();
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

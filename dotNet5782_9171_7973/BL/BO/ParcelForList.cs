@@ -13,39 +13,15 @@ namespace BO
         /// </summary>
         public int Id { get; set; }
 
-        string senderName;
         /// <summary>
         /// Name of parcel sender
         /// </summary>
-        public string SenderName
-        {
-            get => senderName;
-            set
-            {
-                if (!Validation.IsValidName(value))
-                {
-                    throw new InvalidPropertyValueException(value);
-                }
-                senderName = value;
-            }
-        }
+        public int SenderId { get; set; }
 
-        string targetName;
         /// <summary>
         /// Name of parcel target (reciever)
         /// </summary>
-        public string TargetName
-        {
-            get => targetName;
-            set
-            {
-                if (!Validation.IsValidName(value))
-                {
-                    throw new InvalidPropertyValueException(value);
-                }
-                targetName = value;
-            }
-        }
+        public int TargetId { get; set; }
 
         WeightCategory weight;
         /// <summary>

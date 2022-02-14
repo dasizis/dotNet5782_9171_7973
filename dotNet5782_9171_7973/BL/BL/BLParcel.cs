@@ -134,8 +134,8 @@ namespace BL
                 Id = parcel.Id,
                 Priority = parcel.Priority,
                 Weight = parcel.Weight,
-                SenderName = parcel.Sender.Name,
-                TargetName = parcel.Target.Name,
+                SenderId = parcel.Sender.Id,
+                TargetId = parcel.Target.Id,
                 IsOnWay = parcel.Scheduled != null && parcel.Supplied == null,
             };
         }

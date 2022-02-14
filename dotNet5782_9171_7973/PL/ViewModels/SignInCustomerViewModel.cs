@@ -45,7 +45,7 @@ namespace PL.ViewModels
                 {
                     //Get in with proper customer
                     //temp
-                    new MainWindow().Show();
+                    new Views.WorkspaceWindow(customer.Id).Show();
                     Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel(Id));
                 }
                 else

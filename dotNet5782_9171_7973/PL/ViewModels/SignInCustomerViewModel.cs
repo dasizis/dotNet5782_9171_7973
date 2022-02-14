@@ -48,7 +48,10 @@ namespace PL.ViewModels
                     new MainWindow().Show();
                     Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel(Id));
                 }
-                MessageBox.Show("User name is not correct.");
+                else
+                { 
+                    MessageBox.Show("User name is not correct.");
+                }
             }
             catch (ObjectNotFoundException)
             {

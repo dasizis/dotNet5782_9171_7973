@@ -50,7 +50,7 @@ namespace PL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
-                Location = new Location() 
+                Location = new Location()
                 { 
                     Latitude = customer.Location.Latitude,
                     Longitude = customer.Location.Longitude 

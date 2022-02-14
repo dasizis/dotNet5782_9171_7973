@@ -40,4 +40,44 @@
     <Latitude>-3</Latitude>
     <IsDeleted>false</IsDeleted>
   </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>1234</Id>
+    <Name>yaerl</Name>
+    <Phone>0556707445</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>9876</Id>
+    <Name>gdfgf</Name>
+    <Phone>0556707445</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>98776</Id>
+    <Name>fgfg</Name>
+    <Phone>0556707446</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>123233</Id>
+    <Name>ghghgh</Name>
+    <Phone>0556707764</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>12323</Id>
+    <Name>yael</Name>
+    <Phone>0556707445</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </Customers>

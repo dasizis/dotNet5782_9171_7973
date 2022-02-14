@@ -48,7 +48,6 @@ namespace PL.ViewModels
             {
                 List.Add(item);
             }
-            if (List.Count() == 0) Close();
         }
         protected bool Filter(object item)
         {

@@ -68,7 +68,7 @@ namespace PL.ViewModels
             new Views.WorkspaceWindow().Show();
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
             {

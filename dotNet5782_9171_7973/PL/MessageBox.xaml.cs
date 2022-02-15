@@ -28,11 +28,11 @@ namespace PL
             InitializeComponent();
         }
 
-        public static void Show(BoxType type, string text)
+        public static void Show(BoxType type, string text, double width = 400)
         {
             var dialog = new MessageBox()
             {
-                DataContext = new { Type = type, Text = text }
+                DataContext = new { Type = type, Text = text, Width = width }
             };
 
             DialogHost.Show(dialog);

@@ -15,10 +15,10 @@ namespace PL.Views.Converters
         {
             return (MessageBox.BoxType)value switch
             {
-                MessageBox.BoxType.Success => Color.Green,
-                MessageBox.BoxType.Error => Color.Red,
-                MessageBox.BoxType.Warning => Color.Yellow,
-                MessageBox.BoxType.Info => Color.LightBlue,
+                MessageBox.BoxType.Success => nameof(Color.Green),
+                MessageBox.BoxType.Error => nameof(Color.Red),
+                MessageBox.BoxType.Warning => nameof(Color.Yellow),
+                MessageBox.BoxType.Info => nameof(Color.LightBlue),
                 _ => Color.Black,
             };
         }

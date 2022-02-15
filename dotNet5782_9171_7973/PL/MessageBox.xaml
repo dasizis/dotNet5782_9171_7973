@@ -23,7 +23,7 @@
             <materialDesign:PackIcon Kind="{Binding Type, Converter={StaticResource MessageBoxTypeToIConConverter}}" 
                                      HorizontalAlignment="Center"  
                                      Height="30" Width="30" 
-                                     Foreground="{Binding Type, Converter={StaticResource MessageBoxTypeToIConConverter}}" 
+                                     Foreground="{Binding Type, Converter={StaticResource MessageBoxTypeToColorConverter}}" 
                                      VerticalAlignment="Center"/>
             <TextBlock FontSize="25" 
                        FontWeight="DemiBold" 
@@ -38,7 +38,7 @@
                    FontSize="15" 
                    TextWrapping="Wrap" 
                    Margin="0,10" 
-                   Width="400" />
+                   Width="{Binding Width}" />
         <Button Style="{StaticResource PrimaryButton}"
                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                 HorizontalAlignment="Right"

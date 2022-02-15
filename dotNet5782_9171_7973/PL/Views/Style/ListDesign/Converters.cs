@@ -99,10 +99,10 @@ namespace PL.Views.Style.ListDesign
             throw new NotImplementedException();
         }
 
-        public Dictionary<Type, Func<int?, ViewModels.Panel>>   PanelsDictionary { get; set; } = new()
+        public Dictionary<Type, Func<int?, ViewModels.Panel>> PanelsDictionary { get; set; } = new()
         {
             [typeof(Drone)] = ViewModels.Workspace.DronePanel,
-            [typeof(Customer)] = ViewModels.Workspace.CustomerPanel,
+            [typeof(Customer)] = id => ViewModels.Workspace.CustomerPanel(id),
             [typeof(Parcel)] = ViewModels.Workspace.ParcelPanel,
             [typeof(BaseStation)] = ViewModels.Workspace.BaseStationPanel,
         };

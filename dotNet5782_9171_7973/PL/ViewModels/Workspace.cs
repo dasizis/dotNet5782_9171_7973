@@ -13,7 +13,7 @@ namespace PL.ViewModels
     }
 
     //I changed here to make it work from ContentControl to UserControl
-    public record Panel(PanelType PanelType, ContentControl View, string Header);
+    public record Panel(PanelType PanelType, ContentControl View, string Header, bool CanClose = true);
 
     /// <summary>
     /// Defines All Workspace conf
@@ -46,26 +46,29 @@ namespace PL.ViewModels
             ? new(PanelType.Add, new Views.AddParcelView(), ParcelPanelName())
             : new(PanelType.Display, new Views.ParcelDetailsView((int)id), ParcelPanelName(id));
 
-        public static Panel CustomerPanel(int? id = null) => id == null 
-            ? new(PanelType.Add, new Views.AddCustomerView(), CustomerPanelName())
-            : new(PanelType.Display, new Views.CustomerDetailsView((int)id), CustomerPanelName(id));
+        public static Panel CustomerPanel(int? id = null, bool canClose = true) => id == null 
+            ? new(PanelType.Add, new Views.AddCustomerView(), CustomerPanelName(), canClose)
+            : new(PanelType.Display, new Views.CustomerDetailsView((int)id), CustomerPanelName(id), canClose);
 
         public static Panel BaseStationPanel(int? id = null) => id == null
             ? new(PanelType.Add, new Views.AddStationView(), BaseStationPanelName())
             : new(PanelType.Display, new Views.StationDetailsView((int)id), BaseStationPanelName(id));
 
-        public static Panel FilteredDronesListPanel(Predicate<PO.DroneForList> predicate, string header) =>
-            new(PanelType.List, new Views.FilteredDronesListView(predicate), header);
+        public static Panel FilteredDronesListPanel(Predicate<PO.DroneForList> predicate, string header, bool canClose = true) =>
+            new(PanelType.List, new Views.FilteredDronesListView(predicate), header, canClose);
 
-        public static Panel FilteredParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header) =>
-            new(PanelType.List, new Views.FilteredParcelsListView(predicate), header);
+        public static Panel FilteredParcelsListPanel(Predicate<PO.ParcelForList> predicate, string header, bool canClose = true) =>
+            new(PanelType.List, new Views.FilteredParcelsListView(predicate), header, canClose);
 
-        public static Panel ParcelsListPanel => new(PanelType.List, new Views.ParcelsListView(), ListPanelName(typeof(Parcel)));
-        public static Panel DronesListPanel => new(PanelType.List, new Views.DronesListView(), ListPanelName(typeof(Drone)));
-        public static Panel CustomersListPanel => new(PanelType.List, new Views.CustomersListView(), ListPanelName(typeof(Customer)));
-        public static Panel BaseStationsListPanel => new(PanelType.List, new Views.BaseStationsListView(), ListPanelName(typeof(BaseStation)));
+        public static Panel ParcelsListPanel => new(PanelType.List, new Views.ParcelsListView(), ListPanelName(typeof(Parcel)), false);
+        
+        public static Panel DronesListPanel => new(PanelType.List, new Views.DronesListView(), ListPanelName(typeof(Drone)), false);
+        
+        public static Panel CustomersListPanel => new(PanelType.List, new Views.CustomersListView(), ListPanelName(typeof(Customer)), false);
+        
+        public static Panel BaseStationsListPanel => new(PanelType.List, new Views.BaseStationsListView(), ListPanelName(typeof(BaseStation)), false);
 
-        public static Panel MainMapPanel => new(PanelType.Other, new Views.MainMapView(), "Main Map");
+        public static Panel MainMapPanel => new(PanelType.Other, new Views.MainMapView(), "Main Map", false);
 
 
         public static RelayCommand<Panel> AddPanelCommand => Views.WorkspaceWindow.AddPanelCommand;

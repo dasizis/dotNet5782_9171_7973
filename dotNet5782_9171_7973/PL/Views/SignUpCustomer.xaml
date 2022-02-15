@@ -10,7 +10,7 @@
              xmlns:vm="clr-namespace:PL.ViewModels"
              xmlns:local="clr-namespace:PL.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400">
+             d:DesignHeight="700" d:DesignWidth="500">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -23,15 +23,16 @@
 
     <StackPanel Style="{StaticResource Container}">
 
-        <TextBlock Text="Sign Up" Style="{StaticResource Header}"/>
+        <TextBlock Text="Sign Up" Style="{StaticResource RegisterHeader}"/>
 
-        <StackPanel>
+        <StackPanel Width="400">
             <!--Name input-->
             <syncfusion:SfTextInputLayout Hint="Name" 
+                                          LeadingViewPosition="Inside"
                                           HasError="{Binding (Validation.HasError), ElementName=NameInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Rename" Style="{StaticResource Icon}"/>
+                    <materialDesign:PackIcon Kind="Rename" Style="{StaticResource InsideIcon}"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
                 <TextBox x:Name="NameInput"
                      Text="{Binding Customer.Name, 
@@ -42,10 +43,11 @@
             
             <!--Id input-->
             <syncfusion:SfTextInputLayout Hint="Password" 
+                                          LeadingViewPosition="Inside"
                                           HasError="{Binding (Validation.HasError), ElementName=IdInput}"
                                           ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource Icon}"/>
+                    <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource InsideIcon}"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
                 <TextBox x:Name="IdInput"
                          Text="{Binding Customer.Id, 
@@ -56,10 +58,11 @@
 
             <!--Phone input-->
             <syncfusion:SfTextInputLayout Hint="Phone number" 
-                                      HasError="{Binding (Validation.HasError), ElementName=PhoneInput}"
-                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=PhoneInput}">
+                                          LeadingViewPosition="Inside"
+                                          HasError="{Binding (Validation.HasError), ElementName=PhoneInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=PhoneInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Phone" Style="{StaticResource Icon}"/>
+                    <materialDesign:PackIcon Kind="Phone" Style="{StaticResource InsideIcon}"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
                 <TextBox x:Name="PhoneInput"
                      Text="{Binding Customer.Phone, 
@@ -70,10 +73,11 @@
 
             <!--Longitude input-->
             <syncfusion:SfTextInputLayout Hint="Longitude" 
-                                      HasError="{Binding (Validation.HasError), ElementName=LongitudeInput}"
-                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LongitudeInput}">
+                                          LeadingViewPosition="Inside"
+                                          HasError="{Binding (Validation.HasError), ElementName=LongitudeInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LongitudeInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Longitude" Style="{StaticResource Icon}"/>
+                    <materialDesign:PackIcon Kind="Longitude" Style="{StaticResource InsideIcon}"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
                 <TextBox x:Name="LongitudeInput"
                              Text="{Binding Customer.Longitude, 
@@ -88,10 +92,11 @@
 
             <!--Latitude input-->
             <syncfusion:SfTextInputLayout Hint="Latitude" 
-                                      HasError="{Binding (Validation.HasError), ElementName=LatitudeInput}"
-                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LatitudeInput}">
+                                          LeadingViewPosition="Inside"
+                                          HasError="{Binding (Validation.HasError), ElementName=LatitudeInput}"
+                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=LatitudeInput}">
                 <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Latitude" Style="{StaticResource Icon}"/>
+                    <materialDesign:PackIcon Kind="Latitude" Style="{StaticResource InsideIcon}"/>
                 </syncfusion:SfTextInputLayout.LeadingView>
                 <TextBox x:Name="LatitudeInput"
                              Text="{Binding Customer.Latitude, 
@@ -105,6 +110,6 @@
             </syncfusion:SfTextInputLayout>
 
         </StackPanel>
-        <Button Content="Sign Up" Command="{Binding SignUpCommand}"/>
+        <Button Content="Sign Up" Command="{Binding SignUpCommand}" Style="{StaticResource MainButton}"/>
     </StackPanel>
 </UserControl>

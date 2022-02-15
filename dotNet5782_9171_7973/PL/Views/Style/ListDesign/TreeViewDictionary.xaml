@@ -5,6 +5,7 @@
                     xmlns:vm="clr-namespace:PL.ViewModels"
                     xmlns:v="clr-namespace:PL.Views"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:converters="clr-namespace:PL.Views.Converters"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                     xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
@@ -25,7 +26,7 @@
     <listDesign:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
     <listDesign:TypeAndIdToPanelConverter x:Key="TypeAndIdToPanelConverter" />
     <listDesign:CollapseListConverter x:Key="CollapseListConverter" />
-
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <!--<Style TargetType="{x:Type TreeViewItem}">
         <Setter Property="Background" Value="Red" />
     </Style>-->
@@ -142,9 +143,13 @@
                     </MouseBinding.CommandParameter>
                 </MouseBinding>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Model}" VerticalAlignment="Center" 
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="PlayCircle" Foreground="Green" VerticalAlignment="Center" Visibility="{Binding IsAutoMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBlock Text="{Binding Model}" VerticalAlignment="Center" 
                        Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
                        ContextMenu="{StaticResource ItemMenu}"/>
+            </StackPanel>
+            
         </StackPanel>
     </HierarchicalDataTemplate>
 

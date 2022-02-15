@@ -44,6 +44,8 @@ namespace PL.ViewModels
                 if (customer.Name == Name)
                 {
                     new Views.WorkspaceWindow(customer.Id).Show();
+                    var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
+                    registerWindow.Close();
                 }
                 else MessageBox.Show("User name is not correct.");
             }

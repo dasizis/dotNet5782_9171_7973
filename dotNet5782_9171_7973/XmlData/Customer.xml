@@ -40,4 +40,12 @@
     <Latitude>-3</Latitude>
     <IsDeleted>false</IsDeleted>
   </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>212</Id>
+    <Name>Dasi</Name>
+    <Phone>0527616480</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </Customers>

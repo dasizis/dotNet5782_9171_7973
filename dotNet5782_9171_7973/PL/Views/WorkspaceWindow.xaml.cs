@@ -29,16 +29,6 @@ namespace PL.Views
         /// <param name="panel">The panel to add</param>
         private void AddPanel(ViewModels.Panel panel)
         {
-            var item = GetPanel(panel.Header);
-
-            if (item != null)
-            {
-                Dock.SelectItem(item);
-                return;
-            }
-
-            DockingManager.SetHeader(panel.View, panel.Header);
-
             if (panel.PanelType == ViewModels.PanelType.List)
             {
                 DockingManager.SetState(panel.View, DockState.Dock);
@@ -56,21 +46,34 @@ namespace PL.Views
                 DockingManager.SetDesiredHeightInDockedMode(panel.View, 280);
             }
 
+            AddGeneralPanel(panel);
+        }
+
+        private void AddGeneralPanel(ViewModels.Panel panel)
+        {
+            var item = GetPanel(panel.Header);
+
+            if (item != null)
+            {
+                Dock.SelectItem(item);
+                return;
+            }
+
+            DockingManager.SetHeader(panel.View, panel.Header);
+            DockingManager.SetCanClose(panel.View, panel.CanClose);
+
             Dock.Children.Add(panel.View);
             Dock.SelectItem(panel.View);
         }
 
-
         private void AddBaseListPanel(ViewModels.Panel listPanel)
         {
-            DockingManager.SetHeader(listPanel.View, listPanel.Header);
             DockingManager.SetSideInDockedMode(listPanel.View, DockSide.Left);
             listPanel.View.Name = ViewModels.Workspace.TargerNameOfListPanelType;
             DockingManager.SetState(listPanel.View, DockState.Dock);
             DockingManager.SetDesiredWidthInDockedMode(listPanel.View, 300);
 
-            Dock.Children.Add(listPanel.View);
-            Dock.SelectItem(listPanel.View);
+            AddGeneralPanel(listPanel);
         }
 
         /// <summary>
@@ -148,10 +151,10 @@ namespace PL.Views
         {
             Init(
                 ViewModels.Workspace.MainMapPanel,
-                ViewModels.Workspace.DronesListPanel,
                 ViewModels.Workspace.CustomersListPanel,
                 ViewModels.Workspace.BaseStationsListPanel,
-                ViewModels.Workspace.ParcelsListPanel
+                ViewModels.Workspace.ParcelsListPanel,
+                ViewModels.Workspace.DronesListPanel
             );
         }
 
@@ -163,11 +166,11 @@ namespace PL.Views
         public WorkspaceWindow(int userId)
         {
             Init(
-                ViewModels.Workspace.CustomerPanel(userId),
+                ViewModels.Workspace.CustomerPanel(userId, false),
                 ViewModels.Workspace.FilteredParcelsListPanel(p => p.SenderId == userId,
-                                                              ViewModels.Workspace.CustomerSentListName(userId)),
+                                                              ViewModels.Workspace.CustomerSentListName(userId), false),
                 ViewModels.Workspace.FilteredParcelsListPanel(p => p.TargetId == userId,
-                                                              ViewModels.Workspace.CustomerRecievedListName(userId))
+                                                              ViewModels.Workspace.CustomerRecievedListName(userId), false)
             );
         }
     }

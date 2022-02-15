@@ -5,34 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:convereters="clr-namespace:PL.Views.Converters"
         xmlns:local="clr-namespace:PL.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="WelcomeWindow" Height="700" Width="800">
+        Title="Welcome Window" Height="780" Width="500">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <convereters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Sign In As Customer" 
-                    Command="{Binding SignInCustomerCommand}"
-                    Margin="20,10"/>
-            <Button Content="Sign Up As new Customer" 
-                    Command="{Binding SignUpCustomerCommand}"
-                    Margin="10"/>
-            <Button Content="Sign In As Manager" 
-                    Command="{Binding SignInManagerCommand}" 
-                    Style="{StaticResource PrimaryButton}"
-                    Margin="280,10,10,10"/>
-        </StackPanel>
 
-        <StackPanel Visibility="{Binding IsSignUp, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <local:SignUpCustomer/>
+    <materialDesign:DialogHost>
+        <StackPanel>
+            <StackPanel Visibility="{Binding IsSignUp, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:SignUpCustomer/>
+                <Button Content="Already Have an Account? Sign In"
+                    Style="{StaticResource LinkButton}"
+                    Command="{Binding SignInCustomerCommand}"/>
+            </StackPanel>
+            <StackPanel Visibility="{Binding IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:SignInCustomerView/>
+                <Button Content="Do Not Have an Account? Sign Up" 
+                    Command="{Binding SignUpCustomerCommand}"
+                    Style="{StaticResource LinkButton}"/>
+            </StackPanel>
+
+            <Button Command="{Binding SignInManagerCommand}"
+                Style="{StaticResource LinkButton}"
+                HorizontalAlignment="Center">
+                <TextBlock FontStyle="Italic" FontWeight="Bold">
+                Sign In As Manager
+                </TextBlock>
+            </Button>
         </StackPanel>
-        <StackPanel Visibility="{Binding IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <local:SignInCustomerView/>
-        </StackPanel>
-    </StackPanel>
+    </materialDesign:DialogHost>
 </Window>

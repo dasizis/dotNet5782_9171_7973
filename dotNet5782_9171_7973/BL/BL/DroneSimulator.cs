@@ -79,6 +79,7 @@ namespace BL
                 target = bl.GetCustomer(parcel.Target.Id);
             }
             
+            //if drone has not pick parcel up yet
             if (parcel.PickedUp == null)
             {
                 GoToLocation(sender.Location, bl.ElectricityConfumctiolFree);
@@ -90,6 +91,7 @@ namespace BL
 
                 updateAction(new(Parcel: parcel.Id));
             }
+            //if drone has not supplied parcl yet
             else if (parcel.Supplied == null)
             {
                 GoToLocation(target.Location, bl.GetElectricity(parcel.Weight));
@@ -103,14 +105,19 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Handle drone with <see cref="DroneState.Maintenance"/> state
+        /// </summary>
         private void HandleMaintenanceState()
         {
+            //charge until battery is full
             while (drone.Battery < 100)
             {
                 if (shouldStop() || !SleepDelayTime(Delay)) return;
 
                 double batteryToAdd = (double)Delay / MS_PER_SECOND * (double)bl.ChargeRate;
 
+                //do not charge beyond 100% 
                 drone.Battery = Math.Min(drone.Battery + batteryToAdd, 100);
                 updateAction(new(BaseStation: bl.GetDroneBaseStation(drone.Id)));
             }
@@ -125,6 +132,9 @@ namespace BL
             updateAction(new(BaseStation: stationId));
         }
 
+        /// <summary>
+        /// Handle drone with <see cref="DroneState.Free"/> state
+        /// </summary>
         private void HandleFreeState()
         {
             try
@@ -132,15 +142,17 @@ namespace BL
                 int parcelId = bl.AssignParcelToDrone(drone.Id);
                 updateAction(new(Parcel: parcelId));
             }
+            //if no parcel was found to assign 
             catch (InvalidActionException)
             {
                 BaseStation station = drone.FindClosest(bl.GetAvailableBaseStationsId().Select(id => bl.GetBaseStation(id)));
 
+                //if no need to charge or no base station to charge at
                 if (drone.Battery == 100 || station == null)
                 {
                     WaitState();
                 }
-
+                //charge drone
                 else
                 {
                     lock (dal)
@@ -155,13 +167,18 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Transport drone from its location to anothe location
+        /// </summary>
+        /// <param name="location">location where to transport the drone to</param>
+        /// <param name="electricityConfumctiol">the confumctiol the drone takes</param>
         private void GoToLocation(Location location, double electricityConfumctiol)
         {
             double distance;
+            //move another part of the way if there still is way to go
             while (SleepDelayTime(Delay) && (distance = Localable.Distance(drone.Location, location)) > 0)
             {
                 double fraction = Math.Min(KM_PER_S / MS_PER_SECOND, distance) / distance;
-
 
                 double longitudeDistance = location.Longitude - drone.Location.Longitude;
                 double latitudeDistance = location.Latitude - drone.Location.Latitude;
@@ -177,11 +194,19 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Wait until <see cref="WAIT_TIME"/> passes
+        /// </summary>
         private void WaitState()
         {
             SleepDelayTime(WAIT_TIME);
         }
 
+        /// <summary>
+        /// Sleep simulator until delay time passes
+        /// </summary>
+        /// <param name="delay">time in miliseconds to sleep</param>
+        /// <returns>Indicates wheather the sleep was successful</returns>
         private bool SleepDelayTime(int delay)
         {
             try

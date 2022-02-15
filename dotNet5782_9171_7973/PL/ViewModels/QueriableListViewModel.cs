@@ -103,12 +103,21 @@ namespace PL.ViewModels
             OpenAddWindowCommand = new(() => Workspace.AddPanelCommand.Execute(GetAddPanel()));
         }
 
+        /// <summary>
+        /// Activate filter by a parameter
+        /// </summary>
+        /// <param name="parameter">the parameter to filter by</param>
         private void ActivateFilter(object parameter)
         {
             FilterValue = parameter;
             View.Refresh();
         }
 
+        /// <summary>
+        /// Filter list
+        /// </summary>
+        /// <param name="item">item to check if suits the filtering</param>
+        /// <returns>boolean result which indicates wheather the item suits the filtering</returns>
         private bool Filter(object item)
         {
             if (FilterValue == null || FilterKey  == null || (FilterKey is string filterString && filterString == RESET_VALUE))
@@ -147,6 +156,11 @@ namespace PL.ViewModels
         protected abstract Panel GetAddPanel();
 
         protected abstract T GetItem(int id);
+
+        /// <summary>
+        /// Reload list
+        /// </summary>
+        /// <param name="id">id of the item to reload</param>
         protected void ReloadList(int id)
         {
             var item = List.FirstOrDefault(item => item.Id == id);
@@ -163,6 +177,9 @@ namespace PL.ViewModels
             catch (BO.ObjectNotFoundException) { }
         }
 
+        /// <summary>
+        /// Sort list
+        /// </summary>
         void Sort()
         {
             View.SortDescriptions.Clear();
@@ -173,6 +190,9 @@ namespace PL.ViewModels
             View.Refresh();
         }
 
+        /// <summary>
+        /// Group list
+        /// </summary>
         void Group()
         {
             View.GroupDescriptions.Clear();

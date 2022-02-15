@@ -12,7 +12,9 @@ namespace PL.ViewModels
 {
     class WelcomeWindowViewModel : INotifyPropertyChanged
     {
-        
+        /// <summary>
+        /// Indicates sign in mode
+        /// </summary>
         private bool isSignIn;
         public bool IsSignIn
         {
@@ -24,6 +26,9 @@ namespace PL.ViewModels
             }
         }
 
+        /// <summary>
+        /// Indicates sign up mode
+        /// </summary>
         private bool isSignUp;
         public bool IsSignUp
         {
@@ -35,12 +40,25 @@ namespace PL.ViewModels
             }
         }
 
+        /// <summary>
+        /// A command to change mode to sign in mode
+        /// </summary>
         public RelayCommand SignInCustomerCommand { get; set; }
+
+        /// <summary>
+        /// A command to change mode to sign up mode
+        /// </summary>
         public RelayCommand SignUpCustomerCommand { get; set; }
+
+        /// <summary>
+        /// A command to sign in as manager
+        /// </summary>
         public RelayCommand SignInManagerCommand { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// Constractor
+        /// Initialize mode and commands
+        /// </summary>
         public WelcomeWindowViewModel()
         {
             SignInCustomerView signInCustomer = new();
@@ -51,24 +69,36 @@ namespace PL.ViewModels
             IsSignUp = !IsSignIn;
         }
 
+        /// <summary>
+        /// Change mode to sign in mode
+        /// </summary>
         public void SignInCustomer()
         {
             IsSignIn = true;
             IsSignUp = !IsSignIn;
         }
 
+        /// <summary>
+        /// Change mode to sign up mode
+        /// </summary>
         public void SignUpCustomer()
         {
             IsSignIn = false;
             IsSignUp = !IsSignIn;
         }
 
+        /// <summary>
+        /// Sign in as manager
+        /// </summary>
         public void SignInManager()
         {
             var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
             new Views.WorkspaceWindow().Show();
             registerWindow.Close();
         }
+        #region InotifyPropertyChanged members
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -77,5 +107,6 @@ namespace PL.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
     }
 }

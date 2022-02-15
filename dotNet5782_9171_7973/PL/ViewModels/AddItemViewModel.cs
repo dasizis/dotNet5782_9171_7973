@@ -16,15 +16,29 @@ namespace PL.ViewModels
     /// <typeparam name="T">Type of the entity to add</typeparam>
     abstract class AddItemViewModel<T> where T : PropertyChangedNotification, new()
     {
+        /// <summary>
+        /// The model - entity to add
+        /// </summary>
         public T Model { get; set; } = new();
 
+        /// <summary>
+        /// Command to add an item
+        /// </summary>
         public RelayCommand<object> AddCommand { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// initialize command
+        /// </summary>
         public AddItemViewModel()
         {
             AddCommand = new RelayCommand<object>(ExecuteAdd, param => Model.Error == null);
         }
 
+        /// <summary>
+        /// Add the item 
+        /// </summary>
+        /// <param name="target"></param>
         private void ExecuteAdd(object target)
         {
             try

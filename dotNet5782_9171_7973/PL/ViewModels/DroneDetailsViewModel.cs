@@ -5,14 +5,12 @@ using PO;
 
 namespace PL.ViewModels
 {
-    class DroneDetailsViewModel : INotifyPropertyChanged
+    class DroneDetailsViewModel
     {
         /// <summary>
-        /// The drone 
+        /// The model drone 
         /// </summary>
         public Drone Drone { get; set; } = new();
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// List of markers to display on drone's map
@@ -44,6 +42,11 @@ namespace PL.ViewModels
         /// </summary>
         public RelayCommand ViewParcelCommand { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// Initialize drone and commands
+        /// </summary>
+        /// <param name="id">id of the model drone</param>
         public DroneDetailsViewModel(int id)
         {
             Drone.Id = id;
@@ -78,17 +81,18 @@ namespace PL.ViewModels
                 }
             }
             //drone's state is Deliver
-            //(we do not get to this function with Maintanance state
-            //since then drone does not have a related parcel)
             else
             {
                 //Parcel was not picked up yet
+                //step: pick up parcel
                 if (!Drone.ParcelInDeliver.WasPickedUp)
                 {
                     PLService.PickUpParcel(Drone.Id);
                 }
+                //parcel was not supplied yet
                 else
                 {
+                    //step: supply parcel
                     try
                     {
                         PLService.SupplyParcel(Drone.Id);
@@ -101,9 +105,13 @@ namespace PL.ViewModels
             }
         }
 
+        /// <summary>
+        /// Handle drone charge
+        /// </summary>
         private void HandleCharge()
         {
-
+            //if drone needs to charge
+            //step: charge drone 
             if (Drone.State == DroneState.Free)
             {
                 try
@@ -115,6 +123,8 @@ namespace PL.ViewModels
                     MessageBox.Show(MessageBox.BoxType.Error, e.Message);
                 }
             }
+            //if drone needs to be released
+            //step: finish charging
             else if (Drone.State == DroneState.Maintenance)
             {
                 try
@@ -128,12 +138,18 @@ namespace PL.ViewModels
             }
         }
 
+        /// <summary>
+        /// Rename drone
+        /// </summary>
         private void RenameDrone()
         {
             PLService.RenameDrone(Drone.Id, Drone.Model);
             MessageBox.Show(MessageBox.BoxType.Success, $"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
         }
 
+        /// <summary>
+        /// Delete drone
+        /// </summary>
         private void Delete()
         {
             PLService.DeleteDrone(Drone.Id);
@@ -142,10 +158,13 @@ namespace PL.ViewModels
             
         }
 
+        /// <summary>
+        /// Load drone
+        /// </summary>
         private void LoadDrone()
         {
             Drone.Reload(PLService.GetDrone(Drone.Id));
-
+            //load map
             Markers.Clear();
             Markers.Add(MapMarker.FromType(Drone));
         }

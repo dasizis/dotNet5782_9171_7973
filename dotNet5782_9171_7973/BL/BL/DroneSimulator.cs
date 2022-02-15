@@ -21,8 +21,18 @@ namespace BL
         private Action<DroneSimulatorChanges> updateAction;
         private Func<bool> shouldStop;
 
+        /// <summary>
+        /// Time in miliseconds to delay between actions
+        /// </summary>
         public int Delay { get; private set; }
 
+        /// <summary>
+        /// Activate drone simulator
+        /// </summary>
+        /// <param name="id">id of drone to activate</param>
+        /// <param name="updateAction">update action to call on each change</param>
+        /// <param name="shouldStop">indicates if simulator got "stop soon" order</param>
+        /// <param name="delay">time in miliseconds to delay between actions</param>
         public DroneSimulator(int id, Action<DroneSimulatorChanges> updateAction, Func<bool> shouldStop, int delay = 500)
         {
             bl = BL.Instance;
@@ -54,6 +64,9 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// Handle drone with <see cref="DroneState.Deliver"/> state
+        /// </summary>
         private void HandleDeliverState()
         {
             Parcel parcel;

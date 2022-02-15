@@ -65,6 +65,11 @@ namespace PL
             return bl.GetDronesList().Select(drone => ConvertDrone(drone));
         }
 
+        /// <summary>
+        /// Converts <see cref="BO.DroneForList"/> to <see cref="DroneForList"/>
+        /// </summary>
+        /// <param name="drone">The <see cref="BO.DroneForList"/></param>
+        /// <returns>A <see cref="DroneForList"/></returns>
         public static DroneForList ConvertDrone(BO.DroneForList drone)
         {
             return new()
@@ -80,6 +85,11 @@ namespace PL
             };
         }
 
+        /// <summary>
+        /// return specific drone for list
+        /// </summary>
+        /// <param name="id">Id of requested drone</param>
+        /// <returns>The <see cref="DroneForList"/> who has the spesific Id</returns>
         public static DroneForList GetDroneForList(int id)
         {
             return ConvertDrone(bl.GetDroneForList(id));

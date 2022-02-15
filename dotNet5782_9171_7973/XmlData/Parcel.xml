@@ -89,7 +89,7 @@
     <Scheduled>2022-02-15T12:31:07.4949758+02:00</Scheduled>
     <PickedUp>2022-02-15T12:32:45.6637843+02:00</PickedUp>
     <Supplied>2022-02-15T12:33:30.3713523+02:00</Supplied>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <DroneId>2</DroneId>
@@ -102,7 +102,7 @@
     <Scheduled>2022-02-15T14:38:58.2801979+02:00</Scheduled>
     <PickedUp>2022-02-15T14:44:18.8708717+02:00</PickedUp>
     <Supplied>2022-02-15T14:44:42.4531792+02:00</Supplied>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <DroneId>12</DroneId>
@@ -115,7 +115,7 @@
     <Scheduled>2022-02-15T14:42:20.141345+02:00</Scheduled>
     <PickedUp>2022-02-15T14:48:48.7418208+02:00</PickedUp>
     <Supplied>2022-02-15T14:49:11.3519101+02:00</Supplied>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <DroneId>12</DroneId>
@@ -128,7 +128,7 @@
     <Scheduled>2022-02-15T18:33:29.0432084+02:00</Scheduled>
     <PickedUp>2022-02-15T19:17:57.3864252+02:00</PickedUp>
     <Supplied>2022-02-15T19:18:20.4958439+02:00</Supplied>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <DroneId>12</DroneId>
@@ -180,7 +180,7 @@
     <Scheduled>2022-02-15T20:08:04.8079243+02:00</Scheduled>
     <PickedUp>2022-02-15T20:08:05.3698577+02:00</PickedUp>
     <Supplied>2022-02-15T20:08:27.4955891+02:00</Supplied>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <DroneId>12</DroneId>

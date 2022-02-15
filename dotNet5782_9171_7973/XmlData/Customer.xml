@@ -19,7 +19,7 @@
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>78</Id>
     <Name>hjhjh</Name>
-    <Phone>098765432</Phone>
+    <Phone>0987654325</Phone>
     <Longitude>126</Longitude>
     <Latitude>57</Latitude>
     <IsDeleted>false</IsDeleted>
@@ -38,7 +38,7 @@
     <Phone>0548712499</Phone>
     <Longitude>72</Longitude>
     <Latitude>-3</Latitude>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Customer>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>212</Id>
@@ -46,6 +46,6 @@
     <Phone>0527616480</Phone>
     <Longitude>34</Longitude>
     <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Customer>
 </Customers>

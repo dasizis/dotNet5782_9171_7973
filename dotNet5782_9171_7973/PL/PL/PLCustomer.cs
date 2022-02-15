@@ -69,6 +69,11 @@ namespace PL
             return bl.GetCustomersList().Select(customer => ConvertCustomer(customer));
         }
 
+        /// <summary>
+        /// Converts <see cref="BO.CustomerForList"/> to <see cref="CustomerForList"/>
+        /// </summary>
+        /// <param name="customer">The <see cref="BO.CustomerForList"/></param>
+        /// <returns>A <see cref="BaseStationForList"/></returns>
         public static CustomerForList ConvertCustomer(BO.CustomerForList customer)
         {
             return new()
@@ -83,6 +88,11 @@ namespace PL
             };
         }
 
+        /// <summary>
+        /// return specific customer for list
+        /// </summary>
+        /// <param name="id">Id of requested customer</param>
+        /// <returns>The <see cref="CustomerForList"/> who has the spesific Id</returns>
         public static CustomerForList GetCustomerForList(int id)
         {
             return ConvertCustomer(bl.GetCustomerForList(id));

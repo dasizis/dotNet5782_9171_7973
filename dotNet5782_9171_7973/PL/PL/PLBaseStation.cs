@@ -122,6 +122,11 @@ namespace PL
             };
         }
 
+        /// <summary>
+        /// return specific base station for list
+        /// </summary>
+        /// <param name="id">Id of requested base station</param>
+        /// <returns>The <see cref="BaseStationForList"/> who has the spesific Id</returns>
         public static BaseStationForList GetBaseStationForList(int id)
         {
             return ConvertBaseStation(bl.GetBaseStationForList(id));

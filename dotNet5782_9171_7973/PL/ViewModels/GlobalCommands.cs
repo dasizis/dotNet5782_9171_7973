@@ -20,27 +20,28 @@ namespace PL.ViewModels
         {
             if (item == null) return false;
 
-            Type type = item.GetType();
-            if (type == typeof(BaseStationForList))
+            if (item is BaseStationForList baseStation)
             {
-                return ((BaseStationForList)item).BusyChargeSlots == 0;
+                return baseStation.BusyChargeSlots == 0;
             }
-            else if (type == typeof(CustomerForList))
+            else if (item is CustomerForList customer)
             {
-                CustomerForList customer = (CustomerForList)item;
-
                 return customer.ParcelsSendAndNotSupplied == 0
                        && customer.ParcelsSendAndSupplied == 0
                        && customer.ParcelsOnWay == 0
                        && customer.ParcelsRecieved == 0;
             }
-            else if (type == typeof(DroneForList))
+            else if (item is DroneForList drone)
             {
+                if (PLSimulators.Simulators.ContainsKey(drone.Id))
+                {
+                    return !PLSimulators.Simulators[drone.Id].IsBusy;
+                }
                 return ((DroneForList)item).State == DroneState.Free;
             }
-            else if (type == typeof(ParcelForList))
+            else if (item is ParcelForList parcel)
             {
-                return !((ParcelForList)item).IsOnWay;
+                return !parcel.IsOnWay;
             }
             else
             {
@@ -51,25 +52,23 @@ namespace PL.ViewModels
         static void Delete(object item)
         {
             Type type = item.GetType();
-            if (type == typeof(BaseStationForList))
+            if (item is BaseStationForList baseStation)
             {
-                BaseStationForList baseStation = (BaseStationForList)item;
                 PLService.DeleteBaseStation(baseStation.Id);
                 Workspace.RemovePanelCommand.Execute(Workspace.BaseStationPanelName(baseStation.Id));
             }
-            else if (type == typeof(CustomerForList))
+            else if (item is CustomerForList customer)
             {
-                PLService.DeleteCustomer(((CustomerForList)item).Id);
+                PLService.DeleteCustomer(customer.Id);
             }
-            else if (type == typeof(DroneForList))
+            else if (item is DroneForList drone)
             {
-                DroneForList drone = (DroneForList)item;
                 PLService.DeleteDrone(drone.Id);
                 Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(drone.Id));
             }
-            else if (type == typeof(ParcelForList))
+            else if (item is ParcelForList parcel)
             {
-                PLService.DeleteParcel(((ParcelForList)item).Id);
+                PLService.DeleteParcel(parcel.Id);
             }
             else
             {

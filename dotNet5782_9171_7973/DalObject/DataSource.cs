@@ -27,7 +27,7 @@ namespace Dal
         internal static Dictionary<Type, IList> Data { get; } = new()
         {
             [typeof(Drone)] = Drones,
-            [typeof(BaseStation)] = BaseStations,
+            [typeof(BaseStation)] = BaseStations, 
             [typeof(Customer)] = Customers,      
             [typeof(DroneCharge)] = DroneCharges,
             [typeof(Parcel)] = Parcels,
@@ -73,6 +73,7 @@ namespace Dal
             
             IEnumerable<int> shuffledDrones = Drones.OrderBy(item => RandomManager.Rand.Next()).Take(dronesInCharge).Select(drone => drone.Id);
             IEnumerable<int> shuffledBaseStationsId = AvailableStationsId(dronesInCharge);
+            
             // Choose some of the drones to be in charge
             DroneCharges.AddRange(
                 shuffledDrones.Zip(shuffledBaseStationsId).Select(pair => new DroneCharge()

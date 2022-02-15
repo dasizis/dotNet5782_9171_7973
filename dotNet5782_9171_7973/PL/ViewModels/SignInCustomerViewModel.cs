@@ -13,9 +13,9 @@ namespace PL.ViewModels
     class SignInCustomerViewModel : PropertyChangedNotification
     {
         //Should be built new entity?
-        private int id;
+        private int? id;
         [Required(ErrorMessage = "Required")]
-        public int Id
+        public int? Id
         {
             get => id;
             set => SetField(ref id, value);
@@ -33,22 +33,19 @@ namespace PL.ViewModels
 
         public SignInCustomerViewModel()
         {
-            SignInCommand = new(SignIn);
+            SignInCommand = new(SignIn, () => Error == null);
         }
 
         public void SignIn()
         {
             try
             {
-                PO.Customer customer = PLService.GetCustomer(Id);
+                PO.Customer customer = PLService.GetCustomer((int)Id);
                 if (customer.Name == Name)
                 {
-                    //Get in with proper customer
-                    //temp
                     new Views.WorkspaceWindow(customer.Id).Show();
-                    Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel(Id));
                 }
-                MessageBox.Show("User name is not correct.");
+                else MessageBox.Show("User name is not correct.");
             }
             catch (ObjectNotFoundException)
             {

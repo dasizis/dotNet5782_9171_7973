@@ -18,10 +18,4 @@
     <MaxWeight>Heavy</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
-  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>3</Id>
-    <Model>Mff2g</Model>
-    <MaxWeight>Medium</MaxWeight>
-    <IsDeleted>false</IsDeleted>
-  </Drone>
 </Drones>

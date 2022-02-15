@@ -12,18 +12,16 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
-                <ResourceDictionary Source="Style/MapDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel Style="{StaticResource Container}">
-
         <TextBlock Text="Sign In" Style="{StaticResource Header}"/>
 
         <!--Id input-->
         <syncfusion:SfTextInputLayout Hint="Id" 
-                                          HasError="{Binding (Validation.HasError), ElementName=IdInput}"
-                                          ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
+                                      HasError="{Binding (Validation.HasError), ElementName=IdInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
             <syncfusion:SfTextInputLayout.LeadingView>
                 <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource Icon}"/>
             </syncfusion:SfTextInputLayout.LeadingView>

@@ -141,6 +141,9 @@ namespace PL.Views
 
         }
 
+        static WorkspaceWindow()
+        { }
+
         public WorkspaceWindow()
         {
             Init(

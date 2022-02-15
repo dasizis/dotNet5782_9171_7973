@@ -25,9 +25,8 @@ namespace PL.ViewModels
                 //Get In with proper customer 
                 //temp
                 new Views.WorkspaceWindow((int)Customer.Id).Show();
-                Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel(Customer.Id));
             }
-            catch(BO.IdAlreadyExistsException e)
+            catch(BO.IdAlreadyExistsException)
             {
                 MessageBox.Show("Your Password is used by another user.\n Try a different one.");
             }

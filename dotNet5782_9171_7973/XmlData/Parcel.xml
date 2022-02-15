@@ -125,8 +125,8 @@
     <Weight>Medium</Weight>
     <Priority>Fast</Priority>
     <Requested>2022-02-15T17:35:46.4850107+02:00</Requested>
-    <Scheduled>2022-02-15T18:43:20.5393849+02:00</Scheduled>
-    <PickedUp>2022-02-15T18:43:35.0246682+02:00</PickedUp>
+    <Scheduled>2022-02-15T18:33:29.0432084+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
     <Supplied xsi:nil="true" />
     <IsDeleted>false</IsDeleted>
   </Parcel>

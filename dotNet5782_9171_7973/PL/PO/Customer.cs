@@ -8,7 +8,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of customer
     /// </summary>
-    public class Customer : PropertyChangedNotification, ILocalable
+    public class Customer : PropertyChangedNotification, ILocalable, IIdentifiable
     {
         int id;
         /// <summary>

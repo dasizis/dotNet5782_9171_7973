@@ -6,7 +6,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of drone
     /// </summary>
-    public class Drone : PropertyChangedNotification, ILocalable
+    public class Drone : PropertyChangedNotification, ILocalable, IIdentifiable
     {
         int id;
         /// <summary>

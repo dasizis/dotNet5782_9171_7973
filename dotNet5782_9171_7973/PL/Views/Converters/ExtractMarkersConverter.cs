@@ -12,7 +12,9 @@ namespace PL.Views.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((IEnumerable<PL.ViewModels.ItemMarker>)value).Select(itemMarker => itemMarker.Marker);
+            throw new NotImplementedException();
+
+            //return ((IEnumerable<PL.ViewModels.ItemMarker>)value).Select(itemMarker => itemMarker.Marker);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

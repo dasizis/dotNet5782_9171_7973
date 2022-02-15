@@ -7,7 +7,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of base station
     /// </summary>
-    public class BaseStation : PropertyChangedNotification, ILocalable
+    public class BaseStation : PropertyChangedNotification, ILocalable, IIdentifiable
     {
         int id;
         /// <summary>

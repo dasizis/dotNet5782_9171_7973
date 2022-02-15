@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PL.ViewModels
 {
-    record ItemMarker(Type Type, int Id, MapMarker Marker);
+    record ExtendedMarker(Type Type, int Id, double Longitude, double Latitude, string Color, string Label);
 
     class MainMapViewModel
     {
-        public ObservableCollection<ItemMarker> ItemMarkers { get; set; } = new();
+        public ObservableCollection<ExtendedMarker> ItemMarkers { get; set; } = new();
 
         public RelayCommand LoadCommand { get; set; }
 
@@ -27,9 +27,9 @@ namespace PL.ViewModels
             PLNotification.DroneNotification.AddGlobalHandler(id => ReloadItem(id, PLService.GetDrone));
         }
 
-        private void ReloadItem<T>(int id, Func<int, T> requestFunc) where T: ILocalable
+        private void ReloadItem<T>(int id, Func<int, T> requestFunc) where T: ILocalable, IIdentifiable
         {
-            ItemMarker itemMarker = ItemMarkers.FirstOrDefault(marker => marker.Type == typeof(T) && marker.Id == id);
+            ExtendedMarker itemMarker = ItemMarkers.FirstOrDefault(marker => marker.Type == typeof(T) && marker.Id == id);
 
             if (itemMarker != null)
             {
@@ -39,9 +39,22 @@ namespace PL.ViewModels
             try
             {
                 var item = requestFunc(id);
-                ItemMarkers.Add(new(Type: typeof(T), Id: id, MapMarker.FromType(item)));
+                ItemMarkers.Add(CreateExtendedMarker(item));
             }
             catch (BO.ObjectNotFoundException) { }
+        }
+
+        private ExtendedMarker CreateExtendedMarker<T>(T item) where T : ILocalable, IIdentifiable
+        {
+            MapMarker marker = MapMarker.FromType(item);
+            return new(
+                Type: typeof(T),
+                Id: item.Id,
+                Longitude: marker.Longitude,
+                Latitude: marker.Latitude,
+                Color: marker.Color,
+                Label: marker.Label
+            );
         }
 
         private void Load()
@@ -51,19 +64,19 @@ namespace PL.ViewModels
             // load base stations
             foreach (var station in PLService.GetBaseStationsList().Select(s => PLService.GetBaseStation(s.Id)))
             {
-                ItemMarkers.Add(new(Type: typeof(BaseStation), Id: station.Id, Marker: MapMarker.FromType(station)));
+                ItemMarkers.Add(CreateExtendedMarker(station));
             }
 
             // load customers
             foreach (var customer in PLService.GetCustomersList().Select(c => PLService.GetCustomer(c.Id)))
             {
-                ItemMarkers.Add(new(Type: typeof(Customer), Id: customer.Id, Marker: MapMarker.FromType(customer)));
+                ItemMarkers.Add(CreateExtendedMarker(customer));
             }
 
             // load drones
             foreach (var drone in PLService.GetDronesList())
             {
-                ItemMarkers.Add(new(Type: typeof(Customer), Id: drone.Id, Marker: MapMarker.FromType(drone)));
+                ItemMarkers.Add(CreateExtendedMarker(drone));
             }
         }
     }

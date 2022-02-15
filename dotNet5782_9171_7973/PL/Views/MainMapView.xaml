@@ -28,7 +28,7 @@
             <syncfusion:SfMap.Layers>
                 <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"
-                                           Markers="{Binding ItemMarkers, Converter={StaticResource ExtractMarkersConverter}}">
+                                           Markers="{Binding ItemMarkers}">
                     <syncfusion:ShapeFileLayer.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Reload" 

@@ -25,20 +25,19 @@ namespace PL.ViewModels
             AddCommand = new RelayCommand<object>(ExecuteAdd, param => Model.Error == null);
         }
 
-        private void ExecuteAdd(object param)
+        private void ExecuteAdd(object target)
         {
             try
             {
                 Add();
 
                 string name = typeof(T).Name.Replace("ToAdd", "");
-                MessageBox.Show($"{name} added successfully");
+                MessageBox.Show(MessageBox.BoxType.Success, $"{name} added successfully");
                 Workspace.RemovePanelCommand.Execute($"Add {name}");
             }
             catch (BO.IdAlreadyExistsException e)
             {
-                MessageBox.Show(e.Message);
-
+                MessageBox.Show(MessageBox.BoxType.Error, e.Message);
             }
         }
 

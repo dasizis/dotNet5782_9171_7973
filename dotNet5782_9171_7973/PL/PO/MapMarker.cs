@@ -21,6 +21,7 @@ namespace PO
         private static Dictionary<Type, Color> ColorsDictionary { get; set; } = new()
         {
             [typeof(Drone)] = Colors.LightBlue,
+            [typeof(DroneForList)] = Colors.LightBlue,
             [typeof(Customer)] = Colors.LightPink,
             [typeof(Parcel)] = Colors.DarkSeaGreen,
             [typeof(BaseStation)] = Colors.MediumPurple,

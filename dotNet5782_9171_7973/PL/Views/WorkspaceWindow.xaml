@@ -7,12 +7,10 @@
         mc:Ignorable="d"
         Title="WorkspaceWindow" Height="450" Width="800"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowState="Maximized"
         xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF">
-
-    <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
-                               syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
-                               MaximizeButtonEnabled="True">
-
-    </syncfusion:DockingManager>
+        <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
+                                   syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
+                                   MaximizeButtonEnabled="True" />
 </Window>

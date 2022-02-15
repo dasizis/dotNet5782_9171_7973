@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace PL.ViewModels
 {
+    record ItemMarker(Type Type, int Id, MapMarker Marker);
+
     class MainMapViewModel
     {
-        public ObservableCollection<MapMarker> Markers { get; set; } = new();
+        public ObservableCollection<ItemMarker> ItemMarkers { get; set; } = new();
 
         public RelayCommand LoadCommand { get; set; }
 
@@ -19,19 +21,49 @@ namespace PL.ViewModels
             Load();
 
             LoadCommand = new(Load);
+
+            PLNotification.BaseStationNotification.AddGlobalHandler(id => ReloadItem(id, PLService.GetBaseStation));
+            PLNotification.CustomerNotification.AddGlobalHandler(id => ReloadItem(id, PLService.GetCustomer));
+            PLNotification.DroneNotification.AddGlobalHandler(id => ReloadItem(id, PLService.GetDrone));
+        }
+
+        private void ReloadItem<T>(int id, Func<int, T> requestFunc) where T: ILocalable
+        {
+            ItemMarker itemMarker = ItemMarkers.FirstOrDefault(marker => marker.Type == typeof(T) && marker.Id == id);
+
+            if (itemMarker != null)
+            {
+                ItemMarkers.Remove(itemMarker);
+            }
+
+            try
+            {
+                var item = requestFunc(id);
+                ItemMarkers.Add(new(Type: typeof(T), Id: id, MapMarker.FromType(item)));
+            }
+            catch (BO.ObjectNotFoundException) { }
         }
 
         private void Load()
         {
-            Markers.Clear();
+            ItemMarkers.Clear();
 
-            IEnumerable<ILocalable> list = PLService.GetCustomersList().Select(c => PLService.GetCustomer(c.Id)).Cast<ILocalable>()
-                                                    .Union(PLService.GetDronesList().Select(d => PLService.GetDrone(d.Id)))
-                                                    .Union(PLService.GetBaseStationsList().Select(b => PLService.GetBaseStation(b.Id)));
-
-            foreach (var item in list)
+            // load base stations
+            foreach (var station in PLService.GetBaseStationsList().Select(s => PLService.GetBaseStation(s.Id)))
             {
-                Markers.Add(MapMarker.FromType(item));
+                ItemMarkers.Add(new(Type: typeof(BaseStation), Id: station.Id, Marker: MapMarker.FromType(station)));
+            }
+
+            // load customers
+            foreach (var customer in PLService.GetCustomersList().Select(c => PLService.GetCustomer(c.Id)))
+            {
+                ItemMarkers.Add(new(Type: typeof(Customer), Id: customer.Id, Marker: MapMarker.FromType(customer)));
+            }
+
+            // load drones
+            foreach (var drone in PLService.GetDronesList())
+            {
+                ItemMarkers.Add(new(Type: typeof(Customer), Id: drone.Id, Marker: MapMarker.FromType(drone)));
             }
         }
     }

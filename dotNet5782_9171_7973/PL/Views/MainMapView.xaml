@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Style/StyleDictionary.xaml" />
                 <ResourceDictionary Source="Style/MapDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:ExtractMarkersConverter x:Key="ExtractMarkersConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.DataContext>
@@ -27,7 +28,7 @@
             <syncfusion:SfMap.Layers>
                 <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"
-                                           Markers="{Binding Markers}">
+                                           Markers="{Binding ItemMarkers, Converter={StaticResource ExtractMarkersConverter}}">
                     <syncfusion:ShapeFileLayer.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Reload" 

@@ -71,11 +71,11 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.AssignParcelToDrone(Drone.Id);
-                    MessageBox.Show($"Drone {Drone.Id} assigned to parcel {Drone.ParcelInDeliver.Id}");
+                    MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} assigned to parcel {Drone.ParcelInDeliver.Id}");
                 }
                 catch (BO.InvalidActionException e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(MessageBox.BoxType.Error, e.Message);
                 }
             }
             //drone's state is Deliver
@@ -87,18 +87,18 @@ namespace PL.ViewModels
                 if (!Drone.ParcelInDeliver.WasPickedUp)
                 {
                     PLService.PickUpParcel(Drone.Id);
-                    MessageBox.Show($"Drone {Drone.Id} Pick parcel {Drone.ParcelInDeliver.Id} up");
+                    MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} Pick parcel {Drone.ParcelInDeliver.Id} up");
                 }
                 else
                 {
                     try
                     {
                         PLService.SupplyParcel(Drone.Id);
-                        MessageBox.Show($"Drone {Drone.Id} supplied parcel");
+                        MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} supplied parcel");
                     }
                     catch (BO.InvalidActionException e)
                     {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show(MessageBox.BoxType.Error, e.Message);
                     }
                 }
             }
@@ -112,11 +112,11 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.ChargeDrone(Drone.Id);
-                    MessageBox.Show("Drone was send to charge");
+                    MessageBox.Show(MessageBox.BoxType.Info, "Drone was send to charge");
                 }
                 catch (BO.InvalidActionException e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(MessageBox.BoxType.Error, e.Message);
                 }
             }
             else if (Drone.State == DroneState.Maintenance)
@@ -124,11 +124,11 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.FinishCharging(Drone.Id);
-                    MessageBox.Show("Drone realesed from charging");
+                    MessageBox.Show(MessageBox.BoxType.Info, "Drone realesed from charging");
                 }
                 catch (BO.InvalidActionException e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(MessageBox.BoxType.Error, e.Message);
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace PL.ViewModels
         private void RenameDrone()
         {
             PLService.RenameDrone(Drone.Id, Drone.Model);
-            MessageBox.Show($"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
         }
 
         private void Delete()

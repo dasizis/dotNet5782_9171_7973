@@ -20,12 +20,17 @@ namespace PL.ViewModels
         /// <summary>
         /// Return list of base stations
         /// </summary>
-        /// <returns>list of base stations</returns>
+        /// <returns>list of <see cref="BaseStationForList"/></returns>
         protected override IEnumerable<BaseStationForList> GetList()
         {
             return PLService.GetBaseStationsList();
         }
 
+        /// <summary>
+        /// Return a specific base station
+        /// </summary>
+        /// <param name="id">id of requested <see cref="BaseStationForList"/></param>
+        /// <returns>the <see cref="BaseStationForList"/> with the id</returns>
         protected override BaseStationForList GetItem(int id)
         {
             return PLService.GetBaseStationForList(id);

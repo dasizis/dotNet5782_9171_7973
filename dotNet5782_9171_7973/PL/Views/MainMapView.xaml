@@ -23,24 +23,26 @@
     <UserControl.DataContext>
         <vm:MainMapViewModel />
     </UserControl.DataContext>
-    <StackPanel>
-        <syncfusion:SfMap>
-            <syncfusion:SfMap.Layers>
-                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel>
+            <syncfusion:SfMap>
+                <syncfusion:SfMap.Layers>
+                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"
                                            Markers="{Binding ItemMarkers}">
-                    <syncfusion:ShapeFileLayer.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Reload" 
+                        <syncfusion:ShapeFileLayer.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Reload" 
                                       Command="{Binding LoadCommand}">
-                                <MenuItem.Icon>
-                                    <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </ContextMenu>
-                    </syncfusion:ShapeFileLayer.ContextMenu>
-                </syncfusion:ShapeFileLayer>
-            </syncfusion:SfMap.Layers>
-        </syncfusion:SfMap>
-    </StackPanel>
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </syncfusion:ShapeFileLayer.ContextMenu>
+                    </syncfusion:ShapeFileLayer>
+                </syncfusion:SfMap.Layers>
+            </syncfusion:SfMap>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

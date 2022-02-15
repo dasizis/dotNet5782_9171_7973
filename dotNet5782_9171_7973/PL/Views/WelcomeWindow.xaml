@@ -18,27 +18,29 @@
     </Window.Resources>
 
     <materialDesign:DialogHost>
-        <StackPanel>
-            <StackPanel Visibility="{Binding IsSignUp, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <local:SignUpCustomer/>
-                <Button Content="Already Have an Account? Sign In"
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel>
+                <StackPanel Visibility="{Binding IsSignUp, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <local:SignUpCustomer/>
+                    <Button Content="Already Have an Account? Sign In"
                     Style="{StaticResource LinkButton}"
                     Command="{Binding SignInCustomerCommand}"/>
-            </StackPanel>
-            <StackPanel Visibility="{Binding IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <local:SignInCustomerView/>
-                <Button Content="Do Not Have an Account? Sign Up" 
+                </StackPanel>
+                <StackPanel Visibility="{Binding IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <local:SignInCustomerView/>
+                    <Button Content="Do Not Have an Account? Sign Up" 
                     Command="{Binding SignUpCustomerCommand}"
                     Style="{StaticResource LinkButton}"/>
-            </StackPanel>
+                </StackPanel>
 
-            <Button Command="{Binding SignInManagerCommand}"
+                <Button Command="{Binding SignInManagerCommand}"
                 Style="{StaticResource LinkButton}"
                 HorizontalAlignment="Center">
-                <TextBlock FontStyle="Italic" FontWeight="Bold">
+                    <TextBlock FontStyle="Italic" FontWeight="Bold">
                 Sign In As Manager
-                </TextBlock>
-            </Button>
-        </StackPanel>
+                    </TextBlock>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
     </materialDesign:DialogHost>
 </Window>

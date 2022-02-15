@@ -92,6 +92,7 @@ namespace PL.ViewModels
         private void LoadCustomer()
         {
             Customer.Reload(PLService.GetCustomer(Customer.Id));
+            //load map
             Markers.Clear();
             Markers.Add(MapMarker.FromType(Customer));
         }

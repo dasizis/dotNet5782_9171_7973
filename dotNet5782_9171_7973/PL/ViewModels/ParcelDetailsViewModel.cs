@@ -7,14 +7,41 @@ namespace PL.ViewModels
 {
     class ParcelDetailsViewModel : DependencyObject
     {
+        /// <summary>
+        /// The parcel model
+        /// </summary>
         public Parcel Parcel { get; set; } = new();
+
+        /// <summary>
+        /// List of markers for the map
+        /// </summary>
         public ObservableCollection<MapMarker> Markers { get; set; } = new();
 
+        /// <summary>
+        /// A command to view customer who sends the parcel
+        /// </summary>
         public RelayCommand ViewSenderCommand { get; set; }
+
+        /// <summary>
+        /// A command to view customer who gets the parcel
+        /// </summary>
         public RelayCommand ViewTargetCommand { get; set; }
+
+        /// <summary>
+        /// A command to view drone which delivers the parcel
+        /// </summary>
         public RelayCommand ViewDroneCommand { get; set; }
+
+        /// <summary>
+        /// A command to delete the parcel
+        /// </summary>
         public RelayCommand DeleteCommand { get; set; }
 
+        /// <summary>
+        /// Constractor 
+        /// Initialize the parcel and commands
+        /// </summary>
+        /// <param name="id">id of the parcel model</param>
         public ParcelDetailsViewModel(int id)
         {
             Parcel.Id = id;
@@ -28,21 +55,33 @@ namespace PL.ViewModels
             DeleteCommand = new(Delete, () => Parcel.Scheduled == null || Parcel.Supplied != null);     
         }
 
+        /// <summary>
+        /// Open details of customer who sends the parcel
+        /// </summary>
         private void ViewSenderDetails()
         {
             Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Sender.Id));
         }
 
+        /// <summary>
+        /// Open details of customer who gets the parcel
+        /// </summary>
         private void ViewTargetDetails()
         {
             Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Target.Id));
         }
 
+        /// <summary>
+        /// Open details of drone which delivers the parcel
+        /// </summary>
         private void ViewDroneDetails()
         {
             Workspace.AddPanelCommand.Execute(Workspace.DronePanel(Parcel.DroneId));
         }
 
+        /// <summary>
+        /// Delete parcel
+        /// </summary>
         private void Delete()
         {
             PLService.DeleteParcel(Parcel.Id);
@@ -50,10 +89,14 @@ namespace PL.ViewModels
             MessageBox.Show(MessageBox.BoxType.Info, $"Parcel {Parcel.Id} deleted");
         }
 
+        /// <summary>
+        /// Load parcel
+        /// </summary>
         private void LoadParcel()
         {
             Parcel.Reload(PLService.GetParcel(Parcel.Id));
 
+            //load map
             Markers.Clear();
             if (Parcel.DroneId != null)
             {

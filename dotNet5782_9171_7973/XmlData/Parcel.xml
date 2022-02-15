@@ -118,14 +118,14 @@
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <DroneId xsi:nil="true" />
+    <DroneId>12</DroneId>
     <Id>10</Id>
     <SenderId>50</SenderId>
     <TargetId>45</TargetId>
     <Weight>Medium</Weight>
     <Priority>Fast</Priority>
     <Requested>2022-02-15T17:35:46.4850107+02:00</Requested>
-    <Scheduled xsi:nil="true" />
+    <Scheduled>2022-02-15T18:33:29.0432084+02:00</Scheduled>
     <PickedUp xsi:nil="true" />
     <Supplied xsi:nil="true" />
     <IsDeleted>false</IsDeleted>

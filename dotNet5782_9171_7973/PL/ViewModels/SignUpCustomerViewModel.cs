@@ -28,7 +28,7 @@ namespace PL.ViewModels
             }
             catch(BO.IdAlreadyExistsException)
             {
-                MessageBox.Show(MessageBox.BoxType.Warning, "Your Password is used by another user.\n Try a different one.");
+                MessageBox.Show(MessageBox.BoxType.Warning, "Your Password is used by another user.\n Try a different one.", 250);
             }
             
         }

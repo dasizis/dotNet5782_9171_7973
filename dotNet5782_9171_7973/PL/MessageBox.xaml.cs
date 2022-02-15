@@ -37,6 +37,5 @@ namespace PL
 
             DialogHost.Show(dialog);
         }
-
     }
 }

@@ -47,11 +47,11 @@ namespace PL.ViewModels
                     var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
                     registerWindow.Close();
                 }
-                else MessageBox.Show(MessageBox.BoxType.Info, "User name is not correct.");
+                else MessageBox.Show(MessageBox.BoxType.Error, "User name is not correct.", 250);
             }
             catch (ObjectNotFoundException)
             {
-                MessageBox.Show(MessageBox.BoxType.Info, "User Id is not correct.");
+                MessageBox.Show(MessageBox.BoxType.Warning, "User Id is not correct.", 250);
             }
         }
     }

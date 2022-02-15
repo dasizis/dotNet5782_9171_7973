@@ -23,16 +23,45 @@
     </Window.Resources>
     <materialDesign:DialogHost>
         <Grid>
-            <Grid Background="AliceBlue" Height="50" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button Content="Send New Parcel" Click="SendNewParcel" VerticalAlignment="Center"/>
-                    <Button Margin="30,0,0,0" Content="Log Out"  VerticalAlignment="Center" Click="LogOut"/>
+            <DockPanel Background="#444444" Height="50" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <materialDesign:PackIcon Kind="PacMan" 
+                                             Foreground="White" 
+                                             VerticalAlignment="Center" 
+                                             Height="25" Width="25" 
+                                             Margin="10"/>
+                    <TextBlock Text="Drones Company" 
+                               Foreground="White" 
+                               FontSize="18" 
+                               VerticalAlignment="Center" 
+                               FontWeight="Bold"/>
                 </StackPanel>
-            </Grid>
+                
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button Content="Send New Parcel" 
+                            VerticalAlignment="Center" 
+                            Background="#333333" 
+                            Foreground="White" 
+                            Click="SendNewParcel">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#444444" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="Log Out"
+                            Click="LogOut" >
+                        <materialDesign:PackIcon Kind="AccountCircle" Height="25" Width="25" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+                
+            </DockPanel>
             <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                    syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
                                    MaximizeButtonEnabled="True"

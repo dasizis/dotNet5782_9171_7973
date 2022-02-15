@@ -47,6 +47,7 @@ namespace PL.ViewModels
         {
             PLService.DeleteParcel(Parcel.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.ParcelPanelName(Parcel.Id));
+            MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Parcel.Id} deleted");
         }
 
         private void LoadParcel()

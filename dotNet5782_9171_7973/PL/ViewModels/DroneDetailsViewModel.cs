@@ -71,7 +71,6 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.AssignParcelToDrone(Drone.Id);
-                    MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} assigned to parcel {Drone.ParcelInDeliver.Id}");
                 }
                 catch (BO.InvalidActionException e)
                 {
@@ -87,14 +86,12 @@ namespace PL.ViewModels
                 if (!Drone.ParcelInDeliver.WasPickedUp)
                 {
                     PLService.PickUpParcel(Drone.Id);
-                    MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} Pick parcel {Drone.ParcelInDeliver.Id} up");
                 }
                 else
                 {
                     try
                     {
                         PLService.SupplyParcel(Drone.Id);
-                        MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} supplied parcel");
                     }
                     catch (BO.InvalidActionException e)
                     {
@@ -112,7 +109,6 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.ChargeDrone(Drone.Id);
-                    MessageBox.Show(MessageBox.BoxType.Info, "Drone was send to charge");
                 }
                 catch (BO.InvalidActionException e)
                 {
@@ -124,7 +120,6 @@ namespace PL.ViewModels
                 try
                 {
                     PLService.FinishCharging(Drone.Id);
-                    MessageBox.Show(MessageBox.BoxType.Info, "Drone realesed from charging");
                 }
                 catch (BO.InvalidActionException e)
                 {
@@ -136,13 +131,15 @@ namespace PL.ViewModels
         private void RenameDrone()
         {
             PLService.RenameDrone(Drone.Id, Drone.Model);
-            MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
+            MessageBox.Show(MessageBox.BoxType.Success, $"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
         }
 
         private void Delete()
         {
             PLService.DeleteDrone(Drone.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(Drone.Id));
+            MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} deleted");
+            
         }
 
         private void LoadDrone()

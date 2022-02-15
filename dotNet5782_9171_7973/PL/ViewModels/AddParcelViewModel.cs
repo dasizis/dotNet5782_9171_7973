@@ -35,6 +35,7 @@ namespace PL.ViewModels
         {
             Load();
             PLNotification.CustomerNotification.AddGlobalHandler(id => Load());
+            Parcel.SenderId = PLService.CustomerId;
         }
 
         /// <summary>

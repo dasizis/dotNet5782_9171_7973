@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PL.Views"
              xmlns:vm="clr-namespace:PL.ViewModels"
+             xmlns:pl="clr-namespace:PL"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF" 
              xmlns:System="clr-namespace:System;assembly=mscorlib"
@@ -13,11 +14,12 @@
     <UserControl.Resources>
         <System:Double x:Key="ListPanelWidth">280</System:Double>
         <System:Double x:Key="ButtomPanelHeight">200</System:Double>
+        <System:Double x:Key="BarHeight">80</System:Double>
     </UserControl.Resources>
+
     <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
                                MaximizeButtonEnabled="True">
-
         <!--Lists Area-->
         <local:DronesListView x:Name="ListArea"
                               syncfusion:DockingManager.CanClose="False"

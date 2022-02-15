@@ -156,6 +156,7 @@ namespace PL.Views
                 ViewModels.Workspace.ParcelsListPanel,
                 ViewModels.Workspace.DronesListPanel
             );
+            PLService.IsManangerMode = true;
         }
 
         public WorkspaceWindow(params ViewModels.Panel[] panels)
@@ -172,6 +173,26 @@ namespace PL.Views
                 ViewModels.Workspace.FilteredParcelsListPanel(p => p.TargetId == userId,
                                                               ViewModels.Workspace.CustomerRecievedListName(userId), false)
             );
+            PLService.IsManangerMode = false;
+            PLService.IsCustomerMode = !PLService.IsManangerMode;
+            PLService.CustomerId = userId;
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            new WelcomeWindow().Show();
+            //close this window and send it outside?
+            var appWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "WorkspaceWindow");
+            appWindow.Close();
+        }
+
+        private void SendNewParcel(object sender, RoutedEventArgs e)
+        {
+            AddPanel(new ViewModels.Panel(
+                ViewModels.PanelType.Add,
+                new Views.AddParcelView(),
+                ViewModels.Workspace.ParcelPanelName()
+                ));
         }
     }
 }

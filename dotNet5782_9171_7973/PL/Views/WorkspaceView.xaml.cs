@@ -22,6 +22,8 @@ namespace PL.Views
         /// </summary>
         static public RelayCommand<string> RemovePanelCommand { get; set; }
 
+        
+
         /// <summary>
         /// The add panel logic
         /// </summary>
@@ -74,6 +76,7 @@ namespace PL.Views
 
             AddPanelCommand = new(AddPanel);
             RemovePanelCommand = new(Remove);
+            
 
             Dock.DockStateChanged += Dock_DockStateChanged;
 
@@ -110,5 +113,7 @@ namespace PL.Views
 
             return null;
         }
+
+        
     }
 }

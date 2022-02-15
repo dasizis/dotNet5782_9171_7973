@@ -54,7 +54,12 @@ namespace PL.ViewModels
 
             try
             {
-                List.Add(GetItem(id));
+                T newItem = GetItem(id);
+
+                if (Predicate(newItem))
+                {
+                    List.Add(newItem);
+                }
             }
             catch (BO.ObjectNotFoundException) { }
         }

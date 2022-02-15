@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
-  <NextParcelId>15</NextParcelId>
+  <NextParcelId>18</NextParcelId>
   <ElectricityConfumctiol>
     <Free>0.000001</Free>
     <Light>0.000002</Light>

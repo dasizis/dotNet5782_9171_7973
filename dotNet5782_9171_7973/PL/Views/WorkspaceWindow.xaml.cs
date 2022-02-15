@@ -193,5 +193,18 @@ namespace PL.Views
                 ViewModels.Workspace.ParcelPanelName()
                 ));
         }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (var simulator in PLSimulators.Simulators.Values)
+            {
+                if (simulator.IsBusy)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show(MessageBox.BoxType.Error, "There is One Or More Active Simulator");
+                }
+            }
+        }
     }
 }

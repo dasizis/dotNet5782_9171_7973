@@ -31,112 +31,114 @@
             <convereters:NotConverter x:Key="NotConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Margin="30" Grid.Column="0">
+            <StackPanel Margin="30" Grid.Column="0">
 
-            <!--Header-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <!--Header-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,20">
-                    <Button Command="{x:Static pl:PLSimulators.ToggleSimulatorCommand}"
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,20">
+                        <Button Command="{x:Static pl:PLSimulators.ToggleSimulatorCommand}"
                         CommandParameter="{Binding Drone.Id}"
                         Style="{StaticResource MaterialDesignIconButton}"
                         ToolTip="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeText}}" 
                         Foreground="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeColorConverter}}">
-                        <materialDesign:PackIcon Kind="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeIconConverter}}" />
-                    </Button>
-                    <TextBlock Text="{Binding Drone.Id, StringFormat=Drone {0}}"
+                            <materialDesign:PackIcon Kind="{Binding Drone.IsAutoMode, Converter={StaticResource IsAutoModeToChangeModeIconConverter}}" />
+                        </Button>
+                        <TextBlock Text="{Binding Drone.Id, StringFormat=Drone {0}}"
                            Style="{StaticResource DroneHeader}" />
-                </StackPanel>
+                    </StackPanel>
 
 
-                <syncfusion:SfBusyIndicator Grid.Column="1"
+                    <syncfusion:SfBusyIndicator Grid.Column="1"
                                         AnimationType="Battery" 
                                         AnimationSpeed="{Binding Drone.State, Converter={StaticResource DroneStateToAnimationSpeedConverter}}"
                                         HorizontalAlignment="Right" 
                                         ViewboxHeight="30" 
                                         VerticalAlignment="Top">
-                    <syncfusion:SfBusyIndicator.Header>
-                        <TextBlock Text="{Binding Drone.Battery, StringFormat={}{0:F2}%}" Margin="5"/>
-                    </syncfusion:SfBusyIndicator.Header>
-                </syncfusion:SfBusyIndicator>
-            </Grid>
+                        <syncfusion:SfBusyIndicator.Header>
+                            <TextBlock Text="{Binding Drone.Battery, StringFormat={}{0:F2}%}" Margin="5"/>
+                        </syncfusion:SfBusyIndicator.Header>
+                    </syncfusion:SfBusyIndicator>
+                </Grid>
 
-            <!--Model Input-->
-            <syncfusion:SfTextInputLayout Hint="Model" 
+                <!--Model Input-->
+                <syncfusion:SfTextInputLayout Hint="Model" 
                                       HasError="{Binding (Validation.HasError), ElementName=ModelInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=ModelInput}"
                                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" >
-                <syncfusion:SfTextInputLayout.LeadingView>
-                    <materialDesign:PackIcon Kind="Pencil" Height="10"/>
-                </syncfusion:SfTextInputLayout.LeadingView>
-                <TextBox x:Name="ModelInput"
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Pencil" Height="10"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="ModelInput"
                      Text="{Binding Drone.Model, 
                                     ValidatesOnDataErrors=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            </syncfusion:SfTextInputLayout>
+                </syncfusion:SfTextInputLayout>
 
-            <!--Details-->
-            <TextBlock Text="{Binding Drone.MaxWeight, StringFormat='Max weight: {0}'}" 
+                <!--Details-->
+                <TextBlock Text="{Binding Drone.MaxWeight, StringFormat='Max weight: {0}'}" 
                    Style="{StaticResource Text}"/>
-            <TextBlock Text="{Binding Drone.State, StringFormat='State: {0}'}"  
+                <TextBlock Text="{Binding Drone.State, StringFormat='State: {0}'}"  
                    Style="{StaticResource Text}"/>
 
 
-            <!--Buttons-->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <!--Buttons-->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
 
 
-                <Button Content="View Parcel"
+                    <Button Content="View Parcel"
                     Command="{Binding ViewParcelCommand}"
                     Margin="5" Padding="5"/>
 
-                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Drone.IsAutoMode, Converter={StaticResource NotConverter}}">
-                    <Button Content="Update" 
+                    <StackPanel Orientation="Horizontal" IsEnabled="{Binding Drone.IsAutoMode, Converter={StaticResource NotConverter}}">
+                        <Button Content="Update" 
                     Style="{StaticResource PrimaryButton}"                 
                     Command="{Binding RenameDroneCommand}"
                     Margin="5" Padding="5"/>
-                    <Button Command="{Binding ProceedWithParcelCommand}" 
+                        <Button Command="{Binding ProceedWithParcelCommand}" 
                     Margin="5" Padding="5">
-                        <Button.Content>
-                            <MultiBinding Converter="{StaticResource StateToProceedWithParcelText}">
-                                <Binding Path="Drone.State"/>
-                                <Binding Path="Drone.ParcelInDeliver.WasPickedUp" />
-                            </MultiBinding>
-                        </Button.Content>
-                    </Button>
+                            <Button.Content>
+                                <MultiBinding Converter="{StaticResource StateToProceedWithParcelText}">
+                                    <Binding Path="Drone.State"/>
+                                    <Binding Path="Drone.ParcelInDeliver.WasPickedUp" />
+                                </MultiBinding>
+                            </Button.Content>
+                        </Button>
 
-                    <Button Content="{Binding Drone.State, Converter={StaticResource DroneStateToHandleChargeText}}"
+                        <Button Content="{Binding Drone.State, Converter={StaticResource DroneStateToHandleChargeText}}"
                     Command="{Binding HandleChargeCommand}"
                     Margin="5" Padding="5"/>
 
-                    <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock>Delete</TextBlock>
-                        </StackPanel>
-                    </Button>
+                        <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Delete</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
 
-            <!--Map-->
-            <syncfusion:SfMap EnableZoom="True">
-                <syncfusion:SfMap.Layers>
-                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
+                <!--Map-->
+                <syncfusion:SfMap EnableZoom="True">
+                    <syncfusion:SfMap.Layers>
+                        <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
                                            MarkerTemplate="{StaticResource MarkerTemplate}"
                                            Markers="{Binding Markers}">
-                    </syncfusion:ShapeFileLayer>
-                </syncfusion:SfMap.Layers>
-            </syncfusion:SfMap>
-        </StackPanel>
-        <syncfusion:SfBusyIndicator Visibility="{Binding Drone.IsNowStopping, Converter={StaticResource BooleanToVisibilityConverter}}" IsBusy="True" AnimationType="ArrowTrack"  Grid.Column="0" Opacity="0.7" />
+                        </syncfusion:ShapeFileLayer>
+                    </syncfusion:SfMap.Layers>
+                </syncfusion:SfMap>
+            </StackPanel>
+            <syncfusion:SfBusyIndicator Visibility="{Binding Drone.IsNowStopping, Converter={StaticResource BooleanToVisibilityConverter}}" IsBusy="True" AnimationType="ArrowTrack"  Grid.Column="0" Opacity="0.7" />
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

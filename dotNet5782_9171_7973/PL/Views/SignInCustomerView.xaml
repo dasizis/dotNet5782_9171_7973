@@ -15,40 +15,42 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel Style="{StaticResource Container}" Width="400">
-        <TextBlock Text="Sign In" Style="{StaticResource RegisterHeader}"/>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Style="{StaticResource Container}" Width="400">
+            <TextBlock Text="Sign In" Style="{StaticResource RegisterHeader}"/>
 
-        <!--Id input-->
-        <syncfusion:SfTextInputLayout Hint="Id" 
+            <!--Id input-->
+            <syncfusion:SfTextInputLayout Hint="Id" 
                                       LeadingViewPosition="Inside"
                                       HasError="{Binding (Validation.HasError), ElementName=IdInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=IdInput}">
-            <syncfusion:SfTextInputLayout.LeadingView>
-                <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource InsideIcon}"/>
-            </syncfusion:SfTextInputLayout.LeadingView>
-            <TextBox x:Name="IdInput"
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Identifier" Style="{StaticResource InsideIcon}"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <TextBox x:Name="IdInput"
                      Text="{Binding Id, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-        </syncfusion:SfTextInputLayout>
+            </syncfusion:SfTextInputLayout>
 
-        <!--Name input-->
-        <syncfusion:SfTextInputLayout Hint="Name" 
+            <!--Name input-->
+            <syncfusion:SfTextInputLayout Hint="Name" 
                                       LeadingViewPosition="Inside"
                                       HasError="{Binding (Validation.HasError), ElementName=NameInput}"
                                       ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
-            <syncfusion:SfTextInputLayout.LeadingView>
-                <materialDesign:PackIcon Kind="Rename" Style="{StaticResource InsideIcon}"/>
-            </syncfusion:SfTextInputLayout.LeadingView>
-            <TextBox x:Name="NameInput"
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Rename" Style="{StaticResource InsideIcon}"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <TextBox x:Name="NameInput"
                      Text="{Binding Name, 
                                     ValidatesOnDataErrors=true,
                                     NotifyOnValidationError=true,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-        </syncfusion:SfTextInputLayout>
+            </syncfusion:SfTextInputLayout>
 
-        <Button Content="Sign In" Command="{Binding SignInCommand}" Style="{StaticResource MainButton}"/>
+            <Button Content="Sign In" Command="{Binding SignInCommand}" Style="{StaticResource MainButton}"/>
 
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

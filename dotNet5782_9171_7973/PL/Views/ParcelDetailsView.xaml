@@ -20,79 +20,81 @@
             <convereters:DateToToolTipConverter x:Key="DateToToolTipConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel Style="{StaticResource Container}">
-        
-        <!--Header-->
-        <TextBlock Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Style="{StaticResource Container}">
+
+            <!--Header-->
+            <TextBlock Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
                    Style="{StaticResource Header}" />
-        
-        <!--Details-->
-        <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
+
+            <!--Details-->
+            <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
                    Style="{StaticResource Text}"/>
-        <TextBlock Text="{Binding Parcel.Priority, StringFormat='Priority: {0}'}" 
+            <TextBlock Text="{Binding Parcel.Priority, StringFormat='Priority: {0}'}" 
                    Style="{StaticResource Text}"/>
-        <TextBlock Text="{Binding Parcel.Sender.Id, StringFormat='Sender: customer #{0}'}" 
+            <TextBlock Text="{Binding Parcel.Sender.Id, StringFormat='Sender: customer #{0}'}" 
                    Style="{StaticResource Text}"/>
-        <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
+            <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
                    Style="{StaticResource Text}"/>
 
-        <syncfusion:SfStepProgressBar Margin="0, 50">
-            <syncfusion:SfStepProgressBar.SelectedIndex>
-                <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
-                    <Binding Path="Parcel.Requested" />
-                    <Binding Path="Parcel.Scheduled" />
-                    <Binding Path="Parcel.PickedUp" />
-                    <Binding Path="Parcel.Supplied" />
-                </MultiBinding>
-            </syncfusion:SfStepProgressBar.SelectedIndex>
-            <syncfusion:StepViewItem 
+            <syncfusion:SfStepProgressBar Margin="0, 50">
+                <syncfusion:SfStepProgressBar.SelectedIndex>
+                    <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
+                        <Binding Path="Parcel.Requested" />
+                        <Binding Path="Parcel.Scheduled" />
+                        <Binding Path="Parcel.PickedUp" />
+                        <Binding Path="Parcel.Supplied" />
+                    </MultiBinding>
+                </syncfusion:SfStepProgressBar.SelectedIndex>
+                <syncfusion:StepViewItem 
                 Content="Requested" 
                 ToolTip="{Binding Parcel.Requested, Converter={StaticResource DateToToolTipConverter}}"/>
-            <syncfusion:StepViewItem 
+                <syncfusion:StepViewItem 
                 Content="Scheduled" 
                 ToolTip="{Binding Parcel.Scheduled, Converter={StaticResource DateToToolTipConverter}}"/>
-            <syncfusion:StepViewItem 
+                <syncfusion:StepViewItem 
                 Content="Picked up" 
                 ToolTip="{Binding Parcel.PickedUp, Converter={StaticResource DateToToolTipConverter}}"/>
-            <syncfusion:StepViewItem 
+                <syncfusion:StepViewItem 
                 Content="Supplied" 
                 ToolTip="{Binding Parcel.Supplied, Converter={StaticResource DateToToolTipConverter}}"/>
-        </syncfusion:SfStepProgressBar>
+            </syncfusion:SfStepProgressBar>
 
-        <!--Buttons-->
-        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" 
+            <!--Buttons-->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" 
                     Visibility="{Binding Converter={StaticResource BooleanToVisibilityConverter}, 
                                          Source={x:Static pl:PLService.IsManangerMode}}">
-            <Button Content="View Sender"                
+                <Button Content="View Sender"                
                     Command="{Binding ViewSenderCommand}"
                     Margin="5" Padding="5"/>
 
-            <Button Content="View Target"                
+                <Button Content="View Target"                
                     Command="{Binding ViewTargetCommand}"
                     Margin="5" Padding="5"/>
 
-            <Button Content="View Drone"                
+                <Button Content="View Drone"                
                     Command="{Binding ViewDroneCommand}"
                     Margin="5" Padding="5"/>
 
 
-            <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
-                <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                    <StackPanel Orientation="Horizontal">
 
-                    <TextBlock>Delete</TextBlock>
-                </StackPanel>
-            </Button>
-            
-           
-        </StackPanel>
-        <!--Map-->
-        <syncfusion:SfMap>
-            <syncfusion:SfMap.Layers>
-                <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
+                        <TextBlock>Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+            </StackPanel>
+            <!--Map-->
+            <syncfusion:SfMap>
+                <syncfusion:SfMap.Layers>
+                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
                                            MarkerTemplate="{StaticResource MarkerTemplate}"
                                            Markers="{Binding Markers}">
-                </syncfusion:ShapeFileLayer>
-            </syncfusion:SfMap.Layers>
-        </syncfusion:SfMap>
-    </StackPanel>
+                    </syncfusion:ShapeFileLayer>
+                </syncfusion:SfMap.Layers>
+            </syncfusion:SfMap>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

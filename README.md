@@ -1,5 +1,12 @@
 # dotNet5782_9171_7973
 
+## TODO
+[ ] Add links to PL Bonuses
+[ ] DataSource - FIX ALL PROBLEMS
+[ ] document
+[ ] finish README.md
+[ ] check deletion
+
 ## Bonus Review
 
 #### Singleton

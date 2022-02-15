@@ -9,33 +9,13 @@
         mc:Ignorable="d"
         Title="WorkspaceWindow" Height="450" Width="800"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowState="Maximized"
         xmlns:syncfusionskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
-                <ResourceDictionary Source="Style/MapDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <convereters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Grid>
-        <Grid Background="AliceBlue" Height="50" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Content="Send New Parcel" Click="SendNewParcel" VerticalAlignment="Center"/>
-                <Button Margin="30,0,0,0" Content="Log Out"  VerticalAlignment="Center" Click="LogOut"/>
-            </StackPanel>
-        </Grid>
-        <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
+
+    <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"
-                               MaximizeButtonEnabled="True"
-                               Margin="0,50,0,0">
-            
-        </syncfusion:DockingManager>
-    </Grid>
+                               MaximizeButtonEnabled="True">
+
+    </syncfusion:DockingManager>
 </Window>

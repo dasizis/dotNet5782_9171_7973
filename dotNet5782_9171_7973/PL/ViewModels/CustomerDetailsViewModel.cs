@@ -65,7 +65,7 @@ namespace PL.ViewModels
         private void Update()
         {
             PLService.UpdateCustomer(Customer.Id, Customer.Name, Customer.Phone);
-            MessageBox.Show($"Customer {Customer.Name} updated");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Customer {Customer.Name} updated");
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace PL.ViewModels
         private void Delete()
         {
             PLService.DeleteCustomer(Customer.Id);
-            MessageBox.Show($"Customer {Customer.Name} deleted");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Customer {Customer.Name} deleted");
         }
 
         /// <summary>

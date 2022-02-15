@@ -18,4 +18,10 @@
     <MaxWeight>Heavy</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>345</Id>
+    <Model>Jdedf</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
 </Drones>

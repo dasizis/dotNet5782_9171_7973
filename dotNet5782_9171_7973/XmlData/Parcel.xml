@@ -100,8 +100,8 @@
     <Priority>Urgent</Priority>
     <Requested>2022-02-15T14:38:48.5110705+02:00</Requested>
     <Scheduled>2022-02-15T14:38:58.2801979+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Supplied xsi:nil="true" />
+    <PickedUp>2022-02-15T14:44:18.8708717+02:00</PickedUp>
+    <Supplied>2022-02-15T14:44:42.4531792+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">

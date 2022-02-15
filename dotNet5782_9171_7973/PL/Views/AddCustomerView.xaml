@@ -106,7 +106,7 @@
                 </syncfusion:SfTextInputLayout>
 
             </StackPanel>
-            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
+            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

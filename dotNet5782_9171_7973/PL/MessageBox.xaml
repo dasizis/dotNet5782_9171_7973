@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="PL.MessageBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PL.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:PL.Views.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="250">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Views/Style/StyleDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:MessageBoxTypeToColorConverter x:Key="MessageBoxTypeToColorConverter" />
+            <converters:MessageBoxTypeToIConConverter x:Key="MessageBoxTypeToIConConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <StackPanel Margin="20">
+        <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="{Binding Type, Converter={StaticResource MessageBoxTypeToIConConverter}}" 
+                                     HorizontalAlignment="Center"  
+                                     Height="30" Width="30" 
+                                     Foreground="{Binding Type, Converter={StaticResource MessageBoxTypeToColorConverter}}" 
+                                     VerticalAlignment="Center"/>
+            <TextBlock FontSize="25" 
+                       FontWeight="DemiBold" 
+                       Text="{Binding Type}" 
+                       HorizontalAlignment="Center" 
+                       Foreground="#505050" 
+                       VerticalAlignment="Center" 
+                       Margin="10,0"/>
+        </StackPanel>
+
+        <TextBlock Text="{Binding Text}" 
+                   FontSize="15" 
+                   TextWrapping="Wrap" 
+                   Margin="0,10" 
+                   Width="{Binding Width}" />
+        <Button Style="{StaticResource PrimaryButton}"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                HorizontalAlignment="Right"
+                Content="Close" 
+                Padding="5,0"/>
+    </StackPanel>
+    
+</UserControl>

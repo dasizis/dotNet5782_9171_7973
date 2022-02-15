@@ -31,13 +31,13 @@ namespace PL.ViewModels
         private void ExecuteUpdateDetails()
         {
             PLService.UpdateBaseStation(Station.Id, Station.Name, Station.EmptyChargeSlots);
-            MessageBox.Show($"Station {Station.Id}' details changed");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Station {Station.Id}' details changed");
         }
 
         public void Delete()
         {
             PLService.DeleteBaseStation(Station.Id);
-            MessageBox.Show($"Station {Station.Id} deleted");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Station {Station.Id} deleted");
         }
 
         private void LoadStation()

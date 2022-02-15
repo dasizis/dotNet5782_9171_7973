@@ -9,7 +9,7 @@ namespace BL
     partial class BL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
+        public int AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority)
         {
             CustomerInDelivery sender;
             CustomerInDelivery target;
@@ -51,6 +51,8 @@ namespace BL
             {
                 throw new IdAlreadyExistsException(typeof(Parcel), parcel.Id);
             }
+
+            return parcel.Id;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -78,6 +80,27 @@ namespace BL
                 Scheduled = parcel.Scheduled,
                 PickedUp = parcel.PickedUp,
                 Supplied = parcel.Supplied,
+            };
+        }
+
+        /// <summary>
+        /// Returns a converted parcel to parcel for list
+        /// </summary>
+        /// <param name="id">The parcel id</param>
+        /// <returns>A <see cref="ParcelForList"/></returns>
+        /// <exception cref="ObjectNotFoundException" />
+        public ParcelForList GetParcelForList(int id)
+        {
+            Parcel parcel = GetParcel(id);
+
+            return new ParcelForList()
+            {
+                Id = parcel.Id,
+                Priority = parcel.Priority,
+                Weight = parcel.Weight,
+                SenderId = parcel.Sender.Id,
+                TargetId = parcel.Target.Id,
+                IsOnWay = parcel.Scheduled != null && parcel.Supplied == null,
             };
         }
 
@@ -118,27 +141,6 @@ namespace BL
         }
 
         #region Helpers
-
-        /// <summary>
-        /// Returns a converted parcel to parcel for list
-        /// </summary>
-        /// <param name="id">The parcel id</param>
-        /// <returns>A <see cref="ParcelForList"/></returns>
-        /// <exception cref="ObjectNotFoundException" />
-        internal ParcelForList GetParcelForList(int id)
-        {
-            Parcel parcel = GetParcel(id);
-
-            return new ParcelForList()
-            {
-                Id = parcel.Id,
-                Priority = parcel.Priority,
-                Weight = parcel.Weight,
-                SenderId = parcel.Sender.Id,
-                TargetId = parcel.Target.Id,
-                IsOnWay = parcel.Scheduled != null && parcel.Supplied == null,
-            };
-        }
 
         /// <summary>
         /// return converted parcel to parcel at customer

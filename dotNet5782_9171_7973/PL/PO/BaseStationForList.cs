@@ -5,7 +5,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of base station for list
     /// </summary>
-    public class BaseStationForList : PropertyChangedNotification
+    public class BaseStationForList : PropertyChangedNotification, IIdentifiable
     {
 
         int id;

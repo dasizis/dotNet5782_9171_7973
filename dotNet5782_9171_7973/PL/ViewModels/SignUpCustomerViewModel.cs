@@ -15,19 +15,18 @@ namespace PL.ViewModels
 
         public SignUpCustomerViewModel()
         {
-            SignUpCommand = new(SignUp);
+            SignUpCommand = new(SignUp, () => Customer.Error == null);
         }
         void SignUp()
         {
             try
             {
                 PLService.AddCustomer(Customer);
-                //Get In with proper customer 
-                //temp
+                var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
                 new Views.WorkspaceWindow((int)Customer.Id).Show();
-                Views.WorkspaceView.AddPanelCommand.Execute(Workspace.CustomerPanel(Customer.Id));
+                registerWindow.Close();
             }
-            catch(BO.IdAlreadyExistsException e)
+            catch(BO.IdAlreadyExistsException)
             {
                 MessageBox.Show("Your Password is used by another user.\n Try a different one.");
             }

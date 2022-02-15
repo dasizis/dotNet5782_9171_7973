@@ -20,7 +20,7 @@ namespace PL
                            double.Parse(customer.Longitude),
                            double.Parse(customer.Latitude));
 
-            PLNotification.CustomerNotification.NotifyItemChanged();
+            PLNotification.CustomerNotification.NotifyItemChanged((int)customer.Id);
         }
 
         /// <summary>
@@ -66,7 +66,12 @@ namespace PL
         /// <returns>customers list</returns>
         public static IEnumerable<CustomerForList> GetCustomersList()
         {
-            return bl.GetCustomersList().Select(customer => new CustomerForList()
+            return bl.GetCustomersList().Select(customer => ConvertCustomer(customer));
+        }
+
+        public static CustomerForList ConvertCustomer(BO.CustomerForList customer)
+        {
+            return new()
             {
                 Id = customer.Id,
                 Name = customer.Name,
@@ -75,7 +80,12 @@ namespace PL
                 ParcelsRecieved = customer.ParcelsRecieved,
                 ParcelsSendAndNotSupplied = customer.ParcelsSendAndNotSupplied,
                 ParcelsSendAndSupplied = customer.ParcelsSendAndSupplied,
-            });
+            };
+        }
+
+        public static CustomerForList GetCustomerForList(int id)
+        {
+            return ConvertCustomer(bl.GetCustomerForList(id));
         }
 
         /// <summary>
@@ -99,7 +109,7 @@ namespace PL
         {
             bl.DeleteCustomer(customerId);
             PLNotification.CustomerNotification.RemoveHandler(customerId);
-            PLNotification.CustomerNotification.NotifyItemChanged();
+            PLNotification.CustomerNotification.NotifyItemChanged(customerId);
         }
     }
 }

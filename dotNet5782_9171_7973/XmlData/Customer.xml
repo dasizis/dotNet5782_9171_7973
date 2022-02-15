@@ -11,7 +11,7 @@
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>676</Id>
     <Name>yhghjh</Name>
-    <Phone>6768766888</Phone>
+    <Phone>0768766888</Phone>
     <Longitude>90</Longitude>
     <Latitude>67</Latitude>
     <IsDeleted>false</IsDeleted>
@@ -27,7 +27,7 @@
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>50</Id>
     <Name>yael</Name>
-    <Phone>345567678899</Phone>
+    <Phone>0455676788</Phone>
     <Longitude>126</Longitude>
     <Latitude>56</Latitude>
     <IsDeleted>false</IsDeleted>
@@ -41,41 +41,9 @@
     <IsDeleted>false</IsDeleted>
   </Customer>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>1234</Id>
-    <Name>yaerl</Name>
-    <Phone>0556707445</Phone>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>9876</Id>
-    <Name>gdfgf</Name>
-    <Phone>0556707445</Phone>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>98776</Id>
-    <Name>fgfg</Name>
-    <Phone>0556707446</Phone>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>123233</Id>
-    <Name>ghghgh</Name>
-    <Phone>0556707764</Phone>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>12323</Id>
-    <Name>yael</Name>
-    <Phone>0556707445</Phone>
+    <Id>212</Id>
+    <Name>Dasi</Name>
+    <Phone>0527616480</Phone>
     <Longitude>34</Longitude>
     <Latitude>34</Latitude>
     <IsDeleted>false</IsDeleted>

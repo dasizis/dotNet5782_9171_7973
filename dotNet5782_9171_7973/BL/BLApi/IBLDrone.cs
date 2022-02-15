@@ -28,6 +28,14 @@ namespace BLApi
         Drone GetDrone(int id);
 
         /// <summary>
+        /// Returns a converted drone to drone for list
+        /// </summary>
+        /// <param name="id">The id of requested drone</param>
+        /// <returns>A clone of <see cref="DroneForList"/></returns>
+        /// <exception cref="ObjectNotFoundException" />
+        DroneForList GetDroneForList(int id);
+
+        /// <summary>
         /// Returns the drones list
         /// </summary>
         /// <returns>An <see cref="IEnumerable{DroneForList}"/> of the drones list</returns>
@@ -54,41 +62,46 @@ namespace BLApi
         /// Send a drone to charge
         /// </summary>
         /// <param name="droneId">The drone Id to charge</param>
+        /// <returns>The Id of the station which the drone is charging in</returns>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidActionException" />
-        void ChargeDrone(int droneId);
+        int ChargeDrone(int droneId);
 
         /// <summary>
         /// Releases a drone from charging
         /// </summary>
         /// <param name="droneId">The drone to release id</param>
+        /// <returns>The Id of the station which the drone is charging in</returns>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidActionException" />
-        void FinishCharging(int droneId);
+        int FinishCharging(int droneId);
 
         /// <summary>
         /// Find a suitable parcel and assigns it to the drone
         /// </summary>
         /// <param name="droneId">The drone Id to assign a parcel to</param>
+        /// <returns>The parcel Id</returns>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidActionException" />
-        void AssignParcelToDrone(int droneId);
+        int AssignParcelToDrone(int droneId);
 
         /// <summary>
         /// Picks a parcel up by a drone
         /// </summary>
-        /// <param name="droneId">The drone id</param>
+        /// <param name="droneId">The drone id</param>        
+        /// <returns>The parcel Id</returns>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidActionException" />
-        void PickUpParcel(int droneId);
+        int PickUpParcel(int droneId);
 
         /// <summary>
         /// Supply a parcel by a drone
         /// </summary>
         /// <param name="droneId">The drone Id</param>
+        /// <returns>The parcel Id</returns>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidActionException" />
-        void SupplyParcel(int droneId);
+        int SupplyParcel(int droneId);
 
         /// <summary>
         /// Deletes a drone

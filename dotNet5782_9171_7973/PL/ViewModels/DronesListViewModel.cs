@@ -16,9 +16,14 @@ namespace PL.ViewModels
             return PLService.GetDronesList();
         }
 
+        protected override DroneForList GetItem(int id)
+        {
+            return PLService.GetDroneForList(id);
+        }
+
         public DronesListViewModel(): base()
         {
-            PLNotification.DroneNotification.AddHandler(ReloadList);
+            PLNotification.DroneNotification.AddGlobalHandler(ReloadList);
         }
     }
 }

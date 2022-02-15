@@ -65,7 +65,9 @@ namespace PL.ViewModels
 
         public void SignInManager()
         {
+            var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
             new Views.WorkspaceWindow().Show();
+            registerWindow.Close();
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

@@ -60,11 +60,11 @@
                         <materialDesign:PackIcon Kind="Weight" Height="10"/>
                     </syncfusion:SfTextInputLayout.LeadingView>
                     <ComboBox x:Name="WeightInput"
-                     SelectedItem="{Binding Parcel.Weight,
-                                    ValidatesOnDataErrors=true,
-                                    NotifyOnValidationError=true,
-                                    UpdateSourceTrigger=PropertyChanged}"
-                     ItemsSource="{Binding WeightOptions}"/>
+                              SelectedItem="{Binding Parcel.Weight,
+                                                     ValidatesOnDataErrors=true,
+                                                     NotifyOnValidationError=true,
+                                                     UpdateSourceTrigger=PropertyChanged}"
+                             ItemsSource="{Binding WeightOptions}"/>
                 </syncfusion:SfTextInputLayout>
 
                 <!--Priority input-->
@@ -82,6 +82,7 @@
                      ItemsSource="{Binding PriorityOptions}"/>
                 </syncfusion:SfTextInputLayout>
             </StackPanel>
+            
             <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource AddButton}"/>
         </StackPanel>
     </ScrollViewer>

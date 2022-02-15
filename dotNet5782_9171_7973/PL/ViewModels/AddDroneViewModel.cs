@@ -27,7 +27,7 @@ namespace PL.ViewModels
         public AddDroneViewModel()
         {
             Load();
-            PLNotification.BaseStationNotification.AddHandler(Load);
+            PLNotification.BaseStationNotification.AddGlobalHandler(id => Load());
         }
 
         /// <summary>

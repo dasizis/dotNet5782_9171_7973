@@ -27,7 +27,15 @@ namespace BLApi
         /// <returns>The <see cref="Customer"/> who has the spesific Id</returns>
         /// <exception cref="ObjectNotFoundException" />
         Customer GetCustomer(int id);
-        
+
+        /// <summary>
+        /// Returns specific customer for list
+        /// </summary>
+        /// <param name="id">id of requested customer</param>
+        /// <returns>customer with id</returns>
+        /// <exception cref="ObjectNotFoundException" />
+        CustomerForList GetCustomerForList(int id);
+
         /// <summary>
         /// return customers list
         /// </summary>

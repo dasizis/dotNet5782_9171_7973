@@ -19,9 +19,14 @@ namespace PL.ViewModels
             return PLService.GetCustomersList();
         }
 
+        protected override CustomerForList GetItem(int id)
+        {
+            return PLService.GetCustomerForList(id);
+        }
+
         public CustomersListViewModel() : base()
         {
-            PLNotification.CustomerNotification.AddHandler(ReloadList);
+            PLNotification.CustomerNotification.AddGlobalHandler(ReloadList);
         }
     }
 }

@@ -29,6 +29,14 @@ namespace BLApi
         BaseStation GetBaseStation(int id);
 
         /// <summary>
+        /// return converted base station to base staion for list
+        /// </summary>
+        /// <param name="id">id of requested base station</param>
+        /// <returns>base station for list</returns>
+        /// <exception cref="ObjectNotFoundException" />
+        BaseStationForList GetBaseStationForList(int id);
+
+        /// <summary>
         /// return base stations list
         /// </summary>
         /// <returns>base stations list</returns>

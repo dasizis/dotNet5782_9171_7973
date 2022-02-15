@@ -17,7 +17,7 @@ namespace BLApi
         /// <param name="priority">the parcel priority</param>
         /// <exception cref="IdAlreadyExistsException" />
         /// <exception cref="InvalidPropertyValueException" />
-        void AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority);
+        int AddParcel(int senderId, int targetId, WeightCategory weight, Priority priority);
 
         /// <summary>
         /// Returns a specific parcel
@@ -26,6 +26,14 @@ namespace BLApi
         /// <returns>parcel with id</returns>
         /// <exception cref="ObjectNotFoundException" />
         Parcel GetParcel(int id);
+
+        /// <summary>
+        /// Returns a converted parcel to parcel for list
+        /// </summary>
+        /// <param name="id">The parcel id</param>
+        /// <returns>A <see cref="ParcelForList"/></returns>
+        /// <exception cref="ObjectNotFoundException" />
+        ParcelForList GetParcelForList(int id);
 
         /// <summary>
         /// Returns the parcels list

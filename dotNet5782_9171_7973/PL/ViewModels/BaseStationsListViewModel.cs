@@ -26,9 +26,14 @@ namespace PL.ViewModels
             return PLService.GetBaseStationsList();
         }
 
+        protected override BaseStationForList GetItem(int id)
+        {
+            return PLService.GetBaseStationForList(id);
+        }
+
         public BaseStationListViewModel() : base()
         {
-            PLNotification.BaseStationNotification.AddHandler(ReloadList);
+            PLNotification.BaseStationNotification.AddGlobalHandler(ReloadList);
         }
     }
 }

@@ -75,6 +75,17 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// Returns a converted drone to drone for list
+        /// </summary>
+        /// <param name="id">The id of requested drone</param>
+        /// <returns>A clone of <see cref="DroneForList"/></returns>
+        /// <exception cref="ObjectNotFoundException" />
+        public DroneForList GetDroneForList(int id)
+        {
+            return GetDroneForListRef(id).Clone();
+        }
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneForList> GetDronesList()
         {
@@ -111,7 +122,7 @@ namespace BL
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void ChargeDrone(int droneId)
+        public int ChargeDrone(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
 
@@ -141,10 +152,12 @@ namespace BL
             {
                 Dal.AddDroneCharge(drone.Id, closest.Id);
             }
+
+            return closest.Id;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void FinishCharging(int droneId)
+        public int FinishCharging(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
 
@@ -167,10 +180,12 @@ namespace BL
             {
                 Dal.DeleteWhere<DO.DroneCharge>(charge => charge.DroneId == drone.Id);
             }
+
+            return dalCharge.StationId;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AssignParcelToDrone(int droneId)
+        public int AssignParcelToDrone(int droneId)
         {
             Drone drone = GetDrone(droneId);
 
@@ -203,10 +218,12 @@ namespace BL
             var droneForList = GetDroneForListRef(droneId);
             droneForList.State = DroneState.Deliver;
             droneForList.DeliveredParcelId = selectedParcel.Id;
+
+            return selectedParcel.Id;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void PickUpParcel(int droneId)
+        public int PickUpParcel(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
 
@@ -241,10 +258,12 @@ namespace BL
 
             drone.Battery -= Localable.Distance(drone.Location, parcelInDeliver.CollectLocation) * ElectricityConfumctiolFree;
             drone.Location = parcelInDeliver.CollectLocation;
+
+            return parcel.Id;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void SupplyParcel(int droneId)
+        public int SupplyParcel(int droneId)
         {
             DroneForList drone = GetDroneForListRef(droneId);
 
@@ -282,6 +301,8 @@ namespace BL
             {
                 Dal.Update<DO.Parcel>(parcel.Id, nameof(parcel.Supplied), DateTime.Now);
             }
+
+            return (int)drone.DeliveredParcelId;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -343,17 +364,6 @@ namespace BL
             }
 
             return drone;
-        }
-
-        /// <summary>
-        /// Returns a converted drone to drone for list
-        /// </summary>
-        /// <param name="id">The id of requested drone</param>
-        /// <returns>A clone of <see cref="DroneForList"/></returns>
-        /// <exception cref="ObjectNotFoundException" />
-        internal DroneForList GetDroneForList(int id)
-        {
-            return GetDroneForListRef(id).Clone();
         }
 
         /// <summary>

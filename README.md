@@ -56,7 +56,7 @@ We used ***FULL*** MVVM.
 
 #### Miscellaneous
 - Triggres
-  - Event Trigger [example]()
+  - Event Trigger [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/fc27f43be178a083ddce056caffc8e1395295442/dotNet5782_9171_7973/PL/Views/Style/StyleDictionary.xaml#L126)
   - 
 
 ### Simulator

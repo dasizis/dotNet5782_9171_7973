@@ -4,7 +4,7 @@
     <Id>12</Id>
     <Model>yaelgfgf</Model>
     <MaxWeight>Medium</MaxWeight>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </Drone>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>5</Id>
@@ -22,6 +22,18 @@
     <Id>345</Id>
     <Model>Jdedf</Model>
     <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>4</Id>
+    <Model>TmrZ</Model>
+    <MaxWeight>Heavy</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>5</Id>
+    <Model>DSYZ</Model>
+    <MaxWeight>Light</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
 </Drones>

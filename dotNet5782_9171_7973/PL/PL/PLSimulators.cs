@@ -74,7 +74,7 @@ namespace PL
 
                 worker.RunWorkerCompleted += (sender, args) =>
                 {
-                    Simulators[id].IsBusy = false;
+                    Simulators.Remove(id);
                     PLNotification.DroneNotification.NotifyItemChanged(id);
                 };
 

@@ -247,4 +247,56 @@
     <Supplied>2022-02-15T20:08:25.3092621+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId>2</DroneId>
+    <Id>20</Id>
+    <SenderId>78</SenderId>
+    <TargetId>45</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-02-15T21:32:31.5321372+02:00</Requested>
+    <Scheduled>2022-02-15T21:32:34.7703914+02:00</Scheduled>
+    <PickedUp>2022-02-15T21:34:42.5314249+02:00</PickedUp>
+    <Supplied>2022-02-15T21:39:23.344838+02:00</Supplied>
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId>12</DroneId>
+    <Id>21</Id>
+    <SenderId>50</SenderId>
+    <TargetId>45</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Urgent</Priority>
+    <Requested>2022-02-15T21:33:14.7714301+02:00</Requested>
+    <Scheduled>2022-02-15T21:33:22.9911295+02:00</Scheduled>
+    <PickedUp>2022-02-15T21:35:32.7726369+02:00</PickedUp>
+    <Supplied>2022-02-15T21:35:55.870302+02:00</Supplied>
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId>2</DroneId>
+    <Id>22</Id>
+    <SenderId>21</SenderId>
+    <TargetId>33</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Regular</Priority>
+    <Requested>2022-02-15T21:37:48.1254056+02:00</Requested>
+    <Scheduled>2022-02-15T21:39:23.3915251+02:00</Scheduled>
+    <PickedUp>2022-02-15T21:40:17.5206665+02:00</PickedUp>
+    <Supplied>2022-02-15T21:40:25.0542758+02:00</Supplied>
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId>2</DroneId>
+    <Id>23</Id>
+    <SenderId>22</SenderId>
+    <TargetId>21</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Urgent</Priority>
+    <Requested>2022-02-15T21:44:23.1272089+02:00</Requested>
+    <Scheduled>2022-02-15T21:44:26.65302+02:00</Scheduled>
+    <PickedUp>2022-02-15T21:45:25.28686+02:00</PickedUp>
+    <Supplied>2022-02-15T21:45:29.814933+02:00</Supplied>
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
 </Parcels>

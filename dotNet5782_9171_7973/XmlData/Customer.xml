@@ -48,4 +48,28 @@
     <Latitude>34</Latitude>
     <IsDeleted>true</IsDeleted>
   </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>21</Id>
+    <Name>Tamar</Name>
+    <Phone>0527105154</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>33</Id>
+    <Name>Riki</Name>
+    <Phone>0527633089</Phone>
+    <Longitude>40</Longitude>
+    <Latitude>38</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>22</Id>
+    <Name>Moishi</Name>
+    <Phone>0391603558</Phone>
+    <Longitude>32</Longitude>
+    <Latitude>31</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </Customers>

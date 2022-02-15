@@ -24,4 +24,20 @@
     <ChargeSlots>7</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>3</Id>
+    <Name>OldWorld</Name>
+    <Longitude>90</Longitude>
+    <Latitude>56</Latitude>
+    <ChargeSlots>4</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>5</Id>
+    <Name>Afrika</Name>
+    <Longitude>28</Longitude>
+    <Latitude>25</Latitude>
+    <ChargeSlots>4</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
 </BaseStations>

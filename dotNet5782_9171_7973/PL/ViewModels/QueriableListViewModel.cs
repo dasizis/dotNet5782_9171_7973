@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace PL.ViewModels
 {
-    abstract class QueriableListViewModel<T>
+    abstract class QueriableListViewModel<T> where T : PO.IIdentifiable
     {
         private const string RESET_VALUE = "None";
         /// <summary>
@@ -146,14 +146,21 @@ namespace PL.ViewModels
         protected abstract IEnumerable<T> GetList();
         protected abstract Panel GetAddPanel();
 
-        protected void ReloadList()
+        protected abstract T GetItem(int id);
+        protected void ReloadList(int id)
         {
-            List.Clear();
+            var item = List.FirstOrDefault(item => item.Id == id);
 
-            foreach (var item in GetList())
+            if (item != null)
             {
-                List.Add(item);
+                List.Remove(item);
             }
+
+            try
+            {
+                List.Add(GetItem(id));
+            }
+            catch (BO.ObjectNotFoundException) { }
         }
 
         void Sort()

@@ -154,7 +154,7 @@ namespace BL
         /// <param name="id">id of requested base station</param>
         /// <returns>base station for list</returns>
         /// <exception cref="ObjectNotFoundException" />
-        internal BaseStationForList GetBaseStationForList(int id)
+        public BaseStationForList GetBaseStationForList(int id)
         {
             var baseStation = GetBaseStation(id);
 

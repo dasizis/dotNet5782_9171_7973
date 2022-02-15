@@ -18,12 +18,12 @@ namespace BL
         private BL bl;
         private IDal dal;
 
-        private Action updateAction;
+        private Action<DroneSimulatorChanges> updateAction;
         private Func<bool> shouldStop;
 
         public int Delay { get; private set; }
 
-        public DroneSimulator(int id, Action updateAction, Func<bool> shouldStop, int delay = 500)
+        public DroneSimulator(int id, Action<DroneSimulatorChanges> updateAction, Func<bool> shouldStop, int delay = 500)
         {
             bl = BL.Instance;
             dal = bl.Dal;
@@ -75,7 +75,7 @@ namespace BL
                     bl.PickUpParcel(drone.Id);
                 }
 
-                updateAction();
+                updateAction(new(Parcel: parcel.Id));
             }
             else if (parcel.Supplied == null)
             {
@@ -86,7 +86,7 @@ namespace BL
                     bl.SupplyParcel(drone.Id);
                 }
 
-                updateAction();
+                updateAction(new(Parcel: parcel.Id, Customer: parcel.Target.Id));
             }
         }
 
@@ -99,21 +99,25 @@ namespace BL
                 double batteryToAdd = (double)Delay / MS_PER_SECOND * (double)bl.ChargeRate;
 
                 drone.Battery = Math.Min(drone.Battery + batteryToAdd, 100);
-                updateAction();
+                updateAction(new(BaseStation: bl.GetDroneBaseStation(drone.Id)));
             }
 
+            int stationId;
             lock (bl)
             {
-                bl.FinishCharging(drone.Id);
+                stationId = bl.FinishCharging(drone.Id);
             }
             drone.State = DroneState.Free;
+
+            updateAction(new(BaseStation: stationId));
         }
 
         private void HandleFreeState()
         {
             try
             {
-                bl.AssignParcelToDrone(drone.Id);
+                int parcelId = bl.AssignParcelToDrone(drone.Id);
+                updateAction(new(Parcel: parcelId));
             }
             catch (InvalidActionException)
             {
@@ -133,10 +137,9 @@ namespace BL
 
                     GoToLocation(station.Location, bl.ElectricityConfumctiolFree);
                     drone.State = DroneState.Maintenance;
+                    updateAction(new(BaseStation: station.Id));
                 }
             }
-
-            updateAction();
         }
 
         private void GoToLocation(Location location, double electricityConfumctiol)
@@ -157,7 +160,7 @@ namespace BL
                 };
                
                 drone.Battery -= Math.Min(KM_PER_S / MS_PER_SECOND, distance) * electricityConfumctiol;
-                updateAction();
+                updateAction(new());
             }
         }
 

@@ -74,6 +74,38 @@ namespace BL
             };
         }
 
+        /// <summary>
+        /// Returns specific customer for list
+        /// </summary>
+        /// <param name="id">id of requested customer</param>
+        /// <returns>customer with id</returns>
+        /// <exception cref="ObjectNotFoundException" />
+        public CustomerForList GetCustomerForList(int id)
+        {
+            DO.Customer customer;
+            try
+            {
+                customer = Dal.GetById<DO.Customer>(id);
+            }
+            catch (DO.ObjectNotFoundException e)
+            {
+                throw new ObjectNotFoundException(typeof(Customer), e);
+            }
+
+            var parcels = Dal.GetList<DO.Parcel>();
+
+            return new CustomerForList()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                ParcelsSendAndSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied != null).Count(),
+                ParcelsSendAndNotSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied == null).Count(),
+                ParcelsRecieved = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied != null).Count(),
+                ParcelsOnWay = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied == null).Count(),
+            };
+        }
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerForList> GetCustomersList()
         {
@@ -132,38 +164,6 @@ namespace BL
         }
 
         #region Helpers
-
-        /// <summary>
-        /// Returns specific customer for list
-        /// </summary>
-        /// <param name="id">id of requested customer</param>
-        /// <returns>customer with id</returns>
-        /// <exception cref="ObjectNotFoundException" />
-        internal CustomerForList GetCustomerForList(int id)
-        {
-            DO.Customer customer;
-            try
-            {
-                customer = Dal.GetById<DO.Customer>(id);
-            }
-            catch (DO.ObjectNotFoundException e)
-            {
-                throw new ObjectNotFoundException(typeof(Customer), e);
-            }
-
-            var parcels = Dal.GetList<DO.Parcel>();
-
-            return new CustomerForList()
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                ParcelsSendAndSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied != null).Count(),
-                ParcelsSendAndNotSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied == null).Count(),
-                ParcelsRecieved = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied != null).Count(),
-                ParcelsOnWay = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied == null).Count(),
-            };
-        }
 
         /// <summary>
         /// return converted customer to customer in delivery

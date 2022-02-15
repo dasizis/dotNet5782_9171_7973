@@ -8,7 +8,7 @@ namespace PL.ViewModels
     {
         public FilteredParcelsListViewModel(Predicate<ParcelForList> predicate) : base(predicate) 
         {
-            PLNotification.ParcelNotification.AddHandler(LoadList);
+            PLNotification.ParcelNotification.AddGlobalHandler(LoadList);
         }
 
         protected override void ExecuteOpen(ParcelForList item)
@@ -22,6 +22,11 @@ namespace PL.ViewModels
         protected override void Close()
         {
             Workspace.RemovePanelCommand.Execute(Workspace.ListPanelName(typeof(Parcel)));
+        }
+
+        protected override ParcelForList GetItem(int id)
+        {
+            return PLService.GetParcelForList(id);
         }
     }
 }

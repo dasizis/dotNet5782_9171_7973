@@ -8,27 +8,28 @@ namespace PL
     {
         protected Dictionary<int, Action> handlers = new();
 
-        protected event Action globalHandleres;
+        protected event Action<int> globalHandleres;
 
         /// <summary>
         /// Adds a new handler
         /// </summary>
         /// <param name="handler">The handler to add</param>
         /// <param name="id">The item id</param>
-        public void AddHandler(Action handler, int? id = null)
+        public void AddHandler(Action handler, int id)
         {
-            if (id == null)
+            if (handlers.ContainsKey(id))
             {
-                globalHandleres += handler;
-            }
-            else if (handlers.ContainsKey((int)id))
-            {
-                handlers[(int)id] += handler;
+                handlers[id] += handler;
             }
             else
             {
-                handlers.Add((int)id, handler);
+                handlers.Add(id, handler);
             }
+        }
+
+        public void AddGlobalHandler(Action<int> handler)
+        {
+            globalHandleres += handler;
         }
 
         /// <summary>
@@ -48,20 +49,13 @@ namespace PL
         /// </summary>
         /// <param name="id">The item id which was changed</param>
         /// <param name="callerMethodName">The caller method name</param>
-        public void NotifyItemChanged(int? id = null, [CallerMemberName] string callerMethodName = "")
+        public void NotifyItemChanged(int id, [CallerMemberName] string callerMethodName = "")
         {
-            globalHandleres?.Invoke();
+            globalHandleres?.Invoke(id);
 
-            if (id == null)
+            if (handlers.ContainsKey(id))
             {
-                foreach (var (handlerId, handler) in handlers)
-                {
-                    handler?.Invoke();
-                }
-            }
-            else if (handlers.ContainsKey((int)id))
-            {
-                handlers[(int)id]?.Invoke();
+                handlers[id]?.Invoke();
             }
         }
 

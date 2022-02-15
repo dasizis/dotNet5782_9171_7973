@@ -91,4 +91,30 @@
     <Supplied>2022-02-15T12:33:30.3713523+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId>2</DroneId>
+    <Id>8</Id>
+    <SenderId>676</SenderId>
+    <TargetId>78</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Urgent</Priority>
+    <Requested>2022-02-15T14:38:48.5110705+02:00</Requested>
+    <Scheduled>2022-02-15T14:38:58.2801979+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
+  <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <DroneId>12</DroneId>
+    <Id>9</Id>
+    <SenderId>45</SenderId>
+    <TargetId>78</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Urgent</Priority>
+    <Requested>2022-02-15T14:39:06.223453+02:00</Requested>
+    <Scheduled>2022-02-15T14:42:20.141345+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Supplied xsi:nil="true" />
+    <IsDeleted>false</IsDeleted>
+  </Parcel>
 </Parcels>

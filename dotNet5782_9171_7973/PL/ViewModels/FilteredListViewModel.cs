@@ -9,9 +9,9 @@ using System.Windows.Data;
 
 namespace PL.ViewModels
 {
-    abstract class FilteredListViewModel<T> : INotifyPropertyChanged
+    abstract class FilteredListViewModel<T> : INotifyPropertyChanged where T: PO.IIdentifiable
     {
-        public ObservableCollection<T> List { get; set; } = new();
+        public ObservableCollection<T> List { get; set; }
         public ICollectionView View { get; set; }
         public Predicate<T> Predicate { get; set; }
         public RelayCommand<T> OpenItemCommand { get; set; }
@@ -30,7 +30,7 @@ namespace PL.ViewModels
         public FilteredListViewModel(Predicate<T> predicate)
         {
             Predicate = predicate;
-            LoadList();
+            List = new(GetList().Where(item => Predicate(item)));
 
             View = (CollectionView)CollectionViewSource.GetDefaultView(List);
             View.Filter = Filter;
@@ -39,22 +39,32 @@ namespace PL.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected abstract IEnumerable<T> GetList();
+        protected abstract T GetItem(int id);
         protected abstract void ExecuteOpen(T item);
         protected abstract void Close();
-        protected void LoadList()
+
+        protected void LoadList(int id)
         {
-            List.Clear();
-            foreach (var item in GetList().Where(item => Predicate(item)).ToList())
+            var item = List.FirstOrDefault(item => item.Id == id);
+
+            if (item != null)
             {
-                List.Add(item);
+                List.Remove(item);
             }
+
+            try
+            {
+                List.Add(GetItem(id));
+            }
+            catch (BO.ObjectNotFoundException) { }
         }
+
         protected bool Filter(object item)
         {
            if (FilterValue == null) return true;
            return item.ToStringProperties().ToUpper().Contains(FilterValue.ToUpper());
         }
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             View.Refresh();

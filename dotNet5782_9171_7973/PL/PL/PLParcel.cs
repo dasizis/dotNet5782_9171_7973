@@ -13,12 +13,12 @@ namespace PL
         /// <exception cref="InvalidPropertyValueException" />
         public static void AddParcel(ParcelToAdd parcel)
         {
-            bl.AddParcel((int)parcel.SenderId,
-                         (int)parcel.TargetId,
-                         (BO.WeightCategory)parcel.Weight,
-                         (BO.Priority)parcel.Priority);
+            int parcelId = bl.AddParcel((int)parcel.SenderId,
+                                        (int)parcel.TargetId,
+                                        (BO.WeightCategory)parcel.Weight,
+                                        (BO.Priority)parcel.Priority);
 
-            PLNotification.ParcelNotification.NotifyItemChanged();
+            PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace PL
         /// <exception cref="InvalidActionException" />
         public static void PickUpParcel(int droneId)
         {
-            bl.PickUpParcel(droneId);
-            PLNotification.ParcelNotification.NotifyItemChanged();
+            int parcelId = bl.PickUpParcel(droneId);
+            PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
         }
 
@@ -98,8 +98,8 @@ namespace PL
         /// <exception cref="InvalidActionException" />
         public static void SupplyParcel(int droneId)
         {
-            bl.SupplyParcel(droneId);
-            PLNotification.ParcelNotification.NotifyItemChanged();
+            int parcelId = bl.SupplyParcel(droneId);
+            PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
         }
 
@@ -112,7 +112,7 @@ namespace PL
         {
             bl.DeleteParcel(parcelId);
             PLNotification.ParcelNotification.RemoveHandler(parcelId);
-            PLNotification.ParcelNotification.NotifyItemChanged();
+            PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
         }
 
         /// <summary>
@@ -131,6 +131,11 @@ namespace PL
                 TargetId = boParcel.TargetId,
                 IsOnWay = boParcel.IsOnWay,
             };
+        }
+
+        public static ParcelForList GetParcelForList(int id)
+        {
+            return ConvertParcel(bl.GetParcelForList(id));
         }
     }
 }

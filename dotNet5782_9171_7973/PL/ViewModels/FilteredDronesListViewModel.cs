@@ -11,7 +11,7 @@ namespace PL.ViewModels
     {
         public FilteredDronesListViewModel(Predicate<DroneForList> predicate) : base(predicate) 
         { 
-            PLNotification.DroneNotification.AddHandler(LoadList); 
+            PLNotification.DroneNotification.AddGlobalHandler(LoadList); 
         }
 
         protected override void ExecuteOpen(DroneForList item)
@@ -25,6 +25,11 @@ namespace PL.ViewModels
         protected override void Close()
         {
             Workspace.RemovePanelCommand.Execute(Workspace.ListPanelName(typeof(Drone)));
+        }
+
+        protected override DroneForList GetItem(int id)
+        {
+            return PLService.GetDroneForList(id);
         }
     }
 }

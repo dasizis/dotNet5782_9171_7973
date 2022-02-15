@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -47,14 +48,28 @@ namespace PL
                 };
 
                 worker.DoWork += (sender, args) =>
-                    BLApi.BLFactory.GetBL().StartDroneSimulator(id, () => worker.ReportProgress(0), () => worker.CancellationPending);
+                    BLApi.BLFactory.GetBL().StartDroneSimulator(id, changes => worker.ReportProgress(0, changes), () => worker.CancellationPending);
 
                 worker.ProgressChanged += (sender, args) =>
                 {
                     PLNotification.DroneNotification.NotifyItemChanged(id);
-                    PLNotification.CustomerNotification.NotifyItemChanged();
-                    PLNotification.BaseStationNotification.NotifyItemChanged();
-                    PLNotification.ParcelNotification.NotifyItemChanged();
+                    
+                    DroneSimulatorChanges  changes = args.UserState as DroneSimulatorChanges;
+                    
+                    if (changes.Customer != null)
+                    {
+                        PLNotification.CustomerNotification.NotifyItemChanged((int)changes.Customer);
+                    }
+
+                    if (changes.BaseStation != null)
+                    {
+                        PLNotification.BaseStationNotification.NotifyItemChanged((int)changes.BaseStation);
+                    }
+
+                    if (changes.Parcel != null)
+                    {
+                        PLNotification.ParcelNotification.NotifyItemChanged((int)changes.Parcel);
+                    }
                 };
 
                 worker.RunWorkerCompleted += (sender, args) =>

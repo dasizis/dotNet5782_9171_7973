@@ -5,7 +5,7 @@ namespace PO
     /// <summary>
     /// A class to represent a PDS of customer for list
     /// </summary>
-    public class CustomerForList : PropertyChangedNotification
+    public class CustomerForList : PropertyChangedNotification, IIdentifiable
     {
         int id;
         /// <summary>

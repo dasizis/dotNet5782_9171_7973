@@ -16,9 +16,14 @@ namespace PL.ViewModels
             return PLService.GetParcelsList();
         }
 
+        protected override ParcelForList GetItem(int id)
+        {
+            return PLService.GetParcelForList(id);
+        }
+
         public ParcelsListViewModel() : base()
         {
-            PLNotification.ParcelNotification.AddHandler(ReloadList);
+            PLNotification.ParcelNotification.AddGlobalHandler(ReloadList);
         }
     }
 }

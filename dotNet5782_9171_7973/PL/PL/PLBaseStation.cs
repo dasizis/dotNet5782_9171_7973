@@ -20,7 +20,7 @@ namespace PL
                               double.Parse(baseStation.Latitude),
                               (int)baseStation.ChargeSlots);
 
-            PLNotification.BaseStationNotification.NotifyItemChanged();
+            PLNotification.BaseStationNotification.NotifyItemChanged((int)baseStation.Id);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace PL
         {
             bl.DeleteBaseStation(baseStationId);
             PLNotification.BaseStationNotification.RemoveHandler(baseStationId);
-            PLNotification.BaseStationNotification.NotifyItemChanged();
+            PLNotification.BaseStationNotification.NotifyItemChanged(baseStationId);
         }
 
         /// <summary>
@@ -120,6 +120,11 @@ namespace PL
                 BusyChargeSlots = boBaseStation.BusyChargeSlots,
                 EmptyChargeSlots = boBaseStation.EmptyChargeSlots,
             };
+        }
+
+        public static BaseStationForList GetBaseStationForList(int id)
+        {
+            return ConvertBaseStation(bl.GetBaseStationForList(id));
         }
     }
 }

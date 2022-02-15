@@ -1,5 +1,6 @@
 ﻿using PO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PL
 {
@@ -20,8 +21,8 @@ namespace PL
                         (BO.WeightCategory)drone.MaxWeight,
                         (int)drone.StationId);
 
-            PLNotification.DroneNotification.NotifyItemChanged();
-            PLNotification.BaseStationNotification.NotifyItemChanged();
+            PLNotification.DroneNotification.NotifyItemChanged((int)drone.Id);
+            PLNotification.BaseStationNotification.NotifyItemChanged((int)drone.StationId);
         }
 
         /// <summary>
@@ -61,24 +62,27 @@ namespace PL
         /// <returns>An <see cref="IEnumerable{DroneForList}"/> of the drones list</returns>
         public static IEnumerable<DroneForList> GetDronesList()
         {
-            List<DroneForList> dronesList = new();
+            return bl.GetDronesList().Select(drone => ConvertDrone(drone));
+        }
 
-            foreach (var drone in bl.GetDronesList())
+        public static DroneForList ConvertDrone(BO.DroneForList drone)
+        {
+            return new()
             {
-                dronesList.Add(new DroneForList()
-                {
-                    Id = drone.Id,
-                    Model = drone.Model,
-                    Battery = drone.Battery,
-                    State = (DroneState)drone.State,
-                    MaxWeight = (WeightCategory)drone.MaxWeight,
-                    Location = new Location() { Longitude = drone.Location.Longitude, Latitude = drone.Location.Latitude },
-                    DeliveredParcelId = drone.DeliveredParcelId,
-                    IsAutoMode = !PLSimulators.CanStartSimulator(drone.Id),
-                });
-            }
+                Id = drone.Id,
+                Model = drone.Model,
+                Battery = drone.Battery,
+                State = (DroneState)drone.State,
+                MaxWeight = (WeightCategory)drone.MaxWeight,
+                Location = new Location() { Longitude = drone.Location.Longitude, Latitude = drone.Location.Latitude },
+                DeliveredParcelId = drone.DeliveredParcelId,
+                IsAutoMode = !PLSimulators.CanStartSimulator(drone.Id),
+            };
+        }
 
-            return dronesList;
+        public static DroneForList GetDroneForList(int id)
+        {
+            return ConvertDrone(bl.GetDroneForList(id));
         }
 
         /// <summary>
@@ -113,9 +117,9 @@ namespace PL
         /// <exception cref="InvalidActionException" />
         public static void ChargeDrone(int droneId)
         {
-            bl.ChargeDrone(droneId);
+            int stationId = bl.ChargeDrone(droneId);
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
-            PLNotification.BaseStationNotification.NotifyItemChanged();
+            PLNotification.BaseStationNotification.NotifyItemChanged(stationId);
         }
 
         /// <summary>
@@ -126,9 +130,9 @@ namespace PL
         /// <exception cref="InvalidActionException" />
         public static void FinishCharging(int droneId)
         {
-            bl.FinishCharging(droneId);
+            int stationId = bl.FinishCharging(droneId);
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
-            PLNotification.BaseStationNotification.NotifyItemChanged();
+            PLNotification.BaseStationNotification.NotifyItemChanged(stationId);
         }
 
         /// <summary>
@@ -140,8 +144,10 @@ namespace PL
         public static void AssignParcelToDrone(int droneId)
         {
             bl.AssignParcelToDrone(droneId);
+
+            int parcelId = GetDrone(droneId).ParcelInDeliver.Id;
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
-            PLNotification.ParcelNotification.NotifyItemChanged();
+            PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
         }
 
         /// <summary>
@@ -153,7 +159,7 @@ namespace PL
         {
             bl.DeleteDrone(droneId);
             PLNotification.DroneNotification.RemoveHandler(droneId);
-            PLNotification.DroneNotification.NotifyItemChanged();
+            PLNotification.DroneNotification.NotifyItemChanged(droneId);
         }
     }
 }

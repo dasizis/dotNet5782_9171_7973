@@ -19,7 +19,6 @@ namespace PL.ViewModels
             LoadStation();
 
             PLNotification.BaseStationNotification.AddHandler(LoadStation, id);
-            PLNotification.DroneNotification.AddHandler(LoadStation);
 
             UpdateDetailsCommand = new(ExecuteUpdateDetails, () => Station.Error == null);
             DeleteCommand = new(Delete, () => Station.DronesInCharge.Count == 0);

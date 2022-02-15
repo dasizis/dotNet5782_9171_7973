@@ -51,7 +51,7 @@ namespace PL.ViewModels
             }
             catch (ObjectNotFoundException)
             {
-                MessageBox.Show(MessageBox.BoxType.Warning, "User Id is not correct.", 250);
+                MessageBox.Show(MessageBox.BoxType.Error, "User Id is not correct.", 250);
             }
         }
     }

@@ -181,7 +181,6 @@ namespace PL.Views
         private void LogOut(object sender, RoutedEventArgs e)
         {
             new WelcomeWindow().Show();
-            //close this window and send it outside?
             var appWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "WorkspaceWindow");
             appWindow.Close();
         }

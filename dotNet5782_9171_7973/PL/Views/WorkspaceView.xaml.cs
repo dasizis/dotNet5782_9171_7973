@@ -22,8 +22,6 @@ namespace PL.Views
         /// </summary>
         static public RelayCommand<string> RemovePanelCommand { get; set; }
 
-        
-
         /// <summary>
         /// The add panel logic
         /// </summary>

@@ -174,4 +174,52 @@
     <StartTime>2022-02-15T19:19:09.5367679+02:00</StartTime>
     <IsDeleted>true</IsDeleted>
   </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>345</DroneId>
+    <StartTime>2022-02-15T20:09:14.4719175+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-15T20:10:44.4265962+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>12</DroneId>
+    <StartTime>2022-02-15T20:10:50.5437844+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>345</DroneId>
+    <StartTime>2022-02-15T20:46:18.2571968+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-15T20:48:48.2341837+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>12</DroneId>
+    <StartTime>2022-02-15T20:57:38.6617895+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-15T20:57:45.7008209+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>1</StationId>
+    <DroneId>345</DroneId>
+    <StartTime>2022-02-15T20:57:49.5829556+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
 </DroneCharges>

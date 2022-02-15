@@ -138,6 +138,8 @@ namespace PL.ViewModels
         {
             PLService.DeleteDrone(Drone.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(Drone.Id));
+            MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} deleted");
+            
         }
 
         private void LoadDrone()

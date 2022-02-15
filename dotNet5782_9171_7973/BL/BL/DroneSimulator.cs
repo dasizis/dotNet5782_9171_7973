@@ -179,7 +179,7 @@ namespace BL
 
         private void WaitState()
         {
-            SleepDelayTime(WAIT_TIME);
+            //SleepDelayTime(WAIT_TIME);
         }
 
         private bool SleepDelayTime(int delay)

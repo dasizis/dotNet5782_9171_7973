@@ -31,57 +31,53 @@ namespace PL
 
         public static void StartSimulator(int id)
         {
-            if (Simulators.ContainsKey(id))
+            if (!CanStartSimulator(id))
             {
-                if (CanStartSimulator(id))
+                MessageBox.Show(MessageBox.BoxType.Warning, "Can not start simulatro");
+                return;
+            }
+
+            BackgroundWorker worker = new()
+            {
+                WorkerSupportsCancellation = true,
+                WorkerReportsProgress = true,
+            };
+
+            worker.DoWork += (sender, args) =>
+                BLApi.BLFactory.GetBL().StartDroneSimulator(id, changes => worker.ReportProgress(0, changes), () => worker.CancellationPending);
+
+            worker.ProgressChanged += (sender, args) =>
+            {
+                PLNotification.DroneNotification.NotifyItemChanged(id);
+                    
+                DroneSimulatorChanges  changes = args.UserState as DroneSimulatorChanges;
+                    
+                if (changes.Customer != null)
                 {
-                    Simulators[id].Worker.RunWorkerAsync();
-                    Simulators[id].IsBusy = true;
+                    PLNotification.CustomerNotification.NotifyItemChanged((int)changes.Customer);
                 }
-            }
-            else
+
+                if (changes.BaseStation != null)
+                {
+                    PLNotification.BaseStationNotification.NotifyItemChanged((int)changes.BaseStation);
+                }
+
+                if (changes.Parcel != null)
+                {
+                    PLNotification.ParcelNotification.NotifyItemChanged((int)changes.Parcel);
+                }
+            };
+
+            worker.RunWorkerCompleted += (sender, args) =>
             {
-                BackgroundWorker worker = new()
-                {
-                    WorkerSupportsCancellation = true,
-                    WorkerReportsProgress = true,
-                };
+                Simulators.Remove(id);
+                PLNotification.DroneNotification.NotifyItemChanged(id);
+            };
 
-                worker.DoWork += (sender, args) =>
-                    BLApi.BLFactory.GetBL().StartDroneSimulator(id, changes => worker.ReportProgress(0, changes), () => worker.CancellationPending);
+            worker.RunWorkerAsync();
 
-                worker.ProgressChanged += (sender, args) =>
-                {
-                    PLNotification.DroneNotification.NotifyItemChanged(id);
-                    
-                    DroneSimulatorChanges  changes = args.UserState as DroneSimulatorChanges;
-                    
-                    if (changes.Customer != null)
-                    {
-                        PLNotification.CustomerNotification.NotifyItemChanged((int)changes.Customer);
-                    }
-
-                    if (changes.BaseStation != null)
-                    {
-                        PLNotification.BaseStationNotification.NotifyItemChanged((int)changes.BaseStation);
-                    }
-
-                    if (changes.Parcel != null)
-                    {
-                        PLNotification.ParcelNotification.NotifyItemChanged((int)changes.Parcel);
-                    }
-                };
-
-                worker.RunWorkerCompleted += (sender, args) =>
-                {
-                    Simulators.Remove(id);
-                    PLNotification.DroneNotification.NotifyItemChanged(id);
-                };
-
-                worker.RunWorkerAsync();
-
-                Simulators.Add(id, new Simulator(worker));
-            }
+            Simulators.Add(id, new Simulator(worker));
+            PLNotification.DroneNotification.NotifyItemChanged(id);
         }
 
         public static void StopSimulator(int id)

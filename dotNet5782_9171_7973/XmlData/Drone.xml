@@ -4,7 +4,7 @@
     <Id>12</Id>
     <Model>yaelgfgf</Model>
     <MaxWeight>Medium</MaxWeight>
-    <IsDeleted>true</IsDeleted>
+    <IsDeleted>false</IsDeleted>
   </Drone>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>5</Id>

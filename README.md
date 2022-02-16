@@ -1,11 +1,11 @@
 # dotNet5782_9171_7973
 
 ## TODO
-- [ ] Add links to PL Bonuses
+- [X] Add links to PL Bonuses
 - [X] DataSource - FIX ALL PROBLEMS
 - [X] document
 - [ ] finish README.md
-- [ ] check deletion
+- [X] check deletion
 - [X] Remove `Send A parcel` in manager mode
 - [X] Center the progress bar customer
 - [ ] Tool bar blue

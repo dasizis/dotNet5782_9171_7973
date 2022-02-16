@@ -19,6 +19,8 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:ValueToInputTypeConverter x:Key="ValueToInputTypeConverter" />
             <converters:ValueToInputEnableConverter x:Key="ValueToInputEnableConverter" />
+            <converters:CamelCaseToReadableConverter x:Key="CamelCaseToReadableConverter" />
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -40,7 +42,7 @@
                           SelectedItem="{Binding FilterKey, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type ComboBoxItem}">
-                            <TextBlock Text="{Binding Name}" Tag="{Binding}" />
+                            <TextBlock Text="{Binding Name, Converter={StaticResource CamelCaseToReadableConverter}}" Tag="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -69,6 +71,11 @@
                             <i:InvokeCommandAction Command="{Binding SortCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                            <TextBlock Text="{Binding Converter={StaticResource CamelCaseToReadableConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </syncfusion:SfTextInputLayout>
 
@@ -81,6 +88,11 @@
                             <i:InvokeCommandAction Command="{Binding GroupCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type ComboBoxItem}">
+                            <TextBlock Text="{Binding Converter={StaticResource CamelCaseToReadableConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </syncfusion:SfTextInputLayout>
         </StackPanel>

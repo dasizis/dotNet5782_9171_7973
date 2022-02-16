@@ -79,6 +79,7 @@ You can press the `Sign In As Managar` and enter in manager mode or sign up for 
 you can always change mode by clicking `Log Out`
 
 <img src="./screen-shots/log-out.jpg">
+
 #### Full support of all data queries
 -Sort
 -Filter by all properies

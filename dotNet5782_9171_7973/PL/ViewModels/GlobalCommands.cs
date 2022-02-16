@@ -68,28 +68,35 @@ namespace PL.ViewModels
         static void Delete(object item)
         {
             Type type = item.GetType();
+            int id;
             if (item is BaseStationForList baseStation)
             {
                 PLService.DeleteBaseStation(baseStation.Id);
                 Workspace.RemovePanelCommand.Execute(Workspace.BaseStationPanelName(baseStation.Id));
+                id = baseStation.Id;
             }
             else if (item is CustomerForList customer)
             {
                 PLService.DeleteCustomer(customer.Id);
+                id = customer.Id;
             }
             else if (item is DroneForList drone)
             {
                 PLService.DeleteDrone(drone.Id);
                 Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(drone.Id));
+                id = drone.Id;
             }
             else if (item is ParcelForList parcel)
             {
                 PLService.DeleteParcel(parcel.Id);
+                id = parcel.Id;
             }
             else
             {
                 throw new InvalidOperationException("This object can not be deleted");
             }
+
+            MessageBox.Show(MessageBox.BoxType.Info, $"{type.Name} #{id} was deleted ");
         }
     }
 }

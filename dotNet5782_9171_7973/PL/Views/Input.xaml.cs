@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Controls.Input;
+﻿using Syncfusion.DocIO.DLS;
+using Syncfusion.Windows.Controls.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,15 +39,6 @@ namespace PL.Views
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(InputType), typeof(Input), new PropertyMetadata(InputType.Text));
 
-        public object Value
-        {
-            get { return GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(object), typeof(Input), new PropertyMetadata(null));
-
 
         public Type ComboBoxItemsSourceEnumType
         {
@@ -66,32 +58,25 @@ namespace PL.Views
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(RelayCommand<object>), typeof(Input), new PropertyMetadata(null));
 
-
-        public RelayCommand<object> NotifyValueChangedCommand { get; set; }
-
         public Input()
         {
             InitializeComponent();
             DataContext = this;
-
-            NotifyValueChangedCommand = new(NotifyValueChanged);
         }
 
-
-        private void NotifyValueChanged(object value)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (value is SfRangeSlider slider)
-            {
-                Command.Execute(new double[] { slider.RangeStart, slider.RangeEnd });
-            }
-            else if (value is TextBox textBox)
-            {
-                Command.Execute(textBox.Text);
-            }
-            else if (value is ComboBox comboBox)
-            {
-                Command.Execute(comboBox.SelectedItem);
-            }
+            Command.Execute(((ComboBox)sender).SelectedItem);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Command.Execute(((TextBox)sender).Text);
+        }
+
+        private void RangeInput_RangeChanged(object sender, RangeChangedEventArgs e)
+        {
+            Command.Execute(new double[] { (double)e.NewStartValue, (double)e.NewEndValue });
         }
     }
 }

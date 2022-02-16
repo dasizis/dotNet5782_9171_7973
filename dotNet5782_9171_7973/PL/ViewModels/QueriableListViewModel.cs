@@ -24,10 +24,19 @@ namespace PL.ViewModels
         /// </summary>
         public ICollectionView View { get; set; }
 
+        public object filterKey;
         /// <summary>
         /// The key, or property by which to filter
         /// </summary>
-        public object FilterKey { get; set; }
+        public object FilterKey 
+        {
+            get => filterKey;
+            set
+            {
+                filterKey = value;
+                View.Refresh();
+            }
+        }
 
         /// <summary>
         /// The value to filter for
@@ -57,7 +66,7 @@ namespace PL.ViewModels
         /// <summary>
         /// The key, or property by which to sort
         /// </summary>
-        public object SortKey { get; set; }
+        public object SortKey { get; set; } = "Id";
 
         /// <summary>
         /// The key, or property by which to group
@@ -92,7 +101,7 @@ namespace PL.ViewModels
             FilterOptions = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                                      .Where(property => property.PropertyType.IsValueType || property.PropertyType == typeof(string));
                                      
-            SortOptions  =  FilterOptions.Cast<PropertyInfo>().Select(option => option.Name).Union(new List<string> { RESET_VALUE });
+            SortOptions  =  FilterOptions.Cast<PropertyInfo>().Select(option => option.Name);
             GroupOptions = FilterOptions.Cast<PropertyInfo>().Where(property => property.PropertyType.IsEnum).Select(option => option.Name).Union(new List<string> { RESET_VALUE });
 
             View.Filter = Filter;
@@ -101,6 +110,8 @@ namespace PL.ViewModels
             GroupCommand = new(Group, () => GroupKey != null);
             SortCommand = new(Sort);
             OpenAddWindowCommand = new(() => Workspace.AddPanelCommand.Execute(GetAddPanel()));
+
+            Sort();
         }
 
         /// <summary>

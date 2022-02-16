@@ -35,41 +35,28 @@
                                   ThumbToolTipPlacement="TopLeft"
                                   TickFrequency="20"
                                   SnapsTo="StepValues"
-                                  Margin="30,5,30,0">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="RangeChanged">
-                    <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding ElementName=RangeInput}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </syncfusion:SfRangeSlider>
+                                  Margin="30,5,30,0" 
+                                  RangeChanged="RangeInput_RangeChanged" />
 
         <!--Text-->
-        <syncfusion:SfTextInputLayout Visibility="{Binding Type, Converter={StaticResource InputTypeToVisibilityConverter}, ConverterParameter={x:Static local:InputType.Text}}"
-                                      Hint="Filter Value" InputViewPadding="10" >
-            <TextBox x:Name="TextInput"
-                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Tag="TextBox">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
+        <syncfusion:SfTextInputLayout Visibility="{Binding Type, 
+                                                           Converter={StaticResource InputTypeToVisibilityConverter}, 
+                                                           ConverterParameter={x:Static local:InputType.Text}}"
+                                      Hint="Filter Value" 
+                                      InputViewPadding="10">
+            <TextBox TextChanged="TextBox_TextChanged" />
         </syncfusion:SfTextInputLayout>
 
         <!--ComboBox-->
-        <syncfusion:SfTextInputLayout Visibility="{Binding Type, 
+        <syncfusion:SfTextInputLayout x:Name="ComboBoxInput"
+                                      Visibility="{Binding Type, 
                                                            Converter={StaticResource InputTypeToVisibilityConverter}, 
                                                            ConverterParameter={x:Static local:InputType.ComboBox}}"
                                       Hint="Filter Value" 
                                       InputViewPadding="10" >
-            <ComboBox x:Name="ComboBoxInput"
-                      ItemsSource="{Binding ComboBoxItemsSourceEnumType, Converter={StaticResource EnumTypeToValuesConverter}}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding ElementName=ComboBoxInput}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding ComboBoxItemsSourceEnumType,
+                                            Converter={StaticResource EnumTypeToValuesConverter}}" 
+                      SelectionChanged="ComboBox_SelectionChanged"/>
         </syncfusion:SfTextInputLayout>
         
     </StackPanel>

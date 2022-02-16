@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace BO
 {
@@ -12,6 +13,14 @@ namespace BO
                 if (!char.IsDigit(ch)) return false;
             }
             return true;
+        }
+
+        internal static bool IsValidMail(string mail)
+        {
+            if (string.IsNullOrEmpty(mail)) return false;
+
+            Regex mailRegex = new(@"^\w{4,}@gmail[.]com$");
+            return mailRegex.IsMatch(mail);  
         }
 
         internal static bool IsValidLongitude(double longitude)

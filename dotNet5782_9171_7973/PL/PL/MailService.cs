@@ -19,10 +19,21 @@ namespace PL
         const string TARGET_SUBJECT = "Drone supplied a parcel to you";
         const string TARGET_BODY = "Drone has supplied a parcel to you.";
 
-        static public void Send(string targetMail, string name, bool isSender)
+        static public void Send(PO.Parcel parcel)
         {
+            if (parcel.PickedUp == null) return;
+            
+            bool isSender = true;
+            PO.Customer customer = PLService.GetCustomer(parcel.Sender.Id);
+            
+            if (parcel.Supplied != null)
+            {
+                customer = PLService.GetCustomer(parcel.Target.Id);
+                isSender = false;
+            }
+
             var fromAddress = new MailAddress(COMPANY_MAIL, COMPANY_NAME);
-            var toAddress = new MailAddress("yaeldoch@gmail.com", name);
+            var toAddress = new MailAddress("yaeldoch@gmail.com", customer.Name);
             const string fromPassword = COMPANY_PASSWORD;
             string subject = isSender? SENDER_SUBJECT : TARGET_SUBJECT;
             string body = isSender ? SENDER_BODY : TARGET_BODY;

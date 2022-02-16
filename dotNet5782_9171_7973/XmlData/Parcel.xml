@@ -439,7 +439,7 @@
     <Requested>2022-02-16T19:17:23.4359443+02:00</Requested>
     <Scheduled>2022-02-16T19:19:29.0066952+02:00</Scheduled>
     <PickedUp>2022-02-16T19:20:17.6839985+02:00</PickedUp>
-    <Supplied xsi:nil="true" />
+    <Supplied>2022-02-16T22:54:06.7169735+02:00</Supplied>
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">

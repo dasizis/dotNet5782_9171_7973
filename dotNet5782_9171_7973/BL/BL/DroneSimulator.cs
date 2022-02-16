@@ -90,7 +90,6 @@ namespace BL
                 {
                     bl.PickUpParcel(drone.Id);
                 }
-
                 updateAction(new(Parcel: parcel.Id));
             }
             //if drone has not supplied parcl yet

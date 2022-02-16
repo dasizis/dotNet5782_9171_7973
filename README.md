@@ -24,9 +24,10 @@
 ## Bonus Review
 
 ### General
+##### Smart heading to the application
 #### New c# features
 ##### Record
-##### Switch exceptions
+##### Switch expression
 ##### Tupples
 ##### Init only setters
 ##### Using statement
@@ -65,6 +66,7 @@ From now, when *deletion* is just to change is `IsDeleted` property to `true`. O
 In order to prevent reapet our self according to the **DRY** rule, We implemnted all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.
 
 ### PL
+#### Regular expression
 #### User Interface
 Our project supports two modes: customer mode and manager mode. When you run the program you see
 
@@ -77,6 +79,10 @@ You can press the `Sign In As Managar` and enter in manager mode or sign up for 
 you can always change mode by clicking `Log Out`
 
 <img src="./screen-shots/log-out.jpg">
+#### Full support of all data queries
+-Sort
+-Filter by all properies
+-Group by
 
 #### MVVM
 We used ***FULL*** MVVM.

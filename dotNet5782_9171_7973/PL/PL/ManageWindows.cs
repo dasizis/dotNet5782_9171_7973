@@ -5,7 +5,7 @@ namespace PL
 {
     static public class ManageWindows
     {
-        const string AppWindowTitle = "Workspace Window";
+        const string AppWindowTitle = "WorkspaceWindow";
         const string RegisterWindowTitle = "Welcome Window";
 
         public static void OpenRegisterWindow()

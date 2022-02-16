@@ -96,7 +96,7 @@ namespace PL.ViewModels
                 throw new InvalidOperationException("This object can not be deleted");
             }
 
-            MessageBox.Show(MessageBox.BoxType.Info, $"{type.Name} #{id} was deleted ");
+            MessageBox.Show(MessageBox.BoxType.Info, $"{type.Name.Replace("ForList","")} #{id} was deleted ");
         }
     }
 }

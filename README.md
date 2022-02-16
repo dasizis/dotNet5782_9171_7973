@@ -97,7 +97,7 @@ We used ***FULL*** MVVM.
   - Event Trigger [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/fc27f43be178a083ddce056caffc8e1395295442/dotNet5782_9171_7973/PL/Views/Style/StyleDictionary.xaml#L126)
 - Converters [example]()
 - Behavior [example]()
-- Commands (We implemented A [`RelyCommand`]() class and used it.) [example]()
+- Commands (We implemented A [`RelyCommand`]() class and used it as properties in our `PL` classes) [example]()
 - Data templates
 - Observable collection [example]()
 

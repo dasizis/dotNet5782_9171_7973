@@ -2,20 +2,20 @@
 
 ## TODO
 - [ ] Add links to PL Bonuses
-- [ ] DataSource - FIX ALL PROBLEMS
-- [ ] document
+- [X] DataSource - FIX ALL PROBLEMS
+- [X] document
 - [ ] finish README.md
 - [ ] check deletion
-- [ ] Remove `Send A parcel` in manager mode
-- [ ] Center the progress bar customer
+- [X] Remove `Send A parcel` in manager mode
+- [X] Center the progress bar customer
 - [ ] Tool bar blue
 - [ ] Hide text above progress bar
 
 ## Bugs
 - [X] Notify parcel changed in simulatr
 - [X] Let customer name to include space
-- [ ] Rewrite messages
-- [ ] Add deletion message in context menu
+- [X] Rewrite messages
+- [X] Add deletion message in context menu
   
 ## 
 - [ ] Unseen drones
@@ -59,13 +59,14 @@ interface IDeletable
     bool IsDeleted { get; set; }
 }
 ```
-From now, when *deletion* is just to change is `IsDeleted` property to `true`. Only non-deleted entities are allowed to perform actions.
+From now, *deletion* is changing the entity's `IsDeleted` property to `true`. Only non-deleted entities are allowed to perform actions.
 
 #### Extensive Use of Generic
-In order to prevent reapet our self according to the **DRY** rule, We implemnted all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.
+In order to Avoid repetition according to the **DRY** rule, We implemented all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.
 
 ### PL
 #### Custom Window Layout - Docking
+Layout is very flexible and easy to use. 
 - [ ] gif
 #### Regular Expression
 #### User Interface
@@ -73,15 +74,16 @@ Our project supports two modes: customer mode and manager mode. When you run the
 
 <img src="./screen-shots/sign-up.jpg" width="300">
 
-You can press the `Sign In As Managar` and enter in manager mode or sign up for a new customer account and enter in customer mode. If you already have an account you can click on `Already Have an...` and get this scrren:
+You can press the `Sign In As Managar` and enter in manager mode or sign up for a new customer account and enter in customer mode. If you already have an account you can click on `Already Have an...` and get this screen:
 
 <img src="./screen-shots/sign-in.jpg" width="300">
 
-you can always change mode by clicking `Log Out`
+you can always change mode by clicking `Log Out` and reconnecting.
 
 <img src="./screen-shots/log-out.jpg">
 
 #### Full Support of All Data Queries
+Very easy way to accsses accurate data.
 - Sort 
 -  [ ] gif
 - Filter by all properies
@@ -121,6 +123,9 @@ You can activate as many drones as you want.
 
 #### Busy Indicator
 <img src="./screen-shots/busy-indicator.gif">
+
+#### The Application Prevent Closing As long as Simulators are On
+This is to make sure all data is fully updated.
 
 #### Maps
 Each entity has its map to represent its location, Besides there is a `Main Map` for all the entities together.

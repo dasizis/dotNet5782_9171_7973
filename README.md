@@ -43,7 +43,7 @@
 ### Dal
 
 #### Structure
-We have implemented the layers model in the second structure (The Bonus structur), So we have a config file which follos the given format:
+We have implemented the layers model in the second structure (The Bonus structure), So we have a config file which follows the given format:
 ```xml
 <config>
     <dal>[chosen-dal]</dal>
@@ -57,7 +57,7 @@ We have implemented the layers model in the second structure (The Bonus structur
 </config>
 ```
 
-This format allows to specify the namespace and not only the class name.
+This format allows to specify the namespace in addition to the class name.
 
 #### Logic Deletion
 The dal deletion is just a *Logic Deletion* rather than *Real Deletion*. All the `Dal` entities implement the interface `IDeletable` which consists of just one property as follows
@@ -79,17 +79,20 @@ Layout is very flexible and easy to use.
 <img src="./screen-shots/docing.gif">
 
 #### Regular Expression
+We used `Regex` for validity checking. [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/BL/BO/Validation.cs#L22)
 
 #### User Interface
-Our project supports two modes: customer mode and manager mode. When you run the program you see
+Our project supports two modes: customer mode and manager mode. When running the program the following screen shows up:
 
 <img src="./screen-shots/sign-up.jpg" width="300">
 
-You can press the `Sign In As Managar` and enter in manager mode or sign up for a new customer account and enter in customer mode. If you already have an account you can click on `Already Have an...` and get this screen:
+Then pressing the `Sign In As Managar` button enters the program in manager mode.
+Signing up enters with a new customer account in customer mode. 
+Clicking on `Already Have an...` gives sign up page like this screen:
 
 <img src="./screen-shots/sign-in.jpg" width="300">
 
-you can always change mode by clicking `Log Out` and reconnecting.
+Clicking `Log Out` any time brings back to register window, where reconnecting is available again.
 
 <img src="./screen-shots/log-out.jpg">
 
@@ -121,6 +124,11 @@ We used ***FULL*** MVVM.
 - `Collection View` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/FilteredListViewModel.cs#L53)
 
 #### External dictionary
+
+#### The application sends an email using `Smtp` object:
+- To sender- when his parcel is sent
+- To reciever- when he gets a parcel
+[see code](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/PL/PL/MailService.cs#L1)
 
 ### Simulator
 

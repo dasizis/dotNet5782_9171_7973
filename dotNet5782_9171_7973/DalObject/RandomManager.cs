@@ -155,6 +155,7 @@ namespace Dal
             {
                 Id = id,
                 Name = RandomFullName(),
+                Mail = "yaeldoch@gmail.com",
                 Longitude = RandomLongitude(),
                 Latitude = RandomLatitude(),
                 Phone = RandomPhone(),

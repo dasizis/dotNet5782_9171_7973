@@ -37,6 +37,16 @@ namespace PO
             set => SetField(ref phone, value);
         }
 
+        string mail;
+        /// <summary>
+        /// Customer mail address
+        /// </summary>
+        public string Mail
+        {
+            get => mail;
+            set => SetField(ref mail, value);
+        }
+
         int parcelsSendAndSupplied;
         /// <summary>
         /// Number of parcels sent by customer and supplied

@@ -69,6 +69,20 @@
                                     UpdateSourceTrigger=PropertyChanged}"/>
                 </syncfusion:SfTextInputLayout>
 
+                <!--Mail input-->
+                <syncfusion:SfTextInputLayout Hint="Mail address" 
+                                      HasError="{Binding (Validation.HasError), ElementName=MailInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=MailInput}">
+                    <syncfusion:SfTextInputLayout.LeadingView>
+                        <materialDesign:PackIcon Kind="Mail" Style="{StaticResource Icon}"/>
+                    </syncfusion:SfTextInputLayout.LeadingView>
+                    <TextBox x:Name="MailInput"
+                     Text="{Binding Customer.Mail, 
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+                </syncfusion:SfTextInputLayout>
+
                 <!--Longitude input-->
                 <syncfusion:SfTextInputLayout Hint="Longitude" 
                                       HasError="{Binding (Validation.HasError), ElementName=LongitudeInput}"

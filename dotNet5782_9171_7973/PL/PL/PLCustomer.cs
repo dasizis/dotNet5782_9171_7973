@@ -17,6 +17,7 @@ namespace PL
             bl.AddCustomer((int)customer.Id,
                            customer.Name,
                            customer.Phone,
+                           customer.Mail,
                            double.Parse(customer.Longitude),
                            double.Parse(customer.Latitude));
 
@@ -50,6 +51,7 @@ namespace PL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
+                Mail = customer.Mail,
                 Location = new Location()
                 { 
                     Latitude = customer.Location.Latitude,
@@ -81,6 +83,7 @@ namespace PL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
+                Mail = customer.Mail,
                 ParcelsOnWay = customer.ParcelsOnWay,
                 ParcelsRecieved = customer.ParcelsRecieved,
                 ParcelsSendAndNotSupplied = customer.ParcelsSendAndNotSupplied,
@@ -104,9 +107,9 @@ namespace PL
         /// <param name="customerId">customer to update</param>
         /// <param name="name">new name</param>
         /// <param name="phone">new phone</param>
-        public static void UpdateCustomer(int customerId, string name = null, string phone = null)
+        public static void UpdateCustomer(int customerId, string name = null, string phone = null, string mail = null)
         {
-            bl.UpdateCustomer(customerId, name, phone);
+            bl.UpdateCustomer(customerId, name, phone, mail);
             PLNotification.CustomerNotification.NotifyItemChanged(customerId);
         }
 

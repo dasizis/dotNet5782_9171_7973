@@ -47,6 +47,23 @@ namespace BO
             }
         }
 
+        string mail;
+        /// <summary>
+        /// Customer mail address
+        /// </summary>
+        public string Mail
+        {
+            get => mail;
+            set
+            {
+                if (!Validation.IsValidMail(value))
+                {
+                    throw new InvalidPropertyValueException(value);
+                }
+                mail = value;
+            }
+        }
+
         int parcelsSendAndSupplied;
         /// <summary>
         /// Number of parcels sent by customer and supplied

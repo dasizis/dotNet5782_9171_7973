@@ -158,6 +158,7 @@ namespace PL
             int parcelId = GetDrone(droneId).ParcelInDeliver.Id;
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
             PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
+
         }
 
         /// <summary>

@@ -35,6 +35,11 @@ namespace DO
         public double Latitude { get; set; }
 
         /// <summary>
+        /// Customer mail
+        /// </summary>
+        public string Mail { get; set; }
+
+        /// <summary>
         /// Determines whether the customer is deleted or not
         /// </summary>
         public bool IsDeleted { get; set; }

@@ -88,6 +88,10 @@ namespace PL
             int parcelId = bl.PickUpParcel(droneId);
             PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
+
+            var parcel = GetParcel(parcelId);
+            var sender = GetCustomer(parcel.Sender.Id);
+            MailService.Send(sender.Mail, sender.Name, true);
         }
 
         /// <summary>
@@ -101,6 +105,10 @@ namespace PL
             int parcelId = bl.SupplyParcel(droneId);
             PLNotification.ParcelNotification.NotifyItemChanged(parcelId);
             PLNotification.DroneNotification.NotifyItemChanged(droneId);
+
+            var parcel = GetParcel(parcelId);
+            var target = GetCustomer(parcel.Target.Id);
+            MailService.Send(target.Mail, target.Name, false);
         }
 
         /// <summary>

@@ -12,35 +12,37 @@ namespace BL
     public partial class BL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddCustomer(int id, string name, string phone, double longitude, double latitude)
+        public void AddCustomer(int id, string name, string phone, string mail, double longitude, double latitude)
         {
             var customer = new Customer()
             {
                 Id = id,
                 Name = name,
                 Phone = phone,
+                Mail = mail,
                 Location = new Location() { Longitude = longitude, Latitude = latitude },
                 Send = new(),
                 Recieve = new(),
             };
 
-            lock(Dal) try
-            {
-                Dal.Add(
-                    new DO.Customer()
-                    {
-                        Id = customer.Id,
-                        Name = customer.Name,
-                        Phone = customer.Phone,
-                        Longitude = customer.Location.Longitude,
-                        Latitude = customer.Location.Latitude,
-                    }
-               );
-            }
-            catch (DO.IdAlreadyExistsException)
-            {
-                throw new IdAlreadyExistsException(typeof(Customer), id);
-            }
+            lock (Dal) try
+                {
+                    Dal.Add(
+                        new DO.Customer()
+                        {
+                            Id = customer.Id,
+                            Name = customer.Name,
+                            Phone = customer.Phone,
+                            Mail = customer.Mail,
+                            Longitude = customer.Location.Longitude,
+                            Latitude = customer.Location.Latitude,
+                        }
+                   );
+                }
+                catch (DO.IdAlreadyExistsException)
+                {
+                    throw new IdAlreadyExistsException(typeof(Customer), id);
+                }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -69,6 +71,7 @@ namespace BL
                 Location = new Location() { Latitude = customer.Latitude, Longitude = customer.Longitude },
                 Name = customer.Name,
                 Phone = customer.Phone,
+                Mail = customer.Mail,
                 Send = sendParcels.ToList(),
                 Recieve = targetParcels.ToList(),
             };
@@ -99,6 +102,7 @@ namespace BL
                 Id = customer.Id,
                 Name = customer.Name,
                 Phone = customer.Phone,
+                Mail = customer.Mail,
                 ParcelsSendAndSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied != null).Count(),
                 ParcelsSendAndNotSupplied = Dal.GetFilteredList<DO.Parcel>(p => p.SenderId == id && p.Supplied == null).Count(),
                 ParcelsRecieved = Dal.GetFilteredList<DO.Parcel>(p => p.TargetId == id && p.Supplied != null).Count(),
@@ -114,7 +118,7 @@ namespace BL
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void UpdateCustomer(int customerId, string name = null, string phone = null)
+        public void UpdateCustomer(int customerId, string name = null, string phone = null, string mail = null)
         {
             if (name != null)
             {
@@ -139,13 +143,30 @@ namespace BL
                 }
 
                 lock (Dal) try
+                    {
+                        Dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Phone), phone);
+                    }
+                    catch (DO.ObjectNotFoundException e)
+                    {
+                        throw new ObjectNotFoundException(typeof(BaseStation), e);
+                    }
+            }
+
+            if (mail != null)
+            {
+                if (!Validation.IsValidMail(mail))
                 {
-                    Dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Phone), phone);
+                    throw new InvalidPropertyValueException(nameof(DO.Customer.Mail), mail);
                 }
-                catch (DO.ObjectNotFoundException e)
-                {
-                    throw new ObjectNotFoundException(typeof(BaseStation), e);
-                }
+
+                lock (Dal) try
+                    {
+                        Dal.Update<DO.Customer>(customerId, nameof(DO.Customer.Mail), mail);
+                    }
+                    catch (DO.ObjectNotFoundException e)
+                    {
+                        throw new ObjectNotFoundException(typeof(BaseStation), e);
+                    }
             }
         }
 

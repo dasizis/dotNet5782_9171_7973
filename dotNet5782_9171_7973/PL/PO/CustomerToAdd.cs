@@ -43,6 +43,17 @@ namespace PO
             set => SetField(ref phone, value);
         }
 
+        string mail;
+        /// <summary>
+        /// Customer mail address
+        /// </summary>
+        [Required(ErrorMessage = "Required")]
+        [RegularExpression(@"^\w{4,}@gmail[.]com$", ErrorMessage = "Mail must match a Gmail address format")]
+        public string Mail
+        {
+            get => mail;
+            set => SetField(ref mail, value);
+        }
 
         string longitude;
         /// <summary>

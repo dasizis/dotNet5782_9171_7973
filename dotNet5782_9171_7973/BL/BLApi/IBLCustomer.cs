@@ -18,7 +18,7 @@ namespace BLApi
         /// <param name="latitude">The customer location latitude</param>
         /// <exception cref="IdAlreadyExistsException" />
         /// <exception cref="InvalidPropertyValueException" />
-        void AddCustomer(int id, string name, string phone, double longitude, double latitude);
+        void AddCustomer(int id, string name, string phone, string mail, double longitude, double latitude);
 
         /// <summary>
         /// return specific customer
@@ -48,7 +48,7 @@ namespace BLApi
         /// <param name="customerId">customer to update</param>
         /// <param name="name">new name</param>
         /// <param name="phone">new phone</param>
-        void UpdateCustomer(int customerId, string name = null, string phone = null);
+        void UpdateCustomer(int customerId, string name = null, string phone = null, string mail = null);
 
         /// <summary>
         /// Deletes a customer

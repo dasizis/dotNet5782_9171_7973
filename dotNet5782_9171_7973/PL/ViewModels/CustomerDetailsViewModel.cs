@@ -64,7 +64,7 @@ namespace PL.ViewModels
         /// </summary>
         private void Update()
         {
-            PLService.UpdateCustomer(Customer.Id, Customer.Name, Customer.Phone);
+            PLService.UpdateCustomer(Customer.Id, Customer.Name, Customer.Phone, Customer.Mail);
             MessageBox.Show(MessageBox.BoxType.Success, $"Details of customer {Customer.Name} updated");
         }
 

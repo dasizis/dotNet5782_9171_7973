@@ -27,10 +27,11 @@ namespace ConsoleUI_BL
             int id = GetInput(int.Parse);
             string name = GetInput(s => s, Validation.IsValidName);            
             string phone = GetInput(s => s, Validation.IsValidPhone);
+            string mail = GetInput(s => s, Validation.IsValidPhone);
             double longitude = GetInput(double.Parse, Validation.IsValidLongitude);
             double latitude = GetInput(double.Parse, Validation.IsValidLatitude);
 
-            bl.AddCustomer(id, name, phone, longitude, latitude);
+            bl.AddCustomer(id, name, phone, mail, longitude, latitude);
         }
 
         static void AddParcel()

@@ -129,6 +129,9 @@ namespace Dal
 
             var freeDrones = Drones.Where(drone => !Parcels.Any(parcel => parcel.DroneId == drone.Id) && !DroneCharges.Any(slot => slot.DroneId == drone.Id));
 
+            if (!freeDrones.Any()) 
+                return parcel;
+
             int rand = RandomManager.Rand.Next();
 
             return new()

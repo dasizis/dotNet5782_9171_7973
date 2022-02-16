@@ -47,10 +47,10 @@
         <syncfusion:SfTextInputLayout Visibility="{Binding Type, Converter={StaticResource InputTypeToVisibilityConverter}, ConverterParameter={x:Static local:InputType.Text}}"
                                       Hint="Filter Value" InputViewPadding="10" >
             <TextBox x:Name="TextInput"
-                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Tag="TextBox">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding ElementName=TextInput}" />
+                        <i:InvokeCommandAction Command="{Binding NotifyValueChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>

@@ -50,7 +50,7 @@ namespace PL
             {
                 PLNotification.DroneNotification.NotifyItemChanged(id);
                     
-                DroneSimulatorChanges  changes = args.UserState as DroneSimulatorChanges;
+                DroneSimulatorChanges changes = args.UserState as DroneSimulatorChanges;
                     
                 if (changes.Customer != null)
                 {

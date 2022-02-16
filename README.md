@@ -126,6 +126,7 @@ You can activate as many drones as you want.
 
 #### The Application Prevent Closing As long as Simulators are On
 This is to make sure all data is fully updated.
+- [ ] gif
 
 #### Maps
 Each entity has its map to represent its location, Besides there is a `Main Map` for all the entities together.

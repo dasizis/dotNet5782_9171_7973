@@ -95,7 +95,7 @@ namespace BL
             }
             catch (DO.ObjectNotFoundException)
             {
-                throw new ObjectNotFoundException("The drone is not charging");
+                throw new ObjectNotFoundException("Drone is not being charged");
             }
         }
 
@@ -128,14 +128,14 @@ namespace BL
             var availableBaseStations = GetAvailableBaseStationsId();
             if (!availableBaseStations.Any())
             {
-                throw new InvalidActionException("There is no empty base station");
+                throw new InvalidActionException("There is no available charge slot in any station.");
             }
 
             BaseStation closest = drone.FindClosest(availableBaseStations.Select(id => GetBaseStation(id)));
 
             if (!IsEnoughBattery(drone, closest.Location))
             {
-                throw new InvalidActionException("Drone can't get to base station for charging");
+                throw new InvalidActionException("Drone does not have enough battery to get to base station for charging.");
             }
 
             drone.Location = closest.Location;
@@ -157,7 +157,7 @@ namespace BL
 
             if (drone.State != DroneState.Maintenance)
             {
-                throw new InvalidActionException("The drone is not maintained");
+                throw new InvalidActionException("Drone is not being charged.");
             }
  
             var dalCharge = Dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId).FirstOrDefault();
@@ -284,7 +284,7 @@ namespace BL
 
             if (drone.Battery - neededBattery < 0)
             {
-                throw new InvalidActionException("Drone does not have enough battery to get to target customer");
+                throw new InvalidActionException("Drone does not have enough battery to get to target customer.");
             }
 
             drone.Battery -= neededBattery;

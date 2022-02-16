@@ -44,7 +44,7 @@ namespace Singleton
 
                             if (type == null || !type.IsSealed)
                             {
-                                throw new SingletonException($"{type.Name} must be a seald class");
+                                throw new SingletonException($"{type.Name} must be a sealed class");
                             }
 
                             ConstructorInfo ctor = null;

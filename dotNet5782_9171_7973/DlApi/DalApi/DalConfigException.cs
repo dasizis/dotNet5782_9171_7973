@@ -3,7 +3,7 @@
 namespace DalApi
 {
     /// <summary>
-    /// 
+    /// Dal config Exceptions
     /// </summary>
     public class DalConfigException : Exception
     {

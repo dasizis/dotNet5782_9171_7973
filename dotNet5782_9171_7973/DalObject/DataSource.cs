@@ -17,6 +17,7 @@ namespace Dal
         const int INIT_CUSTOMERS = 30;
         const int INIT_PARCELS = 40;
 
+        //Lists of entities
         internal static List<Drone> Drones { get; } = new();
         internal static List<BaseStation> BaseStations { get; } = new();
         internal static List<Customer> Customers { get; } = new();
@@ -38,6 +39,9 @@ namespace Dal
             Initialize();
         }
 
+        /// <summary>
+        /// A class to store config information
+        /// </summary>
         public static class Config
         {
             public static int NextParcelId = 0;
@@ -58,16 +62,19 @@ namespace Dal
         /// </summary>
         public static void Initialize()
         {
+            //initialize base stations
             BaseStations.AddRange(
                 Enumerable.Range(0, INIT_BASESTATIONS)
                           .Select(i => RandomManager.RandomBaseStation(i))
             );
 
+            //initialize drones
             Drones.AddRange(
                 Enumerable.Range(0, INIT_DRONES)
                           .Select(i => RandomManager.RandomDrone(i))
             );
 
+            //number of drones in charge
             int chargeSlots = BaseStations.Select(s => s.ChargeSlots).Aggregate((s1, s2) => s1 + s2);
             int dronesInCharge = Math.Min(chargeSlots / 2, Drones.Count / 2);            
             
@@ -84,11 +91,13 @@ namespace Dal
                 })
             );
 
+            //initialize customers
             Customers.AddRange(
                 Enumerable.Range(0, INIT_CUSTOMERS)
                           .Select(i => RandomManager.RandomCustomer(i))
             );
 
+            //initialize parcels
             Parcels.AddRange(
                 Enumerable.Range(0, INIT_PARCELS).Select(_ => InitializeParcel()) 
             );
@@ -122,6 +131,7 @@ namespace Dal
         {
             const int ChancesOfUnAssignedParcel = 50;
 
+            //not assigned parcels
             Parcel parcel = RandomManager.RandomParcel(Config.NextParcelId++, Customers);
 
             if (RandomManager.Rand.Next(100) < ChancesOfUnAssignedParcel)
@@ -129,11 +139,13 @@ namespace Dal
 
             var freeDrones = Drones.Where(drone => !Parcels.Any(parcel => parcel.DroneId == drone.Id) && !DroneCharges.Any(slot => slot.DroneId == drone.Id));
 
+            //if no free drones- return not assigned parcel
             if (!freeDrones.Any()) 
                 return parcel;
 
             int rand = RandomManager.Rand.Next();
 
+            //an assigned parcel
             return new()
             {
                 Id = parcel.Id,

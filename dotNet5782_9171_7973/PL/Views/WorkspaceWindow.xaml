@@ -44,7 +44,9 @@
                             VerticalAlignment="Center" 
                             Background="#44454c" 
                             Foreground="White" 
-                            Click="SendNewParcel">
+                            Click="SendNewParcel"
+                            Visibility="{Binding Converter={StaticResource BooleanToVisibilityConverter}, 
+                                         Source={x:Static pl:PLService.IsCustomerMode}}">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                 <Style.Triggers>

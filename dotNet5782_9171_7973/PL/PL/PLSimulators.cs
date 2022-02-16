@@ -33,7 +33,7 @@ namespace PL
         {
             if (!CanStartSimulator(id))
             {
-                MessageBox.Show(MessageBox.BoxType.Warning, "Can not start simulatro");
+                MessageBox.Show(MessageBox.BoxType.Warning, "Can not run simulator");
                 return;
             }
 

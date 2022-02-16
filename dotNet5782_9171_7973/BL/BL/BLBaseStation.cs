@@ -138,7 +138,7 @@ namespace BL
             }
 
             if (baseStation.BusyChargeSlots > 0)
-                throw new InvalidActionException("Can not delete a busy base station");
+                throw new InvalidActionException("Can not delete a not empty base station.");
 
             lock (Dal)
             {

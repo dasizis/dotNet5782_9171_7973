@@ -33,7 +33,7 @@ namespace DalApi
             }
             catch (FileNotFoundException e)
             {
-                throw new DalConfigException("Could not load config.xml file", e);
+                throw new DalConfigException("Loading config.xml file failed.", e);
             }
 
             string dalName = dalConfig.Element("dal").Value;

@@ -60,6 +60,15 @@ namespace PL.ViewModels
         /// </summary>
         private void ViewSenderDetails()
         {
+            try
+            {
+                PLService.GetCustomer(Parcel.Sender.Id);
+            }
+            catch(BO.ObjectNotFoundException)
+            {
+                MessageBox.Show(MessageBox.BoxType.Error, $"Sender customer #{Parcel.Sender.Id} was deleted. ");
+                return;
+            }
             Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Sender.Id));
         }
 
@@ -68,6 +77,15 @@ namespace PL.ViewModels
         /// </summary>
         private void ViewTargetDetails()
         {
+            try
+            {
+                PLService.GetCustomer(Parcel.Target.Id);
+            }
+            catch (BO.ObjectNotFoundException)
+            {
+                MessageBox.Show(MessageBox.BoxType.Error, $"Target customer #{Parcel.Target.Id} was deleted.");
+                return;
+            }
             Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Target.Id));
         }
 
@@ -76,6 +94,15 @@ namespace PL.ViewModels
         /// </summary>
         private void ViewDroneDetails()
         {
+            try
+            {
+                PLService.GetDrone((int)Parcel.DroneId);
+            }
+            catch (BO.ObjectNotFoundException)
+            {
+                MessageBox.Show(MessageBox.BoxType.Error, $"Deliver Drone #{(int)Parcel.DroneId} was deleted. ");
+                return;
+            }
             Workspace.AddPanelCommand.Execute(Workspace.DronePanel(Parcel.DroneId));
         }
 
@@ -86,7 +113,7 @@ namespace PL.ViewModels
         {
             PLService.DeleteParcel(Parcel.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.ParcelPanelName(Parcel.Id));
-            MessageBox.Show(MessageBox.BoxType.Info, $"Parcel {Parcel.Id} deleted");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Parcel #{Parcel.Id} deleted");
         }
 
         /// <summary>

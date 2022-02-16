@@ -20,13 +20,13 @@ namespace DalApi
             Type type = Type.GetType($"{DalConfig.Namespace}.{DalConfig.ClassName}, {DalConfig.ClassName}");
 
             if (type == null)
-                throw new DalConfigException("Can't find such project");
+                throw new DalConfigException("Such project was not found.");
 
             IDal dal = (IDal)type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                                  .GetValue(null);
 
             if (dal == null)
-                throw new DalConfigException("Can't Get Dal Instance");
+                throw new DalConfigException("Accessing Dal instance failed.");
 
             return dal;
         }

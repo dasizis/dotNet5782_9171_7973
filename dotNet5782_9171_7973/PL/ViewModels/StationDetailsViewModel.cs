@@ -57,7 +57,7 @@ namespace PL.ViewModels
         private void ExecuteUpdateDetails()
         {
             PLService.UpdateBaseStation(Station.Id, Station.Name, Station.EmptyChargeSlots);
-            MessageBox.Show(MessageBox.BoxType.Success, $"Station {Station.Id}' details changed");
+            MessageBox.Show(MessageBox.BoxType.Success, $"Details of Station #{Station.Id} changed");
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace PL.ViewModels
         public void Delete()
         {
             PLService.DeleteBaseStation(Station.Id);
-            MessageBox.Show(MessageBox.BoxType.Info, $"Station {Station.Id} deleted");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Station #{Station.Id} deleted");
         }
 
         /// <summary>

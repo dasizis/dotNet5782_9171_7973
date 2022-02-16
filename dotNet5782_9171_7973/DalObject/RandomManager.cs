@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Dal
 {
+    /// <summary>
+    /// A class to manage all random values required for initialization
+    /// </summary>
     static class RandomManager
     {
         internal static System.Random Rand => new();

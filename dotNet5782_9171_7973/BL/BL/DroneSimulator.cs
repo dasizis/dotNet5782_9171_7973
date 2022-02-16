@@ -190,7 +190,7 @@ namespace BL
                 };
                
                 drone.Battery -= Math.Min(KM_PER_S / MS_PER_SECOND, distance) * electricityConfumctiol;
-                updateAction(new());
+                updateAction(drone.State == DroneState.Deliver ? new(Parcel: drone.DeliveredParcelId): new());
             }
         }
 

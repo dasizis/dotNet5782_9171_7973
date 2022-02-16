@@ -36,7 +36,7 @@ namespace StringUtilities
 
             foreach (var letter in letters)
             {
-                result += char.IsUpper(letter) ? $" {char.ToLower(letter)}" : letter;
+                result += char.IsUpper(letter) ? $" {letter}" : letter;
             }
 
             return letters[0] + result[2..];

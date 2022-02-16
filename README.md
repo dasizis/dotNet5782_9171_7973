@@ -6,6 +6,20 @@
 - [ ] document
 - [ ] finish README.md
 - [ ] check deletion
+- [ ] Remove `Send A parcel` in manager mode
+- [ ] Center the progress bar customer
+- [ ] Tool bar blue
+- [ ] Hide text above progress bar
+
+## Bugs
+- [X] Notify parcel changed in simulatr
+- [X] Let customer name to include space
+- [ ] Rewrite messages
+- [ ] Add deletion message in context menu
+  
+## 
+- [ ] Unseen drones
+- [ ] View parcel in simulator
 
 ## Bonus Review
 

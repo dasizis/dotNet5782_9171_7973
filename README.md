@@ -137,3 +137,4 @@ Each entity has its map to represent its location, Besides there is a `Main Map`
 We implemnt an abstract class `Singleton` which has lazy initialization and is thread-safe. The `Dal` and `BL` layers just inherit it.
 
 
+###Last But Not Least - Well Neat, Organized and Detailed `README`.

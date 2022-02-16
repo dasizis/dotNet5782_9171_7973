@@ -31,7 +31,7 @@
                                                  VerticalAlignment="Center" 
                                                  Height="25" Width="25" 
                                                  Margin="30,0,15,0"/>
-                    <TextBlock Text="Drones Company" 
+                    <TextBlock Text="Target" 
                                    Foreground="White" 
                                    FontSize="18" 
                                    VerticalAlignment="Center" 

@@ -82,9 +82,12 @@ you can always change mode by clicking `Log Out`
 <img src="./screen-shots/log-out.jpg">
 
 #### Full Support of All Data Queries
-- Sort  [ ] gif
-- Filter by all properies [ ] gif
-- Group by [ ] gif
+- Sort 
+-  [ ] gif
+- Filter by all properies
+-  [ ] gif
+- Group by 
+- [ ] gif
 
 #### MVVM
 We used ***FULL*** MVVM.
@@ -114,7 +117,7 @@ We used ***FULL*** MVVM.
 
 #### Parallel Activation
 You can activate as many drones as you want.
-[ ] gif
+- [ ] gif
 
 #### Busy Indicator
 <img src="./screen-shots/busy-indicator.gif">

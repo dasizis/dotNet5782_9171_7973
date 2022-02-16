@@ -43,7 +43,7 @@
 ### Dal
 
 #### Structure
-We have implemented the layers model in the second structure (The Bonus structur), So we have a config file which follos the given format:
+We have implemented the layers model in the second structure (The Bonus structure), So we have a config file which follows the given format:
 ```xml
 <config>
     <dal>[chosen-dal]</dal>
@@ -57,7 +57,7 @@ We have implemented the layers model in the second structure (The Bonus structur
 </config>
 ```
 
-This format allows to specify the namespace and not only the class name.
+This format allows to specify the namespace in addition to the class name.
 
 #### Logic Deletion
 The dal deletion is just a *Logic Deletion* rather than *Real Deletion*. All the `Dal` entities implement the interface `IDeletable` which consists of just one property as follows

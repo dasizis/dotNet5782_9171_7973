@@ -101,7 +101,7 @@ namespace BL
             }
             catch (DO.ObjectNotFoundException)
             {
-                throw new ObjectNotFoundException("Drone is not being charged");
+                throw new ObjectNotFoundException("Drone is not being charged.");
             }
         }
 
@@ -134,14 +134,14 @@ namespace BL
             var availableBaseStations = GetAvailableBaseStationsId();
             if (!availableBaseStations.Any())
             {
-                throw new InvalidActionException("There is no empty base station");
+                throw new InvalidActionException("There is no available charge slot in any station.");
             }
 
             BaseStation closest = drone.FindClosest(availableBaseStations.Select(id => GetBaseStation(id)));
 
             if (!IsEnoughBattery(drone, closest.Location))
             {
-                throw new InvalidActionException("Drone cannot get to base station for charging.");
+                throw new InvalidActionException("Drone does not have enough battery to get to base station for charging.");
             }
 
             drone.Location = closest.Location;
@@ -163,7 +163,7 @@ namespace BL
 
             if (drone.State != DroneState.Maintenance)
             {
-                throw new InvalidActionException("Drone is not in meintenece");
+                throw new InvalidActionException("Drone is not being charged.");
             }
  
             var dalCharge = Dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId).FirstOrDefault();
@@ -204,7 +204,7 @@ namespace BL
 
             if (!orderedParcels.Any())
             {
-                throw new InvalidActionException("Couldn't assign any parcel to the drone.");
+                throw new InvalidActionException("No suitable parcel was found to assign to the drone.");
             }
 
             ParcelInDeliver selectedParcel = orderedParcels.First();
@@ -246,7 +246,7 @@ namespace BL
             // Was the parcel collected?
             if (parcel.PickedUp != null)
             {
-                throw new InvalidActionException("Parcel assigned to drone was already picked.");
+                throw new InvalidActionException("Drone has already picked up the parcel.");
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
@@ -276,21 +276,21 @@ namespace BL
 
             if (parcel.PickedUp == null)
             {
-                throw new InvalidActionException("Parcel assigned to drone was not picked up yet.");
+                throw new InvalidActionException("Drone has not yet picked up the parcel.");
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
 
             if (!parcelInDeliver.WasPickedUp)
             {
-                throw new InvalidActionException("Parcel assigned to drone has already been supplied.");
+                throw new InvalidActionException("Drone has already supplied the parcel.");
             }
 
             double neededBattery = Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
 
             if (drone.Battery - neededBattery < 0)
             {
-                throw new InvalidActionException("Drone does not have enough battery to get to target customer");
+                throw new InvalidActionException("Drone does not have enough battery to get to target customer.");
             }
 
             drone.Battery -= neededBattery;

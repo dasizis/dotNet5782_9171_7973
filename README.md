@@ -78,12 +78,14 @@ We used ***FULL*** MVVM.
 #### Miscellaneous
 - Triggres
   - Event Trigger [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/fc27f43be178a083ddce056caffc8e1395295442/dotNet5782_9171_7973/PL/Views/Style/StyleDictionary.xaml#L126)
-  - 
+- Converters [example]()
+- Commands (We implemented A [`RelyCommand`]() class and used it.) [example]()
+- 
 
 ### Simulator
 
 #### Location Update
-<img src="./screen-shots/location-update.gif" height="100">
+<img src="./screen-shots/location-update.gif" height="200">
 
 <img src="./screen-shots/map-update.gif">
 

@@ -69,11 +69,6 @@ namespace PL.Views.Style.ListDesign
         {
             var propValue = prop.GetValue(owner);
 
-            if (prop.PropertyType == typeof(PO.Location))
-            {
-                new List<object>() { new Longitude() { Long = (double)((Location)propValue).Longitude }, new Latitude() { Lat = (double)((Location)propValue).Latitude } };
-            };
-
             if (prop.Name == "Battery")
             {
                 return new Battery() { BatteryValue = (double)propValue };

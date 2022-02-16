@@ -79,6 +79,7 @@ Layout is very flexible and easy to use.
 <img src="./screen-shots/docing.gif">
 
 #### Regular Expression
+We used `Regex` for validity checking. [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/BL/BO/Validation.cs#L22)
 
 #### User Interface
 Our project supports two modes: customer mode and manager mode. When you run the program you see
@@ -121,6 +122,11 @@ We used ***FULL*** MVVM.
 - `Collection View` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/FilteredListViewModel.cs#L53)
 
 #### External dictionary
+
+#### The application sends an email using `Smtp` object:
+- To sender- when his parcel is sent
+- To reciever- when he gets a parcel
+[see code](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/PL/PL/MailService.cs#L1)
 
 ### Simulator
 

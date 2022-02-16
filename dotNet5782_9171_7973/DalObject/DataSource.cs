@@ -12,10 +12,10 @@ namespace Dal
     /// </summary>
     public static class DataSource
     {
-        const int INIT_BASESTATIONS = 2;
-        const int INIT_DRONES = 20;
-        const int INIT_CUSTOMERS = 10;
-        const int INIT_PARCELS = 20;
+        const int INIT_BASESTATIONS = 45;
+        const int INIT_DRONES = 200;
+        const int INIT_CUSTOMERS = 300;
+        const int INIT_PARCELS = 500;
 
         internal static List<Drone> Drones { get; } = new();
         internal static List<BaseStation> BaseStations { get; } = new();

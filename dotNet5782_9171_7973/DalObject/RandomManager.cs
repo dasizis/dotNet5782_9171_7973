@@ -24,7 +24,7 @@ namespace Dal
         /// <returns>A random longitude in Israel area</returns>
         internal static double RandomLongitude()
         {
-            return RandomDouble(29.3, 33.5);
+            return RandomDouble(-180, 180);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Dal
         /// <returns>A random latitude</returns>
         internal static double RandomLatitude()
         {
-            return RandomDouble(33.7, 36.3);
+            return RandomDouble(-90, 90);
         }
 
         /// <summary>

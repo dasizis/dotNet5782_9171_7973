@@ -59,7 +59,7 @@ namespace Dal
             if (!DoesExist<BaseStation>(s => s.Id == baseStationId))
                 throw new ObjectNotFoundException(typeof(BaseStation));
 
-            DroneCharge charge = new DroneCharge()
+            DroneCharge charge = new()
             {
                 DroneId = droneId,
                 StationId = baseStationId,

@@ -44,7 +44,7 @@ namespace Dal
         /// </summary>
         public static class Config
         {
-            public static int NextParcelId = 0;
+            static public int NextParcelId { get; set; } = 0;
 
             public static class ElectricityConfumctiol
             {

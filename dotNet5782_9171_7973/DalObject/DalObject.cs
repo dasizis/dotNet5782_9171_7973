@@ -172,7 +172,7 @@ namespace Dal
         /// <param name="item">The item itself</param>
         /// <param name="propName">The property name</param>
         /// <param name="newValue">The new value for the property</param>
-        private void UpdateItem<T>(T item, string propName, object newValue)
+        private static void UpdateItem<T>(T item, string propName, object newValue)
         {
             Type type = typeof(T);
             DataSource.Data[type].Remove(item);

@@ -25,7 +25,7 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Name is not valid.");
                 }
                 name = value;
             }

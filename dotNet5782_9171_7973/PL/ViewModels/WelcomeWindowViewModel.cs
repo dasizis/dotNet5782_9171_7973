@@ -22,7 +22,7 @@ namespace PL.ViewModels
             set
             {
                 isSignIn = value;
-                NotifyPropertyChanged("IsSignIn");
+                NotifyPropertyChanged(nameof(IsSignIn));
             }
         }
 
@@ -36,7 +36,7 @@ namespace PL.ViewModels
             set
             {
                 isSignUp = value;
-                NotifyPropertyChanged("IsSignUp");
+                NotifyPropertyChanged(nameof(IsSignUp));
             }
         }
 
@@ -102,10 +102,7 @@ namespace PL.ViewModels
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new(propertyName));
         }
         #endregion
     }

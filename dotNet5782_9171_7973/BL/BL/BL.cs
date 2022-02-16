@@ -217,7 +217,11 @@ namespace BL
             };
         }
 
-        public void StartDroneSimulator(int id, Action<DroneSimulatorChanges> update, Func<bool> shouldStop) => new DroneSimulator(id, update, shouldStop);
+        public void StartDroneSimulator(int id, Action<DroneSimulatorChanges> update, Func<bool> shouldStop)
+        {
+            var simulator = new DroneSimulator(id, update, shouldStop);
+            simulator.ActivateSimulator();
+        }
 
     }
 }

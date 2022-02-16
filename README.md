@@ -59,7 +59,7 @@ interface IDeletable
     bool IsDeleted { get; set; }
 }
 ```
-From now, when *deletion* is just to change is `IsDeleted` property to `true`. Only non-deleted entities are allowed to perform actions.
+From now, *Deletion* is just to change the `IsDeleted` property to `true`. Only non-deleted entities are allowed to perform actions.
 
 #### Extensive Use of Generic
 In order to prevent reapet our self according to the **DRY** rule, We implemnted all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.

@@ -142,23 +142,29 @@ namespace PL.ViewModels
                 return false;
             }
 
-            if (property.PropertyType == typeof(string))
+            if (property.PropertyType == typeof(string) && FilterValue is string)
             {
                 return propertyValue.ToString().ToUpper().Contains(FilterValue.ToString().ToUpper());
             }
 
             if (property.PropertyType.IsEnum)
             {
-                return (int)FilterValue == (int)propertyValue;
+                try
+                {
+                    return (int)FilterValue == (int)propertyValue;
+                }
+                catch { }
             }
 
-            if (property.PropertyType == typeof(int) ||
-                property.PropertyType == typeof(int?))
-                return (int)propertyValue >= ((double[])FilterValue)[0] && (int)propertyValue <= ((double[])FilterValue)[1];
+            if ((property.PropertyType == typeof(int) 
+                || property.PropertyType == typeof(int?))
+                && FilterValue is double[] intRange)
+                return (int)propertyValue >= intRange[0] && (int)propertyValue <= intRange[1];
 
-            if (property.PropertyType == typeof(double) ||
-                property.PropertyType == typeof(double?))
-                return (double)propertyValue >= ((double[])FilterValue)[0] && (double)propertyValue <= ((double[])FilterValue)[1];
+            if ((property.PropertyType == typeof(int)
+                || property.PropertyType == typeof(int?))
+                && FilterValue is double[] doubleRange)
+                return (double)propertyValue >= doubleRange[0] && (double)propertyValue <= doubleRange[1];
 
             return true;
         }

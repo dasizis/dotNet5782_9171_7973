@@ -4,14 +4,17 @@ using System.Linq;
 
 namespace PL
 {
+    /// <summary>
+    /// 
+    /// </summary>
     static partial class PLService
     {
         /// <summary>
-        /// Adds a base station 
+        /// Add a base station 
         /// </summary>
         /// <param name="baseStation">The base station to add</param>
-        /// <exception cref="InvalidPropertyValueException" />
-        /// <exception cref="IdAlreadyExistsException" />
+        /// <exception cref="BO.InvalidPropertyValueException" />
+        /// <exception cref="BO.IdAlreadyExistsException" />
         public static void AddBaseStation(BaseStationToAdd baseStation)
         {
             bl.AddBaseStation((int)baseStation.Id,
@@ -24,11 +27,11 @@ namespace PL
         }
 
         /// <summary>
-        /// return specific base station
+        /// Return specific base station
         /// </summary>
-        /// <param name="id">id of requested base station</param>
-        /// <returns>base station with id</returns>
-        /// <exception cref="ObjectNotFoundException" />
+        /// <param name="id">Id of requested base station</param>
+        /// <returns>Base station with id</returns>
+        /// <exception cref="BO.ObjectNotFoundException" />
         public static BaseStation GetBaseStation(int id)
         {
             BO.BaseStation baseStation = bl.GetBaseStation(id);
@@ -48,9 +51,9 @@ namespace PL
         }
 
         /// <summary>
-        /// return base stations list
+        /// Return base stations list
         /// </summary>
-        /// <returns>base stations list</returns>
+        /// <returns>Base stations list</returns>
         public static IEnumerable<BaseStationForList> GetBaseStationsList()
         {
             List<BaseStationForList> stationsList = new();
@@ -64,9 +67,9 @@ namespace PL
         }
 
         /// <summary>
-        /// return list of base stations with empty charge slots
+        /// Return list of base stations with empty charge slots
         /// </summary>
-        /// <returns>list of base stations with empty charge slots</returns>
+        /// <returns>List of base stations with empty charge slots</returns>
         public static IEnumerable<BaseStationForList> GetAvailableBaseStations()
         {
             List<BaseStationForList> stationsList = new();
@@ -80,11 +83,11 @@ namespace PL
         }
 
         /// <summary>
-        /// update base station details
+        /// Update base station details
         /// </summary>
-        /// <param name="baseStationId">base station to update</param>
-        /// <param name="name">new name</param>
-        /// <param name="chargeSlots">new number of charge slots</param>
+        /// <param name="baseStationId">Id of base station to update</param>
+        /// <param name="name">New name</param>
+        /// <param name="chargeSlots">New number of charge slots</param>
         /// <exception cref="ObjectNotFoundException" />
         /// <exception cref="InvalidPropertyValueException" />
         public static void UpdateBaseStation(int baseStationId, string name = null, int? chargeSlots = null)
@@ -94,9 +97,9 @@ namespace PL
         }
 
         /// <summary>
-        /// Deletes a base station
+        /// Delete a base station
         /// </summary>
-        /// <param name="baseStationId">The base station Id</param>
+        /// <param name="baseStationId">Id of base station to delete</param>
         /// <exception cref="ObjectNotFoundException"></exception>
         /// <exception cref="InvalidActionException" />
         public static void DeleteBaseStation(int baseStationId)
@@ -107,7 +110,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Converts <see cref="BO.BaseStationForList"/> to <see cref="BaseStationForList"/>
+        /// Convert <see cref="BO.BaseStationForList"/> to <see cref="BaseStationForList"/>
         /// </summary>
         /// <param name="boBaseStation">The <see cref="BO.BaseStationForList"/></param>
         /// <returns>A <see cref="BaseStationForList"/></returns>
@@ -123,7 +126,7 @@ namespace PL
         }
 
         /// <summary>
-        /// return specific base station for list
+        /// Return specific base station for list
         /// </summary>
         /// <param name="id">Id of requested base station</param>
         /// <returns>The <see cref="BaseStationForList"/> who has the spesific Id</returns>

@@ -144,7 +144,7 @@ namespace PL.ViewModels
         private void RenameDrone()
         {
             PLService.RenameDrone(Drone.Id, Drone.Model);
-            MessageBox.Show(MessageBox.BoxType.Success, $"Drone {Drone.Id} renamed succesfully to {Drone.Model}");
+            MessageBox.Show(MessageBox.BoxType.Success, $"Drone #{Drone.Id} renamed succesfully to {Drone.Model}");
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace PL.ViewModels
         {
             PLService.DeleteDrone(Drone.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.DronePanelName(Drone.Id));
-            MessageBox.Show(MessageBox.BoxType.Info, $"Drone {Drone.Id} deleted");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Drone #{Drone.Id} deleted");
             
         }
 

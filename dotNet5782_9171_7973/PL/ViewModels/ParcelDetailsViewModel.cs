@@ -83,7 +83,7 @@ namespace PL.ViewModels
             }
             catch (BO.ObjectNotFoundException)
             {
-                MessageBox.Show(MessageBox.BoxType.Error, $"Target customer #{Parcel.Target.Id} was deleted. ");
+                MessageBox.Show(MessageBox.BoxType.Error, $"Target customer #{Parcel.Target.Id} was deleted.");
                 return;
             }
             Workspace.AddPanelCommand.Execute(Workspace.CustomerPanel(Parcel.Target.Id));
@@ -113,7 +113,7 @@ namespace PL.ViewModels
         {
             PLService.DeleteParcel(Parcel.Id);
             Workspace.RemovePanelCommand.Execute(Workspace.ParcelPanelName(Parcel.Id));
-            MessageBox.Show(MessageBox.BoxType.Info, $"Parcel {Parcel.Id} deleted");
+            MessageBox.Show(MessageBox.BoxType.Info, $"Parcel #{Parcel.Id} deleted");
         }
 
         /// <summary>

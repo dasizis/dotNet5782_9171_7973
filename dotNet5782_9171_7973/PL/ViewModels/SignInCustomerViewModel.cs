@@ -63,7 +63,7 @@ namespace PL.ViewModels
             //if no customer has the entered id
             catch (ObjectNotFoundException)
             {
-                MessageBox.Show(MessageBox.BoxType.Error, "User Id is not correct.", 250);
+                MessageBox.Show(MessageBox.BoxType.Error, "User Id not found.", 250);
             }
         }
     }

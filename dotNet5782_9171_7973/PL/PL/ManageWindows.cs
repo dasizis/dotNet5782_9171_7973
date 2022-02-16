@@ -33,7 +33,7 @@ namespace PL
         /// as manager (id is null) or as customer 
         /// </summary>
         /// <param name="id">id of customer to sign in for</param>
-        public static void OpenAppWindow(int? id)
+        public static void OpenAppWindow(int? id = null)
         {
             if (id == null)
             {

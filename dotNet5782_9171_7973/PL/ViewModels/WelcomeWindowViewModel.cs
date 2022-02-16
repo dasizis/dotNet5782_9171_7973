@@ -92,9 +92,8 @@ namespace PL.ViewModels
         /// </summary>
         public void SignInManager()
         {
-            var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
-            new Views.WorkspaceWindow().Show();
-            registerWindow.Close();
+            ManageWindows.CloseRegisterWindow();
+            ManageWindows.OpenAppWindow();
         }
         #region InotifyPropertyChanged members
 

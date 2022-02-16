@@ -25,10 +25,10 @@
 
 ### General
 #### New c# Features
-- [Record](
-- [Switch Expression]
-- [Tupples]
-- [Init Only Setters]
+- [Record](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BO/DroneSimulatorChanges.cs#L1)
+- [Switch Expression](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L211)
+- [Tupples](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L33)
+- [Init Only Setters](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L21)
 - [Using Statement]
 - [Range Operator]
 
@@ -104,8 +104,6 @@ We used ***FULL*** MVVM.
 
 #### External dictionary
 
-
-
 ### Simulator
 
 #### Location Update
@@ -120,7 +118,7 @@ You can activate as many drones as you want.
 <img src="./screen-shots/busy-indicator.gif">
 
 #### Maps
-Each entity has it map to represent its location, Besides there is a `Main Map` for all the entities together.
+Each entity has its map to represent its location, Besides there is a `Main Map` for all the entities together.
 
 ### Design patterns
 #### Factory - Full structure

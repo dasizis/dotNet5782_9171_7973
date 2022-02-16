@@ -29,8 +29,8 @@
 - [Switch Expression](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L211)
 - [Tupples](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L33)
 - [Init Only Setters](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L21)
-- [Using Statement]
-- [Range Operator]
+- [Using Statement](https://github.com/dasizis/dotNet5782_9171_7973/blob/52a512db91d8e25589d7bedd44bb86eb4fbb7ad7/dotNet5782_9171_7973/DalXml/XSerialization.cs#L18)
+- [Range Operator](https://github.com/dasizis/dotNet5782_9171_7973/blob/52a512db91d8e25589d7bedd44bb86eb4fbb7ad7/dotNet5782_9171_7973/StringUtilities/StringUtilities.cs#L42)
 
 ### Dal
 
@@ -66,6 +66,7 @@ In order to prevent reapet our self according to the **DRY** rule, We implemnted
 
 ### PL
 #### Custom Window Layout - Docking
+- [ ] gif
 #### Regular Expression
 #### User Interface
 Our project supports two modes: customer mode and manager mode. When you run the program you see
@@ -81,9 +82,9 @@ you can always change mode by clicking `Log Out`
 <img src="./screen-shots/log-out.jpg">
 
 #### Full Support of All Data Queries
-- Sort
-- Filter by all properies
-- Group by
+- Sort  [ ] gif
+- Filter by all properies [ ] gif
+- Group by [ ] gif
 
 #### MVVM
 We used ***FULL*** MVVM.
@@ -97,7 +98,7 @@ We used ***FULL*** MVVM.
   - Event Trigger [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/fc27f43be178a083ddce056caffc8e1395295442/dotNet5782_9171_7973/PL/Views/Style/StyleDictionary.xaml#L126)
 - Behaviors example [definition](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/Views/Behaviors/DoubleInplutBehavior.cs#L6) [use](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/Views/AddCustomerView.xaml#L84)
 - Converters [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/Views/Converters/MessageBoxTypeToColorConverter.cs)
-- Commands (We implemented A [`RelyCommand`](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/RelayCommand.cs) class and used it as properties in our `PL` classes) [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/ParcelDetailsViewModel.cs#L23)
+- Commands (We implemented A [`RelayCommand`](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/RelayCommand.cs) class and used it as properties in our `PL` classes) [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/ParcelDetailsViewModel.cs#L23)
 - Data templates
 - `ObservableCollection` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/MainMapViewModel.cs#L15)
 - `Collection View` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/FilteredListViewModel.cs#L53)
@@ -113,6 +114,7 @@ We used ***FULL*** MVVM.
 
 #### Parallel Activation
 You can activate as many drones as you want.
+[ ] gif
 
 #### Busy Indicator
 <img src="./screen-shots/busy-indicator.gif">

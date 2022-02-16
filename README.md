@@ -23,8 +23,14 @@
 
 ## Bonus Review
 
-#### Singleton
-We implemnt an abstract class `Singleton` which has lazy initialization and is thread-safe. The `Dal` and `BL` layers just inherit it.
+### General
+#### New c# features
+##### Record
+##### Switch exceptions
+##### Tupples
+##### Init only setters
+##### Using statement
+##### Range operator
 
 ### Dal
 
@@ -74,13 +80,23 @@ you can always change mode by clicking `Log Out`
 
 #### MVVM
 We used ***FULL*** MVVM.
+### Full binding
+### PO entities
+
+#### Custom `UserControl`
 
 #### Miscellaneous
 - Triggres
   - Event Trigger [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/fc27f43be178a083ddce056caffc8e1395295442/dotNet5782_9171_7973/PL/Views/Style/StyleDictionary.xaml#L126)
 - Converters [example]()
+- Behavior [example]()
 - Commands (We implemented A [`RelyCommand`]() class and used it.) [example]()
-- 
+- Data templates
+- Observable collection [example]()
+
+#### External dictionary
+
+
 
 ### Simulator
 
@@ -97,3 +113,10 @@ You can activate as many drones as you want.
 
 #### Maps
 Each entity has it map to represent its location, Besides there is a `Main Map` for all the entities together.
+
+### Design patterns
+#### Factory - Full structure
+#### Singleton
+We implemnt an abstract class `Singleton` which has lazy initialization and is thread-safe. The `Dal` and `BL` layers just inherit it.
+
+

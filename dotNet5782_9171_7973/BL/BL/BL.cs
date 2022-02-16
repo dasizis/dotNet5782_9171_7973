@@ -18,11 +18,11 @@ namespace BL
         public Random Rand { get; } = new();
 
         // Electricity confumctiol properties
-        public double ElectricityConfumctiolFree { get; set; }
-        public double ElectricityConfumctiolLight { get; set; }
-        public double ElectricityConfumctiolMedium { get; set; }
-        public double ElectricityConfumctiolHeavy { get; set; }
-        public double ChargeRate { get; set; }
+        public double ElectricityConfumctiolFree { get; init; }
+        public double ElectricityConfumctiolLight { get; init; }
+        public double ElectricityConfumctiolMedium { get; init; }
+        public double ElectricityConfumctiolHeavy { get; init; }
+        public double ChargeRate { get; init; }
 
         public List<DroneForList> drones = new();
         
@@ -213,7 +213,7 @@ namespace BL
                 WeightCategory.Light => ElectricityConfumctiolLight,
                 WeightCategory.Medium => ElectricityConfumctiolMedium,
                 WeightCategory.Heavy => ElectricityConfumctiolHeavy,
-                _ => throw new ArgumentException("Invalid weight category"),
+                _ => throw new ArgumentException("Invalid weight category."),
             };
         }
 

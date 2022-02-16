@@ -131,7 +131,7 @@ namespace BL
                 throw new ObjectNotFoundException(typeof(Parcel), e);
             }
 
-            if (parcel.Requested != null && parcel.Supplied == null)
+            if (parcel.Scheduled != null && parcel.Supplied == null)
                 throw new InvalidActionException("Can not delete a parcel in delivery");
 
             lock (Dal)

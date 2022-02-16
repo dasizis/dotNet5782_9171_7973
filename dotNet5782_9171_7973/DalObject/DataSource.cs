@@ -12,10 +12,10 @@ namespace Dal
     /// </summary>
     public static class DataSource
     {
-        const int INIT_BASESTATIONS = 45;
-        const int INIT_DRONES = 200;
-        const int INIT_CUSTOMERS = 300;
-        const int INIT_PARCELS = 500;
+        const int INIT_BASESTATIONS = 10;
+        const int INIT_DRONES = 20;
+        const int INIT_CUSTOMERS = 30;
+        const int INIT_PARCELS = 40;
 
         internal static List<Drone> Drones { get; } = new();
         internal static List<BaseStation> BaseStations { get; } = new();
@@ -44,10 +44,10 @@ namespace Dal
 
             public static class ElectricityConfumctiol
             {
-                public static readonly double Free = 0.01;
-                public static readonly double Light = 0.02;
-                public static readonly double Medium = 0.03;
-                public static readonly double Heavy = 0.04;
+                public static readonly double Free = 0.000001;
+                public static readonly double Light = 0.000002;
+                public static readonly double Medium = 0.000003;
+                public static readonly double Heavy = 0.00004;
             }
 
             public static readonly double ChargeRate = 40;

@@ -486,4 +486,16 @@
     <StartTime>2022-02-16T15:22:52.4635825+02:00</StartTime>
     <IsDeleted>true</IsDeleted>
   </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>3</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-16T15:28:58.8046743+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>3</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-16T15:57:25.5544559+02:00</StartTime>
+    <IsDeleted>false</IsDeleted>
+  </DroneCharge>
 </DroneCharges>

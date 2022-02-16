@@ -87,7 +87,7 @@ namespace PL.ViewModels
         public void SignInManager()
         {
             ManageWindows.OpenAppWindow();
-            ManageWindows.CloseRegisterWindow();       
+            ManageWindows.CloseRegisterWindow();
         }
         #region InotifyPropertyChanged members
 

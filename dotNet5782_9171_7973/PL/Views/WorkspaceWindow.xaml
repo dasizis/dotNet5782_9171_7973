@@ -26,27 +26,27 @@
         <Grid>
             <DockPanel Background="#494a51" Height="50" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                        <materialDesign:PackIcon Kind="CrosshairsGps" 
+                    <materialDesign:PackIcon Kind="CrosshairsGps" 
                                                  Foreground="White" 
                                                  VerticalAlignment="Center" 
                                                  Height="25" Width="25" 
                                                  Margin="30,0,15,0"/>
-                        <TextBlock Text="Drones Company" 
+                    <TextBlock Text="Drones Company" 
                                    Foreground="White" 
                                    FontSize="18" 
                                    VerticalAlignment="Center" 
                                    FontWeight="Bold"/>
-                    </StackPanel>
-                
+                </StackPanel>
+
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <Button Visibility="{Binding Source={x:Static pl:PLService.IsCustomerMode}, Converter={StaticResource BooleanToVisibilityConverter}}"
+
+                    <Button Visibility="{Binding Converter={StaticResource BooleanToVisibilityConverter}, Source={x:Static pl:PLService.IsCustomerMode}}"
                             Content="Send New Parcel" 
-                            VerticalAlignment="Center" 
                             Background="#44454c" 
                             Foreground="White" 
                             Click="SendNewParcel">
                         <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#444444" />
@@ -63,7 +63,7 @@
                         <materialDesign:PackIcon Kind="AccountCircle" Height="25" Width="25" Foreground="White"/>
                     </Button>
                 </StackPanel>
-                
+
             </DockPanel>
             <syncfusion:DockingManager x:Name="Dock" UseDocumentContainer="True"
                                    syncfusionskin:SfSkinManager.VisualStyle="MaterialLight"

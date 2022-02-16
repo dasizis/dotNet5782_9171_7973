@@ -144,10 +144,10 @@
                 </MouseBinding>
             </StackPanel.InputBindings>
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="PlayCircle" Foreground="Green" VerticalAlignment="Center" Visibility="{Binding IsAutoMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <TextBlock Text="{Binding Model}" VerticalAlignment="Center" 
                        Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
                        ContextMenu="{StaticResource ItemMenu}"/>
+                <materialDesign:PackIcon Kind="PlayBox" Height="20" Width="20" Margin="5,0" Foreground="#b1d3a7" VerticalAlignment="Center" Visibility="{Binding IsAutoMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </StackPanel>
             
         </StackPanel>

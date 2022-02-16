@@ -9,7 +9,6 @@ namespace BL
 {
     class DroneSimulator
     {
-        const int SECONDS_PER_HOUR = 3600;
         const int MS_PER_SECOND = 1000;
         const double KM_PER_S = 50000;
         const int WAIT_TIME = 10_000;

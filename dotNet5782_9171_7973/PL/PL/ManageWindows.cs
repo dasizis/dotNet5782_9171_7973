@@ -23,10 +23,12 @@ namespace PL
         {
             if (id == null)
             {
+                PLService.IsManangerMode = true;
                 new Views.WorkspaceWindow().Show();
             }
             else
             {
+                PLService.IsCustomerMode = true;
                 new Views.WorkspaceWindow((int)id).Show();
             }
         }

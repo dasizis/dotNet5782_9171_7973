@@ -24,24 +24,25 @@
     </Window.Resources>
     <materialDesign:DialogHost>
         <Grid>
-            <DockPanel Background="#444444" Height="50" VerticalAlignment="Top">
+            <DockPanel Background="#494a51" Height="50" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                    <materialDesign:PackIcon Kind="PacMan" 
-                                             Foreground="White" 
-                                             VerticalAlignment="Center" 
-                                             Height="25" Width="25" 
-                                             Margin="10"/>
-                    <TextBlock Text="Drones Company" 
-                               Foreground="White" 
-                               FontSize="18" 
-                               VerticalAlignment="Center" 
-                               FontWeight="Bold"/>
-                </StackPanel>
+                        <materialDesign:PackIcon Kind="CrosshairsGps" 
+                                                 Foreground="White" 
+                                                 VerticalAlignment="Center" 
+                                                 Height="25" Width="25" 
+                                                 Margin="30,0,15,0"/>
+                        <TextBlock Text="Drones Company" 
+                                   Foreground="White" 
+                                   FontSize="18" 
+                                   VerticalAlignment="Center" 
+                                   FontWeight="Bold"/>
+                    </StackPanel>
                 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <Button Content="Send New Parcel" 
+                    <Button Visibility="{Binding Source={x:Static pl:PLService.IsCustomerMode}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Content="Send New Parcel" 
                             VerticalAlignment="Center" 
-                            Background="#333333" 
+                            Background="#44454c" 
                             Foreground="White" 
                             Click="SendNewParcel">
                         <Button.Style>
@@ -57,7 +58,8 @@
 
                     <Button Style="{StaticResource MaterialDesignIconButton}"
                             ToolTip="Log Out"
-                            Click="LogOut" >
+                            Click="LogOut" 
+                            Margin="20,0">
                         <materialDesign:PackIcon Kind="AccountCircle" Height="25" Width="25" Foreground="White"/>
                     </Button>
                 </StackPanel>

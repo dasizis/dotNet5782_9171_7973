@@ -29,7 +29,7 @@ namespace BO
             }
         }
 
-        int emptyChargeSlots;
+        private int emptyChargeSlots;
         /// <summary>
         /// Number of empty charge slots at base station 
         /// </summary>

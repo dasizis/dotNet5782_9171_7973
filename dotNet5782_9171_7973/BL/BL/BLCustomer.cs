@@ -154,8 +154,8 @@ namespace BL
         {
             CustomerForList customer = GetCustomerForList(customerId);
 
-            if (customer.ParcelsOnWay != 0 || customer.ParcelsSendAndNotSupplied != 0 || customer.ParcelsRecieved != 0 || customer.ParcelsSendAndSupplied != 0)
-                throw new InvalidActionException("Can not delete a customer with parcels");
+            if (customer.ParcelsOnWay != 0 || customer.ParcelsSendAndNotSupplied != 0)
+                throw new InvalidActionException("Unable to delete customer who has drones on way");
 
             lock (Dal)
             {

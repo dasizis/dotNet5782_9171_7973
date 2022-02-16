@@ -37,7 +37,7 @@
             <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
                    Style="{StaticResource Text}"/>
 
-            <syncfusion:SfStepProgressBar Margin="0, 50">
+            <syncfusion:SfStepProgressBar Margin="0, 50" HorizontalAlignment="Left">
                 <syncfusion:SfStepProgressBar.SelectedIndex>
                     <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
                         <Binding Path="Parcel.Requested" />

@@ -82,15 +82,17 @@ Layout is very flexible and easy to use.
 We used `Regex` for validity checking. [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/BL/BO/Validation.cs#L22)
 
 #### User Interface
-Our project supports two modes: customer mode and manager mode. When you run the program you see
+Our project supports two modes: customer mode and manager mode. When running the program the following screen shows up:
 
 <img src="./screen-shots/sign-up.jpg" width="300">
 
-You can press the `Sign In As Managar` and enter in manager mode or sign up for a new customer account and enter in customer mode. If you already have an account you can click on `Already Have an...` and get this screen:
+Then pressing the `Sign In As Managar` button enters the program in manager mode.
+Signing up enters with a new customer account in customer mode. 
+Clicking on `Already Have an...` gives sign up page like this screen:
 
 <img src="./screen-shots/sign-in.jpg" width="300">
 
-you can always change mode by clicking `Log Out` and reconnecting.
+Clicking `Log Out` any time brings back to register window, where reconnecting is available again.
 
 <img src="./screen-shots/log-out.jpg">
 

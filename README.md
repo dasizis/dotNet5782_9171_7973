@@ -1,25 +1,33 @@
 # dotNet5782_9171_7973
-
-## TODO
-- [X] Add links to PL Bonuses
-- [X] DataSource - FIX ALL PROBLEMS
-- [X] document
-- [ ] finish README.md
-- [X] check deletion
-- [X] Remove `Send A parcel` in manager mode
-- [X] Center the progress bar customer
-- [ ] Tool bar blue
-- [ ] Hide text above progress bar
-
-## Bugs
-- [X] Notify parcel changed in simulatr
-- [X] Let customer name to include space
-- [X] Rewrite messages
-- [X] Add deletion message in context menu
-  
-## 
-- [ ] Unseen drones
-- [ ] View parcel in simulator
+- [dotNet5782_9171_7973](#dotnet5782_9171_7973)
+  - [Bonus Review](#bonus-review)
+    - [General](#general)
+      - [New c# Features](#new-c-features)
+    - [Dal](#dal)
+      - [Structure](#structure)
+      - [Logic Deletion](#logic-deletion)
+      - [Extensive Use of Generic](#extensive-use-of-generic)
+    - [PL](#pl)
+      - [Custom Window Layout - Docking](#custom-window-layout---docking)
+      - [Regular Expression](#regular-expression)
+      - [User Interface](#user-interface)
+      - [Full Support of All Data Queries](#full-support-of-all-data-queries)
+      - [MVVM](#mvvm)
+        - [Full Binding](#full-binding)
+        - [PO Entities](#po-entities)
+      - [Custom `UserControl`](#custom-usercontrol)
+      - [Miscellaneous](#miscellaneous)
+      - [External dictionary](#external-dictionary)
+    - [Simulator](#simulator)
+      - [Location Update](#location-update)
+      - [Parallel Activation](#parallel-activation)
+      - [Busy Indicator](#busy-indicator)
+      - [The Application Prevent Closing As long as Simulators are On](#the-application-prevent-closing-as-long-as-simulators-are-on)
+      - [Maps](#maps)
+    - [Design patterns](#design-patterns)
+      - [Factory - Full structure](#factory---full-structure)
+      - [Singleton](#singleton)
+        - [Last But Not Least - Well Neat, Organized and Detailed `README`.](#last-but-not-least---well-neat-organized-and-detailed-readme)
 
 ## Bonus Review
 
@@ -67,8 +75,11 @@ In order to Avoid repetition according to the **DRY** rule, We implemented all o
 ### PL
 #### Custom Window Layout - Docking
 Layout is very flexible and easy to use. 
-- [ ] gif
+
+<img src="./screen-shots/docing.gif">
+
 #### Regular Expression
+
 #### User Interface
 Our project supports two modes: customer mode and manager mode. When you run the program you see
 
@@ -83,13 +94,14 @@ you can always change mode by clicking `Log Out` and reconnecting.
 <img src="./screen-shots/log-out.jpg">
 
 #### Full Support of All Data Queries
-Very easy way to accsses accurate data.
-- Sort 
--  [ ] gif
-- Filter by all properies
--  [ ] gif
-- Group by 
-- [ ] gif
+Very easy way to accsses accurate data. (uses reflection)
+- Filter (notice the dynamic input)
+
+<img src="./screen-shots/filter.gif" width="200">
+
+- Sort and Group
+
+<img src="./screen-shots/group-and-sort.gif" width="200">
 
 #### MVVM
 We used ***FULL*** MVVM.
@@ -119,14 +131,14 @@ We used ***FULL*** MVVM.
 
 #### Parallel Activation
 You can activate as many drones as you want.
-- [ ] gif
+<img src="./screen-shots/multi-simulator.gif">
 
 #### Busy Indicator
 <img src="./screen-shots/busy-indicator.gif">
 
 #### The Application Prevent Closing As long as Simulators are On
 This is to make sure all data is fully updated.
-- [ ] gif
+<img src="./screen-shots/prevent-close.gif" >
 
 #### Maps
 Each entity has its map to represent its location, Besides there is a `Main Map` for all the entities together.

@@ -14,9 +14,9 @@ namespace BL
         const double KM_PER_S = 50000;
         const int WAIT_TIME = 10_000;
 
-        private DroneForList drone;
-        private BL bl;
-        private IDal dal;
+        private readonly DroneForList drone;
+        private readonly BL bl;
+        private readonly IDal dal;
 
         private Action<DroneSimulatorChanges> updateAction;
         private Func<bool> shouldStop;

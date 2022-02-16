@@ -27,14 +27,9 @@ namespace PL.Views.Style.ListDesign
             throw new NotImplementedException();
         }
 
-        private object CreateProperty(PropertyInfo prop, object owner)
+        private static object CreateProperty(PropertyInfo prop, object owner)
         {
             var propValue = prop.GetValue(owner);
-
-            if (prop.PropertyType == typeof(PO.Location))
-            {
-                new List<object>() { new Longitude() { Long = (double)((Location)propValue).Longitude }, new Latitude() { Lat = (double)((Location)propValue).Latitude } };
-            };
 
             if (prop.Name == "Battery")
             {
@@ -65,7 +60,7 @@ namespace PL.Views.Style.ListDesign
             throw new NotImplementedException();
         }
 
-        private object CreateProperty(PropertyInfo prop, object owner)
+        private static object CreateProperty(PropertyInfo prop, object owner)
         {
             var propValue = prop.GetValue(owner);
 
@@ -119,7 +114,7 @@ namespace PL.Views.Style.ListDesign
             throw new NotImplementedException();
         }
 
-        private object CreateProperty(PropertyInfo prop, object owner)
+        private static object CreateProperty(PropertyInfo prop, object owner)
         {
             var propValue = prop.GetValue(owner);
 

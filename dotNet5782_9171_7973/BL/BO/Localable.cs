@@ -45,7 +45,7 @@ namespace BO
         /// <returns>closest location to the starting point or <c>default(T)</c> if the locables list is empty</returns>
         public static T FindClosest<T>(this ILocalable location,IEnumerable<T> localables) where T: ILocalable
         {
-            if (!localables.Any()) return default(T);
+            if (!localables.Any()) return default;
             return localables.OrderBy(l => Distance(location.Location, l.Location)).First();
         }
 

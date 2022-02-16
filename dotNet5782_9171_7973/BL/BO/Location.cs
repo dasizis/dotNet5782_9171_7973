@@ -20,7 +20,7 @@ namespace BO
             {
                 if (!Validation.IsValidLongitude(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Longitude value is not valid.");
                 }
                 longitude = value;
             }
@@ -38,7 +38,7 @@ namespace BO
             {
                 if (!Validation.IsValidLatitude(value))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Latitude value is not valid.");
                 }
                 latitude = value;
             }

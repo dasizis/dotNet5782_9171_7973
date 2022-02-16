@@ -11,14 +11,14 @@ namespace BL
     {
         const int MS_PER_SECOND = 1000;
         const double KM_PER_S = 50000;
-        const int WAIT_TIME = 10_000;
+        const int WAIT_TIME = 100;
 
-        private DroneForList drone;
-        private BL bl;
-        private IDal dal;
+        private readonly DroneForList drone;
+        private readonly BL bl;
+        private readonly IDal dal;
 
-        private Action<DroneSimulatorChanges> updateAction;
-        private Func<bool> shouldStop;
+        private readonly Action<DroneSimulatorChanges> updateAction;
+        private readonly Func<bool> shouldStop;
 
         /// <summary>
         /// Time in miliseconds to delay between actions
@@ -43,7 +43,10 @@ namespace BL
             drone = bl.GetDroneForListRef(id);
 
             Delay = delay;
+        }
 
+        public void ActivateSimulator()
+        {
             while (!shouldStop())
             {
                 switch (drone.State)
@@ -196,9 +199,9 @@ namespace BL
         /// <summary>
         /// Wait until <see cref="WAIT_TIME"/> passes
         /// </summary>
-        private void WaitState()
+        private static void WaitState()
         {
-            //SleepDelayTime(WAIT_TIME);
+            SleepDelayTime(WAIT_TIME);
         }
 
         /// <summary>
@@ -206,7 +209,7 @@ namespace BL
         /// </summary>
         /// <param name="delay">time in miliseconds to sleep</param>
         /// <returns>Indicates wheather the sleep was successful</returns>
-        private bool SleepDelayTime(int delay)
+        private static bool SleepDelayTime(int delay)
         {
             try
             {

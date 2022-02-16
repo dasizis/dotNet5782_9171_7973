@@ -34,9 +34,9 @@ namespace BO
 
         protected ObjectNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public ObjectNotFoundException(Type type, Exception inner) : base($"item of type {type.Name} not found", inner) { }
+        public ObjectNotFoundException(Type type, Exception inner) : base($"{type.Name} not found", inner) { }
 
-        public ObjectNotFoundException(Type type) : base($"item of type {type.Name} not found") { }
+        public ObjectNotFoundException(Type type) : base($"{type.Name} not found") { }
 
     }
 
@@ -52,9 +52,9 @@ namespace BO
 
         protected IdAlreadyExistsException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public IdAlreadyExistsException(Type type, Exception inner) : base($"item of type {type.Name} not found", inner) { }
+        public IdAlreadyExistsException(Type type, Exception inner) : base($"{type.Name} not found", inner) { }
 
-        public IdAlreadyExistsException(Type type, int id) : base($"item by id {id} of type {type.Name} already exists") { }
+        public IdAlreadyExistsException(Type type, int id) : base($"{type.Name} #{id} already exists") { }
     }
 
     /// <summary>

@@ -34,10 +34,10 @@ We have implemented the layers model in the second structure (The Bonus structur
 <config>
     <dal>[chosen-dal]</dal>
     <dal-packages>
-        <package-1>
+        <[package-1]>
             <class-name>[package-1-class-name]</class-name>
             <namespace>[package-1-namespace]</namespace>
-        </package-1>
+        </[package-1]>
         ...
     </dal-packages>
 </config>

@@ -16,7 +16,11 @@ namespace PL
         /// <summary>
         /// Indicates wheather user is a customer or not
         /// </summary>
-        static public bool IsCustomerMode { get; set; } = !IsManangerMode;
+        static public bool IsCustomerMode
+        {
+            get => !IsManangerMode;
+            set => IsManangerMode = !value;
+        }
 
         /// <summary>
         /// Id of customer user

@@ -39,8 +39,8 @@ namespace BO
         /// <summary>
         /// Number of empty charge slots in base station
         /// </summary>
-        public int EmptyChargeSlots 
-        { 
+        public int EmptyChargeSlots
+        {
             get => emptyChargeSlots;
             set
             {
@@ -49,7 +49,7 @@ namespace BO
                     throw new InvalidPropertyValueException(value);
                 }
                 emptyChargeSlots = value;
-            } 
+            }
         }
 
         /// <summary>

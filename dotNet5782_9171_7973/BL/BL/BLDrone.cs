@@ -75,12 +75,6 @@ namespace BL
             };
         }
 
-        /// <summary>
-        /// Returns a converted drone to drone for list
-        /// </summary>
-        /// <param name="id">The id of requested drone</param>
-        /// <returns>A clone of <see cref="DroneForList"/></returns>
-        /// <exception cref="ObjectNotFoundException" />
         public DroneForList GetDroneForList(int id)
         {
             return GetDroneForListRef(id).Clone();
@@ -101,7 +95,7 @@ namespace BL
             }
             catch (DO.ObjectNotFoundException)
             {
-                throw new ObjectNotFoundException("Drone is not being charged.");
+                throw new ObjectNotFoundException("Drone is not being charged");
             }
         }
 
@@ -128,7 +122,7 @@ namespace BL
 
             if (drone.State != DroneState.Free)
             {
-                throw new InvalidActionException("Can not send a non-free drone to charge.");
+                throw new InvalidActionException("Can not send a non-free drone to charge");
             }
 
             var availableBaseStations = GetAvailableBaseStationsId();
@@ -169,7 +163,7 @@ namespace BL
             var dalCharge = Dal.GetFilteredList<DO.DroneCharge>(c => c.DroneId == droneId).FirstOrDefault();
             if (dalCharge.Equals(default(DO.DroneCharge)))
             {
-                throw new InvalidActionException("Drone is not being charged");
+                throw new InvalidActionException("The drone is not charging");
             }
 
             drone.Battery = Math.Min(drone.Battery + ChargeRate * (DateTime.Now - dalCharge.StartTime).TotalHours,
@@ -191,7 +185,7 @@ namespace BL
 
             if (drone.State == DroneState.Deliver)
             {
-                throw new InvalidActionException("Cannot assign parcel to busy drone.");
+                throw new InvalidActionException("Unable to associate a parcel with a busy drone");
             }
 
             var parcels = GetNotAssignedToDroneParcels().Select(parcel => GetParcelInDeliver(parcel.Id));
@@ -204,7 +198,7 @@ namespace BL
 
             if (!orderedParcels.Any())
             {
-                throw new InvalidActionException("No suitable parcel was found to assign to the drone.");
+                throw new InvalidActionException("Unable to associate any parcel with the drone");
             }
 
             ParcelInDeliver selectedParcel = orderedParcels.First();
@@ -230,7 +224,7 @@ namespace BL
             // Does the drone have a parcel?
             if (drone.DeliveredParcelId == null)
             {
-                throw new InvalidActionException("No parcel is assigned to drone.");
+                throw new InvalidActionException("No parcel is assigned to drone");
             }
 
             DO.Parcel parcel;
@@ -246,7 +240,7 @@ namespace BL
             // Was the parcel collected?
             if (parcel.PickedUp != null)
             {
-                throw new InvalidActionException("Drone has already picked up the parcel.");
+                throw new InvalidActionException("The parcel associated with the drone has already been picked up");
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
@@ -269,21 +263,21 @@ namespace BL
 
             if (drone.DeliveredParcelId == null)
             {
-                throw new InvalidActionException("No parcel is assigned to drone.");
+                throw new InvalidActionException("No parcel is assigned to drone");
             }
 
             var parcel = GetParcel((int)drone.DeliveredParcelId);
 
             if (parcel.PickedUp == null)
             {
-                throw new InvalidActionException("Drone has not yet picked up the parcel.");
+                throw new InvalidActionException("The parcel associated with the drone has not yet been picked up");
             }
 
             ParcelInDeliver parcelInDeliver = GetParcelInDeliver(parcel.Id);
 
             if (!parcelInDeliver.WasPickedUp)
             {
-                throw new InvalidActionException("Drone has already supplied the parcel.");
+                throw new InvalidActionException("The parcel associated with the drone has already been supplied");
             }
 
             double neededBattery = Localable.Distance(drone.Location, parcelInDeliver.TargetLocation) * GetElectricity(parcelInDeliver.Weight);
@@ -324,6 +318,24 @@ namespace BL
         #region Helpers
 
         /// <summary>
+        /// Returns a refrence to a drone in the BL drones list
+        /// </summary>
+        /// <param name="id">The drone id</param>
+        /// <returns>The drone refrence</returns>
+        /// <exception cref="ObjectNotFoundException" />
+        public DroneForList GetDroneForListRef(int id)
+        {
+            var drone = drones.FirstOrDefault(d => d.Id == id);
+
+            if (drone == default)
+            {
+                throw new ObjectNotFoundException(typeof(DroneForList));
+            }
+
+            return drone;
+        }
+
+        /// <summary>
         /// Checks weather a drone can deliver a parcel
         /// </summary>
         /// <param name="drone">The deliver drone</param>
@@ -347,23 +359,6 @@ namespace BL
         {
             var neededBattery = Localable.Distance(drone.Location, location) * ElectricityConfumctiolFree;
             return drone.Battery >= neededBattery;
-        }
-
-        /// <summary>
-        /// Returns a refrence to the drone in the BL drones list
-        /// </summary>
-        /// <param name="id">The drone Id</param>
-        /// <returns>A refrence to <see cref="DroneForList"/> from BL drones list</returns>
-        internal DroneForList GetDroneForListRef(int id)
-        {
-            var drone = drones.FirstOrDefault(d => d.Id == id);
-
-            if (drone == default)
-            {
-                throw new ObjectNotFoundException(typeof(DroneForList));
-            }
-
-            return drone;
         }
 
         /// <summary>

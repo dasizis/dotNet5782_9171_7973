@@ -218,5 +218,6 @@ namespace BL
         }
 
         public void StartDroneSimulator(int id, Action<DroneSimulatorChanges> update, Func<bool> shouldStop) => new DroneSimulator(id, update, shouldStop);
+
     }
 }

@@ -133,7 +133,7 @@ namespace BL
 
             if (parcel.Scheduled != null && parcel.Supplied == null)
             {
-                throw new InvalidActionException("Can not delete a parcel in delivery");
+                throw new InvalidActionException("Can not delete parcel which is in delivery");
             }
 
             lock (Dal)

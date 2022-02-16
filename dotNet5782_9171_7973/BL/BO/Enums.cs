@@ -10,6 +10,7 @@
         Medium,
         Heavy,
     }
+    
     /// <summary>
     /// A priority of parcel
     /// </summary>

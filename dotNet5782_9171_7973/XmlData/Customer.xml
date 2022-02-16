@@ -104,4 +104,12 @@
     <Latitude>34</Latitude>
     <IsDeleted>false</IsDeleted>
   </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>54657</Id>
+    <Name>fhfdgf</Name>
+    <Phone>0556707454</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </Customers>

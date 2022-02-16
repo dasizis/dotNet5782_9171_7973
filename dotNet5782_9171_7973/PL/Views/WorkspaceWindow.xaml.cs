@@ -173,8 +173,6 @@ namespace PL.Views
                 ViewModels.Workspace.FilteredParcelsListPanel(p => p.TargetId == userId,
                                                               ViewModels.Workspace.CustomerRecievedListName(userId), false)
             );
-            PLService.IsManangerMode = false;
-            PLService.IsCustomerMode = !PLService.IsManangerMode;
             PLService.CustomerId = userId;
         }
 

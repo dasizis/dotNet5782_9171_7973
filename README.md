@@ -65,6 +65,7 @@ From now, when *deletion* is just to change is `IsDeleted` property to `true`. O
 In order to prevent reapet our self according to the **DRY** rule, We implemnted all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.
 
 ### PL
+#### Custom Window Layout - Docking
 #### Regular Expression
 #### User Interface
 Our project supports two modes: customer mode and manager mode. When you run the program you see

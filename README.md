@@ -81,9 +81,9 @@ you can always change mode by clicking `Log Out`
 <img src="./screen-shots/log-out.jpg">
 
 #### Full support of all data queries
--Sort
--Filter by all properies
--Group by
+- Sort
+- Filter by all properies
+- Group by
 
 #### MVVM
 We used ***FULL*** MVVM.

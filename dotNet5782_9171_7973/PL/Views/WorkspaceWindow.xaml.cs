@@ -180,9 +180,11 @@ namespace PL.Views
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            new WelcomeWindow().Show();
-            var appWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "WorkspaceWindow");
-            appWindow.Close();
+            if (ManageWindows.CanCloseAppWindow())
+            {
+                ManageWindows.OpenRegisterWindow();
+            }
+            ManageWindows.CloseAppWindow();
         }
 
         private void SendNewParcel(object sender, RoutedEventArgs e)
@@ -197,13 +199,9 @@ namespace PL.Views
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            foreach (var simulator in PLSimulators.Simulators.Values)
+            if (!ManageWindows.CanCloseAppWindow())
             {
-                if (simulator.IsBusy)
-                {
-                    e.Cancel = true;
-                    MessageBox.Show(MessageBox.BoxType.Error, "There is One Or More Active Simulator");
-                }
+                e.Cancel = true;
             }
         }
     }

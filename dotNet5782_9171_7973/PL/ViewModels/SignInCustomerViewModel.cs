@@ -60,9 +60,8 @@ namespace PL.ViewModels
                 PO.Customer customer = PLService.GetCustomer((int)Id);
                 if (customer.Name == Name)
                 {
-                    new Views.WorkspaceWindow(customer.Id).Show();
-                    var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
-                    registerWindow.Close();
+                    ManageWindows.OpenAppWindow(customer.Id);
+                    ManageWindows.CloseRegisterWindow();
                 }
                 //if no customer has the entered name
                 else MessageBox.Show(MessageBox.BoxType.Error, "User name is not correct.", 250);

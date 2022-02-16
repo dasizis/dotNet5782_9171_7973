@@ -37,9 +37,8 @@ namespace PL.ViewModels
             try
             {
                 PLService.AddCustomer(Customer);
-                var registerWindow = App.Current.Windows.Cast<Window>().Single(w => w.Title == "Welcome Window");
-                new Views.WorkspaceWindow((int)Customer.Id).Show();
-                registerWindow.Close();
+                ManageWindows.OpenAppWindow((int)Customer.Id);
+                ManageWindows.CloseRegisterWindow();
             }
             catch(BO.IdAlreadyExistsException)
             {

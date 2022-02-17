@@ -1,39 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Drones>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>12</Id>
-    <Model>yaelgfgf</Model>
-    <MaxWeight>Medium</MaxWeight>
+    <Id>1</Id>
+    <Model>Watermelon</Model>
+    <MaxWeight>Heavy</MaxWeight>
     <IsDeleted>false</IsDeleted>
-  </Drone>
-  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>5</Id>
-    <Model>JD3Fe</Model>
-    <MaxWeight>Medium</MaxWeight>
-    <IsDeleted>true</IsDeleted>
   </Drone>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>2</Id>
-    <Model>fKde3</Model>
-    <MaxWeight>Heavy</MaxWeight>
+    <Model>Guava</Model>
+    <MaxWeight>Medium</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>345</Id>
-    <Model>Jdedf</Model>
-    <MaxWeight>Heavy</MaxWeight>
+    <Id>3</Id>
+    <Model>Mango</Model>
+    <MaxWeight>Medium</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>4</Id>
-    <Model>TmrZ</Model>
+    <Model>Grape</Model>
     <MaxWeight>Heavy</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
   <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>5</Id>
-    <Model>DSYZ</Model>
+    <Model>Lemon</Model>
     <MaxWeight>Light</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>6</Id>
+    <Model>Olive</Model>
+    <MaxWeight>Medium</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>7</Id>
+    <Model>Olive</Model>
+    <MaxWeight>Medium</MaxWeight>
+    <IsDeleted>false</IsDeleted>
+  </Drone>
+  <Drone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>8</Id>
+    <Model>Lychee</Model>
+    <MaxWeight>Heavy</MaxWeight>
     <IsDeleted>false</IsDeleted>
   </Drone>
 </Drones>

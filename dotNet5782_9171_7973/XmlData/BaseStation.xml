@@ -1,43 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BaseStations>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>12</Id>
-    <Name>yaelrtrtrt</Name>
-    <Longitude>126</Longitude>
-    <Latitude>56</Latitude>
-    <ChargeSlots>3</ChargeSlots>
-    <IsDeleted>true</IsDeleted>
-  </BaseStation>
-  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>1</Id>
-    <Name>Center</Name>
-    <Longitude>-80.7</Longitude>
-    <Latitude>32</Latitude>
-    <ChargeSlots>8</ChargeSlots>
+    <Id>100</Id>
+    <Name>Pear</Name>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <ChargeSlots>5</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>2</Id>
-    <Name>Atlantis</Name>
-    <Longitude>56.7</Longitude>
-    <Latitude>-73</Latitude>
+    <Id>101</Id>
+    <Name>Apple</Name>
+    <Longitude>124</Longitude>
+    <Latitude>36.7</Latitude>
+    <ChargeSlots>5</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>103</Id>
+    <Name>Banana</Name>
+    <Longitude>23.99</Longitude>
+    <Latitude>89</Latitude>
     <ChargeSlots>7</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>3</Id>
-    <Name>OldWorld</Name>
-    <Longitude>90</Longitude>
-    <Latitude>56</Latitude>
-    <ChargeSlots>4</ChargeSlots>
+    <Id>104</Id>
+    <Name>Peach</Name>
+    <Longitude>170</Longitude>
+    <Latitude>65</Latitude>
+    <ChargeSlots>8</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
   <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>5</Id>
-    <Name>Afrika</Name>
-    <Longitude>28</Longitude>
-    <Latitude>25</Latitude>
-    <ChargeSlots>4</ChargeSlots>
+    <Id>105</Id>
+    <Name>Pineapple</Name>
+    <Longitude>14</Longitude>
+    <Latitude>14.6</Latitude>
+    <ChargeSlots>12</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>107</Id>
+    <Name>Cherry</Name>
+    <Longitude>1</Longitude>
+    <Latitude>8.9</Latitude>
+    <ChargeSlots>3</ChargeSlots>
     <IsDeleted>false</IsDeleted>
   </BaseStation>
 </BaseStations>

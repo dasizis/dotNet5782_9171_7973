@@ -1,129 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Customers>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>45</Id>
-    <Name>hghghgda</Name>
-    <Phone>0767645454</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>90</Longitude> 
-    <Latitude>56</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>676</Id>
-    <Name>yhghjh</Name>
-    <Phone>0768766888</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>90</Longitude>
-    <Latitude>67</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>78</Id>
-    <Name>hjhjh</Name>
-    <Phone>0987654325</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>126</Longitude>
-    <Latitude>57</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>50</Id>
-    <Name>yael</Name>
-    <Phone>0455676788</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>126</Longitude>
-    <Latitude>56</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>1</Id>
-    <Name>Jhon Doe</Name>
-    <Phone>0548712499</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>72</Longitude>
-    <Latitude>-3</Latitude>
-    <IsDeleted>true</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>212</Id>
-    <Name>Dasi</Name>
-    <Phone>0527616480</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
+    <Id>11</Id>
+    <Name>Joe Paterson</Name>
+    <Phone>0527698544</Phone>
     <Longitude>34</Longitude>
     <Latitude>34</Latitude>
-    <IsDeleted>true</IsDeleted>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>12</Id>
+    <Name>Peter Jonson</Name>
+    <Phone>0545422444</Phone>
+    <Longitude>23</Longitude>
+    <Latitude>78</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>13</Id>
+    <Name>Michel Jefry</Name>
+    <Phone>0546544544</Phone>
+    <Longitude>123</Longitude>
+    <Latitude>67</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>14</Id>
+    <Name>Ross Braun</Name>
+    <Phone>0782545444</Phone>
+    <Longitude>123</Longitude>
+    <Latitude>67.98</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>15</Id>
+    <Name>Liah Herson</Name>
+    <Phone>0784524564</Phone>
+    <Longitude>12</Longitude>
+    <Latitude>67.435</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>16</Id>
+    <Name>Julian Andruz</Name>
+    <Phone>0545154444</Phone>
+    <Longitude>1</Longitude>
+    <Latitude>56.435</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>18</Id>
+    <Name>Jeff Nimbat</Name>
+    <Phone>0841214114</Phone>
+    <Longitude>34</Longitude>
+    <Latitude>78</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>19</Id>
+    <Name>Tomas Soel</Name>
+    <Phone>0565656555</Phone>
+    <Longitude>23</Longitude>
+    <Latitude>67</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>20</Id>
+    <Name>Jeck Geller</Name>
+    <Phone>0754154544</Phone>
+    <Longitude>12</Longitude>
+    <Latitude>45.87</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
   </Customer>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>21</Id>
-    <Name>Tamar</Name>
-    <Phone>0527105154</Phone>
+    <Name>Richard Lev</Name>
+    <Phone>0745457454</Phone>
+    <Longitude>123</Longitude>
+    <Latitude>45.87</Latitude>
     <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>34</Longitude>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>23</Id>
+    <Name>Tom Merffy</Name>
+    <Phone>0785421454</Phone>
+    <Longitude>34.67</Longitude>
+    <Latitude>17</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>24</Id>
+    <Name>Robert Bing</Name>
+    <Phone>0754545444</Phone>
+    <Longitude>176</Longitude>
     <Latitude>34</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
     <IsDeleted>false</IsDeleted>
   </Customer>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>33</Id>
-    <Name>Riki</Name>
-    <Phone>0527633089</Phone>
+    <Id>26</Id>
+    <Name>Rachel Berk</Name>
+    <Phone>0545454544</Phone>
+    <Longitude>45</Longitude>
+    <Latitude>76</Latitude>
     <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>40</Longitude>
-    <Latitude>38</Latitude>
     <IsDeleted>false</IsDeleted>
   </Customer>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>22</Id>
-    <Name>Moishi</Name>
-    <Phone>0391603558</Phone>
+    <Id>27</Id>
+    <Name>Donald J Trump</Name>
+    <Phone>0252544584</Phone>
+    <Longitude>23.67</Longitude>
+    <Latitude>87</Latitude>
     <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>32</Longitude>
-    <Latitude>31</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>1232</Id>
-    <Name>yael</Name>
-    <Phone>0556546544</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>67898</Id>
-    <Name>yaek</Name>
-    <Phone>0556707446</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>766347</Id>
-    <Name>hujh</Name>
-    <Phone>0556707446</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>7856</Id>
-    <Name>hyjuhdf</Name>
-    <Phone>0554544544</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <IsDeleted>false</IsDeleted>
-  </Customer>
-  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Id>54657</Id>
-    <Name>fhfdgf</Name>
-    <Phone>0556707454</Phone>
-    <Mail>yaeldoch@gmail.com</Mail>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
     <IsDeleted>false</IsDeleted>
   </Customer>
 </Customers>

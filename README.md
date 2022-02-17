@@ -117,7 +117,8 @@ We used ***FULL*** MVVM.
 
 #### Custom `UserControl`
 Extensive use in `UserControl` rather than `Window` control.
-Makes the user expeience better, and makes the application look better.
+
+Makes the user experience better, and makes the application look better.
 
 #### Miscellaneous
 - Triggres

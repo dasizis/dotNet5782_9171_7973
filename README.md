@@ -132,16 +132,19 @@ Makes the user experience better, and makes the application look better.
 - `Context Menu` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/ae219365e77a69c7b7c510ab8a576202d9d72bf1/dotNet5782_9171_7973/PL/Views/Style/ListDesign/TreeViewDictionary.xaml#L13)
 
 #### External dictionary
+We used dictionary for style definitions, outer `Data templates`, etc.
 
 #### The application sends an email using `Smtp` object:
 - To sender- when his parcel is sent
 - To reciever- when he gets a parcel
+
 [see code](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/PL/PL/MailService.cs#L1)
 
 ### Simulator
 
 #### Location Update
 Location updates in all related items while running.
+
 <img src="./screen-shots/location-update.gif" height="200">
 
 <img src="./screen-shots/map-update.gif">

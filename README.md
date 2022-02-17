@@ -87,8 +87,10 @@ Our project supports two modes: customer mode and manager mode. When running the
 <img src="./screen-shots/sign-up.jpg" width="300">
 
 Then pressing the `Sign In As Managar` button enters the program in manager mode.
+
 Signing up enters with a new customer account in customer mode. 
-Clicking on `Already Have an...` gives sign up page like this screen:
+
+Clicking on `Already Have an...` gives sign in page like this screen:
 
 <img src="./screen-shots/sign-in.jpg" width="300">
 

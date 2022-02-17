@@ -97,7 +97,6 @@ Clicking on `Already Have an...` gives sign in page like this screen:
 Clicking `Log Out` any time brings back to register window, where reconnecting is available again.
 
 <img src="./screen-shots/log-out.jpg">
-
 #### Full Support of All Data Queries
 Very easy way to accsses accurate data. (uses reflection)
 - Filter (notice the dynamic input)

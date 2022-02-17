@@ -17,7 +17,7 @@
       - [Custom `UserControl`](#custom-usercontrol)
       - [Miscellaneous](#miscellaneous)
       - [External dictionary](#external-dictionary)
-      - [The application sends an email using `Smtp` object:](#the-application-sends-an-email-using-smtp-object)
+      - [Automatic Mail Sending](#automatic-mail-sending)
     - [Simulator](#simulator)
       - [Location Update](#location-update)
       - [Parallel Activation](#parallel-activation)
@@ -27,7 +27,7 @@
     - [Design patterns](#design-patterns)
       - [Factory - Full structure](#factory---full-structure)
       - [Singleton](#singleton)
-        - [Last But Not Least - Well Neat, Organized and Detailed `README`.](#last-but-not-least---well-neat-organized-and-detailed-readme)
+        - [Last But Not Least](#last-but-not-least)
 
 ## Bonus Review
 
@@ -131,11 +131,14 @@ Makes the user experience better, and makes the application look better.
 #### External dictionary
 We used dictionary for style definitions, outer `Data templates`, etc.
 
-#### The application sends an email using `Smtp` object:
+#### Automatic Mail Sending
+The application sends an email using `Smtp` object:
 - To sender- when his parcel is sent
 - To reciever- when he gets a parcel
 
 [see code](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/PL/PL/MailService.cs#L1)
+
+<img src="./screen-shots/mail.jpg" width="300">
 
 ### Simulator
 
@@ -176,4 +179,5 @@ DalApi.IDal Dal { get; } = DalApi.DalFactory.GetDal();
 We implemented an abstract class `Singleton` which has lazy initialization and is thread-safe. The `Dal` and `BL` layers just inherit it.
 
 
-##### Last But Not Least - Well Neat, Organized and Detailed `README`.
+##### Last But Not Least 
+Well Neat, Organized and Detailed `README`.

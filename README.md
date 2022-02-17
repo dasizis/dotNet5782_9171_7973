@@ -115,7 +115,6 @@ We used ***FULL*** MVVM, with full binding.
 
 #### Custom `UserControl`
 Extensive use in `UserControl` rather than `Window` control.
-
 Makes the user experience better, and makes the application look better.
 
 #### Miscellaneous

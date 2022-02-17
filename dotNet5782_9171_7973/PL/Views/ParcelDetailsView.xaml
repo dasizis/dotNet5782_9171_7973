@@ -28,7 +28,7 @@
                    Style="{StaticResource Header}" />
 
             <!--Details-->
-            <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
+                <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
                    Style="{StaticResource Text}"/>
             <TextBlock Text="{Binding Parcel.Priority, StringFormat='Priority: {0}'}" 
                    Style="{StaticResource Text}"/>
@@ -36,30 +36,33 @@
                    Style="{StaticResource Text}"/>
             <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
                    Style="{StaticResource Text}"/>
-
-            <syncfusion:SfStepProgressBar Margin="0, 50" HorizontalAlignment="Left">
-                <syncfusion:SfStepProgressBar.SelectedIndex>
-                    <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
-                        <Binding Path="Parcel.Requested" />
-                        <Binding Path="Parcel.Scheduled" />
-                        <Binding Path="Parcel.PickedUp" />
-                        <Binding Path="Parcel.Supplied" />
-                    </MultiBinding>
-                </syncfusion:SfStepProgressBar.SelectedIndex>
-                <syncfusion:StepViewItem 
-                Content="Requested" 
-                ToolTip="{Binding Parcel.Requested, Converter={StaticResource DateToToolTipConverter}}"/>
-                <syncfusion:StepViewItem 
-                Content="Scheduled" 
-                ToolTip="{Binding Parcel.Scheduled, Converter={StaticResource DateToToolTipConverter}}"/>
-                <syncfusion:StepViewItem 
-                Content="Picked up" 
-                ToolTip="{Binding Parcel.PickedUp, Converter={StaticResource DateToToolTipConverter}}"/>
-                <syncfusion:StepViewItem 
-                Content="Supplied" 
-                ToolTip="{Binding Parcel.Supplied, Converter={StaticResource DateToToolTipConverter}}"/>
-            </syncfusion:SfStepProgressBar>
-
+            
+            <!--ProgressBar-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <syncfusion:SfStepProgressBar Margin="0, 50" HorizontalAlignment="Left" Grid.Row="0">
+                    <syncfusion:SfStepProgressBar.SelectedIndex>
+                        <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
+                            <Binding Path="Parcel.Requested" />
+                            <Binding Path="Parcel.Scheduled" />
+                            <Binding Path="Parcel.PickedUp" />
+                            <Binding Path="Parcel.Supplied" />
+                        </MultiBinding>
+                    </syncfusion:SfStepProgressBar.SelectedIndex>
+                    <syncfusion:StepViewItem Content="Requested" 
+                                             ToolTip="{Binding Parcel.Requested, Converter={StaticResource DateToToolTipConverter}}"/>
+                    <syncfusion:StepViewItem Content="Scheduled" 
+                                             ToolTip="{Binding Parcel.Scheduled, Converter={StaticResource DateToToolTipConverter}}"/>
+                    <syncfusion:StepViewItem Content="Picked up" 
+                                             ToolTip="{Binding Parcel.PickedUp, Converter={StaticResource DateToToolTipConverter}}"/>
+                    <syncfusion:StepViewItem Content="Supplied" 
+                                             ToolTip="{Binding Parcel.Supplied, Converter={StaticResource DateToToolTipConverter}}"/>
+                </syncfusion:SfStepProgressBar>
+                <Rectangle Fill="White" Grid.Row="0" Height="20" Margin="0,0,0,55"/>
+            </Grid>
+            
             <!--Buttons-->
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" 
                     Visibility="{Binding Converter={StaticResource BooleanToVisibilityConverter}, 

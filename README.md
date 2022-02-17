@@ -109,9 +109,7 @@ Very easy way to accsses accurate data. (uses reflection)
 <img src="./screen-shots/group-and-sort.gif" width="200">
 
 #### MVVM
-We used ***FULL*** MVVM.
-##### Full Binding
-- [ ] what should I write over here?
+We used ***FULL*** MVVM, with full binding.
 ##### PO Entities
 `PO` entities are mainly used as `Model`s in MVVM.
 
@@ -168,9 +166,7 @@ Each entity has its map to represent its location, Besides, there is a `Main Map
 ### Design patterns
 #### Factory - Full structure
 We used the full (bonus) structure for our `Factory`.
-
 It finds the requested implementation of the servise contract and supplies its `Instance`.
-
 To get it the following piece of code alone is necessary:
 
 ```csharp

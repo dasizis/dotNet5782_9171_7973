@@ -22,7 +22,7 @@
       - [Location Update](#location-update)
       - [Parallel Activation](#parallel-activation)
       - [Busy Indicator](#busy-indicator)
-      - [Prevent Application Closing](#prevent-application-closing)
+      - [Application Closing Prevention](#application-closing-prevention)
       - [Maps](#maps)
     - [Design patterns](#design-patterns)
       - [Factory - Full structure](#factory---full-structure)
@@ -157,7 +157,7 @@ It is possible to run several simulators together. (not limitted)
 Busy indicator is on while simulator is about to stop its activity, after user's request.
 <img src="./screen-shots/busy-indicator.gif">
 
-#### Prevent Application Closing
+#### Application Closing Prevention
 The Application Prevent Closing As long as Simulators are On.
 This is to make sure all data is fully updated.
 <img src="./screen-shots/prevent-close.gif" >

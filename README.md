@@ -70,7 +70,7 @@ interface IDeletable
 From now, *deletion* is changing the entity's `IsDeleted` property to `true`. Only non-deleted entities are allowed to perform actions.
 
 #### Extensive Use of Generic
-In order to Avoid repetition according to the **DRY** rule, We implemented all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.
+In order to Avoid repetition according to the **DRY** principle, We implemented all our `Dal` methods as generic methods. So, Instead of having `AddDrone`, `AddParcel`, `AddBaseStation` and `AddCustomer` for example, We only have `AddItem<T>` method.
 
 ### PL
 #### Custom Window Layout - Docking
@@ -109,19 +109,24 @@ Very easy way to accsses accurate data. (uses reflection)
 #### MVVM
 We used ***FULL*** MVVM.
 ##### Full Binding
+- [ ] what should I write over here?
 ##### PO Entities
+`PO` entities are mainly used as `Model`s in MVVM.
 
 #### Custom `UserControl`
+Extensive use in `UserControl` rather than `Window` control.
+Makes the user expeience better, and makes the application look better.
 
 #### Miscellaneous
 - Triggres
   - Event Trigger [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/fc27f43be178a083ddce056caffc8e1395295442/dotNet5782_9171_7973/PL/Views/Style/StyleDictionary.xaml#L126)
-- Behaviors example [definition](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/Views/Behaviors/DoubleInplutBehavior.cs#L6) [use](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/Views/AddCustomerView.xaml#L84)
+- Behaviors examples: [definition](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/Views/Behaviors/DoubleInplutBehavior.cs#L6) [use](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/Views/AddCustomerView.xaml#L84)
 - Converters [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/Views/Converters/MessageBoxTypeToColorConverter.cs)
 - Commands (We implemented A [`RelayCommand`](https://github.com/dasizis/dotNet5782_9171_7973/blob/for_exe_3/dotNet5782_9171_7973/PL/RelayCommand.cs) class and used it as properties in our `PL` classes) [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/ParcelDetailsViewModel.cs#L23)
-- Data templates
+- Data templates [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/ae219365e77a69c7b7c510ab8a576202d9d72bf1/dotNet5782_9171_7973/PL/Views/Style/ListDesign/TreeViewDictionary.xaml#L59)
 - `ObservableCollection` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/MainMapViewModel.cs#L15)
 - `Collection View` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/5786b202b9f9332ab20bee664a9cc717ba732413/dotNet5782_9171_7973/PL/ViewModels/FilteredListViewModel.cs#L53)
+- `Context Menu` [example](https://github.com/dasizis/dotNet5782_9171_7973/blob/ae219365e77a69c7b7c510ab8a576202d9d72bf1/dotNet5782_9171_7973/PL/Views/Style/ListDesign/TreeViewDictionary.xaml#L13)
 
 #### External dictionary
 
@@ -133,26 +138,37 @@ We used ***FULL*** MVVM.
 ### Simulator
 
 #### Location Update
+Location updates in all related items while running.
 <img src="./screen-shots/location-update.gif" height="200">
 
 <img src="./screen-shots/map-update.gif">
 
 #### Parallel Activation
-You can activate as many drones as you want.
+It is possible to run several simulators together. (not limitted)
 <img src="./screen-shots/multi-simulator.gif">
 
 #### Busy Indicator
+Busy indicator is on while simulator is about to stop its activity, after user's request.
 <img src="./screen-shots/busy-indicator.gif">
 
-#### The Application Prevent Closing As long as Simulators are On
+#### Prevent Application Closing
+The Application Prevent Closing As long as Simulators are On.
 This is to make sure all data is fully updated.
 <img src="./screen-shots/prevent-close.gif" >
 
 #### Maps
-Each entity has its map to represent its location, Besides there is a `Main Map` for all the entities together.
+Each entity has its map to represent its location, Besides, there is a `Main Map` for all the entities together.
 
 ### Design patterns
 #### Factory - Full structure
+We used the full (bonus) structure for our `Factory`.
+It finds the requested implementation of the servise contract and supplies its `Instance`.
+To get it the only following piece of code is necessary:
+
+```csharp
+DalApi.IDal Dal { get; } = DalApi.DalFactory.GetDal();
+```
+
 #### Singleton
 We implemented an abstract class `Singleton` which has lazy initialization and is thread-safe. The `Dal` and `BL` layers just inherit it.
 

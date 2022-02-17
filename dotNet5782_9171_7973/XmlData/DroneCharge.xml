@@ -4,13 +4,13 @@
     <StationId>107</StationId>
     <DroneId>1</DroneId>
     <StartTime>2022-02-17T13:18:41.6325665+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>100</StationId>
     <DroneId>2</DroneId>
     <StartTime>2022-02-17T13:19:09.3855094+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>101</StationId>

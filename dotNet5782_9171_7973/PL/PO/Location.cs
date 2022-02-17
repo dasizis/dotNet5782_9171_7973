@@ -1,6 +1,6 @@
-﻿using System;
+﻿using StringUtilities;
+using System;
 using System.ComponentModel.DataAnnotations;
-using StringUtilities;
 
 namespace PO
 {

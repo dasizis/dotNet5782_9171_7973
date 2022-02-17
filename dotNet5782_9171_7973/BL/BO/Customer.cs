@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using StringUtilities;
+﻿using StringUtilities;
+using System.Collections.Generic;
 
 
 namespace BO

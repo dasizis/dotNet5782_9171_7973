@@ -1,6 +1,4 @@
-﻿using StringUtilities;
-using Syncfusion.Windows.Tools.Controls;
-using System;
+﻿using Syncfusion.Windows.Tools.Controls;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

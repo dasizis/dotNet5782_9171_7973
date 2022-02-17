@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PO;
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using PO;
 
 namespace PL.ViewModels
 {

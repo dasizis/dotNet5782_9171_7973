@@ -1,7 +1,6 @@
 ﻿using PO;
-using StringUtilities;
-using System.Windows;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace PL.ViewModels
 {

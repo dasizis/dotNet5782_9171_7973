@@ -1,14 +1,11 @@
-﻿using Singleton;
-using System.Reflection;
-using System.IO;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using System.Text;
-using DO;
+﻿using DO;
+using Singleton;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace Dal
 {

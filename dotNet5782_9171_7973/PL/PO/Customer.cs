@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using StringUtilities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using StringUtilities;
 
 
 namespace PO

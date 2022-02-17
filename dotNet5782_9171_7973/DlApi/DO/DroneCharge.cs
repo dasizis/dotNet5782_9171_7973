@@ -1,5 +1,5 @@
-﻿using System;
-using StringUtilities;
+﻿using StringUtilities;
+using System;
 
 namespace DO
 {

@@ -1,9 +1,7 @@
 ﻿using BO;
+using StringUtilities;
 using System;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using StringUtilities;
 
 namespace ConsoleUI_BL
 {

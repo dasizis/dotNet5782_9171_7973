@@ -3,7 +3,6 @@ using DalApi;
 using System;
 using System.Linq;
 using System.Threading;
-using static BL.BL;
 
 namespace BL
 {

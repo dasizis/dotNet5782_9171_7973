@@ -1,7 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
-using PO;
+﻿using PO;
+using System.Collections.ObjectModel;
 
 namespace PL.ViewModels
 {

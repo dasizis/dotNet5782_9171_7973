@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DO;
-using System.Linq;
+﻿using DO;
 using Singleton;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 

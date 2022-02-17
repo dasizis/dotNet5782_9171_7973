@@ -1,9 +1,8 @@
-﻿using StringUtilities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PO
 {
-    
+
     //public void AddCustomer(int id, string name, string phone, Location location)
 
     class CustomerToAdd : PropertyChangedNotification

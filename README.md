@@ -138,6 +138,8 @@ The application sends an email using `Smtp` object:
 
 [see code](https://github.com/dasizis/dotNet5782_9171_7973/blob/8d5ea8f5e75f66e818a4676271e99f4e8c7cbd79/dotNet5782_9171_7973/PL/PL/MailService.cs#L1)
 
+<img src="./screen-shots/mail.jpg" width="300">
+
 ### Simulator
 
 #### Location Update

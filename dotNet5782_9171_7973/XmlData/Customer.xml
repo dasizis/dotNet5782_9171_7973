@@ -126,4 +126,13 @@
     <Mail>yaeldoch@gmail.com</Mail>
     <IsDeleted>false</IsDeleted>
   </Customer>
+  <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>1234</Id>
+    <Name>Yael Dochg</Name>
+    <Phone>0556707446</Phone>
+    <Longitude>34.65</Longitude>
+    <Latitude>34.76</Latitude>
+    <Mail>yaeldoch@gmail.com</Mail>
+    <IsDeleted>false</IsDeleted>
+  </Customer>
 </ArrayOfCustomer>

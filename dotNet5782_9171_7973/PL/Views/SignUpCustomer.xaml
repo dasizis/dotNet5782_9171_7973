@@ -77,7 +77,7 @@
                                               HasError="{Binding (Validation.HasError), ElementName=MailInput}"
                                               ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=MailInput}">
                     <syncfusion:SfTextInputLayout.LeadingView>
-                        <materialDesign:PackIcon Kind="Mail" Style="{StaticResource Icon}"/>
+                        <materialDesign:PackIcon Kind="Mail" Style="{StaticResource InsideIcon}"/>
                     </syncfusion:SfTextInputLayout.LeadingView>
                     <TextBox x:Name="MailInput"
                      Text="{Binding Customer.Mail, 

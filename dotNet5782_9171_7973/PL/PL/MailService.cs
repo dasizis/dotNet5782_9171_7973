@@ -13,11 +13,11 @@ namespace PL
 
     static public class MailService
     {
-        static string SenderBody(int parcelId) => "<h1 style=\"color: red\">This is the header</h1>";//$"Drone has just picked up your parcel (parcel #{parcelId}.";
-        static string TargetBody(int parcelId) => "<h1 style=\"color: red\">This is the header</h1>";//$"Drone has supplied a parcel to you (parcel #{parcelId}."; 
+        static string SenderBody(int parcelId) => "<h1 style=\"color: red\">This is the header</h1>";//$"Drone has just picked up your parcel (parcel #{parcelId}).";
+        static string TargetBody(int parcelId) => "<h1 style=\"color: red\">This is the header</h1>";//$"Drone has supplied a parcel to you (parcel #{parcelId})."; 
 
         const string COMPANY_MAIL = "dronesCompany1000@gmail.com";
-        const string COMPANY_NAME = "Drones Company";
+        const string COMPANY_NAME = "Target";
         const string COMPANY_PASSWORD = "drones.Company1234";
         const string SENDER_SUBJECT = "Drone picked your parcel";
         const string TARGET_SUBJECT = "Drone supplied a parcel to you";

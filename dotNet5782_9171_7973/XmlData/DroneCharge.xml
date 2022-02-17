@@ -46,7 +46,7 @@
     <StationId>104</StationId>
     <DroneId>8</DroneId>
     <StartTime>2022-02-17T13:21:13.2536029+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>100</StationId>

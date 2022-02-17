@@ -135,4 +135,4 @@
     <Mail>yaeldoch@gmail.com</Mail>
     <IsDeleted>false</IsDeleted>
   </Customer>
-</Customers>
+</ArrayOfCustomer>

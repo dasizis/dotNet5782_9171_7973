@@ -65,7 +65,7 @@ namespace PL
             var mail = new MailMessage()
             {
                 Subject = subject,
-                Body = HtmlMail(SenderBody, parcel.Id),
+                Body = HtmlMail(body, parcel.Id),
                 From = fromAddress,
                 IsBodyHtml = true,
             };

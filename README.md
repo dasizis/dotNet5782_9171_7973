@@ -27,7 +27,7 @@
     - [Design patterns](#design-patterns)
       - [Factory - Full structure](#factory---full-structure)
       - [Singleton](#singleton)
-        - [Last But Not Least](#last-but-not-least)
+      - [Last But Not Least](#last-but-not-least)
 
 ## Bonus Review
 

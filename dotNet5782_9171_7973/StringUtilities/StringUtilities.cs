@@ -13,7 +13,7 @@ namespace StringUtilities
         /// <param name="enumType">The type of the enum</param>
         public static string EnumToString(Type enumType)
         {
-            StringBuilder result = new ();
+            StringBuilder result = new();
 
             foreach (var option in Enum.GetValues(enumType))
             {
@@ -39,7 +39,7 @@ namespace StringUtilities
                 result += char.IsUpper(letter) ? $" {letter}" : letter;
             }
 
-            return letters[0] + result[2..];
+            return result[1..];
         }
 
         /// <summary>

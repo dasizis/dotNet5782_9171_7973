@@ -26,7 +26,7 @@ namespace DalApi
                                  .GetValue(null);
 
             if (dal == null)
-                throw new DalConfigException("Accessing Dal instance failed.");
+                throw new DalConfigException("Accessing to Dal instance failed.");
 
             return dal;
         }

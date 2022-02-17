@@ -80,7 +80,11 @@ namespace PL
                 EnableSsl = true,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
             };
-            Task.Factory.StartNew(() => smtp.Send(mail));
+            try
+            {
+                Task.Factory.StartNew(() => smtp.Send(mail));
+            }
+            catch { }
         }
     }
 }

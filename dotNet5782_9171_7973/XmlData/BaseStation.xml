@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>100</Id>
+    <Name>Pear</Name>
+    <Longitude>34</Longitude>
+    <Latitude>34</Latitude>
+    <ChargeSlots>5</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>101</Id>
+    <Name>Apple</Name>
+    <Longitude>124</Longitude>
+    <Latitude>36.7</Latitude>
+    <ChargeSlots>5</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>103</Id>
+    <Name>Banana</Name>
+    <Longitude>23.99</Longitude>
+    <Latitude>89</Latitude>
+    <ChargeSlots>7</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>104</Id>
+    <Name>Peach</Name>
+    <Longitude>170</Longitude>
+    <Latitude>65</Latitude>
+    <ChargeSlots>8</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>105</Id>
+    <Name>Pineapple</Name>
+    <Longitude>14</Longitude>
+    <Latitude>14.6</Latitude>
+    <ChargeSlots>12</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+  <BaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>107</Id>
+    <Name>Cherry</Name>
+    <Longitude>1</Longitude>
+    <Latitude>8.9</Latitude>
+    <ChargeSlots>3</ChargeSlots>
+    <IsDeleted>false</IsDeleted>
+  </BaseStation>
+</ArrayOfBaseStation>

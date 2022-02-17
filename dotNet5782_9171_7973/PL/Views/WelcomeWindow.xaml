@@ -1,0 +1,46 @@
+﻿<Window x:Class="PL.Views.WelcomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:convereters="clr-namespace:PL.Views.Converters"
+        xmlns:local="clr-namespace:PL.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Welcome Window" Height="840" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <convereters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <materialDesign:DialogHost>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel>
+                <StackPanel Visibility="{Binding IsSignUp, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <local:SignUpCustomer/>
+                    <Button Content="Already Have an Account? Sign In"
+                    Style="{StaticResource LinkButton}"
+                    Command="{Binding SignInCustomerCommand}"/>
+                </StackPanel>
+                <StackPanel Visibility="{Binding IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <local:SignInCustomerView/>
+                    <Button Content="Do Not Have an Account? Sign Up" 
+                    Command="{Binding SignUpCustomerCommand}"
+                    Style="{StaticResource LinkButton}"/>
+                </StackPanel>
+
+                <Button Command="{Binding SignInManagerCommand}"
+                Style="{StaticResource LinkButton}"
+                HorizontalAlignment="Center">
+                    <TextBlock FontStyle="Italic" FontWeight="Bold">
+                Sign In As Manager
+                    </TextBlock>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </materialDesign:DialogHost>
+</Window>

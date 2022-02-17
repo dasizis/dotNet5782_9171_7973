@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../bin</OutputPath>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DlApi\DalApi.csproj" />
-    <ProjectReference Include="..\Singelton\Singelton.csproj" />
+    <ProjectReference Include="..\Singelton\Singleton.csproj" />
   </ItemGroup>
 
 </Project>

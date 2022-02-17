@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalApi", "DlApi\DalApi.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{413B9D8D-4D44-42C8-88C4-E926A2DE5388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singelton", "Singelton\Singelton.csproj", "{3D709D0D-132C-41EC-AD88-7F07C77512D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singleton", "Singelton\Singleton.csproj", "{3D709D0D-132C-41EC-AD88-7F07C77512D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{A37C315C-7497-4DB5-A6B9-AA1296FE201D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{3D709D0D-132C-41EC-AD88-7F07C77512D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D709D0D-132C-41EC-AD88-7F07C77512D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D709D0D-132C-41EC-AD88-7F07C77512D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37C315C-7497-4DB5-A6B9-AA1296FE201D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37C315C-7497-4DB5-A6B9-AA1296FE201D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37C315C-7497-4DB5-A6B9-AA1296FE201D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37C315C-7497-4DB5-A6B9-AA1296FE201D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

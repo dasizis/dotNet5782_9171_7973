@@ -1,16 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of customer for list
+    /// </summary>
     public class CustomerForList 
     {
+        /// <summary>
+        /// Customer Id
+        /// </summary>
         public int Id { get; set; }
+
         string name;
+        /// <summary>
+        /// Customer name
+        /// </summary>
         public string Name 
         { 
             get => name;
@@ -18,12 +24,16 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException(value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 name = value;
             }
         }
+
         string phone;
+        /// <summary>
+        /// Customer phone number
+        /// </summary>
         public string Phone
         {
             get => phone;
@@ -31,12 +41,33 @@ namespace BO
             {
                 if (!Validation.IsValidPhone(value))
                 {
-                    throw new ArgumentException(value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 phone = value;
             }
         }
+
+        string mail;
+        /// <summary>
+        /// Customer mail address
+        /// </summary>
+        public string Mail
+        {
+            get => mail;
+            set
+            {
+                if (!Validation.IsValidMail(value))
+                {
+                    throw new InvalidPropertyValueException(value);
+                }
+                mail = value;
+            }
+        }
+
         int parcelsSendAndSupplied;
+        /// <summary>
+        /// Number of parcels sent by customer and supplied
+        /// </summary>
         public int ParcelsSendAndSupplied
         {
             get => parcelsSendAndSupplied;
@@ -44,12 +75,16 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsSendAndSupplied = value;
             }
         }
+
         int parcelsSendAndNotSupplied;
+        /// <summary>
+        /// Number of parcels sent by customer and were not supplied
+        /// </summary>
         public int ParcelsSendAndNotSupplied
         {
             get => parcelsSendAndNotSupplied;
@@ -57,12 +92,16 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsSendAndNotSupplied = value;
             }
         }
+
         int parcelsRecieved;
+        /// <summary>
+        /// Number of parcels customer recieved
+        /// </summary>
         public int ParcelsRecieved
         {
             get => parcelsRecieved;
@@ -70,12 +109,16 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsRecieved = value;
             }
         }
+
         int parcelsOnWay;
+        /// <summary>
+        /// Number of parcels on the way to customer
+        /// </summary>
         public int ParcelsOnWay
         {
             get => parcelsOnWay;
@@ -83,12 +126,17 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
                 parcelsOnWay = value;
             }
         }
-        public override string ToString() => this.ToStringProperties();
 
+        /// <summary>
+        /// Uses an outer project <see cref="StringUtilities"/>
+        /// to override the <c>ToString()</c> method
+        /// </summary>
+        /// <returns>String representation of customer</returns>
+        public override string ToString() => this.ToStringProperties();
     }
 }

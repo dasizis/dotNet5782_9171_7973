@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StringUtilities;
+﻿using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of base station for list
+    /// </summary>
     public class BaseStationForList
     {
+        /// <summary>
+        /// Base station Id
+        /// </summary>
         public int Id { get; set; }
+
         string name;
+        /// <summary>
+        /// Base station name
+        /// </summary>
         public string Name
         {
             get => name;
@@ -18,12 +23,16 @@ namespace BO
             {
                 if (!Validation.IsValidName(value))
                 {
-                    throw new ArgumentException(value);
+                    throw new InvalidPropertyValueException(value);
                 }
                 name = value;
             }
         }
-        int emptyChargeSlots;
+
+        private int emptyChargeSlots;
+        /// <summary>
+        /// Number of empty charge slots at base station 
+        /// </summary>
         public int EmptyChargeSlots
         {
             get => emptyChargeSlots;
@@ -31,12 +40,16 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
                 emptyChargeSlots = value;
             }
         }
+        
         private int busyChargeSlots;
+        /// <summary>
+        /// Number of busy charge slots at base station 
+        /// </summary>
         public int BusyChargeSlots
         {
             get => busyChargeSlots;
@@ -44,12 +57,17 @@ namespace BO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
                 busyChargeSlots = value;
             }
         }
-        public override string ToString() => this.ToStringProperties();
 
+        /// <summary>
+        /// Uses an outer project <see cref="StringUtilities"/>
+        /// to override the <c>ToString()</c> method
+        /// </summary>
+        /// <returns>String representation of customer</returns>
+        public override string ToString() => this.ToStringProperties();
     }
 }

@@ -1,29 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StringUtilities;
 
 namespace BO
 {
+    /// <summary>
+    /// A class to represent a PDS of drone in delivery
+    /// </summary>
     public class DroneInDelivery : ILocalable
     {
+        /// <summary>
+        /// Drone Id
+        /// </summary>
         public int Id { get; set; }
-        double batteryState;
-        public double BatteryState
+
+        double battery;
+        /// <summary>
+        /// Drone battery state 
+        /// (in parcents)
+        /// </summary>
+        public double Battery
         {
-            get => batteryState;
+            get => battery;
             set
             {
-                if (value < 0)
+                if (!Validation.IsValidBattery(value))
                 {
-                    throw new ArgumentException(value.ToString());
+                    throw new InvalidPropertyValueException(value);
                 }
-                batteryState = value;
+                battery = value;
             }
         }
+
+        /// <summary>
+        /// Drone location
+        /// </summary>
         public Location Location { get; set; }
+
+        /// <summary>
+        /// Uses an outer project <see cref="StringUtilities"/>
+        /// to override the <c>ToString()</c> method
+        /// </summary>
+        /// <returns>String representation of customer</returns>
         public override string ToString() => this.ToStringProperties();
     }
 }

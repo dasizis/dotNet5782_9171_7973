@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="PL.Views.ParcelDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:convereters="clr-namespace:PL.Views.Converters" 
+             xmlns:local="clr-namespace:PL.Views"
+             xmlns:pl="clr-namespace:PL"
+             mc:Ignorable="d" 
+             d:DesignHeight="1450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+                <ResourceDictionary Source="Style/MapDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <convereters:ParcelDatesToSteperIndexConverter x:Key="ParcelDatesToSteperIndex"/>
+            <convereters:DateToToolTipConverter x:Key="DateToToolTipConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Style="{StaticResource Container}">
+
+            <!--Header-->
+            <TextBlock Text="{Binding Parcel.Id, StringFormat=Parcel {0}}"
+                   Style="{StaticResource Header}" />
+
+            <!--Details-->
+            <TextBlock Text="{Binding Parcel.Weight, StringFormat='Weight: {0}'}" 
+                   Style="{StaticResource Text}"/>
+            <TextBlock Text="{Binding Parcel.Priority, StringFormat='Priority: {0}'}" 
+                   Style="{StaticResource Text}"/>
+            <TextBlock Text="{Binding Parcel.Sender.Id, StringFormat='Sender: customer #{0}'}" 
+                   Style="{StaticResource Text}"/>
+            <TextBlock Text="{Binding Parcel.Target.Id, StringFormat='Reciever: customer #{0}'}" 
+                   Style="{StaticResource Text}"/>
+
+            <syncfusion:SfStepProgressBar Margin="0, 50" HorizontalAlignment="Left">
+                <syncfusion:SfStepProgressBar.SelectedIndex>
+                    <MultiBinding Converter="{StaticResource ParcelDatesToSteperIndex}">
+                        <Binding Path="Parcel.Requested" />
+                        <Binding Path="Parcel.Scheduled" />
+                        <Binding Path="Parcel.PickedUp" />
+                        <Binding Path="Parcel.Supplied" />
+                    </MultiBinding>
+                </syncfusion:SfStepProgressBar.SelectedIndex>
+                <syncfusion:StepViewItem 
+                Content="Requested" 
+                ToolTip="{Binding Parcel.Requested, Converter={StaticResource DateToToolTipConverter}}"/>
+                <syncfusion:StepViewItem 
+                Content="Scheduled" 
+                ToolTip="{Binding Parcel.Scheduled, Converter={StaticResource DateToToolTipConverter}}"/>
+                <syncfusion:StepViewItem 
+                Content="Picked up" 
+                ToolTip="{Binding Parcel.PickedUp, Converter={StaticResource DateToToolTipConverter}}"/>
+                <syncfusion:StepViewItem 
+                Content="Supplied" 
+                ToolTip="{Binding Parcel.Supplied, Converter={StaticResource DateToToolTipConverter}}"/>
+            </syncfusion:SfStepProgressBar>
+
+            <!--Buttons-->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" 
+                    Visibility="{Binding Converter={StaticResource BooleanToVisibilityConverter}, 
+                                         Source={x:Static pl:PLService.IsManangerMode}}">
+                <Button Content="View Sender"                
+                    Command="{Binding ViewSenderCommand}"
+                    Margin="5" Padding="5"/>
+
+                <Button Content="View Target"                
+                    Command="{Binding ViewTargetCommand}"
+                    Margin="5" Padding="5"/>
+
+                <Button Content="View Drone"                
+                    Command="{Binding ViewDroneCommand}"
+                    Margin="5" Padding="5"/>
+
+
+                <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock>Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+            </StackPanel>
+            <!--Map-->
+            <syncfusion:SfMap>
+                <syncfusion:SfMap.Layers>
+                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
+                                           MarkerTemplate="{StaticResource MarkerTemplate}"
+                                           Markers="{Binding Markers}">
+                    </syncfusion:ShapeFileLayer>
+                </syncfusion:SfMap.Layers>
+            </syncfusion:SfMap>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

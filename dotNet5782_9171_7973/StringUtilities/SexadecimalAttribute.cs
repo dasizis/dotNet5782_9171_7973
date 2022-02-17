@@ -1,24 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StringUtilities
 {
+
+    /// <summary>
+    /// An Attribute to mark that the following property is a longitude property
+    /// and should be displyed in a sexadecimal format
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class SexadecimalLongitudeAttribute : Attribute
     {
     }
 
+    /// <summary>
+    /// An Attribute to mark that the following property is a latitude property
+    /// and should be displyed in a sexadecimal format
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class SexadecimalLatitudeAttribute : Attribute
     {
     }
 
+    /// <summary>
+    /// Static helper methods for sexadecimal attributes
+    /// </summary>
     public static class Sexadecimal
     {
-        public static string Longitde(double longitude)
+        /// <summary>
+        /// Converts a longitude value to sexadecimal representation
+        /// </summary>
+        /// <param name="longitude">The longitude value</param>
+        /// <returns>The longitde in a sexadecimal <see cref="string"/> representation</returns>
+        public static string Longitude(double longitude)
         {
             string ch = "E";
             if (longitude < 0)
@@ -34,6 +47,11 @@ namespace StringUtilities
 
         }
 
+        /// <summary>
+        /// Converts a latitude value to sexadecimal representation
+        /// </summary>
+        /// <param name="latitude">The latitude value</param>
+        /// <returns>The latitude in a sexadecimal <see cref="string"/> representation</returns>
         public static string Latitude(double latitude)
         {
             string ch = "N";

@@ -5,7 +5,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        private static readonly BLApi.IBL bl = BLApi.FactoryBL.GetBL();
+        private static readonly BLApi.IBL bl = BLApi.BLFactory.GetBL();
 
         static T GetInput<T>(Converter<string, T> convert = null, Predicate<T> isValid = null, string prompt = "> ")
         {
@@ -28,7 +28,7 @@ namespace ConsoleUI_BL
             return converted;
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             ActivateMainMenu();
         }

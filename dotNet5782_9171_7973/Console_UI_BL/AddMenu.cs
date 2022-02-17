@@ -17,7 +17,7 @@ namespace ConsoleUI_BL
             double latitude = GetInput(double.Parse, Validation.IsValidLatitude);
             int chargeSlots = GetInput(int.Parse, input => input > 0);
 
-            bl.AddBaseStation(id, name, new Location { Latitude = latitude, Longitude = longitude }, chargeSlots);
+            bl.AddBaseStation(id, name, longitude, latitude, chargeSlots);
         }
 
         static void AddCustomer()
@@ -27,10 +27,11 @@ namespace ConsoleUI_BL
             int id = GetInput(int.Parse);
             string name = GetInput(s => s, Validation.IsValidName);            
             string phone = GetInput(s => s, Validation.IsValidPhone);
+            string mail = GetInput(s => s, Validation.IsValidPhone);
             double longitude = GetInput(double.Parse, Validation.IsValidLongitude);
             double latitude = GetInput(double.Parse, Validation.IsValidLatitude);
 
-            bl.AddCustomer(id, name, phone, new Location() { Longitude = longitude, Latitude = latitude });
+            bl.AddCustomer(id, name, phone, mail, longitude, latitude);
         }
 
         static void AddParcel()

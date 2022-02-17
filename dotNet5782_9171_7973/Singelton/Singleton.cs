@@ -1,15 +1,25 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Singelton
+namespace Singleton
 {
-    [Serializable]
-    public class SingletonException : Exception
-    {
-        public SingletonException(string message) : base(message) { }
-        public SingletonException(string message, Exception exception) : base(message, exception) { }
-    }
-
+    /// <summary>
+    /// A generic class that can make any class a singleton by inheritance.
+    /// If you have a class Person for example, you can make it singleton by the following steps:
+    /// <list type="number">
+    ///     <listheader></listheader>
+    ///     <item>Make its constructor private</item>
+    ///     <item>Add a static constructor</item>
+    ///     <item>Make the Person class sealed</item>
+    ///     <item>
+    ///         Inherit from Singleton in the following form 
+    ///         <c>public sealed class Person: Singleton&lt;Person&gt;</c>
+    ///     </item>
+    /// </list>
+    /// </summary>
+    /// <example>
+    /// </example>
+    /// <typeparam name="T">The class to be singleton</typeparam>
     public abstract class Singleton<T> where T : Singleton<T>
     {
         static Singleton() { }
@@ -17,24 +27,24 @@ namespace Singelton
 
         class Nested
         {
-            internal static volatile T _instatnce = null;
-            internal static readonly object _lock = new object();
+            internal static volatile T instatnce = null;
+            internal static readonly object locker = new ();
         }
         public static T Instance
         {
             get
             {
-                if (Nested._instatnce == null)
+                if (Nested.instatnce == null)
                 {
-                    lock (Nested._lock)
+                    lock (Nested.locker)
                     {
-                        if (Nested._instatnce == null)
+                        if (Nested.instatnce == null)
                         {
                             Type type = typeof(T);
 
                             if (type == null || !type.IsSealed)
                             {
-                                throw new SingletonException($"{type.Name} must be a seald class");
+                                throw new SingletonException($"{type.Name} must be a sealed class");
                             }
 
                             ConstructorInfo ctor = null;
@@ -43,7 +53,7 @@ namespace Singelton
                                 ctor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
                                                            null, Type.EmptyTypes, null);
                             }
-                            catch (Exception exception)
+                            catch (ArgumentException exception)
                             {
                                 throw new SingletonException($"A private/protected constructor is missing for {type.Name}", exception);
                             }
@@ -53,11 +63,11 @@ namespace Singelton
                                 throw new SingletonException($"A private/protected constructor is missing for {type.Name}");
                             }
 
-                            Nested._instatnce = (T)ctor.Invoke(null);
+                            Nested.instatnce = (T)ctor.Invoke(null);
                         }
                     }
                 }
-                return Nested._instatnce;
+                return Nested.instatnce;
             }
         }
     }

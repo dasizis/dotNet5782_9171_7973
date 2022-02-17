@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="PL.Views.MainMapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PL.Views"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:converters="clr-namespace:PL.Views.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:PL.ViewModels"
+             x:Name="MainMapUserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml" />
+                <ResourceDictionary Source="Style/MapDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:ExtractMarkersConverter x:Key="ExtractMarkersConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:MainMapViewModel />
+    </UserControl.DataContext>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel>
+            <syncfusion:SfMap>
+                <syncfusion:SfMap.Layers>
+                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp" 
+                                           MarkerTemplate="{StaticResource MarkerTemplate}"
+                                           Markers="{Binding ItemMarkers}">
+                        <syncfusion:ShapeFileLayer.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Reload" 
+                                      Command="{Binding LoadCommand}">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </syncfusion:ShapeFileLayer.ContextMenu>
+                    </syncfusion:ShapeFileLayer>
+                </syncfusion:SfMap.Layers>
+            </syncfusion:SfMap>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

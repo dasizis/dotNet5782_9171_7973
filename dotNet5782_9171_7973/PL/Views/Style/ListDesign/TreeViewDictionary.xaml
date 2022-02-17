@@ -1,0 +1,180 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:po="clr-namespace:PO"
+                    xmlns:listDesign="clr-namespace:PL.Views.Style.ListDesign"
+                    xmlns:vm="clr-namespace:PL.ViewModels"
+                    xmlns:v="clr-namespace:PL.Views"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:converters="clr-namespace:PL.Views.Converters"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
+    
+    <ContextMenu x:Key="ItemMenu">
+        <MenuItem Header="Delete" 
+                  Command="{x:Static vm:GlobalCommands.DeleteCommand}" 
+                  CommandParameter="{Binding}">
+            <MenuItem.Icon>
+                <materialDesign:PackIcon Kind="Delete" Height="20" Width="20"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <!--Converters-->
+    <listDesign:ObjectToTreeViewProperitesConverter x:Key="ObjectToTreeViewProperitesConverter" />
+    <listDesign:LocationToOrientaionConverter x:Key="LocationToOrientaionConverter" />
+    <listDesign:BatteryValueToIconNameConverter x:Key="BatteryValueToIconNameConverter" />
+    <listDesign:TypeAndIdToPanelConverter x:Key="TypeAndIdToPanelConverter" />
+    <listDesign:CollapseListConverter x:Key="CollapseListConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <!--<Style TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Background" Value="Red" />
+    </Style>-->
+
+    <!--Query Area-->
+    <Style x:Key="QueryArea" TargetType="StackPanel">
+        <Setter Property="Background" Value="#FAFAFA" />
+    </Style>
+
+    <!--Query Inputs-->
+    <Style TargetType="{x:Type syncfusion:SfTextInputLayout}">
+        <Setter Property="Margin" Value="30,10,30,0" />
+    </Style>
+
+    <!--Icon Style-->
+    <Style TargetType="materialDesign:PackIcon">
+        <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="Foreground" Value="Gray" />
+    </Style>
+
+    <!--PO.Location-->
+    <HierarchicalDataTemplate DataType="{x:Type po:Location}" ItemsSource="{Binding Converter={StaticResource LocationToOrientaionConverter}}">
+        <StackPanel Orientation="Horizontal"  Width="200" Height="30">
+            <materialDesign:PackIcon Kind="MapMarker"  VerticalAlignment="Center" />
+            <TextBlock Text="Location" FontWeight="Bold" VerticalAlignment="Center" />
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <!--Longitude-->
+    <DataTemplate DataType="{x:Type listDesign:Longitude}">
+        <StackPanel Orientation="Horizontal" Width="200" Height="30">
+            <materialDesign:PackIcon Kind="Longitude"  VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding}"  VerticalAlignment="Center"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!--Latitude-->
+    <DataTemplate DataType="{x:Type listDesign:Latitude}">
+        <StackPanel Orientation="Horizontal" Width="200" Height="30">
+            <materialDesign:PackIcon Kind="Latitude" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding}"  VerticalAlignment="Center"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <!--Object property-->
+    <DataTemplate DataType="{x:Type listDesign:TreeViewProp}">
+        <DockPanel Width="200" Height="30">
+            <TextBlock Text="{Binding PropName}" FontWeight="DemiBold" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding propValue}" TextAlignment="Right" VerticalAlignment="Center"/>
+        </DockPanel>
+    </DataTemplate>
+
+    <!--Battery-->
+    <DataTemplate DataType="{x:Type listDesign:Battery}">
+        <DockPanel Width="200"  Height="30">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="{Binding BatteryValue, Converter={StaticResource BatteryValueToIconNameConverter}}" VerticalAlignment="Center" />
+                <TextBlock Text="Battery" FontWeight="Bold" VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Text="{Binding BatteryValue, StringFormat={}{0:F2}% }" TextAlignment="Right"
+                        VerticalAlignment="Center"/>
+        </DockPanel>
+
+    </DataTemplate>
+
+    <!--PO.BaseStationForList-->
+    <HierarchicalDataTemplate DataType="{x:Type po:BaseStationForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
+
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:BaseStation}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <!--PO.CustomerForList-->
+    <HierarchicalDataTemplate   DataType="{x:Type po:CustomerForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:Customer}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <!--PO.DroneForList-->
+    <HierarchicalDataTemplate DataType="{x:Type po:DroneForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:Drone}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Model}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>
+                <materialDesign:PackIcon Kind="PlayBox" Height="20" Width="20" Margin="5,0" Foreground="#b1d3a7" VerticalAlignment="Center" Visibility="{Binding IsAutoMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <!--PO.ParcelForList-->
+    <HierarchicalDataTemplate DataType="{x:Type po:ParcelForList}" ItemsSource="{Binding Converter={StaticResource ObjectToTreeViewProperitesConverter}}">
+        <StackPanel Orientation="Horizontal" Tag="{Binding}"  Width="200" Height="30">
+            <StackPanel.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static vm:Workspace.AddPanelCommand}">
+                    <MouseBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TypeAndIdToPanelConverter}">
+                            <Binding Source="{x:Type po:Parcel}" />
+                            <Binding Path="Id" />
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </StackPanel.InputBindings>
+            <TextBlock Text="{Binding Id}" VerticalAlignment="Center" 
+                       Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       ContextMenu="{StaticResource ItemMenu}"/>        
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <!--Group Style-->
+    <ControlTemplate x:Key="TreeViewGroup">
+        <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Items}" />
+    </ControlTemplate>
+
+</ResourceDictionary>

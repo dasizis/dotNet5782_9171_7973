@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DalObject\DalObject.csproj" />
-    <ProjectReference Include="..\Singelton\Singelton.csproj" />
+    <ProjectReference Include="..\DlApi\DalApi.csproj" />
+    <ProjectReference Include="..\Singelton\Singleton.csproj" />
     <ProjectReference Include="..\StringUtilities\StringUtilities.csproj" />
   </ItemGroup>
 
@@ -15,7 +15,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <OutputPath>../bin</OutputPath>
+	  <OutputPath></OutputPath>
 	</PropertyGroup>
 
 </Project>

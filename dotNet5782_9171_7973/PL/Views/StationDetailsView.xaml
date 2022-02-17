@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="PL.Views.StationDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:convereters="clr-namespace:PL.Views.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:po="clr-namespace:PO"
+             xmlns:vm="clr-namespace:PL.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDictionary.xaml"/>
+                <ResourceDictionary Source="Style/MapDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <convereters:DroneStateToHandleChargeTextConverter x:Key="DroneStateToHandleChargeText" />
+            <convereters:StateToProceedWithParcelTextConverter x:Key="StateToProceedWithParcelText" />
+            <convereters:DroneStateToAnimationSpeedConverter x:Key="DroneStateToAnimationSpeedConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Margin="30">
+            <!--header-->
+            <TextBlock Text="{Binding Station.Id, StringFormat=Station {0}}"
+                   Style="{StaticResource Header}" />
+            <!--name input-->
+            <syncfusion:SfTextInputLayout Hint="Name" 
+                                      HasError="{Binding (Validation.HasError), ElementName=NameInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=NameInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Pencil" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <TextBox x:Name="NameInput"
+                     Text="{Binding Station.Name, 
+                                    ValidatesOnDataErrors=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+            </syncfusion:SfTextInputLayout>
+
+            <!--empty slots input-->
+            <syncfusion:SfTextInputLayout Hint="Empty Slots" 
+                                      HasError="{Binding (Validation.HasError), ElementName=EmptySlotsInput}"
+                                      ErrorText="{Binding (Validation.Errors)/ErrorContent, ElementName=EmptySlotsInput}">
+                <syncfusion:SfTextInputLayout.LeadingView>
+                    <materialDesign:PackIcon Kind="Pencil" Height="10"/>
+                </syncfusion:SfTextInputLayout.LeadingView>
+                <TextBox x:Name="EmptySlotsInput"
+                     Text="{Binding Station.EmptyChargeSlots, 
+                                    ValidatesOnDataErrors=true,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+            </syncfusion:SfTextInputLayout>
+
+            <!--Buttons-->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Update" Style="{StaticResource PrimaryButton}"              
+                    Command="{Binding UpdateDetailsCommand}"
+                    Margin="5" Padding="5"/>
+
+                <Button Content="View Drones in Charge"                
+                    Command="{Binding OpenDronesListCommand}">
+                    <syncfusion:SfBadge.Badge>
+                        <syncfusion:SfBadge
+                                Content="{Binding BaseStation.DronesInCharge.Count}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                HorizontalAnchor="Center"
+                                VerticalAnchor="Center"/>
+                    </syncfusion:SfBadge.Badge>
+                </Button>
+
+                <Button Command="{Binding DeleteCommand}" Margin="5" Padding="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <!--Map-->
+            <syncfusion:SfMap>
+                <syncfusion:SfMap.Layers>
+                    <syncfusion:ShapeFileLayer Uri="PL.Views;component/../Assest/world.shp"
+                                           MarkerTemplate="{StaticResource MarkerTemplate}"
+                                           Markers="{Binding Markers}">
+                    </syncfusion:ShapeFileLayer>
+                </syncfusion:SfMap.Layers>
+            </syncfusion:SfMap>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

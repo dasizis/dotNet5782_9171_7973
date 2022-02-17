@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Reflection;
 using System.Text;
 
@@ -7,17 +6,25 @@ namespace StringUtilities
 {
     public static class StringUtilitiesExtension
     {
-        public static string ToStringProperties<T>(this T obj)
+        /// <summary>
+        /// Converts an object to detailed string description
+        /// using reflection
+        /// </summary>
+        /// <param name="obj">The object to describe</param>
+        /// <returns>A detailed <see cref="string"/> description of the object</returns>
+        public static string ToStringProperties(this object obj)
         {
             Type type = obj.GetType();
             StringBuilder description = new($"<{type.Name}> {{");
 
-            foreach (var prop in type.GetProperties())
+            foreach (var prop in type.GetProperties(BindingFlags.Public |
+                                                    BindingFlags.Instance |
+                                                    BindingFlags.DeclaredOnly))
             {
                 description.Append($"{prop.Name} = ");
 
                 var propValue = prop.GetValue(obj);
-                var countProperty = propValue?.GetType()?.GetProperty("Count");
+                var countProperty = prop.PropertyType.GetProperty("Count");
 
                 // Is the property a list?
                 if (countProperty != null)
@@ -33,7 +40,7 @@ namespace StringUtilities
                 }
                 else if (Attribute.IsDefined(prop, typeof(SexadecimalLongitudeAttribute)))
                 {
-                    description.Append(Sexadecimal.Longitde((double)propValue));
+                    description.Append(Sexadecimal.Longitude((double)propValue));
                 }
                 else
                 {

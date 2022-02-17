@@ -162,8 +162,10 @@ Each entity has its map to represent its location, Besides, there is a `Main Map
 ### Design patterns
 #### Factory - Full structure
 We used the full (bonus) structure for our `Factory`.
+
 It finds the requested implementation of the servise contract and supplies its `Instance`.
-To get it the only following piece of code is necessary:
+
+To get it the following piece of code alone is necessary:
 
 ```csharp
 DalApi.IDal Dal { get; } = DalApi.DalFactory.GetDal();

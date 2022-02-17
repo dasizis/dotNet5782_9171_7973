@@ -97,6 +97,7 @@ Clicking on `Already Have an...` gives sign in page like this screen:
 Clicking `Log Out` any time brings back to register window, where reconnecting is available again.
 
 <img src="./screen-shots/log-out.jpg">
+
 #### Full Support of All Data Queries
 Very easy way to accsses accurate data. (uses reflection)
 - Filter (notice the dynamic input)
@@ -179,5 +180,5 @@ DalApi.IDal Dal { get; } = DalApi.DalFactory.GetDal();
 We implemented an abstract class `Singleton` which has lazy initialization and is thread-safe. The `Dal` and `BL` layers just inherit it.
 
 
-##### Last But Not Least
+#### Last But Not Least
 Well Neat, Organized and Detailed `README`.

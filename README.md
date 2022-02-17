@@ -33,7 +33,7 @@
 
 ### General
 #### New c# Features
-- [Record](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BO/DroneSimulatorChanges.cs#L1)
+- [Record](https://github.com/dasizis/dotNet5782_9171_7973/blob/549b55c3dbb1381493c1e36a7aa49a9d8cca3464/dotNet5782_9171_7973/BL/BO/DroneSimulatorChanges.cs#L1)
 - [Switch Expression](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L211)
 - [Tupples](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L33)
 - [Init Only Setters](https://github.com/dasizis/dotNet5782_9171_7973/blob/b3326b502c4ef8df432f34f2dca4ba10b42f6404/dotNet5782_9171_7973/BL/BL/BL.cs#L21)

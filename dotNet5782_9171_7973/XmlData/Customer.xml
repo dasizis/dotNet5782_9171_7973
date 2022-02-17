@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Customers>
+<ArrayOfCustomer>
   <Customer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Id>11</Id>
     <Name>Joe Paterson</Name>
@@ -126,4 +126,4 @@
     <Mail>yaeldoch@gmail.com</Mail>
     <IsDeleted>false</IsDeleted>
   </Customer>
-</Customers>
+</ArrayOfCustomer>

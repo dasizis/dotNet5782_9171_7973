@@ -59,13 +59,13 @@ namespace Dal
             if (!DoesExist<BaseStation>(s => s.Id == baseStationId))
                 throw new ObjectNotFoundException(typeof(BaseStation));
 
-            DroneCharge charge = new()
-            {
-                DroneId = droneId,
-                StationId = baseStationId,
-                StartTime = DateTime.Now,
-                IsDeleted = false,
-            };
+            XElement charge = new(
+                nameof(DroneCharge),
+                new XElement(nameof(DroneCharge.DroneId), droneId),
+                new XElement(nameof(DroneCharge.StationId), baseStationId),
+                new XElement(nameof(DroneCharge.StartTime), DateTime.Now),
+                new XElement(nameof(DroneCharge.IsDeleted), false)
+            );
 
             XDocument document = XDocument.Load(GetXmlFilePath(typeof(DroneCharge)));
             document.Root.Add(charge.ToXElement());
@@ -79,7 +79,19 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public T GetById<T>(int id) where T : IIdentifiable, IDeletable
         {
-            return GetSingle<T>(item => item.Id == id);
+            try
+            {
+                return XDocument.Load(GetXmlFilePath(typeof(T)))
+                                .Root
+                                .Elements(typeof(T).Name)
+                                .Single(xElement => !bool.Parse(xElement.Element(nameof(IDeletable.IsDeleted)).Value)
+                                                   && int.Parse(xElement.Element(nameof(IIdentifiable.Id)).Value) == id)
+                                .FromXElement<T>();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new ObjectNotFoundException(typeof(T));
+            }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -100,8 +112,7 @@ namespace Dal
         {
             return XDocument.Load(GetXmlFilePath(typeof(T)))
                             .Root
-                            .Elements(typeof(T).Name)
-                            .Select(xelement => xelement.FromXElement<T>())
+                            .FromXElement<List<T>>()
                             .Where(item => !item.IsDeleted);
         }
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DroneCharges>
+<ArrayOfDroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>107</StationId>
     <DroneId>1</DroneId>
@@ -16,25 +16,25 @@
     <StationId>101</StationId>
     <DroneId>3</DroneId>
     <StartTime>2022-02-17T13:19:29.8928017+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>104</StationId>
     <DroneId>4</DroneId>
     <StartTime>2022-02-17T13:19:46.6931843+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>103</StationId>
     <DroneId>5</DroneId>
     <StartTime>2022-02-17T13:20:07.2212117+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>103</StationId>
     <DroneId>6</DroneId>
     <StartTime>2022-02-17T13:20:26.7248933+02:00</StartTime>
-    <IsDeleted>false</IsDeleted>
+    <IsDeleted>true</IsDeleted>
   </DroneCharge>
   <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <StationId>104</StationId>
@@ -48,4 +48,28 @@
     <StartTime>2022-02-17T13:21:13.2536029+02:00</StartTime>
     <IsDeleted>false</IsDeleted>
   </DroneCharge>
-</DroneCharges>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>100</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-17T15:24:46.8104955+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <StationId>100</StationId>
+    <DroneId>2</DroneId>
+    <StartTime>2022-02-17T15:32:01.4257107+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>2</DroneId>
+    <StationId>100</StationId>
+    <StartTime>2022-02-17T15:38:57.3472344+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>2</DroneId>
+    <StationId>100</StationId>
+    <StartTime>2022-02-17T15:38:59.1188989+02:00</StartTime>
+    <IsDeleted>true</IsDeleted>
+  </DroneCharge>
+</ArrayOfDroneCharge>

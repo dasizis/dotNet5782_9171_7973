@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Parcels>
+<ArrayOfParcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <DroneId xsi:nil="true" />
     <Id>40</Id>
@@ -27,7 +27,7 @@
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <DroneId>1</DroneId>
+    <DroneId xsi:nil="true" />
     <Id>42</Id>
     <SenderId>21</SenderId>
     <TargetId>15</TargetId>
@@ -105,7 +105,7 @@
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <DroneId>1</DroneId>
+    <DroneId xsi:nil="true" />
     <Id>48</Id>
     <SenderId>27</SenderId>
     <TargetId>24</TargetId>
@@ -183,7 +183,7 @@
     <IsDeleted>false</IsDeleted>
   </Parcel>
   <Parcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <DroneId>2</DroneId>
+    <DroneId xsi:nil="true" />
     <Id>54</Id>
     <SenderId>20</SenderId>
     <TargetId>21</TargetId>
@@ -221,4 +221,4 @@
     <Supplied xsi:nil="true" />
     <IsDeleted>false</IsDeleted>
   </Parcel>
-</Parcels>
+</ArrayOfParcel>

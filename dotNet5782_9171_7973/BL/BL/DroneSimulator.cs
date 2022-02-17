@@ -90,7 +90,7 @@ namespace BL
                 {
                     bl.PickUpParcel(drone.Id);
                 }
-                updateAction(new(Parcel: parcel.Id));
+                updateAction(new(Parcel: parcel.Id, ParcelForMail: drone.DeliveredParcelId));
             }
             //if drone has not supplied parcl yet
             else if (parcel.Supplied == null)
@@ -102,7 +102,7 @@ namespace BL
                     bl.SupplyParcel(drone.Id);
                 }
 
-                updateAction(new(Parcel: parcel.Id, Customer: parcel.Target.Id));
+                updateAction(new(Parcel: parcel.Id, Customer: parcel.Target.Id, ParcelForMail: drone.DeliveredParcelId));
             }
         }
 

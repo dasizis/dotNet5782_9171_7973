@@ -64,11 +64,14 @@ namespace PL
 
                 if (changes.Parcel != null)
                 {
-                    PLNotification.ParcelNotification.NotifyItemChanged((int)changes.Parcel);
+                    PLNotification.ParcelNotification.NotifyItemChanged((int)changes.Parcel);  
+                }
 
-                    //send mail
+                if (changes.ParcelForMail != null)
+                {
+                    // Send mail
                     var parcel = PLService.GetParcel((int)changes.Parcel);
-                    MailService.Send(parcel);  
+                    MailService.Send(parcel);
                 }
             };
 

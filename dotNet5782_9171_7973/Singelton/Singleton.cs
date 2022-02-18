@@ -27,18 +27,18 @@ namespace Singleton
 
         class Nested
         {
-            internal static volatile T instatnce = null;
+            internal static volatile T instance = null;
             internal static readonly object locker = new ();
         }
         public static T Instance
         {
             get
             {
-                if (Nested.instatnce == null)
+                if (Nested.instance == null)
                 {
                     lock (Nested.locker)
                     {
-                        if (Nested.instatnce == null)
+                        if (Nested.instance == null)
                         {
                             Type type = typeof(T);
 
@@ -63,11 +63,11 @@ namespace Singleton
                                 throw new SingletonException($"A private/protected constructor is missing for {type.Name}");
                             }
 
-                            Nested.instatnce = (T)ctor.Invoke(null);
+                            Nested.instance = (T)ctor.Invoke(null);
                         }
                     }
                 }
-                return Nested.instatnce;
+                return Nested.instance;
             }
         }
     }
